@@ -21,6 +21,7 @@ public class PlayerJoinListener implements Listener {
 		this.plugin = plugin;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();

@@ -21,6 +21,7 @@ public class PlayerRespawnListener implements Listener {
 		this.plugin = plugin;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerRespawn(PlayerRespawnEvent event) {
 		Player player = event.getPlayer();
