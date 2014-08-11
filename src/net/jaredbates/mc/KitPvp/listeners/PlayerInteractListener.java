@@ -42,7 +42,7 @@ public class PlayerInteractListener implements Listener {
 					ItemStack kitPvp = new ItemStack(Material.DIAMOND_SWORD);
 					ItemMeta kitPvpMeta = kitPvp.getItemMeta();
 					List<String> lores = new ArrayList<String>();
-					lores.add("A standard iron armor and sword.");
+					lores.add("A Standard Pvp Kit, Iron Armor and Diamond Sword.");
 					kitPvpMeta.setLore(lores);
 					kitPvpMeta.setDisplayName("§eKit Pvp");
 					kitPvp.setItemMeta(kitPvpMeta);
@@ -51,7 +51,7 @@ public class PlayerInteractListener implements Listener {
 					ItemStack kitHeavy = new ItemStack(Material.DIAMOND_CHESTPLATE);
 					ItemMeta kitHeavyMeta = kitHeavy.getItemMeta();
 					List<String> lores = new ArrayList<String>();
-					lores.add("A lot of armor but slow.");
+					lores.add("Better Armor and Sword, but Slow.");
 					kitHeavyMeta.setLore(lores);
 					kitHeavyMeta.setDisplayName("§eKit Heavy");
 					kitHeavy.setItemMeta(kitHeavyMeta);
@@ -65,6 +65,15 @@ public class PlayerInteractListener implements Listener {
 					kitArcherMeta.setDisplayName("§eKit Archer");
 					kitArcher.setItemMeta(kitArcherMeta);
 					plugin.kitSelector.setItem(2, kitArcher);
+				} {
+					ItemStack kitSoldier = new ItemStack(Material.FEATHER);
+					ItemMeta kitSoldierMeta = kitSoldier.getItemMeta();
+					List<String> lores = new ArrayList<String>();
+					lores.add("Take to the skies with Kit Soldier!");
+					kitSoldierMeta.setLore(lores);
+					kitSoldierMeta.setDisplayName("§eKit Soldier");
+					kitSoldier.setItemMeta(kitSoldierMeta);
+					plugin.kitSelector.setItem(3, kitSoldier);
 				}
 				player.openInventory(plugin.kitSelector);
 			}

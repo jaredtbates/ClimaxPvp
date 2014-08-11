@@ -1,5 +1,7 @@
 package net.jaredbates.mc.KitPvp;
 
+import java.util.ArrayList;
+
 import net.jaredbates.mc.KitPvp.commands.RepairCommand;
 import net.jaredbates.mc.KitPvp.listeners.FoodLevelChangeListener;
 import net.jaredbates.mc.KitPvp.listeners.InventoryClickListener;
@@ -12,6 +14,7 @@ import net.jaredbates.mc.KitPvp.listeners.PlayerJoinListener;
 import net.jaredbates.mc.KitPvp.listeners.PlayerPickupItemListener;
 import net.jaredbates.mc.KitPvp.listeners.PlayerQuitListener;
 import net.jaredbates.mc.KitPvp.listeners.PlayerRespawnListener;
+import net.jaredbates.mc.KitPvp.listeners.SoldierKitFly;
 import net.jaredbates.mc.KitPvp.listeners.WeatherChangeListener;
 import net.jaredbates.mc.KitPvp.utils.SettingsManager;
 
@@ -23,6 +26,7 @@ public class Main extends JavaPlugin {
 	public SettingsManager players = SettingsManager.getInstance();
 	public Inventory kitSelector = Bukkit.createInventory(null, 9, "§a§lKit Selector");
 	public Inventory soup = Bukkit.createInventory(null, 54, "§5§lFree Soup!");
+	public ArrayList<String> soldierkit = new ArrayList<String>();
 	
 	public void onEnable() {
 		getServer().getPluginManager().registerEvents(new FoodLevelChangeListener(this), this);
@@ -38,6 +42,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new InventoryOpenListener(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerQuitListener(this), this);
 		getServer().getPluginManager().registerEvents(new RepairCommand(this), this);
+		getServer().getPluginManager().registerEvents(new SoldierKitFly(this), this);
 	}
 	
 	public void onDisable() {

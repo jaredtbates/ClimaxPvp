@@ -4,6 +4,7 @@ import net.jaredbates.mc.KitPvp.Main;
 import net.jaredbates.mc.KitPvp.kits.ArcherKit;
 import net.jaredbates.mc.KitPvp.kits.HeavyKit;
 import net.jaredbates.mc.KitPvp.kits.PvpKit;
+import net.jaredbates.mc.KitPvp.kits.SoldierKit;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -33,6 +34,8 @@ public class InventoryClickListener implements Listener {
 						HeavyKit.wear(player);
 					} else if (clicked.getItemMeta().getDisplayName().equals("§eKit Archer")) {
 						ArcherKit.wear(player);
+					} else if (clicked.getItemMeta().getDisplayName().equals("§eKit Soldier")) {
+						SoldierKit.wear(player);
 					}
 					event.setCancelled(true);
 					player.closeInventory();
