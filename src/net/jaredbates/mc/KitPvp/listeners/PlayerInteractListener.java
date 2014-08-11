@@ -16,6 +16,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.Vector;
 
 public class PlayerInteractListener implements Listener {
 	Main plugin;
@@ -84,6 +85,13 @@ public class PlayerInteractListener implements Listener {
 				Soup.add(plugin.soup, 0, 72);
 				player.openInventory(plugin.soup);
 				player.sendMessage("Debug 1");
+			}
+		}
+		if (plugin.soldierKit.contains(player.getName())) {
+			if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
+				if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+					player.setVelocity(new Vector(0, 0.7, 0));
+				}
 			}
 		}
 	}

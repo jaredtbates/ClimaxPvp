@@ -10,8 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
 public class SoldierKit {
-	
-Main plugin;
+	Main plugin;
 	
 	public SoldierKit(Main plugin) {
 		this.plugin = plugin;
@@ -27,7 +26,7 @@ Main plugin;
 		player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
 		player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
 		ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
-		boots.addEnchantment(Enchantment.PROTECTION_FALL, 10);
+		boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
 		player.getInventory().setBoots(boots);
 		Soup.add(player.getInventory(), 1, 35);
 		player.sendMessage("§6You have chosen §aSoldier");
