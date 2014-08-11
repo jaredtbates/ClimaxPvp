@@ -1,7 +1,5 @@
 package net.jaredbates.mc.KitPvp.listeners;
 
-import java.util.UUID;
-
 import net.jaredbates.mc.KitPvp.Main;
 
 import org.bukkit.entity.Player;
@@ -20,8 +18,9 @@ public class PlayerDeathListener implements Listener {
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
 		final Player player = event.getEntity();
-		final UUID uuid = player.getUniqueId();
+		//final UUID uuid = player.getUniqueId();
 		event.getDrops().clear();
+		plugin.soldierKit.remove(player.getName());
 		/*if (plugin.players.getPlayerFile(uuid).contains("Deaths")) {
 			plugin.players.getPlayerFile(uuid).set("Deaths", plugin.players.getPlayerFile(uuid).getInt("Deaths") + 1);
 		} else {
