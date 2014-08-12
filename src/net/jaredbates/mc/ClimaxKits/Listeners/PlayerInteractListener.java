@@ -84,7 +84,7 @@ public class PlayerInteractListener implements Listener {
 					kitFishermanMeta.setLore(lores);
 					kitFishermanMeta.setDisplayName("§eKit Fisherman");
 					kitFisherman.setItemMeta(kitFishermanMeta);
-					plugin.kitSelector.setItem(3, kitFisherman);
+					plugin.kitSelector.setItem(4, kitFisherman);
 				}
 				player.openInventory(plugin.kitSelector);
 			}
