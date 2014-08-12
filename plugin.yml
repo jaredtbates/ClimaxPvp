@@ -1,5 +1,5 @@
 name: ClimaxKits
-main: net.jaredbates.mc.KitPvp.Main
+main: net.jaredbates.mc.ClimaxKits.Main
 version: 1.1
-author: computerwizjared & jonhan2000
-description: Fully Featured KitPvp plugin for ClimaxKitPvp
+authors: [computerwizjared, jonhan2000]
+description: Fully Featured KitPvp Plugin For ClimaxPvp
