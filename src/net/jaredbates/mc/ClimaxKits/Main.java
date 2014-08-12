@@ -16,9 +16,11 @@ import net.jaredbates.mc.ClimaxKits.Listeners.PlayerQuitListener;
 import net.jaredbates.mc.ClimaxKits.Listeners.PlayerRespawnListener;
 import net.jaredbates.mc.ClimaxKits.Listeners.WeatherChangeListener;
 import net.jaredbates.mc.ClimaxKits.Utils.SettingsManager;
+import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -26,8 +28,10 @@ public class Main extends JavaPlugin {
 	public Inventory kitSelector = Bukkit.createInventory(null, 9, "§a§lKit Selector");
 	public Inventory soup = Bukkit.createInventory(null, 54, "§5§lFree Soup!");
 	public ArrayList<String> soldierKit = new ArrayList<String>();
-	
+	public Economy economy = null;
+
 	public void onEnable() {
+		setupEconomy();
 		getServer().getPluginManager().registerEvents(new FoodLevelChangeListener(this), this);
 		getServer().getPluginManager().registerEvents(new InventoryClickListener(this), this);
 		getServer().getPluginManager().registerEvents(new ItemSpawnListener(this), this);
@@ -42,8 +46,20 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new PlayerQuitListener(this), this);
 		getServer().getPluginManager().registerEvents(new RepairCommand(this), this);
 	}
-	
+
 	public void onDisable() {
 		
+	}
+
+	private boolean setupEconomy() {
+		if (getServer().getPluginManager().getPlugin("Vault") == null) {
+			return false;
+		}
+		RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+		if (rsp == null) {
+			return false;
+		}
+		economy = rsp.getProvider();
+		return economy != null;
 	}
 }

@@ -22,13 +22,22 @@ public class RepairCommand implements Listener {
 		if (args[0].equals("repair")) {
 			event.setCancelled(true);
 			if (player.hasPermission("ClimaxKits.Repair")) {
-				for (ItemStack item : player.getInventory().getContents()) {
-					item.setDurability((short) 0);
+				if (plugin.economy.getBalance(player) >= 3) {
+					plugin.economy.withdrawPlayer(player, 3);
+					for (ItemStack item : player.getInventory().getContents()) {
+						if (item != null) {
+							item.setDurability((short) -100);
+						}
+					}
+					for (ItemStack item : player.getInventory().getArmorContents()) {
+						if (item != null) {
+							item.setDurability((short) -100);
+						}
+					}
+					player.sendMessage("§aYou repaired your inventory for three dollars!");
+				} else {
+					player.sendMessage("§cYou do not have enough money to repair your inventory!");
 				}
-				for (ItemStack item : player.getInventory().getArmorContents()) {
-					item.setDurability((short) 0);
-				}
-				player.sendMessage("§aYour inventory has been repaired!");
 			} else {
 				player.sendMessage("§cYou do not have permission for that command!");
 			}
