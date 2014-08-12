@@ -30,7 +30,7 @@ public class FishermanKit {
 		player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
 		ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
 		player.getInventory().setBoots(boots);
-		Soup.add(player.getInventory(), 1, 35);
+		Soup.add(player.getInventory(), 2, 35);
 		player.sendMessage("§6You have chosen §aFisherman");
 	}
 }
