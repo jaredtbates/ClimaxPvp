@@ -24,6 +24,7 @@ public class FishermanKit {
 		ItemStack sword = new ItemStack(Material.IRON_SWORD);
 		sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
 		player.getInventory().addItem(sword);
+		player.getInventory().addItem(new ItemStack(Material.FISHING_ROD));
 		player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
 		player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
 		player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
