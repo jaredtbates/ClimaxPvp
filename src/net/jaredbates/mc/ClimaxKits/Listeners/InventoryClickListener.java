@@ -2,6 +2,7 @@ package net.jaredbates.mc.ClimaxKits.Listeners;
 
 import net.jaredbates.mc.ClimaxKits.Main;
 import net.jaredbates.mc.ClimaxKits.Kits.ArcherKit;
+import net.jaredbates.mc.ClimaxKits.Kits.FishermanKit;
 import net.jaredbates.mc.ClimaxKits.Kits.HeavyKit;
 import net.jaredbates.mc.ClimaxKits.Kits.PvpKit;
 import net.jaredbates.mc.ClimaxKits.Kits.SoldierKit;
@@ -37,6 +38,9 @@ public class InventoryClickListener implements Listener {
 					} else if (clicked.getItemMeta().getDisplayName().equals("§eKit Soldier")) {
 						SoldierKit.wear(player);
 						plugin.soldierKit.add(player.getName());
+					} else if (clicked.getItemMeta().getDisplayName().equals("§eKit Soldier")) {
+						FishermanKit.wear(player);
+						plugin.fishermanKit.add(player.getName());
 					}
 					event.setCancelled(true);
 					player.closeInventory();

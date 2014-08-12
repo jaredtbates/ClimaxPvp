@@ -28,6 +28,7 @@ public class Main extends JavaPlugin {
 	public Inventory kitSelector = Bukkit.createInventory(null, 9, "§a§lKit Selector");
 	public Inventory soup = Bukkit.createInventory(null, 54, "§5§lFree Soup!");
 	public ArrayList<String> soldierKit = new ArrayList<String>();
+	public ArrayList<String> fishermanKit = new ArrayList<String>();
 	public Economy economy = null;
 
 	public void onEnable() {

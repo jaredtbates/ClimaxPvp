@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -75,6 +76,15 @@ public class PlayerInteractListener implements Listener {
 					kitSoldierMeta.setDisplayName("§eKit Soldier");
 					kitSoldier.setItemMeta(kitSoldierMeta);
 					plugin.kitSelector.setItem(3, kitSoldier);
+				} {
+					ItemStack kitFisherman = new ItemStack(Material.FISHING_ROD);
+					ItemMeta kitFishermanMeta = kitFisherman.getItemMeta();
+					List<String> lores = new ArrayList<String>();
+					lores.add("Fish dem with kit Fisherman!");
+					kitFishermanMeta.setLore(lores);
+					kitFishermanMeta.setDisplayName("§eKit Fisherman");
+					kitFisherman.setItemMeta(kitFishermanMeta);
+					plugin.kitSelector.setItem(3, kitFisherman);
 				}
 				player.openInventory(plugin.kitSelector);
 			}
@@ -91,6 +101,17 @@ public class PlayerInteractListener implements Listener {
 			if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
 				if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 					player.setVelocity(new Vector(0, 0.7, 0));
+				}
+			}
+		}
+	}
+	@EventHandler
+	public void onPlayerFish(PlayerFishEvent e){
+		Player p = e.getPlayer();
+		if(e.getCaught() instanceof Player){
+			if(plugin.fishermanKit.contains(p.getName())){
+				if(p.getInventory().getItemInHand().getType() == Material.FISHING_ROD){
+					e.getCaught().teleport(p.getLocation());
 				}
 			}
 		}

@@ -21,6 +21,7 @@ public class PlayerDeathListener implements Listener {
 		//final UUID uuid = player.getUniqueId();
 		event.getDrops().clear();
 		plugin.soldierKit.remove(player.getName());
+		plugin.fishermanKit.remove(player.getName());
 		/*if (plugin.players.getPlayerFile(uuid).contains("Deaths")) {
 			plugin.players.getPlayerFile(uuid).set("Deaths", plugin.players.getPlayerFile(uuid).getInt("Deaths") + 1);
 		} else {
