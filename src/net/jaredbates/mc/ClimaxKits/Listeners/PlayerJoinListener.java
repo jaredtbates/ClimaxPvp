@@ -21,13 +21,15 @@ public class PlayerJoinListener implements Listener {
 		this.plugin = plugin;
 	}
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		event.setJoinMessage("§3Join§8» " + player.getName());
 		player.teleport(player.getWorld().getSpawnLocation());
+		plugin.tag.add(player.getName());
 		player.getInventory().clear();
+		player.setHealth(20L);
+		player.setMaxHealth(20L);
 		for (PotionEffect effect : player.getActivePotionEffects()) {
 			player.removePotionEffect(effect.getType());
 		}

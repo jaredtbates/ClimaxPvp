@@ -1,8 +1,10 @@
 package net.jaredbates.mc.ClimaxKits;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import net.jaredbates.mc.ClimaxKits.Commands.RepairCommand;
+import net.jaredbates.mc.ClimaxKits.Listeners.EntityDamageByEntityListener;
 import net.jaredbates.mc.ClimaxKits.Listeners.FoodLevelChangeListener;
 import net.jaredbates.mc.ClimaxKits.Listeners.InventoryClickListener;
 import net.jaredbates.mc.ClimaxKits.Listeners.InventoryOpenListener;
@@ -29,6 +31,8 @@ public class Main extends JavaPlugin {
 	public Inventory soup = Bukkit.createInventory(null, 54, "§5§lFree Soup!");
 	public ArrayList<String> soldierKit = new ArrayList<String>();
 	public ArrayList<String> fishermanKit = new ArrayList<String>();
+	public ArrayList<String> tag = new ArrayList<String>();
+	public HashMap<String, Long> time = new HashMap<String, Long>();
 	public Economy economy = null;
 
 	public void onEnable() {
@@ -45,6 +49,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new WeatherChangeListener(this), this);
 		getServer().getPluginManager().registerEvents(new InventoryOpenListener(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerQuitListener(this), this);
+		getServer().getPluginManager().registerEvents(new EntityDamageByEntityListener(this), this);
 		getServer().getPluginManager().registerEvents(new RepairCommand(this), this);
 	}
 
