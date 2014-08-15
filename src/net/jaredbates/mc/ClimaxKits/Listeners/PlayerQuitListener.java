@@ -21,7 +21,7 @@ public class PlayerQuitListener implements Listener {
 		event.setQuitMessage("§cQuit§8» " + player.getName());
 		if (plugin.tag.contains(player.getName())) {
 			Bukkit.broadcastMessage("§c" + player.getName().toUpperCase() + " HAS COMBAT LOGGED!");
+			plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "tempban " + player.getName() + " 2m");
 		}
-		plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "tempban " + player.getName() + " 5m");
 	}
 }

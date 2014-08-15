@@ -8,7 +8,8 @@ public class TagTime implements Runnable {
 	Main plugin;
 	Player player;
 	
-	public TagTime(Player player, long ticks) {
+	public TagTime(Player player, long ticks, Main plugin) {
+		this.plugin = plugin;
 		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, this);
 		this.player = player;
 	}
@@ -20,7 +21,7 @@ public class TagTime implements Runnable {
 				plugin.tag.remove(player.getName());
 			} else {
 				long time = System.currentTimeMillis() / 1000L - plugin.time.get(player.getName()).longValue() / 1000L;
-				new TagTime(player, time);
+				new TagTime(player, time, plugin);
 			}
 		}
 	}

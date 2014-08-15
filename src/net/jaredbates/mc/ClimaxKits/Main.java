@@ -11,6 +11,7 @@ import net.jaredbates.mc.ClimaxKits.Listeners.InventoryOpenListener;
 import net.jaredbates.mc.ClimaxKits.Listeners.ItemSpawnListener;
 import net.jaredbates.mc.ClimaxKits.Listeners.PlayerDeathListener;
 import net.jaredbates.mc.ClimaxKits.Listeners.PlayerDropItemListener;
+import net.jaredbates.mc.ClimaxKits.Listeners.PlayerFishListener;
 import net.jaredbates.mc.ClimaxKits.Listeners.PlayerInteractListener;
 import net.jaredbates.mc.ClimaxKits.Listeners.PlayerJoinListener;
 import net.jaredbates.mc.ClimaxKits.Listeners.PlayerPickupItemListener;
@@ -31,6 +32,7 @@ public class Main extends JavaPlugin {
 	public Inventory soup = Bukkit.createInventory(null, 54, "§5§lFree Soup!");
 	public ArrayList<String> soldierKit = new ArrayList<String>();
 	public ArrayList<String> fishermanKit = new ArrayList<String>();
+	public ArrayList<String> irongolemKit = new ArrayList<String>();
 	public ArrayList<String> tag = new ArrayList<String>();
 	public HashMap<String, Long> time = new HashMap<String, Long>();
 	public Economy economy = null;
@@ -50,6 +52,7 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new InventoryOpenListener(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerQuitListener(this), this);
 		getServer().getPluginManager().registerEvents(new EntityDamageByEntityListener(this), this);
+		getServer().getPluginManager().registerEvents(new PlayerFishListener(this), this);
 		getServer().getPluginManager().registerEvents(new RepairCommand(this), this);
 	}
 

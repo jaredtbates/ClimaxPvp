@@ -1,19 +1,15 @@
 package net.jaredbates.mc.ClimaxKits.Listeners;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import net.jaredbates.mc.ClimaxKits.Main;
-import net.jaredbates.mc.ClimaxKits.Utils.Soup;
 
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -21,17 +17,16 @@ import org.bukkit.util.Vector;
 
 public class PlayerInteractListener implements Listener {
 	Main plugin;
-	
+
 	public PlayerInteractListener(Main plugin) {
 		this.plugin = plugin;
 	}
-	
+
 	@EventHandler
 	public void onInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		Damageable dm = event.getPlayer();
 		ItemStack item = event.getItem();
-		Block block = event.getClickedBlock();
 		if (player.getItemInHand().getType() == Material.MUSHROOM_SOUP && dm.getHealth() < 20.0D) {
 			if ((event.getAction() == Action.RIGHT_CLICK_AIR) || (event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
 				player.getInventory().getItemInHand().setType(Material.BOWL);
@@ -43,7 +38,7 @@ public class PlayerInteractListener implements Listener {
 				{
 					ItemStack kitPvp = new ItemStack(Material.DIAMOND_SWORD);
 					ItemMeta kitPvpMeta = kitPvp.getItemMeta();
-					List<String> lores = new ArrayList<String>();
+					ArrayList<String> lores = new ArrayList<String>();
 					lores.add("A Standard Pvp Kit, Iron Armor and Diamond Sword.");
 					kitPvpMeta.setLore(lores);
 					kitPvpMeta.setDisplayName("§eKit Pvp");
@@ -52,7 +47,7 @@ public class PlayerInteractListener implements Listener {
 				} {
 					ItemStack kitHeavy = new ItemStack(Material.DIAMOND_CHESTPLATE);
 					ItemMeta kitHeavyMeta = kitHeavy.getItemMeta();
-					List<String> lores = new ArrayList<String>();
+					ArrayList<String> lores = new ArrayList<String>();
 					lores.add("Better Armor and Sword, but Slow.");
 					kitHeavyMeta.setLore(lores);
 					kitHeavyMeta.setDisplayName("§eKit Heavy");
@@ -61,7 +56,7 @@ public class PlayerInteractListener implements Listener {
 				} {
 					ItemStack kitArcher = new ItemStack(Material.BOW);
 					ItemMeta kitArcherMeta = kitArcher.getItemMeta();
-					List<String> lores = new ArrayList<String>();
+					ArrayList<String> lores = new ArrayList<String>();
 					lores.add("Snipe them up!");
 					kitArcherMeta.setLore(lores);
 					kitArcherMeta.setDisplayName("§eKit Archer");
@@ -70,7 +65,7 @@ public class PlayerInteractListener implements Listener {
 				} {
 					ItemStack kitSoldier = new ItemStack(Material.FEATHER);
 					ItemMeta kitSoldierMeta = kitSoldier.getItemMeta();
-					List<String> lores = new ArrayList<String>();
+					ArrayList<String> lores = new ArrayList<String>();
 					lores.add("Take to the skies with Kit Soldier!");
 					kitSoldierMeta.setLore(lores);
 					kitSoldierMeta.setDisplayName("§eKit Soldier");
@@ -79,39 +74,29 @@ public class PlayerInteractListener implements Listener {
 				} {
 					ItemStack kitFisherman = new ItemStack(Material.FISHING_ROD);
 					ItemMeta kitFishermanMeta = kitFisherman.getItemMeta();
-					List<String> lores = new ArrayList<String>();
+					ArrayList<String> lores = new ArrayList<String>();
 					lores.add("Fish dem with kit Fisherman!");
 					kitFishermanMeta.setLore(lores);
 					kitFishermanMeta.setDisplayName("§eKit Fisherman");
 					kitFisherman.setItemMeta(kitFishermanMeta);
 					plugin.kitSelector.setItem(4, kitFisherman);
+				} {
+					ItemStack kitIronGolem = new ItemStack(Material.RED_ROSE);
+					ItemMeta kitIronGolemMeta = kitIronGolem.getItemMeta();
+					ArrayList<String> lores = new ArrayList<String>();
+					lores.add("Knock them into the sky, with IronGolem!");
+					kitIronGolemMeta.setLore(lores);
+					kitIronGolemMeta.setDisplayName("§eKit IronGolem");
+					kitIronGolem.setItemMeta(kitIronGolemMeta);
+					this.plugin.kitSelector.setItem(5, kitIronGolem);
 				}
 				player.openInventory(plugin.kitSelector);
-			}
-		}
-		if (block != null) {
-			if (block.equals(Material.CHEST)) {
-				event.setCancelled(true);
-				Soup.add(plugin.soup, 0, 72);
-				player.openInventory(plugin.soup);
-				player.sendMessage("Debug 1");
 			}
 		}
 		if (plugin.soldierKit.contains(player.getName())) {
 			if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
 				if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 					player.setVelocity(new Vector(0, 0.7, 0));
-				}
-			}
-		}
-	}
-	@EventHandler
-	public void onPlayerFish(PlayerFishEvent e){
-		Player p = e.getPlayer();
-		if(e.getCaught() instanceof Player){
-			if(plugin.fishermanKit.contains(p.getName())){
-				if(p.getInventory().getItemInHand().getType() == Material.FISHING_ROD){
-					e.getCaught().teleport(p.getLocation());
 				}
 			}
 		}

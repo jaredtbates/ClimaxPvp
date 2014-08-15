@@ -26,7 +26,6 @@ public class PlayerJoinListener implements Listener {
 		Player player = event.getPlayer();
 		event.setJoinMessage("§3Join§8» " + player.getName());
 		player.teleport(player.getWorld().getSpawnLocation());
-		plugin.tag.add(player.getName());
 		player.getInventory().clear();
 		player.setHealth(20L);
 		player.setMaxHealth(20L);
