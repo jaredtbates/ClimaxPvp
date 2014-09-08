@@ -1,6 +1,9 @@
 name: ClimaxKits
-main: net.jaredbates.mc.ClimaxKits.Main
-version: 1.1
+main: net.climaxmc.KitPvp.Main
+version: 1.2
 authors: [computerwizjared, jonhan2000]
-description: Fully Featured KitPvp Plugin For ClimaxPvp
 depend: [Vault]
+commands:
+  repair:
+    description: Repairs your inventory!
+    permission: ClimaxKits.Repair
