@@ -1,7 +1,6 @@
 package net.climaxmc.KitPvp;
 
 import net.climaxmc.KitPvp.Commands.RepairCommand;
-import net.climaxmc.KitPvp.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Listeners.EntityDamageByEntityListener;
 import net.climaxmc.KitPvp.Listeners.FoodLevelChangeListener;
 import net.climaxmc.KitPvp.Listeners.InventoryClickListener;

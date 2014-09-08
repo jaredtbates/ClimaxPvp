@@ -1,7 +1,6 @@
 package net.climaxmc.KitPvp.Kits;
 
-import net.climaxmc.KitPvp.Main;
-import net.climaxmc.KitPvp.KitPvp.Soup;
+import net.climaxmc.KitPvp.Kit;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -11,14 +10,12 @@ import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
-public class FishermanKit {
-	Main plugin;
-	
-	public FishermanKit(Main plugin) {
-		this.plugin = plugin;
+public class FishermanKit extends Kit {
+	public FishermanKit() {
+		super("Fisherman", new ItemStack(Material.FISHING_ROD));
 	}
-	
-	public static void wear(Player player) {
+
+	public void wear(Player player) {
 		for (PotionEffect effect : player.getActivePotionEffects()) {
 			player.removePotionEffect(effect.getType());
 		}
@@ -32,7 +29,7 @@ public class FishermanKit {
 		player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
 		ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
 		player.getInventory().setBoots(boots);
-		Soup.add(player.getInventory(), 2, 35);
+		addSoup(player.getInventory(), 2, 35);
 		player.sendMessage("§6You have chosen §aFisherman");
 	}
 	

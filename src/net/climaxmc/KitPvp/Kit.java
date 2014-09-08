@@ -11,6 +11,12 @@ public abstract class Kit implements Listener {
 	private ItemStack kitItem = new ItemStack(Material.AIR);
 	private String kitLore = "";
 	
+	public Kit(String kitName, ItemStack kitItem) {
+		this.kitName = kitName;
+		this.kitItem = kitItem;
+		System.out.println("Kit Manager> Enabled kit " + kitName);
+	}
+	
 	public Kit(String kitName, ItemStack kitItem, String kitLore) {
 		this.kitName = kitName;
 		this.kitItem = kitItem;

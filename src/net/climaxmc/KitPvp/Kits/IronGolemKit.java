@@ -1,21 +1,18 @@
 package net.climaxmc.KitPvp.Kits;
 
-import net.jaredbates.mc.ClimaxKits.Main;
-import net.jaredbates.mc.ClimaxKits.Utils.Soup;
+import net.climaxmc.KitPvp.Kit;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
-public class IronGolemKit {
-	Main plugin;
-
-	public IronGolemKit(Main plugin) {
-		this.plugin = plugin;
+public class IronGolemKit extends Kit {
+	public IronGolemKit() {
+		super("Iron Golem", new ItemStack(Material.RED_ROSE));
 	}
 
-	public static void wear(Player player) {
+	public void wear(Player player) {
 		for (PotionEffect effect : player.getActivePotionEffects()) {
 			player.removePotionEffect(effect.getType());
 		}
@@ -26,7 +23,7 @@ public class IronGolemKit {
 		player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
 		ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
 		player.getInventory().setBoots(boots);
-		Soup.add(player.getInventory(), 2, 35);
+		addSoup(player.getInventory(), 2, 35);
 		player.sendMessage("§6You have chosen §aIronGolem");
 	}
 }
