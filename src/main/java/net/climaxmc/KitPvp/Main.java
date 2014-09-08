@@ -1,20 +1,20 @@
 package net.climaxmc.KitPvp;
 
+import net.climaxmc.KitPvp.Commands.RepairCommand;
 import net.climaxmc.KitPvp.KitPvp.KitManager;
-import net.climaxmc.KitPvp.KitPvp.Commands.RepairCommand;
-import net.climaxmc.KitPvp.KitPvp.Listeners.EntityDamageByEntityListener;
-import net.climaxmc.KitPvp.KitPvp.Listeners.FoodLevelChangeListener;
-import net.climaxmc.KitPvp.KitPvp.Listeners.InventoryClickListener;
-import net.climaxmc.KitPvp.KitPvp.Listeners.InventoryOpenListener;
-import net.climaxmc.KitPvp.KitPvp.Listeners.ItemSpawnListener;
-import net.climaxmc.KitPvp.KitPvp.Listeners.PlayerDeathListener;
-import net.climaxmc.KitPvp.KitPvp.Listeners.PlayerDropItemListener;
-import net.climaxmc.KitPvp.KitPvp.Listeners.PlayerInteractListener;
-import net.climaxmc.KitPvp.KitPvp.Listeners.PlayerJoinListener;
-import net.climaxmc.KitPvp.KitPvp.Listeners.PlayerPickupItemListener;
-import net.climaxmc.KitPvp.KitPvp.Listeners.PlayerQuitListener;
-import net.climaxmc.KitPvp.KitPvp.Listeners.PlayerRespawnListener;
-import net.climaxmc.KitPvp.KitPvp.Listeners.WeatherChangeListener;
+import net.climaxmc.KitPvp.Listeners.EntityDamageByEntityListener;
+import net.climaxmc.KitPvp.Listeners.FoodLevelChangeListener;
+import net.climaxmc.KitPvp.Listeners.InventoryClickListener;
+import net.climaxmc.KitPvp.Listeners.InventoryOpenListener;
+import net.climaxmc.KitPvp.Listeners.ItemSpawnListener;
+import net.climaxmc.KitPvp.Listeners.PlayerDeathListener;
+import net.climaxmc.KitPvp.Listeners.PlayerDropItemListener;
+import net.climaxmc.KitPvp.Listeners.PlayerInteractListener;
+import net.climaxmc.KitPvp.Listeners.PlayerJoinListener;
+import net.climaxmc.KitPvp.Listeners.PlayerPickupItemListener;
+import net.climaxmc.KitPvp.Listeners.PlayerQuitListener;
+import net.climaxmc.KitPvp.Listeners.PlayerRespawnListener;
+import net.climaxmc.KitPvp.Listeners.WeatherChangeListener;
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.plugin.RegisteredServiceProvider;
