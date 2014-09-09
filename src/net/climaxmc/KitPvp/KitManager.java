@@ -2,7 +2,12 @@ package net.climaxmc.KitPvp;
 
 import java.util.ArrayList;
 
-import net.climaxmc.KitPvp.Kits.*;
+import net.climaxmc.KitPvp.Kits.ArcherKit;
+import net.climaxmc.KitPvp.Kits.FishermanKit;
+import net.climaxmc.KitPvp.Kits.HeavyKit;
+import net.climaxmc.KitPvp.Kits.IronGolemKit;
+import net.climaxmc.KitPvp.Kits.PvpKit;
+import net.climaxmc.KitPvp.Kits.SoldierKit;
 
 public class KitManager {
 	public static ArrayList<Kit> kits = new ArrayList<Kit>();

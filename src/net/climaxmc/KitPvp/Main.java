@@ -9,7 +9,6 @@ import net.climaxmc.KitPvp.Listeners.PlayerDeathListener;
 import net.climaxmc.KitPvp.Listeners.PlayerDropItemListener;
 import net.climaxmc.KitPvp.Listeners.PlayerInteractListener;
 import net.climaxmc.KitPvp.Listeners.PlayerJoinListener;
-import net.climaxmc.KitPvp.Listeners.PlayerPickupItemListener;
 import net.climaxmc.KitPvp.Listeners.PlayerQuitListener;
 import net.climaxmc.KitPvp.Listeners.PlayerRespawnListener;
 import net.climaxmc.KitPvp.Listeners.WeatherChangeListener;
@@ -33,7 +32,6 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new PlayerDropItemListener(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerInteractListener(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
-		getServer().getPluginManager().registerEvents(new PlayerPickupItemListener(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerRespawnListener(this), this);
 		getServer().getPluginManager().registerEvents(new WeatherChangeListener(this), this);
 		getServer().getPluginManager().registerEvents(new InventoryOpenListener(this), this);

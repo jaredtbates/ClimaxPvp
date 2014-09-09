@@ -25,6 +25,7 @@ public class PlayerJoinListener implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		event.setJoinMessage("§3Join§8» " + player.getName());
+		player.setCanPickupItems(false);
 		player.teleport(player.getWorld().getSpawnLocation());
 		player.getInventory().clear();
 		player.setHealth(20L);

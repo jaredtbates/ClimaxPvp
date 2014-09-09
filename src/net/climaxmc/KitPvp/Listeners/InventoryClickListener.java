@@ -38,13 +38,10 @@ public class InventoryClickListener implements Listener {
 						ArcherKit.wear(player);
 					} else if (clicked.getItemMeta().getDisplayName().equals("§eKit Soldier")) {
 						SoldierKit.wear(player);
-						plugin.soldierKit.add(player.getName());
 					} else if (clicked.getItemMeta().getDisplayName().equals("§eKit Fisherman")) {
 						FishermanKit.wear(player);
-						plugin.fishermanKit.add(player.getName());
 					} else if (clicked.getItemMeta().getDisplayName().equals("§eKit IronGolem")) {
 						IronGolemKit.wear(player);
-						plugin.irongolemKit.add(player.getName());
 					}
 					event.setCancelled(true);
 					player.closeInventory();

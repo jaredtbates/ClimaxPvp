@@ -1,7 +1,6 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.KitPvp.Main;
-import net.climaxmc.KitPvp.Utils.Soup;
 
 import org.bukkit.block.Chest;
 import org.bukkit.block.DoubleChest;
