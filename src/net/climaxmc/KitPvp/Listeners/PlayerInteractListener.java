@@ -13,7 +13,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.util.Vector;
 
 public class PlayerInteractListener implements Listener {
 	Main plugin;
@@ -91,13 +90,6 @@ public class PlayerInteractListener implements Listener {
 					this.plugin.kitSelector.setItem(5, kitIronGolem);
 				}
 				player.openInventory(plugin.kitSelector);
-			}
-		}
-		if (plugin.soldierKit.contains(player.getName())) {
-			if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
-				if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-					player.setVelocity(new Vector(0, 0.7, 0));
-				}
 			}
 		}
 	}

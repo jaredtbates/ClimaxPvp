@@ -4,8 +4,11 @@ import net.climaxmc.KitPvp.Kit;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.util.Vector;
 
 public class IronGolemKit extends Kit {
 	public IronGolemKit() {
@@ -25,5 +28,18 @@ public class IronGolemKit extends Kit {
 		player.getInventory().setBoots(boots);
 		addSoup(player.getInventory(), 2, 35);
 		player.sendMessage("§6You have chosen §aIronGolem");
+	}
+
+	@EventHandler
+	public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+		if (event.getDamager() instanceof Player) {
+			Player player = (Player) event.getDamager();
+			if (event.getEntity() instanceof Player) {
+				Player target = (Player) event.getEntity();
+				if (player.getItemInHand().getType().equals(Material.RED_ROSE)) {
+					target.setVelocity(new Vector(0.0D, 1.0D, 0.0D));
+				}
+			}
+		}
 	}
 }

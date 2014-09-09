@@ -1,7 +1,6 @@
 package net.climaxmc.KitPvp;
 
 import net.climaxmc.KitPvp.Commands.RepairCommand;
-import net.climaxmc.KitPvp.Listeners.EntityDamageByEntityListener;
 import net.climaxmc.KitPvp.Listeners.FoodLevelChangeListener;
 import net.climaxmc.KitPvp.Listeners.InventoryClickListener;
 import net.climaxmc.KitPvp.Listeners.InventoryOpenListener;
@@ -16,11 +15,13 @@ import net.climaxmc.KitPvp.Listeners.PlayerRespawnListener;
 import net.climaxmc.KitPvp.Listeners.WeatherChangeListener;
 import net.milkbowl.vault.economy.Economy;
 
+import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 	public Economy economy = null;
+	public Inventory kitSelector = getServer().createInventory(null, 9, "§a§lKit Selector");
 	
 	public void onEnable() {
 		setupEconomy();
@@ -37,7 +38,6 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new WeatherChangeListener(this), this);
 		getServer().getPluginManager().registerEvents(new InventoryOpenListener(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerQuitListener(this), this);
-		getServer().getPluginManager().registerEvents(new EntityDamageByEntityListener(this), this);
 		getCommand("repair").setExecutor(new RepairCommand(this));
 	}
 
