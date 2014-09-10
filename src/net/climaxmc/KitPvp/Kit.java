@@ -6,17 +6,44 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * Represents a kit
+ * 
+ * @author Jared
+ */
 public abstract class Kit implements Listener {
+	/**
+	 * Name of the kit
+	 */
 	private String kitName = "";
+	/**
+	 * Item representing the kit
+	 */
 	private ItemStack kitItem = new ItemStack(Material.AIR);
+	/**
+	 * Lore of the kit
+	 */
 	private String kitLore = "";
 	
+	/**
+	 * Defines a kit
+	 * 
+	 * @param kitName Name of the kit
+	 * @param kitItem Item representing the kit
+	 */
 	public Kit(String kitName, ItemStack kitItem) {
 		this.kitName = kitName;
 		this.kitItem = kitItem;
 		System.out.println("Kit Manager> Enabled kit " + kitName);
 	}
 	
+	/**
+	 * Defines a kit
+	 * 
+	 * @param kitName Name of the kit
+	 * @param kitItem Item representing the kit
+	 * @param kitLore Lore of the kit
+	 */
 	public Kit(String kitName, ItemStack kitItem, String kitLore) {
 		this.kitName = kitName;
 		this.kitItem = kitItem;
