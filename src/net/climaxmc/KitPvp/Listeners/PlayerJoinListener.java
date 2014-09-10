@@ -41,6 +41,5 @@ public class PlayerJoinListener implements Listener {
 		kitSelectorMeta.setLore(kitSelectorLores);
 		kitSelector.setItemMeta(kitSelectorMeta);
 		player.getInventory().setItem(0, kitSelector);
-		player.updateInventory();
 	}
 }

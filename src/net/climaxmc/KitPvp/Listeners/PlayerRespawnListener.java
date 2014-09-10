@@ -36,6 +36,5 @@ public class PlayerRespawnListener implements Listener {
 		itemmeta.setLore(lores);
 		item.setItemMeta(itemmeta);
 		player.getInventory().setItem(0, item);
-		player.updateInventory();
 	}
 }
