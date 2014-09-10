@@ -21,6 +21,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin {
 	public Economy economy = null;
 	public Inventory kitSelector = getServer().createInventory(null, 9, "§a§lKit Selector");
+	public Inventory soup = getServer().createInventory(null, 54, "§5§lFree Soup!");
 	
 	public void onEnable() {
 		setupEconomy();

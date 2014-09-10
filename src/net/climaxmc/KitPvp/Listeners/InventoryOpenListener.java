@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp.Listeners;
 
+import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.Main;
 
 import org.bukkit.block.Chest;
@@ -19,9 +20,9 @@ public class InventoryOpenListener implements Listener {
 	@EventHandler
 	public void onInventoryOpenEvent(InventoryOpenEvent event) {
 		Player player = (Player) event.getPlayer();
-		if (event.getInventory().getHolder() instanceof Chest || event.getInventory().getHolder() instanceof DoubleChest){
+		if (event.getInventory().getHolder() instanceof Chest || event.getInventory().getHolder() instanceof DoubleChest) {
 			event.setCancelled(true);
-			Soup.add(plugin.soup, 0, 53);
+			Kit.addSoup(plugin.soup, 0, 53);
 			player.openInventory(plugin.soup);
 		}
 	}
