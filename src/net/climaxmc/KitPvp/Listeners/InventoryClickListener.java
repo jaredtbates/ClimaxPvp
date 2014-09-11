@@ -1,12 +1,6 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.KitPvp.Main;
-import net.climaxmc.KitPvp.Kits.ArcherKit;
-import net.climaxmc.KitPvp.Kits.FishermanKit;
-import net.climaxmc.KitPvp.Kits.HeavyKit;
-import net.climaxmc.KitPvp.Kits.IronGolemKit;
-import net.climaxmc.KitPvp.Kits.PvpKit;
-import net.climaxmc.KitPvp.Kits.SoldierKit;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -31,17 +25,17 @@ public class InventoryClickListener implements Listener {
 			if (inventory.getName() == plugin.kitSelector.getName()) {
 				if (clicked.getItemMeta() != null) {
 					if (clicked.getItemMeta().getDisplayName().equals("§eKit Pvp")) {
-						PvpKit.wear(player);
+						//PvpKit.wear(player);
 					} else if (clicked.getItemMeta().getDisplayName().equals("§eKit Heavy")) {
-						HeavyKit.wear(player);
+						//HeavyKit.wear(player);
 					} else if (clicked.getItemMeta().getDisplayName().equals("§eKit Archer")) {
-						ArcherKit.wear(player);
+						//ArcherKit.wear(player);
 					} else if (clicked.getItemMeta().getDisplayName().equals("§eKit Soldier")) {
-						SoldierKit.wear(player);
+						//SoldierKit.wear(player);
 					} else if (clicked.getItemMeta().getDisplayName().equals("§eKit Fisherman")) {
-						FishermanKit.wear(player);
+						//FishermanKit.wear(player);
 					} else if (clicked.getItemMeta().getDisplayName().equals("§eKit IronGolem")) {
-						IronGolemKit.wear(player);
+						//IronGolemKit.wear(player);
 					}
 					event.setCancelled(true);
 					player.closeInventory();

@@ -5,5 +5,17 @@ authors: [computerwizjared, jonhan2000]
 depend: [Vault]
 commands:
   repair:
-    description: Repairs your inventory!
+    description: Repairs your inventory
     permission: ClimaxKits.Repair
+  pvp:
+    description: Applies Kit Pvp
+  heavy:
+    description: Applies Kit Heavy
+  archer:
+    description: Applies Kit Archer
+  soldier:
+    description: Applies Kit Soldier
+  irongolem:
+    description: Applies Kit Iron Golem
+  fisherman:
+    description: Applies Kit Fisherman

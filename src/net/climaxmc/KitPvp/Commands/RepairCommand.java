@@ -10,12 +10,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class RepairCommand implements CommandExecutor {
 	Main plugin;
-
+	
 	public RepairCommand(Main plugin) {
 		this.plugin = plugin;
 	}
-
-	@Override
+	
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;

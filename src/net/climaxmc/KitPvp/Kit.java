@@ -1,6 +1,9 @@
 package net.climaxmc.KitPvp;
 
 import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
@@ -11,7 +14,7 @@ import org.bukkit.inventory.ItemStack;
  * 
  * @author Jared
  */
-public abstract class Kit implements Listener {
+public abstract class Kit implements Listener, CommandExecutor {
 	/**
 	 * Name of the kit
 	 */
@@ -111,6 +114,16 @@ public abstract class Kit implements Listener {
 	 * @param player Player to wear kit
 	 */
 	public abstract void wear(Player player);
+	
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		if (sender instanceof Player) {
+			Player player = (Player) sender;
+			if (command.getName().equalsIgnoreCase(getName())) {
+				wear(player);
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * Gives a player specified amount of soups

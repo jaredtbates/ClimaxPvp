@@ -22,6 +22,7 @@ public class KitManager {
 		
 		for (Kit kit : kits) {
 			plugin.getServer().getPluginManager().registerEvents(kit, plugin);
+			plugin.getCommand(kit.getName().replaceAll("\\s+", "")).setExecutor(kit);
 		}
 	}
 }
