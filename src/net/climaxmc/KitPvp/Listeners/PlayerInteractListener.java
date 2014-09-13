@@ -1,7 +1,7 @@
 package net.climaxmc.KitPvp.Listeners;
 
-import java.util.ArrayList;
-
+import net.climaxmc.KitPvp.Kit;
+import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Main;
 
 import org.bukkit.Material;
@@ -12,7 +12,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class PlayerInteractListener implements Listener {
 	Main plugin;
@@ -34,6 +33,7 @@ public class PlayerInteractListener implements Listener {
 		}
 		if (item != null) {
 			if (item.getType().equals(Material.NETHER_STAR)) {
+				/* Kept just in case breaks
 				{
 					ItemStack kitPvp = new ItemStack(Material.DIAMOND_SWORD);
 					ItemMeta kitPvpMeta = kitPvp.getItemMeta();
@@ -88,6 +88,9 @@ public class PlayerInteractListener implements Listener {
 					kitIronGolemMeta.setDisplayName("§eKit IronGolem");
 					kitIronGolem.setItemMeta(kitIronGolemMeta);
 					this.plugin.kitSelector.setItem(5, kitIronGolem);
+				}*/
+				for (Kit kit : KitManager.kits) {
+					plugin.kitSelector.setItem(kit.getSlot(), kit.getItem());
 				}
 				player.openInventory(plugin.kitSelector);
 			}

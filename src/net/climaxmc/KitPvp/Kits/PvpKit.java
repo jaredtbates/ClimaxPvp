@@ -10,7 +10,7 @@ import org.bukkit.potion.PotionEffect;
 
 public class PvpKit extends Kit {
 	public PvpKit() {
-		super("Pvp", new ItemStack(Material.DIAMOND_SWORD));
+		super("Pvp", new ItemStack(Material.DIAMOND_SWORD), "A Standard Pvp Kit, Iron Armor and Diamond Sword.", 0);
 	}
 
 	public void wear(Player player) {

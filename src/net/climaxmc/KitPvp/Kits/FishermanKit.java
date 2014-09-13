@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffect;
 
 public class FishermanKit extends Kit {
 	public FishermanKit() {
-		super("Fisherman", new ItemStack(Material.FISHING_ROD));
+		super("Fisherman", new ItemStack(Material.FISHING_ROD), "Fish dem with kit Fisherman!", 4);
 	}
 
 	public void wear(Player player) {

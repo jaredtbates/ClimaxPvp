@@ -12,7 +12,7 @@ import org.bukkit.util.Vector;
 
 public class IronGolemKit extends Kit {
 	public IronGolemKit() {
-		super("Iron Golem", new ItemStack(Material.RED_ROSE));
+		super("Iron Golem", new ItemStack(Material.RED_ROSE), "Fish dem with kit Fisherman!", 5);
 	}
 
 	public void wear(Player player) {
@@ -27,7 +27,6 @@ public class IronGolemKit extends Kit {
 		ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
 		player.getInventory().setBoots(boots);
 		addSoup(player.getInventory(), 2, 35);
-		player.sendMessage("§6You have chosen §aIronGolem");
 	}
 
 	@EventHandler

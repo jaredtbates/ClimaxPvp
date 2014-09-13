@@ -1,5 +1,7 @@
 package net.climaxmc.KitPvp;
 
+import java.util.ArrayList;
+
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,11 +10,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 /**
  * Represents a kit
  * 
- * @author Jared
+ * @author computerwizjared
  */
 public abstract class Kit implements Listener, CommandExecutor {
 	/**
@@ -27,16 +30,26 @@ public abstract class Kit implements Listener, CommandExecutor {
 	 * Lore of the kit
 	 */
 	private String kitLore = "";
+	/**
+	 * Slot of the kit
+	 */
+	private int kitSlot = 0;
 	
 	/**
 	 * Defines a kit
 	 * 
 	 * @param kitName Name of the kit
 	 * @param kitItem Item representing the kit
+	 * @param kitSlot Slot of the kit
 	 */
-	public Kit(String kitName, ItemStack kitItem) {
+	public Kit(String kitName, ItemStack kitItem, int kitSlot) {
+		ItemMeta kitMeta = kitItem.getItemMeta();
+		kitMeta.setDisplayName("§eKit " + kitName);
+		kitItem.setItemMeta(kitMeta);
 		this.kitName = kitName;
 		this.kitItem = kitItem;
+		this.kitSlot = kitSlot;
+		this.kitItem.getItemMeta();
 		System.out.println("Kit Manager> Enabled kit " + kitName);
 	}
 	
@@ -46,11 +59,19 @@ public abstract class Kit implements Listener, CommandExecutor {
 	 * @param kitName Name of the kit
 	 * @param kitItem Item representing the kit
 	 * @param kitLore Lore of the kit
+	 * @param kitSlot Slot of the kit
 	 */
-	public Kit(String kitName, ItemStack kitItem, String kitLore) {
+	public Kit(String kitName, ItemStack kitItem, String kitLore, int kitSlot) {
+		ItemMeta kitMeta = kitItem.getItemMeta();
+		ArrayList<String> lores = new ArrayList<String>();
+		lores.add(kitLore);
+		kitMeta.setLore(lores);
+		kitMeta.setDisplayName("§eKit " + kitName);
+		kitItem.setItemMeta(kitMeta);
 		this.kitName = kitName;
 		this.kitItem = kitItem;
 		this.kitLore = kitLore;
+		this.kitSlot = kitSlot;
 		System.out.println("Kit Manager> Enabled kit " + kitName);
 	}
 	
@@ -77,8 +98,17 @@ public abstract class Kit implements Listener, CommandExecutor {
 	 * 
 	 * @return Lore of the kit
 	 */
-	public String setLore() {
+	public String getLore() {
 		return kitLore;
+	}
+	
+	/**
+	 * Get the slot of the kit
+	 * 
+	 * @return Slot of the kit
+	 */
+	public int getSlot() {
+		return kitSlot;
 	}
 	
 	/**
@@ -106,6 +136,15 @@ public abstract class Kit implements Listener, CommandExecutor {
 	 */
 	public void setLore(String newKitLore) {
 		kitLore = newKitLore;
+	}
+	
+	/**
+	 * Sets the slot of the kit
+	 * 
+	 * @param newKitSlot New slot of the kit
+	 */
+	public void setSlot(int newKitSlot) {
+		kitSlot = newKitSlot;
 	}
 	
 	/**

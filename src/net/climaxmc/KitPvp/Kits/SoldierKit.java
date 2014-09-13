@@ -14,7 +14,7 @@ import org.bukkit.util.Vector;
 
 public class SoldierKit extends Kit {
 	public SoldierKit() {
-		super("Soldier", new ItemStack(Material.FEATHER));
+		super("Soldier", new ItemStack(Material.FEATHER), "Take to the skies with Kit Soldier!", 3);
 	}
 
 	public void wear(Player player) {

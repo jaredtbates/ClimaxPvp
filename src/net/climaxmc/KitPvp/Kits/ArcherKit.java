@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffect;
 
 public class ArcherKit extends Kit {
 	public ArcherKit() {
-		super("Archer", new ItemStack(Material.BOW));
+		super("Archer", new ItemStack(Material.BOW), "Snipe them up!", 2);
 	}
 
 	public void wear(Player player) {
