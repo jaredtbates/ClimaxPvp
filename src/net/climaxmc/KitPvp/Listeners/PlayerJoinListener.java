@@ -1,9 +1,9 @@
-package net.jaredbates.mc.ClimaxKits.Listeners;
+package net.climaxmc.KitPvp.Listeners;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import net.jaredbates.mc.ClimaxKits.Main;
+import net.climaxmc.KitPvp.Main;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -25,6 +25,7 @@ public class PlayerJoinListener implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		event.setJoinMessage("§3Join§8» " + player.getName());
+		player.setCanPickupItems(false);
 		player.teleport(player.getWorld().getSpawnLocation());
 		player.getInventory().clear();
 		player.setHealth(20L);
@@ -40,6 +41,5 @@ public class PlayerJoinListener implements Listener {
 		kitSelectorMeta.setLore(kitSelectorLores);
 		kitSelector.setItemMeta(kitSelectorMeta);
 		player.getInventory().setItem(0, kitSelector);
-		player.updateInventory();
 	}
 }

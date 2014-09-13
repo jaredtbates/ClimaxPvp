@@ -1,7 +1,6 @@
-package net.jaredbates.mc.ClimaxKits.Kits;
+package net.climaxmc.KitPvp.Kits;
 
-import net.jaredbates.mc.ClimaxKits.Main;
-import net.jaredbates.mc.ClimaxKits.Utils.Soup;
+import net.climaxmc.KitPvp.Kit;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -10,10 +9,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class HeavyKit {
-	Main plugin;
+public class HeavyKit extends Kit {
+	public HeavyKit() {
+		super("Heavy", new ItemStack(Material.DIAMOND_CHESTPLATE), "Better Armor and Sword, but Slow.", 1);
+	}
 	
-	public static void wear(Player player) {
+	public void wear(Player player) {
 		for (PotionEffect effect : player.getActivePotionEffects()) {
 			player.removePotionEffect(effect.getType());
 		}
@@ -28,7 +29,6 @@ public class HeavyKit {
 		player.getInventory().addItem(sword);
 		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 2));
 		player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, 1));
-		Soup.add(player.getInventory(), 1, 35);
-		player.sendMessage("§6You have chosen §aHeavy");
+		addSoup(player.getInventory(), 1, 35);
 	}
 }

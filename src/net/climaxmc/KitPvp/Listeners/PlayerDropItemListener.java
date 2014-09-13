@@ -1,6 +1,6 @@
-package net.jaredbates.mc.ClimaxKits.Listeners;
+package net.climaxmc.KitPvp.Listeners;
 
-import net.jaredbates.mc.ClimaxKits.Main;
+import net.climaxmc.KitPvp.Main;
 
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;

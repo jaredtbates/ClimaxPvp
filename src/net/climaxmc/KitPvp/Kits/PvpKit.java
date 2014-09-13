@@ -1,7 +1,6 @@
-package net.jaredbates.mc.ClimaxKits.Kits;
+package net.climaxmc.KitPvp.Kits;
 
-import net.jaredbates.mc.ClimaxKits.Main;
-import net.jaredbates.mc.ClimaxKits.Utils.Soup;
+import net.climaxmc.KitPvp.Kit;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -9,14 +8,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
-public class PvpKit {
-	Main plugin;
-	
-	public PvpKit(Main plugin) {
-		this.plugin = plugin;
+public class PvpKit extends Kit {
+	public PvpKit() {
+		super("Pvp", new ItemStack(Material.DIAMOND_SWORD), "A Standard Pvp Kit, Iron Armor and Diamond Sword.", 0);
 	}
-	
-	public static void wear(Player player) {
+
+	public void wear(Player player) {
 		for (PotionEffect effect : player.getActivePotionEffects()) {
 			player.removePotionEffect(effect.getType());
 		}
@@ -28,7 +25,6 @@ public class PvpKit {
 		ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
 		sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
 		player.getInventory().addItem(sword);
-		Soup.add(player.getInventory(), 1, 35);
-		player.sendMessage("§6You have chosen §aPvp");
+		addSoup(player.getInventory(), 1, 35);
 	}
 }

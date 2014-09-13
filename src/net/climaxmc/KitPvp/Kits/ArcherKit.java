@@ -1,7 +1,6 @@
-package net.jaredbates.mc.ClimaxKits.Kits;
+package net.climaxmc.KitPvp.Kits;
 
-import net.jaredbates.mc.ClimaxKits.Main;
-import net.jaredbates.mc.ClimaxKits.Utils.Soup;
+import net.climaxmc.KitPvp.Kit;
 
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -11,14 +10,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 
-public class ArcherKit {
-	Main plugin;
-	
-	public ArcherKit(Main plugin) {
-		this.plugin = plugin;
+public class ArcherKit extends Kit {
+	public ArcherKit() {
+		super("Archer", new ItemStack(Material.BOW), "Snipe them up!", 2);
 	}
-	
-	public static void wear(Player player) {
+
+	public void wear(Player player) {
 		for (PotionEffect effect : player.getActivePotionEffects()) {
 			player.removePotionEffect(effect.getType());
 		}
@@ -56,8 +53,7 @@ public class ArcherKit {
 		bow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
 		bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
 		player.getInventory().addItem(bow);
-		Soup.add(player.getInventory(), 2, 34);
+		addSoup(player.getInventory(), 2, 34);
 		player.getInventory().addItem(new ItemStack(Material.ARROW, 1));
-		player.sendMessage("§6You have chosen §aArcher");
 	}
 }

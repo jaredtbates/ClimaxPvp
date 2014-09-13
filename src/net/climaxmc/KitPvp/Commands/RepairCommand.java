@@ -1,27 +1,24 @@
-package net.jaredbates.mc.ClimaxKits.Commands;
+package net.climaxmc.KitPvp.Commands;
 
-import net.jaredbates.mc.ClimaxKits.Main;
+import net.climaxmc.KitPvp.Main;
 
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class RepairCommand implements Listener {
+public class RepairCommand implements CommandExecutor {
 	Main plugin;
-
+	
 	public RepairCommand(Main plugin) {
 		this.plugin = plugin;
 	}
-
-	@EventHandler
-	public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
-		String[] args = event.getMessage().substring(1).split(" ");
-		Player player = event.getPlayer();
-		if (args[0].equals("repair")) {
-			event.setCancelled(true);
-			if (player.hasPermission("ClimaxKits.Repair")) {
+	
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		if (sender instanceof Player) {
+			Player player = (Player) sender;
+			if (command.getName().equalsIgnoreCase("repair")) {
 				if (plugin.economy.getBalance(player) >= 2) {
 					plugin.economy.withdrawPlayer(player, 2);
 					for (ItemStack item : player.getInventory().getContents()) {
@@ -38,9 +35,8 @@ public class RepairCommand implements Listener {
 				} else {
 					player.sendMessage("§cYou do not have enough money to repair your inventory!");
 				}
-			} else {
-				player.sendMessage("§cYou do not have permission for that command!");
 			}
 		}
+		return false;
 	}
 }

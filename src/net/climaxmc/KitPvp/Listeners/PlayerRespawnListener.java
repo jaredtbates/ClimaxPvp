@@ -1,9 +1,9 @@
-package net.jaredbates.mc.ClimaxKits.Listeners;
+package net.climaxmc.KitPvp.Listeners;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import net.jaredbates.mc.ClimaxKits.Main;
+import net.climaxmc.KitPvp.Main;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -36,6 +36,5 @@ public class PlayerRespawnListener implements Listener {
 		itemmeta.setLore(lores);
 		item.setItemMeta(itemmeta);
 		player.getInventory().setItem(0, item);
-		player.updateInventory();
 	}
 }
