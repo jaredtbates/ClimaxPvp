@@ -19,6 +19,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
+	public String climax = "§0§l[§cClimax§0§l] §r";
 	public Economy economy = null;
 	public Inventory kitSelector = getServer().createInventory(null, 9, "§a§lKit Selector");
 	public Inventory soup = getServer().createInventory(null, 54, "§5§lFree Soup!");

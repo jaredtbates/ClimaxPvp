@@ -18,6 +18,14 @@ public class PlayerDeathListener implements Listener {
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
 		final Player player = event.getEntity();
+		Player killer = player.getKiller();
+		if (killer != null) {
+			event.setDeathMessage("§c" + player.getName() + " §7was killed by §a" + killer.getName());
+			plugin.economy.depositPlayer(killer, 10);
+			killer.sendMessage(plugin.climax + "§aYou have gained §6$10§a!");
+		} else {
+			event.setDeathMessage("§c" + player.getName() + " §7died");
+		}
 		player.setVelocity(new Vector(0, 0, 0));
 		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 			public void run() {
