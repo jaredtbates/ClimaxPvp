@@ -27,7 +27,7 @@ public class PlayerDeathListener implements Listener {
 			event.setDeathMessage("§c" + player.getName() + " §7died");
 		}
 		player.setVelocity(new Vector(0, 0, 0));
-		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+		plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
 			public void run() {
 				if (player.isDead()) {
 					try {
