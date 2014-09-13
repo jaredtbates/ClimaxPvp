@@ -30,7 +30,6 @@ public class FishermanKit extends Kit {
 		ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
 		player.getInventory().setBoots(boots);
 		addSoup(player.getInventory(), 2, 35);
-		player.sendMessage("§6You have chosen §aFisherman");
 	}
 	
 	@EventHandler

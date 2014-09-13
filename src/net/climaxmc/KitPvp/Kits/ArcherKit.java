@@ -55,6 +55,5 @@ public class ArcherKit extends Kit {
 		player.getInventory().addItem(bow);
 		addSoup(player.getInventory(), 2, 34);
 		player.getInventory().addItem(new ItemStack(Material.ARROW, 1));
-		player.sendMessage("§6You have chosen §aArcher");
 	}
 }

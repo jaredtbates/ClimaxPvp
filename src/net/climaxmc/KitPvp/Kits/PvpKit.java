@@ -26,6 +26,5 @@ public class PvpKit extends Kit {
 		sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
 		player.getInventory().addItem(sword);
 		addSoup(player.getInventory(), 1, 35);
-		player.sendMessage("§6You have chosen §aPvp");
 	}
 }

@@ -30,7 +30,6 @@ public class SoldierKit extends Kit {
 		boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
 		player.getInventory().setBoots(boots);
 		addSoup(player.getInventory(), 1, 35);
-		player.sendMessage("§6You have chosen §aSoldier");
 	}
 
 	@EventHandler
