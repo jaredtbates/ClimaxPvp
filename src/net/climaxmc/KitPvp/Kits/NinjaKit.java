@@ -16,13 +16,17 @@ public class NinjaKit extends Kit{
 	}
 
 	public void wear(Player player) {
+		for(PotionEffect effect : player.getActivePotionEffects()){
+			player.removePotionEffect(effect.getType());
+		}
+		player.getInventory().clear();
 		player.getInventory().setHelmet(new ItemStack(Material.GOLD_HELMET));
 		player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
 		player.getInventory().setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
 		player.getInventory().setBoots(new ItemStack(Material.GOLD_BOOTS));
 		ItemStack sword = new ItemStack(Material.IRON_SWORD);
 		sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-		sword.addEnchantment(Enchantment.KNOCKBACK, 2);
+		sword.addEnchantment(Enchantment.KNOCKBACK, 1);
 		player.getInventory().addItem(sword);
 		player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
 		addSoup(player.getInventory(), 1, 35);
