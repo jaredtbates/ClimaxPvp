@@ -6,6 +6,7 @@ import net.climaxmc.KitPvp.Kits.ArcherKit;
 import net.climaxmc.KitPvp.Kits.FishermanKit;
 import net.climaxmc.KitPvp.Kits.HeavyKit;
 import net.climaxmc.KitPvp.Kits.IronGolemKit;
+import net.climaxmc.KitPvp.Kits.NinjaKit;
 import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Kits.SoldierKit;
 
@@ -19,6 +20,7 @@ public class KitManager {
 		kits.add(new SoldierKit());
 		kits.add(new IronGolemKit());
 		kits.add(new FishermanKit());
+		kits.add(new NinjaKit());
 		
 		for (Kit kit : kits) {
 			plugin.getServer().getPluginManager().registerEvents(kit, plugin);
