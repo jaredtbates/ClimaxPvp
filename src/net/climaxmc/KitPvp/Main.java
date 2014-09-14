@@ -1,5 +1,8 @@
 package net.climaxmc.KitPvp;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 import net.climaxmc.KitPvp.Commands.RepairCommand;
 import net.climaxmc.KitPvp.Listeners.FoodLevelChangeListener;
 import net.climaxmc.KitPvp.Listeners.InventoryClickListener;
@@ -23,6 +26,7 @@ public class Main extends JavaPlugin {
 	public Economy economy = null;
 	public Inventory kitSelector = getServer().createInventory(null, 9, "§a§lKit Selector");
 	public Inventory soup = getServer().createInventory(null, 54, "§5§lFree Soup!");
+	public ArrayList<UUID> inKit = new ArrayList<UUID>();
 	
 	public void onEnable() {
 		setupEconomy();

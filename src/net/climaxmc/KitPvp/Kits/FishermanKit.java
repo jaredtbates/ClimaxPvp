@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
 
 public class FishermanKit extends Kit {
 	public FishermanKit() {
@@ -16,10 +15,6 @@ public class FishermanKit extends Kit {
 	}
 
 	public void wear(Player player) {
-		for (PotionEffect effect : player.getActivePotionEffects()) {
-			player.removePotionEffect(effect.getType());
-		}
-		player.getInventory().clear();
 		ItemStack sword = new ItemStack(Material.IRON_SWORD);
 		sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
 		player.getInventory().addItem(sword);

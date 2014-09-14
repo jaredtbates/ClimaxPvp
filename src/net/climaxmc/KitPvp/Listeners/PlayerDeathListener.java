@@ -19,6 +19,9 @@ public class PlayerDeathListener implements Listener {
 	public void onPlayerDeath(PlayerDeathEvent event) {
 		final Player player = event.getEntity();
 		Player killer = player.getKiller();
+		if (plugin.inKit.contains(player.getUniqueId())) {
+			plugin.inKit.remove(player.getUniqueId());
+		}
 		if (killer != null) {
 			event.setDeathMessage("§c" + player.getName() + " §7was killed by §a" + killer.getName());
 			plugin.economy.depositPlayer(killer, 10);

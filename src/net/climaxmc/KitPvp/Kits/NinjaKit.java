@@ -16,10 +16,6 @@ public class NinjaKit extends Kit{
 	}
 
 	public void wear(Player player) {
-		for(PotionEffect effect : player.getActivePotionEffects()){
-			player.removePotionEffect(effect.getType());
-		}
-		player.getInventory().clear();
 		player.getInventory().setHelmet(new ItemStack(Material.GOLD_HELMET));
 		player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
 		player.getInventory().setLeggings(new ItemStack(Material.GOLD_LEGGINGS));

@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.util.Vector;
 
 public class IronGolemKit extends Kit {
@@ -17,10 +16,6 @@ public class IronGolemKit extends Kit {
 	}
 
 	public void wear(Player player) {
-		for (PotionEffect effect : player.getActivePotionEffects()) {
-			player.removePotionEffect(effect.getType());
-		}
-		player.getInventory().clear();
 		ItemStack sword = new ItemStack(Material.GOLD_SWORD);
 		sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
 		sword.addEnchantment(Enchantment.DURABILITY, 2);

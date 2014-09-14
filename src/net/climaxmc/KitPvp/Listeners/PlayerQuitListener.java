@@ -17,6 +17,9 @@ public class PlayerQuitListener implements Listener {
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
+		if (plugin.inKit.contains(player.getUniqueId())) {
+			plugin.inKit.remove(player.getUniqueId());
+		}
 		event.setQuitMessage("§cQuit§8» " + player.getName());
 	}
 }

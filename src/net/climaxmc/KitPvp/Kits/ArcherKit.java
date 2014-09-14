@@ -8,7 +8,6 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.potion.PotionEffect;
 
 public class ArcherKit extends Kit {
 	public ArcherKit() {
@@ -16,10 +15,6 @@ public class ArcherKit extends Kit {
 	}
 
 	public void wear(Player player) {
-		for (PotionEffect effect : player.getActivePotionEffects()) {
-			player.removePotionEffect(effect.getType());
-		}
-		player.getInventory().clear();
 		ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
 		LeatherArmorMeta helmetMeta = (LeatherArmorMeta) helmet.getItemMeta();
 		helmetMeta.setColor(Color.WHITE);

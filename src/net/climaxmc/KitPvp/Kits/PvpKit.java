@@ -6,7 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
 
 public class PvpKit extends Kit {
 	public PvpKit() {
@@ -14,10 +13,6 @@ public class PvpKit extends Kit {
 	}
 
 	public void wear(Player player) {
-		for (PotionEffect effect : player.getActivePotionEffects()) {
-			player.removePotionEffect(effect.getType());
-		}
-		player.getInventory().clear();
 		player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
 		player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
 		player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));

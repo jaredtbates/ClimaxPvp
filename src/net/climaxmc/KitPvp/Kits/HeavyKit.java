@@ -15,10 +15,6 @@ public class HeavyKit extends Kit {
 	}
 	
 	public void wear(Player player) {
-		for (PotionEffect effect : player.getActivePotionEffects()) {
-			player.removePotionEffect(effect.getType());
-		}
-		player.getInventory().clear();
 		player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
 		player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
 		player.getInventory().setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS));

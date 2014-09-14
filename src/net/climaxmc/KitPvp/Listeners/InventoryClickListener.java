@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.potion.PotionEffect;
 
 public class InventoryClickListener implements Listener {
 	Main plugin;
@@ -25,13 +26,22 @@ public class InventoryClickListener implements Listener {
 			if (inventory.getName() == plugin.kitSelector.getName()) {
 				for (Kit kit : KitManager.kits) {
 					if (event.getSlot() == kit.getSlot()) {
-						kit.wear(player);
+						if (!plugin.inKit.contains(player.getUniqueId())) {
+							plugin.inKit.add(player.getUniqueId());
+							for (PotionEffect effect : player.getActivePotionEffects()) {
+								player.removePotionEffect(effect.getType());
+							}
+							player.getInventory().clear();
+							kit.wear(player);
+							player.sendMessage("§6You have chosen §a" + kit.getName());
+						} else {
+							player.sendMessage("§cYou have not died yet!");
+						}
 						plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
 							public void run() {
 								player.closeInventory();
 							}
 						});
-						player.sendMessage("§6You have chosen §a" + kit.getName());
 					}
 				}
 			}
