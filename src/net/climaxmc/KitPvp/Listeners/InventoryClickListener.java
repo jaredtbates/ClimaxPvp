@@ -41,6 +41,7 @@ public class InventoryClickListener implements Listener {
 						} else {
 							player.sendMessage("§cYou do not have permission for kit " + kit.getName() + "§c!");
 						}
+						event.setCancelled(true);
 						plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
 							public void run() {
 								player.closeInventory();
