@@ -26,7 +26,7 @@ public class Main extends JavaPlugin {
 	public Economy economy = null;
 	public Inventory kitSelector = getServer().createInventory(null, 9, "§a§lKit Selector");
 	public Inventory soup = getServer().createInventory(null, 54, "§5§lFree Soup!");
-	public ArrayList<UUID> inKit = new ArrayList<UUID>();
+	public static ArrayList<UUID> inKit = new ArrayList<UUID>();
 	
 	public void onEnable() {
 		setupEconomy();

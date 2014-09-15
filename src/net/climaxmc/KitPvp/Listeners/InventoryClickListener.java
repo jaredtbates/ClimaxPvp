@@ -27,8 +27,8 @@ public class InventoryClickListener implements Listener {
 				for (Kit kit : KitManager.kits) {
 					if (event.getSlot() == kit.getSlot()) {
 						if (player.hasPermission("ClimaxKits.Kit." + kit.getName().replaceAll("\\s+", ""))) {
-							if (!plugin.inKit.contains(player.getUniqueId())) {
-								plugin.inKit.add(player.getUniqueId());
+							if (!Main.inKit.contains(player.getUniqueId())) {
+								Main.inKit.add(player.getUniqueId());
 								for (PotionEffect effect : player.getActivePotionEffects()) {
 									player.removePotionEffect(effect.getType());
 								}

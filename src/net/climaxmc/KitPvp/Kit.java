@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
 
 /**
  * Represents a kit
@@ -158,7 +159,21 @@ public abstract class Kit implements Listener, CommandExecutor {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
 			if (command.getName().equalsIgnoreCase(getName())) {
-				wear(player);
+				if (player.hasPermission("ClimaxKits.Kit." + getName().replaceAll("\\s+", ""))) {
+					if (!Main.inKit.contains(player.getUniqueId())) {
+						Main.inKit.add(player.getUniqueId());
+						for (PotionEffect effect : player.getActivePotionEffects()) {
+							player.removePotionEffect(effect.getType());
+						}
+						player.getInventory().clear();
+						wear(player);
+						player.sendMessage("§6You have chosen §a" + getName());
+					} else {
+						player.sendMessage("§cYou have not died yet!");
+					}
+				} else {
+					player.sendMessage("§cYou do not have permission for kit " + getName() + "§c!");
+				}
 			}
 		}
 		return false;
