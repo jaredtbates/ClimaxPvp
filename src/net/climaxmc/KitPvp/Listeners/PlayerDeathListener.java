@@ -24,8 +24,23 @@ public class PlayerDeathListener implements Listener {
 		}
 		if (killer != null) {
 			event.setDeathMessage("§c" + player.getName() + " §7was killed by §a" + killer.getName());
-			plugin.economy.depositPlayer(killer, 10);
-			killer.sendMessage(plugin.climax + "§aYou have gained §6$10§a!");
+			if (plugin.killStreak.containsKey(player.getUniqueId())) {
+				plugin.killStreak.put(player.getUniqueId(), plugin.killStreak.get(player.getUniqueId()) + 1);
+				int amount = plugin.killStreak.get(player.getUniqueId());
+				if (amount % 5 == 0) {
+					plugin.getServer().broadcastMessage("§a" + player.getName() + " §7has reached a kill streak of §c" + amount + "§7!");
+					amount = amount * 2 + 10;
+					plugin.economy.depositPlayer(killer, amount);
+					killer.sendMessage(plugin.climax + "§aYou have gained §6$" + amount + "§a!");
+				} else {
+					plugin.economy.depositPlayer(killer, 10);
+					killer.sendMessage(plugin.climax + "§aYou have gained §6$10§a!");
+				}
+			} else {
+				plugin.killStreak.put(player.getUniqueId(), 1);
+				plugin.economy.depositPlayer(killer, 10);
+				killer.sendMessage(plugin.climax + "§aYou have gained §6$10§a!");
+			}
 		} else {
 			event.setDeathMessage("§c" + player.getName() + " §7died");
 		}

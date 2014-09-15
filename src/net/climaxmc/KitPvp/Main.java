@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import net.climaxmc.KitPvp.Commands.RepairCommand;
@@ -27,6 +28,7 @@ public class Main extends JavaPlugin {
 	public Inventory kitSelector = getServer().createInventory(null, 9, "§a§lKit Selector");
 	public Inventory soup = getServer().createInventory(null, 54, "§5§lFree Soup!");
 	public static ArrayList<UUID> inKit = new ArrayList<UUID>();
+	public HashMap<UUID, Integer> killStreak = new HashMap<UUID, Integer>();
 	
 	public void onEnable() {
 		setupEconomy();
