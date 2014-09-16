@@ -3,9 +3,10 @@ package net.climaxmc.KitPvp.Kits;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import net.climaxmc.KitPvp.Kit;
-import net.climaxmc.KitPvp.Utils.Cooldowns;
+import net.climaxmc.KitPvp.Utils.Ability;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -24,6 +25,7 @@ public class SoldierKit extends Kit {
 	int task = 0;
 	ArrayList<UUID> soldier = new ArrayList<UUID>();
 	HashMap<UUID, Integer> cooldown = new HashMap<UUID, Integer>();
+	Ability fly = new Ability(5);
 	
 	public SoldierKit() {
 		super("Soldier", new ItemStack(Material.FEATHER), "Take to the skies with Kit Soldier!", 3);
@@ -47,10 +49,10 @@ public class SoldierKit extends Kit {
 		if (soldier.contains(player.getUniqueId())) {
 			if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
 				if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-					if (Cooldowns.tryCooldown(player, "", 5)) {
+					if (fly.tryUse(player)) {
 						player.setVelocity(new Vector(0, 0.7, 0));
 					} else {
-						player.sendMessage("");
+						player.sendMessage("§7Wait §c" + fly.getStatus(player).getRemainingTime(TimeUnit.SECONDS) + " §7seconds before using fly!");
 					}
 				}
 			}
