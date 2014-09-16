@@ -60,7 +60,9 @@ public class SoldierKit extends Kit {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
-		soldier.remove(player.getUniqueId());
+		if (soldier.contains(player.getUniqueId())) {
+			soldier.remove(player.getUniqueId());
+		}
 	}
 	
 	@EventHandler
