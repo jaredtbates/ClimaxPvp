@@ -24,24 +24,29 @@ public class PlayerDeathListener implements Listener {
 		}
 		if (killer != null) {
 			event.setDeathMessage("§c" + player.getName() + " §7was killed by §a" + killer.getName());
-			if (plugin.killStreak.containsKey(player.getUniqueId())) {
+			if (plugin.killStreak.containsKey(killer.getUniqueId())) {
 				plugin.killStreak.put(player.getUniqueId(), plugin.killStreak.get(player.getUniqueId()) + 1);
-				int amount = plugin.killStreak.get(player.getUniqueId());
-				if (amount % 5 == 0) {
-					plugin.getServer().broadcastMessage("§a" + killer.getName() + " §7has reached a KillStreak of §c" + amount + "§7!");
-					amount = amount * 2 + 10;
-					plugin.economy.depositPlayer(killer, amount);
-					killer.sendMessage(plugin.climax + "§aYou have gained §6$" + amount + "§a!");
+				int killerAmount = plugin.killStreak.get(killer.getUniqueId());
+				if (killerAmount % 5 == 0) {
+					plugin.getServer().broadcastMessage("§a" + killer.getName() + " §7has reached a KillStreak of §c" + killerAmount + "§7!");
+					if (plugin.killStreak.containsKey(player.getUniqueId())) {
+						if (plugin.killStreak.get(player.getUniqueId()) >= 10) {
+							plugin.getServer().broadcastMessage("§a" + killer.getName() + " §7destroyed §c" + killerAmount + "§7" + player.getName() + "'s KillStreak!");
+						}
+					}
+					killerAmount = killerAmount * 2 + 10;
+					plugin.economy.depositPlayer(killer, killerAmount);
+					killer.sendMessage(plugin.climax + "§aYou have gained §6$" + killerAmount + "§a!");
 				} else {
 					plugin.economy.depositPlayer(killer, 10);
 					killer.sendMessage(plugin.climax + "§aYou have gained §6$10§a!");
-					killer.sendMessage(plugin.climax + "§aYou have reached a KillStreak of §6" + amount + "§a!");
+					killer.sendMessage(plugin.climax + "§aYou have reached a KillStreak of §6" + killerAmount + "§a!");
 				}
 			} else {
-				plugin.killStreak.put(player.getUniqueId(), 1);
+				plugin.killStreak.put(killer.getUniqueId(), 1);
 				plugin.economy.depositPlayer(killer, 10);
 				killer.sendMessage(plugin.climax + "§aYou have gained §6$10§a!");
-				killer.sendMessage(plugin.climax + "§aYou have reached a KillStreak of §6" + plugin.killStreak.get(player.getUniqueId()) + "§a!");
+				killer.sendMessage(plugin.climax + "§aYou have reached a KillStreak of §6" + plugin.killStreak.get(killer.getUniqueId()) + "§a!");
 			}
 		} else {
 			event.setDeathMessage("§c" + player.getName() + " §7died");
