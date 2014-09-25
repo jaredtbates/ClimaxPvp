@@ -2,6 +2,8 @@ package net.climaxmc.KitPvp;
 
 import java.util.ArrayList;
 
+import lombok.Data;
+
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,6 +20,7 @@ import org.bukkit.potion.PotionEffect;
  * 
  * @author computerwizjared
  */
+@Data
 public abstract class Kit implements Listener, CommandExecutor {
 	/**
 	 * Name of the kit
@@ -73,78 +76,6 @@ public abstract class Kit implements Listener, CommandExecutor {
 		this.lore = lore;
 		this.slot = slot;
 		System.out.println("Kit Manager> Enabled kit " + name);
-	}
-	
-	/**
-	 * Get the name of the kit
-	 * 
-	 * @return Name of the kit
-	 */
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * Get the item that represents the kit
-	 * 
-	 * @return Item representing the kit
-	 */
-	public ItemStack getItem() {
-		return item;
-	}
-	
-	/**
-	 * Get the lore of the kit
-	 * 
-	 * @return Lore of the kit
-	 */
-	public String getLore() {
-		return lore;
-	}
-	
-	/**
-	 * Get the slot of the kit
-	 * 
-	 * @return Slot of the kit
-	 */
-	public int getSlot() {
-		return slot;
-	}
-	
-	/**
-	 * Set the name of the kit
-	 * 
-	 * @param newName New name of the kit
-	 */
-	public void setName(String newName) {
-		name = newName;
-	}
-	
-	/**
-	 * Sets the item that represents the kit
-	 * 
-	 * @param newItem New item representing the kit
-	 */
-	public void setItem(ItemStack newItem) {
-		item = newItem;
-	}
-	
-	/**
-	 * Sets the lore of the kit
-	 * 
-	 * @param newLore New lore of the kit
-	 */
-	public void setLore(String newLore) {
-		lore = newLore;
-	}
-	
-	/**
-	 * Sets the slot of the kit
-	 * 
-	 * @param newSlot New slot of the kit
-	 */
-	public void setSlot(int newSlot) {
-		slot = newSlot;
 	}
 	
 	/**
