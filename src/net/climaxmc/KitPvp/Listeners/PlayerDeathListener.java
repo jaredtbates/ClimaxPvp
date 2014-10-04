@@ -47,11 +47,11 @@ public class PlayerDeathListener implements Listener {
 				if (plugin.killStreak.get(player.getUniqueId()) >= 10) {
 					plugin.getServer().broadcastMessage("§a" + killer.getName() + " §7Destroyed §c" + player.getName() + "'s §6KillStreak of §a" + plugin.killStreak.get(player.getUniqueId()) + "!");
 				}
+				plugin.killStreak.remove(player.getUniqueId());
 			}
 		} else {
 			event.setDeathMessage("§c" + player.getName() + " §7died");
 		}
-		player.setVelocity(new Vector(0, 0, 0));
 		plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
 			public void run() {
 				if (player.isDead()) {
@@ -72,5 +72,6 @@ public class PlayerDeathListener implements Listener {
 				}
 			}
 		});
+		player.setVelocity(new Vector(0, 0, 0));
 	}
 }

@@ -20,6 +20,9 @@ public class PlayerQuitListener implements Listener {
 		if (Main.inKit.contains(player.getUniqueId())) {
 			Main.inKit.remove(player.getUniqueId());
 		}
+		if (plugin.killStreak.containsKey(player.getUniqueId())) {
+			plugin.killStreak.containsKey(player.getUniqueId());
+		}
 		event.setQuitMessage("§cQuit§8» " + player.getName());
 	}
 }
