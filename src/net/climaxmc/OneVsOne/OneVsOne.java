@@ -37,7 +37,7 @@ public class OneVsOne implements CommandExecutor {
 					p.sendMessage("§aTeleported to Spawn!");
 					p.teleport(new Location(p.getWorld(), -675.5, 8, 1068.5));
 					in1v1.remove(p.getUniqueId());
-					challenged.remove(p);
+					challenged.remove(p.getUniqueId());
 				}
 				in1v1.add(p.getUniqueId());
 				int x = plugin.getConfig().getInt("lobbyspawn.x");
