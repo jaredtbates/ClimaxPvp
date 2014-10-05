@@ -2,10 +2,9 @@ package net.climaxmc.OneVsOne;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import net.climaxmc.Main;
-import net.climaxmc.Utils.Ability;
+import net.climaxmc.Utils.Cooldowns;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -38,8 +37,7 @@ public class Events implements Listener{
 			Player target = (Player) e.getRightClicked();
 			if(OneVsOne.in1v1.contains(target.getUniqueId())){
 				if(p.getInventory().getItemInHand().getType() == Material.STICK){
-					Ability challenge = new Ability(5);
-					if(challenge.tryUse(p)){
+					if(Cooldowns.tryCooldown(p, "Challenge", 5)){
 						if(OneVsOne.challenged.containsKey(target.getUniqueId()) && OneVsOne.challenged.containsValue(p.getUniqueId())){
 							if(a1.size() == a2.size() && a2.size() == a3.size()){
 								a1.add(1);
@@ -108,7 +106,7 @@ public class Events implements Listener{
 							target.sendMessage("§0§l[§6§l1v1§0§l] §aYou have been challenged by " + p.getName() + " to a Regular 1v1! Right Click them to Accept!");
 						}
 					}else{
-						p.sendMessage("§0§l[§6§l1v1§0§l] §cYou must wait " + challenge.getStatus(p).getRemainingTime(TimeUnit.SECONDS) + " seconds to Challenge them again!");
+						p.sendMessage("§0§l[§6§l1v1§0§l] §cYou must wait " + Cooldowns.getCooldown(p, "Challenge") + " seconds to Challenge them again!");
 					}
 				}
 			}

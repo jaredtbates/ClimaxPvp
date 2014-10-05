@@ -1,9 +1,10 @@
 package net.climaxmc;
 
-//import java.sql.Connection;
+import java.sql.Connection;
 
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Commands.RepairCommand;
+import net.climaxmc.KitPvp.Commands.SpawnCommand;
 import net.climaxmc.OneVsOne.OneVsOne;
 import net.milkbowl.vault.economy.Economy;
 
@@ -13,19 +14,20 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin {
 	public String climax = "§0§l[§cClimax§0§l] §r";
 	public Economy economy = null;
-	//public Connection connection;
+	public Connection connection;
 	
 	public void onEnable() {
 		saveDefaultConfig();
-		//connection = Database.openConnection(this);
+		connection = Database.openConnection(this);
 		setupEconomy();
 		new KitPvp(this);
 		new OneVsOne(this);
 		getCommand("repair").setExecutor(new RepairCommand(this));
+		getCommand("spawn").setExecutor(new SpawnCommand(this));
 	}
 	
 	public void onDisable() {
-		//Database.closeConnection(this, connection);
+		Database.closeConnection(this, connection);
 	}
 
 	private boolean setupEconomy() {

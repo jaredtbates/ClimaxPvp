@@ -59,6 +59,17 @@ public class Database {
 			return false;
 		}
 	}
+	
+	public static synchronized boolean removeIP(JavaPlugin plugin, Connection connection, Player player) {
+		try {
+			Statement statement = connection.createStatement();
+			statement.executeUpdate("DELETE FROM " + plugin.getConfig().getString("MySQL.Table") + " WHERE" + player.getUniqueId().toString() + ";");
+			return true;
+		} catch (Exception e) {
+			System.out.println("[" + plugin.getDescription().getName() + "] MySQL could not be contacted!");
+			return false;
+		}
+	}
 
 	public static synchronized boolean containsPlayer(JavaPlugin plugin, Connection connection, Player player) {
 		try {

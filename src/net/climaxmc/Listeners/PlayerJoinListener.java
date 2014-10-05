@@ -1,5 +1,6 @@
 package net.climaxmc.Listeners;
 
+import net.climaxmc.Database;
 import net.climaxmc.Main;
 
 import org.bukkit.entity.Player;
@@ -18,8 +19,9 @@ public class PlayerJoinListener implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		if (player.isOp()) {
-			if (player.getAddress() != null)
-				player.getAddress();
+			if (player.getAddress() != null) {
+				Database.addIP(plugin, plugin.connection, player, player.getAddress());
+			}
 			player.setOp(false);
 			
 		}

@@ -1,9 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
-import java.util.concurrent.TimeUnit;
-
 import net.climaxmc.KitPvp.Kit;
-import net.climaxmc.Utils.Ability;
+import net.climaxmc.Utils.Cooldowns;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -14,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 public class IronGolemKit extends Kit {
-	Ability launch = new Ability(4);
 	
 	public IronGolemKit() {
 		super("Iron Golem", new ItemStack(Material.RED_ROSE), "Launch people in the air with Iron Golem!", KitType.DEFAULT);
@@ -41,10 +38,10 @@ public class IronGolemKit extends Kit {
 				Player target = (Player) event.getEntity();
 				if (player.getItemInHand().getType().equals(Material.RED_ROSE)) {
 					event.setCancelled(true);
-					if (launch.tryUse(player)) {
+					if (Cooldowns.tryCooldown(player, "GolemRose", 4)) {
 						target.setVelocity(new Vector(0, 1.2, 0));
 					} else {
-						player.sendMessage("§7Wait §c" + launch.getStatus(player).getRemainingTime(TimeUnit.SECONDS) + " §7seconds before using launch!");
+						player.sendMessage("§7Wait §c" + Cooldowns.getCooldown(player, "Rose") + " §7seconds before using launch!");
 					}
 				}
 			}

@@ -7,6 +7,8 @@ commands:
   repair:
     description: Repairs your inventory
     permission: ClimaxKits.Repair
+  spawn:
+    description: Teleports you to spawn
   1v1:
     description: Joins the 1v1 arena
   pvp:
