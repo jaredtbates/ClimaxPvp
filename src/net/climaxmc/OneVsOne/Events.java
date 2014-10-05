@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import net.climaxmc.Main;
-import net.climaxmc.Utils.Cooldowns;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
