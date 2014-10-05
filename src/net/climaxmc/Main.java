@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Commands.RepairCommand;
+import net.climaxmc.OneVsOne.OneVsOne;
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -19,6 +20,7 @@ public class Main extends JavaPlugin {
 		connection = Database.openConnection(this);
 		setupEconomy();
 		new KitPvp(this);
+		new OneVsOne(this);
 		getCommand("repair").setExecutor(new RepairCommand(this));
 	}
 	
