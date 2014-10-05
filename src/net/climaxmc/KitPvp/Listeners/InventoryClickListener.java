@@ -1,8 +1,9 @@
 package net.climaxmc.KitPvp.Listeners;
 
+import net.climaxmc.Main;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-import net.climaxmc.KitPvp.Main;
+import net.climaxmc.KitPvp.KitPvp;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,12 +24,12 @@ public class InventoryClickListener implements Listener {
 		Inventory inventory = event.getInventory();
 		final Player player = (Player) event.getWhoClicked();
 		if (inventory != null) {
-			if (inventory.getName() == plugin.kitSelector.getName()) {
+			if (inventory.getName() == KitPvp.kitSelector.getName()) {
 				for (Kit kit : KitManager.kits) {
 					if (event.getCurrentItem().getItemMeta().getDisplayName().equals(kit.getItem().getItemMeta().getDisplayName())) {
 						if (player.hasPermission("ClimaxKits.Kit." + kit.getName().replaceAll("\\s+", ""))) {
-							if (!Main.inKit.contains(player.getUniqueId())) {
-								Main.inKit.add(player.getUniqueId());
+							if (!KitPvp.inKit.contains(player.getUniqueId())) {
+								KitPvp.inKit.add(player.getUniqueId());
 								for (PotionEffect effect : player.getActivePotionEffects()) {
 									player.removePotionEffect(effect.getType());
 								}

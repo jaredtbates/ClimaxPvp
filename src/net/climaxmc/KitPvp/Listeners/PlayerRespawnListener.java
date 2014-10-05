@@ -3,7 +3,7 @@ package net.climaxmc.KitPvp.Listeners;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.climaxmc.KitPvp.Main;
+import net.climaxmc.Main;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

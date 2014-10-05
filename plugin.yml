@@ -1,5 +1,5 @@
-name: ClimaxKits
-main: net.climaxmc.KitPvp.Main
+name: ClimaxPvp
+main: net.climaxmc.Main
 version: 1.2
 authors: [computerwizjared, jonhan2000]
 depend: [Vault]

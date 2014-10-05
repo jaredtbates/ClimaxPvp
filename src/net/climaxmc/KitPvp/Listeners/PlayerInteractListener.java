@@ -1,9 +1,10 @@
 package net.climaxmc.KitPvp.Listeners;
 
+import net.climaxmc.Main;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.Kit.KitType;
 import net.climaxmc.KitPvp.KitManager;
-import net.climaxmc.KitPvp.Main;
+import net.climaxmc.KitPvp.KitPvp;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -37,42 +38,42 @@ public class PlayerInteractListener implements Listener {
 				ItemMeta defaultKitsMeta = defaultKits.getItemMeta();
 				defaultKitsMeta.setDisplayName("§eDefault Kits");
 				defaultKits.setItemMeta(defaultKitsMeta);
-				plugin.kitSelector.setItem(0, defaultKits);
+				KitPvp.kitSelector.setItem(0, defaultKits);
 				ItemStack amateurKits = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 11);
 				ItemMeta amateurKitsMeta = amateurKits.getItemMeta();
 				amateurKitsMeta.setDisplayName("§3Amateur Kits");
 				amateurKits.setItemMeta(amateurKitsMeta);
-				plugin.kitSelector.setItem(9, amateurKits);
+				KitPvp.kitSelector.setItem(9, amateurKits);
 				ItemStack experiencedKits = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 5);
 				ItemMeta experiencedKitsMeta = experiencedKits.getItemMeta();
 				experiencedKitsMeta.setDisplayName("§aExperienced Kits");
 				experiencedKits.setItemMeta(experiencedKitsMeta);
-				plugin.kitSelector.setItem(18, experiencedKits);
+				KitPvp.kitSelector.setItem(18, experiencedKits);
 				ItemStack advancedKits = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
 				ItemMeta advancedKitsMeta = advancedKits.getItemMeta();
 				advancedKitsMeta.setDisplayName("§cAdvanced Kits");
 				advancedKits.setItemMeta(advancedKitsMeta);
-				plugin.kitSelector.setItem(27, advancedKits);
+				KitPvp.kitSelector.setItem(27, advancedKits);
 				ItemStack veteranKits = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 3);
 				ItemMeta veteranKitsMeta = veteranKits.getItemMeta();
 				veteranKitsMeta.setDisplayName("§6Veteran Kits");
 				veteranKits.setItemMeta(veteranKitsMeta);
-				plugin.kitSelector.setItem(36, veteranKits);
+				KitPvp.kitSelector.setItem(36, veteranKits);
 				int defaultSlot = 0, amateurSlot = 0, experiencedSlot = 0, advancedSlot = 0, veteranSlot = 0;
 				for (Kit kit : KitManager.kits) {
 					if (kit.getType().equals(KitType.DEFAULT)) {
-						plugin.kitSelector.setItem(++defaultSlot, kit.getItem());
+						KitPvp.kitSelector.setItem(++defaultSlot, kit.getItem());
 					} else if (kit.getType().equals(KitType.AMATEUR)) {
-						plugin.kitSelector.setItem(++amateurSlot + 9, kit.getItem());
+						KitPvp.kitSelector.setItem(++amateurSlot + 9, kit.getItem());
 					} else if (kit.getType().equals(KitType.EXPERIENCED)) {
-						plugin.kitSelector.setItem(++experiencedSlot + 18, kit.getItem());
+						KitPvp.kitSelector.setItem(++experiencedSlot + 18, kit.getItem());
 					} else if (kit.getType().equals(KitType.ADVANCED)) {
-						plugin.kitSelector.setItem(++advancedSlot + 27, kit.getItem());
+						KitPvp.kitSelector.setItem(++advancedSlot + 27, kit.getItem());
 					} else if (kit.getType().equals(KitType.VETERAN)) {
-						plugin.kitSelector.setItem(++veteranSlot + 36, kit.getItem());
+						KitPvp.kitSelector.setItem(++veteranSlot + 36, kit.getItem());
 					}
 				}
-				player.openInventory(plugin.kitSelector);
+				player.openInventory(KitPvp.kitSelector);
 			}
 		}
 	}

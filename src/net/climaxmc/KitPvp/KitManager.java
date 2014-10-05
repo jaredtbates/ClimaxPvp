@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp;
 
 import java.util.ArrayList;
 
+import net.climaxmc.Main;
 import net.climaxmc.KitPvp.Kits.ArcherKit;
 import net.climaxmc.KitPvp.Kits.FishermanKit;
 import net.climaxmc.KitPvp.Kits.HeavyKit;

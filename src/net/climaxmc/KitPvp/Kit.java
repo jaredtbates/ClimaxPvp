@@ -97,8 +97,8 @@ public abstract class Kit implements Listener, CommandExecutor {
 			Player player = (Player) sender;
 			if (command.getName().equalsIgnoreCase(getName())) {
 				if (player.hasPermission("ClimaxKits.Kit." + getName().replaceAll("\\s+", ""))) {
-					if (!Main.inKit.contains(player.getUniqueId())) {
-						Main.inKit.add(player.getUniqueId());
+					if (!KitPvp.inKit.contains(player.getUniqueId())) {
+						KitPvp.inKit.add(player.getUniqueId());
 						for (PotionEffect effect : player.getActivePotionEffects()) {
 							player.removePotionEffect(effect.getType());
 						}
