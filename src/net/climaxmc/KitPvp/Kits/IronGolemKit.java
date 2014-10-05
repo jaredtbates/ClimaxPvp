@@ -17,7 +17,7 @@ public class IronGolemKit extends Kit {
 	Ability launch = new Ability(4);
 	
 	public IronGolemKit() {
-		super("Iron Golem", new ItemStack(Material.RED_ROSE), "Launch people in the air with Iron Golem!", 5);
+		super("Iron Golem", new ItemStack(Material.RED_ROSE), "Launch people in the air with Iron Golem!", KitType.DEFAULT);
 	}
 
 	public void wear(Player player) {

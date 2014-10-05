@@ -25,7 +25,7 @@ public class InventoryClickListener implements Listener {
 		if (inventory != null) {
 			if (inventory.getName() == plugin.kitSelector.getName()) {
 				for (Kit kit : KitManager.kits) {
-					if (event.getSlot() == kit.getSlot()) {
+					if (event.getCurrentItem().getItemMeta().getDisplayName().equals(kit.getItem().getItemMeta().getDisplayName())) {
 						if (player.hasPermission("ClimaxKits.Kit." + kit.getName().replaceAll("\\s+", ""))) {
 							if (!Main.inKit.contains(player.getUniqueId())) {
 								Main.inKit.add(player.getUniqueId());
@@ -41,14 +41,14 @@ public class InventoryClickListener implements Listener {
 						} else {
 							player.sendMessage("§cYou do not have permission for kit " + kit.getName() + "§c!");
 						}
+						plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
+							public void run() {
+								player.closeInventory();
+							}
+						});
 					}
+					event.setCancelled(true);
 				}
-				event.setCancelled(true);
-				plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
-					public void run() {
-						player.closeInventory();
-					}
-				});
 			}
 		}
 	}

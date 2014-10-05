@@ -14,13 +14,22 @@ public class KitManager {
 	public static ArrayList<Kit> kits = new ArrayList<Kit>();
 	
 	public KitManager(Main plugin) {
+		// Default Kits
 		kits.add(new PvpKit());
 		kits.add(new HeavyKit());
 		kits.add(new ArcherKit());
-		kits.add(new SoldierKit());
 		kits.add(new IronGolemKit());
 		kits.add(new FishermanKit());
 		kits.add(new NinjaKit());
+		// Amateur Kits
+		kits.add(new SoldierKit());
+		
+		// Experienced Kits
+		
+		// Advanced Kits
+		
+		// Veteran Kits
+		
 		
 		for (Kit kit : kits) {
 			plugin.getServer().getPluginManager().registerEvents(kit, plugin);

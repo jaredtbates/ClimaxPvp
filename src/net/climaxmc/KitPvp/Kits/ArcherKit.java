@@ -11,7 +11,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public class ArcherKit extends Kit {
 	public ArcherKit() {
-		super("Archer", new ItemStack(Material.BOW), "Snipe them up!", 2);
+		super("Archer", new ItemStack(Material.BOW), "Snipe them up!", KitType.DEFAULT);
 	}
 
 	public void wear(Player player) {

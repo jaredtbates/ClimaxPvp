@@ -24,7 +24,7 @@ public class SoldierKit extends Kit {
 	Ability fly = new Ability(3);
 	
 	public SoldierKit() {
-		super("Soldier", new ItemStack(Material.FEATHER), "Take to the skies with Kit Soldier!", 3);
+		super("Soldier", new ItemStack(Material.FEATHER), "Take to the skies with Kit Soldier!", KitType.AMATEUR);
 	}
 	
 	public void wear(Player player) {
