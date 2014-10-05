@@ -60,8 +60,8 @@ public class Events implements Listener{
 								}
 								RegularKit.wear(p);
 								RegularKit.wear(target);
-								p.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a Regular 1v1 with " + target.getUniqueId());
-								target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a Regular 1v1 with " + p.getUniqueId());
+								p.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a Regular 1v1 with " + target.getName());
+								target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a Regular 1v1 with " + p.getName());
 							}else if(a1.size() > a2.size()){
 								a2.add(1);
 								int x1 = plugin.getConfig().getInt("arena2.spawn1.x");
@@ -80,8 +80,8 @@ public class Events implements Listener{
 								}
 								RegularKit.wear(p);
 								RegularKit.wear(target);
-								p.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a Regular 1v1 with " + target.getUniqueId());
-								target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a Regular 1v1 with " + p.getUniqueId());
+								p.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a Regular 1v1 with " + target.getName());
+								target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a Regular 1v1 with " + p.getName());
 							}else if(a2.size() > a3.size()){
 								a3.add(1);
 								int x1 = plugin.getConfig().getInt("arena3.spawn1.x");
@@ -100,13 +100,13 @@ public class Events implements Listener{
 								}
 								RegularKit.wear(p);
 								RegularKit.wear(target);
-								p.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a Regular 1v1 with " + target.getUniqueId());
-								target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a Regular 1v1 with " + p.getUniqueId());
+								p.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a Regular 1v1 with " + target.getName());
+								target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a Regular 1v1 with " + p.getName());
 							}
 						}else{
 							OneVsOne.challenged.put(p.getUniqueId(), target.getUniqueId());
-							p.sendMessage("§0§l[§6§l1v1§0§l] §aYou have challenged " + target.getUniqueId() + " to a Regular 1v1!");
-							target.sendMessage("§0§l[§6§l1v1§0§l] §aYou have been challenged by " + p.getUniqueId() + " to a Regular 1v1! Right Click them to Accept!");
+							p.sendMessage("§0§l[§6§l1v1§0§l] §aYou have challenged " + target.getName() + " to a Regular 1v1!");
+							target.sendMessage("§0§l[§6§l1v1§0§l] §aYou have been challenged by " + p.getName() + " to a Regular 1v1! Right Click them to Accept!");
 						}
 					}else{
 						p.sendMessage("§0§l[§6§l1v1§0§l] §cYou must wait " + challenge.getStatus(p).getRemainingTime(TimeUnit.SECONDS) + " seconds to Challenge them again!");
