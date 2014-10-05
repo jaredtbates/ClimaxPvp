@@ -25,7 +25,7 @@ public class PlayerDeathListener implements Listener {
 		}
 		if (killer != null) {
 			event.setDeathMessage("§c" + player.getName() + " §7was killed by §a" + killer.getName());
-			if (killer.getName().equals(killer.getName())) {
+			if (!killer.getName().equals(killer.getName())) {
 				if (KitPvp.killStreak.containsKey(killer.getUniqueId())) {
 					KitPvp.killStreak.put(killer.getUniqueId(), KitPvp.killStreak.get(killer.getUniqueId()) + 1);
 					int killerAmount = KitPvp.killStreak.get(killer.getUniqueId());
