@@ -38,19 +38,20 @@ public class OneVsOne implements CommandExecutor {
 					p.teleport(new Location(p.getWorld(), -675.5, 8, 1068.5));
 					in1v1.remove(p.getUniqueId());
 					challenged.remove(p.getUniqueId());
+				} else {
+					in1v1.add(p.getUniqueId());
+					int x = plugin.getConfig().getInt("lobbyspawn.x");
+					int y = plugin.getConfig().getInt("lobbyspawn.y");
+					int z = plugin.getConfig().getInt("lobbyspawn.z");
+					p.teleport(new Location(p.getWorld(), x, y, z));
+					ItemStack stick = new ItemStack(Material.STICK);
+					ItemMeta stickmeta = stick.getItemMeta();
+					stickmeta.setDisplayName("§6§lRegular 1v1");
+					stick.setItemMeta(stickmeta);
+					p.getInventory().clear();
+					p.getInventory().addItem(stick);
+					p.sendMessage("§0§l[§6§l1v1§0§l] §7Teleported to the 1v1 Lobby!");
 				}
-				in1v1.add(p.getUniqueId());
-				int x = plugin.getConfig().getInt("lobbyspawn.x");
-				int y = plugin.getConfig().getInt("lobbyspawn.y");
-				int z = plugin.getConfig().getInt("lobbyspawn.z");
-				p.teleport(new Location(p.getWorld(), x, y, z));
-				ItemStack stick = new ItemStack(Material.STICK);
-				ItemMeta stickmeta = stick.getItemMeta();
-				stickmeta.setDisplayName("§6§lRegular 1v1");
-				stick.setItemMeta(stickmeta);
-				p.getInventory().clear();
-				p.getInventory().addItem(stick);
-				p.sendMessage("§0§l[§6§l1v1§0§l] §7Teleported to the 1v1 Lobby!");
 				return true;
 			}
 			if(args[0].equalsIgnoreCase("setlobby")){
