@@ -5,18 +5,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import net.climaxmc.Main;
-import net.climaxmc.KitPvp.Listeners.FoodLevelChangeListener;
-import net.climaxmc.KitPvp.Listeners.InventoryClickListener;
-import net.climaxmc.KitPvp.Listeners.InventoryOpenListener;
-import net.climaxmc.KitPvp.Listeners.ItemSpawnListener;
-import net.climaxmc.KitPvp.Listeners.PlayerDeathListener;
-import net.climaxmc.KitPvp.Listeners.PlayerDropItemListener;
-import net.climaxmc.KitPvp.Listeners.PlayerInteractListener;
-import net.climaxmc.KitPvp.Listeners.PlayerJoinListener;
-import net.climaxmc.KitPvp.Listeners.PlayerQuitListener;
-import net.climaxmc.KitPvp.Listeners.PlayerRespawnListener;
-import net.climaxmc.KitPvp.Listeners.WeatherChangeListener;
-
+import net.climaxmc.KitPvp.Listeners.*;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 
@@ -39,5 +28,6 @@ public class KitPvp {
 		plugin.getServer().getPluginManager().registerEvents(new WeatherChangeListener(plugin), plugin);
 		plugin.getServer().getPluginManager().registerEvents(new InventoryOpenListener(plugin), plugin);
 		plugin.getServer().getPluginManager().registerEvents(new PlayerQuitListener(plugin), plugin);
+		plugin.getServer().getPluginManager().registerEvents(new PlayerPickupItemListener(plugin), plugin);
 	}
 }
