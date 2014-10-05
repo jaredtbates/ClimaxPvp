@@ -5,7 +5,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import net.climaxmc.KitPvp.Kit;
-import net.climaxmc.KitPvp.Utils.Ability;
+import net.climaxmc.Utils.Ability;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
