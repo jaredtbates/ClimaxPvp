@@ -12,7 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 public class NinjaKit extends Kit{
 
 	public NinjaKit() {
-		super("Ninja", new ItemStack(Material.IRON_SWORD), "Be Fast and Jump High with Kit Ninja!", 6);
+		super("Ninja", new ItemStack(Material.IRON_SWORD), "Be Fast and Jump High with Kit Ninja!", KitType.DEFAULT);
 	}
 
 	public void wear(Player player) {

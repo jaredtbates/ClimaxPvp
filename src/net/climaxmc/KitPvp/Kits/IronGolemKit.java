@@ -1,6 +1,9 @@
 package net.climaxmc.KitPvp.Kits;
 
+import java.util.concurrent.TimeUnit;
+
 import net.climaxmc.KitPvp.Kit;
+import net.climaxmc.KitPvp.Utils.Ability;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -11,8 +14,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 public class IronGolemKit extends Kit {
+	Ability launch = new Ability(4);
+	
 	public IronGolemKit() {
-		super("Iron Golem", new ItemStack(Material.RED_ROSE), "Fish dem with kit Fisherman!", 5);
+		super("Iron Golem", new ItemStack(Material.RED_ROSE), "Launch people in the air with Iron Golem!", KitType.DEFAULT);
 	}
 
 	public void wear(Player player) {
@@ -35,7 +40,12 @@ public class IronGolemKit extends Kit {
 			if (event.getEntity() instanceof Player) {
 				Player target = (Player) event.getEntity();
 				if (player.getItemInHand().getType().equals(Material.RED_ROSE)) {
-					target.setVelocity(new Vector(0.5D, 1.5D, 0.0D));
+					event.setCancelled(true);
+					if (launch.tryUse(player)) {
+						target.setVelocity(new Vector(0, 1.2, 0));
+					} else {
+						player.sendMessage("§7Wait §c" + launch.getStatus(player).getRemainingTime(TimeUnit.SECONDS) + " §7seconds before using launch!");
+					}
 				}
 			}
 		}

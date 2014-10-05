@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Listeners;
 
-import net.climaxmc.KitPvp.Main;
+import net.climaxmc.Main;
+import net.climaxmc.KitPvp.KitPvp;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,8 +18,11 @@ public class PlayerQuitListener implements Listener {
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
-		if (Main.inKit.contains(player.getUniqueId())) {
-			Main.inKit.remove(player.getUniqueId());
+		if (KitPvp.inKit.contains(player.getUniqueId())) {
+			KitPvp.inKit.remove(player.getUniqueId());
+		}
+		if (KitPvp.killStreak.containsKey(player.getUniqueId())) {
+			KitPvp.killStreak.containsKey(player.getUniqueId());
 		}
 		event.setQuitMessage("§cQuit§8» " + player.getName());
 	}

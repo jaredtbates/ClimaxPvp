@@ -1,7 +1,6 @@
 package net.climaxmc.KitPvp.Kits;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -21,14 +20,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 public class SoldierKit extends Kit {
-	final int cooldownTime = 5;
-	int task = 0;
 	ArrayList<UUID> soldier = new ArrayList<UUID>();
-	HashMap<UUID, Integer> cooldown = new HashMap<UUID, Integer>();
-	Ability fly = new Ability(5);
+	Ability fly = new Ability(3);
 	
 	public SoldierKit() {
-		super("Soldier", new ItemStack(Material.FEATHER), "Take to the skies with Kit Soldier!", 3);
+		super("Soldier", new ItemStack(Material.FEATHER), "Take to the skies with Kit Soldier!", KitType.AMATEUR);
 	}
 	
 	public void wear(Player player) {

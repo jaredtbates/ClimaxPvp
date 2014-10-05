@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class HeavyKit extends Kit {
 	public HeavyKit() {
-		super("Heavy", new ItemStack(Material.DIAMOND_CHESTPLATE), "Better Armor and Sword, but Slow.", 1);
+		super("Heavy", new ItemStack(Material.DIAMOND_CHESTPLATE), "Better Armor and Sword, but Slow.", KitType.DEFAULT);
 	}
 	
 	public void wear(Player player) {

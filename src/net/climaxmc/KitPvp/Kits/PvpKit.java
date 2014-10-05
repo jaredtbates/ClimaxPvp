@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class PvpKit extends Kit {
 	public PvpKit() {
-		super("Pvp", new ItemStack(Material.DIAMOND_SWORD), "A Standard Pvp Kit, Iron Armor and Diamond Sword.", 0);
+		super("Pvp", new ItemStack(Material.DIAMOND_SWORD), "A Standard Pvp Kit, Iron Armor and Diamond Sword.", KitType.DEFAULT);
 	}
 
 	public void wear(Player player) {
