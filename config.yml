@@ -1,0 +1,7 @@
+MySQL:
+  Hostname: localhost
+  Port: 3306
+  Database: ClimaxPvp
+  Username: root
+  Password: password
+  Table: KitPvp
