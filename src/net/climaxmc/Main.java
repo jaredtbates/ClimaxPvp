@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Commands.RepairCommand;
+import net.climaxmc.KitPvp.Commands.SpawnCommand;
 import net.climaxmc.OneVsOne.OneVsOne;
 import net.milkbowl.vault.economy.Economy;
 
@@ -22,6 +23,7 @@ public class Main extends JavaPlugin {
 		new KitPvp(this);
 		new OneVsOne(this);
 		getCommand("repair").setExecutor(new RepairCommand(this));
+		getCommand("spawn").setExecutor(new SpawnCommand(this));
 	}
 	
 	public void onDisable() {

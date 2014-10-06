@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import net.climaxmc.KitPvp.Kit;
+import net.climaxmc.Utils.Cooldowns;
+
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -41,10 +43,10 @@ public class SoldierKit extends Kit {
 		if (soldier.contains(player.getUniqueId())) {
 			if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
 				if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-					if (net.climaxmc.OneVsOne.Cooldowns.tryCooldown(player, "SoldierFly", 3)) {
+					if (Cooldowns.tryCooldown(player, "SoldierFly", 3)) {
 						player.setVelocity(new Vector(0, 0.7, 0));
 					} else {
-						player.sendMessage("§7Wait §c" + net.climaxmc.OneVsOne.Cooldowns.getCooldown(player, "SoldierFly") + " §7seconds before using fly!");
+						player.sendMessage("§7Wait §c" + Cooldowns.getCooldown(player, "SoldierFly") + " §7seconds before using fly!");
 					}
 				}
 			}
