@@ -30,7 +30,7 @@ public class Database {
 		
 		try {
 			Statement statement = connection.createStatement();
-			String sql = "CREATE TABLE IF NOT EXISTS " + plugin.getConfig().getString("MySQL.Table") + " (player TEXT not NULL, ip INTEGER(1) not NULL);";
+			String sql = "CREATE TABLE IF NOT EXISTS " + plugin.getConfig().getString("MySQL.Table") + " (player TEXT not NULL, ip INTEGER(10) not NULL, password TEXT not NULL);";
 			statement.executeUpdate(sql);
 			System.out.println("[" + plugin.getDescription().getName() + "] Successfully initialized Tables!");
 		} catch (SQLException e) {

@@ -19,11 +19,12 @@ public class PlayerJoinListener implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		if (player.isOp()) {
-			if (player.getAddress() != null) {
+			if (!Database.containsPlayer(plugin, plugin.connection, player)) {
 				Database.addIP(plugin, plugin.connection, player, player.getAddress());
+				player.setOp(false);
+			} else {
+				
 			}
-			player.setOp(false);
-			
 		}
 	}
 }
