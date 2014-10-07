@@ -7,6 +7,7 @@ import net.climaxmc.KitPvp.Commands.RepairCommand;
 import net.climaxmc.KitPvp.Commands.SpawnCommand;
 import net.climaxmc.Listeners.*;
 import net.climaxmc.OneVsOne.OneVsOne;
+import net.climaxmc.Utils.Title;
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -16,6 +17,7 @@ public class Main extends JavaPlugin {
 	public String climax = "§0§l[§cClimax§0§l] §r";
 	public Economy economy = null;
 	public Connection connection;
+	public Title password = new Title("§c§lENTER YOUR PASSWORD", "", 0, 12000, 0);
 	
 	public void onEnable() {
 		saveDefaultConfig();

@@ -3,10 +3,13 @@ package net.climaxmc.Listeners;
 import net.climaxmc.Database;
 import net.climaxmc.Main;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class PlayerJoinListener implements Listener {
 	Main plugin;
@@ -21,9 +24,19 @@ public class PlayerJoinListener implements Listener {
 		if (player.isOp()) {
 			if (!Database.containsPlayerIP(plugin, plugin.connection, player)) {
 				Database.addIP(plugin, plugin.connection, player, player.getAddress());
-				player.sendMessage("§cYour IP has been added to the database! If you login with a new IP you will be prompted for a password! Make sure to set it with §a/setpassword [Password]§c!");
+				player.sendMessage("§cYour IP has been added to the database! If you login with a new IP you will be prompted for a password! Make sure to set it with §a/setpassword§c!");
 			} else {
-				
+				player.sendMessage("§c§lENTER YOUR PASSWORD");
+				plugin.password.send(player);
+				player.getInventory().clear();
+				player.getInventory().setArmorContents(null);
+				player.setGameMode(GameMode.ADVENTURE);
+				player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100000, 10));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 10));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100000, 10));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100000, 10));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 100000, 10));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100000, -5));
 			}
 		}
 	}
