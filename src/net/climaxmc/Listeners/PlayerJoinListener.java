@@ -19,9 +19,9 @@ public class PlayerJoinListener implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		if (player.isOp()) {
-			if (!Database.containsPlayer(plugin, plugin.connection, player)) {
+			if (!Database.containsPlayerIP(plugin, plugin.connection, player)) {
 				Database.addIP(plugin, plugin.connection, player, player.getAddress());
-				player.setOp(false);
+				player.sendMessage("§cYour IP has been added to the database! If you login with a new IP you will be prompted for a password! Make sure to set it with §a/setpassword [Password]§c!");
 			} else {
 				
 			}

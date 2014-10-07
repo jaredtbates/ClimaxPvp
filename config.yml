@@ -4,4 +4,4 @@ MySQL:
   Database: ClimaxPvp
   Username: root
   Password: password
-  Table: KitPvp
+  IPTable: KitPvpIPs

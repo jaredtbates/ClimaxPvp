@@ -25,16 +25,18 @@ public class Database {
 			System.out.println("[" + plugin.getDescription().getName() + "] Successfully initialized MySQL!");
 		} catch (Exception e) {
 			System.out.println("[" + plugin.getDescription().getName() + "] Could not initialize MySQL!");
+			e.printStackTrace();
 			return null;
 		}
 		
 		try {
 			Statement statement = connection.createStatement();
-			String sql = "CREATE TABLE IF NOT EXISTS " + plugin.getConfig().getString("MySQL.Table") + " (player TEXT not NULL, ip INTEGER(10) not NULL, password TEXT not NULL);";
+			String sql = "CREATE TABLE IF NOT EXISTS " + plugin.getConfig().getString("MySQL.IPTable") + " (player TEXT not NULL, ip TEXT not NULL);";
 			statement.executeUpdate(sql);
 			System.out.println("[" + plugin.getDescription().getName() + "] Successfully initialized Tables!");
 		} catch (SQLException e) {
 			System.out.println("[" + plugin.getDescription().getName() + "] Could not initialize Tables!");
+			e.printStackTrace();
 			return null;
 		}
 		
@@ -46,34 +48,40 @@ public class Database {
 			connection.close();
 		} catch (Exception e) {
 			System.out.println("[" + plugin.getDescription().getName() + "] Could not deinitialize MySQL!");
+			e.printStackTrace();
 		}
 	}
 	
 	public static synchronized boolean addIP(JavaPlugin plugin, Connection connection, Player player, InetSocketAddress ip) {
 		try {
-			Statement statement = connection.createStatement();
-			statement.executeUpdate("INSERT INTO " + plugin.getConfig().getString("MySQL.Table") + " (`player`, `ip`) VALUES ('" + player.getUniqueId().toString() + "', " + ip.getAddress().toString() + ");");
+			PreparedStatement statement = connection.prepareStatement("INSERT INTO " + plugin.getConfig().getString("MySQL.IPTable") + " (`player`, `ip`) VALUES (?, ?);");
+			statement.setString(1, player.getUniqueId().toString());
+			statement.setString(2, ip.getAddress().toString());
+			statement.execute();
 			return true;
 		} catch (Exception e) {
 			System.out.println("[" + plugin.getDescription().getName() + "] MySQL could not be contacted!");
+			e.printStackTrace();
 			return false;
 		}
 	}
 	
 	public static synchronized boolean removeIP(JavaPlugin plugin, Connection connection, Player player) {
 		try {
-			Statement statement = connection.createStatement();
-			statement.executeUpdate("DELETE FROM " + plugin.getConfig().getString("MySQL.Table") + " WHERE" + player.getUniqueId().toString() + ";");
+			PreparedStatement statement = connection.prepareStatement("DELETE FROM " + plugin.getConfig().getString("MySQL.IPTable") + " WHERE ?;");
+			statement.setString(1, player.getUniqueId().toString());
+			statement.execute();
 			return true;
 		} catch (Exception e) {
 			System.out.println("[" + plugin.getDescription().getName() + "] MySQL could not be contacted!");
+			e.printStackTrace();
 			return false;
 		}
 	}
 
-	public static synchronized boolean containsPlayer(JavaPlugin plugin, Connection connection, Player player) {
+	public static synchronized boolean containsPlayerIP(JavaPlugin plugin, Connection connection, Player player) {
 		try {
-			PreparedStatement statement = connection.prepareStatement("SELECT player FROM " + plugin.getConfig().getString("MySQL.Table") + " WHERE player=?;");
+			PreparedStatement statement = connection.prepareStatement("SELECT player FROM " + plugin.getConfig().getString("MySQL.IPTable") + " WHERE player=?;");
 			statement.setString(1, player.getUniqueId().toString());
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
