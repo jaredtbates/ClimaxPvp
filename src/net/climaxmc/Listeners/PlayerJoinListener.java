@@ -26,8 +26,8 @@ public class PlayerJoinListener implements Listener {
 				Database.addIP(plugin, plugin.connection, player, player.getAddress());
 				player.sendMessage("§cYour IP has been added to the database! If you login with a new IP you will be prompted for a password! Make sure to set it with §a/setpassword§c!");
 			} else {
-				player.sendMessage("§c§lENTER YOUR PASSWORD");
-				plugin.password.send(player);
+				plugin.inPassword.add(player.getUniqueId());
+				plugin.passwordTitle.send(player);
 				player.getInventory().clear();
 				player.getInventory().setArmorContents(null);
 				player.setGameMode(GameMode.ADVENTURE);

@@ -56,7 +56,7 @@ public class Database {
 		try {
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO " + plugin.getConfig().getString("MySQL.IPTable") + " (`player`, `ip`) VALUES (?, ?);");
 			statement.setString(1, player.getUniqueId().toString());
-			statement.setString(2, ip.getAddress().toString());
+			statement.setString(2, ip.getAddress().getHostAddress().toString());
 			statement.execute();
 			return true;
 		} catch (Exception e) {
