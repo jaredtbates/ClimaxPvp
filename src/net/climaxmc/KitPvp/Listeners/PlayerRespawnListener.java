@@ -25,6 +25,7 @@ public class PlayerRespawnListener implements Listener {
 	public void onPlayerRespawn(PlayerRespawnEvent event) {
 		Player player = event.getPlayer();
 		player.getInventory().clear();
+		player.getInventory().setArmorContents(null);
 		for (PotionEffect effect : player.getActivePotionEffects()) {
 			player.removePotionEffect(effect.getType());
 		}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.climaxmc.Main;
+import net.climaxmc.KitPvp.KitPvp;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -33,8 +34,12 @@ public class SpawnCommand implements CommandExecutor {
 				plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
 					public void run() {
 						if (player.getLocation().getBlock().equals(block)) {
+							if (KitPvp.inKit.contains(player.getUniqueId())) {
+								KitPvp.inKit.remove(player.getUniqueId());
+							}
 							player.teleport(player.getWorld().getSpawnLocation());
 							player.getInventory().clear();
+							player.getInventory().setArmorContents(null);
 							player.setHealth(20L);
 							player.setMaxHealth(20L);
 							for (PotionEffect effect : player.getActivePotionEffects()) {

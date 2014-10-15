@@ -28,8 +28,6 @@ public class PlayerJoinListener implements Listener {
 			} else {
 				plugin.inPassword.add(player.getUniqueId());
 				plugin.passwordTitle.send(player);
-				player.getInventory().clear();
-				player.getInventory().setArmorContents(null);
 				player.setGameMode(GameMode.ADVENTURE);
 				player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100000, 10));
 				player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100000, 10));
