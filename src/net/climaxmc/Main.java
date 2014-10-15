@@ -23,19 +23,19 @@ public class Main extends JavaPlugin {
 	
 	public void onEnable() {
 		saveDefaultConfig();
-		connection = Database.openConnection(this);
+		//connection = Database.openConnection(this);
 		setupEconomy();
 		new KitPvp(this);
 		new OneVsOne(this);
-		getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
-		getServer().getPluginManager().registerEvents(new PlayerQuitListener(this), this);
-		getServer().getPluginManager().registerEvents(new AsyncPlayerChatListener(this), this);
+		//getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
+		//getServer().getPluginManager().registerEvents(new PlayerQuitListener(this), this);
+		//getServer().getPluginManager().registerEvents(new AsyncPlayerChatListener(this), this);
 		getCommand("repair").setExecutor(new RepairCommand(this));
 		getCommand("spawn").setExecutor(new SpawnCommand(this));
 	}
 	
 	public void onDisable() {
-		Database.closeConnection(this, connection);
+		//Database.closeConnection(this, connection);
 	}
 
 	private boolean setupEconomy() {
