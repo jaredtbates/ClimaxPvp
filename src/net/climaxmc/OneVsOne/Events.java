@@ -17,11 +17,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
-public class Events implements Listener{
+public class Events implements Listener {
 	Main plugin;
 
-	public Events(Main instance){
-		plugin = instance;
+	public Events(Main plugin) {
+		this.plugin = plugin;
 	}
 
 	int taskid;
@@ -31,10 +31,10 @@ public class Events implements Listener{
 	ArrayList<UUID> inCountdown = new ArrayList<UUID>();
 
 	@EventHandler
-	public void onPlayerClick(PlayerInteractEntityEvent e){
-		Player p = e.getPlayer();
-		if (e.getRightClicked() instanceof Player) {
-			Player target = (Player) e.getRightClicked();
+	public void onPlayerClick(PlayerInteractEntityEvent event){
+		Player p = event.getPlayer();
+		if (event.getRightClicked() instanceof Player) {
+			Player target = (Player) event.getRightClicked();
 			if(OneVsOne.in1v1.contains(target.getUniqueId())){
 				if(p.getInventory().getItemInHand().getType() == Material.STICK){
 					if(Cooldowns.tryCooldown(p, "Challenge", 5)){
@@ -112,7 +112,7 @@ public class Events implements Listener{
 			}
 		}
 	}
-	/*@EventHandler
+	/* @EventHandler
 	public void onInventoryClick(InventoryClickEvent e){
 		final Player p = (Player) e.getWhoClicked();
 		final Player clicked = plugin.getServer().getPlayer(plugin.challenged.get(p.getUniqueId()));
@@ -217,39 +217,38 @@ public class Events implements Listener{
 				clicked.closeInventory();
 			}
 		}
-	}*/
+	} */
 
 	@EventHandler
-	public void onPlayerDeath(PlayerDeathEvent e){
-		final Player p = e.getEntity();
-		if(p instanceof Player){
+	public void onPlayerDeath(PlayerDeathEvent event){
+		final Player player = event.getEntity();
+		if (player instanceof Player) {
 			plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
 				public void run() {
-					if(OneVsOne.in1v1.contains(p.getUniqueId())){
-						OneVsOne.in1v1.remove(p.getUniqueId());
+					if(OneVsOne.in1v1.contains(player.getUniqueId())){
+						OneVsOne.in1v1.remove(player.getUniqueId());
 						int x = plugin.getConfig().getInt("lobbyspawn.x");
 						int y = plugin.getConfig().getInt("lobbyspawn.y");
 						int z = plugin.getConfig().getInt("lobbyspawn.z");
-						p.teleport(new Location(p.getWorld(), x, y, z));
-					}
-					if(OneVsOne.challenged.containsKey(p.getUniqueId())){
+						player.teleport(new Location(player.getWorld(), x, y, z));
+					} else if(OneVsOne.challenged.containsKey(player.getUniqueId())) {
 						int x = plugin.getConfig().getInt("lobbyspawn.x");
 						int y = plugin.getConfig().getInt("lobbyspawn.y");
 						int z = plugin.getConfig().getInt("lobbyspawn.z");
-						p.teleport(new Location(p.getWorld(), x, y, z));
+						player.teleport(new Location(player.getWorld(), x, y, z));
 						ItemStack stick = new ItemStack(Material.STICK);
 						ItemMeta stickmeta = stick.getItemMeta();
 						stickmeta.setDisplayName("§6§lRegular 1v1");
 						stick.setItemMeta(stickmeta);
-						OneVsOne.in1v1.add(p.getUniqueId());
-						p.getInventory().clear();
-						p.getInventory().addItem(stick);
-						p.sendMessage("§0§l[§6§l1v1§0§l] §7Teleported to the 1v1 Lobby!");
-						OneVsOne.in1v1.add(p.getKiller().getUniqueId());
-						p.getKiller().getInventory().clear();
-						p.getKiller().getInventory().addItem(stick);
-						p.getKiller().sendMessage("§0§l[§6§l1v1§0§l] §7Teleported to the 1v1 Lobby!");
-						p.getKiller().teleport(new Location(p.getWorld(), x, y, z));
+						OneVsOne.in1v1.add(player.getUniqueId());
+						player.getInventory().clear();
+						player.getInventory().addItem(stick);
+						player.sendMessage("§0§l[§6§l1v1§0§l] §7Teleported to the 1v1 Lobby!");
+						OneVsOne.in1v1.add(player.getKiller().getUniqueId());
+						player.getKiller().getInventory().clear();
+						player.getKiller().getInventory().addItem(stick);
+						player.getKiller().sendMessage("§0§l[§6§l1v1§0§l] §7Teleported to the 1v1 Lobby!");
+						player.getKiller().teleport(new Location(player.getWorld(), x, y, z));
 					}
 				}
 			});
