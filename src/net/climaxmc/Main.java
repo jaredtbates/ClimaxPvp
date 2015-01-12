@@ -10,10 +10,12 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
+	private static Main instance;
 	public String climax = "§0§l[§cClimax§0§l] §r";
 	public Economy economy = null;
 	
 	public void onEnable() {
+		instance = this;
 		saveDefaultConfig();
 		setupEconomy();
 		new KitPvp(this);
@@ -36,5 +38,9 @@ public class Main extends JavaPlugin {
 		}
 		economy = rsp.getProvider();
 		return economy != null;
+	}
+	
+	public static Main getPlugin() {
+		return instance;
 	}
 }
