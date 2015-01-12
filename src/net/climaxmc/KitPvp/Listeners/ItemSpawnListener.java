@@ -15,12 +15,10 @@ public class ItemSpawnListener implements Listener {
 	
 	@EventHandler
 	public void onItemSpawn(final ItemSpawnEvent event) {
-		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable(){
-            @Override
+		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
             public void run() {
                 event.getEntity().remove();
             }
- 
         }, 20L);
 	}
 }
