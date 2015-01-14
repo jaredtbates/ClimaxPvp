@@ -3,13 +3,7 @@ package net.climaxmc.KitPvp;
 import java.util.ArrayList;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Kits.ArcherKit;
-import net.climaxmc.KitPvp.Kits.FishermanKit;
-import net.climaxmc.KitPvp.Kits.HeavyKit;
-import net.climaxmc.KitPvp.Kits.IronGolemKit;
-import net.climaxmc.KitPvp.Kits.NinjaKit;
-import net.climaxmc.KitPvp.Kits.PvpKit;
-import net.climaxmc.KitPvp.Kits.SoldierKit;
+import net.climaxmc.KitPvp.Kits.*;
 
 public class KitManager {
 	public static ArrayList<Kit> kits = new ArrayList<Kit>();
@@ -24,7 +18,7 @@ public class KitManager {
 		kits.add(new NinjaKit());
 		// Amateur Kits
 		kits.add(new SoldierKit());
-		
+		kits.add(new EndermanKit());
 		// Experienced Kits
 		
 		// Advanced Kits
