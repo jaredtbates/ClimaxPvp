@@ -57,7 +57,7 @@ public class PlayerDeathListener implements Listener {
 		}
 		plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
 			public void run() {
-				if (player.isDead()) {
+				if (player.isOnline()) {
 					try {
 						Object nmsPlayer = player.getClass().getMethod("getHandle").invoke(player);
 						Object packet = Class.forName(nmsPlayer.getClass().getPackage().getName() + ".PacketPlayInClientCommand").newInstance();
@@ -72,9 +72,9 @@ public class PlayerDeathListener implements Listener {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+					player.setVelocity(new Vector(0, 0, 0));
 				}
 			}
 		});
-		player.setVelocity(new Vector(0, 0, 0));
 	}
 }
