@@ -40,7 +40,7 @@ public class ClimaxPvp extends JavaPlugin {
 		return economy != null;
 	}
 	
-	public static ClimaxPvp getPlugin() {
+	public static ClimaxPvp getInstance() {
 		return instance;
 	}
 }
