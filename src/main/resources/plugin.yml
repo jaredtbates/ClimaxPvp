@@ -25,3 +25,10 @@ commands:
     description: Applies Kit Fisherman
   ninja:
     description: Applies Kit Ninja
+  setlobby:
+  setarena1spawn1:
+  setarena1spawn2:
+  setarena2spawn1:
+  setarena2spawn2:
+  setarena3spawn1:
+  setarena3spawn2:
