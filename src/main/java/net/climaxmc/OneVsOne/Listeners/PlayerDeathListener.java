@@ -38,16 +38,16 @@ public class PlayerDeathListener implements Listener {
 						player.teleport(new Location(player.getWorld(), x, y, z));
 						ItemStack stick = new ItemStack(Material.STICK);
 						ItemMeta stickmeta = stick.getItemMeta();
-						stickmeta.setDisplayName("§6§lRegular 1v1");
+						stickmeta.setDisplayName("Â§6Â§lRegular 1v1");
 						stick.setItemMeta(stickmeta);
 						OneVsOne.in1v1.add(player.getUniqueId());
 						player.getInventory().clear();
 						player.getInventory().addItem(stick);
-						player.sendMessage("§0§l[§6§l1v1§0§l] §7Teleported to the 1v1 Lobby!");
+						player.sendMessage("Â§0Â§l[Â§6Â§l1v1Â§0Â§l] Â§7Teleported to the 1v1 Lobby!");
 						OneVsOne.in1v1.add(player.getKiller().getUniqueId());
 						player.getKiller().getInventory().clear();
 						player.getKiller().getInventory().addItem(stick);
-						player.getKiller().sendMessage("§0§l[§6§l1v1§0§l] §7Teleported to the 1v1 Lobby!");
+						player.getKiller().sendMessage("Â§0Â§l[Â§6Â§l1v1Â§0Â§l] Â§7Teleported to the 1v1 Lobby!");
 						player.getKiller().teleport(new Location(player.getWorld(), x, y, z));
 					}
 				}

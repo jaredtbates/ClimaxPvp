@@ -24,6 +24,6 @@ public class PlayerQuitListener implements Listener {
 		if (KitPvp.killStreak.containsKey(player.getUniqueId())) {
 			KitPvp.killStreak.remove(player.getUniqueId());
 		}
-		event.setQuitMessage("�cQuit�8� " + player.getName());
+		event.setQuitMessage("§cQuit§8» " + player.getName());
 	}
 }

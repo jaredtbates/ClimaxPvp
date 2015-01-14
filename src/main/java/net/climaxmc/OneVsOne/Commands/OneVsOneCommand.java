@@ -24,7 +24,7 @@ public class OneVsOneCommand implements CommandExecutor {
 			Player player = (Player) sender;
 			if (command.getName().startsWith("1v1") && args.length == 0) {
 				if (OneVsOne.in1v1.contains(player.getUniqueId())){
-					player.sendMessage("§aTeleported to Spawn!");
+					player.sendMessage("Â§aTeleported to Spawn!");
 					player.teleport(new Location(player.getWorld(), -675.5, 8, 1068.5));
 					OneVsOne.in1v1.remove(player.getUniqueId());
 					OneVsOne.challenged.remove(player.getUniqueId());
@@ -36,11 +36,11 @@ public class OneVsOneCommand implements CommandExecutor {
 					player.teleport(new Location(player.getWorld(), x, y, z));
 					ItemStack stick = new ItemStack(Material.STICK);
 					ItemMeta stickMeta = stick.getItemMeta();
-					stickMeta.setDisplayName("§6§lRegular 1v1");
+					stickMeta.setDisplayName("Â§6Â§lRegular 1v1");
 					stick.setItemMeta(stickMeta);
 					player.getInventory().clear();
 					player.getInventory().addItem(stick);
-					player.sendMessage(plugin.climax + " §7Teleported to the 1v1 Lobby!");
+					player.sendMessage(plugin.climax + " Â§7Teleported to the 1v1 Lobby!");
 				}
 				return true;
 			}

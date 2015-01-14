@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class ClimaxPvp extends JavaPlugin {
 	private static ClimaxPvp instance;
-	public String climax = "§0§l[§cClimax§0§l] §r";
+	public String climax = "Â§0Â§l[Â§cClimaxÂ§0Â§l] Â§r";
 	public Economy economy = null;
 	
 	public void onEnable() {

@@ -24,36 +24,36 @@ public class PlayerDeathListener implements Listener {
 			KitPvp.inKit.remove(player.getUniqueId());
 		}
 		if (killer != null) {
-			event.setDeathMessage("§c" + player.getName() + " §7was killed by §a" + killer.getName());
+			event.setDeathMessage("Â§c" + player.getName() + " Â§7was killed by Â§a" + killer.getName());
 			if (!killer.getUniqueId().equals(player.getUniqueId())) {
 				if (KitPvp.killStreak.containsKey(killer.getUniqueId())) {
 					KitPvp.killStreak.put(killer.getUniqueId(), KitPvp.killStreak.get(killer.getUniqueId()) + 1);
 					int killerAmount = KitPvp.killStreak.get(killer.getUniqueId());
 					if (killerAmount % 5 == 0) {
-						plugin.getServer().broadcastMessage("§a" + killer.getName() + " §7has reached a KillStreak of §c" + killerAmount + "§7!");
+						plugin.getServer().broadcastMessage("Â§a" + killer.getName() + " Â§7has reached a KillStreak of Â§c" + killerAmount + "Â§7!");
 						killerAmount = killerAmount * 2 + 10;
 						plugin.economy.depositPlayer(killer, killerAmount);
-						killer.sendMessage(plugin.climax + "§aYou have gained §6$" + killerAmount + "§a!");
+						killer.sendMessage(plugin.climax + "Â§aYou have gained Â§6$" + killerAmount + "Â§a!");
 					} else {
 						plugin.economy.depositPlayer(killer, 10);
-						killer.sendMessage(plugin.climax + "§aYou have gained §6$10§a!");
-						killer.sendMessage(plugin.climax + "§aYou have reached a KillStreak of §6" + killerAmount + "§a!");
+						killer.sendMessage(plugin.climax + "Â§aYou have gained Â§6$10Â§a!");
+						killer.sendMessage(plugin.climax + "Â§aYou have reached a KillStreak of Â§6" + killerAmount + "Â§a!");
 					}
 				} else {
 					KitPvp.killStreak.put(killer.getUniqueId(), 1);
 					plugin.economy.depositPlayer(killer, 10);
-					killer.sendMessage(plugin.climax + "§aYou have gained §6$10§a!");
-					killer.sendMessage(plugin.climax + "§aYou have reached a KillStreak of §6" + KitPvp.killStreak.get(killer.getUniqueId()) + "§a!");
+					killer.sendMessage(plugin.climax + "Â§aYou have gained Â§6$10Â§a!");
+					killer.sendMessage(plugin.climax + "Â§aYou have reached a KillStreak of Â§6" + KitPvp.killStreak.get(killer.getUniqueId()) + "Â§a!");
 				}
 				if (KitPvp.killStreak.containsKey(player.getUniqueId())) {
 					if (KitPvp.killStreak.get(player.getUniqueId()) >= 10) {
-						plugin.getServer().broadcastMessage("§a" + killer.getName() + " §7Destroyed §c" + player.getName() + "'s §6KillStreak of §a" + KitPvp.killStreak.get(player.getUniqueId()) + "!");
+						plugin.getServer().broadcastMessage("Â§a" + killer.getName() + " Â§7Destroyed Â§c" + player.getName() + "'s Â§6KillStreak of Â§a" + KitPvp.killStreak.get(player.getUniqueId()) + "!");
 					}
 					KitPvp.killStreak.remove(player.getUniqueId());
 				}
 			}
 		} else {
-			event.setDeathMessage("§c" + player.getName() + " §7died");
+			event.setDeathMessage("Â§c" + player.getName() + " Â§7died");
 		}
 		plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
 			public void run() {

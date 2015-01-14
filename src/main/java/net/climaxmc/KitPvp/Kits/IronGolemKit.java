@@ -41,7 +41,7 @@ public class IronGolemKit extends Kit {
 					if (Cooldowns.tryCooldown(player, "GolemRose", 4)) {
 						target.setVelocity(new Vector(0, 1.2, 0));
 					} else {
-						player.sendMessage("ง7Wait งc" + Cooldowns.getCooldown(player, "Rose") + " ง7seconds before using launch!");
+						player.sendMessage("ยง7Wait ยงc" + Cooldowns.getCooldown(player, "Rose") + " ยง7seconds before using launch!");
 					}
 				}
 			}

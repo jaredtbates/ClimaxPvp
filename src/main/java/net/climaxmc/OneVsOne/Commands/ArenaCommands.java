@@ -53,6 +53,6 @@ public class ArenaCommands extends JavaPlugin {
 		plugin.getConfig().set("arena" + arena + ".spawn" + spawn + ".x", player.getLocation().getBlockY());
 		plugin.getConfig().set("arena" + arena + ".spawn" + spawn + ".x", player.getLocation().getBlockZ() + 0.5);
 		plugin.saveConfig();
-		player.sendMessage("§aArena " + arena + " Spawn " + spawn + " Set!");
+		player.sendMessage("Â§aArena " + arena + " Spawn " + spawn + " Set!");
 	}
 }

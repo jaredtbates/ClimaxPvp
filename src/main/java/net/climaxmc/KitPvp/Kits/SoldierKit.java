@@ -46,7 +46,7 @@ public class SoldierKit extends Kit {
 					if (Cooldowns.tryCooldown(player, "SoldierFly", 3)) {
 						player.setVelocity(new Vector(0, 0.7, 0));
 					} else {
-						player.sendMessage("ง7Wait งc" + Cooldowns.getCooldown(player, "SoldierFly") + " ง7seconds before using fly!");
+						player.sendMessage("ยง7Wait ยงc" + Cooldowns.getCooldown(player, "SoldierFly") + " ยง7seconds before using fly!");
 					}
 				}
 			}

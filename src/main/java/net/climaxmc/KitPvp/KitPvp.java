@@ -10,8 +10,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 
 public class KitPvp {
-	public static Inventory kitSelector = Bukkit.createInventory(null, 54, "§a§lKit Selector");
-	public static Inventory soup = Bukkit.createInventory(null, 54, "§5§lFree Soup!");
+	public static Inventory kitSelector = Bukkit.createInventory(null, 54, "Â§aÂ§lKit Selector");
+	public static Inventory soup = Bukkit.createInventory(null, 54, "Â§5Â§lFree Soup!");
 	public static ArrayList<UUID> inKit = new ArrayList<UUID>();
 	public static HashMap<UUID, Integer> killStreak = new HashMap<UUID, Integer>();
 

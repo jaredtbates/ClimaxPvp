@@ -35,12 +35,12 @@ public class InventoryClickListener implements Listener {
 								}
 								player.getInventory().clear();
 								kit.wear(player);
-								player.sendMessage("§6You have chosen §a" + kit.getName());
+								player.sendMessage("Â§6You have chosen Â§a" + kit.getName());
 							} else {
-								player.sendMessage("§cYou have not died yet!");
+								player.sendMessage("Â§cYou have not died yet!");
 							}
 						} else {
-							player.sendMessage("§cYou do not have permission for kit " + kit.getName() + "§c!");
+							player.sendMessage("Â§cYou do not have permission for kit " + kit.getName() + "Â§c!");
 						}
 						plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
 							public void run() {

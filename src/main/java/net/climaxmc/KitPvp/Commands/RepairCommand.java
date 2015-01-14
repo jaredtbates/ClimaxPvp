@@ -31,9 +31,9 @@ public class RepairCommand implements CommandExecutor {
 							item.setDurability((short) -100);
 						}
 					}
-					player.sendMessage("§aYou repaired your inventory for $2!");
+					player.sendMessage("Â§aYou repaired your inventory for $2!");
 				} else {
-					player.sendMessage("§cYou do not have enough money to repair your inventory!");
+					player.sendMessage("Â§cYou do not have enough money to repair your inventory!");
 				}
 			}
 		}

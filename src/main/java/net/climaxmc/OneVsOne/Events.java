@@ -27,23 +27,23 @@ public class Events implements Listener {
 		final Player p = (Player) e.getWhoClicked();
 		final Player clicked = plugin.getServer().getPlayer(plugin.challenged.get(p.getUniqueId()));
 		ItemStack clickedItem = e.getCurrentItem();
-		if(e.getInventory().getName() == "§6§lChallenge!"){
+		if(e.getInventory().getName() == "Â§6Â§lChallenge!"){
 			e.setCancelled(true);
-			if(clickedItem.getItemMeta().getDisplayName() == "§a§lChallenge"){
+			if(clickedItem.getItemMeta().getDisplayName() == "Â§aÂ§lChallenge"){
 				plugin.challenged.put(p.getUniqueId(), clicked.getName());
-				p.sendMessage("§0§l[§6§l1v1§0§l] §aYou have challenged " + clicked.getName());
-				clicked.sendMessage("§aYou have been challenged by " + p.getUniqueId() + ", right click them to Accept!");
+				p.sendMessage("Â§0Â§l[Â§6Â§l1v1Â§0Â§l] Â§aYou have challenged " + clicked.getName());
+				clicked.sendMessage("Â§aYou have been challenged by " + p.getUniqueId() + ", right click them to accept!");
 				p.closeInventory();
-			} else if(clickedItem.getItemMeta().getDisplayName() == "§c§lCancel"){
+			} else if(clickedItem.getItemMeta().getDisplayName() == "Â§cÂ§lCancel"){
 				plugin.challenged.remove(p.getUniqueId());
 				plugin.challenged.remove(clicked.getName());
-				p.sendMessage("§0§l[§6§l1v1§0§l] §c§lYou have cancelled the challenge");
+				p.sendMessage("Â§0Â§l[Â§6Â§l1v1Â§0Â§l] Â§cÂ§lYou have cancelled the challenge");
 			    p.closeInventory();
 			}
 		}
-		if(e.getInventory().getName() == "§6§lAccept!"){
+		if(e.getInventory().getName() == "Â§6Â§lAccept!"){
 			e.setCancelled(true);
-			if(clickedItem.getItemMeta().getDisplayName() == "§a§lAccept"){
+			if(clickedItem.getItemMeta().getDisplayName() == "Â§aÂ§lAccept"){
 				if(a1.size() == a2.size() && a2.size() == a3.size()){
 					a1.add(1);
 					int x1 = plugin.getConfig().getInt("arena1.spawn1.x");
@@ -59,8 +59,8 @@ public class Events implements Listener {
 					taskid = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable(){
 						  int time = 3;
 						  public void run() {
-						    p.sendMessage("§0§l[§6§l1v1§0§l] §7Starting in " + time + "seconds!");
-						    clicked.sendMessage("§0§l[§6§l1v1§0§l] §7Starting in " + time + "seconds!");
+						    p.sendMessage("Â§0Â§l[Â§6Â§l1v1Â§0Â§l] Â§7Starting in " + time + " seconds!");
+						    clicked.sendMessage("Â§0Â§l[Â§6Â§l1v1Â§0Â§l] Â§7Starting in " + time + " seconds!");
 						    time--;
 						    if(time == 0){
 						    	inCountdown.remove(p.getUniqueId());
@@ -84,8 +84,8 @@ public class Events implements Listener {
 					taskid = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable(){
 						  int time = 3;
 						  public void run() {
-						    p.sendMessage("§0§l[§6§l1v1§0§l] §7Starting in " + time + "seconds!");
-						    clicked.sendMessage("§0§l[§6§l1v1§0§l] §7Starting in " + time + "seconds!");
+						    p.sendMessage("Â§0Â§l[Â§6Â§l1v1Â§0Â§l] Â§7Starting in " + time + " seconds!");
+						    clicked.sendMessage("Â§0Â§l[Â§6Â§l1v1Â§0Â§l] Â§7Starting in " + time + " seconds!");
 						    time--;
 						    if(time == 0){
 						    	inCountdown.remove(p.getUniqueId());
@@ -109,8 +109,8 @@ public class Events implements Listener {
 					taskid = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable(){
 						  int time = 3;
 						  public void run() {
-						    p.sendMessage("§0§l[§6§l1v1§0§l] §7Starting in " + time + "seconds!");
-						    clicked.sendMessage("§0§l[§6§l1v1§0§l] §7Starting in " + time + "seconds!");
+						    p.sendMessage("Â§0Â§l[Â§6Â§l1v1Â§0Â§l] Â§7Starting in " + time + " seconds!");
+						    clicked.sendMessage("Â§0Â§l[Â§6Â§l1v1Â§0Â§l] Â§7Starting in " + time + " seconds!");
 						    time--;
 						    if(time == 0){
 						    	inCountdown.remove(p.getUniqueId());
@@ -121,9 +121,9 @@ public class Events implements Listener {
 						}, 20L, 20L);
 				}
 			}
-			if(clickedItem.getItemMeta().getDisplayName() == "§c§lDecline"){
-				p.sendMessage("§0§l[§6§l1v1§0§l] §cPlayer " + clicked.getName() + " declined your 1v1 request!");
-				clicked.sendMessage("§0§l[§6§l1v1§0§l] §cYou declined " + p.getUniqueId() + "'s 1v1 request!");
+			if(clickedItem.getItemMeta().getDisplayName() == "Â§cÂ§lDecline"){
+				p.sendMessage("Â§0Â§l[Â§6Â§l1v1Â§0Â§l] Â§cPlayer " + clicked.getName() + " declined your 1v1 request!");
+				clicked.sendMessage("Â§0Â§l[Â§6Â§l1v1Â§0Â§l] Â§cYou declined " + p.getName() + "'s 1v1 request!");
 				clicked.closeInventory();
 			}
 		}

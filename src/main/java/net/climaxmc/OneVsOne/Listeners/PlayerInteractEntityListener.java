@@ -53,8 +53,8 @@ public class PlayerInteractEntityListener implements Listener {
 								}
 								RegularKit.wear(player);
 								RegularKit.wear(target);
-								player.sendMessage("ง0งl[ง6งl1v1ง0งl] ง7You have entered a Regular 1v1 with " + target.getName());
-								target.sendMessage("ง0งl[ง6งl1v1ง0งl] ง7You have entered a Regular 1v1 with " + player.getName());
+								player.sendMessage("ยง0ยงl[ยง6ยงl1v1ยง0ยงl] ยง7You have entered a Regular 1v1 with " + target.getName());
+								target.sendMessage("ยง0ยงl[ยง6ยงl1v1ยง0ยงl] ยง7You have entered a Regular 1v1 with " + player.getName());
 							} else if (a1.size() > a2.size()) {
 								a2.add(1);
 								int x1 = plugin.getConfig().getInt("arena2.spawn1.x");
@@ -73,8 +73,8 @@ public class PlayerInteractEntityListener implements Listener {
 								}
 								RegularKit.wear(player);
 								RegularKit.wear(target);
-								player.sendMessage("ง0งl[ง6งl1v1ง0งl] ง7You have entered a Regular 1v1 with " + target.getName());
-								target.sendMessage("ง0งl[ง6งl1v1ง0งl] ง7You have entered a Regular 1v1 with " + player.getName());
+								player.sendMessage("ยง0ยงl[ยง6ยงl1v1ยง0ยงl] ยง7You have entered a Regular 1v1 with " + target.getName());
+								target.sendMessage("ยง0ยงl[ยง6ยงl1v1ยง0ยงl] ยง7You have entered a Regular 1v1 with " + player.getName());
 							} else if (a2.size() > a3.size()) {
 								a3.add(1);
 								int x1 = plugin.getConfig().getInt("arena3.spawn1.x");
@@ -93,16 +93,16 @@ public class PlayerInteractEntityListener implements Listener {
 								}
 								RegularKit.wear(player);
 								RegularKit.wear(target);
-								player.sendMessage("ง0งl[ง6งl1v1ง0งl] ง7You have entered a Regular 1v1 with " + target.getName());
-								target.sendMessage("ง0งl[ง6งl1v1ง0งl] ง7You have entered a Regular 1v1 with " + player.getName());
+								player.sendMessage("ยง0ยงl[ยง6ยงl1v1ยง0ยงl] ยง7You have entered a Regular 1v1 with " + target.getName());
+								target.sendMessage("ยง0ยงl[ยง6ยงl1v1ยง0ยงl] ยง7You have entered a Regular 1v1 with " + player.getName());
 							}
 						} else {
 							OneVsOne.challenged.put(player.getUniqueId(), target.getUniqueId());
-							player.sendMessage("ง0งl[ง6งl1v1ง0งl] งaYou have challenged " + target.getName() + " to a Regular 1v1!");
-							target.sendMessage("ง0งl[ง6งl1v1ง0งl] งaYou have been challenged by " + player.getName() + " to a Regular 1v1! Right Click them to Accept!");
+							player.sendMessage("ยง0ยงl[ยง6ยงl1v1ยง0ยงl] ยงaYou have challenged " + target.getName() + " to a Regular 1v1!");
+							target.sendMessage("ยง0ยงl[ยง6ยงl1v1ยง0ยงl] ยงaYou have been challenged by " + player.getName() + " to a Regular 1v1! Right Click them to Accept!");
 						}
 					} else {
-						player.sendMessage("ง0งl[ง6งl1v1ง0งl] งcYou must wait " + Cooldowns.getCooldown(player, "Challenge") + " seconds to Challenge them again!");
+						player.sendMessage("ยง0ยงl[ยง6ยงl1v1ยง0ยงl] ยงcYou must wait " + Cooldowns.getCooldown(player, "Challenge") + " seconds to Challenge them again!");
 					}
 				}
 			}

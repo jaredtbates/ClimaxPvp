@@ -31,9 +31,9 @@ public class PlayerRespawnListener implements Listener {
 		}
 		ItemStack item = new ItemStack(Material.NETHER_STAR);
 		ItemMeta itemmeta = item.getItemMeta();
-		itemmeta.setDisplayName("§a§lKit Selector");
+		itemmeta.setDisplayName("Â§aÂ§lKit Selector");
 		List<String> lores = new ArrayList<String>();
-		lores.add("§5§o(Right Click) to select a kit!");
+		lores.add("Â§5Â§o(Right Click) to select a kit!");
 		itemmeta.setLore(lores);
 		item.setItemMeta(itemmeta);
 		player.getInventory().setItem(0, item);

@@ -29,7 +29,7 @@ public class SpawnCommand implements CommandExecutor {
 			if (command.getName().equalsIgnoreCase("spawn")) {
 				final Block block = player.getLocation().getBlock();
 				
-				player.sendMessage("§aPlease wait §c3 §aseconds to be teleported to spawn.");
+				player.sendMessage("Â§aPlease wait Â§c3 Â§aseconds to be teleported to spawn.");
 
 				plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
 					public void run() {
@@ -47,15 +47,15 @@ public class SpawnCommand implements CommandExecutor {
 							}
 							ItemStack kitSelector = new ItemStack(Material.NETHER_STAR);
 							ItemMeta kitSelectorMeta = kitSelector.getItemMeta();
-							kitSelectorMeta.setDisplayName("§a§lKit Selector");
+							kitSelectorMeta.setDisplayName("Â§aÂ§lKit Selector");
 							List<String> kitSelectorLores = new ArrayList<String>();
-							kitSelectorLores.add("§5§o(Right Click) to select a kit!");
+							kitSelectorLores.add("Â§5Â§o(Right Click) to select a kit!");
 							kitSelectorMeta.setLore(kitSelectorLores);
 							kitSelector.setItemMeta(kitSelectorMeta);
 							player.getInventory().setItem(0, kitSelector);
-							player.sendMessage("§aYou have been teleported to spawn!");
+							player.sendMessage("Â§aYou have been teleported to spawn!");
 						} else {
-							player.sendMessage("§cTeleportation canceled.");
+							player.sendMessage("Â§cTeleportation canceled.");
 						}
 					}
 				}, 60);

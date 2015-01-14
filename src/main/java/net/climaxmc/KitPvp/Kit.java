@@ -55,7 +55,7 @@ public abstract class Kit implements Listener, CommandExecutor {
 	 */
 	public Kit(String name, ItemStack item, KitType type) {
 		ItemMeta meta = item.getItemMeta();
-		meta.setDisplayName("�eKit " + name);
+		meta.setDisplayName("§eKit " + name);
 		item.setItemMeta(meta);
 		this.name = name;
 		this.item = item;
@@ -76,7 +76,7 @@ public abstract class Kit implements Listener, CommandExecutor {
 		ArrayList<String> lores = new ArrayList<String>();
 		lores.add(lore);
 		meta.setLore(lores);
-		meta.setDisplayName("�eKit " + name);
+		meta.setDisplayName("§eKit " + name);
 		item.setItemMeta(meta);
 		this.name = name;
 		this.item = item;
@@ -104,12 +104,12 @@ public abstract class Kit implements Listener, CommandExecutor {
 						}
 						player.getInventory().clear();
 						wear(player);
-						player.sendMessage("�6You have chosen �a" + getName());
+						player.sendMessage("§6You have chosen §a" + getName());
 					} else {
-						player.sendMessage("�cYou have not died yet!");
+						player.sendMessage("§cYou have not died yet!");
 					}
 				} else {
-					player.sendMessage("�cYou do not have permission for kit " + getName() + "�c!");
+					player.sendMessage("§cYou do not have permission for kit " + getName() + "§c!");
 				}
 			}
 		}
