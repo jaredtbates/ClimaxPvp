@@ -32,10 +32,14 @@ public class EndermanKit extends Kit {
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         Player player = event.getPlayer();
         if (event.getCause().equals(PlayerTeleportEvent.TeleportCause.ENDER_PEARL)) {
-            if (event.getTo().getX() < (event.getFrom().getX() + 10) && event.getTo().getX() > (event.getFrom().getX() - 10)) {
-                if (event.getTo().getY() > (event.getFrom().getY() + 10) && event.getTo().getY() > (event.getFrom().getY() - 10)) {
+            if (event.getTo().getBlockX() < (event.getFrom().getBlockX() + 10) && event.getTo().getBlockX() > (event.getFrom().getBlockX() - 10)) {
+                if (event.getTo().getBlockY() < (event.getFrom().getBlockY() + 10) && event.getTo().getBlockY() > (event.getFrom().getBlockY() - 10)) {
+                    if (event.getTo().getBlockZ() < (event.getFrom().getBlockY() + 10) && event.getTo().getBlockZ() > (event.getFrom().getBlockY() - 10)) {
+                        return;
+                    }
                     return;
                 }
+                return;
             }
             player.sendMessage("§cYou cannot teleport further than 10 blocks!");
             event.setCancelled(true);
