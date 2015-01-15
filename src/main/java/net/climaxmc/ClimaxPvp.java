@@ -1,5 +1,7 @@
 package net.climaxmc;
 
+import lombok.Getter;
+import net.climaxmc.Creative.Creative;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Commands.RepairCommand;
 import net.climaxmc.KitPvp.Commands.SpawnCommand;
@@ -10,16 +12,20 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ClimaxPvp extends JavaPlugin {
+	@Getter
 	private static ClimaxPvp instance;
-	public String climax = "§0§l[§cClimax§0§l] §r";
-	public Economy economy = null;
-	
+	@Getter
+	private String prefix = "§0§l[§cClimax§0§l] §r";
+	@Getter
+	private Economy economy = null;
+
 	public void onEnable() {
 		instance = this;
 		saveDefaultConfig();
 		setupEconomy();
 		new KitPvp(this);
 		new OneVsOne(this);
+		new Creative(this);
 		getCommand("repair").setExecutor(new RepairCommand(this));
 		getCommand("spawn").setExecutor(new SpawnCommand(this));
 	}
@@ -38,9 +44,5 @@ public class ClimaxPvp extends JavaPlugin {
 		}
 		economy = rsp.getProvider();
 		return economy != null;
-	}
-	
-	public static ClimaxPvp getInstance() {
-		return instance;
 	}
 }
