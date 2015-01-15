@@ -6,7 +6,7 @@ depend: [Vault]
 commands:
   repair:
     description: Repairs your inventory
-    permission: ClimaxKits.Repair
+    permission: ClimaxPvp.Repair
   spawn:
     description: Teleports you to spawn
   1v1:

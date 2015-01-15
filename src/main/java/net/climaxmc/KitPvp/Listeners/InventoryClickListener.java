@@ -27,7 +27,7 @@ public class InventoryClickListener implements Listener {
 			if (inventory.getName() == KitPvp.kitSelector.getName()) {
 				for (Kit kit : KitManager.kits) {
 					if (event.getCurrentItem().getItemMeta().getDisplayName().equals(kit.getItem().getItemMeta().getDisplayName())) {
-						if (player.hasPermission("ClimaxKits.Kit." + kit.getName().replaceAll("\\s+", ""))) {
+						if (player.hasPermission("ClimaxPvp.Kit." + kit.getName().replaceAll("\\s+", ""))) {
 							if (!KitPvp.inKit.contains(player.getUniqueId())) {
 								KitPvp.inKit.add(player.getUniqueId());
 								for (PotionEffect effect : player.getActivePotionEffects()) {
