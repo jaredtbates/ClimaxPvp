@@ -40,7 +40,7 @@ public class OneVsOneCommand implements CommandExecutor {
 					stick.setItemMeta(stickMeta);
 					player.getInventory().clear();
 					player.getInventory().addItem(stick);
-					player.sendMessage(plugin.prefix + " §7Teleported to the 1v1 Lobby!");
+					player.sendMessage(plugin.getPrefix() + " §7Teleported to the 1v1 Lobby!");
 				}
 				return true;
 			}

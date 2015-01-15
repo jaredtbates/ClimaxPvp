@@ -33,17 +33,17 @@ public class PlayerDeathListener implements Listener {
 						plugin.getServer().broadcastMessage("§a" + killer.getName() + " §7has reached a KillStreak of §c" + killerAmount + "§7!");
 						killerAmount = killerAmount * 2 + 10;
 						plugin.getEconomy().depositPlayer(killer, killerAmount);
-						killer.sendMessage(plugin.prefix + "§aYou have gained §6$" + killerAmount + "§a!");
+						killer.sendMessage(plugin.getPrefix() + "§aYou have gained §6$" + killerAmount + "§a!");
 					} else {
-						plugin.economy.depositPlayer(killer, 10);
-						killer.sendMessage(plugin.prefix + "§aYou have gained §6$10§a!");
-						killer.sendMessage(plugin.prefix + "§aYou have reached a KillStreak of §6" + killerAmount + "§a!");
+						plugin.getEconomy().depositPlayer(killer, 10);
+						killer.sendMessage(plugin.getPrefix() + "§aYou have gained §6$10§a!");
+						killer.sendMessage(plugin.getPrefix() + "§aYou have reached a KillStreak of §6" + killerAmount + "§a!");
 					}
 				} else {
 					KitPvp.killStreak.put(killer.getUniqueId(), 1);
-					plugin.economy.depositPlayer(killer, 10);
-					killer.sendMessage(plugin.prefix + "§aYou have gained §6$10§a!");
-					killer.sendMessage(plugin.prefix + "§aYou have reached a KillStreak of §6" + KitPvp.killStreak.get(killer.getUniqueId()) + "§a!");
+					plugin.getEconomy().depositPlayer(killer, 10);
+					killer.sendMessage(plugin.getPrefix() + "§aYou have gained §6$10§a!");
+					killer.sendMessage(plugin.getPrefix() + "§aYou have reached a KillStreak of §6" + KitPvp.killStreak.get(killer.getUniqueId()) + "§a!");
 				}
 				if (KitPvp.killStreak.containsKey(player.getUniqueId())) {
 					if (KitPvp.killStreak.get(player.getUniqueId()) >= 10) {

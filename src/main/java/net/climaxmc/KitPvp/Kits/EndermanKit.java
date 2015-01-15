@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -32,17 +33,10 @@ public class EndermanKit extends Kit {
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         Player player = event.getPlayer();
         if (event.getCause().equals(PlayerTeleportEvent.TeleportCause.ENDER_PEARL)) {
-            if (event.getTo().getBlockX() < (event.getFrom().getBlockX() + 10) && event.getTo().getBlockX() > (event.getFrom().getBlockX() - 10)) {
-                if (event.getTo().getBlockY() < (event.getFrom().getBlockY() + 10) && event.getTo().getBlockY() > (event.getFrom().getBlockY() - 10)) {
-                    if (event.getTo().getBlockZ() < (event.getFrom().getBlockY() + 10) && event.getTo().getBlockZ() > (event.getFrom().getBlockY() - 10)) {
-                        return;
-                    }
-                    return;
-                }
-                return;
+            if (event.getFrom().distance(event.getFrom()) > 10) {
+                player.sendMessage("§cYou cannot teleport further than 10 blocks!");
+                event.setCancelled(true);
             }
-            player.sendMessage("§cYou cannot teleport further than 10 blocks!");
-            event.setCancelled(true);
         }
     }
 }
