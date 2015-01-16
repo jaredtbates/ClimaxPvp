@@ -2,6 +2,7 @@ package net.climaxmc;
 
 import lombok.Getter;
 import net.climaxmc.Creative.Creative;
+import net.climaxmc.Donations.Donations;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Commands.RepairCommand;
 import net.climaxmc.KitPvp.Commands.SpawnCommand;
@@ -25,6 +26,7 @@ public class ClimaxPvp extends JavaPlugin {
 		setupEconomy();
 		new KitPvp(this);
 		new OneVsOne(this);
+		new Donations(this);
 		new Creative(this);
 		getCommand("repair").setExecutor(new RepairCommand(this));
 		getCommand("spawn").setExecutor(new SpawnCommand(this));
