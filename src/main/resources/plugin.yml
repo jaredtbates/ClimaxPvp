@@ -11,10 +11,3 @@ commands:
     description: Teleports you to spawn
   1v1:
     description: Joins the 1v1 arena
-  setlobby:
-  setarena1spawn1:
-  setarena1spawn2:
-  setarena2spawn1:
-  setarena2spawn2:
-  setarena3spawn1:
-  setarena3spawn2:
