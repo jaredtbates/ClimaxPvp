@@ -1,7 +1,9 @@
 package net.climaxmc.Donations.Listeners;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.Donations.Donations;
 import net.climaxmc.Utils.ParticleEffect;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,9 +11,11 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 public class PlayerMoveListener implements Listener {
     private ClimaxPvp plugin;
+    private Donations instance;
 
-    public PlayerMoveListener(ClimaxPvp plugin) {
+    public PlayerMoveListener(ClimaxPvp plugin, Donations instance) {
         this.plugin = plugin;
+        this.instance = instance;
     }
 
     @EventHandler
@@ -23,5 +27,9 @@ public class PlayerMoveListener implements Listener {
                 //effect.sendToLocation(player.getLocation());
             }
         }
+        Location location = player.getLocation();
+        location.setY(location.getY() + 0.5);
+        ParticleEffect effect = new ParticleEffect(ParticleEffect.ParticleType.EXPLOSION_NORMAL, 0, 0, 0);
+        //effect.sendToLocation(location);
     }
 }

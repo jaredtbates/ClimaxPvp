@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import lombok.Data;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -60,7 +61,7 @@ public abstract class Kit implements Listener, CommandExecutor {
 		this.name = name;
 		this.item = item;
 		this.type = type;
-		System.out.println("Kit Manager> Enabled kit " + name);
+		Bukkit.getLogger().info("Kit Manager> Enabled kit " + name);
 	}
 	
 	/**
@@ -82,7 +83,7 @@ public abstract class Kit implements Listener, CommandExecutor {
 		this.item = item;
 		this.lore = lore;
 		this.type = type;
-		System.out.println("Kit Manager> Enabled kit " + name);
+		Bukkit.getLogger().info("Kit Manager> Enabled kit " + name);
 	}
 	
 	/**

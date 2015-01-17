@@ -37,10 +37,10 @@ public class PlayerDeathListener implements Listener {
 					player.getInventory().clear();
 					player.getInventory().addItem(stick);
 					player.sendMessage("§0§l[§6§l1v1§0§l] §7Teleported to the 1v1 lobby!");
+					player.getKiller().teleport(lobbySpawn);
 					player.getKiller().getInventory().clear();
 					player.getKiller().getInventory().addItem(stick);
 					player.getKiller().sendMessage("§0§l[§6§l1v1§0§l] §7Teleported to the 1v1 lobby!");
-					player.getKiller().teleport(lobbySpawn);
 				}
 			});
 		}
