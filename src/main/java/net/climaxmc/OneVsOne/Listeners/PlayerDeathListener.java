@@ -16,8 +16,6 @@ public class PlayerDeathListener implements Listener {
 	private ClimaxPvp plugin;
 	private OneVsOne instance;
 
-	private Location lobbySpawn = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Lobby.Spawn.World")), plugin.getConfig().getInt("Lobby.Spawn.X"), plugin.getConfig().getInt("Lobby.Spawn.Y"), plugin.getConfig().getInt("Lobby.Spawn.Z"));
-
 	public PlayerDeathListener(ClimaxPvp plugin, OneVsOne instance) {
 		this.plugin = plugin;
 		this.instance = instance;
@@ -25,7 +23,9 @@ public class PlayerDeathListener implements Listener {
 
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event){
+		final Location lobbySpawn = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Lobby.Spawn.World")), plugin.getConfig().getInt("Lobby.Spawn.X"), plugin.getConfig().getInt("Lobby.Spawn.Y"), plugin.getConfig().getInt("Lobby.Spawn.Z"));
 		final Player player = event.getEntity();
+
 		if (player instanceof Player) {
 			plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
 				public void run() {
