@@ -19,6 +19,13 @@ public class PlayerInteractEntityListener implements Listener {
     private ClimaxPvp plugin;
     private OneVsOne instance;
 
+    private Location arena1spawn1 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.1.Spawns.1.World")), plugin.getConfig().getInt("Arena.1.Spawns.1.X"), plugin.getConfig().getInt("Arena.1.Spawns.1.Y"), plugin.getConfig().getInt("Arena.1.Spawns.1.Z"));
+    private Location arena1spawn2 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.1.Spawns.2.World")), plugin.getConfig().getInt("Arena.1.Spawns.2.X"), plugin.getConfig().getInt("Arena.1.Spawns.2.Y"), plugin.getConfig().getInt("Arena.1.Spawns.2.Z"));
+    private Location arena2spawn1 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.2.Spawns.1.World")), plugin.getConfig().getInt("Arena.2.Spawns.1.X"), plugin.getConfig().getInt("Arena.2.Spawns.1.Y"), plugin.getConfig().getInt("Arena.2.Spawns.1.Z"));
+    private Location arena2spawn2 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.2.Spawns.2.World")), plugin.getConfig().getInt("Arena.2.Spawns.2.X"), plugin.getConfig().getInt("Arena.2.Spawns.2.Y"), plugin.getConfig().getInt("Arena.2.Spawns.2.Z"));
+    private Location arena3spawn1 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.3.Spawns.1.World")), plugin.getConfig().getInt("Arena.3.Spawns.1.X"), plugin.getConfig().getInt("Arena.3.Spawns.1.Y"), plugin.getConfig().getInt("Arena.3.Spawns.1.Z"));
+    private Location arena3spawn2 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.3.Spawns.2.World")), plugin.getConfig().getInt("Arena.3.Spawns.2.X"), plugin.getConfig().getInt("Arena.3.Spawns.2.Y"), plugin.getConfig().getInt("Arena.3.Spawns.2.Z"));
+
     public PlayerInteractEntityListener(ClimaxPvp plugin, OneVsOne instance) {
         this.plugin = plugin;
         this.instance = instance;
@@ -32,63 +39,49 @@ public class PlayerInteractEntityListener implements Listener {
             if (player.getInventory().getItemInHand().getType() == Material.STICK) {
                 if (instance.getChallenged().containsKey(target.getUniqueId()) && instance.getChallenged().containsValue(player.getUniqueId())) {
                     int random = new Random().nextInt(3);
-                    if (random == 0) {
-                        int x1 = plugin.getConfig().getInt("arena1.spawn1.x");
-                        int y1 = plugin.getConfig().getInt("arena1.spawn1.y");
-                        int z1 = plugin.getConfig().getInt("arena1.spawn1.z");
-                        player.teleport(new Location(player.getWorld(), x1, y1, z1));
-                        int x2 = plugin.getConfig().getInt("arena1.spawn2.x");
-                        int y2 = plugin.getConfig().getInt("arena1.spawn2.y");
-                        int z2 = plugin.getConfig().getInt("arena1.spawn2.z");
-                        target.teleport(new Location(player.getWorld(), x2, y2, z2));
-                        player.getInventory().clear();
-                        target.getInventory().clear();
-                        for (PotionEffect effect : player.getActivePotionEffects()) {
-                            player.removePotionEffect(effect.getType());
-                            target.removePotionEffect(effect.getType());
-                        }
-                        RegularKit.wear(player);
-                        RegularKit.wear(target);
-                        player.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + target.getName());
-                        target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + player.getName());
-                    } else if (random == 1) {
-                        int x1 = plugin.getConfig().getInt("arena2.spawn1.x");
-                        int y1 = plugin.getConfig().getInt("arena2.spawn1.y");
-                        int z1 = plugin.getConfig().getInt("arena2.spawn1.z");
-                        player.teleport(new Location(player.getWorld(), x1, y1, z1));
-                        int x2 = plugin.getConfig().getInt("arena2.spawn2.x");
-                        int y2 = plugin.getConfig().getInt("arena2.spawn2.y");
-                        int z2 = plugin.getConfig().getInt("arena2.spawn2.z");
-                        target.teleport(new Location(player.getWorld(), x2, y2, z2));
-                        player.getInventory().clear();
-                        target.getInventory().clear();
-                        for (PotionEffect effect : player.getActivePotionEffects()) {
-                            player.removePotionEffect(effect.getType());
-                            target.removePotionEffect(effect.getType());
-                        }
-                        RegularKit.wear(player);
-                        RegularKit.wear(target);
-                        player.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + target.getName());
-                        target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + player.getName());
-                    } else if (random == 2) {
-                        int x1 = plugin.getConfig().getInt("arena3.spawn1.x");
-                        int y1 = plugin.getConfig().getInt("arena3.spawn1.y");
-                        int z1 = plugin.getConfig().getInt("arena3.spawn1.z");
-                        player.teleport(new Location(player.getWorld(), x1, y1, z1));
-                        int x2 = plugin.getConfig().getInt("arena3.spawn2.x");
-                        int y2 = plugin.getConfig().getInt("arena3.spawn2.y");
-                        int z2 = plugin.getConfig().getInt("arena3.spawn2.z");
-                        target.teleport(new Location(player.getWorld(), x2, y2, z2));
-                        player.getInventory().clear();
-                        target.getInventory().clear();
-                        for (PotionEffect effect : player.getActivePotionEffects()) {
-                            player.removePotionEffect(effect.getType());
-                            target.removePotionEffect(effect.getType());
-                        }
-                        RegularKit.wear(player);
-                        RegularKit.wear(target);
-                        player.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + target.getName());
-                        target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + player.getName());
+                    switch (random) {
+                        case 0:
+                            player.teleport(arena1spawn1);
+                            target.teleport(arena1spawn2);
+                            player.getInventory().clear();
+                            target.getInventory().clear();
+                            for (PotionEffect effect : player.getActivePotionEffects()) {
+                                player.removePotionEffect(effect.getType());
+                                target.removePotionEffect(effect.getType());
+                            }
+                            RegularKit.wear(player);
+                            RegularKit.wear(target);
+                            player.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + target.getName());
+                            target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + player.getName());
+                            return;
+                        case 1:
+                            player.teleport(arena2spawn1);
+                            target.teleport(arena2spawn2);
+                            player.getInventory().clear();
+                            target.getInventory().clear();
+                            for (PotionEffect effect : player.getActivePotionEffects()) {
+                                player.removePotionEffect(effect.getType());
+                                target.removePotionEffect(effect.getType());
+                            }
+                            RegularKit.wear(player);
+                            RegularKit.wear(target);
+                            player.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + target.getName());
+                            target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + player.getName());
+                            return;
+                        case 2:
+                            player.teleport(arena3spawn1);
+                            target.teleport(arena3spawn2);
+                            player.getInventory().clear();
+                            target.getInventory().clear();
+                            for (PotionEffect effect : player.getActivePotionEffects()) {
+                                player.removePotionEffect(effect.getType());
+                                target.removePotionEffect(effect.getType());
+                            }
+                            RegularKit.wear(player);
+                            RegularKit.wear(target);
+                            player.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + target.getName());
+                            target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + player.getName());
+                            return;
                     }
                 } else {
                     instance.getChallenged().put(player.getUniqueId(), target.getUniqueId());
