@@ -28,9 +28,9 @@ public class OneVsOneCommand implements CommandExecutor {
 				if (args.length > 0) {
 					if (player.hasPermission("ClimaxPvp.1v1.ArenaCommands")) {
 						if (args[0].equalsIgnoreCase("setlobby")) {
-							plugin.getConfig().set("lobbyspawn.x", player.getLocation().getBlockX());
-							plugin.getConfig().set("lobbyspawn.y", player.getLocation().getBlockY() + 1);
-							plugin.getConfig().set("lobbyspawn.z", player.getLocation().getBlockZ());
+							plugin.getConfig().set("Lobby.Spawn.X", player.getLocation().getBlockX());
+							plugin.getConfig().set("Lobby.Spawn.Y", player.getLocation().getBlockY() + 0.5);
+							plugin.getConfig().set("Lobby.Spawn.Z", player.getLocation().getBlockZ());
 							plugin.saveConfig();
 							player.sendMessage("§a1v1 Lobby Spawn Set!");
 							return true;
@@ -55,9 +55,9 @@ public class OneVsOneCommand implements CommandExecutor {
 						}
 					}
 				}
-				int x = plugin.getConfig().getInt("lobbyspawn.x");
-				int y = plugin.getConfig().getInt("lobbyspawn.y");
-				int z = plugin.getConfig().getInt("lobbyspawn.z");
+				int x = plugin.getConfig().getInt("Lobby.Spawn.X");
+				int y = plugin.getConfig().getInt("Lobby.Spawn.Y");
+				int z = plugin.getConfig().getInt("Lobby.Spawn.Z");
 				player.teleport(new Location(player.getWorld(), x, y, z));
 				ItemStack stick = new ItemStack(Material.STICK);
 				ItemMeta stickMeta = stick.getItemMeta();
@@ -73,9 +73,9 @@ public class OneVsOneCommand implements CommandExecutor {
 	}
 
 	private void addArenaSpawn(Player player, int arena, int spawn) {
-		plugin.getConfig().set("arena" + arena + ".spawn" + spawn + ".x", player.getLocation().getBlockX());
-		plugin.getConfig().set("arena" + arena + ".spawn" + spawn + ".y", player.getLocation().getBlockY() + 0.5);
-		plugin.getConfig().set("arena" + arena + ".spawn" + spawn + ".z", player.getLocation().getBlockZ());
+		plugin.getConfig().set("Arenas." + arena + ".Spawns." + spawn + ".X", player.getLocation().getBlockX());
+		plugin.getConfig().set("Arenas." + arena + ".Spawns." + spawn + ".Y", player.getLocation().getBlockY() + 0.5);
+		plugin.getConfig().set("Arenas." + arena + ".Spawns." + spawn + ".Z", player.getLocation().getBlockZ());
 		plugin.saveConfig();
 		player.sendMessage("§aArena " + arena + " spawn " + spawn + " set!");
 	}

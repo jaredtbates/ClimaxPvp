@@ -1,6 +1,5 @@
 package net.climaxmc.OneVsOne.Listeners;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import net.climaxmc.ClimaxPvp;
@@ -19,13 +18,6 @@ public class PlayerInteractEntityListener implements Listener {
     private ClimaxPvp plugin;
     private OneVsOne instance;
 
-    private Location arena1spawn1 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.1.Spawns.1.World")), plugin.getConfig().getInt("Arena.1.Spawns.1.X"), plugin.getConfig().getInt("Arena.1.Spawns.1.Y"), plugin.getConfig().getInt("Arena.1.Spawns.1.Z"));
-    private Location arena1spawn2 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.1.Spawns.2.World")), plugin.getConfig().getInt("Arena.1.Spawns.2.X"), plugin.getConfig().getInt("Arena.1.Spawns.2.Y"), plugin.getConfig().getInt("Arena.1.Spawns.2.Z"));
-    private Location arena2spawn1 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.2.Spawns.1.World")), plugin.getConfig().getInt("Arena.2.Spawns.1.X"), plugin.getConfig().getInt("Arena.2.Spawns.1.Y"), plugin.getConfig().getInt("Arena.2.Spawns.1.Z"));
-    private Location arena2spawn2 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.2.Spawns.2.World")), plugin.getConfig().getInt("Arena.2.Spawns.2.X"), plugin.getConfig().getInt("Arena.2.Spawns.2.Y"), plugin.getConfig().getInt("Arena.2.Spawns.2.Z"));
-    private Location arena3spawn1 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.3.Spawns.1.World")), plugin.getConfig().getInt("Arena.3.Spawns.1.X"), plugin.getConfig().getInt("Arena.3.Spawns.1.Y"), plugin.getConfig().getInt("Arena.3.Spawns.1.Z"));
-    private Location arena3spawn2 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.3.Spawns.2.World")), plugin.getConfig().getInt("Arena.3.Spawns.2.X"), plugin.getConfig().getInt("Arena.3.Spawns.2.Y"), plugin.getConfig().getInt("Arena.3.Spawns.2.Z"));
-
     public PlayerInteractEntityListener(ClimaxPvp plugin, OneVsOne instance) {
         this.plugin = plugin;
         this.instance = instance;
@@ -33,6 +25,13 @@ public class PlayerInteractEntityListener implements Listener {
 
     @EventHandler
     public void onPlayerClick(PlayerInteractEntityEvent event) {
+        Location arena1Spawn1 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.1.Spawns.1.World")), plugin.getConfig().getInt("Arena.1.Spawns.1.X"), plugin.getConfig().getInt("Arena.1.Spawns.1.Y"), plugin.getConfig().getInt("Arena.1.Spawns.1.Z"));
+        Location arena1Spawn2 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.1.Spawns.2.World")), plugin.getConfig().getInt("Arena.1.Spawns.2.X"), plugin.getConfig().getInt("Arena.1.Spawns.2.Y"), plugin.getConfig().getInt("Arena.1.Spawns.2.Z"));
+        Location arena2Spawn1 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.2.Spawns.1.World")), plugin.getConfig().getInt("Arena.2.Spawns.1.X"), plugin.getConfig().getInt("Arena.2.Spawns.1.Y"), plugin.getConfig().getInt("Arena.2.Spawns.1.Z"));
+        Location arena2spawn2 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.2.Spawns.2.World")), plugin.getConfig().getInt("Arena.2.Spawns.2.X"), plugin.getConfig().getInt("Arena.2.Spawns.2.Y"), plugin.getConfig().getInt("Arena.2.Spawns.2.Z"));
+        Location arena3spawn1 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.3.Spawns.1.World")), plugin.getConfig().getInt("Arena.3.Spawns.1.X"), plugin.getConfig().getInt("Arena.3.Spawns.1.Y"), plugin.getConfig().getInt("Arena.3.Spawns.1.Z"));
+        Location arena3spawn2 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.3.Spawns.2.World")), plugin.getConfig().getInt("Arena.3.Spawns.2.X"), plugin.getConfig().getInt("Arena.3.Spawns.2.Y"), plugin.getConfig().getInt("Arena.3.Spawns.2.Z"));
+
         Player player = event.getPlayer();
         if (event.getRightClicked() instanceof Player) {
             Player target = (Player) event.getRightClicked();
@@ -41,8 +40,8 @@ public class PlayerInteractEntityListener implements Listener {
                     int random = new Random().nextInt(3);
                     switch (random) {
                         case 0:
-                            player.teleport(arena1spawn1);
-                            target.teleport(arena1spawn2);
+                            player.teleport(arena1Spawn1);
+                            target.teleport(arena1Spawn2);
                             player.getInventory().clear();
                             target.getInventory().clear();
                             for (PotionEffect effect : player.getActivePotionEffects()) {
@@ -55,7 +54,7 @@ public class PlayerInteractEntityListener implements Listener {
                             target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + player.getName());
                             return;
                         case 1:
-                            player.teleport(arena2spawn1);
+                            player.teleport(arena2Spawn1);
                             target.teleport(arena2spawn2);
                             player.getInventory().clear();
                             target.getInventory().clear();

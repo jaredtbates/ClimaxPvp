@@ -16,6 +16,8 @@ public class PlayerDeathListener implements Listener {
 	private ClimaxPvp plugin;
 	private OneVsOne instance;
 
+	private Location lobbySpawn = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Lobby.Spawn.World")), plugin.getConfig().getInt("Lobby.Spawn.X"), plugin.getConfig().getInt("Lobby.Spawn.Y"), plugin.getConfig().getInt("Lobby.Spawn.Z"));
+
 	public PlayerDeathListener(ClimaxPvp plugin, OneVsOne instance) {
 		this.plugin = plugin;
 		this.instance = instance;
@@ -27,10 +29,7 @@ public class PlayerDeathListener implements Listener {
 		if (player instanceof Player) {
 			plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
 				public void run() {
-					int x = plugin.getConfig().getInt("lobbyspawn.x");
-					int y = plugin.getConfig().getInt("lobbyspawn.y");
-					int z = plugin.getConfig().getInt("lobbyspawn.z");
-					player.teleport(new Location(player.getWorld(), x, y, z));
+					player.teleport(lobbySpawn);
 					ItemStack stick = new ItemStack(Material.STICK);
 					ItemMeta stickmeta = stick.getItemMeta();
 					stickmeta.setDisplayName("§6§lRegular 1v1");
@@ -41,7 +40,7 @@ public class PlayerDeathListener implements Listener {
 					player.getKiller().getInventory().clear();
 					player.getKiller().getInventory().addItem(stick);
 					player.getKiller().sendMessage("§0§l[§6§l1v1§0§l] §7Teleported to the 1v1 lobby!");
-					player.getKiller().teleport(new Location(player.getWorld(), x, y, z));
+					player.getKiller().teleport(lobbySpawn);
 				}
 			});
 		}
