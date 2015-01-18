@@ -21,15 +21,14 @@ public class PlayerMoveListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        for (ParticleEffect.ParticleType type : ParticleEffect.ParticleType.values()) {
-            ParticleEffect effect = new ParticleEffect(type, 1, 1, 10);
-            if (player.hasPermission("ClimaxPvp.Particles." + type.getName())) {
-                //effect.sendToLocation(player.getLocation());
+        if (instance.getParticlesEnabled().containsKey(player.getUniqueId())) {
+            for (ParticleEffect.ParticleType type : ParticleEffect.ParticleType.values()) {
+                if (instance.getParticlesEnabled().get(player.getUniqueId()).equals(type)) {
+                    Location location = player.getLocation();
+                    location.setY(location.getY() + 0.5);
+                    new ParticleEffect(type, 0, 0, 0).sendToLocation(location);
+                }
             }
         }
-        Location location = player.getLocation();
-        location.setY(location.getY() + 0.5);
-        ParticleEffect effect = new ParticleEffect(ParticleEffect.ParticleType.EXPLOSION_NORMAL, 0, 0, 0);
-        //effect.sendToLocation(location);
     }
 }
