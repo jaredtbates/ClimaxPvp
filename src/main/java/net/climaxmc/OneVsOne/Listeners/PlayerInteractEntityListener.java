@@ -36,7 +36,7 @@ public class PlayerInteractEntityListener implements Listener {
         if (event.getRightClicked() instanceof Player) {
             Player target = (Player) event.getRightClicked();
             if (player.getInventory().getItemInHand().getType() == Material.STICK) {
-                if (instance.getChallenged().containsKey(target.getUniqueId()) && instance.getChallenged().containsValue(player.getUniqueId())) {
+                if (instance.getChallenged().containsKey(player.getUniqueId()) && instance.getChallenged().containsValue(target.getUniqueId())) {
                     int random = new Random().nextInt(3);
                     switch (random) {
                         case 0:

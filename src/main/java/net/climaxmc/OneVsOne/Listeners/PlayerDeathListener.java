@@ -25,8 +25,7 @@ public class PlayerDeathListener implements Listener {
 	public void onPlayerDeath(PlayerDeathEvent event){
 		final Location lobbySpawn = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Lobby.Spawn.World")), plugin.getConfig().getInt("Lobby.Spawn.X"), plugin.getConfig().getInt("Lobby.Spawn.Y"), plugin.getConfig().getInt("Lobby.Spawn.Z"));
 		final Player player = event.getEntity();
-
-		if (player instanceof Player) {
+		if (instance.getChallenged().containsKey(player.getUniqueId())) {
 			plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
 				public void run() {
 					player.teleport(lobbySpawn);
@@ -41,6 +40,8 @@ public class PlayerDeathListener implements Listener {
 					player.getKiller().getInventory().clear();
 					player.getKiller().getInventory().addItem(stick);
 					player.getKiller().sendMessage("§0§l[§6§l1v1§0§l] §7Teleported to the 1v1 lobby!");
+					instance.getChallenged().remove(player.getUniqueId());
+					instance.getChallenged().remove(player.getKiller().getUniqueId());
 				}
 			});
 		}

@@ -23,6 +23,7 @@ public class InventoryClickListener implements Listener {
             int slot = event.getSlot();
             switch (slot) {
                 case 53:
+
                     return;
                 default:
                     return;
