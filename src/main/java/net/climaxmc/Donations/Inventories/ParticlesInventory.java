@@ -12,13 +12,16 @@ public class ParticlesInventory {
 
     public ParticlesInventory(Player player) {
         addParticle(inventory, "Smoke", Material.COAL);
+        addParticle(inventory, "Lava", Material.LAVA_BUCKET);
+        addParticle(inventory, "Water", Material.WATER_BUCKET);
+        addParticle(inventory, "Enchantment", Material.ENCHANTMENT_TABLE);
         player.openInventory(inventory);
     }
 
     private void addParticle(Inventory inventory, String name, Material material) {
         ItemStack particle = new ItemStack(material);
         ItemMeta particleMeta = particle.getItemMeta();
-        particleMeta.setDisplayName(name);
+        particleMeta.setDisplayName("§a" + name);
         particle.setItemMeta(particleMeta);
         inventory.addItem(particle);
     }

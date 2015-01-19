@@ -26,7 +26,7 @@ public class PlayerMoveListener implements Listener {
                 if (instance.getParticlesEnabled().get(player.getUniqueId()).equals(type)) {
                     Location location = player.getLocation();
                     location.setY(location.getY() + 0.5);
-                    new ParticleEffect(type, 0, 0, 0).sendToLocation(location);
+                    new ParticleEffect(type, 2, 2, 0).sendToLocation(location);
                 }
             }
         }
