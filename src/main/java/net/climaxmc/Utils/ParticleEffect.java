@@ -130,11 +130,26 @@ public class ParticleEffect {
      * @param count the number of particles to spawn
      * @param radius the radius of the particles
      */
-    public ParticleEffect(ParticleType type, double speed, int count, double radius){
+    public ParticleEffect(ParticleType type, double speed, int count, double radius) {
         this.type = type;
         this.speed = speed;
         this.count = count;
         this.radius = radius;
+    }
+
+    /**
+     * Constructs a new particle effect for use.
+     * <p>
+     *     Note: different values for speed and radius may hav;e different effects
+     *     depending on the particle's type.
+     * </p>
+     * @param data the particle data
+     */
+    public ParticleEffect(ParticleData data) {
+        type = data.getType();
+        speed = data.getSpeed();
+        count = data.getCount();
+        radius = data.getRadius();
     }
 
     /**
@@ -387,7 +402,7 @@ public class ParticleEffect {
         /**
          * The number of particles spawned by the effect
          */
-        private double count;
+        private int count;
         /**
          * The radius of the particle effect
          */
