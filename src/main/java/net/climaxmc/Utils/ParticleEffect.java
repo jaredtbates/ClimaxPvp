@@ -306,7 +306,7 @@ public class ParticleEffect {
      * Enum representing valid particle types in Minecraft 1.8
      */
     @AllArgsConstructor
-    public class ParticleType {
+    public enum ParticleType {
         EXPLOSION_NORMAL("explode", 0, 17),
         EXPLOSION_LARGE("largeexplode", 1, 1),
         EXPLOSION_HUGE("hugeexplosion", 2, 0),
