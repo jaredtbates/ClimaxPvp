@@ -26,22 +26,19 @@ public class InventoryClickListener implements Listener {
             int slot = event.getSlot();
             event.setCancelled(true);
             player.closeInventory();
-            ParticleEffect.ParticleType type = null;
-            double speed = 0;
-            double count = 0;
-            double radius = 0;
+            ParticleEffect.ParticleData particle = null;
             switch (slot) {
                 case 0:
-                    type = ParticleEffect.ParticleType.EXPLOSION_NORMAL;
+                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.EXPLOSION_NORMAL, 0, 0, 0);
                     break;
                 case 1:
-                    type = ParticleEffect.ParticleType.LAVA;
+                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.LAVA, 0, 0, 0);
                     break;
                 case 2:
-                    type = ParticleEffect.ParticleType.DRIP_WATER;
+                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.DRIP_WATER, 0, 0, 0);
                     break;
                 case 3:
-                    type = ParticleEffect.ParticleType.ENCHANTMENT_TABLE;
+                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.ENCHANTMENT_TABLE, 0, 0, 0);
                     break;
                 case 4:
                     break;
@@ -78,11 +75,11 @@ public class InventoryClickListener implements Listener {
                 case 20:
                     break;
             }
-            if (instance.getParticlesEnabled().containsKey(player.getUniqueId()) && instance.getParticlesEnabled().get(player.getUniqueId()).equals(type)) {
+            if (instance.getParticlesEnabled().containsKey(player.getUniqueId()) && instance.getParticlesEnabled().get(player.getUniqueId()).equals(particle)) {
                 instance.getParticlesEnabled().remove(player.getUniqueId());
                 player.sendMessage("§aYou have removed your particle!");
             } else {
-                instance.getParticlesEnabled().put(player.getUniqueId(), type);
+                instance.getParticlesEnabled().put(player.getUniqueId(), particle);
                 player.sendMessage("§aYou have applied the " + event.getCurrentItem().getItemMeta().getDisplayName() + " particle!");
             }
         }

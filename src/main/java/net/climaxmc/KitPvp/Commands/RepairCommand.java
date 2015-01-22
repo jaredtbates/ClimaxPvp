@@ -1,7 +1,6 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

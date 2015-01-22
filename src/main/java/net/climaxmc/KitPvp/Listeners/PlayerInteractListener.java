@@ -5,7 +5,6 @@ import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.Kit.KitType;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
-
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class Donations {
-    @Getter private HashMap<UUID, ParticleEffect.ParticleType> particlesEnabled = new HashMap<UUID, ParticleEffect.ParticleType>();
+    @Getter private HashMap<UUID, ParticleEffect.ParticleData> particlesEnabled = new HashMap<UUID, ParticleEffect.ParticleData>();
 
     public Donations(ClimaxPvp plugin) {
         plugin.getCommand("particles").setExecutor(new ParticlesCommand(plugin));

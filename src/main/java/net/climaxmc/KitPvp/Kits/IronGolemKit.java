@@ -2,7 +2,6 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.Utils.Cooldowns;
-
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;

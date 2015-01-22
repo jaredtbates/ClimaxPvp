@@ -1,7 +1,6 @@
 package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
-
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

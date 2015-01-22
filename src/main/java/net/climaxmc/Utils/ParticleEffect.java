@@ -30,6 +30,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -303,7 +305,8 @@ public class ParticleEffect {
     /**
      * Enum representing valid particle types in Minecraft 1.8
      */
-    public enum ParticleType {
+    @AllArgsConstructor
+    public class ParticleType {
         EXPLOSION_NORMAL("explode", 0, 17),
         EXPLOSION_LARGE("largeexplode", 1, 1),
         EXPLOSION_HUGE("hugeexplosion", 2, 0),
@@ -365,11 +368,29 @@ public class ParticleEffect {
          * @return The legacy ID (pre-1.8) of the particle effect
          */
         @Getter private int legacyId;
+    }
 
-        ParticleType(String name, int id, int legacyId){
-            this.name = name;
-            this.id = id;
-            this.legacyId = legacyId;
-        }
+    /**
+     * Defines data of a particle effect
+     */
+    @Data
+    @AllArgsConstructor
+    public static class ParticleData {
+        /**
+         * The type of the particle effect
+         */
+        private ParticleType type;
+        /**
+         * The speed of the particles in this effect
+         */
+        private double speed;
+        /**
+         * The number of particles spawned by the effect
+         */
+        private double count;
+        /**
+         * The radius of the particle effect
+         */
+        private double radius;
     }
 }

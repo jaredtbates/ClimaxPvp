@@ -1,11 +1,7 @@
 package net.climaxmc.KitPvp.Commands;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
-
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
@@ -15,6 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SpawnCommand implements CommandExecutor {
 	ClimaxPvp plugin;

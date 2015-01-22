@@ -1,11 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.Utils.Cooldowns;
-
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -17,6 +13,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class SoldierKit extends Kit {
 	ArrayList<UUID> soldier = new ArrayList<UUID>();

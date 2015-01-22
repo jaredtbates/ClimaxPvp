@@ -1,9 +1,5 @@
 package net.climaxmc.KitPvp;
 
-import java.util.ArrayList;
-
-import lombok.Data;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -16,12 +12,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
+import java.util.ArrayList;
+
 /**
  * Represents a kit
  * 
  * @author computerwizjared
  */
-@Data
 public abstract class Kit implements Listener, CommandExecutor {
 	/**
 	 * Name of the kit
@@ -44,7 +41,7 @@ public abstract class Kit implements Listener, CommandExecutor {
 	 * Available types of kits
 	 */
 	public enum KitType {
-		DEFAULT, AMATEUR, EXPERIENCED, ADVANCED, VETERAN;
+		DEFAULT, AMATEUR, EXPERIENCED, ADVANCED, VETERAN
 	}
 	
 	/**

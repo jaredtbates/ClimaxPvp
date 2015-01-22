@@ -1,7 +1,6 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
-
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

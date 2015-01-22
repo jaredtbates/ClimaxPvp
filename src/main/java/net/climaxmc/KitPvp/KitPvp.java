@@ -1,13 +1,12 @@
 package net.climaxmc.KitPvp;
 
+import net.climaxmc.ClimaxPvp;
+import org.bukkit.Bukkit;
+import org.bukkit.inventory.Inventory;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
-
-import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Listeners.*;
-import org.bukkit.Bukkit;
-import org.bukkit.inventory.Inventory;
 
 public class KitPvp {
 	public static Inventory kitSelector = Bukkit.createInventory(null, 54, "§a§lKit Selector");
