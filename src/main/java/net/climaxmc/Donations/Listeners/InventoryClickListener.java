@@ -29,7 +29,7 @@ public class InventoryClickListener implements Listener {
             ParticleEffect.ParticleData particle = null;
             switch (slot) {
                 case 0:
-                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.EXPLOSION_NORMAL, 0, 0, 0);
+                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.EXPLOSION_NORMAL, 0.1, 2, 0.5);
                     break;
                 case 1:
                     particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.LAVA, 0, 0, 0);
