@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp;
 
+import lombok.Data;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
  * 
  * @author computerwizjared
  */
+@Data
 public abstract class Kit implements Listener, CommandExecutor {
 	/**
 	 * Name of the kit

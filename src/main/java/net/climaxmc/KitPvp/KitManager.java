@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Kits.*;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;

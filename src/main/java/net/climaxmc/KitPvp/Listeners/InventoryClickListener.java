@@ -23,7 +23,7 @@ public class InventoryClickListener implements Listener {
 		Inventory inventory = event.getInventory();
 		final Player player = (Player) event.getWhoClicked();
 		if (inventory != null) {
-			if (inventory.getName() == KitPvp.kitSelector.getName()) {
+			if (inventory.getName().equals(KitPvp.kitSelector.getName())) {
 				for (Kit kit : KitManager.kits) {
 					if (event.getCurrentItem().getItemMeta().getDisplayName().equals(kit.getItem().getItemMeta().getDisplayName())) {
 						if (player.hasPermission("ClimaxPvp.Kit." + kit.getName().replaceAll("\\s+", ""))) {

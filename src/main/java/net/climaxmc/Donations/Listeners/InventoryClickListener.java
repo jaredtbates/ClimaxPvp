@@ -41,6 +41,7 @@ public class InventoryClickListener implements Listener {
                     particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.ENCHANTMENT_TABLE, 0, 0, 0);
                     break;
                 case 4:
+                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.PORTAL, 0, 0, 0);
                     break;
                 case 5:
                     break;
@@ -75,12 +76,14 @@ public class InventoryClickListener implements Listener {
                 case 20:
                     break;
             }
-            if (instance.getParticlesEnabled().containsKey(player.getUniqueId()) && instance.getParticlesEnabled().get(player.getUniqueId()).equals(particle)) {
-                instance.getParticlesEnabled().remove(player.getUniqueId());
-                player.sendMessage("§aYou have removed your particle!");
-            } else {
-                instance.getParticlesEnabled().put(player.getUniqueId(), particle);
-                player.sendMessage("§aYou have applied the " + event.getCurrentItem().getItemMeta().getDisplayName() + " particle!");
+            if (particle != null) {
+                if (instance.getParticlesEnabled().containsKey(player.getUniqueId()) && instance.getParticlesEnabled().get(player.getUniqueId()).equals(particle)) {
+                    instance.getParticlesEnabled().remove(player.getUniqueId());
+                    player.sendMessage("§aYou have removed your particle!");
+                } else {
+                    instance.getParticlesEnabled().put(player.getUniqueId(), particle);
+                    player.sendMessage("§aYou have applied the " + event.getCurrentItem().getItemMeta().getDisplayName() + " particle!");
+                }
             }
         }
     }
