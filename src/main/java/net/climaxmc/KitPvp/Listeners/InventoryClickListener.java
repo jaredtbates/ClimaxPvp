@@ -26,21 +26,7 @@ public class InventoryClickListener implements Listener {
 			if (inventory.getName().equals(KitPvp.kitSelector.getName())) {
 				for (Kit kit : KitManager.kits) {
 					if (event.getCurrentItem().getItemMeta().getDisplayName().equals(kit.getItem().getItemMeta().getDisplayName())) {
-						if (player.hasPermission("ClimaxPvp.Kit." + kit.getName().replaceAll("\\s+", ""))) {
-							if (!KitPvp.inKit.contains(player.getUniqueId())) {
-								KitPvp.inKit.add(player.getUniqueId());
-								for (PotionEffect effect : player.getActivePotionEffects()) {
-									player.removePotionEffect(effect.getType());
-								}
-								player.getInventory().clear();
-								kit.wear(player);
-								player.sendMessage("§6You have chosen §a" + kit.getName());
-							} else {
-								player.sendMessage("§cYou have not died yet!");
-							}
-						} else {
-							player.sendMessage("§cYou do not have permission for kit " + kit.getName() + "§c!");
-						}
+						kit.wearCheckPerms(player);
 						plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
 							public void run() {
 								player.closeInventory();

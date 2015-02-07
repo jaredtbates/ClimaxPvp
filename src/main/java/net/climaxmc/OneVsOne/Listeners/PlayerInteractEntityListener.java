@@ -3,8 +3,9 @@ package net.climaxmc.OneVsOne.Listeners;
 import java.util.Random;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Kit;
+import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.OneVsOne.OneVsOne;
-import net.climaxmc.OneVsOne.RegularKit;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -25,6 +26,7 @@ public class PlayerInteractEntityListener implements Listener {
 
     @EventHandler
     public void onPlayerClick(PlayerInteractEntityEvent event) {
+        Kit kit = new PvpKit();
         Location arena1Spawn1 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.1.Spawns.1.World")), plugin.getConfig().getInt("Arenas.1.Spawns.1.X"), plugin.getConfig().getInt("Arenas.1.Spawns.1.Y"), plugin.getConfig().getInt("Arenas.1.Spawns.1.Z"));
         Location arena1Spawn2 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.1.Spawns.2.World")), plugin.getConfig().getInt("Arenas.1.Spawns.2.X"), plugin.getConfig().getInt("Arenas.1.Spawns.2.Y"), plugin.getConfig().getInt("Arenas.1.Spawns.2.Z"));
         Location arena2Spawn1 = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Arenas.2.Spawns.1.World")), plugin.getConfig().getInt("Arenas.2.Spawns.1.X"), plugin.getConfig().getInt("Arenas.2.Spawns.1.Y"), plugin.getConfig().getInt("Arenas.2.Spawns.1.Z"));
@@ -48,8 +50,8 @@ public class PlayerInteractEntityListener implements Listener {
                                 player.removePotionEffect(effect.getType());
                                 target.removePotionEffect(effect.getType());
                             }
-                            RegularKit.wear(player);
-                            RegularKit.wear(target);
+                            kit.wear(player);
+                            kit.wear(target);
                             player.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + target.getName());
                             target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + player.getName());
                             return;
@@ -62,8 +64,8 @@ public class PlayerInteractEntityListener implements Listener {
                                 player.removePotionEffect(effect.getType());
                                 target.removePotionEffect(effect.getType());
                             }
-                            RegularKit.wear(player);
-                            RegularKit.wear(target);
+                            kit.wear(player);
+                            kit.wear(target);
                             player.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + target.getName());
                             target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + player.getName());
                             return;
@@ -76,11 +78,10 @@ public class PlayerInteractEntityListener implements Listener {
                                 player.removePotionEffect(effect.getType());
                                 target.removePotionEffect(effect.getType());
                             }
-                            RegularKit.wear(player);
-                            RegularKit.wear(target);
+                            kit.wear(player);
+                            kit.wear(target);
                             player.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + target.getName());
                             target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + player.getName());
-                            return;
                     }
                 } else {
                     instance.getChallenged().put(player.getUniqueId(), target.getUniqueId());

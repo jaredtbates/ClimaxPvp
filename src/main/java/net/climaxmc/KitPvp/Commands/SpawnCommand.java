@@ -35,22 +35,7 @@ public class SpawnCommand implements CommandExecutor {
 						if (KitPvp.inKit.contains(player.getUniqueId())) {
 							KitPvp.inKit.remove(player.getUniqueId());
 						}
-						player.teleport(player.getWorld().getSpawnLocation());
-						player.getInventory().clear();
-						player.getInventory().setArmorContents(null);
-						player.setHealth(20L);
-						player.setMaxHealth(20L);
-						for (PotionEffect effect : player.getActivePotionEffects()) {
-							player.removePotionEffect(effect.getType());
-						}
-						ItemStack kitSelector = new ItemStack(Material.NETHER_STAR);
-						ItemMeta kitSelectorMeta = kitSelector.getItemMeta();
-						kitSelectorMeta.setDisplayName("§a§lKit Selector");
-						List<String> kitSelectorLores = new ArrayList<String>();
-						kitSelectorLores.add("§5§o(Right Click) to select a kit!");
-						kitSelectorMeta.setLore(kitSelectorLores);
-						kitSelector.setItemMeta(kitSelectorMeta);
-						player.getInventory().setItem(0, kitSelector);
+						plugin.sendToSpawn(player);
 						player.sendMessage("§aYou have been teleported to spawn!");
 					} else {
 						player.sendMessage("§cTeleportation canceled.");

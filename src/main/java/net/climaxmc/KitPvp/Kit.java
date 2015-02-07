@@ -91,26 +91,35 @@ public abstract class Kit implements Listener, CommandExecutor {
 	 * @param player Player to wear kit
 	 */
 	public abstract void wear(Player player);
+
+    /**
+     * Wear the kit with permissions and messages
+     *
+     * @param player Player to wear kit
+     */
+    public void wearCheckPerms(Player player) {
+        if (player.hasPermission("ClimaxPvp.Kit." + getName().replaceAll("\\s+", ""))) {
+            if (!KitPvp.inKit.contains(player.getUniqueId())) {
+                KitPvp.inKit.add(player.getUniqueId());
+                for (PotionEffect effect : player.getActivePotionEffects()) {
+                    player.removePotionEffect(effect.getType());
+                }
+                player.getInventory().clear();
+                wear(player);
+                player.sendMessage("§6You have chosen §a" + getName());
+            } else {
+                player.sendMessage("§cYou have not died yet!");
+            }
+        } else {
+            player.sendMessage("§cYou do not have permission for kit " + getName() + "§c!");
+        }
+    }
 	
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
 			if (command.getName().equalsIgnoreCase(getName())) {
-				if (player.hasPermission("ClimaxPvp.Kit." + getName().replaceAll("\\s+", ""))) {
-					if (!KitPvp.inKit.contains(player.getUniqueId())) {
-						KitPvp.inKit.add(player.getUniqueId());
-						for (PotionEffect effect : player.getActivePotionEffects()) {
-							player.removePotionEffect(effect.getType());
-						}
-						player.getInventory().clear();
-						wear(player);
-						player.sendMessage("§6You have chosen §a" + getName());
-					} else {
-						player.sendMessage("§cYou have not died yet!");
-					}
-				} else {
-					player.sendMessage("§cYou do not have permission for kit " + getName() + "§c!");
-				}
+                wearCheckPerms(player);
 			}
 		}
 		return false;

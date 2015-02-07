@@ -24,21 +24,6 @@ public class PlayerJoinListener implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
 		event.setJoinMessage("§3Join§8» " + player.getName());
-		player.teleport(player.getWorld().getSpawnLocation());
-		player.getInventory().clear();
-		player.getInventory().setArmorContents(null);
-		player.setHealth(20L);
-		player.setMaxHealth(20L);
-		for (PotionEffect effect : player.getActivePotionEffects()) {
-			player.removePotionEffect(effect.getType());
-		}
-		ItemStack kitSelector = new ItemStack(Material.NETHER_STAR);
-		ItemMeta kitSelectorMeta = kitSelector.getItemMeta();
-		kitSelectorMeta.setDisplayName("§a§lKit Selector");
-		List<String> kitSelectorLores = new ArrayList<String>();
-		kitSelectorLores.add("§5§o(Right Click) to select a kit!");
-		kitSelectorMeta.setLore(kitSelectorLores);
-		kitSelector.setItemMeta(kitSelectorMeta);
-		player.getInventory().setItem(0, kitSelector);
+		plugin.sendToSpawn(player);
 	}
 }
