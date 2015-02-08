@@ -16,6 +16,8 @@ public class ParticlesInventory {
         addParticle(inventory, "Water", Material.WATER_BUCKET);
         addParticle(inventory, "Enchantment", Material.ENCHANTMENT_TABLE);
         addParticle(inventory, "Portal", Material.ENDER_PEARL);
+        addParticle(inventory, "Spell", Material.QUARTZ);
+        addParticle(inventory, "Love", Material.GOLDEN_CARROT);
         player.openInventory(inventory);
     }
 

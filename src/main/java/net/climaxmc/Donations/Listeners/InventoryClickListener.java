@@ -35,7 +35,7 @@ public class InventoryClickListener implements Listener {
                     particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.LAVA, 0, 0, 0);
                     break;
                 case 2:
-                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.WATER_SPLASH, 1, 20, 0);
+                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.DRIP_WATER, 0, 6, 0.2);
                     break;
                 case 3:
                     particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.ENCHANTMENT_TABLE, 0.2, 10, 0.1);
@@ -44,8 +44,10 @@ public class InventoryClickListener implements Listener {
                     particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.PORTAL, 0.2, 20, 0.1);
                     break;
                 case 5:
+                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.SPELL, 1, 5, 0.2);
                     break;
                 case 6:
+                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.HEART, 0, 1, 0.2);
                     break;
                 case 7:
                     break;
