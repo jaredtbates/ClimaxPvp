@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.Donations.Inventories.ParticlesInventory;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.Kit.KitType;
 import net.climaxmc.KitPvp.KitManager;
@@ -73,7 +74,9 @@ public class PlayerInteractListener implements Listener {
 					}
 				}
 				player.openInventory(KitPvp.kitSelector);
-			}
+			} else if (item.getType().equals(Material.COCOA)) {
+                new ParticlesInventory(player);
+            }
 		}
 	}
 }

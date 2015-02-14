@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.climaxmc</groupId>
 	<artifactId>ClimaxPvp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>ClimaxPvp</name>
+	<version>1.0</version>
+
 	<repositories>
 		<repository>
-			<id>spigotmc-repo</id>
+			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
 		</repository>
 		<repository>
@@ -15,6 +15,7 @@
 			<url>http://nexus.theyeticave.net/content/repositories/pub_releases/</url>
 		</repository>
 	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -32,4 +33,13 @@
 			<version>LATEST</version>
 		</dependency>
 	</dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
 </project>

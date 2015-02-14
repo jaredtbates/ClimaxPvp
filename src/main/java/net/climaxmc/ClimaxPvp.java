@@ -65,6 +65,7 @@ public class ClimaxPvp extends JavaPlugin {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
+
         ItemStack kitSelector = new ItemStack(Material.NETHER_STAR);
         ItemMeta kitSelectorMeta = kitSelector.getItemMeta();
         kitSelectorMeta.setDisplayName("§a§lKit Selector");
@@ -72,6 +73,16 @@ public class ClimaxPvp extends JavaPlugin {
         kitSelectorLores.add("§5§o(Right Click) to select a kit!");
         kitSelectorMeta.setLore(kitSelectorLores);
         kitSelector.setItemMeta(kitSelectorMeta);
+
+        ItemStack particles = new ItemStack(Material.COCOA);
+        ItemMeta particlesMeta = particles.getItemMeta();
+        particlesMeta.setDisplayName("§a§lParticle Selector");
+        List<String> particlesLores = new ArrayList<String>();
+        particlesLores.add("§5§o(Right Click) to select a particle!");
+        particlesMeta.setLore(particlesLores);
+        particles.setItemMeta(particlesMeta);
+
         player.getInventory().setItem(0, kitSelector);
+        player.getInventory().setItem(8, particles);
     }
 }
