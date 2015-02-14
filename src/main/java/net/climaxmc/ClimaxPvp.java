@@ -1,6 +1,8 @@
 package net.climaxmc;
 
 import lombok.Getter;
+import net.climaxmc.API.Events.UpdateEvent;
+import net.climaxmc.API.Statistics;
 import net.climaxmc.Administration.Administration;
 import net.climaxmc.Creative.Creative;
 import net.climaxmc.Donations.Donations;
@@ -8,8 +10,10 @@ import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Commands.RepairCommand;
 import net.climaxmc.KitPvp.Commands.SpawnCommand;
 import net.climaxmc.OneVsOne.OneVsOne;
+import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 
+import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -18,6 +22,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 
+import javax.persistence.PersistenceException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,11 +30,16 @@ public class ClimaxPvp extends JavaPlugin {
 	@Getter private static ClimaxPvp instance;
 	@Getter private String prefix = "§0§l[§cClimax§0§l] §r";
 	@Getter private Economy economy = null;
+    @Getter private Permission permission = null;
+    @Getter private Chat chat = null;
 
 	public void onEnable() {
 		instance = this;
 		saveDefaultConfig();
+        setupDatabase();
 		setupEconomy();
+        setupPermissions();
+        setupChat();
 		new KitPvp(this);
 		new OneVsOne(this);
 		new Donations(this);
@@ -37,11 +47,25 @@ public class ClimaxPvp extends JavaPlugin {
         new Administration(this);
 		getCommand("repair").setExecutor(new RepairCommand(this));
 		getCommand("spawn").setExecutor(new SpawnCommand(this));
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+            public void run() {
+                getServer().getPluginManager().callEvent(new UpdateEvent());
+            }
+        }, 1, 1);
 	}
 	
 	public void onDisable() {
 		
 	}
+
+    private void setupDatabase() {
+        try {
+            getDatabase().find(Statistics.class).findRowCount();
+        } catch (PersistenceException ex) {
+            System.out.println("Installing database for " + getDescription().getName() + " due to first time usage");
+            installDDL();
+        }
+    }
 
 	private boolean setupEconomy() {
 		if (getServer().getPluginManager().getPlugin("Vault") == null) {
@@ -54,6 +78,29 @@ public class ClimaxPvp extends JavaPlugin {
 		economy = rsp.getProvider();
 		return economy != null;
 	}
+
+    private boolean setupPermissions() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
+        if (rsp == null) {
+            return false;
+        }
+        permission = rsp.getProvider();
+        return permission != null;
+    }
+
+    private boolean setupChat() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
+        if (rsp != null) {
+            chat = rsp.getProvider();
+        }
+        return chat != null;
+    }
 
     public void sendToSpawn(Player player) {
         player.teleport(player.getWorld().getSpawnLocation());

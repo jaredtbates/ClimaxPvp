@@ -1,4 +1,4 @@
-package net.climaxmc.Utils;
+package net.climaxmc.API;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

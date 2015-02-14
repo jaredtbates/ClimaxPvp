@@ -29,5 +29,6 @@ public class KitPvp {
 		plugin.getServer().getPluginManager().registerEvents(new InventoryOpenListener(plugin), plugin);
 		plugin.getServer().getPluginManager().registerEvents(new PlayerQuitListener(plugin), plugin);
 		plugin.getServer().getPluginManager().registerEvents(new PlayerPickupItemListener(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new ScoreboardListener(plugin), plugin);
 	}
 }

@@ -5,9 +5,8 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Commands.ParticlesCommand;
 import net.climaxmc.Donations.Listeners.InventoryClickListener;
 import net.climaxmc.Donations.Listeners.PlayerMoveListener;
-import net.climaxmc.Utils.ParticleEffect;
+import net.climaxmc.API.ParticleEffect;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 

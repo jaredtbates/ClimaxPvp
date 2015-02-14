@@ -1,4 +1,4 @@
-package net.climaxmc.Utils;
+package net.climaxmc.API;
 
 import java.util.UUID;
 

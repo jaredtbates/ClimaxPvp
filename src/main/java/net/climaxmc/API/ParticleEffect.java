@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package net.climaxmc.Utils;
+package net.climaxmc.API;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
