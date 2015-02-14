@@ -1,6 +1,7 @@
 package net.climaxmc;
 
 import lombok.Getter;
+import net.climaxmc.Administration.Administration;
 import net.climaxmc.Creative.Creative;
 import net.climaxmc.Donations.Donations;
 import net.climaxmc.KitPvp.KitPvp;
@@ -21,12 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClimaxPvp extends JavaPlugin {
-	@Getter
-	private static ClimaxPvp instance;
-	@Getter
-	private String prefix = "§0§l[§cClimax§0§l] §r";
-	@Getter
-	private Economy economy = null;
+	@Getter private static ClimaxPvp instance;
+	@Getter private String prefix = "§0§l[§cClimax§0§l] §r";
+	@Getter private Economy economy = null;
 
 	public void onEnable() {
 		instance = this;
@@ -36,6 +34,7 @@ public class ClimaxPvp extends JavaPlugin {
 		new OneVsOne(this);
 		new Donations(this);
 		new Creative(this);
+        new Administration(this);
 		getCommand("repair").setExecutor(new RepairCommand(this));
 		getCommand("spawn").setExecutor(new SpawnCommand(this));
 	}
