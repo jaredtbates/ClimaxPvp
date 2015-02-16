@@ -11,5 +11,5 @@ commands:
     description: Teleports you to spawn
   1v1:
     description: Joins the 1v1 arena
-  particles:
-    descriptions: Displays the particles inventory
+  trails:
+    descriptions: Displays the trails inventory

@@ -22,7 +22,7 @@ public class InventoryClickListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         Inventory inventory = event.getInventory();
         Player player = (Player) event.getWhoClicked();
-        if (inventory.getName().equals("§a§lParticle Settings")) {
+        if (inventory.getName().equals("§a§lTrail Settings")) {
             int slot = event.getSlot();
             event.setCancelled(true);
             player.closeInventory();

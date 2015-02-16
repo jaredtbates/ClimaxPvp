@@ -36,7 +36,7 @@ public class ClimaxPvp extends JavaPlugin {
 	public void onEnable() {
 		instance = this;
 		saveDefaultConfig();
-        setupDatabase();
+        //setupDatabase();
 		setupEconomy();
         setupPermissions();
         setupChat();
@@ -120,11 +120,11 @@ public class ClimaxPvp extends JavaPlugin {
         kitSelectorMeta.setLore(kitSelectorLores);
         kitSelector.setItemMeta(kitSelectorMeta);
 
-        ItemStack particles = new ItemStack(Material.COCOA);
+        ItemStack particles = new ItemStack(Material.SEEDS);
         ItemMeta particlesMeta = particles.getItemMeta();
-        particlesMeta.setDisplayName("§a§lParticle Selector");
+        particlesMeta.setDisplayName("§a§lTrail Selector");
         List<String> particlesLores = new ArrayList<String>();
-        particlesLores.add("§5§o(Right Click) to select a particle!");
+        particlesLores.add("§5§o(Right Click) to select a trail!");
         particlesMeta.setLore(particlesLores);
         particles.setItemMeta(particlesMeta);
 

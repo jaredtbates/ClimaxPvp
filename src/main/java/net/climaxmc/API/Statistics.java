@@ -5,13 +5,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.UUID;
 
 @Entity
-@Table(name="Stats")
+@Table(name="Statistics")
 public class Statistics {
-    @NotNull @Getter private UUID uuid;
+    @Id @Getter private UUID uuid;
     @NotNull @Getter @Setter private int kills;
     @NotNull @Getter @Setter private int deaths;
 }

@@ -7,16 +7,15 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class ParticlesInventory {
-    private Inventory inventory = Bukkit.createInventory(null, 54, "§a§lParticle Settings");
-
-    public ParticlesInventory(Player player) {
-        addParticle(inventory, "Smoke", Material.COAL);
-        addParticle(inventory, "Lava", Material.LAVA_BUCKET);
-        addParticle(inventory, "Water", Material.WATER_BUCKET);
-        addParticle(inventory, "Enchantment", Material.ENCHANTMENT_TABLE);
-        addParticle(inventory, "Portal", Material.ENDER_PEARL);
-        addParticle(inventory, "Spell", Material.QUARTZ);
+public class TrailsInventory {
+    public TrailsInventory(Player player) {
+        Inventory inventory = Bukkit.createInventory(null, 54, "§a§lTrail Settings");
+        addParticle(inventory, "Clouds", Material.COAL);
+        addParticle(inventory, "Flame", Material.LAVA_BUCKET);
+        addParticle(inventory, "Rain", Material.WATER_BUCKET);
+        addParticle(inventory, "Mystic", Material.ENCHANTMENT_TABLE);
+        addParticle(inventory, "Purple Snake", Material.ENDER_PEARL);
+        addParticle(inventory, "Hypnotic", Material.QUARTZ);
         addParticle(inventory, "Love", Material.GOLDEN_CARROT);
         player.openInventory(inventory);
     }
