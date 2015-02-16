@@ -2,6 +2,7 @@ package net.climaxmc.Donations;
 
 import lombok.Getter;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.Donations.Commands.SpectateCommand;
 import net.climaxmc.Donations.Commands.TrailsCommand;
 import net.climaxmc.Donations.Listeners.InventoryClickListener;
 import net.climaxmc.Donations.Listeners.PlayerMoveListener;
@@ -15,6 +16,7 @@ public class Donations {
 
     public Donations(ClimaxPvp plugin) {
         plugin.getCommand("trails").setExecutor(new TrailsCommand(plugin));
+        plugin.getCommand("spectate").setExecutor(new SpectateCommand(plugin));
         plugin.getServer().getPluginManager().registerEvents(new PlayerMoveListener(plugin, this), plugin);
         plugin.getServer().getPluginManager().registerEvents(new InventoryClickListener(plugin, this), plugin);
     }

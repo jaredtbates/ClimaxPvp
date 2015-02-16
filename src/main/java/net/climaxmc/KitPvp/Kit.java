@@ -60,7 +60,6 @@ public abstract class Kit implements Listener, CommandExecutor {
 		this.name = name;
 		this.item = item;
 		this.type = type;
-		Bukkit.getLogger().info("Kit Manager> Enabled kit " + name);
 	}
 	
 	/**
@@ -82,7 +81,6 @@ public abstract class Kit implements Listener, CommandExecutor {
 		this.item = item;
 		this.lore = lore;
 		this.type = type;
-		Bukkit.getLogger().info("Kit Manager> Enabled kit " + name);
 	}
 	
 	/**

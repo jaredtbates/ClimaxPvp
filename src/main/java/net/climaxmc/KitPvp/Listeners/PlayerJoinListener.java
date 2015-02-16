@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp.Listeners;
 
+import net.climaxmc.API.BossBar;
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -14,16 +15,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerJoinListener implements Listener {
-	ClimaxPvp plugin;
-	
-	public PlayerJoinListener(ClimaxPvp plugin) {
-		this.plugin = plugin;
-	}
-	
-	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent event) {
-		Player player = event.getPlayer();
-		event.setJoinMessage("§3Join§8» " + player.getName());
-		plugin.sendToSpawn(player);
-	}
+    ClimaxPvp plugin;
+
+    public PlayerJoinListener(ClimaxPvp plugin) {
+        this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        final Player player = event.getPlayer();
+        event.setJoinMessage("§3Join§8» " + player.getName());
+        plugin.sendToSpawn(player);
+        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+            public void run() {
+                try {
+                    BossBar.getInstance().setStatus(player, "§a§lWelcome to Climax!", 50, false);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 0, 200);
+
+        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+            public void run() {
+                try {
+                    BossBar.getInstance().setStatus(player, "§b§lDonate at donate.climaxmc.net!", 100, false);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 0, 200);
+    }
 }

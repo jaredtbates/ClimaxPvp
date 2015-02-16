@@ -13,3 +13,7 @@ commands:
     description: Joins the 1v1 arena
   trails:
     descriptions: Displays the trails inventory
+  spectate:
+    aliases: spec
+    description: Spectate the pvp arena
+    permission: ${project.artifactId}.Spectate

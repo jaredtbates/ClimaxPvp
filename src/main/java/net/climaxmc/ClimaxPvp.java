@@ -14,6 +14,7 @@ import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 
 import net.milkbowl.vault.permission.Permission;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -104,10 +105,12 @@ public class ClimaxPvp extends JavaPlugin {
 
     public void sendToSpawn(Player player) {
         player.teleport(player.getWorld().getSpawnLocation());
+        player.setGameMode(GameMode.SURVIVAL);
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
-        player.setHealth(20L);
-        player.setMaxHealth(20L);
+        player.setHealth(20F);
+        player.setMaxHealth(20F);
+        player.setFlySpeed(0.1F);
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
