@@ -1,10 +1,9 @@
 package net.climaxmc;
 
-import com.avaje.ebean.EbeanServer;
 import lombok.Getter;
-import net.climaxmc.API.Database;
 import net.climaxmc.API.Events.UpdateEvent;
-import net.climaxmc.API.Statistics;
+import net.climaxmc.API.MySQL;
+import net.climaxmc.API.PlayerData;
 import net.climaxmc.Administration.Administration;
 import net.climaxmc.Creative.Creative;
 import net.climaxmc.Donations.Donations;
@@ -23,12 +22,15 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 
-import javax.persistence.PersistenceException;
-import java.util.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClimaxPvp extends JavaPlugin {
     @Getter
     private static ClimaxPvp instance;
+    @Getter
+    private MySQL mySQL = null;
     @Getter
     private String prefix = "§0§l[§cClimax§0§l] §r";
     @Getter
@@ -37,87 +39,69 @@ public class ClimaxPvp extends JavaPlugin {
     private Permission permission = null;
     @Getter
     private Chat chat = null;
-    private Database database = null;
 
     public void onEnable() {
+        // Initialize Instance
         instance = this;
+
+        // Save Configuration
         saveDefaultConfig();
-        setupDatabase();
+
+        // Connect to MySQL
+        mySQL = new MySQL(
+                getConfig().getString("Database.Host"),
+                getConfig().getInt("Database.Port"),
+                getConfig().getString("Database.Database"),
+                getConfig().getString("Database.Username"),
+                getConfig().getString("Database.Password")
+        );
+
+        // Configure Vault
         setupEconomy();
         setupPermissions();
         setupChat();
+
+        // Load Modules
         new KitPvp(this);
         new OneVsOne(this);
         new Donations(this);
         new Creative(this);
         new Administration(this);
+
+        // Global Commands
         getCommand("repair").setExecutor(new RepairCommand(this));
         getCommand("spawn").setExecutor(new SpawnCommand(this));
+
+        // Update Event
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             public void run() {
                 getServer().getPluginManager().callEvent(new UpdateEvent());
             }
-        }, 1, 1);
+        }, 20, 0);
     }
 
     @Override
     public void onDisable() {
-    }
-
-    private void setupDatabase() {
-        database = new Database(this) {
-            protected java.util.List<Class<?>> getDatabaseClasses() {
-                List<Class<?>> list = new ArrayList<Class<?>>();
-                list.add(Statistics.class);
-                return list;
+        // Close MySQL Connection
+        if (mySQL.getConnection() != null) {
+            try {
+                mySQL.getConnection().close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        };
-
-        database.initializeDatabase(
-                getConfig().getString("Database.Driver"),
-                getConfig().getString("Database.URL"),
-                getConfig().getString("Database.Username"),
-                getConfig().getString("Database.Password"),
-                getConfig().getString("Database.Isolation"),
-                getConfig().getBoolean("Database.Logging", false),
-                getConfig().getBoolean("Database.Rebuild", true)
-        );
-
-        getConfig().set("Database.Rebuild", false);
-        saveConfig();
-        try {
-            getDatabase().find(Statistics.class).findRowCount();
-        } catch (PersistenceException ex) {
-            System.out.println("Installing database for " + getDescription().getName() + " due to first time usage");
-            installDDL();
         }
     }
 
-    @Override
-    public EbeanServer getDatabase() {
-        return database.getDatabase();
+    /**
+     * Get player data from MySQL
+     *
+     * @param player Player to get data of
+     * @return Data of player
+     */
+    public PlayerData getPlayerData(OfflinePlayer player) {
+        return mySQL.getPlayerData(player);
     }
 
-    @Override
-    public List<Class<?>> getDatabaseClasses() {
-        List<Class<?>> list = new ArrayList<Class<?>>();
-        list.add(Statistics.class);
-        return list;
-    }
-
-    public Statistics getStatistics(OfflinePlayer player) {
-        return getStatistics(player.getUniqueId());
-    }
-
-    public Statistics getStatistics(UUID uuid) {
-        Statistics statistics = getDatabase().find(Statistics.class).where().ieq("uuid", uuid.toString()).findUnique();
-        if (statistics == null) {
-            statistics = new Statistics();
-            statistics.setUuid(uuid);
-            getDatabase().insert(statistics);
-        }
-        return statistics;
-    }
 
     private boolean setupEconomy() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
@@ -154,6 +138,11 @@ public class ClimaxPvp extends JavaPlugin {
         return chat != null;
     }
 
+    /**
+     * Resets a player and sends them to spawn
+     *
+     * @param player Player to send to spawn
+     */
     public void sendToSpawn(Player player) {
         player.teleport(player.getWorld().getSpawnLocation());
         player.setGameMode(GameMode.SURVIVAL);

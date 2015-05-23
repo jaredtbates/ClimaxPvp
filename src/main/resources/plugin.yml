@@ -3,7 +3,6 @@ main: ${project.groupId}.${project.artifactId}
 version: ${project.version}
 authors: [computerwizjared, jonhan2000]
 depend: [Vault]
-database: true
 commands:
   repair:
     description: Repairs your inventory

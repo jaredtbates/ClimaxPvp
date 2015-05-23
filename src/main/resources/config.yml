@@ -1,8 +1,6 @@
 Database:
-  Driver: com.mysql.jdbc.Driver
-  URL: jdbc:mysql://127.0.0.1:3306/bukkit
+  Host: localhost
+  Port: 3306
+  Database: ClimaxPvp
   Username: root
   Password: password
-  Isolation: SERIALIZABLE
-  Logging: false
-  Rebuild: true

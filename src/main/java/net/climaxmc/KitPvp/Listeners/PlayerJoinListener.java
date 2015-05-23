@@ -17,6 +17,8 @@ public class PlayerJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
 
+        plugin.getMySQL().createPlayerData(player);
+
         event.setJoinMessage("§3Join§8» " + player.getName());
         plugin.sendToSpawn(player);
 

@@ -1,6 +1,6 @@
 package net.climaxmc.KitPvp.Listeners;
 
-import net.climaxmc.API.Statistics;
+import net.climaxmc.API.PlayerData;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.entity.Player;
@@ -19,16 +19,14 @@ public class PlayerDeathListener implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         final Player player = event.getEntity();
         Player killer = player.getKiller();
-        Statistics playerStatistics = plugin.getStatistics(player);
-        playerStatistics.setDeaths(playerStatistics.getDeaths() + 1);
-        plugin.getDatabase().save(playerStatistics);
+        PlayerData playerData = plugin.getPlayerData(player);
+        playerData.setDeaths(playerData.getDeaths() + 1);
         if (KitPvp.inKit.contains(player.getUniqueId())) {
             KitPvp.inKit.remove(player.getUniqueId());
         }
         if (killer != null) {
-            Statistics killerStatistics = plugin.getDatabase().find(Statistics.class).where().ieq("UUID", killer.getUniqueId().toString()).findUnique();
-            killerStatistics.setKills(killerStatistics.getKills() + 1);
-            plugin.getDatabase().save(killerStatistics);
+            PlayerData killerData = plugin.getPlayerData(killer);
+            killerData.setKills(killerData.getKills() + 1);
             event.setDeathMessage("§c" + player.getName() + " §7was killed by §a" + killer.getName());
             if (!killer.getUniqueId().equals(player.getUniqueId())) {
                 if (KitPvp.killStreak.containsKey(killer.getUniqueId())) {

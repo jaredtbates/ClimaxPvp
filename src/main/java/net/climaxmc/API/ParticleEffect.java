@@ -35,6 +35,7 @@ import java.util.HashMap;
 
 /**
  * Particle effects utility library
+ *
  * @author Maxim Roncace
  * @version 0.1.0
  */
@@ -51,6 +52,7 @@ public class ParticleEffect {
     private static Class<Enum> enumParticle = null;
     /**
      * Gets whether ParticleLib is compatible with the server software.
+     *
      * @return whether ParticleLib is compatible with the server software.
      */
     @Getter
@@ -97,18 +99,21 @@ public class ParticleEffect {
     private ParticleType type;
     /**
      * Gets the speed of the particles in this effect
+     *
      * @return The speed of the particles in this effect
      */
     @Getter
     private double speed;
     /**
      * Retrieves the number of particles spawned by the effect
+     *
      * @return The number of particles spawned by the effect
      */
     @Getter
     private int count;
     /**
      * Gets the radius of the particle effect
+     *
      * @return The radius of the particle effect
      */
     @Getter
@@ -117,12 +122,13 @@ public class ParticleEffect {
     /**
      * Constructs a new particle effect for use.
      * <p>
-     *     Note: different values for speed and radius may hav;e different effects
-     *     depending on the particle's type.
+     * Note: different values for speed and radius may hav;e different effects
+     * depending on the particle's type.
      * </p>
-     * @param type the particle type
-     * @param speed the speed of the particles
-     * @param count the number of particles to spawn
+     *
+     * @param type   the particle type
+     * @param speed  the speed of the particles
+     * @param count  the number of particles to spawn
      * @param radius the radius of the particles
      */
     public ParticleEffect(ParticleType type, double speed, int count, double radius) {
@@ -135,9 +141,10 @@ public class ParticleEffect {
     /**
      * Constructs a new particle effect for use.
      * <p>
-     *     Note: different values for speed and radius may hav;e different effects
-     *     depending on the particle's type.
+     * Note: different values for speed and radius may hav;e different effects
+     * depending on the particle's type.
      * </p>
+     *
      * @param data the particle data
      */
     public ParticleEffect(ParticleData data) {
@@ -150,9 +157,10 @@ public class ParticleEffect {
     /**
      * Sends a packet to a player.
      * <p>
-     *     Note: this method is <strong>not typesafe</strong>!
+     * Note: this method is <strong>not typesafe</strong>!
      * </p>
-     * @param p the player to send a packet to
+     *
+     * @param p      the player to send a packet to
      * @param packet the packet to send
      * @throws IllegalArgumentException if <code>packet</code> is not of a proper type
      */
@@ -181,6 +189,7 @@ public class ParticleEffect {
 
     /**
      * Gets the NMS handle of the given {@link Entity}.
+     *
      * @param entity the entity get the handle of
      * @return the entity's NMS handle
      */
@@ -201,6 +210,7 @@ public class ParticleEffect {
 
     /**
      * Gets the NMS class by the given name.
+     *
      * @param name the name of the NMS class to get
      * @return the NMS class of the given name
      */
@@ -219,6 +229,7 @@ public class ParticleEffect {
 
     /**
      * Determines the version string used by Craftbukkit's safeguard (e.g. 1_7_R4).
+     *
      * @return the version string used by Craftbukkit's safeguard
      */
     private static String getVersion() {
@@ -230,6 +241,7 @@ public class ParticleEffect {
 
     /**
      * Send a particle effect to all players
+     *
      * @param location The location to send the effect to
      */
     public void sendToLocation(Location location) {
@@ -245,6 +257,7 @@ public class ParticleEffect {
 
     /**
      * Constructs a new particle packet.
+     *
      * @param location the location to spawn the particle effect at
      * @return the constructed packet
      */
