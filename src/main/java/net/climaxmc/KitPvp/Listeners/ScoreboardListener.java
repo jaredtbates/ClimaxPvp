@@ -26,27 +26,21 @@ public class ScoreboardListener implements Listener {
         for (Player player : plugin.getServer().getOnlinePlayers()) {
             Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
             player.setScoreboard(board);
-            Objective obje = board.registerNewObjective("§lPlayer Data", "dummy");
-            obje.setDisplaySlot(DisplaySlot.SIDEBAR);
+            Objective objective = board.registerNewObjective("§lPlayer Data", "dummy");
+            objective.setDisplaySlot(DisplaySlot.SIDEBAR);
             board.registerNewTeam("Team");
             Objective obj = player.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
             obj.setDisplayName("§f§lClimaxPvp");
             int line = 7;
             obj.getScore("§a§lBalance").setScore(line--);
             String balance = "$" + new Double(plugin.getEconomy().getBalance(player)).intValue();
-            //player.getScoreboard().resetScores(balance);
-            plugin.getServer().getScoreboardManager().getMainScoreboard();
             obj.getScore(balance).setScore(line--);
             obj.getScore(" ").setScore(line--);
-            //obj.getScore(String.valueOf(C.cGray) + C.Bold + "Stacker").setScore(line--);
-            //player.getScoreboard().resetScores(this.Get(player).BestPig);
-            //this.Get(player).BestPig = this._pigStacker;
             obj.getScore("§c§l Kills").setScore(line--);
-            obj.getScore("0").setScore(line--);
-            //player.getScoreboard().resetScores(this.Get(player).GetUltraText(false));
+            obj.getScore(Integer.toString(plugin.getStatistics(player).getKills())).setScore(line--);
             obj.getScore("    ").setScore(line--);
             obj.getScore("§e§lWebsite").setScore(line--);
-            obj.getScore("climaxmc.net").setScore(line--);
+            obj.getScore("climaxmc.net").setScore(line);
         }
     }
 }

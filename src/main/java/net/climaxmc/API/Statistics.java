@@ -2,7 +2,6 @@ package net.climaxmc.API;
 
 import com.avaje.ebean.validation.NotNull;
 import lombok.Data;
-import org.bukkit.OfflinePlayer;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -12,17 +11,10 @@ import java.util.UUID;
 @Data
 public class Statistics {
     @Id
-    private final UUID uuid;
     @NotNull
-    private int kills;
+    private UUID uuid;
     @NotNull
-    private int deaths;
-
-    public static Statistics getStatistics(OfflinePlayer player) {
-        return getStatistics(player.getUniqueId());
-    }
-
-    public static Statistics getStatistics(UUID uuid) {
-        return new Statistics(uuid);
-    }
+    private int kills = 0;
+    @NotNull
+    private int deaths = 0;
 }

@@ -1,6 +1,5 @@
 package net.climaxmc.KitPvp.Listeners;
 
-import net.climaxmc.API.BossBar;
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,9 +16,11 @@ public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
+
         event.setJoinMessage("§3Join§8» " + player.getName());
         plugin.sendToSpawn(player);
-        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
+
+        /* plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
             public void run() {
                 try {
                     BossBar.getInstance().setStatus(player, "§a§lWelcome to Climax!", 50, false);
@@ -37,6 +38,6 @@ public class PlayerJoinListener implements Listener {
                     e.printStackTrace();
                 }
             }
-        }, 0, 200);
+        }, 0, 200);*/
     }
 }

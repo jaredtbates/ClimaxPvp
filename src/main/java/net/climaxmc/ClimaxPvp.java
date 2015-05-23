@@ -13,8 +13,7 @@ import net.climaxmc.OneVsOne.OneVsOne;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -23,8 +22,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 
 import javax.persistence.PersistenceException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ClimaxPvp extends JavaPlugin {
     @Getter
@@ -70,6 +68,27 @@ public class ClimaxPvp extends JavaPlugin {
             System.out.println("Installing database for " + getDescription().getName() + " due to first time usage");
             installDDL();
         }
+    }
+
+    @Override
+    public List<Class<?>> getDatabaseClasses() {
+        List<Class<?>> list = new ArrayList<Class<?>>();
+        list.add(Statistics.class);
+        return list;
+    }
+
+    public Statistics getStatistics(OfflinePlayer player) {
+        return getStatistics(player.getUniqueId());
+    }
+
+    public Statistics getStatistics(UUID uuid) {
+        Statistics statistics = getDatabase().find(Statistics.class).where().ieq("uuid", uuid.toString()).findUnique();
+        if (statistics == null) {
+            statistics = new Statistics();
+            statistics.setUuid(uuid);
+            getDatabase().insert(statistics);
+        }
+        return statistics;
     }
 
     private boolean setupEconomy() {
