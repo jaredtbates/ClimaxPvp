@@ -1,6 +1,8 @@
 package net.climaxmc;
 
+import com.avaje.ebean.EbeanServer;
 import lombok.Getter;
+import net.climaxmc.API.Database;
 import net.climaxmc.API.Events.UpdateEvent;
 import net.climaxmc.API.Statistics;
 import net.climaxmc.Administration.Administration;
@@ -35,6 +37,7 @@ public class ClimaxPvp extends JavaPlugin {
     private Permission permission = null;
     @Getter
     private Chat chat = null;
+    private Database database = null;
 
     public void onEnable() {
         instance = this;
@@ -62,12 +65,37 @@ public class ClimaxPvp extends JavaPlugin {
     }
 
     private void setupDatabase() {
+        database = new Database(this) {
+            protected java.util.List<Class<?>> getDatabaseClasses() {
+                List<Class<?>> list = new ArrayList<Class<?>>();
+                list.add(Statistics.class);
+                return list;
+            }
+        };
+
+        database.initializeDatabase(
+                getConfig().getString("Database.Driver"),
+                getConfig().getString("Database.URL"),
+                getConfig().getString("Database.Username"),
+                getConfig().getString("Database.Password"),
+                getConfig().getString("Database.Isolation"),
+                getConfig().getBoolean("Database.Logging", false),
+                getConfig().getBoolean("Database.Rebuild", true)
+        );
+
+        getConfig().set("Database.Rebuild", false);
+        saveConfig();
         try {
             getDatabase().find(Statistics.class).findRowCount();
         } catch (PersistenceException ex) {
             System.out.println("Installing database for " + getDescription().getName() + " due to first time usage");
             installDDL();
         }
+    }
+
+    @Override
+    public EbeanServer getDatabase() {
+        return database.getDatabase();
     }
 
     @Override

@@ -31,13 +31,16 @@ public class ScoreboardListener implements Listener {
             board.registerNewTeam("Team");
             Objective obj = player.getScoreboard().getObjective(DisplaySlot.SIDEBAR);
             obj.setDisplayName("§f§lClimaxPvp");
-            int line = 7;
+            int line = 11;
             obj.getScore("§a§lBalance").setScore(line--);
             String balance = "$" + new Double(plugin.getEconomy().getBalance(player)).intValue();
             obj.getScore(balance).setScore(line--);
             obj.getScore(" ").setScore(line--);
-            obj.getScore("§c§l Kills").setScore(line--);
+            obj.getScore("§c§lKills").setScore(line--);
             obj.getScore(Integer.toString(plugin.getStatistics(player).getKills())).setScore(line--);
+            obj.getScore(" ").setScore(line--);
+            obj.getScore("§c§lDeaths").setScore(line--);
+            obj.getScore(Integer.toString(plugin.getStatistics(player).getDeaths())).setScore(line--);
             obj.getScore("    ").setScore(line--);
             obj.getScore("§e§lWebsite").setScore(line--);
             obj.getScore("climaxmc.net").setScore(line);
