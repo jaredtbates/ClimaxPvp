@@ -1,12 +1,9 @@
 package net.climaxmc.OneVsOne.Listeners;
 
-import java.util.Random;
-
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.OneVsOne.OneVsOne;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -14,6 +11,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.potion.PotionEffect;
+
+import java.util.Random;
 
 public class PlayerInteractEntityListener implements Listener {
     private ClimaxPvp plugin;

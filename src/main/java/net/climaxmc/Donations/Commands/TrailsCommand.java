@@ -2,9 +2,7 @@ package net.climaxmc.Donations.Commands;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Inventories.TrailsInventory;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
 public class TrailsCommand implements CommandExecutor {

@@ -13,62 +13,62 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class KitManager {
-	public static ArrayList<Kit> kits = new ArrayList<Kit>();
-	
-	public KitManager(ClimaxPvp plugin) {
-		// Default Kits
-		kits.add(new PvpKit());
-		kits.add(new HeavyKit());
-		kits.add(new ArcherKit());
-		kits.add(new IronGolemKit());
-		kits.add(new FishermanKit());
-		kits.add(new NinjaKit());
-		// Amateur Kits
-		kits.add(new SoldierKit());
-		kits.add(new EndermanKit());
-		// Experienced Kits
-		
-		// Advanced Kits
-		
-		// Veteran Kits
-		
-		
-		for (Kit kit : kits) {
-			plugin.getServer().getPluginManager().registerEvents(kit, plugin);
-			getCommandMap().register(plugin.getConfig().getName(), getCommand(kit.getName().replaceAll("\\s+", ""), plugin));
-			plugin.getCommand(kit.getName().replaceAll("\\s+", "")).setExecutor(kit);
-		}
-	}
+    public static ArrayList<Kit> kits = new ArrayList<Kit>();
 
-	private PluginCommand getCommand(String name, Plugin plugin) {
-		PluginCommand command = null;
+    public KitManager(ClimaxPvp plugin) {
+        // Default Kits
+        kits.add(new PvpKit());
+        kits.add(new HeavyKit());
+        kits.add(new ArcherKit());
+        kits.add(new IronGolemKit());
+        kits.add(new FishermanKit());
+        kits.add(new NinjaKit());
+        // Amateur Kits
+        kits.add(new SoldierKit());
+        kits.add(new EndermanKit());
+        // Experienced Kits
 
-		try {
-			Constructor<PluginCommand> c = PluginCommand.class.getDeclaredConstructor(String.class, Plugin.class);
-			c.setAccessible(true);
+        // Advanced Kits
 
-			command = c.newInstance(name, plugin);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        // Veteran Kits
 
-		return command;
-	}
 
-	private CommandMap getCommandMap() {
-		CommandMap commandMap = null;
+        for (Kit kit : kits) {
+            plugin.getServer().getPluginManager().registerEvents(kit, plugin);
+            getCommandMap().register(plugin.getConfig().getName(), getCommand(kit.getName().replaceAll("\\s+", ""), plugin));
+            plugin.getCommand(kit.getName().replaceAll("\\s+", "")).setExecutor(kit);
+        }
+    }
 
-		try {
-			if (Bukkit.getPluginManager() instanceof SimplePluginManager) {
-				Field f = SimplePluginManager.class.getDeclaredField("commandMap");
-				f.setAccessible(true);
+    private PluginCommand getCommand(String name, Plugin plugin) {
+        PluginCommand command = null;
 
-				commandMap = (CommandMap) f.get(Bukkit.getPluginManager());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        try {
+            Constructor<PluginCommand> c = PluginCommand.class.getDeclaredConstructor(String.class, Plugin.class);
+            c.setAccessible(true);
 
-		return commandMap;
-	}
+            command = c.newInstance(name, plugin);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return command;
+    }
+
+    private CommandMap getCommandMap() {
+        CommandMap commandMap = null;
+
+        try {
+            if (Bukkit.getPluginManager() instanceof SimplePluginManager) {
+                Field f = SimplePluginManager.class.getDeclaredField("commandMap");
+                f.setAccessible(true);
+
+                commandMap = (CommandMap) f.get(Bukkit.getPluginManager());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return commandMap;
+    }
 }

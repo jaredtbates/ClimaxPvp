@@ -6,14 +6,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 
 public class FoodLevelChangeListener implements Listener {
-	ClimaxPvp plugin;
-	
-	public FoodLevelChangeListener(ClimaxPvp plugin) {
-		this.plugin = plugin;
-	}
-	
-	@EventHandler
-	public void onHungerChange(FoodLevelChangeEvent event) {
-		event.setCancelled(true);
-	}
+    ClimaxPvp plugin;
+
+    public FoodLevelChangeListener(ClimaxPvp plugin) {
+        this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onHungerChange(FoodLevelChangeEvent event) {
+        event.setCancelled(true);
+    }
 }

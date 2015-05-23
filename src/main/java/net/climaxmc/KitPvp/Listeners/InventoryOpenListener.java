@@ -11,19 +11,19 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 
 public class InventoryOpenListener implements Listener {
-	ClimaxPvp plugin;
+    ClimaxPvp plugin;
 
-	public InventoryOpenListener(ClimaxPvp plugin) {
-		this.plugin = plugin;
-	}
+    public InventoryOpenListener(ClimaxPvp plugin) {
+        this.plugin = plugin;
+    }
 
-	@EventHandler
-	public void onInventoryOpenEvent(InventoryOpenEvent event) {
-		Player player = (Player) event.getPlayer();
-		if (event.getInventory().getHolder() instanceof Chest || event.getInventory().getHolder() instanceof DoubleChest) {
-			event.setCancelled(true);
-			Kit.addSoup(KitPvp.soup, 0, 53);
-			player.openInventory(KitPvp.soup);
-		}
-	}
+    @EventHandler
+    public void onInventoryOpenEvent(InventoryOpenEvent event) {
+        Player player = (Player) event.getPlayer();
+        if (event.getInventory().getHolder() instanceof Chest || event.getInventory().getHolder() instanceof DoubleChest) {
+            event.setCancelled(true);
+            Kit.addSoup(KitPvp.soup, 0, 53);
+            player.openInventory(KitPvp.soup);
+        }
+    }
 }

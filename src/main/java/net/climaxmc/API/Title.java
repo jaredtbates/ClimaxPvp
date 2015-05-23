@@ -1,16 +1,17 @@
 package net.climaxmc.API;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Title implements Listener {
+    private static final Map<Class<?>, Class<?>> CORRESPONDING_TYPES = new HashMap<Class<?>, Class<?>>();
     /* Title packet */
     private Class<?> packetTitle;
     /* Title packet actions ENUM */
@@ -29,27 +30,22 @@ public class Title implements Listener {
     private int fadeOutTime = -1;
     private boolean ticks = false;
 
-    private static final Map<Class<?>, Class<?>> CORRESPONDING_TYPES = new HashMap<Class<?>, Class<?>>();
-
     /**
-    * Create a new 1.8 title
-    * 
-    * @param cMain
-    *            Title
-    */
+     * Create a new 1.8 title
+     *
+     * @param cMain Title
+     */
     public Title(String cMain) {
         this.title = cMain;
         loadClasses();
     }
 
     /**
-    * Create a new 1.8 title
-    * 
-    * @param title
-    *            Title text
-    * @param subtitle
-    *            Subtitle text
-    */
+     * Create a new 1.8 title
+     *
+     * @param title    Title text
+     * @param subtitle Subtitle text
+     */
     public Title(String title, String subtitle) {
         this.title = title;
         this.subtitle = subtitle;
@@ -57,11 +53,10 @@ public class Title implements Listener {
     }
 
     /**
-    * Copy 1.8 title
-    * 
-    * @param title
-    *            Title
-    */
+     * Copy 1.8 title
+     *
+     * @param title Title
+     */
     public Title(Title title) {
         // Copy title
         this.title = title.title;
@@ -76,21 +71,16 @@ public class Title implements Listener {
     }
 
     /**
-    * Create a new 1.8 title
-    * 
-    * @param title
-    *            Title text
-    * @param subtitle
-    *            Subtitle text
-    * @param fadeInTime
-    *            Fade in time
-    * @param stayTime
-    *            Stay on screen time
-    * @param fadeOutTime
-    *            Fade out time
-    */
+     * Create a new 1.8 title
+     *
+     * @param title       Title text
+     * @param subtitle    Subtitle text
+     * @param fadeInTime  Fade in time
+     * @param stayTime    Stay on screen time
+     * @param fadeOutTime Fade out time
+     */
     public Title(String title, String subtitle, int fadeInTime, int stayTime,
-            int fadeOutTime) {
+                 int fadeOutTime) {
         this.title = title;
         this.subtitle = subtitle;
         this.fadeInTime = fadeInTime;
@@ -99,9 +89,18 @@ public class Title implements Listener {
         loadClasses();
     }
 
-	/**
-    * Load spigot and NMS classes
-    */
+    private static boolean equalsTypeArray(Class<?>[] a, Class<?>[] o) {
+        if (a.length != o.length)
+            return false;
+        for (int i = 0; i < a.length; i++)
+            if (!a[i].equals(o[i]) && !a[i].isAssignableFrom(o[i]))
+                return false;
+        return true;
+    }
+
+    /**
+     * Load spigot and NMS classes
+     */
     private void loadClasses() {
         packetTitle = getClass("org.spigotmc.ProtocolInjector$PacketTitle");
         packetActions = getClass("org.spigotmc.ProtocolInjector$PacketTitle$Action");
@@ -109,113 +108,105 @@ public class Title implements Listener {
     }
 
     /**
-    * Set title text
-    * 
-    * @param title
-    *            Title
-    */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    /**
-    * Get title text
-    * 
-    * @return Title text
-    */
+     * Get title text
+     *
+     * @return Title text
+     */
     public String getTitle() {
         return this.title;
     }
 
     /**
-    * Set subtitle text
-    * 
-    * @param subtitle
-    *            Subtitle text
-    */
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
+     * Set title text
+     *
+     * @param title Title
+     */
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     /**
-    * Get subtitle text
-    * 
-    * @return Subtitle text
-    */
+     * Get subtitle text
+     *
+     * @return Subtitle text
+     */
     public String getSubtitle() {
         return this.subtitle;
     }
 
     /**
-    * Set the title color
-    * 
-    * @param color
-    *            Chat color
-    */
+     * Set subtitle text
+     *
+     * @param subtitle Subtitle text
+     */
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
+    }
+
+    /**
+     * Set the title color
+     *
+     * @param color Chat color
+     */
     public void setTitleColor(ChatColor color) {
         this.titleColor = color;
     }
 
     /**
-    * Set the subtitle color
-    * 
-    * @param color
-    *            Chat color
-    */
+     * Set the subtitle color
+     *
+     * @param color Chat color
+     */
     public void setSubtitleColor(ChatColor color) {
         this.subtitleColor = color;
     }
 
     /**
-    * Set title fade in time
-    * 
-    * @param time
-    *            Time
-    */
+     * Set title fade in time
+     *
+     * @param time Time
+     */
     public void setFadeInTime(int time) {
         this.fadeInTime = time;
     }
 
     /**
-    * Set title fade out time
-    * 
-    * @param time
-    *            Time
-    */
+     * Set title fade out time
+     *
+     * @param time Time
+     */
     public void setFadeOutTime(int time) {
         this.fadeOutTime = time;
     }
 
     /**
-    * Set title stay time
-    * 
-    * @param time
-    *            Time
-    */
+     * Set title stay time
+     *
+     * @param time Time
+     */
     public void setStayTime(int time) {
         this.stayTime = time;
     }
 
     /**
-    * Set timings to ticks
-    */
+     * Set timings to ticks
+     */
     public void setTimingsToTicks() {
         ticks = true;
     }
 
     /**
-    * Set timings to seconds
-    */
+     * Set timings to seconds
+     */
     public void setTimingsToSeconds() {
         ticks = false;
     }
 
     /**
-    * Send the title to a player
-    * 
-    * @param player
-    *            Player
-    */
+     * Send the title to a player
+     *
+     * @param player Player
+     */
     public void send(Player player) {
         if (getProtocolVersion(player) >= 47 && isSpigot()
                 && packetTitle != null) {
@@ -244,7 +235,7 @@ public class Title implements Listener {
                         null,
                         "{text:\""
                                 + ChatColor.translateAlternateColorCodes('&',
-                                        title) + "\",color:"
+                                title) + "\",color:"
                                 + titleColor.name().toLowerCase() + "}");
                 packet = packetTitle.getConstructor(packetActions,
                         getNMSClass("IChatBaseComponent")).newInstance(
@@ -256,11 +247,11 @@ public class Title implements Listener {
                             .invoke(null,
                                     "{text:\""
                                             + ChatColor
-                                                    .translateAlternateColorCodes(
-                                                            '&', subtitle)
+                                            .translateAlternateColorCodes(
+                                                    '&', subtitle)
                                             + "\",color:"
                                             + subtitleColor.name()
-                                                    .toLowerCase() + "}");
+                                            .toLowerCase() + "}");
                     packet = packetTitle.getConstructor(packetActions,
                             getNMSClass("IChatBaseComponent")).newInstance(
                             actions[1], serialized);
@@ -273,20 +264,19 @@ public class Title implements Listener {
     }
 
     /**
-    * Broadcast the title to all players
-    */
-	public void broadcast() {
+     * Broadcast the title to all players
+     */
+    public void broadcast() {
         for (Player p : Bukkit.getOnlinePlayers()) {
             send(p);
         }
     }
 
     /**
-    * Clear the title
-    * 
-    * @param player
-    *            Player
-    */
+     * Clear the title
+     *
+     * @param player Player
+     */
     public void clearTitle(Player player) {
         if (getProtocolVersion(player) >= 47 && isSpigot()) {
             try {
@@ -307,11 +297,10 @@ public class Title implements Listener {
     }
 
     /**
-    * Reset the title settings
-    * 
-    * @param player
-    *            Player
-    */
+     * Reset the title settings
+     *
+     * @param player Player
+     */
     public void resetTitle(Player player) {
         if (getProtocolVersion(player) >= 47 && isSpigot()) {
             try {
@@ -332,12 +321,11 @@ public class Title implements Listener {
     }
 
     /**
-    * Get the protocol version of the player
-    * 
-    * @param player
-    *            Player
-    * @return Protocol version
-    */
+     * Get the protocol version of the player
+     *
+     * @param player Player
+     * @return Protocol version
+     */
     private int getProtocolVersion(Player player) {
         int version = 0;
         try {
@@ -356,21 +344,20 @@ public class Title implements Listener {
     }
 
     /**
-    * Check if running spigot
-    * 
-    * @return Spigot
-    */
+     * Check if running spigot
+     *
+     * @return Spigot
+     */
     private boolean isSpigot() {
         return Bukkit.getVersion().contains("Spigot");
     }
 
     /**
-    * Get class by url
-    * 
-    * @param namespace
-    *            Namespace url
-    * @return Class
-    */
+     * Get class by url
+     *
+     * @param namespace Namespace url
+     * @return Class
+     */
     private Class<?> getClass(String namespace) {
         try {
             return Class.forName(namespace);
@@ -403,15 +390,6 @@ public class Title implements Listener {
         return types;
     }
 
-    private static boolean equalsTypeArray(Class<?>[] a, Class<?>[] o) {
-        if (a.length != o.length)
-            return false;
-        for (int i = 0; i < a.length; i++)
-            if (!a[i].equals(o[i]) && !a[i].isAssignableFrom(o[i]))
-                return false;
-        return true;
-    }
-
     private Object getHandle(Object obj) {
         try {
             return getMethod("getHandle", obj.getClass()).invoke(obj);
@@ -422,7 +400,7 @@ public class Title implements Listener {
     }
 
     private Method getMethod(String name, Class<?> clazz,
-            Class<?>... paramTypes) {
+                             Class<?>... paramTypes) {
         Class<?>[] t = toPrimitiveTypeArray(paramTypes);
         for (Method m : clazz.getMethods()) {
             Class<?>[] types = toPrimitiveTypeArray(m.getParameterTypes());
@@ -464,7 +442,7 @@ public class Title implements Listener {
         for (Method m : clazz.getMethods())
             if (m.getName().equals(name)
                     && (args.length == 0 || ClassListEqual(args,
-                            m.getParameterTypes()))) {
+                    m.getParameterTypes()))) {
                 m.setAccessible(true);
                 return m;
             }

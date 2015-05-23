@@ -1,29 +1,27 @@
 package net.climaxmc.OneVsOne;
 
+import net.climaxmc.ClimaxPvp;
+import org.bukkit.event.Listener;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
-import net.climaxmc.ClimaxPvp;
-
-import org.bukkit.event.Listener;
-
 /**
  * DO NOT USE - ARCHIVED FOR FUTURE REFERENCE
+ *
  * @deprecated
  */
 @Deprecated
 public class Events implements Listener {
-	ClimaxPvp plugin;
-
-	public Events(ClimaxPvp plugin) {
-		this.plugin = plugin;
-	}
-
-	int taskid;
-	ArrayList<UUID> inCountdown = new ArrayList<UUID>();
+    ClimaxPvp plugin;
+    int taskid;
+    ArrayList<UUID> inCountdown = new ArrayList<UUID>();
+    public Events(ClimaxPvp plugin) {
+        this.plugin = plugin;
+    }
 
 	/* @EventHandler
-	public void onInventoryClick(InventoryClickEvent e){
+    public void onInventoryClick(InventoryClickEvent e){
 		final Player p = (Player) e.getWhoClicked();
 		final Player clicked = plugin.getServer().getPlayer(plugin.challenged.get(p.getUniqueId()));
 		ItemStack clickedItem = e.getCurrentItem();

@@ -1,18 +1,18 @@
 /**
  * The MIT License (MIT)
- *
+ * <p/>
  * Copyright (c) 2014 Maxim Roncace
- *
+ * <p/>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
- *  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p/>
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * <p/>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,19 +24,14 @@
 
 package net.climaxmc.API;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+
+import java.lang.reflect.*;
+import java.util.HashMap;
 
 /**
  * Particle effects utility library
@@ -54,34 +49,17 @@ public class ParticleEffect {
 
     private static boolean newParticlePacketConstructor = false;
     private static Class<Enum> enumParticle = null;
-
-    private ParticleType type;
-    /**
-     * Gets the speed of the particles in this effect
-     * @return The speed of the particles in this effect
-     */
-    @Getter private double speed;
-    /**
-     * Retrieves the number of particles spawned by the effect
-     * @return The number of particles spawned by the effect
-     */
-    @Getter private int count;
-    /**
-     * Gets the radius of the particle effect
-     * @return The radius of the particle effect
-     */
-    @Getter private double radius;
-
     /**
      * Gets whether ParticleLib is compatible with the server software.
      * @return whether ParticleLib is compatible with the server software.
      */
-    @Getter private static boolean compatible = true;
+    @Getter
+    private static boolean compatible = true;
 
     static {
         String vString = getVersion().replace("v", "");
         double v = 0;
-        if (!vString.isEmpty()){
+        if (!vString.isEmpty()) {
             String[] array = vString.split("_");
             v = Double.parseDouble(array[0] + "." + array[1]);
         }
@@ -93,31 +71,48 @@ public class ParticleEffect {
                 packetClass = getNmsClass("Packet63WorldParticles");
                 packetConstructor = packetClass.getConstructor();
                 fields = packetClass.getDeclaredFields();
-            }
-            else {
+            } else {
                 Bukkit.getLogger().info("[ParticleLib] Hooking into Netty NMS classes");
                 packetClass = getNmsClass("PacketPlayOutWorldParticles");
-                if (v < 1.8){
+                if (v < 1.8) {
                     Bukkit.getLogger().info("[ParticleLib] Version is < 1.8 - using old packet constructor");
                     packetConstructor = packetClass.getConstructor(String.class, float.class, float.class, float.class,
                             float.class, float.class, float.class, float.class, int.class);
-                }
-                else { // use the new constructor for 1.8
+                } else { // use the new constructor for 1.8
                     Bukkit.getLogger().info("[ParticleLib] Version is >= 1.8 - using new packet constructor");
                     newParticlePacketConstructor = true;
-                    enumParticle = (Class<Enum>)getNmsClass("EnumParticle");
+                    enumParticle = (Class<Enum>) getNmsClass("EnumParticle");
                     packetConstructor = packetClass.getDeclaredConstructor(enumParticle, boolean.class, float.class,
                             float.class, float.class, float.class, float.class, float.class, float.class, int.class,
                             int[].class);
                 }
             }
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             Bukkit.getLogger().severe("[ParticleLib] Failed to initialize NMS components!");
             compatible = false;
         }
     }
+
+    private ParticleType type;
+    /**
+     * Gets the speed of the particles in this effect
+     * @return The speed of the particles in this effect
+     */
+    @Getter
+    private double speed;
+    /**
+     * Retrieves the number of particles spawned by the effect
+     * @return The number of particles spawned by the effect
+     */
+    @Getter
+    private int count;
+    /**
+     * Gets the radius of the particle effect
+     * @return The radius of the particle effect
+     */
+    @Getter
+    private double radius;
 
     /**
      * Constructs a new particle effect for use.
@@ -153,85 +148,6 @@ public class ParticleEffect {
     }
 
     /**
-     * Send a particle effect to all players
-     * @param location The location to send the effect to
-     */
-    public void sendToLocation(Location location){
-        try {
-            Object packet = createPacket(location);
-            for (Player player : Bukkit.getOnlinePlayers()){
-                sendPacket(player, packet);
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Constructs a new particle packet.
-     * @param location the location to spawn the particle effect at
-     * @return the constructed packet
-     */
-    private Object createPacket(Location location){
-        try {
-            if (this.count <= 0){
-                this.count = 1;
-            }
-            Object packet;
-            if (netty){
-                if (newParticlePacketConstructor){
-                    Object particleType = enumParticle.getEnumConstants()[type.getId()];
-                    packet = packetConstructor.newInstance(particleType,
-                            true, (float)location.getX(), (float)location.getY(), (float)location.getZ(),
-                            (float)this.radius, (float)this.radius, (float)this.radius,
-                            (float)this.speed, this.count, new int[0]);
-                }
-                else {
-                    packet = packetConstructor.newInstance(type.getName(),
-                            (float)location.getX(), (float)location.getY(), (float)location.getZ(),
-                            (float)this.radius, (float)this.radius, (float)this.radius,
-                            (float)this.speed, this.count);
-                }
-            }
-            else {
-                packet = packetConstructor.newInstance();
-                for (Field f : fields){
-                    f.setAccessible(true);
-                    if (f.getName().equals("a"))
-                        f.set(packet, type.getName());
-                    else if (f.getName().equals("b"))
-                        f.set(packet, (float)location.getX());
-                    else if (f.getName().equals("c"))
-                        f.set(packet, (float)location.getY());
-                    else if (f.getName().equals("d"))
-                        f.set(packet, (float)location.getZ());
-                    else if (f.getName().equals("e") || f.getName().equals("f") || f.getName().equals("g"))
-                        f.set(packet, this.radius);
-                    else if (f.getName().equals("h"))
-                        f.set(packet, this.speed);
-                    else if (f.getName().equals("i"))
-                        f.set(packet, this.count);
-                }
-            }
-            return packet;
-        }
-        catch (IllegalAccessException ex){
-            ex.printStackTrace();
-            Bukkit.getLogger().severe("{ParticleLib] Failed to construct particle effect packet!");
-        }
-        catch (InstantiationException ex){
-            ex.printStackTrace();
-            Bukkit.getLogger().severe("{ParticleLib] Failed to construct particle effect packet!");
-        }
-        catch (InvocationTargetException ex){
-            ex.printStackTrace();
-            Bukkit.getLogger().severe("{ParticleLib] Failed to construct particle effect packet!");
-        }
-        return null;
-    }
-
-    /**
      * Sends a packet to a player.
      * <p>
      *     Note: this method is <strong>not typesafe</strong>!
@@ -242,25 +158,22 @@ public class ParticleEffect {
      */
     private static void sendPacket(Player p, Object packet) throws IllegalArgumentException {
         try {
-            if (player_connection == null){
+            if (player_connection == null) {
                 player_connection = getHandle(p).getClass().getField("playerConnection");
-                for (Method m : player_connection.get(getHandle(p)).getClass().getMethods()){
-                    if (m.getName().equalsIgnoreCase("sendPacket")){
+                for (Method m : player_connection.get(getHandle(p)).getClass().getMethods()) {
+                    if (m.getName().equalsIgnoreCase("sendPacket")) {
                         player_sendPacket = m;
                     }
                 }
             }
             player_sendPacket.invoke(player_connection.get(getHandle(p)), packet);
-        }
-        catch (IllegalAccessException ex){
+        } catch (IllegalAccessException ex) {
             ex.printStackTrace();
             Bukkit.getLogger().severe("[ParticleLib] Failed to send packet!");
-        }
-        catch (InvocationTargetException ex){
+        } catch (InvocationTargetException ex) {
             ex.printStackTrace();
             Bukkit.getLogger().severe("[ParticleLib] Failed to send packet!");
-        }
-        catch (NoSuchFieldException ex){
+        } catch (NoSuchFieldException ex) {
             ex.printStackTrace();
             Bukkit.getLogger().severe("[ParticleLib] Failed to send packet!");
         }
@@ -271,7 +184,7 @@ public class ParticleEffect {
      * @param entity the entity get the handle of
      * @return the entity's NMS handle
      */
-    private static Object getHandle(Entity entity){
+    private static Object getHandle(Entity entity) {
         try {
             if (handles.get(entity.getClass()) != null)
                 return handles.get(entity.getClass()).invoke(entity);
@@ -280,8 +193,7 @@ public class ParticleEffect {
                 handles.put(entity.getClass(), entity_getHandle);
                 return entity_getHandle.invoke(entity);
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
@@ -292,14 +204,13 @@ public class ParticleEffect {
      * @param name the name of the NMS class to get
      * @return the NMS class of the given name
      */
-    private static Class<?> getNmsClass(String name){
+    private static Class<?> getNmsClass(String name) {
         String version = getVersion();
         String className = "net.minecraft.server." + version + name;
         Class<?> clazz = null;
         try {
             clazz = Class.forName(className);
-        }
-        catch (ClassNotFoundException ex){
+        } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
             Bukkit.getLogger().severe("[ParticleLib] Failed to load NMS class " + name + "!");
         }
@@ -310,11 +221,84 @@ public class ParticleEffect {
      * Determines the version string used by Craftbukkit's safeguard (e.g. 1_7_R4).
      * @return the version string used by Craftbukkit's safeguard
      */
-    private static String getVersion(){
+    private static String getVersion() {
         String[] array = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",");
         if (array.length == 4)
             return array[3] + ".";
         return "";
+    }
+
+    /**
+     * Send a particle effect to all players
+     * @param location The location to send the effect to
+     */
+    public void sendToLocation(Location location) {
+        try {
+            Object packet = createPacket(location);
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                sendPacket(player, packet);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Constructs a new particle packet.
+     * @param location the location to spawn the particle effect at
+     * @return the constructed packet
+     */
+    private Object createPacket(Location location) {
+        try {
+            if (this.count <= 0) {
+                this.count = 1;
+            }
+            Object packet;
+            if (netty) {
+                if (newParticlePacketConstructor) {
+                    Object particleType = enumParticle.getEnumConstants()[type.getId()];
+                    packet = packetConstructor.newInstance(particleType,
+                            true, (float) location.getX(), (float) location.getY(), (float) location.getZ(),
+                            (float) this.radius, (float) this.radius, (float) this.radius,
+                            (float) this.speed, this.count, new int[0]);
+                } else {
+                    packet = packetConstructor.newInstance(type.getName(),
+                            (float) location.getX(), (float) location.getY(), (float) location.getZ(),
+                            (float) this.radius, (float) this.radius, (float) this.radius,
+                            (float) this.speed, this.count);
+                }
+            } else {
+                packet = packetConstructor.newInstance();
+                for (Field f : fields) {
+                    f.setAccessible(true);
+                    if (f.getName().equals("a"))
+                        f.set(packet, type.getName());
+                    else if (f.getName().equals("b"))
+                        f.set(packet, (float) location.getX());
+                    else if (f.getName().equals("c"))
+                        f.set(packet, (float) location.getY());
+                    else if (f.getName().equals("d"))
+                        f.set(packet, (float) location.getZ());
+                    else if (f.getName().equals("e") || f.getName().equals("f") || f.getName().equals("g"))
+                        f.set(packet, this.radius);
+                    else if (f.getName().equals("h"))
+                        f.set(packet, this.speed);
+                    else if (f.getName().equals("i"))
+                        f.set(packet, this.count);
+                }
+            }
+            return packet;
+        } catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+            Bukkit.getLogger().severe("{ParticleLib] Failed to construct particle effect packet!");
+        } catch (InstantiationException ex) {
+            ex.printStackTrace();
+            Bukkit.getLogger().severe("{ParticleLib] Failed to construct particle effect packet!");
+        } catch (InvocationTargetException ex) {
+            ex.printStackTrace();
+            Bukkit.getLogger().severe("{ParticleLib] Failed to construct particle effect packet!");
+        }
+        return null;
     }
 
     /**
@@ -370,19 +354,22 @@ public class ParticleEffect {
          *
          * @return The name of the particle effect
          */
-        @Getter private String name;
+        @Getter
+        private String name;
         /**
          * Gets the ID of the particle effect
          *
          * @return The ID of the particle effect
          */
-        @Getter private int id;
+        @Getter
+        private int id;
         /**
          * Gets the legacy ID (pre-1.8) of the particle effect
          *
          * @return The legacy ID (pre-1.8) of the particle effect
          */
-        @Getter private int legacyId;
+        @Getter
+        private int legacyId;
     }
 
     /**

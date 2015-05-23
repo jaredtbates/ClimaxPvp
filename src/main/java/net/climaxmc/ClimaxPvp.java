@@ -6,13 +6,12 @@ import net.climaxmc.API.Statistics;
 import net.climaxmc.Administration.Administration;
 import net.climaxmc.Creative.Creative;
 import net.climaxmc.Donations.Donations;
-import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Commands.RepairCommand;
 import net.climaxmc.KitPvp.Commands.SpawnCommand;
+import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.OneVsOne.OneVsOne;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
-
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -28,36 +27,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClimaxPvp extends JavaPlugin {
-	@Getter private static ClimaxPvp instance;
-	@Getter private String prefix = "§0§l[§cClimax§0§l] §r";
-	@Getter private Economy economy = null;
-    @Getter private Permission permission = null;
-    @Getter private Chat chat = null;
+    @Getter
+    private static ClimaxPvp instance;
+    @Getter
+    private String prefix = "§0§l[§cClimax§0§l] §r";
+    @Getter
+    private Economy economy = null;
+    @Getter
+    private Permission permission = null;
+    @Getter
+    private Chat chat = null;
 
-	public void onEnable() {
-		instance = this;
-		saveDefaultConfig();
-        //setupDatabase();
-		setupEconomy();
+    public void onEnable() {
+        instance = this;
+        saveDefaultConfig();
+        setupDatabase();
+        setupEconomy();
         setupPermissions();
         setupChat();
-		new KitPvp(this);
-		new OneVsOne(this);
-		new Donations(this);
-		new Creative(this);
+        new KitPvp(this);
+        new OneVsOne(this);
+        new Donations(this);
+        new Creative(this);
         new Administration(this);
-		getCommand("repair").setExecutor(new RepairCommand(this));
-		getCommand("spawn").setExecutor(new SpawnCommand(this));
+        getCommand("repair").setExecutor(new RepairCommand(this));
+        getCommand("spawn").setExecutor(new SpawnCommand(this));
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             public void run() {
                 getServer().getPluginManager().callEvent(new UpdateEvent());
             }
         }, 1, 1);
-	}
-	
-	public void onDisable() {
-		
-	}
+    }
+
+    @Override
+    public void onDisable() {
+    }
 
     private void setupDatabase() {
         try {
@@ -68,17 +72,17 @@ public class ClimaxPvp extends JavaPlugin {
         }
     }
 
-	private boolean setupEconomy() {
-		if (getServer().getPluginManager().getPlugin("Vault") == null) {
-			return false;
-		}
-		RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-		if (rsp == null) {
-			return false;
-		}
-		economy = rsp.getProvider();
-		return economy != null;
-	}
+    private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        economy = rsp.getProvider();
+        return economy != null;
+    }
 
     private boolean setupPermissions() {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {

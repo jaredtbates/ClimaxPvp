@@ -1,8 +1,8 @@
 package net.climaxmc.Donations.Listeners;
 
+import net.climaxmc.API.ParticleEffect;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Donations;
-import net.climaxmc.API.ParticleEffect;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

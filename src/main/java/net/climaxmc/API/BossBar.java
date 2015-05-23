@@ -1,19 +1,72 @@
 package net.climaxmc.API;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
+import java.lang.reflect.*;
+import java.util.*;
+
 public class BossBar {
+    private static BossBar instance;
+    private Map<String, Dragon> dragonMap = new HashMap<String, Dragon>();
+
+    public static BossBar getInstance() {
+        if (BossBar.instance == null)
+            BossBar.instance = new BossBar();
+
+        return BossBar.instance;
+    }
+
+    public void setStatus(Player player, String text, float percent, boolean reset)
+            throws IllegalArgumentException, SecurityException, InstantiationException,
+            IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+        Dragon dragon = null;
+
+        if (dragonMap.containsKey(player.getName()) && !reset) {
+            dragon = dragonMap.get(player.getName());
+        } else {
+            dragon = new Dragon(text, player.getLocation().add(0, -100, 0), percent);
+            Object mobPacket = dragon.getSpawnPacket();
+            sendPacket(player, mobPacket);
+            dragonMap.put(player.getName(), dragon);
+        }
+
+        if (text.equals("")) {
+            Object destroyPacket = dragon.getDestroyPacket();
+            sendPacket(player, destroyPacket);
+            dragonMap.remove(player.getName());
+        } else {
+            dragon.setName(text);
+            dragon.setHealth(percent);
+            Object metaPacket = dragon.getMetaPacket(dragon.getWatcher());
+            Object teleportPacket = dragon
+                    .getTeleportPacket(player.getLocation().add(0, -100, 0));
+            sendPacket(player, metaPacket);
+            sendPacket(player, teleportPacket);
+        }
+    }
+
+    private void sendPacket(Player player, Object packet) {
+        try {
+            Object nmsPlayer = ReflectionUtils.getHandle(player);
+            Field con_field = nmsPlayer.getClass().getField("playerConnection");
+            Object con = con_field.get(nmsPlayer);
+            Method packet_method = ReflectionUtils.getMethod(con.getClass(), "sendPacket");
+            packet_method.invoke(con, packet);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static class ReflectionUtils {
         public static void sendPacket(List<Player> players, Object packet) {
             for (Player p : players) {
@@ -137,65 +190,6 @@ public class BossBar {
             }
 
             return equal;
-        }
-    }
-
-    private static BossBar instance;
-    private Map<String, Dragon> dragonMap = new HashMap<String, Dragon>();
-
-    public static BossBar getInstance() {
-        if (BossBar.instance == null)
-            BossBar.instance = new BossBar();
-
-        return BossBar.instance;
-    }
-
-    public void setStatus(Player player, String text, float percent, boolean reset)
-            throws IllegalArgumentException, SecurityException, InstantiationException,
-            IllegalAccessException, InvocationTargetException, NoSuchMethodException {
-        Dragon dragon = null;
-
-        if (dragonMap.containsKey(player.getName()) && !reset) {
-            dragon = dragonMap.get(player.getName());
-        } else {
-            dragon = new Dragon(text, player.getLocation().add(0, -100, 0), percent);
-            Object mobPacket = dragon.getSpawnPacket();
-            sendPacket(player, mobPacket);
-            dragonMap.put(player.getName(), dragon);
-        }
-
-        if (text.equals("")) {
-            Object destroyPacket = dragon.getDestroyPacket();
-            sendPacket(player, destroyPacket);
-            dragonMap.remove(player.getName());
-        } else {
-            dragon.setName(text);
-            dragon.setHealth(percent);
-            Object metaPacket = dragon.getMetaPacket(dragon.getWatcher());
-            Object teleportPacket = dragon
-                    .getTeleportPacket(player.getLocation().add(0, -100, 0));
-            sendPacket(player, metaPacket);
-            sendPacket(player, teleportPacket);
-        }
-    }
-
-    private void sendPacket(Player player, Object packet) {
-        try {
-            Object nmsPlayer = ReflectionUtils.getHandle(player);
-            Field con_field = nmsPlayer.getClass().getField("playerConnection");
-            Object con = con_field.get(nmsPlayer);
-            Method packet_method = ReflectionUtils.getMethod(con.getClass(), "sendPacket");
-            packet_method.invoke(con, packet);
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
         }
     }
 

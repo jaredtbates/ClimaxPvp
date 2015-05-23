@@ -2,9 +2,7 @@ package net.climaxmc.Donations.Commands;
 
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.GameMode;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
 public class SpectateCommand implements CommandExecutor {
