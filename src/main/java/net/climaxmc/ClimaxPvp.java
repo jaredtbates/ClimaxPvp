@@ -1,6 +1,7 @@
 package net.climaxmc;
 
 import lombok.Getter;
+import me.confuser.barapi.BarAPI;
 import net.climaxmc.API.Events.UpdateEvent;
 import net.climaxmc.API.MySQL;
 import net.climaxmc.API.PlayerData;
@@ -40,9 +41,14 @@ public class ClimaxPvp extends JavaPlugin {
     @Getter
     private Chat chat = null;
 
+    BarAPI barAPI = new BarAPI(this);
+
     public void onEnable() {
         // Initialize Instance
         instance = this;
+
+        // Enable BarAPI
+        barAPI.onEnable();
 
         // Save Configuration
         saveDefaultConfig();
@@ -90,6 +96,9 @@ public class ClimaxPvp extends JavaPlugin {
                 e.printStackTrace();
             }
         }
+
+        // Disable BarAPI
+        barAPI.onDisable();
     }
 
     /**
