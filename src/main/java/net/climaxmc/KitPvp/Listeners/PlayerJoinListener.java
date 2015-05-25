@@ -1,6 +1,5 @@
 package net.climaxmc.KitPvp.Listeners;
 
-import me.confuser.barapi.BarAPI;
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,8 +21,6 @@ public class PlayerJoinListener implements Listener {
 
         event.setJoinMessage("§3Join§8» " + player.getName());
         plugin.sendToSpawn(player);
-
-        BarAPI.setMessage(player, "Welcome to Climax!");
 
         /* plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
             public void run() {
