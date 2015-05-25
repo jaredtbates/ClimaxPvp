@@ -14,7 +14,6 @@ public class MySQL {
     private static final String GET_DATA = "SELECT * FROM `player_data` WHERE `UUID` = ?;";
     private static final String CREATE_DATA_TABLE = "CREATE TABLE IF NOT EXISTS `player_data` (`UUID` VARCHAR(36) NOT NULL PRIMARY KEY, `Kills` INT NOT NULL, `Deaths` INT NOT NULL);";
     private static final String CREATE_PLAYER_DATA = "INSERT IGNORE INTO player_data (`UUID`, `Kills`, `Deaths`) VALUES (?, ?, ?);";
-    private static final String UPDATE_DATA = "UPDATE `player_data` SET ? = ? WHERE `UUID` = ?;";
     private final String address;
     private final int port;
     private final String name;
