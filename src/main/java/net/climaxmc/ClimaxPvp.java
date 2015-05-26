@@ -1,7 +1,6 @@
 package net.climaxmc;
 
 import lombok.Getter;
-import net.climaxmc.API.Events.UpdateEvent;
 import net.climaxmc.API.MySQL;
 import net.climaxmc.API.PlayerData;
 import net.climaxmc.Administration.Administration;
@@ -71,13 +70,6 @@ public class ClimaxPvp extends JavaPlugin {
         // Global Commands
         getCommand("repair").setExecutor(new RepairCommand(this));
         getCommand("spawn").setExecutor(new SpawnCommand(this));
-
-        // Update Event
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-            public void run() {
-                getServer().getPluginManager().callEvent(new UpdateEvent());
-            }
-        }, 20, 0);
     }
 
     @Override

@@ -59,10 +59,6 @@ public class PlayerDeathListener implements Listener {
             event.setDeathMessage("§c" + player.getName() + " §7died");
         }
 
-        plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
-            public void run() {
-                player.spigot().respawn();
-            }
-        });
+        plugin.getServer().getScheduler().runTask(plugin, () -> player.spigot().respawn());
     }
 }
