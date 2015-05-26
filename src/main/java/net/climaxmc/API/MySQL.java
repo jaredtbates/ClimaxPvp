@@ -11,9 +11,9 @@ import java.sql.*;
  * @author computerwizjared
  */
 public class MySQL {
-    private static final String GET_DATA = "SELECT * FROM `player_data` WHERE `UUID` = ?;";
-    private static final String CREATE_DATA_TABLE = "CREATE TABLE IF NOT EXISTS `player_data` (`UUID` VARCHAR(36) NOT NULL PRIMARY KEY, `Kills` INT NOT NULL, `Deaths` INT NOT NULL);";
-    private static final String CREATE_PLAYER_DATA = "INSERT IGNORE INTO player_data (`UUID`, `Kills`, `Deaths`) VALUES (?, ?, ?);";
+    private static final String GET_DATA = "SELECT * FROM `player_data` WHERE `uuid` = ?;";
+    private static final String CREATE_DATA_TABLE = "CREATE TABLE IF NOT EXISTS `player_data` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `kills` INT NOT NULL, `deaths` INT NOT NULL);";
+    private static final String CREATE_PLAYER_DATA = "INSERT IGNORE INTO `player_data` (`uuid`, `kills`, `deaths`) VALUES (?, ?, ?);";
     private final String address;
     private final int port;
     private final String name;
@@ -110,7 +110,7 @@ public class MySQL {
      * @param player The player to update
      */
     public void updateData(String column, String to, OfflinePlayer player) {
-        executeUpdate("UPDATE player_data SET " + column + "=\"" + to + "\" WHERE UUID=\"" + player.getUniqueId().toString() + "\";");
+        executeUpdate("UPDATE `player_data` SET " + column + "=\"" + to + "\" WHERE uuid='" + player.getUniqueId().toString() + "';");
     }
 
     /**
@@ -128,8 +128,8 @@ public class MySQL {
 
         try {
             if (set.next()) {
-                int kills = set.getInt("Kills");
-                int deaths = set.getInt("Deaths");
+                int kills = set.getInt("kills");
+                int deaths = set.getInt("deaths");
                 return new PlayerData(this, player, kills, deaths);
             }
         } catch (SQLException e) {
