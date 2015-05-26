@@ -4,8 +4,7 @@ import net.climaxmc.API.PlayerData;
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
+import org.bukkit.event.*;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scoreboard.*;
@@ -49,7 +48,7 @@ public class ScoreboardListener implements Listener {
         objective.getScore("climaxmc.net").setScore(1);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerDeath(PlayerDeathEvent event) {
         updateScoreboards();
     }
