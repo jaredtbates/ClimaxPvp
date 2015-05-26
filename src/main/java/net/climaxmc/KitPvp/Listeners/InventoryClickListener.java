@@ -19,7 +19,7 @@ public class InventoryClickListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         Inventory inventory = event.getInventory();
         final Player player = (Player) event.getWhoClicked();
-        if (inventory != null) {
+        if (inventory != null && event.getCurrentItem() != null) {
             if (inventory.getName().equals(KitPvp.kitSelector.getName())) {
                 for (Kit kit : KitManager.kits) {
                     if (event.getCurrentItem().getItemMeta().getDisplayName().equals(kit.getItem().getItemMeta().getDisplayName())) {

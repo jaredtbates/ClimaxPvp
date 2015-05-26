@@ -57,19 +57,25 @@ public class ScoreboardListener implements Listener {
             Objective objective = board.getObjective("Player Data");
             objective.setDisplayName("§f§lClimaxPvp");
             objective.getScore("§a§lBalance").setScore(11);
-            board.resetScores("$" + balances.get(player.getUniqueId()));
-            String balance = "$" + new Double(plugin.getEconomy().getBalance(player)).intValue();
-            objective.getScore(balance).setScore(10);
+            if (balances.containsKey(player.getUniqueId())) {
+                board.resetScores("$" + balances.get(player.getUniqueId()));
+                String balance = "$" + new Double(plugin.getEconomy().getBalance(player)).intValue();
+                objective.getScore(balance).setScore(10);
+            }
             balances.put(player.getUniqueId(), new Double(plugin.getEconomy().getBalance(player)).intValue());
             objective.getScore(" ").setScore(9);
             objective.getScore("§c§lKills").setScore(8);
-            board.resetScores(Integer.toString(kills.get(player.getUniqueId())));
-            objective.getScore(Integer.toString(plugin.getPlayerData(player).getKills())).setScore(7);
+            if (kills.containsKey(player.getUniqueId())) {
+                board.resetScores(Integer.toString(kills.get(player.getUniqueId())));
+                objective.getScore(Integer.toString(plugin.getPlayerData(player).getKills())).setScore(7);
+            }
             kills.put(player.getUniqueId(), playerData.getKills());
             objective.getScore("  ").setScore(6);
             objective.getScore("§c§lDeaths").setScore(5);
-            board.resetScores(Integer.toString(deaths.get(player.getUniqueId())));
-            objective.getScore(Integer.toString(plugin.getPlayerData(player).getDeaths())).setScore(4);
+            if (deaths.containsKey(player.getUniqueId())) {
+                board.resetScores(Integer.toString(deaths.get(player.getUniqueId())));
+                objective.getScore(Integer.toString(plugin.getPlayerData(player).getDeaths())).setScore(4);
+            }
             deaths.put(player.getUniqueId(), playerData.getDeaths());
             objective.getScore("   ").setScore(3);
             objective.getScore("§e§lWebsite").setScore(2);
