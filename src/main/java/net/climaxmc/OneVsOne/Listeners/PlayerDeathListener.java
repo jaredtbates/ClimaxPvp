@@ -5,7 +5,6 @@ import net.climaxmc.OneVsOne.OneVsOne;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
@@ -20,7 +19,7 @@ public class PlayerDeathListener implements Listener {
         this.instance = instance;
     }
 
-    @EventHandler
+    //@EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         final Location lobbySpawn = new Location(plugin.getServer().getWorld(plugin.getConfig().getString("Lobby.Spawn.World")), plugin.getConfig().getInt("Lobby.Spawn.X"), plugin.getConfig().getInt("Lobby.Spawn.Y"), plugin.getConfig().getInt("Lobby.Spawn.Z"));
         final Player player = event.getEntity();
