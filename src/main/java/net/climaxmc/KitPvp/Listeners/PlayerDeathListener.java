@@ -60,5 +60,6 @@ public class PlayerDeathListener implements Listener {
         }
 
         plugin.getServer().getScheduler().runTask(plugin, () -> player.spigot().respawn());
+
     }
 }

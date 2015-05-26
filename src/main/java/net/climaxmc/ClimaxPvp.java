@@ -13,17 +13,11 @@ import net.climaxmc.OneVsOne.OneVsOne;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
-import org.bukkit.*;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffect;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ClimaxPvp extends JavaPlugin {
     @Getter
@@ -128,42 +122,5 @@ public class ClimaxPvp extends JavaPlugin {
             chat = rsp.getProvider();
         }
         return chat != null;
-    }
-
-    /**
-     * Resets a player and sends them to spawn
-     *
-     * @param player Player to send to spawn
-     */
-    public void sendToSpawn(Player player) {
-        player.teleport(player.getWorld().getSpawnLocation());
-        player.setGameMode(GameMode.SURVIVAL);
-        player.getInventory().clear();
-        player.getInventory().setArmorContents(null);
-        player.setHealth(20F);
-        player.setMaxHealth(20F);
-        player.setFlySpeed(0.1F);
-        for (PotionEffect effect : player.getActivePotionEffects()) {
-            player.removePotionEffect(effect.getType());
-        }
-
-        ItemStack kitSelector = new ItemStack(Material.NETHER_STAR);
-        ItemMeta kitSelectorMeta = kitSelector.getItemMeta();
-        kitSelectorMeta.setDisplayName("§a§lKit Selector");
-        List<String> kitSelectorLores = new ArrayList<String>();
-        kitSelectorLores.add("§5§o(Right Click) to select a kit!");
-        kitSelectorMeta.setLore(kitSelectorLores);
-        kitSelector.setItemMeta(kitSelectorMeta);
-
-        ItemStack particles = new ItemStack(Material.SEEDS);
-        ItemMeta particlesMeta = particles.getItemMeta();
-        particlesMeta.setDisplayName("§a§lTrail Selector");
-        List<String> particlesLores = new ArrayList<String>();
-        particlesLores.add("§5§o(Right Click) to select a trail!");
-        particlesMeta.setLore(particlesLores);
-        particles.setItemMeta(particlesMeta);
-
-        player.getInventory().setItem(0, kitSelector);
-        player.getInventory().setItem(8, particles);
     }
 }

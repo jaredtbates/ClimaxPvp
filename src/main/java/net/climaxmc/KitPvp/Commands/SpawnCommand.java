@@ -20,17 +20,15 @@ public class SpawnCommand implements CommandExecutor {
 
             player.sendMessage("§aPlease wait §c3 §aseconds to be teleported to spawn.");
 
-            plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
-                public void run() {
-                    if (player.getLocation().getBlock().equals(block)) {
-                        if (KitPvp.inKit.contains(player.getUniqueId())) {
-                            KitPvp.inKit.remove(player.getUniqueId());
-                        }
-                        plugin.sendToSpawn(player);
-                        player.sendMessage("§aYou have been teleported to spawn!");
-                    } else {
-                        player.sendMessage("§cTeleportation canceled.");
+            plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+                if (player.getLocation().getBlock().equals(block)) {
+                    if (KitPvp.inKit.contains(player.getUniqueId())) {
+                        KitPvp.inKit.remove(player.getUniqueId());
                     }
+                    player.spigot().respawn();
+                    player.sendMessage("§aYou have been teleported to spawn!");
+                } else {
+                    player.sendMessage("§cTeleportation canceled.");
                 }
             }, 60);
         }

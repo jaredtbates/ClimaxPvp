@@ -24,11 +24,7 @@ public class InventoryClickListener implements Listener {
                 for (Kit kit : KitManager.kits) {
                     if (event.getCurrentItem().getItemMeta().getDisplayName().equals(kit.getItem().getItemMeta().getDisplayName())) {
                         kit.wearCheckPerms(player);
-                        plugin.getServer().getScheduler().runTask(plugin, new Runnable() {
-                            public void run() {
-                                player.closeInventory();
-                            }
-                        });
+                        plugin.getServer().getScheduler().runTask(plugin, player::closeInventory);
                     }
                     event.setCancelled(true);
                 }

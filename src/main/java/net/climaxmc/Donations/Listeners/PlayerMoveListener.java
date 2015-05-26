@@ -35,7 +35,7 @@ public class PlayerMoveListener implements Listener {
             if ((player.getLocation().getBlockY() <= -5) || (player.getLocation().getBlockY() >= 100)
                     || (player.getLocation().getBlockX() >= -590 || player.getLocation().getBlockX() <= -760)
                     || (player.getLocation().getBlockZ() >= 1160 || player.getLocation().getBlockZ() <= 980)) {
-                plugin.sendToSpawn(player);
+                player.spigot().respawn();
                 player.setGameMode(GameMode.SPECTATOR);
                 player.setFlySpeed(0.15F);
             }
