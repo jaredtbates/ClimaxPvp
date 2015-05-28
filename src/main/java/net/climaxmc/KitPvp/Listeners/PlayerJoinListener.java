@@ -20,7 +20,7 @@ public class PlayerJoinListener implements Listener {
         plugin.getMySQL().createPlayerData(player);
 
         event.setJoinMessage("§3Join§8» " + player.getName());
-        player.spigot().respawn();
+        plugin.respawn(player);
 
         /* plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
             public void run() {

@@ -25,7 +25,7 @@ public class SpawnCommand implements CommandExecutor {
                     if (KitPvp.inKit.contains(player.getUniqueId())) {
                         KitPvp.inKit.remove(player.getUniqueId());
                     }
-                    player.spigot().respawn();
+                    plugin.respawn(player);
                     player.sendMessage("§aYou have been teleported to spawn!");
                 } else {
                     player.sendMessage("§cTeleportation canceled.");

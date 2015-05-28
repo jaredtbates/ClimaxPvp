@@ -14,6 +14,8 @@ import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -122,5 +124,11 @@ public class ClimaxPvp extends JavaPlugin {
             chat = rsp.getProvider();
         }
         return chat != null;
+    }
+
+    public void respawn(Player player) {
+        player.spigot().respawn();
+        player.teleport(player.getWorld().getSpawnLocation());
+        getServer().getPluginManager().callEvent(new PlayerRespawnEvent(player, player.getWorld().getSpawnLocation(), false));
     }
 }

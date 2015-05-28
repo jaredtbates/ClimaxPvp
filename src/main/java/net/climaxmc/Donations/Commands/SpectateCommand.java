@@ -16,12 +16,12 @@ public class SpectateCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (!player.getGameMode().equals(GameMode.SPECTATOR)) {
-                player.spigot().respawn();
+                plugin.respawn(player);
                 player.setGameMode(GameMode.SPECTATOR);
                 player.setFlySpeed(0.15F);
                 player.sendMessage("§aYou are now spectating");
             } else {
-                player.spigot().respawn();
+                plugin.respawn(player);
                 player.sendMessage("§aYou are no longer spectating");
             }
         }
