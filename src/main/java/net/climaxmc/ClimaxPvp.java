@@ -6,8 +6,7 @@ import net.climaxmc.API.PlayerData;
 import net.climaxmc.Administration.Administration;
 import net.climaxmc.Creative.Creative;
 import net.climaxmc.Donations.Donations;
-import net.climaxmc.KitPvp.Commands.RepairCommand;
-import net.climaxmc.KitPvp.Commands.SpawnCommand;
+import net.climaxmc.KitPvp.Commands.*;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.OneVsOne.OneVsOne;
 import org.bukkit.OfflinePlayer;
@@ -51,6 +50,7 @@ public class ClimaxPvp extends JavaPlugin {
         // Global Commands
         getCommand("repair").setExecutor(new RepairCommand(this));
         getCommand("spawn").setExecutor(new SpawnCommand(this));
+        getCommand("balance").setExecutor(new BalanceCommand(this));
     }
 
     @Override

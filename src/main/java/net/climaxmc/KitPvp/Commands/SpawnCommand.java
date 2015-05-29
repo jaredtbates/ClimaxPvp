@@ -7,7 +7,7 @@ import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
 public class SpawnCommand implements CommandExecutor {
-    ClimaxPvp plugin;
+    private ClimaxPvp plugin;
 
     public SpawnCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
@@ -32,6 +32,6 @@ public class SpawnCommand implements CommandExecutor {
                 }
             }, 60);
         }
-        return false;
+        return true;
     }
 }

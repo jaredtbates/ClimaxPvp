@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class RepairCommand implements CommandExecutor {
-    ClimaxPvp plugin;
+    private ClimaxPvp plugin;
 
     public RepairCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
@@ -34,6 +34,6 @@ public class RepairCommand implements CommandExecutor {
                 player.sendMessage("§cYou do not have enough money to repair your inventory!");
             }
         }
-        return false;
+        return true;
     }
 }

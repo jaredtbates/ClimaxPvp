@@ -10,6 +10,9 @@ commands:
     description: Teleports you to spawn
   1v1:
     description: Joins the 1v1 arena
+  balance:
+    aliases: bal
+    description: Gets your balance
   trails:
     descriptions: Displays the trails inventory
   spectate:
