@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp.Listeners;
 
+import net.climaxmc.API.Events.PlayerBalanceChangeEvent;
 import net.climaxmc.API.PlayerData;
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.Bukkit;
@@ -32,9 +33,9 @@ public class ScoreboardListener implements Listener {
         board.registerNewTeam("Team");
         objective.setDisplayName("§f§lClimaxPvp");
         objective.getScore("§a§lBalance").setScore(11);
-        String balance = "$" + new Double(plugin.getEconomy().getBalance(player)).intValue();
+        String balance = "$" + new Double(playerData.getBalance()).intValue();
         objective.getScore(balance).setScore(10);
-        balances.put(player.getUniqueId(), new Double(plugin.getEconomy().getBalance(player)).intValue());
+        balances.put(player.getUniqueId(), new Double(playerData.getBalance()).intValue());
         objective.getScore(" ").setScore(9);
         objective.getScore("§c§lKills").setScore(8);
         objective.getScore(Integer.toString(plugin.getPlayerData(player).getKills())).setScore(7);
@@ -53,6 +54,11 @@ public class ScoreboardListener implements Listener {
         updateScoreboards();
     }
 
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerBalanceChange(PlayerBalanceChangeEvent event) {
+        updateScoreboards();
+    }
+
     public void updateScoreboards() {
         for (Player player : plugin.getServer().getOnlinePlayers()) {
             PlayerData playerData = plugin.getPlayerData(player);
@@ -62,10 +68,10 @@ public class ScoreboardListener implements Listener {
             objective.getScore("§a§lBalance").setScore(11);
             if (balances.containsKey(player.getUniqueId())) {
                 board.resetScores("$" + balances.get(player.getUniqueId()));
-                String balance = "$" + new Double(plugin.getEconomy().getBalance(player)).intValue();
+                String balance = "$" + new Double(playerData.getBalance()).intValue();
                 objective.getScore(balance).setScore(10);
             }
-            balances.put(player.getUniqueId(), new Double(plugin.getEconomy().getBalance(player)).intValue());
+            balances.put(player.getUniqueId(), new Double(playerData.getBalance()).intValue());
             objective.getScore(" ").setScore(9);
             objective.getScore("§c§lKills").setScore(8);
             if (kills.containsKey(player.getUniqueId())) {

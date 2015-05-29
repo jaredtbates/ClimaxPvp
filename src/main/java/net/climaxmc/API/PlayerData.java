@@ -2,6 +2,8 @@ package net.climaxmc.API;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import net.climaxmc.API.Events.PlayerBalanceChangeEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 @AllArgsConstructor
@@ -22,6 +24,7 @@ public class PlayerData {
      */
     public void setBalance(int amount) {
         mySQL.updateData("balance", Integer.toString(balance = amount), player);
+        Bukkit.getPluginManager().callEvent(new PlayerBalanceChangeEvent(player));
     }
 
     /**
