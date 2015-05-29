@@ -44,7 +44,7 @@ public class EconomyCommand implements CommandExecutor {
         }
 
         try {
-            amount = Integer.valueOf(args[2]);
+            amount = Integer.parseInt(args[2]);
         } catch (NumberFormatException e) {
             sender.sendMessage(ChatColor.RED + "/eco <give|take|set|reset> <player> <amount>");
             return true;
