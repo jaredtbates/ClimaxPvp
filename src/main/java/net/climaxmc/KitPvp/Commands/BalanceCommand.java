@@ -15,11 +15,14 @@ public class BalanceCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            PlayerData playerData = plugin.getPlayerData(player);
-            player.sendMessage(ChatColor.GREEN + "Balance: " + ChatColor.RED + "$" + playerData.getBalance());
+        if (!(sender instanceof Player)) {
+            return true;
         }
+
+        Player player = (Player) sender;
+        PlayerData playerData = plugin.getPlayerData(player);
+        player.sendMessage(ChatColor.GREEN + "Balance: " + ChatColor.RED + "$" + playerData.getBalance());
+
         return true;
     }
 }
