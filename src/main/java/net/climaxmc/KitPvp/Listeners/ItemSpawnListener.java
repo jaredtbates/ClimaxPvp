@@ -14,6 +14,6 @@ public class ItemSpawnListener implements Listener {
 
     @EventHandler
     public void onItemSpawn(final ItemSpawnEvent event) {
-        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> event.getEntity().remove());
+        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> event.getEntity().remove(), 40);
     }
 }

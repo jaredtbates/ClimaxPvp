@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.API.PlayerData;
+import net.climaxmc.API.Rank;
 import net.climaxmc.ClimaxPvp;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.*;
@@ -18,6 +19,10 @@ public class EconomyCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             PlayerData playerData = plugin.getPlayerData(player);
+            if (!playerData.hasRank(Rank.ADMINISTRATOR) && !player.isOp()) {
+                player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
+                return true;
+            }
         }
 
         if (args.length <= 1 || args.length >= 4) {
