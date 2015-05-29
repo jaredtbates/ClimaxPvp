@@ -10,13 +10,9 @@ import net.climaxmc.KitPvp.Commands.RepairCommand;
 import net.climaxmc.KitPvp.Commands.SpawnCommand;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.OneVsOne.OneVsOne;
-import net.milkbowl.vault.chat.Chat;
-import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.permission.Permission;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
@@ -28,12 +24,6 @@ public class ClimaxPvp extends JavaPlugin {
     private MySQL mySQL = null;
     @Getter
     private String prefix = "§0§l[§cClimax§0§l] §r";
-    @Getter
-    private Economy economy = null;
-    @Getter
-    private Permission permission = null;
-    @Getter
-    private Chat chat = null;
 
     public void onEnable() {
         // Initialize Instance
@@ -50,11 +40,6 @@ public class ClimaxPvp extends JavaPlugin {
                 getConfig().getString("Database.Username"),
                 getConfig().getString("Database.Password")
         );
-
-        // Configure Vault
-        setupEconomy();
-        setupPermissions();
-        setupChat();
 
         // Load Modules
         new KitPvp(this);
@@ -88,42 +73,6 @@ public class ClimaxPvp extends JavaPlugin {
      */
     public PlayerData getPlayerData(OfflinePlayer player) {
         return mySQL.getPlayerData(player);
-    }
-
-
-    private boolean setupEconomy() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            return false;
-        }
-        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if (rsp == null) {
-            return false;
-        }
-        economy = rsp.getProvider();
-        return economy != null;
-    }
-
-    private boolean setupPermissions() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            return false;
-        }
-        RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
-        if (rsp == null) {
-            return false;
-        }
-        permission = rsp.getProvider();
-        return permission != null;
-    }
-
-    private boolean setupChat() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            return false;
-        }
-        RegisteredServiceProvider<Chat> rsp = getServer().getServicesManager().getRegistration(Chat.class);
-        if (rsp != null) {
-            chat = rsp.getProvider();
-        }
-        return chat != null;
     }
 
     public void respawn(Player player) {
