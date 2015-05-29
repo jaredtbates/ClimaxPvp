@@ -22,6 +22,10 @@ public class AsyncPlayerChatListener implements Listener {
         PlayerData playerData = plugin.getPlayerData(player);
         Rank rank = playerData.getRank();
 
-        event.setFormat(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "{" + rank.getColor() + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + ChatColor.RESET + " %s" + ChatColor.RESET + ": %s");
+        if (playerData.hasRank(Rank.TRUSTED)) {
+            event.setFormat(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "{" + rank.getColor() + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + ChatColor.RESET + " %s" + ChatColor.RESET + ": %s");
+        } else {
+            event.setFormat(ChatColor.RESET + "%s" + ChatColor.RESET + ": %s");
+        }
     }
 }

@@ -18,7 +18,6 @@ commands:
   economy:
     aliases: eco
     description: Economy management
-    permission: ${project.artifactId}.Economy
   pay:
     description: Pay a player
   trails:

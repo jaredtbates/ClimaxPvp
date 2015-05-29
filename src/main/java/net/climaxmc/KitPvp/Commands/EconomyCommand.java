@@ -15,6 +15,11 @@ public class EconomyCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            PlayerData playerData = plugin.getPlayerData(player);
+        }
+
         if (args.length <= 1 || args.length >= 4) {
             sender.sendMessage(ChatColor.RED + "/eco <give|take|set|reset> <player> <amount>");
             return true;
