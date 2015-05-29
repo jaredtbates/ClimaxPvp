@@ -21,7 +21,6 @@ public class PayCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        PlayerData playerData = plugin.getPlayerData(player);
 
         if (args.length != 2) {
             sender.sendMessage(ChatColor.RED + "/pay <player> <amount>");
@@ -35,8 +34,6 @@ public class PayCommand implements CommandExecutor {
             return true;
         }
 
-        PlayerData targetData = plugin.getPlayerData(target);
-
         int amount;
 
         try {
@@ -46,10 +43,12 @@ public class PayCommand implements CommandExecutor {
             return true;
         }
 
+        PlayerData playerData = plugin.getPlayerData(player);
         playerData.withdrawBalance(amount);
-        targetData.depositBalance(amount);
-
         player.sendMessage(ChatColor.GREEN + "You have sent " + target.getName() + " $" + amount + ".");
+
+        PlayerData targetData = plugin.getPlayerData(target);
+        targetData.depositBalance(amount);
         target.sendMessage(ChatColor.GREEN + "You have received $" + amount + " from " + player.getName() + ".");
 
         return true;
