@@ -2,7 +2,6 @@ name: ${project.artifactId}
 main: ${project.groupId}.${project.artifactId}
 version: ${project.version}
 authors: [computerwizjared, jonhan2000]
-depend: [Vault]
 commands:
   repair:
     description: Repairs your inventory
