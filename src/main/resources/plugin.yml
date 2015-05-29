@@ -2,7 +2,6 @@ name: ${project.artifactId}
 main: ${project.groupId}.${project.artifactId}
 version: ${project.version}
 authors: [computerwizjared, jonhan2000]
-depend: [Vault]
 commands:
   repair:
     description: Repairs your inventory
@@ -11,6 +10,15 @@ commands:
     description: Teleports you to spawn
   1v1:
     description: Joins the 1v1 arena
+  balance:
+    aliases: bal
+    description: Gets your balance
+  economy:
+    aliases: eco
+    description: Economy management
+    permission: ${project.artifactId}.Economy
+  pay:
+    description: Pay a player
   trails:
     descriptions: Displays the trails inventory
   spectate:
