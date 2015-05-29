@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Commands.*;
 import net.climaxmc.KitPvp.Listeners.*;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
@@ -14,7 +15,10 @@ public class KitPvp {
     public static HashMap<UUID, Integer> killStreak = new HashMap<UUID, Integer>();
 
     public KitPvp(ClimaxPvp plugin) {
+        // Initalize kits
         new KitManager(plugin);
+
+        // Register listeners
         plugin.getServer().getPluginManager().registerEvents(new FoodLevelChangeListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new InventoryClickListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ItemSpawnListener(plugin), plugin);
@@ -28,5 +32,12 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new PlayerQuitListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerPickupItemListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ScoreboardListener(plugin), plugin);
+
+        // Register commands
+        plugin.getCommand("repair").setExecutor(new RepairCommand(plugin));
+        plugin.getCommand("spawn").setExecutor(new SpawnCommand(plugin));
+        plugin.getCommand("balance").setExecutor(new BalanceCommand(plugin));
+        plugin.getCommand("economy").setExecutor(new EconomyCommand(plugin));
+        plugin.getCommand("pay").setExecutor(new PayCommand(plugin));
     }
 }

@@ -12,11 +12,30 @@ public class PlayerData {
     @Getter
     private final OfflinePlayer player;
     @Getter
+    private Rank rank;
+    @Getter
     private int balance;
     @Getter
     private int kills;
     @Getter
     private int deaths;
+
+    /**
+     * Sets the player's rank
+     * @param rank Rank of the player
+     */
+    public void setRank(Rank rank) {
+        mySQL.updateData("rank", (this.rank = rank).toString(), player);
+    }
+
+    /**
+     * Checks if the player has rank
+     * @param rank Rank to compare
+     * @return Player has rank
+     */
+    public boolean hasRank(Rank rank) {
+        return this.rank.getPermissionLevel() >= rank.getPermissionLevel();
+    }
 
     /**
      * Sets the player's balance

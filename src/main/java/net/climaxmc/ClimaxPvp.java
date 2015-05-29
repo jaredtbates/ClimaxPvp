@@ -6,7 +6,6 @@ import net.climaxmc.API.PlayerData;
 import net.climaxmc.Administration.Administration;
 import net.climaxmc.Creative.Creative;
 import net.climaxmc.Donations.Donations;
-import net.climaxmc.KitPvp.Commands.*;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.OneVsOne.OneVsOne;
 import org.bukkit.OfflinePlayer;
@@ -19,7 +18,6 @@ import java.sql.SQLException;
 public class ClimaxPvp extends JavaPlugin {
     @Getter
     private static ClimaxPvp instance;
-    @Getter
     private MySQL mySQL = null;
     @Getter
     private String prefix = "§0§l[§cClimax§0§l] §r";
@@ -46,13 +44,6 @@ public class ClimaxPvp extends JavaPlugin {
         new Donations(this);
         new Creative(this);
         new Administration(this);
-
-        // Global Commands
-        getCommand("repair").setExecutor(new RepairCommand(this));
-        getCommand("spawn").setExecutor(new SpawnCommand(this));
-        getCommand("balance").setExecutor(new BalanceCommand(this));
-        getCommand("economy").setExecutor(new EconomyCommand(this));
-        getCommand("pay").setExecutor(new PayCommand(this));
     }
 
     @Override

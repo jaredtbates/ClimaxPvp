@@ -12,8 +12,8 @@ import java.sql.*;
  */
 public class MySQL {
     private static final String GET_DATA = "SELECT * FROM `player_data` WHERE `uuid` = ?;";
-    private static final String CREATE_DATA_TABLE = "CREATE TABLE IF NOT EXISTS `player_data` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL);";
-    private static final String CREATE_PLAYER_DATA = "INSERT IGNORE INTO `player_data` (`uuid`, `balance`, `kills`, `deaths`) VALUES (?, ?, ?, ?);";
+    private static final String CREATE_DATA_TABLE = "CREATE TABLE IF NOT EXISTS `player_data` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL);";
+    private static final String CREATE_PLAYER_DATA = "INSERT IGNORE INTO `player_data` (`uuid`, `rank`, `balance`, `kills`, `deaths`) VALUES (?, ?, ?, ?, ?);";
     private final String address;
     private final int port;
     private final String name;
@@ -128,10 +128,11 @@ public class MySQL {
 
         try {
             if (set.next()) {
+                Rank rank = Rank.valueOf(set.getString("rank"));
                 int balance = set.getInt("balance");
                 int kills = set.getInt("kills");
                 int deaths = set.getInt("deaths");
-                return new PlayerData(this, player, balance, kills, deaths);
+                return new PlayerData(this, player, rank, balance, kills, deaths);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -151,6 +152,7 @@ public class MySQL {
 
             int i = 0;
             statement.setString(++i, player.getUniqueId().toString());
+            statement.setString(++i, Rank.DEFAULT.toString());
             statement.setInt(++i, 0);
             statement.setInt(++i, 0);
             statement.setInt(++i, 0);
