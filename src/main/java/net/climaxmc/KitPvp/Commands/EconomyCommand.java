@@ -16,38 +16,59 @@ public class EconomyCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length <= 1 || args.length >= 4) {
-            return false;
+            sender.sendMessage(ChatColor.RED + "/eco <give|take|set|reset> <player> <amount>");
+            return true;
         }
 
-        Player player = plugin.getServer().getPlayer(args[2]);
+        Player target = plugin.getServer().getPlayer(args[1]);
 
-        if (player == null) {
+        if (target == null) {
             sender.sendMessage(ChatColor.RED + "That player is not online!");
             return true;
         }
 
-        PlayerData playerData = plugin.getPlayerData(player);
+        PlayerData targetData = plugin.getPlayerData(target);
+
+        int amount = 0;
 
         if (args[0].equals("reset")) {
-            playerData.setBalance(0);
+            targetData.setBalance(amount);
+            sender.sendMessage(ChatColor.GREEN + "You set " + target.getName() + "'s balance to $" + targetData.getBalance() + ".");
+            target.sendMessage(ChatColor.GREEN + "Your balance was set to $" + targetData.getBalance() + ".");
+            return true;
         }
 
-        int amount;
+        if (args.length != 3) {
+            sender.sendMessage(ChatColor.RED + "/eco <give|take|set|reset> <player> <amount>");
+            return true;
+        }
 
         try {
             amount = Integer.valueOf(args[2]);
         } catch (NumberFormatException e) {
-            return false;
+            sender.sendMessage(ChatColor.RED + "/eco <give|take|set|reset> <player> <amount>");
+            return true;
         }
 
-        if (args[0].equals("give")) {
-            playerData.depositBalance(amount);
-        } else if (args[0].equals("take")) {
-            playerData.withdrawBalance(amount);
-        } else if (args[0].equals("set")) {
-            playerData.setBalance(amount);
-        } else {
-            return false;
+        switch (args[0]) {
+            case "give":
+                targetData.depositBalance(amount);
+                sender.sendMessage(ChatColor.GREEN + "$" + amount + " added to " + target.getName() + "'s account. New balance: $" + targetData.getBalance() + ".");
+                target.sendMessage(ChatColor.GREEN + "$" + amount + " has been added to your account.");
+                break;
+            case "take":
+                targetData.withdrawBalance(amount);
+                sender.sendMessage(ChatColor.GREEN + "$" + amount + " taken from " + target.getName() + "'s account. New balance: $" + targetData.getBalance() + ".");
+                target.sendMessage(ChatColor.GREEN + "$" + amount + " has been taken from your account.");
+                break;
+            case "set":
+                targetData.setBalance(amount);
+                sender.sendMessage(ChatColor.GREEN + "You set " + target.getName() + "'s balance to $" + targetData.getBalance() + ".");
+                target.sendMessage(ChatColor.GREEN + "Your balance was set to $" + targetData.getBalance() + ".");
+                break;
+            default:
+                sender.sendMessage(ChatColor.RED + "/eco <give|take|set|reset> <player> <amount>");
+                break;
         }
 
         return true;

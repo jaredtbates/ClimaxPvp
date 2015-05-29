@@ -17,7 +17,7 @@ commands:
     aliases: eco
     description: Economy management
     permission: ${project.artifactId}.Economy
-    usage: §a/eco <give|take|set|reset> <player> <amount>
+    usage: ""
   trails:
     descriptions: Displays the trails inventory
   spectate:
