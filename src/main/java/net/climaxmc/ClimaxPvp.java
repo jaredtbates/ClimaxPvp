@@ -18,6 +18,7 @@ import java.sql.SQLException;
 public class ClimaxPvp extends JavaPlugin {
     @Getter
     private static ClimaxPvp instance;
+    @Getter
     private MySQL mySQL = null;
     @Getter
     private String prefix = "§0§l[§cClimax§0§l] §r";
