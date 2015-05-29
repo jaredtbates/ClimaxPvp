@@ -3,6 +3,8 @@ main: ${project.groupId}.${project.artifactId}
 version: ${project.version}
 authors: [computerwizjared, jonhan2000]
 commands:
+  rank:
+    description: Rank management
   repair:
     description: Repairs your inventory
     permission: ${project.artifactId}.Repair
