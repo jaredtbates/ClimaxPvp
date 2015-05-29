@@ -10,15 +10,21 @@ public class PlayerData {
     @Getter
     private final OfflinePlayer player;
     @Getter
+    private int balance;
+    @Getter
     private int kills;
     @Getter
     private int deaths;
 
+    public void setBalance(int balance) {
+        mySQL.updateData("balance", Integer.toString(this.balance = balance), player);
+    }
+
     public void setKills(int kills) {
-        mySQL.updateData("Kills", Integer.toString(this.kills = kills), player);
+        mySQL.updateData("kills", Integer.toString(this.kills = kills), player);
     }
 
     public void setDeaths(int deaths) {
-        mySQL.updateData("Deaths", Integer.toString(this.deaths = deaths), player);
+        mySQL.updateData("deaths", Integer.toString(this.deaths = deaths), player);
     }
 }
