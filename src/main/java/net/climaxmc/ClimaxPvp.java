@@ -51,6 +51,7 @@ public class ClimaxPvp extends JavaPlugin {
         getCommand("repair").setExecutor(new RepairCommand(this));
         getCommand("spawn").setExecutor(new SpawnCommand(this));
         getCommand("balance").setExecutor(new BalanceCommand(this));
+        getCommand("economy").setExecutor(new EconomyCommand(this));
     }
 
     @Override
