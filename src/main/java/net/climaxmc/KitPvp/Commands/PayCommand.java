@@ -44,6 +44,12 @@ public class PayCommand implements CommandExecutor {
         }
 
         PlayerData playerData = plugin.getPlayerData(player);
+
+        if (amount > playerData.getBalance()) {
+            player.sendMessage(ChatColor.RED + "You do not have that much money!");
+            return true;
+        }
+
         playerData.withdrawBalance(amount);
         player.sendMessage(ChatColor.GREEN + "You have sent " + target.getName() + " $" + amount + ".");
 

@@ -26,7 +26,7 @@ public class EconomyCommand implements CommandExecutor {
         }
 
         if (args.length <= 1 || args.length >= 4) {
-            sender.sendMessage(ChatColor.RED + "/eco <give|take|set|reset> <player> <amount>");
+            sender.sendMessage(ChatColor.RED + "/" + label + " <give|take|set|reset> <player> <amount>");
             return true;
         }
 
@@ -49,14 +49,14 @@ public class EconomyCommand implements CommandExecutor {
         }
 
         if (args.length != 3) {
-            sender.sendMessage(ChatColor.RED + "/eco <give|take|set|reset> <player> <amount>");
+            sender.sendMessage(ChatColor.RED + "/" + label + " <give|take|set|reset> <player> <amount>");
             return true;
         }
 
         try {
             amount = Integer.parseInt(args[2]);
         } catch (NumberFormatException e) {
-            sender.sendMessage(ChatColor.RED + "/eco <give|take|set|reset> <player> <amount>");
+            sender.sendMessage(ChatColor.RED + "/" + label + " <give|take|set|reset> <player> <amount>");
             return true;
         }
 
@@ -77,7 +77,7 @@ public class EconomyCommand implements CommandExecutor {
                 target.sendMessage(ChatColor.GREEN + "Your balance was set to $" + targetData.getBalance() + ".");
                 break;
             default:
-                sender.sendMessage(ChatColor.RED + "/eco <give|take|set|reset> <player> <amount>");
+                sender.sendMessage(ChatColor.RED + "/" + label + " <give|take|set|reset> <player> <amount>");
                 break;
         }
 

@@ -26,3 +26,6 @@ commands:
     aliases: spec
     description: Spectate the pvp arena
     permission: ${project.artifactId}.Spectate
+  statistics:
+    aliases: stats
+    description: Displays a player's stats
