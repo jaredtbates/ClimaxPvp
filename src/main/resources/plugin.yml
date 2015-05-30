@@ -1,7 +1,7 @@
 name: ${project.artifactId}
 main: ${project.groupId}.${project.artifactId}
 version: ${project.version}
-authors: [computerwizjared, jonhan2000]
+authors: [computerwizjared, Jonhan_]
 commands:
   rank:
     description: Rank management
