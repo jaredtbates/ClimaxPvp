@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -10,7 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class HeavyKit extends Kit {
     public HeavyKit() {
-        super("Heavy", new ItemStack(Material.DIAMOND_CHESTPLATE), "Better Armor and Sword, but Slow.", KitType.DEFAULT);
+        super("Heavy", new ItemStack(Material.DIAMOND_CHESTPLATE), "Better Armor and Sword, but Slow.", ChatColor.GRAY);
     }
 
     public void wear(Player player) {

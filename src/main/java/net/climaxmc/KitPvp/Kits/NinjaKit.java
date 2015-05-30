@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -11,7 +12,7 @@ import org.bukkit.potion.PotionEffectType;
 public class NinjaKit extends Kit {
 
     public NinjaKit() {
-        super("Ninja", new ItemStack(Material.IRON_SWORD), "Be Fast with Kit Ninja!", KitType.DEFAULT);
+        super("Ninja", new ItemStack(Material.IRON_SWORD), "Be Fast with Kit Ninja!", ChatColor.GRAY);
     }
 
     public void wear(Player player) {

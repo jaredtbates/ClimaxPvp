@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -10,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class EndermanKit extends Kit {
     public EndermanKit() {
-        super("Enderman", new ItemStack(Material.ENDER_PEARL), "Teleport around like an enderman!", KitType.EXPERIENCED);
+        super("Enderman", new ItemStack(Material.ENDER_PEARL), "Teleport around like an enderman!", ChatColor.BLUE);
     }
 
     public void wear(Player player) {

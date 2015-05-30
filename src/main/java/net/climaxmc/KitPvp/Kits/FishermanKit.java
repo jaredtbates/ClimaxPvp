@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -10,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class FishermanKit extends Kit {
     public FishermanKit() {
-        super("Fisherman", new ItemStack(Material.FISHING_ROD), "Fish dem with kit Fisherman!", KitType.DEFAULT);
+        super("Fisherman", new ItemStack(Material.FISHING_ROD), "Fish dem with kit Fisherman!", ChatColor.GRAY);
     }
 
     public void wear(Player player) {

@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.API.Cooldowns;
 import net.climaxmc.KitPvp.Kit;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -13,7 +14,7 @@ import org.bukkit.util.Vector;
 public class IronGolemKit extends Kit {
 
     public IronGolemKit() {
-        super("Iron Golem", new ItemStack(Material.RED_ROSE), "Launch people in the air with Iron Golem!", KitType.DEFAULT);
+        super("Iron Golem", new ItemStack(Material.RED_ROSE), "Launch people in the air with Iron Golem!", ChatColor.GRAY);
     }
 
     public void wear(Player player) {

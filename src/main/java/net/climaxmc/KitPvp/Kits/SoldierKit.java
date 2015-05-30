@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.API.Cooldowns;
 import net.climaxmc.KitPvp.Kit;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -19,7 +20,7 @@ public class SoldierKit extends Kit {
     ArrayList<UUID> soldier = new ArrayList<UUID>();
 
     public SoldierKit() {
-        super("Soldier", new ItemStack(Material.FEATHER), "Take to the skies with Kit Soldier!", KitType.AMATEUR);
+        super("Soldier", new ItemStack(Material.FEATHER), "Take to the skies with Kit Soldier!", ChatColor.BLUE);
     }
 
     public void wear(Player player) {

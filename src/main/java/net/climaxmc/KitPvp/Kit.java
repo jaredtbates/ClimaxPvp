@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp;
 
 import lombok.Data;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -34,22 +35,22 @@ public abstract class Kit implements Listener, CommandExecutor {
     /**
      * Type of the kit
      */
-    private KitType type = KitType.DEFAULT;
+    private ChatColor color = ChatColor.GRAY;
 
     /**
      * Defines a kit
      *
      * @param name Name of the kit
      * @param item Item representing the kit
-     * @param type Type of the kit
+     * @param color Color of the kit
      */
-    public Kit(String name, ItemStack item, KitType type) {
+    public Kit(String name, ItemStack item, ChatColor color) {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName("§eKit " + name);
         item.setItemMeta(meta);
         this.name = name;
         this.item = item;
-        this.type = type;
+        this.color = color;
     }
 
     /**
@@ -58,9 +59,9 @@ public abstract class Kit implements Listener, CommandExecutor {
      * @param name Name of the kit
      * @param item Item representing the kit
      * @param lore Lore of the kit
-     * @param type Type of the kit
+     * @param color Color of the kit
      */
-    public Kit(String name, ItemStack item, String lore, KitType type) {
+    public Kit(String name, ItemStack item, String lore, ChatColor color) {
         ItemMeta meta = item.getItemMeta();
         ArrayList<String> lores = new ArrayList<String>();
         lores.add(lore);
@@ -70,7 +71,7 @@ public abstract class Kit implements Listener, CommandExecutor {
         this.name = name;
         this.item = item;
         this.lore = lore;
-        this.type = type;
+        this.color = color;
     }
 
     /**
@@ -124,12 +125,5 @@ public abstract class Kit implements Listener, CommandExecutor {
             }
         }
         return false;
-    }
-
-    /**
-     * Available types of kits
-     */
-    public enum KitType {
-        DEFAULT, AMATEUR, EXPERIENCED, ADVANCED, VETERAN
     }
 }

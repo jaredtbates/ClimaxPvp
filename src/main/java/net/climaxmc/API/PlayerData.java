@@ -118,12 +118,10 @@ public class PlayerData {
     public String getLevelColor() {
         if (kills >= 500) {
             return ChatColor.GOLD + "" + ChatColor.BOLD;
-        } else if (kills >= 400) {
-            return ChatColor.RED + "";
         } else if (kills >= 300) {
-            return ChatColor.GREEN + "";
+            return ChatColor.RED + "";
         } else if (kills >= 150) {
-            return ChatColor.DARK_PURPLE + "";
+            return ChatColor.GREEN + "";
         } else if (kills >= 50) {
             return ChatColor.BLUE + "";
         } else {

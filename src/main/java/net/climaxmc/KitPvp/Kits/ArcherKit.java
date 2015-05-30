@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -10,7 +11,7 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public class ArcherKit extends Kit {
     public ArcherKit() {
-        super("Archer", new ItemStack(Material.BOW), "Snipe them up!", KitType.DEFAULT);
+        super("Archer", new ItemStack(Material.BOW), "Snipe them up!", ChatColor.GRAY);
     }
 
     public void wear(Player player) {

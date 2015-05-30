@@ -16,21 +16,21 @@ public class KitManager {
     public static ArrayList<Kit> kits = new ArrayList<Kit>();
 
     public KitManager(ClimaxPvp plugin) {
-        // Default Kits
+        // Gray Kits
         kits.add(new PvpKit());
         kits.add(new HeavyKit());
         kits.add(new ArcherKit());
         kits.add(new IronGolemKit());
         kits.add(new FishermanKit());
         kits.add(new NinjaKit());
-        // Amateur Kits
+        // Blue Kits
         kits.add(new SoldierKit());
+        // Lime Kits
         kits.add(new EndermanKit());
-        // Experienced Kits
 
-        // Advanced Kits
+        // Red Kits
 
-        // Veteran Kits
+        // Gold Kits
 
 
         for (Kit kit : kits) {
