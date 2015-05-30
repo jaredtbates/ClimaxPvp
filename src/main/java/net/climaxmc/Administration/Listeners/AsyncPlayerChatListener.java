@@ -20,12 +20,15 @@ public class AsyncPlayerChatListener implements Listener {
     public void onAsyncPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         PlayerData playerData = plugin.getPlayerData(player);
+        int kills = playerData.getKills();
         Rank rank = playerData.getRank();
 
+        String level = playerData.getLevelColor() + Integer.toString(kills);
+
         if (playerData.hasRank(Rank.TRUSTED)) {
-            event.setFormat(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "{" + rank.getColor() + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + ChatColor.RESET + " %s" + ChatColor.RESET + ": %s");
+            event.setFormat(level + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "{" + rank.getColor() + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
         } else {
-            event.setFormat(ChatColor.RESET + "%s" + ChatColor.RESET + ": %s");
+            event.setFormat(level + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
         }
     }
 }

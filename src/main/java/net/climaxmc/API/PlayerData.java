@@ -3,6 +3,7 @@ package net.climaxmc.API;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import net.climaxmc.API.Events.PlayerBalanceChangeEvent;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
@@ -108,5 +109,25 @@ public class PlayerData {
      */
     public void removeDeaths(int amount) {
         setDeaths(deaths - amount);
+    }
+
+    /**
+     * Gets player's level color
+     * @return Player's level color
+     */
+    public String getLevelColor() {
+        if (kills >= 500) {
+            return ChatColor.GOLD + "" + ChatColor.BOLD;
+        } else if (kills >= 400) {
+            return ChatColor.RED + "";
+        } else if (kills >= 300) {
+            return ChatColor.GREEN + "";
+        } else if (kills >= 150) {
+            return ChatColor.DARK_PURPLE + "";
+        } else if (kills >= 50) {
+            return ChatColor.BLUE + "";
+        } else {
+            return ChatColor.GRAY + "";
+        }
     }
 }
