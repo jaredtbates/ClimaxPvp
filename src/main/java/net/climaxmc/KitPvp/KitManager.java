@@ -20,18 +20,20 @@ public class KitManager {
         kits.add(new PvpKit());
         kits.add(new HeavyKit());
         kits.add(new ArcherKit());
-        kits.add(new IronGolemKit());
         kits.add(new FishermanKit());
         kits.add(new NinjaKit());
         // Blue Kits
-        kits.add(new SoldierKit());
-        // Lime Kits
         kits.add(new EndermanKit());
 
+        // Green Kits
+        kits.add(new IronGolemKit());
+
         // Red Kits
+        kits.add(new SoldierKit());
 
         // Gold Kits
 
+        // Other Kits
 
         for (Kit kit : kits) {
             plugin.getServer().getPluginManager().registerEvents(kit, plugin);

@@ -46,7 +46,7 @@ public abstract class Kit implements Listener, CommandExecutor {
      */
     public Kit(String name, ItemStack item, ChatColor color) {
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName("§eKit " + name);
+        meta.setDisplayName(color + "Kit " + name);
         item.setItemMeta(meta);
         this.name = name;
         this.item = item;
@@ -66,7 +66,7 @@ public abstract class Kit implements Listener, CommandExecutor {
         ArrayList<String> lores = new ArrayList<String>();
         lores.add(lore);
         meta.setLore(lores);
-        meta.setDisplayName("§eKit " + name);
+        meta.setDisplayName(color + "Kit " + name);
         item.setItemMeta(meta);
         this.name = name;
         this.item = item;
@@ -108,7 +108,7 @@ public abstract class Kit implements Listener, CommandExecutor {
                 }
                 player.getInventory().clear();
                 wear(player);
-                player.sendMessage("§6You have chosen §a" + getName());
+                player.sendMessage("§6You have chosen " + getColor() + getName());
             } else {
                 player.sendMessage("§cYou have not died yet!");
             }

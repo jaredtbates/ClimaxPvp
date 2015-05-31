@@ -4,6 +4,7 @@ import net.climaxmc.ClimaxPvp;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ItemSpawnEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class ItemSpawnListener implements Listener {
     ClimaxPvp plugin;
@@ -14,6 +15,11 @@ public class ItemSpawnListener implements Listener {
 
     @EventHandler
     public void onItemSpawn(final ItemSpawnEvent event) {
-        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> event.getEntity().remove(), 40);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                event.getEntity().remove();
+            }
+        }.runTaskLater(plugin, 40);
     }
 }

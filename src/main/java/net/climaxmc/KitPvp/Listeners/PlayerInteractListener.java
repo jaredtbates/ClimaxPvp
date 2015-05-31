@@ -36,54 +36,115 @@ public class PlayerInteractListener implements Listener {
 
         if (item != null) {
             if (item.getType().equals(Material.NETHER_STAR)) {
+                // TODO: Clean up this code! It sucks!
                 ItemStack goldKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 1);
                 ItemMeta goldKitsMeta = goldKits.getItemMeta();
-                goldKitsMeta.setDisplayName(ChatColor.GOLD + "Gold Kits");
+                goldKitsMeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kits");
                 goldKits.setItemMeta(goldKitsMeta);
-                KitPvp.kitSelector.setItem(1, goldKits);
-                KitPvp.kitSelector.setItem(7, goldKits);
+                KitPvp.kitSelectorInventory.setItem(1, goldKits);
+                KitPvp.kitSelectorInventory.setItem(7, goldKits);
 
                 ItemStack redKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 14);
                 ItemMeta redKitsMeta = redKits.getItemMeta();
                 redKitsMeta.setDisplayName(ChatColor.RED + "Red Kits");
                 redKits.setItemMeta(redKitsMeta);
-                KitPvp.kitSelector.setItem(10, redKits);
-                KitPvp.kitSelector.setItem(16, redKits);
+                KitPvp.kitSelectorInventory.setItem(10, redKits);
+                KitPvp.kitSelectorInventory.setItem(16, redKits);
 
-                ItemStack limeKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 5);
-                ItemMeta limeKitsMeta = limeKits.getItemMeta();
-                limeKitsMeta.setDisplayName(ChatColor.GREEN + "Lime Kits");
-                limeKits.setItemMeta(limeKitsMeta);
-                KitPvp.kitSelector.setItem(19, limeKits);
-                KitPvp.kitSelector.setItem(25, limeKits);
+                ItemStack greenKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 5);
+                ItemMeta greenKitsMeta = greenKits.getItemMeta();
+                greenKitsMeta.setDisplayName(ChatColor.GREEN + "Green Kits");
+                greenKits.setItemMeta(greenKitsMeta);
+                KitPvp.kitSelectorInventory.setItem(19, greenKits);
+                KitPvp.kitSelectorInventory.setItem(25, greenKits);
 
                 ItemStack blueKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 3);
                 ItemMeta blueKitsMeta = blueKits.getItemMeta();
                 blueKitsMeta.setDisplayName(ChatColor.BLUE + "Blue Kits");
                 blueKits.setItemMeta(blueKitsMeta);
-                KitPvp.kitSelector.setItem(28, blueKits);
-                KitPvp.kitSelector.setItem(34, blueKits);
+                KitPvp.kitSelectorInventory.setItem(28, blueKits);
+                KitPvp.kitSelectorInventory.setItem(34, blueKits);
 
                 ItemStack grayKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 7);
                 ItemMeta grayKitsMeta = grayKits.getItemMeta();
                 grayKitsMeta.setDisplayName(ChatColor.GRAY + "Gray Kits");
                 grayKits.setItemMeta(grayKitsMeta);
-                KitPvp.kitSelector.setItem(37, grayKits);
-                KitPvp.kitSelector.setItem(42, grayKits);
+                KitPvp.kitSelectorInventory.setItem(37, grayKits);
+                KitPvp.kitSelectorInventory.setItem(43, grayKits);
 
-                int goldSlot = 0, redSlot = 0, limeSlot = 0, blueSlot = 0, graySlot = 0;
+                ItemStack goldKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 1);
+                ItemMeta goldKitsGlassMeta = goldKits.getItemMeta();
+                goldKitsGlassMeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kit");
+                goldKitsGlass.setItemMeta(goldKitsGlassMeta);
+                for (int i = 2; i < 7; i++) {
+                    KitPvp.kitSelectorInventory.setItem(i, goldKitsGlass);
+                }
+
+                ItemStack redKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
+                ItemMeta redKitsGlassMeta = goldKits.getItemMeta();
+                redKitsGlassMeta.setDisplayName(ChatColor.RED + "Red Kit");
+                redKitsGlass.setItemMeta(redKitsGlassMeta);
+                for (int i = 11; i < 16; i++) {
+                    KitPvp.kitSelectorInventory.setItem(i, redKitsGlass);
+                }
+
+                ItemStack greenKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 5);
+                ItemMeta greenKitsGlassMeta = goldKits.getItemMeta();
+                greenKitsGlassMeta.setDisplayName(ChatColor.GREEN + "Green Kit");
+                greenKitsGlass.setItemMeta(greenKitsGlassMeta);
+                for (int i = 20; i < 25; i++) {
+                    KitPvp.kitSelectorInventory.setItem(i, greenKitsGlass);
+                }
+
+                ItemStack blueKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 3);
+                ItemMeta blueKitsGlassMeta = goldKits.getItemMeta();
+                blueKitsGlassMeta.setDisplayName(ChatColor.BLUE + "Blue Kit");
+                blueKitsGlass.setItemMeta(blueKitsGlassMeta);
+                for (int i = 29; i < 34; i++) {
+                    KitPvp.kitSelectorInventory.setItem(i, blueKitsGlass);
+                }
+
+                ItemStack grayKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
+                ItemMeta grayKitsGlassMeta = goldKits.getItemMeta();
+                grayKitsGlassMeta.setDisplayName(ChatColor.GRAY + "Gray Kit");
+                grayKitsGlass.setItemMeta(grayKitsGlassMeta);
+                for (int i = 38; i < 42; i++) {
+                    KitPvp.kitSelectorInventory.setItem(i, grayKitsGlass);
+                }
+
+                int goldSlot = 0, redSlot = 10, limeSlot = 19, blueSlot = 28, graySlot = 37;
 
                 for (Kit kit : KitManager.kits) {
                     if (kit.getColor().equals(ChatColor.GOLD)) {
-                        KitPvp.kitSelector.setItem(++goldSlot, kit.getItem());
+                        if (playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD)) {
+                            KitPvp.kitSelectorInventory.setItem(++goldSlot, kit.getItem());
+                        }
                     } else if (kit.getColor().equals(ChatColor.RED)) {
-                        KitPvp.kitSelector.setItem(++redSlot + 10, kit.getItem());
+                        if (playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD) ||
+                                playerData.getLevelColor().equals(ChatColor.RED + "")) {
+                            KitPvp.kitSelectorInventory.setItem(++redSlot, kit.getItem());
+                        }
                     } else if (kit.getColor().equals(ChatColor.GREEN)) {
-                        KitPvp.kitSelector.setItem(++limeSlot + 19, kit.getItem());
+                        if (playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD) ||
+                                playerData.getLevelColor().equals(ChatColor.RED + "") ||
+                                playerData.getLevelColor().equals(ChatColor.GREEN + "")) {
+                            KitPvp.kitSelectorInventory.setItem(++limeSlot, kit.getItem());
+                        }
                     } else if (kit.getColor().equals(ChatColor.BLUE)) {
-                        KitPvp.kitSelector.setItem(++blueSlot + 28, kit.getItem());
+                        if (playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD) ||
+                                playerData.getLevelColor().equals(ChatColor.RED + "") ||
+                                playerData.getLevelColor().equals(ChatColor.GREEN + "") ||
+                                playerData.getLevelColor().equals(ChatColor.BLUE + "")) {
+                            KitPvp.kitSelectorInventory.setItem(++blueSlot, kit.getItem());
+                        }
                     } else if (kit.getColor().equals(ChatColor.GRAY)) {
-                        KitPvp.kitSelector.setItem(++graySlot + 37, kit.getItem());
+                        if (playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD) ||
+                                playerData.getLevelColor().equals(ChatColor.RED + "") ||
+                                playerData.getLevelColor().equals(ChatColor.GREEN + "") ||
+                                playerData.getLevelColor().equals(ChatColor.BLUE + "") ||
+                                playerData.getLevelColor().equals(ChatColor.GRAY + "")) {
+                            KitPvp.kitSelectorInventory.setItem(++graySlot, kit.getItem());
+                        }
                     }
                 }
 
@@ -91,9 +152,9 @@ public class PlayerInteractListener implements Listener {
                 ItemMeta moreKitsMeta = moreKits.getItemMeta();
                 moreKitsMeta.setDisplayName(ChatColor.AQUA + "More Kits");
                 moreKits.setItemMeta(moreKitsMeta);
-                KitPvp.kitSelector.setItem(53, moreKits);
+                KitPvp.kitSelectorInventory.setItem(53, moreKits);
 
-                player.openInventory(KitPvp.kitSelector);
+                player.openInventory(KitPvp.kitSelectorInventory);
             } else if (item.getType().equals(Material.SEEDS)) {
                 new TrailsInventory(player);
             }

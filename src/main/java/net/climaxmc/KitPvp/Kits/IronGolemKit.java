@@ -14,7 +14,7 @@ import org.bukkit.util.Vector;
 public class IronGolemKit extends Kit {
 
     public IronGolemKit() {
-        super("Iron Golem", new ItemStack(Material.RED_ROSE), "Launch people in the air with Iron Golem!", ChatColor.GRAY);
+        super("Iron Golem", new ItemStack(Material.RED_ROSE), "Launch people in the air with Iron Golem!", ChatColor.GREEN);
     }
 
     public void wear(Player player) {

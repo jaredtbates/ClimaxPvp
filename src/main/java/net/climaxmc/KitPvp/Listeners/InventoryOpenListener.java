@@ -21,8 +21,8 @@ public class InventoryOpenListener implements Listener {
         Player player = (Player) event.getPlayer();
         if (event.getInventory().getHolder() instanceof Chest || event.getInventory().getHolder() instanceof DoubleChest) {
             event.setCancelled(true);
-            Kit.addSoup(KitPvp.soup, 0, 53);
-            player.openInventory(KitPvp.soup);
+            Kit.addSoup(KitPvp.soupInventory, 0, 53);
+            player.openInventory(KitPvp.soupInventory);
         }
     }
 }

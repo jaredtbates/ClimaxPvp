@@ -20,7 +20,7 @@ public class InventoryClickListener implements Listener {
         Inventory inventory = event.getInventory();
         final Player player = (Player) event.getWhoClicked();
         if (inventory != null && event.getCurrentItem() != null && event.getCurrentItem().getItemMeta() != null && event.getCurrentItem().getItemMeta().getDisplayName() != null) {
-            if (inventory.getName().equals(KitPvp.kitSelector.getName())) {
+            if (inventory.getName().equals(KitPvp.kitSelectorInventory.getName())) {
                 for (Kit kit : KitManager.kits) {
                     if (event.getCurrentItem().getItemMeta().getDisplayName().equals(kit.getItem().getItemMeta().getDisplayName())) {
                         kit.wearCheckPerms(player);
