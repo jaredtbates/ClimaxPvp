@@ -22,6 +22,7 @@ public class BalanceCommand implements CommandExecutor {
         Player player = (Player) sender;
         PlayerData playerData = plugin.getPlayerData(player);
         player.sendMessage(ChatColor.GREEN + "Balance: " + ChatColor.RED + "$" + playerData.getBalance());
+        player.sendMessage(ChatColor.GREEN + "Levels: " + ChatColor.RED + playerData.getKills());
 
         return true;
     }
