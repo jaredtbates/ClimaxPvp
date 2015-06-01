@@ -29,3 +29,6 @@ commands:
   statistics:
     aliases: stats
     description: Displays a player's stats
+  nickname:
+    aliases: nick
+    description: Create a nickname
