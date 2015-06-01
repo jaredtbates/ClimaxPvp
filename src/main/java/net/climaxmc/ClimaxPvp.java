@@ -4,7 +4,6 @@ import lombok.Getter;
 import net.climaxmc.API.MySQL;
 import net.climaxmc.API.PlayerData;
 import net.climaxmc.Administration.Administration;
-import net.climaxmc.Creative.Creative;
 import net.climaxmc.Donations.Donations;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.OneVsOne.OneVsOne;
@@ -43,7 +42,6 @@ public class ClimaxPvp extends JavaPlugin {
         new KitPvp(this);
         new OneVsOne(this);
         new Donations(this);
-        new Creative(this);
         new Administration(this);
     }
 
