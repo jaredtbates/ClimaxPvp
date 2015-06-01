@@ -13,6 +13,8 @@ import java.util.UUID;
 
 public class Donations {
     @Getter
+    private String apiKey = "2108f49bd9d9e27ca6a3f7230cf36649";
+    @Getter
     private HashMap<UUID, ParticleEffect.ParticleData> particlesEnabled = new HashMap<UUID, ParticleEffect.ParticleData>();
 
     public Donations(ClimaxPvp plugin) {

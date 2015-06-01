@@ -14,6 +14,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Collections;
+
 public class PlayerInteractListener implements Listener {
     private ClimaxPvp plugin;
 
@@ -26,6 +28,10 @@ public class PlayerInteractListener implements Listener {
         Player player = event.getPlayer();
         PlayerData playerData = plugin.getPlayerData(player);
         ItemStack item = event.getItem();
+
+        if (event.getAction() == Action.PHYSICAL && event.getClickedBlock().getType() == Material.SOIL) {
+            event.setCancelled(true);
+        }
 
         if (player.getItemInHand().getType() == Material.MUSHROOM_SOUP && player.getHealth() < 20.0D) {
             if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
@@ -75,6 +81,7 @@ public class PlayerInteractListener implements Listener {
                 ItemStack goldKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 1);
                 ItemMeta goldKitsGlassMeta = goldKits.getItemMeta();
                 goldKitsGlassMeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kit");
+                goldKitsGlassMeta.setLore(Collections.singletonList(ChatColor.GOLD + "" + ChatColor.ITALIC + "Unlocked at Level 500"));
                 goldKitsGlass.setItemMeta(goldKitsGlassMeta);
                 for (int i = 2; i < 7; i++) {
                     KitPvp.kitSelectorInventory.setItem(i, goldKitsGlass);
@@ -83,6 +90,7 @@ public class PlayerInteractListener implements Listener {
                 ItemStack redKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
                 ItemMeta redKitsGlassMeta = goldKits.getItemMeta();
                 redKitsGlassMeta.setDisplayName(ChatColor.RED + "Red Kit");
+                redKitsGlassMeta.setLore(Collections.singletonList(ChatColor.RED + "" + ChatColor.ITALIC + "Unlocked at Level 300"));
                 redKitsGlass.setItemMeta(redKitsGlassMeta);
                 for (int i = 11; i < 16; i++) {
                     KitPvp.kitSelectorInventory.setItem(i, redKitsGlass);
@@ -91,6 +99,7 @@ public class PlayerInteractListener implements Listener {
                 ItemStack greenKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 5);
                 ItemMeta greenKitsGlassMeta = goldKits.getItemMeta();
                 greenKitsGlassMeta.setDisplayName(ChatColor.GREEN + "Green Kit");
+                greenKitsGlassMeta.setLore(Collections.singletonList(ChatColor.GREEN + "" + ChatColor.ITALIC + "Unlocked at Level 150"));
                 greenKitsGlass.setItemMeta(greenKitsGlassMeta);
                 for (int i = 20; i < 25; i++) {
                     KitPvp.kitSelectorInventory.setItem(i, greenKitsGlass);
@@ -99,6 +108,7 @@ public class PlayerInteractListener implements Listener {
                 ItemStack blueKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 3);
                 ItemMeta blueKitsGlassMeta = goldKits.getItemMeta();
                 blueKitsGlassMeta.setDisplayName(ChatColor.BLUE + "Blue Kit");
+                blueKitsGlassMeta.setLore(Collections.singletonList(ChatColor.BLUE + "" + ChatColor.ITALIC + "Unlocked at Level 50"));
                 blueKitsGlass.setItemMeta(blueKitsGlassMeta);
                 for (int i = 29; i < 34; i++) {
                     KitPvp.kitSelectorInventory.setItem(i, blueKitsGlass);
@@ -107,6 +117,7 @@ public class PlayerInteractListener implements Listener {
                 ItemStack grayKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
                 ItemMeta grayKitsGlassMeta = goldKits.getItemMeta();
                 grayKitsGlassMeta.setDisplayName(ChatColor.GRAY + "Gray Kit");
+                grayKitsGlassMeta.setLore(Collections.singletonList(ChatColor.GRAY + "" + ChatColor.ITALIC + "Unlocked at Level 0"));
                 grayKitsGlass.setItemMeta(grayKitsGlassMeta);
                 for (int i = 38; i < 42; i++) {
                     KitPvp.kitSelectorInventory.setItem(i, grayKitsGlass);
