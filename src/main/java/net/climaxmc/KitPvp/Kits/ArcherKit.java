@@ -63,7 +63,13 @@ public class ArcherKit extends Kit {
         }
 
         Player player = (Player) event.getEntity();
-        double vel = event.getProjectile().getVelocity().length() * (0.1D + 0.1D);
+
+        if (player.isSneaking()) {
+            return;
+        }
+
+        double vel = event.getProjectile().getVelocity().length() * (0.1D + 0.1D * 5);
+        // Knock player back
         velocity(player, player.getLocation().getDirection().multiply(-1), vel,
                 false, 0.0D, 0.2D, 0.8D, true);
     }
