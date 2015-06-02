@@ -5,9 +5,13 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.util.Vector;
 
 public class ArcherKit extends Kit {
     public ArcherKit() {
@@ -50,5 +54,45 @@ public class ArcherKit extends Kit {
         player.getInventory().addItem(bow);
         addSoup(player.getInventory(), 2, 34);
         player.getInventory().addItem(new ItemStack(Material.ARROW, 1));
+    }
+
+    @EventHandler
+    public void onEntityShootBow(EntityShootBowEvent event) {
+        if (!(event.getEntity() instanceof Player)) {
+            return;
+        }
+
+        Player player = (Player) event.getEntity();
+        double vel = event.getProjectile().getVelocity().length() * (0.1D + 0.1D);
+        velocity(player, player.getLocation().getDirection().multiply(-1), vel,
+                false, 0.0D, 0.2D, 0.8D, true);
+    }
+
+    private void velocity(Entity ent, Vector vec, double str, boolean ySet, double yBase, double yAdd, double yMax, boolean groundBoost)
+    {
+        if ((Double.isNaN(vec.getX())) || (Double.isNaN(vec.getY())) || (Double.isNaN(vec.getZ())) || (vec.length() == 0.0D)) {
+            return;
+        }
+
+        if (ySet) {
+            vec.setY(yBase);
+        }
+
+        vec.normalize();
+        vec.multiply(str);
+
+
+        vec.setY(vec.getY() + yAdd);
+
+
+        if (vec.getY() > yMax) {
+            vec.setY(yMax);
+        }
+        if (groundBoost) {
+            vec.setY(vec.getY() + 0.2D);
+        }
+
+        ent.setFallDistance(0.0F);
+        ent.setVelocity(vec);
     }
 }
