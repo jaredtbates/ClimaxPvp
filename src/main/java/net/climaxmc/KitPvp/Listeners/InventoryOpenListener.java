@@ -6,6 +6,7 @@ import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.block.Chest;
 import org.bukkit.block.DoubleChest;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 
@@ -16,7 +17,7 @@ public class InventoryOpenListener implements Listener {
         this.plugin = plugin;
     }
 
-    //@EventHandler
+    @EventHandler
     public void onInventoryOpenEvent(InventoryOpenEvent event) {
         Player player = (Player) event.getPlayer();
         if (event.getInventory().getHolder() instanceof Chest || event.getInventory().getHolder() instanceof DoubleChest) {
