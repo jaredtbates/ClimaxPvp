@@ -7,9 +7,11 @@ import org.json.JSONArray;
 
 public class CommandChecker extends BukkitRunnable {
     private ClimaxPvp plugin;
+    private String apiKey = "";
 
     public CommandChecker(ClimaxPvp plugin) {
         this.plugin = plugin;
+        this.apiKey = plugin.getConfig().getString("Donations.APIKey");
     }
 
     @Override
@@ -17,8 +19,8 @@ public class CommandChecker extends BukkitRunnable {
         String pending;
         String expiry;
         try {
-            pending = JsonManager.getJSON("http://www.minecraftmarket.com/api/" + Donations + "/pending");
-            expiry = JsonManager.getJSON("http://www.minecraftmarket.com/api/" + plugin.ApiKey + "/expiry");
+            pending = JsonManager.getJSON("http://www.minecraftmarket.com/api/" + apiKey + "/pending");
+            expiry = JsonManager.getJSON("http://www.minecraftmarket.com/api/" + apiKey + "/expiry");
 
             if (pending != null) {
                 JSONArray pendingArray = new JSONObject(pending).optJSONArray("result");
@@ -29,10 +31,10 @@ public class CommandChecker extends BukkitRunnable {
                         for (int c = 0; c < commands.length(); c++) {
                             String cmd = commands.getJSONObject(c).getString("command");
                             int cmdID = commands.getJSONObject(c).getInt("id");
-                            if (JsonManager.getJSON("http://www.minecraftmarket.com/api/" + plugin.ApiKey + "/executed/" + cmdID) != null) {
+                            if (JsonManager.getJSON("http://www.minecraftmarket.com/api/" + apiKey + "/executed/" + cmdID) != null) {
                                 if (!cmd.equals("")) {
                                     plugin.getLogger().info("Executing \"/" + cmd + "\" on behalf of " + username);
-                                    plugin.executeCommand(cmd);
+                                    executeCommand(cmd);
                                 }
                             }
                         }
@@ -48,9 +50,9 @@ public class CommandChecker extends BukkitRunnable {
                         for (int c = 0; c < commands.length(); c++) {
                             String cmd = commands.getJSONObject(c).getString("command");
                             int cmdID = commands.getJSONObject(c).getInt("id");
-                            if (JsonManager.getJSON("http://www.minecraftmarket.com/api/" + plugin.ApiKey + "/executed/" + cmdID) != null) {
+                            if (JsonManager.getJSON("http://www.minecraftmarket.com/api/" + apiKey + "/executed/" + cmdID) != null) {
                                 plugin.getLogger().info("Executing \"/" + cmd + "\" on behalf of " + username);
-                                plugin.executeCommand(cmd);
+                                executeCommand(cmd);
                             }
                         }
                     }
@@ -59,5 +61,9 @@ public class CommandChecker extends BukkitRunnable {
 
         } catch (Exception ignored) {
         }
+    }
+
+    private void executeCommand(final String cmd) {
+        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), cmd));
     }
 }

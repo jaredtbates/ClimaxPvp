@@ -4,3 +4,5 @@ Database:
   Database: ClimaxPvp
   Username: root
   Password: password
+Donations:
+  APIKey: MINECRAFT_MARKET_API_KEY
