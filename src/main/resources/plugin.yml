@@ -32,3 +32,5 @@ commands:
   nickname:
     aliases: nick
     description: Create a nickname
+  admin:
+    description: Enables admin access to all kits

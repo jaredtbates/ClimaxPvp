@@ -1,5 +1,6 @@
 package net.climaxmc.Administration;
 
+import net.climaxmc.Administration.Commands.AdminCommand;
 import net.climaxmc.Administration.Commands.RankCommand;
 import net.climaxmc.Administration.Listeners.AsyncPlayerChatListener;
 import net.climaxmc.Administration.Listeners.PlayerCommandPreprocessListener;
@@ -12,6 +13,7 @@ public class Administration {
         plugin.getServer().getPluginManager().registerEvents(new AsyncPlayerChatListener(plugin), plugin);
 
         // Register commands
+        plugin.getCommand("admin").setExecutor(new AdminCommand(plugin));
         plugin.getCommand("rank").setExecutor(new RankCommand(plugin));
     }
 }

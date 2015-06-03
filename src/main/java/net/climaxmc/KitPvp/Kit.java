@@ -1,6 +1,8 @@
 package net.climaxmc.KitPvp;
 
 import lombok.Data;
+import net.climaxmc.API.PlayerData;
+import net.climaxmc.ClimaxPvp;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.*;
@@ -100,7 +102,8 @@ public abstract class Kit implements Listener, CommandExecutor {
      * @param player Player to wear kit
      */
     public void wearCheckPerms(Player player) {
-        if (player.hasPermission("ClimaxPvp.Kit." + getName().replaceAll("\\s+", ""))) {
+        PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
+        if (player.hasPermission("ClimaxPvp.Kit." + getName().replaceAll("\\s+", "")) || playerData.hasData("Admin Mode")) {
             if (!KitPvp.inKit.contains(player.getUniqueId())) {
                 KitPvp.inKit.add(player.getUniqueId());
                 for (PotionEffect effect : player.getActivePotionEffects()) {
