@@ -1,7 +1,14 @@
 package net.climaxmc.KitPvp.Kits;
 
-/**
- * Created by Joshua on 6/3/2015.
- */
-public class WitherKit extends Kit{
+import net.climaxmc.KitPvp.Kit;
+import org.bukkit.entity.Player;
+
+public class WitherKit extends Kit {
+    public WitherKit() {
+        super("Wither", null, null, null);
+    }
+
+    public void wear(Player player) {
+
+    }
 }

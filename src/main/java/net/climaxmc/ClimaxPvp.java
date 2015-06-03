@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
+import java.util.*;
 
 public class ClimaxPvp extends JavaPlugin {
     @Getter
@@ -21,6 +22,8 @@ public class ClimaxPvp extends JavaPlugin {
     private MySQL mySQL = null;
     @Getter
     private String prefix = "§0§l[§cClimax§0§l] §r";
+    @Getter
+    private Map<UUID, Map<String, Object>> temporaryPlayerData = new HashMap<>();
 
     public void onEnable() {
         // Initialize Instance
@@ -43,6 +46,10 @@ public class ClimaxPvp extends JavaPlugin {
         new OneVsOne(this);
         new Donations(this);
         new Administration(this);
+
+        for (Player player : getServer().getOnlinePlayers()) {
+            temporaryPlayerData.put(player.getUniqueId(), new HashMap<>());
+        }
     }
 
     @Override
@@ -67,9 +74,22 @@ public class ClimaxPvp extends JavaPlugin {
         return mySQL.getPlayerData(player);
     }
 
+    /**
+     * Respawns a player
+     * @param player Player to respawn
+     */
     public void respawn(Player player) {
         player.spigot().respawn();
         player.teleport(player.getWorld().getSpawnLocation());
         getServer().getPluginManager().callEvent(new PlayerRespawnEvent(player, player.getWorld().getSpawnLocation(), false));
+    }
+
+    /**
+     * Gets temporary data of a player (clears on player join)
+     * @param player Player to get data of
+     * @return Temporary data of player
+     */
+    public Map<String, Object> getTemporaryPlayerData(OfflinePlayer player) {
+        return temporaryPlayerData.get(player.getUniqueId());
     }
 }

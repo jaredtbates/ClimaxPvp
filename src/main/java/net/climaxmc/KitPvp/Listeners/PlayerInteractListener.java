@@ -127,29 +127,34 @@ public class PlayerInteractListener implements Listener {
 
                 for (Kit kit : KitManager.kits) {
                     if (kit.getColor().equals(ChatColor.GOLD)) {
-                        if (playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD)) {
+                        if (playerData.hasData("Admin Mode") ||
+                                playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD)) {
                             KitPvp.kitSelectorInventory.setItem(++goldSlot, kit.getItem());
                         }
                     } else if (kit.getColor().equals(ChatColor.RED)) {
-                        if (playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD) ||
+                        if (playerData.hasData("Admin Mode") ||
+                                playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD) ||
                                 playerData.getLevelColor().equals(ChatColor.RED + "")) {
                             KitPvp.kitSelectorInventory.setItem(++redSlot, kit.getItem());
                         }
                     } else if (kit.getColor().equals(ChatColor.GREEN)) {
-                        if (playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD) ||
+                        if (playerData.hasData("Admin Mode") ||
+                                playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD) ||
                                 playerData.getLevelColor().equals(ChatColor.RED + "") ||
                                 playerData.getLevelColor().equals(ChatColor.GREEN + "")) {
                             KitPvp.kitSelectorInventory.setItem(++limeSlot, kit.getItem());
                         }
                     } else if (kit.getColor().equals(ChatColor.BLUE)) {
-                        if (playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD) ||
+                        if (playerData.hasData("Admin Mode") ||
+                                playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD) ||
                                 playerData.getLevelColor().equals(ChatColor.RED + "") ||
                                 playerData.getLevelColor().equals(ChatColor.GREEN + "") ||
                                 playerData.getLevelColor().equals(ChatColor.BLUE + "")) {
                             KitPvp.kitSelectorInventory.setItem(++blueSlot, kit.getItem());
                         }
                     } else if (kit.getColor().equals(ChatColor.GRAY)) {
-                        if (playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD) ||
+                        if (playerData.hasData("Admin Mode") ||
+                                playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD) ||
                                 playerData.getLevelColor().equals(ChatColor.RED + "") ||
                                 playerData.getLevelColor().equals(ChatColor.GREEN + "") ||
                                 playerData.getLevelColor().equals(ChatColor.BLUE + "") ||

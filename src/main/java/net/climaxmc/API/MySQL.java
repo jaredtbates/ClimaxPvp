@@ -1,9 +1,11 @@
 package net.climaxmc.API;
 
+import net.climaxmc.ClimaxPvp;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 import java.sql.*;
+import java.util.HashMap;
 
 /**
  * MySQL Tools

@@ -28,19 +28,23 @@ public class AdminCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length != 0) {
+        if (args.length != 1) {
             player.sendMessage(ChatColor.RED + "/admin <on/off>");
             return true;
         }
 
-        if (args[0].equals("on")) {
-            playerData.addData("Admin Mode", true);
-            player.sendMessage(ChatColor.GREEN + "Admin access to all kits has been enabled!");
-        } else if (args[0].equals("off")) {
-            playerData.removeData("Admin Mode");
-            player.sendMessage(ChatColor.GREEN + "Admin access to all kits has been " + ChatColor.RED + "disabled " + ChatColor.GREEN + "!");
-        } else {
-            player.sendMessage(ChatColor.RED + "/admin <on/off>");
+        switch (args[0]) {
+            case "on":
+                playerData.addData("Admin Mode", true);
+                player.sendMessage(ChatColor.GREEN + "Admin access to all kits has been enabled!");
+                break;
+            case "off":
+                playerData.removeData("Admin Mode");
+                player.sendMessage(ChatColor.GREEN + "Admin access to all kits has been " + ChatColor.RED + "disabled" + ChatColor.GREEN + "!");
+                break;
+            default:
+                player.sendMessage(ChatColor.RED + "/admin <on/off>");
+                break;
         }
 
         return true;

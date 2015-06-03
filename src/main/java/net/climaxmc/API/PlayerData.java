@@ -1,12 +1,12 @@
 package net.climaxmc.API;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import net.climaxmc.API.Events.PlayerBalanceChangeEvent;
+import net.climaxmc.ClimaxPvp;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-
-import java.util.HashMap;
 
 @Data
 @AllArgsConstructor
@@ -17,8 +17,6 @@ public class PlayerData {
     private int balance;
     private int kills;
     private int deaths;
-
-    private final HashMap<String, Object> data = new HashMap<>();
 
     /**
      * Sets the player's rank
@@ -134,7 +132,7 @@ public class PlayerData {
      * @return Value of temporary data
      */
     public Object getData(String key) {
-        return this.data.get(key);
+        return ClimaxPvp.getInstance().getTemporaryPlayerData(player).get(key);
     }
 
     /**
@@ -143,7 +141,7 @@ public class PlayerData {
      * @return If player has temporary data
      */
     public boolean hasData(String key) {
-        return this.data.containsKey(key);
+        return ClimaxPvp.getInstance().getTemporaryPlayerData(player).containsKey(key);
     }
 
     /**
@@ -152,7 +150,7 @@ public class PlayerData {
      * @param value Value of temporary data to add
      */
     public void addData(String key, Object value) {
-        this.data.put(key, value);
+        ClimaxPvp.getInstance().getTemporaryPlayerData(player).put(key, value);
     }
 
     /**
@@ -160,6 +158,6 @@ public class PlayerData {
      * @param key Key of temporary data to remove
      */
     public void removeData(String key) {
-        this.data.remove(key);
+        ClimaxPvp.getInstance().getTemporaryPlayerData(player).remove(key);
     }
 }
