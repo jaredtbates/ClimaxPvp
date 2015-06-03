@@ -1,6 +1,9 @@
 package net.climaxmc.Donations.Enums;
 
-public enum Trail {
+import lombok.Getter;
+import net.climaxmc.Donations.Perk;
+
+public enum Trail implements Perk {
     CLOUDS("Clouds"),
     FLAME("Flame"),
     RAIN("Rain"),
@@ -9,9 +12,15 @@ public enum Trail {
     HYPNOTIC("Hypnotic"),
     LOVE("Love");
 
+    @Getter
     private String name;
 
     Trail(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String getDBName() {
+        return this.toString();
     }
 }

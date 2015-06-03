@@ -1,17 +1,19 @@
 package net.climaxmc.Donations.Commands;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.Donations.Perk;
 import org.bukkit.GameMode;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
-public class SpectateCommand implements CommandExecutor {
+public class SpectateCommand implements Perk, CommandExecutor {
     private ClimaxPvp plugin;
 
     public SpectateCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
     }
 
+    @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
@@ -26,5 +28,10 @@ public class SpectateCommand implements CommandExecutor {
             }
         }
         return false;
+    }
+
+    @Override
+    public String getDBName() {
+        return "Spectator";
     }
 }
