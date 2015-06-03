@@ -1,6 +1,5 @@
 package net.climaxmc.KitPvp.Kits;
 
-import net.climaxmc.API.Cooldowns;
 import net.climaxmc.KitPvp.Kit;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -38,11 +37,7 @@ public class IronGolemKit extends Kit {
                 Player target = (Player) event.getEntity();
                 if (player.getItemInHand().getType().equals(Material.RED_ROSE)) {
                     event.setCancelled(true);
-                    if (Cooldowns.tryCooldown(player, "GolemRose", 4)) {
-                        target.setVelocity(new Vector(0, 1.2, 0));
-                    } else {
-                        player.sendMessage("§7Wait §c" + Cooldowns.getCooldown(player, "Rose") + " §7seconds before using launch!");
-                    }
+                    target.setVelocity(new Vector(0, 1.2, 0));
                 }
             }
         }

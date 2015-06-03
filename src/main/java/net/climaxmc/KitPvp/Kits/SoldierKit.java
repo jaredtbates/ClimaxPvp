@@ -1,6 +1,5 @@
 package net.climaxmc.KitPvp.Kits;
 
-import net.climaxmc.API.Cooldowns;
 import net.climaxmc.KitPvp.Kit;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -41,11 +40,7 @@ public class SoldierKit extends Kit {
         if (soldier.contains(player.getUniqueId())) {
             if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                    if (Cooldowns.tryCooldown(player, "SoldierFly", 3)) {
-                        player.setVelocity(new Vector(0, 0.7, 0));
-                    } else {
-                        player.sendMessage("§7Wait §c" + Cooldowns.getCooldown(player, "SoldierFly") + " §7seconds before using fly!");
-                    }
+                    player.setVelocity(new Vector(0, 0.7, 0));
                 }
             }
         }
