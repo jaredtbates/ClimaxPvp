@@ -1,6 +1,7 @@
 package net.climaxmc.Donations.Inventories;
 
 import net.climaxmc.Donations.Enums.Trail;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -9,7 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class TrailsInventory {
     public TrailsInventory(Player player) {
-        Inventory inventory = Bukkit.createInventory(null, 54, "§a§lTrail Settings");
+        Inventory inventory = Bukkit.createInventory(null, 18, ChatColor.RED + "" + ChatColor.BOLD + "Trail Settings");
 
         for (Trail trail : Trail.values()) {
             addTrail(inventory, trail);

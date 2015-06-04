@@ -3,15 +3,16 @@ package net.climaxmc.KitPvp;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Commands.*;
 import net.climaxmc.KitPvp.Listeners.*;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 
 import java.util.*;
 
 public class KitPvp {
-    public static Inventory kitSelectorInventory = Bukkit.createInventory(null, 54, "§a§lKit Selector");
+    public static Inventory kitSelectorInventory = Bukkit.createInventory(null, 54, ChatColor.RED + "" + ChatColor.BOLD + "Kit Selector");
     public static Inventory moreKitsInventory = Bukkit.createInventory(null, 54, "§b§lMore Kits");
-    public static Inventory soupInventory = Bukkit.createInventory(null, 54, "§5§lFree Soup!");
+    public static Inventory soupInventory = Bukkit.createInventory(null, 54, "§lFree Soup!");
     public static ArrayList<UUID> inKit = new ArrayList<>();
     public static HashMap<UUID, Integer> killStreak = new HashMap<>();
 

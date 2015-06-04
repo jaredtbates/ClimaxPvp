@@ -24,10 +24,10 @@ public class PlayerMoveListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         if (instance.getTrailsEnabled().containsKey(player.getUniqueId())) {
-            for (Trail possibleTrail : Trail.values()) {
-                if (possibleTrail.equals(instance.getTrailsEnabled().get(player.getUniqueId()))) {
+            for (Trail trail : Trail.values()) {
+                if (trail.equals(instance.getTrailsEnabled().get(player.getUniqueId()))) {
                     Location location = player.getLocation();
-                    location.setY(location.getY() + 0.5);
+                    location.setY(location.getY() + trail.getYOffset());
                     new ParticleEffect(instance.getTrailsEnabled().get(player.getUniqueId()).getData()).sendToLocation(location);
                 }
             }
