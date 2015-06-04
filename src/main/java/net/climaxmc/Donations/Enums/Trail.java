@@ -13,7 +13,8 @@ public enum Trail implements Perk {
     ENDER("Ender", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.PORTAL, 0.2, 20, 0.1), Material.ENDER_PEARL),
     HYPNOTIC("Hypnotic", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.SPELL_MOB, 20, 5, 0.2), Material.QUARTZ),
     LOVE("Love", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.HEART, 0, 1, 0.2), Material.GOLDEN_CARROT),
-    NOTES("Notes", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.NOTE, 20, 2, 1), Material.NOTE_BLOCK);
+    NOTES("Notes", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.NOTE, 20, 2, 1), Material.NOTE_BLOCK),
+    SLIME("Slime", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.SLIME, 0, 5, 0.3), Material.SLIME_BALL);
 
     @Getter
     private String name;
