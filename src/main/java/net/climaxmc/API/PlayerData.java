@@ -10,6 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
+import java.util.Collections;
 import java.util.List;
 
 @Data
@@ -137,7 +138,7 @@ public class PlayerData {
      * @return If player has perk
      */
     public boolean hasPerk(Perk perk) {
-        return perks.contains(perk.getDBName());
+        return perks.contains(perk.getDBName().toLowerCase());
     }
 
     /**
@@ -146,7 +147,8 @@ public class PlayerData {
      */
     public void addPerk(Perk perk) {
         perks.add(perk.getDBName());
-        mySQL.updateData("perks", StringUtils.join(perks.toArray(), ","), player);
+        Collections.sort(perks);
+        mySQL.updateData("perks", StringUtils.join(perks.toArray(), ",").toLowerCase(), player);
     }
 
     /**
@@ -155,7 +157,8 @@ public class PlayerData {
      */
     public void removePerk(Perk perk) {
         perks.remove(perk.getDBName());
-        mySQL.updateData("perks", StringUtils.join(perks.toArray(), ","), player);
+        Collections.sort(perks);
+        mySQL.updateData("perks", StringUtils.join(perks.toArray(), ",").toLowerCase(), player);
     }
 
     /**

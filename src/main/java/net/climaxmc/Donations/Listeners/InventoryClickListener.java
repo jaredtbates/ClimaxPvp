@@ -1,8 +1,8 @@
 package net.climaxmc.Donations.Listeners;
 
-import net.climaxmc.API.ParticleEffect;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Donations;
+import net.climaxmc.Donations.Enums.Trail;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,68 +23,23 @@ public class InventoryClickListener implements Listener {
         Inventory inventory = event.getInventory();
         Player player = (Player) event.getWhoClicked();
         if (inventory.getName().equals("§a§lTrail Settings")) {
-            int slot = event.getSlot();
             event.setCancelled(true);
             player.closeInventory();
-            ParticleEffect.ParticleData particle = null;
-            switch (slot) {
-                case 0:
-                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.EXPLOSION_NORMAL, 0.1, 2, 0.5);
-                    break;
-                case 1:
-                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.LAVA, 0, 0, 0);
-                    break;
-                case 2:
-                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.DRIP_WATER, 0, 6, 0.2);
-                    break;
-                case 3:
-                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.ENCHANTMENT_TABLE, 0.2, 10, 0.1);
-                    break;
-                case 4:
-                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.PORTAL, 0.2, 20, 0.1);
-                    break;
-                case 5:
-                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.SPELL, 1, 5, 0.2);
-                    break;
-                case 6:
-                    particle = new ParticleEffect.ParticleData(ParticleEffect.ParticleType.HEART, 0, 1, 0.2);
-                    break;
-                case 7:
-                    break;
-                case 8:
-                    break;
-                case 9:
-                    break;
-                case 10:
-                    break;
-                case 11:
-                    break;
-                case 12:
-                    break;
-                case 13:
-                    break;
-                case 14:
-                    break;
-                case 15:
-                    break;
-                case 16:
-                    break;
-                case 17:
-                    break;
-                case 18:
-                    break;
-                case 19:
-                    break;
-                case 20:
-                    break;
+            Trail trail = null;
+
+            for (Trail possibleTrail : Trail.values()) {
+                if (event.getCurrentItem().getType().equals(possibleTrail.getMaterial())) {
+                    trail = possibleTrail;
+                }
             }
-            if (particle != null) {
-                if (instance.getParticlesEnabled().containsKey(player.getUniqueId()) && instance.getParticlesEnabled().get(player.getUniqueId()).equals(particle)) {
-                    instance.getParticlesEnabled().remove(player.getUniqueId());
-                    player.sendMessage("§aYou have removed your particle!");
+
+            if (trail != null) {
+                if (instance.getTrailsEnabled().containsKey(player.getUniqueId()) && instance.getTrailsEnabled().get(player.getUniqueId()).equals(trail)) {
+                    instance.getTrailsEnabled().remove(player.getUniqueId());
+                    player.sendMessage("§aYou have removed your trail!");
                 } else {
-                    instance.getParticlesEnabled().put(player.getUniqueId(), particle);
-                    player.sendMessage("§aYou have applied the " + event.getCurrentItem().getItemMeta().getDisplayName() + " particle!");
+                    instance.getTrailsEnabled().put(player.getUniqueId(), trail);
+                    player.sendMessage("§aYou have applied the " + trail.getName() + " trail!");
                 }
             }
         }

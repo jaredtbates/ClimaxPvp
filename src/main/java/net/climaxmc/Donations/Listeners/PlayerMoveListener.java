@@ -3,6 +3,7 @@ package net.climaxmc.Donations.Listeners;
 import net.climaxmc.API.ParticleEffect;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Donations;
+import net.climaxmc.Donations.Enums.Trail;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -22,15 +23,16 @@ public class PlayerMoveListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        if (instance.getParticlesEnabled().containsKey(player.getUniqueId())) {
-            for (ParticleEffect.ParticleType type : ParticleEffect.ParticleType.values()) {
-                if (instance.getParticlesEnabled().get(player.getUniqueId()).getType().equals(type)) {
+        if (instance.getTrailsEnabled().containsKey(player.getUniqueId())) {
+            for (Trail possibleTrail : Trail.values()) {
+                if (possibleTrail.equals(instance.getTrailsEnabled().get(player.getUniqueId()))) {
                     Location location = player.getLocation();
                     location.setY(location.getY() + 0.5);
-                    new ParticleEffect(instance.getParticlesEnabled().get(player.getUniqueId())).sendToLocation(location);
+                    new ParticleEffect(instance.getTrailsEnabled().get(player.getUniqueId()).getData()).sendToLocation(location);
                 }
             }
         }
+
         if (player.getGameMode().equals(GameMode.SPECTATOR)) {
             if ((player.getLocation().getBlockY() <= -5) || (player.getLocation().getBlockY() >= 100)
                     || (player.getLocation().getBlockX() >= -590 || player.getLocation().getBlockX() <= -760)

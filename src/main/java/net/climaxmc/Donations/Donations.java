@@ -1,20 +1,19 @@
 package net.climaxmc.Donations;
 
 import lombok.Getter;
-import net.climaxmc.API.ParticleEffect;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Commands.SpectateCommand;
 import net.climaxmc.Donations.Commands.TrailsCommand;
+import net.climaxmc.Donations.Enums.Trail;
 import net.climaxmc.Donations.Listeners.InventoryClickListener;
 import net.climaxmc.Donations.Listeners.PlayerMoveListener;
 import net.climaxmc.Donations.Web.CommandChecker;
 
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 public class Donations {
     @Getter
-    private HashMap<UUID, ParticleEffect.ParticleData> particlesEnabled = new HashMap<>();
+    private Map<UUID, Trail> trailsEnabled = new HashMap<>();
 
     public Donations(ClimaxPvp plugin) {
         // Initialize command checker for Minecraft Market
