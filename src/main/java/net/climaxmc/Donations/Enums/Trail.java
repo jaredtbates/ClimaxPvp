@@ -10,9 +10,10 @@ public enum Trail implements Perk {
     FLAME("Flame", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.LAVA, 0, 0, 0), Material.LAVA_BUCKET),
     RAIN("Rain", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.DRIP_WATER, 0, 6, 0.2), Material.WATER_BUCKET),
     MYSTIC("Mystic", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.ENCHANTMENT_TABLE, 0.2, 10, 0.1), Material.ENCHANTMENT_TABLE),
-    PURPLE_SNAKE("Purple Snake", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.PORTAL, 0.2, 20, 0.1), Material.ENDER_PEARL),
+    ENDER("Ender", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.PORTAL, 0.2, 20, 0.1), Material.ENDER_PEARL),
     HYPNOTIC("Hypnotic", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.SPELL, 1, 5, 0.2), Material.QUARTZ),
-    LOVE("Love", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.HEART, 0, 1, 0.2), Material.GOLDEN_CARROT);
+    LOVE("Love", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.HEART, 0, 1, 0.2), Material.GOLDEN_CARROT),
+    NOTES("Notes", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.NOTE, 20, 2, 1), Material.NOTE_BLOCK);
 
     @Getter
     private String name;

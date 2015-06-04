@@ -27,21 +27,37 @@ public class PerkCommand implements CommandExecutor {
             return true;
         }
 
-        if (args[0].equals("trail")) {
-            OfflinePlayer player = plugin.getServer().getOfflinePlayer(UUID.fromString(args[1]));
+        switch (args[0]) {
+            /*
+             * /perk trail {UUID} {Trail Name}
+             */
+            case "trail":
+                OfflinePlayer player = plugin.getServer().getOfflinePlayer(UUID.fromString(args[1]));
 
-            if (player == null) {
-                return true;
-            }
+                if (player == null) {
+                    return true;
+                }
 
-            PlayerData playerData = plugin.getPlayerData(player);
-            Trail trail = Trail.valueOf(args[2].toUpperCase());
+                PlayerData playerData = plugin.getPlayerData(player);
+                Trail trail = Trail.valueOf(args[2].toUpperCase());
 
-            if (trail == null) {
-                return true;
-            }
+                if (trail == null) {
+                    return true;
+                }
 
-            playerData.addPerk(trail);
+                playerData.addPerk(trail);
+                break;
+            /*
+             * /perk spectate {UUID}
+             */
+            case "spectate":
+
+                break;
+            /*
+             * /perk nickname {UUID}
+             */
+            case "nickname":
+                break;
         }
 
         return true;
