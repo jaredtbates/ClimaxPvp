@@ -4,9 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import net.climaxmc.API.Events.PlayerBalanceChangeEvent;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.Donations.Perk;
 import net.md_5.bungee.api.ChatColor;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,6 +21,7 @@ public class PlayerData {
     private int balance;
     private int kills;
     private int deaths;
+    private List<String> perks;
 
     /**
      * Sets the player's rank
@@ -124,6 +129,33 @@ public class PlayerData {
         } else {
             return ChatColor.GRAY + "";
         }
+    }
+
+    /**
+     * Checks if player has perk
+     * @param perk Perk to check
+     * @return If player has perk
+     */
+    public boolean hasPerk(Perk perk) {
+        return perks.contains(perk.getDBName());
+    }
+
+    /**
+     * Adds a perk to a player
+     * @param perk Perk to add
+     */
+    public void addPerk(Perk perk) {
+        perks.add(perk.getDBName());
+        mySQL.updateData("perks", StringUtils.join(perks.toArray(), ","), player);
+    }
+
+    /**
+     * Removes a perk from a player
+     * @param perk Perk to remove
+     */
+    public void removePerk(Perk perk) {
+        perks.remove(perk.getDBName());
+        mySQL.updateData("perks", StringUtils.join(perks.toArray(), ","), player);
     }
 
     /**

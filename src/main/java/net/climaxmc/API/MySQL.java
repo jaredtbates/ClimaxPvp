@@ -1,11 +1,12 @@
 package net.climaxmc.API;
 
-import net.climaxmc.ClimaxPvp;
+import net.climaxmc.Donations.Perk;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 import java.sql.*;
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * MySQL Tools
@@ -14,8 +15,8 @@ import java.util.HashMap;
  */
 public class MySQL {
     private static final String GET_DATA = "SELECT * FROM `player_data` WHERE `uuid` = ?;";
-    private static final String CREATE_DATA_TABLE = "CREATE TABLE IF NOT EXISTS `player_data` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL);";
-    private static final String CREATE_PLAYER_DATA = "INSERT IGNORE INTO `player_data` (`uuid`, `rank`, `balance`, `kills`, `deaths`) VALUES (?, ?, ?, ?, ?);";
+    private static final String CREATE_DATA_TABLE = "CREATE TABLE IF NOT EXISTS `player_data` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, `perks` TEXT NOT NULL);";
+    private static final String CREATE_PLAYER_DATA = "INSERT IGNORE INTO `player_data` (`uuid`, `rank`, `balance`, `kills`, `deaths`, `perks`) VALUES (?, ?, ?, ?, ?, ?);";
     private final String address;
     private final int port;
     private final String name;
@@ -134,7 +135,8 @@ public class MySQL {
                 int balance = set.getInt("balance");
                 int kills = set.getInt("kills");
                 int deaths = set.getInt("deaths");
-                return new PlayerData(this, player, rank, balance, kills, deaths);
+                List<String> perks = Arrays.asList(set.getString("perks").split(","));
+                return new PlayerData(this, player, rank, balance, kills, deaths, perks);
             }
         } catch (SQLException e) {
             e.printStackTrace();
