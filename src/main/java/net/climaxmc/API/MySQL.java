@@ -1,12 +1,10 @@
 package net.climaxmc.API;
 
-import net.climaxmc.Donations.Perk;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 import java.sql.*;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * MySQL Tools
@@ -135,7 +133,7 @@ public class MySQL {
                 int balance = set.getInt("balance");
                 int kills = set.getInt("kills");
                 int deaths = set.getInt("deaths");
-                List<String> perks = Arrays.asList(set.getString("perks").split(","));
+                List<String> perks = new ArrayList<>(Arrays.asList(set.getString("perks").split(",")));
                 return new PlayerData(this, player, rank, balance, kills, deaths, perks);
             }
         } catch (SQLException e) {

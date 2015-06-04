@@ -1,6 +1,7 @@
 package net.climaxmc.Donations.Listeners;
 
 import net.climaxmc.API.PlayerData;
+import net.climaxmc.API.Rank;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Donations;
 import net.climaxmc.Donations.Enums.Trail;
@@ -32,7 +33,7 @@ public class InventoryClickListener implements Listener {
                 if (event.getCurrentItem().getType().equals(trail.getMaterial())) {
                     PlayerData playerData = plugin.getPlayerData(player);
 
-                    if (!playerData.hasPerk(trail)) {
+                    if (!playerData.hasPerk(trail) && !playerData.hasRank(Rank.TRUSTED)) {
                         player.sendMessage(ChatColor.RED + "Please donate at https://donate.climaxmc.net for access to this trail!");
                         return;
                     }
