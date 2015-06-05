@@ -38,7 +38,7 @@ public class WitherKit extends Kit {
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         player.getInventory().setBoots(boots);
-        addSoup(player.getInventory(), 2, 35);
+        addSoup(player.getInventory(), 2, 34);
         player.getInventory().setItem(17, new ItemStack(Material.ARROW, 64));
         wither.add(player.getUniqueId());
     }

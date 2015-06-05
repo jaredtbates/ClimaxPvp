@@ -60,7 +60,7 @@ public class ArcherKit extends Kit {
         bow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
         player.getInventory().addItem(bow);
         addSoup(player.getInventory(), 2, 34);
-        player.getInventory().addItem(new ItemStack(Material.ARROW, 32));
+        player.getInventory().addItem(new ItemStack(Material.ARROW, 64));
         archer.add(player.getUniqueId());
     }
 
