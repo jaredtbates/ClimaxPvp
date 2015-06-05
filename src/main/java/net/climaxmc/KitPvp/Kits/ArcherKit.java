@@ -1,7 +1,11 @@
 package net.climaxmc.KitPvp.Kits;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 import net.climaxmc.KitPvp.Kit;
 import net.md_5.bungee.api.ChatColor;
+
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -14,6 +18,8 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.util.Vector;
 
 public class ArcherKit extends Kit {
+	ArrayList<UUID> archer = new ArrayList<UUID>();
+	
     public ArcherKit() {
         super("Archer", new ItemStack(Material.BOW), "Snipe them up!", ChatColor.GRAY);
     }
@@ -62,6 +68,10 @@ public class ArcherKit extends Kit {
         }
 
         Player player = (Player) event.getEntity();
+        
+        if (!(archer.contains(player.getUniqueId()))){
+        	return;
+        }
 
         if (player.isSneaking()) {
             return;
