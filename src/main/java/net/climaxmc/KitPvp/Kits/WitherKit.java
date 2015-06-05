@@ -29,11 +29,13 @@ public class WitherKit extends Kit {
     public void wear(Player player) {
         player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
         player.getInventory().addItem(new ItemStack(Material.BOW));
-        player.getInventory().setHelmet(new ItemStack(Material.GOLD_HELMET));
+        ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
+        helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
+        player.getInventory().setHelmet(helmet);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
-        boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 5);
+        boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 2, 35);
         wither.add(player.getUniqueId());
