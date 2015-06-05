@@ -1,11 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 import net.climaxmc.KitPvp.Kit;
 import net.md_5.bungee.api.ChatColor;
-
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -13,9 +9,15 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.util.Vector;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class ArcherKit extends Kit {
 	ArrayList<UUID> archer = new ArrayList<UUID>();
@@ -59,6 +61,31 @@ public class ArcherKit extends Kit {
         player.getInventory().addItem(bow);
         addSoup(player.getInventory(), 2, 34);
         player.getInventory().addItem(new ItemStack(Material.ARROW, 32));
+        archer.add(player.getUniqueId());
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        if (archer.contains(player.getUniqueId())) {
+            archer.remove(player.getUniqueId());
+        }
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        if (archer.contains(player.getUniqueId())) {
+            archer.remove(player.getUniqueId());
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        if (archer.contains(player.getUniqueId())) {
+            archer.remove(player.getUniqueId());
+        }
     }
 
     @EventHandler

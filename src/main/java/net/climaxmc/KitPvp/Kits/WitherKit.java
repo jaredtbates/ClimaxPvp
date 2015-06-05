@@ -39,6 +39,7 @@ public class WitherKit extends Kit {
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 2, 35);
+        player.getInventory().setItem(17, new ItemStack(Material.ARROW, 64));
         wither.add(player.getUniqueId());
     }
 
@@ -52,6 +53,7 @@ public class WitherKit extends Kit {
     		}
     	}
     }
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();

@@ -1,6 +1,7 @@
 package net.climaxmc.Donations.Commands;
 
 import net.climaxmc.API.PlayerData;
+import net.climaxmc.API.Rank;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Perk;
 import net.md_5.bungee.api.ChatColor;
@@ -29,7 +30,9 @@ public class NicknameCommand implements Perk, CommandExecutor {
         }
 
         if (args.length == 2) {
+            if (playerData.hasRank(Rank.MODERATOR)) {
 
+            }
         }
 
         if (args.length != 1) {
