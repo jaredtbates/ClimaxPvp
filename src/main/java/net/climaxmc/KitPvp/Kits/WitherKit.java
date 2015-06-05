@@ -7,13 +7,11 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
 
 import net.climaxmc.KitPvp.Kit;
 
@@ -42,15 +40,14 @@ public class WitherKit extends Kit {
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent event) {
-        final Player player = event.getPlayer();
-        if (wither.contains(player.getUniqueId())) {
-            if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
-                if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                    player.launchProjectile(WitherSkull.class).setVelocity(event.getProjectile().getVelocity());
-                }
-            }
-        }
+    public void onBowShoot(EntityShootBowEvent event) {
+    	if (event.getEntity() instanceof Player){
+    		Player player = (Player) event.getEntity();
+    		if (wither.contains(player.getUniqueId())) {
+    			event.setCancelled(true);
+    			player.launchProjectile(WitherSkull.class).setVelocity(event.getProjectile().getVelocity());
+    		}
+    	}
     }
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {

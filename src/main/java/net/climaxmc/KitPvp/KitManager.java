@@ -24,6 +24,7 @@ public class KitManager {
         kits.add(new NinjaKit());
         // Blue Kits
         kits.add(new EndermanKit());
+        kits.add(new WitherKit());
 
         // Green Kits
         kits.add(new IronGolemKit());

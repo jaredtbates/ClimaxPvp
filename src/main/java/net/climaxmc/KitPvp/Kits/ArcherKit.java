@@ -50,10 +50,9 @@ public class ArcherKit extends Kit {
         ItemStack bow = new ItemStack(Material.BOW);
         bow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
         bow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
-        bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
         player.getInventory().addItem(bow);
         addSoup(player.getInventory(), 2, 34);
-        player.getInventory().addItem(new ItemStack(Material.ARROW, 1));
+        player.getInventory().addItem(new ItemStack(Material.ARROW, 32));
     }
 
     @EventHandler
