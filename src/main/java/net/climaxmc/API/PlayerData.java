@@ -23,6 +23,7 @@ public class PlayerData {
     private int kills;
     private int deaths;
     private List<String> perks;
+    private String nickname;
 
     /**
      * Sets the player's rank
@@ -138,7 +139,7 @@ public class PlayerData {
      * @return If player has perk
      */
     public boolean hasPerk(Perk perk) {
-        return perks.contains(perk.getDBName().toLowerCase());
+        return perks.contains(perk.getDBName().toLowerCase()) || hasRank(Rank.TRUSTED) || player.isOp();
     }
 
     /**
@@ -159,6 +160,14 @@ public class PlayerData {
         perks.remove(perk.getDBName());
         Collections.sort(perks);
         mySQL.updateData("perks", StringUtils.join(perks.toArray(), ",").toLowerCase(), player);
+    }
+
+    /**
+     * Sets a player's nickname
+     * @param nickname Nickname to set to
+     */
+    public void setNickname(String nickname) {
+        mySQL.updateData("nickname", this.nickname = nickname, player);
     }
 
     /**

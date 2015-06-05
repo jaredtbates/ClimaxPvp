@@ -13,8 +13,8 @@ import java.util.*;
  */
 public class MySQL {
     private static final String GET_DATA = "SELECT * FROM `player_data` WHERE `uuid` = ?;";
-    private static final String CREATE_DATA_TABLE = "CREATE TABLE IF NOT EXISTS `player_data` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, `perks` TEXT NOT NULL);";
-    private static final String CREATE_PLAYER_DATA = "INSERT IGNORE INTO `player_data` (`uuid`, `rank`, `balance`, `kills`, `deaths`, `perks`) VALUES (?, ?, ?, ?, ?, ?);";
+    private static final String CREATE_DATA_TABLE = "CREATE TABLE IF NOT EXISTS `player_data` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, `perks` TEXT NOT NULL, `nickname` VARCHAR(32) DEFAULT NULL);";
+    private static final String CREATE_PLAYER_DATA = "INSERT IGNORE INTO `player_data` (`uuid`, `rank`, `balance`, `kills`, `deaths`, `perks`, `nickname`) VALUES (?, ?, ?, ?, ?, ?, ?);";
     private final String address;
     private final int port;
     private final String name;
@@ -134,7 +134,8 @@ public class MySQL {
                 int kills = set.getInt("kills");
                 int deaths = set.getInt("deaths");
                 List<String> perks = new ArrayList<>(Arrays.asList(set.getString("perks").split(",")));
-                return new PlayerData(this, player, rank, balance, kills, deaths, perks);
+                String nickname = set.getString("nickname");
+                return new PlayerData(this, player, rank, balance, kills, deaths, perks, nickname);
             }
         } catch (SQLException e) {
             e.printStackTrace();
