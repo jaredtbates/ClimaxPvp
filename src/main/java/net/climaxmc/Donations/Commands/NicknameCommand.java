@@ -31,7 +31,19 @@ public class NicknameCommand implements Perk, CommandExecutor {
 
         if (args.length == 2) {
             if (playerData.hasRank(Rank.MODERATOR)) {
+                Player target = plugin.getServer().getPlayer(args[0]);
 
+                if (target == null) {
+                    player.sendMessage(ChatColor.RED + "That player is not online!");
+                    return true;
+                }
+
+                String nickname = ChatColor.translateAlternateColorCodes('&', args[1]);
+                player.setDisplayName(nickname);
+                playerData.setNickname(nickname);
+                player.sendMessage(ChatColor.GREEN + target.getName() + "'s nickname has been set to " + nickname + ChatColor.GREEN + "!");
+
+                return true;
             }
         }
 
