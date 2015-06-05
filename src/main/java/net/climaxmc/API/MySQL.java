@@ -159,6 +159,8 @@ public class MySQL {
             statement.setInt(++i, 0);
             statement.setInt(++i, 0);
             statement.setInt(++i, 0);
+            statement.setString(++i, "");
+            statement.setString(++i, null);
 
             statement.executeUpdate();
         } catch (SQLException e) {

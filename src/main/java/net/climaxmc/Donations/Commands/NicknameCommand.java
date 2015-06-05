@@ -32,15 +32,23 @@ public class NicknameCommand implements Perk, CommandExecutor {
         if (args.length == 2) {
             if (playerData.hasRank(Rank.MODERATOR)) {
                 Player target = plugin.getServer().getPlayer(args[0]);
+                PlayerData targetData = plugin.getPlayerData(player);
 
                 if (target == null) {
                     player.sendMessage(ChatColor.RED + "That player is not online!");
                     return true;
                 }
 
+                if (args[1].equalsIgnoreCase("off")) {
+                    player.sendMessage(ChatColor.GREEN + target.getName() + "'s nickname has been disabled!");
+                    targetData.setNickname(null);
+                    target.setDisplayName(null);
+                    return true;
+                }
+
                 String nickname = ChatColor.translateAlternateColorCodes('&', args[1]);
-                player.setDisplayName(nickname);
-                playerData.setNickname(nickname);
+                target.setDisplayName(nickname);
+                targetData.setNickname(nickname);
                 player.sendMessage(ChatColor.GREEN + target.getName() + "'s nickname has been set to " + nickname + ChatColor.GREEN + "!");
 
                 return true;
@@ -60,6 +68,7 @@ public class NicknameCommand implements Perk, CommandExecutor {
         if (args[0].equalsIgnoreCase("off")) {
             player.sendMessage(ChatColor.GREEN + "Your nickname has been disabled!");
             player.setDisplayName(null);
+            playerData.setNickname(null);
             return true;
         }
 
