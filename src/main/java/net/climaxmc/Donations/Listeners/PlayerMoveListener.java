@@ -35,8 +35,8 @@ public class PlayerMoveListener implements Listener {
 
         if (player.getGameMode().equals(GameMode.SPECTATOR)) {
             if ((player.getLocation().getBlockY() <= -5) || (player.getLocation().getBlockY() >= 100)
-                    || (player.getLocation().getBlockX() >= -590 || player.getLocation().getBlockX() <= -760)
-                    || (player.getLocation().getBlockZ() >= 1160 || player.getLocation().getBlockZ() <= 980)) {
+                    || (player.getLocation().getBlockX() >= -553 || player.getLocation().getBlockX() <= -812)
+                    || (player.getLocation().getBlockZ() >= 691 || player.getLocation().getBlockZ() <= 431)) {
                 plugin.respawn(player);
                 player.setGameMode(GameMode.SPECTATOR);
                 player.setFlySpeed(0.15F);
