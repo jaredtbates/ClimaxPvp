@@ -19,14 +19,16 @@ public class SoldierKit extends Kit {
     ArrayList<UUID> soldier = new ArrayList<UUID>();
 
     public SoldierKit() {
-        super("Soldier", new ItemStack(Material.FEATHER), "Take to the skies with Kit Soldier!", ChatColor.GREEN);
+        super("Soldier", new ItemStack(Material.FEATHER), "Right Click Blocks with your Sword to Climb Walls!", ChatColor.RED);
     }
 
     public void wear(Player player) {
-        player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
+    	ItemStack sword = new ItemStack(Material.IRON_SWORD);
+    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        player.getInventory().addItem(sword);
         player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
         player.getInventory().setBoots(boots);

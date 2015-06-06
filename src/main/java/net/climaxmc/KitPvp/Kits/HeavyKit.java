@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class HeavyKit extends Kit {
     public HeavyKit() {
-        super("Heavy", new ItemStack(Material.DIAMOND_CHESTPLATE), "Better Armor and Sword, but Slow.", ChatColor.GRAY);
+        super("Heavy", new ItemStack(Material.DIAMOND_CHESTPLATE), "The tankiest of all kits!", ChatColor.GRAY);
     }
 
     public void wear(Player player) {
