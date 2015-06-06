@@ -22,6 +22,7 @@ public class KitManager {
         kits.add(new ArcherKit());
         kits.add(new FishermanKit());
         kits.add(new NinjaKit());
+
         // Blue Kits
         kits.add(new EndermanKit());
         kits.add(new ViperKit());
