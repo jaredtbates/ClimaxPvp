@@ -2,8 +2,7 @@ package net.climaxmc.Administration;
 
 import net.climaxmc.Administration.Commands.AdminCommand;
 import net.climaxmc.Administration.Commands.RankCommand;
-import net.climaxmc.Administration.Listeners.AsyncPlayerChatListener;
-import net.climaxmc.Administration.Listeners.PlayerCommandPreprocessListener;
+import net.climaxmc.Administration.Listeners.*;
 import net.climaxmc.ClimaxPvp;
 
 public class Administration {
@@ -11,6 +10,7 @@ public class Administration {
         // Register listeners
         plugin.getServer().getPluginManager().registerEvents(new PlayerCommandPreprocessListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new AsyncPlayerChatListener(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new CombatLogListeners(plugin), plugin);
 
         // Register commands
         plugin.getCommand("admin").setExecutor(new AdminCommand(plugin));
