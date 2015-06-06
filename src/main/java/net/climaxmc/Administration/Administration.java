@@ -11,6 +11,8 @@ public class Administration {
         plugin.getServer().getPluginManager().registerEvents(new PlayerCommandPreprocessListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new AsyncPlayerChatListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new CombatLogListeners(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new SpawnProtectListeners(plugin), plugin);
+
 
         // Register commands
         plugin.getCommand("admin").setExecutor(new AdminCommand(plugin));

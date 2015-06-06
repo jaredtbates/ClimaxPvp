@@ -3,8 +3,7 @@ package net.climaxmc.Administration.Listeners;
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
+import org.bukkit.event.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -20,8 +19,12 @@ public class CombatLogListeners implements Listener {
 
     private Map<UUID, Long> tagged = new HashMap<>();
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamage(EntityDamageByEntityEvent event) {
+        if (event.isCancelled()) {
+            return;
+        }
+
         if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
             Player damager = (Player) event.getDamager();
             Player damaged = (Player) event.getEntity();
@@ -34,8 +37,8 @@ public class CombatLogListeners implements Listener {
                 damaged.sendMessage(ChatColor.GRAY + "You are now in combat with " + ChatColor.GOLD + damager.getName() + ChatColor.GRAY + ".");
             }
 
-            tagged.put(damager.getUniqueId(), System.currentTimeMillis() + 10000);
-            tagged.put(damaged.getUniqueId(), System.currentTimeMillis() + 10000);
+            tagged.put(damager.getUniqueId(), System.currentTimeMillis() + 20000);
+            tagged.put(damaged.getUniqueId(), System.currentTimeMillis() + 20000);
 
             new BukkitRunnable() {
                 public void run() {
