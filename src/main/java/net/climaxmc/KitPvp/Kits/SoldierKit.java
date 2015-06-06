@@ -19,7 +19,7 @@ public class SoldierKit extends Kit {
     ArrayList<UUID> soldier = new ArrayList<UUID>();
 
     public SoldierKit() {
-        super("Soldier", new ItemStack(Material.FEATHER), "Take to the skies with Kit Soldier!", ChatColor.RED);
+        super("Soldier", new ItemStack(Material.FEATHER), "Take to the skies with Kit Soldier!", ChatColor.GREEN);
     }
 
     public void wear(Player player) {

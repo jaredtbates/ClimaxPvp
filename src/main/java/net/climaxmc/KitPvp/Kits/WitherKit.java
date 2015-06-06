@@ -23,7 +23,7 @@ public class WitherKit extends Kit {
     ArrayList<UUID> wither = new ArrayList<UUID>();
 
     public WitherKit() {
-        super("Wither", new ItemStack(Material.SKULL_ITEM), "Shoot your WitherBow to Launch your Wither Head!", ChatColor.RED);
+        super("Wither", new ItemStack(Material.SKULL_ITEM), "Shoot your WitherBow to Launch your Wither Head!", ChatColor.GREEN);
     }
 
     public void wear(Player player) {

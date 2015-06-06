@@ -24,13 +24,14 @@ public class KitManager {
         kits.add(new NinjaKit());
         // Blue Kits
         kits.add(new EndermanKit());
-        kits.add(new WitherKit());
+        kits.add(new ViperKit());
 
         // Green Kits
         kits.add(new IronGolemKit());
+        kits.add(new SoldierKit());
+        kits.add(new WitherKit());
 
         // Red Kits
-        kits.add(new SoldierKit());
 
         // Gold Kits
 
