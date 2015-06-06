@@ -47,7 +47,7 @@ public class ViperKit extends Kit {
         		Player damaged = (Player) event.getEntity();
         		if (viper.contains(player.getUniqueId())){
         			if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD){
-        				damaged.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 3, 200));
+        				damaged.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 3, 3000));
         			}
         		}
         	}
