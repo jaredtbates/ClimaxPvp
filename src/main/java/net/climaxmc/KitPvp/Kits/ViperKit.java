@@ -7,6 +7,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
@@ -39,8 +40,12 @@ public class ViperKit extends Kit {
         viper.add(player.getUniqueId());
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPvp(EntityDamageByEntityEvent event) {
+        if (event.isCancelled()) {
+            return;
+        }
+
         if (event.getDamager() instanceof Player){
         	Player player = (Player) event.getDamager();
         	if (event.getEntity() instanceof Player){

@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
@@ -29,8 +30,12 @@ public class IronGolemKit extends Kit {
         addSoup(player.getInventory(), 2, 35);
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        if (event.isCancelled()) {
+            return;
+        }
+
         if (event.getDamager() instanceof Player) {
             Player player = (Player) event.getDamager();
             if (event.getEntity() instanceof Player) {

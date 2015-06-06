@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -89,6 +90,16 @@ public class CombatLogListeners implements Listener {
 
         if (tagged.containsKey(player.getUniqueId())) {
             tagged.remove(player.getUniqueId());
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        Player killer = player.getKiller();
+
+        if (tagged.containsKey(killer.getUniqueId())) {
+            tagged.remove(killer.getUniqueId());
         }
     }
 }

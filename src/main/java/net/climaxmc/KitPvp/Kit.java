@@ -123,7 +123,7 @@ public abstract class Kit implements Listener, CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (command.getName().equalsIgnoreCase(getName())) {
+            if (command.getName().equalsIgnoreCase(getName().replaceAll("\\s+", ""))) {
                 wearCheckPerms(player);
             }
         }
