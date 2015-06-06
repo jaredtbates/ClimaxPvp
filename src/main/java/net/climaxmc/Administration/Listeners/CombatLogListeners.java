@@ -65,7 +65,7 @@ public class CombatLogListeners implements Listener {
 
         if (tagged.containsKey(player.getUniqueId())) {
             tagged.remove(player.getUniqueId());
-            player.setHealth(0);
+            player.damage(player.getHealth(), player.getLastDamageCause().getEntity());
             plugin.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + player.getName() + ChatColor.RED + " has logged out while in combat!");
         }
     }
