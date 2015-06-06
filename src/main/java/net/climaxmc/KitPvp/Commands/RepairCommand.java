@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.API.PlayerData;
 import net.climaxmc.ClimaxPvp;
+import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -33,9 +34,9 @@ public class RepairCommand implements CommandExecutor {
                     item.setDurability((short) -100);
                 }
             }
-            player.sendMessage("§aYou repaired your inventory for $2!");
+            player.sendMessage(ChatColor.GREEN + "You repaired your inventory for $2!");
         } else {
-            player.sendMessage("§cYou do not have enough money to repair your inventory!");
+            player.sendMessage(ChatColor.RED + "You do not have enough money to repair your inventory!");
         }
 
         return true;

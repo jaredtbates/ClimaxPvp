@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
+import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -22,7 +23,7 @@ public class SpawnCommand implements CommandExecutor {
         final Player player = (Player) sender;
         final Block block = player.getLocation().getBlock();
 
-        player.sendMessage("§aPlease wait §c3 §aseconds to be teleported to spawn.");
+        player.sendMessage(ChatColor.GREEN + "Please wait " + ChatColor.RED + "3" + ChatColor.GREEN + " seconds to be teleported to spawn.");
 
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
             if (player.getLocation().getBlock().equals(block)) {
@@ -30,9 +31,9 @@ public class SpawnCommand implements CommandExecutor {
                     KitPvp.inKit.remove(player.getUniqueId());
                 }
                 plugin.respawn(player);
-                player.sendMessage("§aYou have been teleported to spawn!");
+                player.sendMessage(ChatColor.GREEN + "You have been teleported to spawn!");
             } else {
-                player.sendMessage("§cTeleportation canceled.");
+                player.sendMessage(ChatColor.RED + "Teleportation canceled.");
             }
         }, 60);
 

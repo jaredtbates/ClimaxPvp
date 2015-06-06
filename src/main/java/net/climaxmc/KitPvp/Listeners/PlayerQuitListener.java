@@ -2,13 +2,14 @@ package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerQuitListener implements Listener {
-    ClimaxPvp plugin;
+    private ClimaxPvp plugin;
 
     public PlayerQuitListener(ClimaxPvp plugin) {
         this.plugin = plugin;
@@ -26,6 +27,6 @@ public class PlayerQuitListener implements Listener {
             KitPvp.killStreak.remove(player.getUniqueId());
         }
 
-        event.setQuitMessage("§cQuit§8» " + player.getName());
+        event.setQuitMessage(ChatColor.RED + "Quit " + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
     }
 }

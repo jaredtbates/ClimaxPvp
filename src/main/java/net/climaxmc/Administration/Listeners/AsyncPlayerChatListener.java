@@ -3,7 +3,7 @@ package net.climaxmc.Administration.Listeners;
 import net.climaxmc.API.PlayerData;
 import net.climaxmc.API.Rank;
 import net.climaxmc.ClimaxPvp;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

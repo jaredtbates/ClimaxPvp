@@ -7,7 +7,7 @@ import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class ItemSpawnListener implements Listener {
-    ClimaxPvp plugin;
+    private ClimaxPvp plugin;
 
     public ItemSpawnListener(ClimaxPvp plugin) {
         this.plugin = plugin;

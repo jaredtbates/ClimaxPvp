@@ -5,7 +5,7 @@ import lombok.Data;
 import net.climaxmc.API.Events.PlayerBalanceChangeEvent;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Perk;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;

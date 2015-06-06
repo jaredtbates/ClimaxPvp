@@ -1,7 +1,7 @@
 package net.climaxmc.API;
 
 import lombok.Getter;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 
 public enum Rank {
     OWNER("Owner", ChatColor.RED, Integer.MAX_VALUE),

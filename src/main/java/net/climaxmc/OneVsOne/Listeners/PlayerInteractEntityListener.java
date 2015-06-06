@@ -4,8 +4,7 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.OneVsOne.OneVsOne;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -51,8 +50,8 @@ public class PlayerInteractEntityListener implements Listener {
                             }
                             kit.wear(player);
                             kit.wear(target);
-                            player.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + target.getName());
-                            target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + player.getName());
+                            player.sendMessage(ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.GOLD + "" + ChatColor.BOLD + "1v1" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.GRAY + "You have entered a regular 1v1 with " + target.getName());
+                            target.sendMessage(ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.GOLD + "" + ChatColor.BOLD + "1v1" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.GRAY + "You have entered a regular 1v1 with " + player.getName());
                             return;
                         case 1:
                             player.teleport(arena2Spawn1);
@@ -65,8 +64,8 @@ public class PlayerInteractEntityListener implements Listener {
                             }
                             kit.wear(player);
                             kit.wear(target);
-                            player.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + target.getName());
-                            target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + player.getName());
+                            player.sendMessage(ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.GOLD + "" + ChatColor.BOLD + "1v1" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.GRAY + "You have entered a regular 1v1 with " + target.getName());
+                            target.sendMessage(ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.GOLD + "" + ChatColor.BOLD + "1v1" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.GRAY + "You have entered a regular 1v1 with " + player.getName());
                             return;
                         case 2:
                             player.teleport(arena3spawn1);
@@ -79,13 +78,13 @@ public class PlayerInteractEntityListener implements Listener {
                             }
                             kit.wear(player);
                             kit.wear(target);
-                            player.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + target.getName());
-                            target.sendMessage("§0§l[§6§l1v1§0§l] §7You have entered a regular 1v1 with " + player.getName());
+                            player.sendMessage(ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.GOLD + "" + ChatColor.BOLD + "1v1" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.GRAY + "You have entered a regular 1v1 with " + target.getName());
+                            target.sendMessage(ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.GOLD + "" + ChatColor.BOLD + "1v1" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.GRAY + "You have entered a regular 1v1 with " + player.getName());
                     }
                 } else {
                     instance.getChallenged().put(player.getUniqueId(), target.getUniqueId());
-                    player.sendMessage("§0§l[§6§l1v1§0§l] §aYou have challenged " + target.getName() + " to a regular 1v1!");
-                    target.sendMessage("§0§l[§6§l1v1§0§l] §aYou have been challenged by " + player.getName() + " to a Regular 1v1! Right click them to accept!");
+                    player.sendMessage(ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.GOLD + "" + ChatColor.BOLD + "1v1" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.GREEN + "You have challenged " + target.getName() + " to a regular 1v1!");
+                    target.sendMessage(ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.GOLD + "" + ChatColor.BOLD + "1v1" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.GREEN + "You have been challenged by " + player.getName() + " to a Regular 1v1! Right click them to accept!");
                 }
             }
         }

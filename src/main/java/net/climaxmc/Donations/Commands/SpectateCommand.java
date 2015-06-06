@@ -2,6 +2,7 @@ package net.climaxmc.Donations.Commands;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Perk;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -21,10 +22,10 @@ public class SpectateCommand implements Perk, CommandExecutor {
                 plugin.respawn(player);
                 player.setGameMode(GameMode.SPECTATOR);
                 player.setFlySpeed(0.15F);
-                player.sendMessage("§aYou are now spectating");
+                player.sendMessage(ChatColor.GREEN + "You are now spectating");
             } else {
                 plugin.respawn(player);
-                player.sendMessage("§aYou are no longer spectating");
+                player.sendMessage(ChatColor.GREEN + "You are no longer spectating");
             }
         }
         return false;

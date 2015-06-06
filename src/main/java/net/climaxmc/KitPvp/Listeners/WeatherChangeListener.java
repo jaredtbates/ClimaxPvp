@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
 public class WeatherChangeListener implements Listener {
-    ClimaxPvp plugin;
+    private ClimaxPvp plugin;
 
     public WeatherChangeListener(ClimaxPvp plugin) {
         this.plugin = plugin;

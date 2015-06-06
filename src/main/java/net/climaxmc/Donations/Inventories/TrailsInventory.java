@@ -1,7 +1,7 @@
 package net.climaxmc.Donations.Inventories;
 
 import net.climaxmc.Donations.Enums.Trail;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -22,7 +22,7 @@ public class TrailsInventory {
     private void addTrail(Inventory inventory, Trail trail) {
         ItemStack particle = new ItemStack(trail.getMaterial());
         ItemMeta particleMeta = particle.getItemMeta();
-        particleMeta.setDisplayName("§a" + trail.getName());
+        particleMeta.setDisplayName(ChatColor.GREEN + trail.getName());
         particle.setItemMeta(particleMeta);
         inventory.addItem(particle);
     }

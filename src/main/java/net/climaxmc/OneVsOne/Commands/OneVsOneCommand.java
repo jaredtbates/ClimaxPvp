@@ -2,8 +2,7 @@ package net.climaxmc.OneVsOne.Commands;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.OneVsOne.OneVsOne;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -29,7 +28,7 @@ public class OneVsOneCommand implements CommandExecutor {
                             plugin.getConfig().set("Lobby.Spawn.Y", player.getLocation().getBlockY() + 0.5);
                             plugin.getConfig().set("Lobby.Spawn.Z", player.getLocation().getBlockZ());
                             plugin.saveConfig();
-                            player.sendMessage("§a1v1 Lobby Spawn Set!");
+                            player.sendMessage(ChatColor.GREEN + "1v1 Lobby Spawn Set!");
                             return true;
                         } else if (args[0].equalsIgnoreCase("setarena1spawn1")) {
                             addArenaSpawn(player, 1, 1);
@@ -58,11 +57,11 @@ public class OneVsOneCommand implements CommandExecutor {
                 player.teleport(new Location(player.getWorld(), x, y, z));
                 ItemStack stick = new ItemStack(Material.STICK);
                 ItemMeta stickMeta = stick.getItemMeta();
-                stickMeta.setDisplayName("§6§lRegular 1v1");
+                stickMeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "Regular 1v1");
                 stick.setItemMeta(stickMeta);
                 player.getInventory().clear();
                 player.getInventory().addItem(stick);
-                player.sendMessage(plugin.getPrefix() + " §7Teleported to the 1v1 Lobby!");
+                player.sendMessage(plugin.getPrefix() + ChatColor.GRAY + " Teleported to the 1v1 Lobby!");
                 return true;
             }
         }
@@ -74,6 +73,6 @@ public class OneVsOneCommand implements CommandExecutor {
         plugin.getConfig().set("Arenas." + arena + ".Spawns." + spawn + ".Y", player.getLocation().getBlockY() + 0.5);
         plugin.getConfig().set("Arenas." + arena + ".Spawns." + spawn + ".Z", player.getLocation().getBlockZ());
         plugin.saveConfig();
-        player.sendMessage("§aArena " + arena + " spawn " + spawn + " set!");
+        player.sendMessage(ChatColor.GREEN + "Arena " + arena + " spawn " + spawn + " set!");
     }
 }

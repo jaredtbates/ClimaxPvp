@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerRespawnListener implements Listener {
-    ClimaxPvp plugin;
+    private ClimaxPvp plugin;
 
     public PlayerRespawnListener(ClimaxPvp plugin) {
         this.plugin = plugin;
@@ -37,17 +37,17 @@ public class PlayerRespawnListener implements Listener {
 
         ItemStack kitSelector = new ItemStack(Material.NETHER_STAR);
         ItemMeta kitSelectorMeta = kitSelector.getItemMeta();
-        kitSelectorMeta.setDisplayName("§a§lKit Selector");
+        kitSelectorMeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "Kit Selector");
         List<String> kitSelectorLores = new ArrayList<String>();
-        kitSelectorLores.add("§5§o(Right Click) to select a kit!");
+        kitSelectorLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "(Right Click) to select a kit!");
         kitSelectorMeta.setLore(kitSelectorLores);
         kitSelector.setItemMeta(kitSelectorMeta);
 
         ItemStack particles = new ItemStack(Material.SEEDS);
         ItemMeta particlesMeta = particles.getItemMeta();
-        particlesMeta.setDisplayName("§a§lTrail Selector");
+        particlesMeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "Trail Selector");
         List<String> particlesLores = new ArrayList<String>();
-        particlesLores.add("§5§o(Right Click) to select a trail!");
+        particlesLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "(Right Click) to select a trail!");
         particlesMeta.setLore(particlesLores);
         particles.setItemMeta(particlesMeta);
 

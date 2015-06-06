@@ -3,7 +3,7 @@ package net.climaxmc.KitPvp;
 import lombok.Data;
 import net.climaxmc.API.PlayerData;
 import net.climaxmc.ClimaxPvp;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -111,12 +111,12 @@ public abstract class Kit implements Listener, CommandExecutor {
                 }
                 player.getInventory().clear();
                 wear(player);
-                player.sendMessage("§6You have chosen " + getColor() + getName());
+                player.sendMessage(ChatColor.GOLD + "You have chosen " + getColor() + getName());
             } else {
-                player.sendMessage("§cYou have not died yet!");
+                player.sendMessage(ChatColor.RED + "You have not died yet!");
             }
         } else {
-            player.sendMessage("§cYou do not have permission for kit " + getName() + "§c!");
+            player.sendMessage(ChatColor.RED + "You do not have permission for kit " + getName() + ChatColor.RED + "!");
         }
     }
 

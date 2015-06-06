@@ -11,7 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 
 public class InventoryOpenListener implements Listener {
-    ClimaxPvp plugin;
+    private ClimaxPvp plugin;
 
     public InventoryOpenListener(ClimaxPvp plugin) {
         this.plugin = plugin;

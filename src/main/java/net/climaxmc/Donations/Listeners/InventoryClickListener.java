@@ -5,7 +5,7 @@ import net.climaxmc.API.Rank;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Donations;
 import net.climaxmc.Donations.Enums.Trail;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

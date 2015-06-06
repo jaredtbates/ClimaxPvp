@@ -7,6 +7,7 @@ import net.climaxmc.Administration.Administration;
 import net.climaxmc.Donations.Donations;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.OneVsOne.OneVsOne;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -21,7 +22,7 @@ public class ClimaxPvp extends JavaPlugin {
     @Getter
     private MySQL mySQL = null;
     @Getter
-    private String prefix = "§0§l[§cClimax§0§l] §r";
+    private String prefix = ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.RED + "Climax" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.RESET;
     @Getter
     private Map<UUID, Map<String, Object>> temporaryPlayerData = new HashMap<>();
 

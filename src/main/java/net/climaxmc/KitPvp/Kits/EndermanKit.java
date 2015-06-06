@@ -1,7 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -34,7 +34,7 @@ public class EndermanKit extends Kit {
         Player player = event.getPlayer();
         if (event.getCause().equals(PlayerTeleportEvent.TeleportCause.ENDER_PEARL)) {
             if (event.getFrom().distance(event.getFrom()) > 10) {
-                player.sendMessage("§cYou cannot teleport further than 10 blocks!");
+                player.sendMessage(ChatColor.RED + "You cannot teleport further than 10 blocks!");
                 event.setCancelled(true);
             }
         }

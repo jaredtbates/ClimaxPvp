@@ -9,7 +9,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
 public class InventoryClickListener implements Listener {
-    ClimaxPvp plugin;
+    private ClimaxPvp plugin;
 
     public InventoryClickListener(ClimaxPvp plugin) {
         this.plugin = plugin;

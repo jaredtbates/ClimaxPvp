@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
 public class PlayerPickupItemListener implements Listener {
-    ClimaxPvp plugin;
+    private ClimaxPvp plugin;
 
     public PlayerPickupItemListener(ClimaxPvp plugin) {
         this.plugin = plugin;
