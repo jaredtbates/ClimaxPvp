@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
@@ -64,8 +65,18 @@ public class CombatLogListeners implements Listener {
         Player player = event.getPlayer();
 
         if (tagged.containsKey(player.getUniqueId())) {
-            player.damage(Integer.MIN_VALUE);
+            tagged.remove(player.getUniqueId());
+            player.setHealth(0);
             plugin.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + player.getName() + ChatColor.RED + " has logged out while in combat!");
+        }
+    }
+
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
+        Player player = event.getPlayer();
+
+        if (tagged.containsKey(player.getUniqueId())) {
+            tagged.remove(player.getUniqueId());
         }
     }
 }
