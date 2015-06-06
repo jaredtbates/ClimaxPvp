@@ -52,12 +52,12 @@ public class ArcherKit extends Kit {
         boots.addEnchantment(Enchantment.PROTECTION_FALL, 4);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.WOOD_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-        sword.addEnchantment(Enchantment.DURABILITY, 2);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 4);
+        sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack bow = new ItemStack(Material.BOW);
         bow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
-        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
+        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
         player.getInventory().addItem(bow);
         addSoup(player.getInventory(), 2, 34);
         player.getInventory().addItem(new ItemStack(Material.ARROW, 64));

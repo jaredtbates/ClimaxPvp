@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class FishermanKit extends Kit {
     public FishermanKit() {
-        super("Fisherman", new ItemStack(Material.FISHING_ROD), "Fish dem with kit Fisherman!", ChatColor.GRAY);
+        super("Fisherman", new ItemStack(Material.FISHING_ROD), "Hook a player and retract your line to Fish them to you!", ChatColor.GRAY);
     }
 
     public void wear(Player player) {
