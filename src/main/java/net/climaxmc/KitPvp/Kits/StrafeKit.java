@@ -9,10 +9,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class NinjaKit extends Kit {
+public class StrafeKit extends Kit {
 
-    public NinjaKit() {
-        super("Ninja", new ItemStack(Material.IRON_SWORD), "Gotta Go Fast! with Kit Ninja!", ChatColor.GRAY);
+    public StrafeKit() {
+        super("Strafe", new ItemStack(Material.IRON_SWORD), "It's in the name! SpeedII Ftw!", ChatColor.GRAY);
     }
 
     public void wear(Player player) {

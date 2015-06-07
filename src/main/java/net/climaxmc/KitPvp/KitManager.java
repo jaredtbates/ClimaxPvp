@@ -21,11 +21,12 @@ public class KitManager {
         kits.add(new HeavyKit());
         kits.add(new ArcherKit());
         kits.add(new FishermanKit());
-        kits.add(new NinjaKit());
+        kits.add(new StrafeKit());
 
         // Blue Kits
         kits.add(new EndermanKit());
         kits.add(new ViperKit());
+        kits.add(new SanicKit());
 
         // Green Kits
         kits.add(new IronGolemKit());
