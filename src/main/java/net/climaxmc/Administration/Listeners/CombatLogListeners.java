@@ -43,20 +43,28 @@ public class CombatLogListeners implements Listener {
 
             new BukkitRunnable() {
                 public void run() {
+                    if (!tagged.containsKey(damager.getUniqueId())) {
+                        cancel();
+                        return;
+                    }
+
                     if (System.currentTimeMillis() >= tagged.get(damager.getUniqueId())) {
                         tagged.remove(damager.getUniqueId());
                         damager.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
-                        cancel();
                     }
                 }
             }.runTaskTimer(plugin, 20, 20);
 
             new BukkitRunnable() {
                 public void run() {
+                    if (!tagged.containsKey(damager.getUniqueId())) {
+                        cancel();
+                        return;
+                    }
+
                     if (System.currentTimeMillis() >= tagged.get(damaged.getUniqueId())) {
                         tagged.remove(damaged.getUniqueId());
                         damaged.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
-                        cancel();
                     }
                 }
             }.runTaskTimer(plugin, 20, 20);
@@ -69,7 +77,6 @@ public class CombatLogListeners implements Listener {
 
         if (tagged.containsKey(player.getUniqueId())) {
             tagged.remove(player.getUniqueId());
-            player.damage(player.getHealth(), player.getLastDamageCause().getEntity());
             plugin.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + player.getName() + ChatColor.RED + " has logged out while in combat!");
         }
     }
@@ -98,8 +105,10 @@ public class CombatLogListeners implements Listener {
         Player player = event.getEntity();
         Player killer = player.getKiller();
 
-        if (tagged.containsKey(killer.getUniqueId())) {
-            tagged.remove(killer.getUniqueId());
+        if (killer != null) {
+            if (tagged.containsKey(killer.getUniqueId())) {
+                tagged.remove(killer.getUniqueId());
+            }
         }
     }
 }

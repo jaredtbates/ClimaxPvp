@@ -1,8 +1,8 @@
 package net.climaxmc.Donations.Commands;
 
-import net.climaxmc.API.PlayerData;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Enums.Trail;
+import net.climaxmc.database.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.*;

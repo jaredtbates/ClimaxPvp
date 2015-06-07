@@ -1,12 +1,12 @@
 package net.climaxmc;
 
 import lombok.Getter;
-import net.climaxmc.API.MySQL;
-import net.climaxmc.API.PlayerData;
 import net.climaxmc.Administration.Administration;
 import net.climaxmc.Donations.Donations;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.OneVsOne.OneVsOne;
+import net.climaxmc.database.MySQL;
+import net.climaxmc.database.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;

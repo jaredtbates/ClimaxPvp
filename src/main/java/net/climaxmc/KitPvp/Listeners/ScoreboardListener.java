@@ -1,8 +1,8 @@
 package net.climaxmc.KitPvp.Listeners;
 
-import net.climaxmc.API.Events.PlayerBalanceChangeEvent;
-import net.climaxmc.API.PlayerData;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.database.PlayerData;
+import net.climaxmc.database.events.BukkitPlayerBalanceChangeEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -15,9 +15,9 @@ import java.util.*;
 
 public class ScoreboardListener implements Listener {
     private ClimaxPvp plugin;
-    private Map<UUID, Integer> balances = new HashMap<UUID, Integer>();
-    private Map<UUID, Integer> kills = new HashMap<UUID, Integer>();
-    private Map<UUID, Integer> deaths = new HashMap<UUID, Integer>();
+    private Map<UUID, Integer> balances = new HashMap<>();
+    private Map<UUID, Integer> kills = new HashMap<>();
+    private Map<UUID, Integer> deaths = new HashMap<>();
 
     public ScoreboardListener(ClimaxPvp plugin) {
         this.plugin = plugin;
@@ -56,7 +56,7 @@ public class ScoreboardListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerBalanceChange(PlayerBalanceChangeEvent event) {
+    public void onPlayerBalanceChange(BukkitPlayerBalanceChangeEvent event) {
         updateScoreboards();
     }
 

@@ -2,7 +2,7 @@ package net.climaxmc.Donations.Enums;
 
 import lombok.Getter;
 import net.climaxmc.API.ParticleEffect;
-import net.climaxmc.Donations.Perk;
+import net.climaxmc.database.Perk;
 import org.bukkit.Material;
 
 public enum Trail implements Perk {

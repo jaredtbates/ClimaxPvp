@@ -1,8 +1,8 @@
 package net.climaxmc.KitPvp;
 
 import lombok.Data;
-import net.climaxmc.API.PlayerData;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.database.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.*;
@@ -65,7 +65,7 @@ public abstract class Kit implements Listener, CommandExecutor {
      */
     public Kit(String name, ItemStack item, String lore, ChatColor color) {
         ItemMeta meta = item.getItemMeta();
-        ArrayList<String> lores = new ArrayList<String>();
+        ArrayList<String> lores = new ArrayList<>();
         lores.add(lore);
         meta.setLore(lores);
         meta.setDisplayName(color + "Kit " + name);

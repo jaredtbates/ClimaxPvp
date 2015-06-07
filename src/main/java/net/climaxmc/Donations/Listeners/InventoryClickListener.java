@@ -1,10 +1,10 @@
 package net.climaxmc.Donations.Listeners;
 
-import net.climaxmc.API.PlayerData;
-import net.climaxmc.API.Rank;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Donations;
 import net.climaxmc.Donations.Enums.Trail;
+import net.climaxmc.database.PlayerData;
+import net.climaxmc.database.Rank;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

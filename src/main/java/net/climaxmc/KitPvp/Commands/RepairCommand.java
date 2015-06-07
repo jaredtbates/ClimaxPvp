@@ -1,7 +1,7 @@
 package net.climaxmc.KitPvp.Commands;
 
-import net.climaxmc.API.PlayerData;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.database.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;

@@ -1,7 +1,7 @@
 package net.climaxmc.KitPvp.Listeners;
 
-import net.climaxmc.API.PlayerData;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.database.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

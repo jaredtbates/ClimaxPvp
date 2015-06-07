@@ -1,11 +1,11 @@
 package net.climaxmc.Administration.Commands;
 
-import net.climaxmc.API.PlayerData;
-import net.climaxmc.API.Rank;
 import net.climaxmc.ClimaxPvp;
-import org.bukkit.ChatColor;
+import net.climaxmc.database.PlayerData;
+import net.climaxmc.database.Rank;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
