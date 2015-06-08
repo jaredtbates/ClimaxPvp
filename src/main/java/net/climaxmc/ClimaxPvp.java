@@ -72,7 +72,7 @@ public class ClimaxPvp extends JavaPlugin {
      * @return Data of player
      */
     public PlayerData getPlayerData(OfflinePlayer player) {
-        return mySQL.getPlayerData(player);
+        return mySQL.getPlayerData(player.getUniqueId());
     }
 
     /**
