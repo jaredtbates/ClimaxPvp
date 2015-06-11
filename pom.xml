@@ -91,7 +91,7 @@
                     <minimizeJar>true</minimizeJar>
                     <artifactSet>
                         <includes>
-                            <include>net.climaxmc:Database</include>
+                            <include>net.climaxmc:Common</include>
                         </includes>
                     </artifactSet>
                 </configuration>
