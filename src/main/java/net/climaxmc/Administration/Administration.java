@@ -1,7 +1,6 @@
 package net.climaxmc.Administration;
 
 import net.climaxmc.Administration.Commands.AdminCommand;
-import net.climaxmc.Administration.Commands.RankCommand;
 import net.climaxmc.Administration.Listeners.*;
 import net.climaxmc.ClimaxPvp;
 
@@ -16,6 +15,5 @@ public class Administration {
 
         // Register commands
         plugin.getCommand("admin").setExecutor(new AdminCommand(plugin));
-        plugin.getCommand("rank").setExecutor(new RankCommand(plugin));
     }
 }

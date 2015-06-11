@@ -26,6 +26,7 @@ public class ClimaxPvp extends JavaPlugin {
     @Getter
     private Map<UUID, Map<String, Object>> temporaryPlayerData = new HashMap<>();
 
+    @Override
     public void onEnable() {
         // Initialize Instance
         instance = this;
