@@ -4,7 +4,6 @@ import lombok.Getter;
 import net.climaxmc.Administration.Administration;
 import net.climaxmc.Donations.Donations;
 import net.climaxmc.KitPvp.KitPvp;
-import net.climaxmc.OneVsOne.OneVsOne;
 import net.climaxmc.common.database.MySQL;
 import net.climaxmc.common.database.PlayerData;
 import org.bukkit.ChatColor;
@@ -45,7 +44,6 @@ public class ClimaxPvp extends JavaPlugin {
 
         // Load Modules
         new KitPvp(this);
-        new OneVsOne(this);
         new Donations(this);
         new Administration(this);
 
