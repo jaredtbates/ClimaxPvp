@@ -1,8 +1,8 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.database.PlayerData;
-import net.climaxmc.database.events.BukkitPlayerBalanceChangeEvent;
+import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.events.BukkitPlayerBalanceChangeEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

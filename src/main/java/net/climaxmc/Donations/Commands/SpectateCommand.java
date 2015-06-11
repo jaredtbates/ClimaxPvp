@@ -1,7 +1,7 @@
 package net.climaxmc.Donations.Commands;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.database.Perk;
+import net.climaxmc.common.donations.Perk;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.*;

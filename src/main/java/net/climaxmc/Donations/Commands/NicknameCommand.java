@@ -1,7 +1,9 @@
 package net.climaxmc.Donations.Commands;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.database.*;
+import net.climaxmc.common.Rank;
+import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.donations.Perk;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;

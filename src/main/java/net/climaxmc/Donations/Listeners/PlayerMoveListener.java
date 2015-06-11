@@ -1,9 +1,9 @@
 package net.climaxmc.Donations.Listeners;
 
-import net.climaxmc.API.ParticleEffect;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Donations;
-import net.climaxmc.Donations.Enums.Trail;
+import net.climaxmc.common.donations.trails.ParticleEffect;
+import net.climaxmc.common.donations.trails.Trail;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

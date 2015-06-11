@@ -2,7 +2,7 @@ package net.climaxmc.KitPvp;
 
 import lombok.Data;
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.database.PlayerData;
+import net.climaxmc.common.database.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.*;
