@@ -22,8 +22,6 @@ public class ClimaxPvp extends JavaPlugin {
     private MySQL mySQL = null;
     @Getter
     private String prefix = ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.RED + "Climax" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.RESET;
-    @Getter
-    private Map<UUID, Map<String, Object>> temporaryPlayerData = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -42,14 +40,13 @@ public class ClimaxPvp extends JavaPlugin {
                 getConfig().getString("Database.Password")
         );
 
+        // Create temporary player data
+        getServer().getOnlinePlayers().forEach(player -> mySQL.getTemporaryPlayerData().put(player.getUniqueId(), new HashMap<>()));
+
         // Load Modules
         new KitPvp(this);
         new Donations(this);
         new Administration(this);
-
-        for (Player player : getServer().getOnlinePlayers()) {
-            temporaryPlayerData.put(player.getUniqueId(), new HashMap<>());
-        }
     }
 
     @Override
@@ -90,6 +87,6 @@ public class ClimaxPvp extends JavaPlugin {
      * @return Temporary data of player
      */
     public Map<String, Object> getTemporaryPlayerData(OfflinePlayer player) {
-        return temporaryPlayerData.get(player.getUniqueId());
+        return mySQL.getTemporaryPlayerData().get(player.getUniqueId());
     }
 }

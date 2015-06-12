@@ -27,7 +27,7 @@ public class PlayerJoinListener implements Listener {
 
         plugin.respawn(player);
 
-        ClimaxPvp.getInstance().getTemporaryPlayerData().put(player.getUniqueId(), new HashMap<>());
+        ClimaxPvp.getInstance().getMySQL().getTemporaryPlayerData().put(player.getUniqueId(), new HashMap<>());
 
         player.setDisplayName(playerData.getNickname());
     }

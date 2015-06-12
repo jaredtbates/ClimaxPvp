@@ -3,15 +3,11 @@ main: ${project.groupId}.${project.artifactId}
 version: ${project.version}
 authors: [computerwizjared, Jonhan_]
 commands:
-  rank:
-    description: Rank management
   repair:
     description: Repairs your inventory
     permission: ${project.artifactId}.Repair
   spawn:
     description: Teleports you to spawn
-  1v1:
-    description: Joins the 1v1 arena
   balance:
     aliases: bal
     description: Gets your balance
@@ -34,5 +30,3 @@ commands:
     description: Create a nickname
   admin:
     description: Enables admin access to all kits
-  perk:
-    description: Perk management
