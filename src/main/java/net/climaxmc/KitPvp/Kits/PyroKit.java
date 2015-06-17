@@ -37,7 +37,7 @@ public class PyroKit extends Kit {
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 3);
         player.getInventory().setBoots(boots);
-        addSoup(player.getInventory(), 1, 35);
+        addSoup(player.getInventory(), 1, 34);
         pyro.add(player.getUniqueId());
     }
 
