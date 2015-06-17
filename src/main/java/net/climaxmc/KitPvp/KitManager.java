@@ -30,10 +30,11 @@ public class KitManager {
 
         // Green Kits
         kits.add(new IronGolemKit());
-        kits.add(new SoldierKit());
         kits.add(new WitherKit());
+        kits.add(new PyroKit());
 
         // Red Kits
+        kits.add(new SoldierKit());
 
         // Gold Kits
 
