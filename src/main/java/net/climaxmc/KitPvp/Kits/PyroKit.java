@@ -105,31 +105,31 @@ public class PyroKit extends Kit {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (soldier.contains(player.getUniqueId())) {
-            soldier.remove(player.getUniqueId());
+        if (pyro.contains(player.getUniqueId())) {
+            pyro.remove(player.getUniqueId());
         }
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        if (soldier.contains(player.getUniqueId())) {
-            soldier.remove(player.getUniqueId());
+        if (pyro.contains(player.getUniqueId())) {
+            pyro.remove(player.getUniqueId());
         }
     }
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
-        if (soldier.contains(player.getUniqueId())) {
-            soldier.remove(player.getUniqueId());
+        if (pyro.contains(player.getUniqueId())) {
+            pyro.remove(player.getUniqueId());
         }
     }
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event){
     	Player player = event.getPlayer();
-    	if(soldier.contains(player.getUniqueId())){
-    		soldier.remove(player.getUniqueId());
+    	if(pyro.contains(player.getUniqueId())){
+    		pyro.remove(player.getUniqueId());
     	}
     }
 }
