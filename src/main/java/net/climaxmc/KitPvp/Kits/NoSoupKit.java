@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class NoSoupKit extends Kit {
     public NoSoupKit() {
-        super("NoSoup", new ItemStack(Material.DIAMOND_SWORD), "A Standard Pvp Kit, Iron Armor and Diamond Sword.", ChatColor.GRAY);
+        super("NoSoupKit", new ItemStack(Material.DIAMOND_SWORD), "A Standard Pvp Kit, Iron Armor and Diamond Sword.", ChatColor.GRAY);
     }
 
     public void wear(Player player) {
