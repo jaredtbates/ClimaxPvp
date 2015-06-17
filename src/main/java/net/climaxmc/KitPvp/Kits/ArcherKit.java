@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -12,6 +13,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.util.Vector;
@@ -86,6 +88,13 @@ public class ArcherKit extends Kit {
         if (archer.contains(player.getUniqueId())) {
             archer.remove(player.getUniqueId());
         }
+    }
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event){
+    	Player player = event.getPlayer();
+    	if(archer.contains(player.getUniqueId())){
+    		archer.remove(player.getUniqueId());
+    	}
     }
 
     @EventHandler

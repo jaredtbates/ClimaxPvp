@@ -1,6 +1,10 @@
 package net.climaxmc.KitPvp.Kits;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 import net.climaxmc.KitPvp.Kit;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -8,10 +12,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
 public class IronGolemKit extends Kit {
+	ArrayList<UUID> irongolem = new ArrayList<UUID>();
 
     public IronGolemKit() {
         super("Iron Golem", new ItemStack(Material.RED_ROSE), "Punch people with your Rose to launch them in the air!", ChatColor.GREEN);
@@ -40,11 +49,43 @@ public class IronGolemKit extends Kit {
             Player player = (Player) event.getDamager();
             if (event.getEntity() instanceof Player) {
                 Player target = (Player) event.getEntity();
-                if (player.getItemInHand().getType().equals(Material.RED_ROSE)) {
-                    event.setCancelled(true);
-                    target.setVelocity(new Vector(0, 1.2, 0));
+                if(irongolem.contains(player.getUniqueId())){
+                	if (player.getItemInHand().getType().equals(Material.RED_ROSE)) {
+                        event.setCancelled(true);
+                        target.setVelocity(new Vector(0, 1.2, 0));
+                    }
                 }
             }
         }
+    }
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        if (irongolem.contains(player.getUniqueId())) {
+        	irongolem.remove(player.getUniqueId());
+        }
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        if (irongolem.contains(player.getUniqueId())) {
+        	irongolem.remove(player.getUniqueId());
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        if (irongolem.contains(player.getUniqueId())) {
+        	irongolem.remove(player.getUniqueId());
+        }
+    }
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event){
+    	Player player = event.getPlayer();
+    	if(irongolem.contains(player.getUniqueId())){
+    		irongolem.remove(player.getUniqueId());
+    	}
     }
 }

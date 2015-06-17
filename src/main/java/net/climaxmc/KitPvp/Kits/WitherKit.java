@@ -1,7 +1,6 @@
 package net.climaxmc.KitPvp.Kits;
 
 import org.bukkit.ChatColor;
-
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -11,6 +10,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
 import net.climaxmc.KitPvp.Kit;
@@ -76,5 +76,12 @@ public class WitherKit extends Kit {
         if (wither.contains(player.getUniqueId())) {
             wither.remove(player.getUniqueId());
         }
+    }
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event){
+    	Player player = event.getPlayer();
+    	if(wither.contains(player.getUniqueId())){
+    		wither.remove(player.getUniqueId());
+    	}
     }
 }

@@ -71,4 +71,11 @@ public class SoldierKit extends Kit {
             soldier.remove(player.getUniqueId());
         }
     }
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event){
+    	Player player = event.getPlayer();
+    	if(soldier.contains(player.getUniqueId())){
+    		soldier.remove(player.getUniqueId());
+    	}
+    }
 }

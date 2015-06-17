@@ -82,4 +82,11 @@ public class ViperKit extends Kit {
             viper.remove(player.getUniqueId());
         }
     }
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event){
+    	Player player = event.getPlayer();
+    	if(viper.contains(player.getUniqueId())){
+    		viper.remove(player.getUniqueId());
+    	}
+    }
 }
