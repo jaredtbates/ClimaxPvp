@@ -14,6 +14,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -30,14 +31,18 @@ public class PyroKit extends Kit {
     	ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
     	sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
         player.getInventory().addItem(sword);
-        player.getInventory().addItem(new ItemStack(Material.GOLD_HOE));
+        ItemStack hoe = new ItemStack(Material.GOLD_HOE);
+        ItemMeta hoemeta = hoe.getItemMeta();
+        hoemeta.setDisplayName(ChatColor.RED + "Fireball Launcher");
+        hoe.setItemMeta(hoemeta);
+        player.getInventory().addItem(hoe);
         player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 3);
         player.getInventory().setBoots(boots);
-        addSoup(player.getInventory(), 1, 34);
+        addSoup(player.getInventory(), 2, 34);
         pyro.add(player.getUniqueId());
     }
 
