@@ -27,11 +27,12 @@ public class KitManager {
         kits.add(new EndermanKit());
         kits.add(new ViperKit());
         kits.add(new SanicKit());
+        kits.add(new GhastKit());
 
         // Green Kits
         kits.add(new IronGolemKit());
         kits.add(new WitherKit());
-        kits.add(new GhastKit());
+        kits.add(new ThorKit());
 
         // Red Kits
         kits.add(new SoldierKit());

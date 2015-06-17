@@ -24,7 +24,7 @@ public class GhastKit extends Kit {
     ArrayList<UUID> ghast = new ArrayList<UUID>();
 
     public GhastKit() {
-        super("Ghast", new ItemStack(Material.FIREBALL), "Set the world on Fire with the Ghast Kit!", ChatColor.GREEN);
+        super("Ghast", new ItemStack(Material.FIREBALL), "Set the world on Fire with the Ghast Kit!", ChatColor.BLUE);
     }
 
     public void wear(Player player) {
@@ -42,7 +42,7 @@ public class GhastKit extends Kit {
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 3);
         player.getInventory().setBoots(boots);
-        addSoup(player.getInventory(), 2, 34);
+        addSoup(player.getInventory(), 2, 35);
         ghast.add(player.getUniqueId());
     }
 
