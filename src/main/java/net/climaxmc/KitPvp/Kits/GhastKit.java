@@ -20,11 +20,11 @@ import org.bukkit.util.Vector;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class PyroKit extends Kit {
-    ArrayList<UUID> pyro = new ArrayList<UUID>();
+public class GhastKit extends Kit {
+    ArrayList<UUID> ghast = new ArrayList<UUID>();
 
-    public PyroKit() {
-        super("Pyro", new ItemStack(Material.FIREBALL), "Set the world on Fire with the Pyro Kit!", ChatColor.GREEN);
+    public GhastKit() {
+        super("Ghast", new ItemStack(Material.FIREBALL), "Set the world on Fire with the Ghast Kit!", ChatColor.GREEN);
     }
 
     public void wear(Player player) {
@@ -43,18 +43,17 @@ public class PyroKit extends Kit {
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 3);
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 2, 34);
-        pyro.add(player.getUniqueId());
+        ghast.add(player.getUniqueId());
     }
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
-        if (pyro.contains(player.getUniqueId())) {
+        if (ghast.contains(player.getUniqueId())) {
             if (player.getInventory().getItemInHand().getType() == Material.GOLD_HOE) {
                 if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                 	Fireball f = event.getPlayer().launchProjectile(Fireball.class);
                 	f.setIsIncendiary(false);
-                	f.setYield(0);
                 	double vel = f.getVelocity().length() * (0.1D + 0.1D * 5);
                     // Knock player back
                     velocity(player, player.getLocation().getDirection().multiply(-1), vel,
@@ -70,9 +69,9 @@ public class PyroKit extends Kit {
     		Fireball f = (Fireball) event.getDamager();
     		if(f.getShooter() instanceof Player){
     			Player shooter = (Player) f.getShooter();
-    			if(pyro.contains(shooter.getUniqueId())){
+    			if(ghast.contains(shooter.getUniqueId())){
     				if(shooter.getItemInHand().getType() == Material.GOLD_HOE){
-    					event.setDamage(7.0);
+    					event.setDamage(20.0);
     				}
     			}
     		}
@@ -110,31 +109,31 @@ public class PyroKit extends Kit {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (pyro.contains(player.getUniqueId())) {
-            pyro.remove(player.getUniqueId());
+        if (ghast.contains(player.getUniqueId())) {
+        	ghast.remove(player.getUniqueId());
         }
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        if (pyro.contains(player.getUniqueId())) {
-            pyro.remove(player.getUniqueId());
+        if (ghast.contains(player.getUniqueId())) {
+        	ghast.remove(player.getUniqueId());
         }
     }
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
-        if (pyro.contains(player.getUniqueId())) {
-            pyro.remove(player.getUniqueId());
+        if (ghast.contains(player.getUniqueId())) {
+        	ghast.remove(player.getUniqueId());
         }
     }
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event){
     	Player player = event.getPlayer();
-    	if(pyro.contains(player.getUniqueId())){
-    		pyro.remove(player.getUniqueId());
+    	if(ghast.contains(player.getUniqueId())){
+    		ghast.remove(player.getUniqueId());
     	}
     }
 }
