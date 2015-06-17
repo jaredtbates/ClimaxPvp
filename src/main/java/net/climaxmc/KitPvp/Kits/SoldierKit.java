@@ -24,12 +24,12 @@ public class SoldierKit extends Kit {
 
     public void wear(Player player) {
     	ItemStack sword = new ItemStack(Material.IRON_SWORD);
-    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
-        ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
+        ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 1, 35);
@@ -42,7 +42,7 @@ public class SoldierKit extends Kit {
         if (soldier.contains(player.getUniqueId())) {
             if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                    player.setVelocity(new Vector(0, 0.7, 0));
+                    player.setVelocity(new Vector(0, 0.5, 0));
                 }
             }
         }
