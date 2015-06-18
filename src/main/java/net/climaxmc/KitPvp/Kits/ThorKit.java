@@ -46,7 +46,6 @@ public class ThorKit extends Kit {
         		if (KitManager.isPlayerInKit(player, this)) {
         			if (player.getItemInHand().getType() == Material.IRON_AXE) {
                         if (!lightning.tryUse(player)) {
-                            player.sendMessage(ChatColor.RED + "You have " + lightning.getStatus(player).getRemainingTime(TimeUnit.SECONDS) + " seconds remaining before you may use lightning!");
                             return;
                         }
 

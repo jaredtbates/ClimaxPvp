@@ -52,7 +52,6 @@ public class GhastKit extends Kit {
             if (player.getInventory().getItemInHand().getType() == Material.GOLD_HOE) {
                 if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                     if (!fireball.tryUse(player)) {
-                        player.sendMessage(ChatColor.RED + "You have " + fireball.getStatus(player).getRemainingTime(TimeUnit.SECONDS) + " seconds remaining before you may use fireball!");
                         return;
                     }
 
