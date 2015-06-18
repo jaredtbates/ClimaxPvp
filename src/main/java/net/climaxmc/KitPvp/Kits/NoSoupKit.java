@@ -12,7 +12,7 @@ public class NoSoupKit extends Kit {
         super("NoSoupKit", new ItemStack(Material.DIAMOND_SWORD), "A Standard Pvp Kit, Iron Armor and Diamond Sword.", ChatColor.GRAY);
     }
 
-    public void wear(Player player) {
+    protected void wear(Player player) {
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));

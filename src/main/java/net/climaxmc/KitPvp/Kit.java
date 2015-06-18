@@ -94,7 +94,7 @@ public abstract class Kit implements Listener, CommandExecutor {
      *
      * @param player Player to wear kit
      */
-    public abstract void wear(Player player);
+    protected abstract void wear(Player player);
 
     /**
      * Wear the kit with permissions and messages
@@ -102,21 +102,16 @@ public abstract class Kit implements Listener, CommandExecutor {
      * @param player Player to wear kit
      */
     public void wearCheckPerms(Player player) {
-        PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
-        if (player.hasPermission("ClimaxPvp.Kit." + getName().replaceAll("\\s+", "")) || playerData.hasData("Admin Mode")) {
-            if (!KitPvp.inKit.contains(player.getUniqueId())) {
-                KitPvp.inKit.add(player.getUniqueId());
-                for (PotionEffect effect : player.getActivePotionEffects()) {
-                    player.removePotionEffect(effect.getType());
-                }
-                player.getInventory().clear();
-                wear(player);
-                player.sendMessage(ChatColor.GOLD + "You have chosen " + getColor() + getName());
-            } else {
-                player.sendMessage(ChatColor.RED + "You have not died yet!");
+        if (!KitPvp.inKit.contains(player.getUniqueId())) {
+            KitPvp.inKit.add(player.getUniqueId());
+            for (PotionEffect effect : player.getActivePotionEffects()) {
+                player.removePotionEffect(effect.getType());
             }
+            player.getInventory().clear();
+            wear(player);
+            player.sendMessage(ChatColor.GOLD + "You have chosen " + getColor() + getName());
         } else {
-            player.sendMessage(ChatColor.RED + "You do not have permission for kit " + getName() + ChatColor.RED + "!");
+            player.sendMessage(ChatColor.RED + "You have not died yet!");
         }
     }
 

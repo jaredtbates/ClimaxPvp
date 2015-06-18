@@ -26,7 +26,7 @@ public class IronGolemKit extends Kit {
         super("Iron Golem", new ItemStack(Material.RED_ROSE), "Punch people with your Rose to launch them in the air!", ChatColor.GREEN);
     }
 
-    public void wear(Player player) {
+    protected void wear(Player player) {
         ItemStack sword = new ItemStack(Material.GOLD_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         sword.addEnchantment(Enchantment.DURABILITY, 2);

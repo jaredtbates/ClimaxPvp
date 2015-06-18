@@ -26,7 +26,7 @@ public class ViperKit extends Kit {
         super("Viper", new ItemStack(Material.SPIDER_EYE), "With each hit you poison your enemy!", ChatColor.BLUE);
     }
 
-    public void wear(Player player) {
+    protected void wear(Player player) {
         player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();

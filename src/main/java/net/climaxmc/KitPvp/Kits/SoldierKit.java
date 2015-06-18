@@ -22,7 +22,7 @@ public class SoldierKit extends Kit {
         super("Soldier", new ItemStack(Material.FEATHER), "Right Click Blocks with your Sword to Climb Walls!", ChatColor.RED);
     }
 
-    public void wear(Player player) {
+    protected void wear(Player player) {
     	ItemStack sword = new ItemStack(Material.IRON_SWORD);
     	sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);

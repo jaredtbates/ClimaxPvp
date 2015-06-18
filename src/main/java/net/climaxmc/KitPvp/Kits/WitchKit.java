@@ -12,7 +12,7 @@ public class WitchKit extends Kit {
         super("Witch", new ItemStack(Material.SOUL_SAND), "Potions FTW!", ChatColor.GRAY);
     }
 
-    public void wear(Player player) {
+    protected void wear(Player player) {
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));

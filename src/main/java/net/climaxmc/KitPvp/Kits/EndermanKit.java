@@ -14,7 +14,7 @@ public class EndermanKit extends Kit {
         super("Enderman", new ItemStack(Material.ENDER_PEARL), "Teleport around like an enderman!", ChatColor.BLUE);
     }
 
-    public void wear(Player player) {
+    protected void wear(Player player) {
         player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));

@@ -24,7 +24,7 @@ public class FishermanKit extends Kit {
         super("Fisherman", new ItemStack(Material.FISHING_ROD), "Hook a player and retract your line to Fish them to you!", ChatColor.GRAY);
     }
 
-    public void wear(Player player) {
+    protected void wear(Player player) {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);

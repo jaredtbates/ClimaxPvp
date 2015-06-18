@@ -28,7 +28,7 @@ public class ArcherKit extends Kit {
         super("Archer", new ItemStack(Material.BOW), "Snipe them up!", ChatColor.GRAY);
     }
 
-    public void wear(Player player) {
+    protected void wear(Player player) {
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         LeatherArmorMeta helmetMeta = (LeatherArmorMeta) helmet.getItemMeta();
         helmetMeta.setColor(Color.WHITE);

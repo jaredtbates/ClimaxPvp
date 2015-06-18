@@ -25,7 +25,7 @@ public class ThorKit extends Kit {
         super("Thor", new ItemStack(Material.DIAMOND_AXE), "Punch a player with your Axe to Strike Lightning!", ChatColor.GREEN);
     }
 
-    public void wear(Player player) {
+    protected void wear(Player player) {
     	ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
     	sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);

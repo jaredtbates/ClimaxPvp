@@ -26,7 +26,7 @@ public class WitherKit extends Kit {
         super("Wither", new ItemStack(Material.SKULL_ITEM), "Shoot your WitherBow to Launch your Wither Head!", ChatColor.GREEN);
     }
 
-    public void wear(Player player) {
+    protected void wear(Player player) {
         player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
         player.getInventory().addItem(new ItemStack(Material.BOW));
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET);

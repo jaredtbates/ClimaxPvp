@@ -15,7 +15,7 @@ public class StrafeKit extends Kit {
         super("Strafe", new ItemStack(Material.IRON_SWORD), "It's in the name! SpeedII Ftw!", ChatColor.GRAY);
     }
 
-    public void wear(Player player) {
+    protected void wear(Player player) {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }

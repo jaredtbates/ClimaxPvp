@@ -16,7 +16,7 @@ public class SanicKit extends Kit {
         super("Sanic", new ItemStack(Material.QUARTZ), "Gotta Go Fast!", ChatColor.BLUE);
     }
 
-    public void wear(Player player) {
+    protected void wear(Player player) {
     	for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }

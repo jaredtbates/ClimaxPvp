@@ -14,7 +14,7 @@ public class HeavyKit extends Kit {
         super("Heavy", new ItemStack(Material.DIAMOND_CHESTPLATE), "The tankiest of all kits!", ChatColor.GRAY);
     }
 
-    public void wear(Player player) {
+    protected void wear(Player player) {
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS));

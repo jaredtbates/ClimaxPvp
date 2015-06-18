@@ -27,7 +27,7 @@ public class GhastKit extends Kit {
         super("Ghast", new ItemStack(Material.FIREBALL), "Set the world on Fire with the Ghast Kit!", ChatColor.BLUE);
     }
 
-    public void wear(Player player) {
+    protected void wear(Player player) {
     	ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
     	sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
         player.getInventory().addItem(sword);
@@ -47,7 +47,7 @@ public class GhastKit extends Kit {
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent event) {
+    protected void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (ghast.contains(player.getUniqueId())) {
             if (player.getInventory().getItemInHand().getType() == Material.GOLD_HOE) {
