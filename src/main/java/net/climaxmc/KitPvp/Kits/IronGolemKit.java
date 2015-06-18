@@ -37,6 +37,7 @@ public class IronGolemKit extends Kit {
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 2, 35);
+        irongolem.add(player.getUniqueId());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
