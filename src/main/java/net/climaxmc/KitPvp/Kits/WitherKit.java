@@ -1,5 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
+import net.climaxmc.KitPvp.Kit;
+import net.climaxmc.KitPvp.KitManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -7,21 +9,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
-import net.climaxmc.KitPvp.Kit;
-
-import java.util.ArrayList;
-import java.util.UUID;
-
 public class WitherKit extends Kit {
-
-    ArrayList<UUID> wither = new ArrayList<UUID>();
-
     public WitherKit() {
         super("Wither", new ItemStack(Material.SKULL_ITEM), "Shoot your WitherBow to Launch your Wither Head!", ChatColor.GREEN);
     }
@@ -40,48 +30,16 @@ public class WitherKit extends Kit {
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 2, 34);
         player.getInventory().setItem(17, new ItemStack(Material.ARROW, 64));
-        wither.add(player.getUniqueId());
     }
 
     @EventHandler
     public void onBowShoot(EntityShootBowEvent event) {
     	if (event.getEntity() instanceof Player){
     		Player player = (Player) event.getEntity();
-    		if (wither.contains(player.getUniqueId())) {
+    		if (KitManager.isPlayerInKit(player, this)) {
     			event.setCancelled(true);
     			player.launchProjectile(WitherSkull.class).setVelocity(event.getProjectile().getVelocity());
     		}
-    	}
-    }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        if (wither.contains(player.getUniqueId())) {
-            wither.remove(player.getUniqueId());
-        }
-    }
-
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-        if (wither.contains(player.getUniqueId())) {
-            wither.remove(player.getUniqueId());
-        }
-    }
-
-    @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent event) {
-        Player player = event.getEntity();
-        if (wither.contains(player.getUniqueId())) {
-            wither.remove(player.getUniqueId());
-        }
-    }
-    @EventHandler
-    public void onPlayerRespawn(PlayerRespawnEvent event){
-    	Player player = event.getPlayer();
-    	if(wither.contains(player.getUniqueId())){
-    		wither.remove(player.getUniqueId());
     	}
     }
 }

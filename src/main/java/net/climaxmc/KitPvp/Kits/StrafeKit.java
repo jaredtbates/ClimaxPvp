@@ -10,7 +10,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class StrafeKit extends Kit {
-
     public StrafeKit() {
         super("Strafe", new ItemStack(Material.IRON_SWORD), "It's in the name! SpeedII Ftw!", ChatColor.GRAY);
     }

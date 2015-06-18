@@ -1,19 +1,28 @@
 package net.climaxmc.KitPvp;
 
+import lombok.Getter;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kits.*;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.SimplePluginManager;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.util.*;
 
-public class KitManager {
-    public static ArrayList<Kit> kits = new ArrayList<Kit>();
+public class KitManager implements Listener {
+    @Getter
+    private static List<Kit> kits = new ArrayList<>();
+    @Getter
+    private static Map<UUID, Kit> playersInKits = new HashMap<>();
 
     public KitManager(ClimaxPvp plugin) {
         // Gray Kits
@@ -39,13 +48,50 @@ public class KitManager {
 
         // Gold Kits
 
-        // Other Kits
-
         for (Kit kit : kits) {
             plugin.getServer().getPluginManager().registerEvents(kit, plugin);
             getCommandMap().register(plugin.getConfig().getName(), getCommand(kit.getName().replaceAll("\\s+", ""), plugin));
             plugin.getCommand(kit.getName().replaceAll("\\s+", "")).setExecutor(kit);
         }
+    }
+
+    @EventHandler
+    public final void onPlayerRespawn(PlayerRespawnEvent event) {
+        Player player = event.getPlayer();
+        if (isPlayerInKit(player)) {
+            playersInKits.remove(player.getUniqueId());
+        }
+    }
+
+    @EventHandler
+    public final void onPlayerDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        if (isPlayerInKit(player)) {
+            playersInKits.remove(player.getUniqueId());
+        }
+    }
+
+    public final void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        if (isPlayerInKit(player)) {
+            playersInKits.remove(player.getUniqueId());
+        }
+    }
+
+    @EventHandler
+    public final void onPlayerQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        if (isPlayerInKit(player)) {
+            playersInKits.remove(player.getUniqueId());
+        }
+    }
+
+    public static boolean isPlayerInKit(Player player) {
+        return playersInKits.containsKey(player.getUniqueId());
+    }
+
+    public static boolean isPlayerInKit(Player player, Kit kit) {
+        return playersInKits.containsKey(player.getUniqueId()) && playersInKits.get(player.getUniqueId()).equals(kit);
     }
 
     private PluginCommand getCommand(String name, Plugin plugin) {

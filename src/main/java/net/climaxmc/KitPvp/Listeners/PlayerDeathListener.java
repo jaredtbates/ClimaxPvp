@@ -26,10 +26,6 @@ public class PlayerDeathListener implements Listener {
         PlayerData playerData = plugin.getPlayerData(player);
         playerData.addDeaths(1);
 
-        if (KitPvp.inKit.contains(player.getUniqueId())) {
-            KitPvp.inKit.remove(player.getUniqueId());
-        }
-
         if (killer == null) {
             event.setDeathMessage(ChatColor.RED + player.getName() + ChatColor.GRAY + " died");
             return;

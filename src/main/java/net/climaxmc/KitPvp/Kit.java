@@ -1,8 +1,6 @@
 package net.climaxmc.KitPvp;
 
 import lombok.Data;
-import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.database.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.*;
@@ -84,8 +82,8 @@ public abstract class Kit implements Listener, CommandExecutor {
      * @param finalslot Inventory slot to end giving soups
      */
     public static void addSoup(Inventory inventory, int startslot, int finalslot) {
-        for (int x = startslot; x <= finalslot; x++) {
-            inventory.setItem(x, new ItemStack(Material.MUSHROOM_SOUP));
+        for (int slot = startslot; slot <= finalslot; slot++) {
+            inventory.setItem(slot, new ItemStack(Material.MUSHROOM_SOUP));
         }
     }
 
@@ -102,11 +100,13 @@ public abstract class Kit implements Listener, CommandExecutor {
      * @param player Player to wear kit
      */
     public void wearCheckPerms(Player player) {
-        if (!KitPvp.inKit.contains(player.getUniqueId())) {
-            KitPvp.inKit.add(player.getUniqueId());
+        if (!KitManager.isPlayerInKit(player)) {
+            KitManager.getPlayersInKits().put(player.getUniqueId(), this);
+
             for (PotionEffect effect : player.getActivePotionEffects()) {
                 player.removePotionEffect(effect.getType());
             }
+
             player.getInventory().clear();
             wear(player);
             player.sendMessage(ChatColor.GOLD + "You have chosen " + getColor() + getName());

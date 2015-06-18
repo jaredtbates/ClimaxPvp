@@ -1,29 +1,18 @@
 package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.Material;
+import net.climaxmc.KitPvp.KitManager;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 public class ArcherKit extends Kit {
-	ArrayList<UUID> archer = new ArrayList<UUID>();
-	
     public ArcherKit() {
         super("Archer", new ItemStack(Material.BOW), "Snipe them up!", ChatColor.GRAY);
     }
@@ -63,38 +52,6 @@ public class ArcherKit extends Kit {
         player.getInventory().addItem(bow);
         addSoup(player.getInventory(), 2, 34);
         player.getInventory().addItem(new ItemStack(Material.ARROW, 64));
-        archer.add(player.getUniqueId());
-    }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        if (archer.contains(player.getUniqueId())) {
-            archer.remove(player.getUniqueId());
-        }
-    }
-
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-        if (archer.contains(player.getUniqueId())) {
-            archer.remove(player.getUniqueId());
-        }
-    }
-
-    @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent event) {
-        Player player = event.getEntity();
-        if (archer.contains(player.getUniqueId())) {
-            archer.remove(player.getUniqueId());
-        }
-    }
-    @EventHandler
-    public void onPlayerRespawn(PlayerRespawnEvent event){
-    	Player player = event.getPlayer();
-    	if(archer.contains(player.getUniqueId())){
-    		archer.remove(player.getUniqueId());
-    	}
     }
 
     @EventHandler
@@ -105,7 +62,7 @@ public class ArcherKit extends Kit {
 
         Player player = (Player) event.getEntity();
         
-        if (!(archer.contains(player.getUniqueId()))){
+        if (!KitManager.isPlayerInKit(player, this)) {
         	return;
         }
 
@@ -119,8 +76,7 @@ public class ArcherKit extends Kit {
                 false, 0.0D, 0.2D, 0.8D, true);
     }
 
-    private void velocity(Entity ent, Vector vec, double str, boolean ySet, double yBase, double yAdd, double yMax, boolean groundBoost)
-    {
+    private void velocity(Entity ent, Vector vec, double str, boolean ySet, double yBase, double yAdd, double yMax, boolean groundBoost) {
         if ((Double.isNaN(vec.getX())) || (Double.isNaN(vec.getY())) || (Double.isNaN(vec.getZ())) || (vec.length() == 0.0D)) {
             return;
         }
@@ -132,13 +88,12 @@ public class ArcherKit extends Kit {
         vec.normalize();
         vec.multiply(str);
 
-
         vec.setY(vec.getY() + yAdd);
-
 
         if (vec.getY() > yMax) {
             vec.setY(yMax);
         }
+
         if (groundBoost) {
             vec.setY(vec.getY() + 0.2D);
         }

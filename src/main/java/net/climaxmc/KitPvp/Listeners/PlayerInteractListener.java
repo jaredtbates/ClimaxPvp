@@ -125,7 +125,7 @@ public class PlayerInteractListener implements Listener {
 
                 int goldSlot = 0, redSlot = 10, limeSlot = 19, blueSlot = 28, graySlot = 37;
 
-                for (Kit kit : KitManager.kits) {
+                for (Kit kit : KitManager.getKits()) {
                     if (kit.getColor().equals(ChatColor.GOLD)) {
                         if (playerData.hasData("Admin Mode") ||
                                 playerData.getLevelColor().equals(ChatColor.GOLD + "" + ChatColor.BOLD)) {

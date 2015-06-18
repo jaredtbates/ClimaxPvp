@@ -19,10 +19,6 @@ public class PlayerQuitListener implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        if (KitPvp.inKit.contains(player.getUniqueId())) {
-            KitPvp.inKit.remove(player.getUniqueId());
-        }
-
         if (KitPvp.killStreak.containsKey(player.getUniqueId())) {
             KitPvp.killStreak.remove(player.getUniqueId());
         }
