@@ -46,7 +46,7 @@ public class GhastKit extends Kit {
             if (player.getInventory().getItemInHand().getType() == Material.GOLD_HOE) {
                 if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                 	Fireball f = event.getPlayer().launchProjectile(Fireball.class);
-                	player.getWorld().playSound(player.getLocation(), Sound.BLAZE_HIT, 1, 1);
+                	player.getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 1);
                 	f.setIsIncendiary(false);
                 	double vel = f.getVelocity().length() * (0.1D + 0.1D * 5);
                     // Knock player back
