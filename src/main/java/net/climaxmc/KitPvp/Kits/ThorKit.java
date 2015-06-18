@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.Utils.Ability;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -11,7 +12,11 @@ import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.concurrent.TimeUnit;
+
 public class ThorKit extends Kit {
+    private Ability lightning = new Ability(1, 5, TimeUnit.SECONDS);
+
     public ThorKit() {
         super("Thor", new ItemStack(Material.DIAMOND_AXE), "Punch a player with your Axe to Strike Lightning!", ChatColor.GREEN);
     }
@@ -40,6 +45,11 @@ public class ThorKit extends Kit {
         		Player target = (Player) event.getEntity();
         		if (KitManager.isPlayerInKit(player, this)) {
         			if (player.getItemInHand().getType() == Material.IRON_AXE) {
+                        if (!lightning.tryUse(player)) {
+                            player.sendMessage(ChatColor.RED + "You have " + lightning.getStatus(player).getRemainingTime(TimeUnit.SECONDS) + " seconds remaining before you may use lightning!");
+                            return;
+                        }
+
         				event.setCancelled(true);
         				target.getWorld().strikeLightning(target.getLocation());
         			}
