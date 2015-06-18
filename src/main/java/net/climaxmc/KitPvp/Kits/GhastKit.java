@@ -2,8 +2,10 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -44,6 +46,7 @@ public class GhastKit extends Kit {
             if (player.getInventory().getItemInHand().getType() == Material.GOLD_HOE) {
                 if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                 	Fireball f = event.getPlayer().launchProjectile(Fireball.class);
+                	player.getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 1);
                 	f.setIsIncendiary(false);
                 	double vel = f.getVelocity().length() * (0.1D + 0.1D * 5);
                     // Knock player back
