@@ -5,15 +5,15 @@ import net.climaxmc.KitPvp.Kit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -55,6 +55,12 @@ public class ThorKit extends Kit {
         		}
         	}
         }
+    }
+    @EventHandler
+    public void onBlockIgnite(BlockIgniteEvent event){
+    	if(event.getIgnitingEntity().getType() == EntityType.LIGHTNING){
+    		event.setCancelled(true);
+    	}
     }
 
     @EventHandler
