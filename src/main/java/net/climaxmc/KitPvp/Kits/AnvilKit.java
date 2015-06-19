@@ -38,6 +38,7 @@ public class AnvilKit extends Kit {
         		Player target = (Player) event.getEntity();
         		if(KitManager.isPlayerInKit(player, this)){
         			player.setVelocity(new Vector(0, 0, 0));
+        			target.setVelocity(new Vector(0, 0, 0));
         		}
         	}
         }
