@@ -36,7 +36,7 @@ public class SoldierKit extends Kit {
         if (KitManager.isPlayerInKit(player, this)) {
             if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                    player.setVelocity(new Vector(0, 0.5, 0));
+                    player.setVelocity(new Vector(0, 0.7, 0));
                     player.damage(3);
                 }
             }
