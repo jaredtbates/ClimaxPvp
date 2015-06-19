@@ -1,33 +1,34 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
-import org.bukkit.command.*;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.stream.Collectors;
 
 public class WarpCommand implements CommandExecutor {
     private ClimaxPvp plugin;
-    private File warpFile;
-
 
     public WarpCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
-        warpFile = new File(plugin.getDataFolder(), "warps.json");
-
-        if (warpFile.exists()) {
-
-        } else {
-            try {
-                warpFile.createNewFile();
-            } catch (IOException e) {
-                plugin.getLogger().severe("Could not create warps.json!");
-            }
-        }
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+            return true;
+        }
+
+        Player player = (Player) sender;
+
+        if (args.length == 0) {
+            player.sendMessage(ChatColor.GREEN + "Available warps: " + ChatColor.AQUA + plugin.getWarpsConfig().getKeys(false).stream().collect(Collectors.joining(", ")));
+        } else if (args.length >= 1) {
+
+        }
 
         return true;
     }

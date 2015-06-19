@@ -8,10 +8,13 @@ import net.climaxmc.common.database.MySQL;
 import net.climaxmc.common.database.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.*;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -23,13 +26,21 @@ public class ClimaxPvp extends JavaPlugin {
     @Getter
     private String prefix = ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.RED + "Climax" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.RESET;
 
+    // Warp Storage
+    @Getter
+    private FileConfiguration warpsConfig = null;
+    private File warpsConfigFile = null;
+
     @Override
     public void onEnable() {
         // Initialize Instance
         instance = this;
 
-        // Save Configuration
+        // Save Default Configuration
         saveDefaultConfig();
+
+        // Save Default Warps Storage File
+        saveDefaultWarpsConfig();
 
         // Connect to MySQL
         mySQL = new MySQL(
@@ -88,5 +99,17 @@ public class ClimaxPvp extends JavaPlugin {
      */
     public Map<String, Object> getTemporaryPlayerData(OfflinePlayer player) {
         return mySQL.getTemporaryPlayerData().get(player.getUniqueId());
+    }
+
+    private void saveDefaultWarpsConfig() {
+        if (warpsConfigFile == null) {
+            warpsConfigFile = new File(getDataFolder(), "warps.yml");
+        }
+
+        if (!warpsConfigFile.exists()) {
+            saveResource("warps.yml", false);
+        }
+
+        warpsConfig = YamlConfiguration.loadConfiguration(warpsConfigFile);
     }
 }
