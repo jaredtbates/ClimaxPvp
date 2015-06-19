@@ -37,7 +37,9 @@ public class SoldierKit extends Kit {
             if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                     player.setVelocity(new Vector(0, 0.5, 0));
-                    player.getInventory().getItemInHand().setDurability((short) (player.getInventory().getItemInHand().getDurability() - 20));
+                    short currentDurability = player.getInventory().getItemInHand().getDurability();
+                    short newDurability = (short) (currentDurability - 20);
+                    player.getInventory().getItemInHand().setDurability(newDurability);
                 }
             }
         }
