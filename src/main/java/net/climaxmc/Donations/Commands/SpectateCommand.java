@@ -31,6 +31,9 @@ public class SpectateCommand implements Perk, CommandExecutor {
 
         if (!player.getGameMode().equals(GameMode.SPECTATOR)) {
             plugin.respawn(player);
+            if (plugin.getCurrentWarps().containsKey(player.getUniqueId())) {
+                player.teleport(plugin.getCurrentWarps().get(player.getUniqueId()));
+            }
             player.setGameMode(GameMode.SPECTATOR);
             player.setFlySpeed(0.15F);
             player.sendMessage(ChatColor.GREEN + "You are now spectating");

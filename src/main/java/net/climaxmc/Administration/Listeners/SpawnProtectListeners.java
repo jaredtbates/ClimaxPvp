@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 public class SpawnProtectListeners implements Listener {
     private ClimaxPvp plugin;
@@ -28,6 +29,21 @@ public class SpawnProtectListeners implements Listener {
 
         if ((damagerLocation.distance(damager.getWorld().getSpawnLocation()) <= 12 || (damagedLocation.distance(damaged.getWorld().getSpawnLocation()) <= 12))
                 || (damagerLocation.distance(plugin.getWarpLocation("NoSoup")) <= 7 || (damagedLocation.distance(plugin.getWarpLocation("NoSoup")) <= 7))) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onEntityDamage(EntityDamageEvent event) {
+        if (!(event.getEntity() instanceof Player)) {
+            return;
+        }
+
+        Player player = (Player) event.getEntity();
+        Location location = player.getLocation();
+
+        if (location.distance(location.getWorld().getSpawnLocation()) <= 12
+                || location.distance(plugin.getWarpLocation("NoSoup")) <= 7) {
             event.setCancelled(true);
         }
     }
