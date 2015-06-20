@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
@@ -87,7 +88,8 @@ public class ArcherKit extends Kit {
         bow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
         bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
         player.getInventory().addItem(bow);
-        addSoup(player.getInventory(), 2, 34);
+        ItemStack fishingrod = new ItemStack(Material.FISHING_ROD);
+        fishingrod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(new ItemStack(Material.ARROW, 64));
     }
 

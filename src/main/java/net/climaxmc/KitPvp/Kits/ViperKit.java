@@ -2,7 +2,9 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+
 import org.bukkit.*;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -40,8 +42,8 @@ public class ViperKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
-        addSoup(player.getInventory(), 1, 35);
-    }
+        ItemStack fishingrod = new ItemStack(Material.FISHING_ROD);
+        fishingrod.addEnchantment(Enchantment.DURABILITY, 3);f    }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPvp(EntityDamageByEntityEvent event) {

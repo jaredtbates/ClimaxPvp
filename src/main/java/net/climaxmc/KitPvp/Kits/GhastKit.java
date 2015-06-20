@@ -59,7 +59,8 @@ public class GhastKit extends Kit {
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 3);
         player.getInventory().setBoots(boots);
-        addSoup(player.getInventory(), 2, 35);
+        ItemStack fishingrod = new ItemStack(Material.FISHING_ROD);
+        fishingrod.addEnchantment(Enchantment.DURABILITY, 3);
     }
 
     @EventHandler

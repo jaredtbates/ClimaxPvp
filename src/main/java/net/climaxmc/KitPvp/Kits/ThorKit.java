@@ -42,8 +42,8 @@ public class ThorKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
-        addSoup(player.getInventory(), 2, 35);
-    }
+        ItemStack fishingrod = new ItemStack(Material.FISHING_ROD);
+        fishingrod.addEnchantment(Enchantment.DURABILITY, 3);    }
 
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {

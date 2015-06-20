@@ -40,7 +40,8 @@ public class SoldierKit extends Kit {
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
         player.getInventory().setBoots(boots);
-        addSoup(player.getInventory(), 1, 35);
+        ItemStack fishingrod = new ItemStack(Material.FISHING_ROD);
+        fishingrod.addEnchantment(Enchantment.DURABILITY, 3);
     }
 
     @EventHandler
