@@ -127,7 +127,7 @@ public class ClimaxPvp extends JavaPlugin {
         try {
             warpsConfig.save(warpsConfigFile);
         } catch (IOException e) {
-            getLogger().severe("Could not save currentWarps configuration!");
+            getLogger().severe("Could not save warps configuration!");
         }
     }
 

@@ -34,6 +34,7 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new ScoreboardListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new BlockBreakListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new BlockPlaceListener(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PortalListeners(plugin), plugin);
 
         // Register commands
         plugin.getCommand("repair").setExecutor(new RepairCommand(plugin));

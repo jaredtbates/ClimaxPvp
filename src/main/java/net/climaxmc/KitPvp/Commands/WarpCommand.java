@@ -28,14 +28,14 @@ public class WarpCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.GREEN + "Available currentWarps: " + ChatColor.AQUA + plugin.getWarpsConfig().getKeys(false).stream().collect(Collectors.joining(", ")));
+            player.sendMessage(ChatColor.GREEN + "Available warps: " + ChatColor.AQUA + plugin.getWarpsConfig().getKeys(false).stream().collect(Collectors.joining(", ")));
             return true;
         }
 
         switch (args[0]) {
             case ("create"):
                 if (!(playerData.hasRank(Rank.ADMINISTRATOR) || playerData.getRank().equals(Rank.BUILDER))) {
-                    player.sendMessage(ChatColor.RED + "You do not have permission to create currentWarps!");
+                    player.sendMessage(ChatColor.RED + "You do not have permission to create warps!");
                     return true;
                 }
 
@@ -59,7 +59,7 @@ public class WarpCommand implements CommandExecutor {
                 break;
             case ("delete"):
                 if (!(playerData.hasRank(Rank.ADMINISTRATOR) || playerData.getRank().equals(Rank.BUILDER))) {
-                    player.sendMessage(ChatColor.RED + "You do not have permission to create currentWarps!");
+                    player.sendMessage(ChatColor.RED + "You do not have permission to create warps!");
                     return true;
                 }
 

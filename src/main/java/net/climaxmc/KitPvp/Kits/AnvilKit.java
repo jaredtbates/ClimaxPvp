@@ -1,10 +1,9 @@
 package net.climaxmc.KitPvp.Kits;
 
+import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -53,12 +52,12 @@ public class AnvilKit extends Kit {
         		Player target = (Player) event.getEntity();
         		if (KitManager.isPlayerInKit(player, this)) {
         			event.setCancelled(true);
-        			target.damage(7, player);
-        			if(KitManager.isPlayerInKit(target, this)){
+        			if (KitManager.isPlayerInKit(target, this)) {
         				event.setCancelled(true);
-        				target.damage(event.getDamage());
         			}
-        		}
+
+                    Bukkit.getScheduler().runTask(ClimaxPvp.getInstance(), () -> target.setVelocity(new Vector()));
+                }
         	}
         }
     }
