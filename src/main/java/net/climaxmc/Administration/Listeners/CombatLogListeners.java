@@ -62,9 +62,11 @@ public class CombatLogListeners implements Listener {
                         return;
                     }
 
-                    if (System.currentTimeMillis() >= tagged.get(damaged.getUniqueId())) {
-                        tagged.remove(damaged.getUniqueId());
-                        damaged.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
+                    if (tagged.containsKey(damaged.getUniqueId())) {
+                        if (System.currentTimeMillis() >= tagged.get(damaged.getUniqueId())) {
+                            tagged.remove(damaged.getUniqueId());
+                            damaged.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
+                        }
                     }
                 }
             }.runTaskTimer(plugin, 20, 20);
@@ -80,10 +82,12 @@ public class CombatLogListeners implements Listener {
             plugin.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + player.getName() + ChatColor.RED + " has logged out while in combat!");
         }
 
-        if (player.getLastDamageCause().getEntity() instanceof Player) {
-            Player other = (Player) player.getLastDamageCause().getEntity();
-            if (tagged.containsKey(other.getUniqueId())) {
-                tagged.remove(other.getUniqueId());
+        if (player.getLastDamageCause() != null) {
+            if (player.getLastDamageCause().getEntity() instanceof Player) {
+                Player other = (Player) player.getLastDamageCause().getEntity();
+                if (tagged.containsKey(other.getUniqueId())) {
+                    tagged.remove(other.getUniqueId());
+                }
             }
         }
     }

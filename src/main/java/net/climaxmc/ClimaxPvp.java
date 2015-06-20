@@ -26,7 +26,7 @@ public class ClimaxPvp extends JavaPlugin {
     @Getter
     private String prefix = ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.RED + "Climax" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.RESET;
 
-    // Warp Storage
+    // Warps Configuration
     @Getter
     private FileConfiguration warpsConfig = null;
     private File warpsConfigFile = null;
@@ -101,6 +101,9 @@ public class ClimaxPvp extends JavaPlugin {
         return mySQL.getTemporaryPlayerData().get(player.getUniqueId());
     }
 
+    /**
+     * Saves the default warps configuration file
+     */
     private void saveDefaultWarpsConfig() {
         if (warpsConfigFile == null) {
             warpsConfigFile = new File(getDataFolder(), "warps.yml");
@@ -111,5 +114,16 @@ public class ClimaxPvp extends JavaPlugin {
         }
 
         warpsConfig = YamlConfiguration.loadConfiguration(warpsConfigFile);
+    }
+
+    /**
+     * Saves the warps configuration file
+     */
+    public void saveWarpsConfig() {
+        try {
+            warpsConfig.save(warpsConfigFile);
+        } catch (IOException e) {
+            getLogger().severe("Could not save warps configuration!");
+        }
     }
 }
