@@ -3,8 +3,7 @@ package net.climaxmc.KitPvp;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Commands.*;
 import net.climaxmc.KitPvp.Listeners.*;
-import org.bukkit.ChatColor;
-import org.bukkit.Bukkit;
+import org.bukkit.*;
 import org.bukkit.inventory.Inventory;
 
 import java.util.*;

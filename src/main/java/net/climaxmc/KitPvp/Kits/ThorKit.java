@@ -33,7 +33,7 @@ public class ThorKit extends Kit {
         addSoup(player.getInventory(), 2, 35);
     }
     
-    protected void wearNoSoup(Player player){
+    protected void wearNoSoup(Player player) {
     	ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
     	sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
@@ -42,8 +42,10 @@ public class ThorKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
-        ItemStack fishingrod = new ItemStack(Material.FISHING_ROD);
-        fishingrod.addEnchantment(Enchantment.DURABILITY, 3);    }
+        ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
+        fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(fishingRod);
+    }
 
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {

@@ -96,7 +96,7 @@ public class CombatLogListeners implements Listener {
     public void onPlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
 
-        if (tagged.containsKey(player.getUniqueId()) && !event.getMessage().toLowerCase().startsWith("/repair")) {
+        if (tagged.containsKey(player.getUniqueId()) && !(event.getMessage().toLowerCase().startsWith("/repair") || event.getMessage().toLowerCase().startsWith("/suicide"))) {
             player.sendMessage(ChatColor.RED + "You cannot run commands during combat!");
             event.setCancelled(true);
         }

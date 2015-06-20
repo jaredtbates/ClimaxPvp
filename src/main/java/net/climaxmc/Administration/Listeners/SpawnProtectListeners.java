@@ -25,12 +25,8 @@ public class SpawnProtectListeners implements Listener {
         Location damagerLocation = damager.getLocation();
         Location damagedLocation = damaged.getLocation();
 
-        if (!(((damagerLocation.getBlockY() <= 20) || (damagerLocation.getBlockY() >= 30))
-                && ((damagerLocation.getBlockX() <= -672) || (damagerLocation.getBlockX() <= -694))
-                && ((damagerLocation.getBlockZ() <=  550) || (damagerLocation.getBlockZ() <= 573))
-                || ((damagedLocation.getBlockY() <= 20) || (damagedLocation.getBlockY() >= 30)
-                && (damagedLocation.getBlockX() <= -672) || (damagedLocation.getBlockX() <= -694)
-                && (damagedLocation.getBlockZ() <=  550) || (damagedLocation.getBlockZ() <= 573)))) {
+        if (damagerLocation.distance(damager.getWorld().getSpawnLocation()) <= 12 ||
+                damagedLocation.distance(damaged.getWorld().getSpawnLocation()) <= 12) {
             event.setCancelled(true);
         }
     }

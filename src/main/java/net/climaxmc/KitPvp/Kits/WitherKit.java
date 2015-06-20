@@ -32,7 +32,7 @@ public class WitherKit extends Kit {
         player.getInventory().setItem(17, new ItemStack(Material.ARROW, 64));
     }
     
-    protected void wearNoSoup(Player player){
+    protected void wearNoSoup(Player player) {
     	player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
         player.getInventory().addItem(new ItemStack(Material.BOW));
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
@@ -44,8 +44,9 @@ public class WitherKit extends Kit {
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         player.getInventory().setBoots(boots);
-        ItemStack fishingrod = new ItemStack(Material.FISHING_ROD);
-        fishingrod.addEnchantment(Enchantment.DURABILITY, 3);
+        ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
+        fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(fishingRod);
         player.getInventory().setItem(17, new ItemStack(Material.ARROW, 64));
     }
 
