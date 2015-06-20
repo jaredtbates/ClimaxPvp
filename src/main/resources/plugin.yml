@@ -31,3 +31,5 @@ commands:
     description: Enables admin access to all kits
   warp:
     description: Warp to a different location
+  suicide:
+    description: Commit suicide

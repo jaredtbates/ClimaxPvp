@@ -46,5 +46,6 @@ public class KitPvp {
         plugin.getCommand("pay").setExecutor(new PayCommand(plugin));
         plugin.getCommand("statistics").setExecutor(new StatisticsCommand(plugin));
         plugin.getCommand("warp").setExecutor(new WarpCommand(plugin));
+        plugin.getCommand("suicide").setExecutor(new SuicideCommand(plugin));
     }
 }
