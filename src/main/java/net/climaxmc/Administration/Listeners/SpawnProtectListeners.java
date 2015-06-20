@@ -25,8 +25,8 @@ public class SpawnProtectListeners implements Listener {
         Location damagerLocation = damager.getLocation();
         Location damagedLocation = damaged.getLocation();
 
-        if (damagerLocation.distance(damager.getWorld().getSpawnLocation()) <= 12 ||
-                damagedLocation.distance(damaged.getWorld().getSpawnLocation()) <= 12) {
+        if ((damagerLocation.distance(damager.getWorld().getSpawnLocation()) <= 12 || (damagedLocation.distance(damaged.getWorld().getSpawnLocation()) <= 12))
+                || (damagerLocation.distance(plugin.getWarpLocation("NoSoup")) <= 7 || (damagedLocation.distance(plugin.getWarpLocation("NoSoup")) <= 7))) {
             event.setCancelled(true);
         }
     }
