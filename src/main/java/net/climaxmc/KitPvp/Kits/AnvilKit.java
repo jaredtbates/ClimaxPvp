@@ -54,6 +54,10 @@ public class AnvilKit extends Kit {
         		if (KitManager.isPlayerInKit(player, this)) {
         			event.setCancelled(true);
         			target.damage(7, player);
+        			if(KitManager.isPlayerInKit(target, this)){
+        				event.setCancelled(true);
+        				target.damage(event.getDamage());
+        			}
         		}
         	}
         }
