@@ -48,9 +48,9 @@ public class ArcherKit extends Kit {
         addSoup(player.getInventory(), 2, 34);
         player.getInventory().addItem(new ItemStack(Material.ARROW, 64));
     }
-    
+
     protected void wearNoSoup(Player player) {
-    	ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
+        ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         LeatherArmorMeta helmetMeta = (LeatherArmorMeta) helmet.getItemMeta();
         helmetMeta.setColor(Color.WHITE);
         helmet.setItemMeta(helmetMeta);

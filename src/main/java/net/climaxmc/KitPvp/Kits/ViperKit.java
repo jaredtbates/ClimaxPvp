@@ -2,7 +2,6 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -31,9 +30,9 @@ public class ViperKit extends Kit {
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
         addSoup(player.getInventory(), 1, 35);
     }
-    
+
     protected void wearNoSoup(Player player) {
-    	player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
+        player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
         meta.setColor(Color.LIME);
@@ -54,15 +53,15 @@ public class ViperKit extends Kit {
         }
 
         if (event.getDamager() instanceof Player) {
-        	Player player = (Player) event.getDamager();
-        	if (event.getEntity() instanceof Player) {
-        		Player damaged = (Player) event.getEntity();
-        		if (KitManager.isPlayerInKit(player, this)) {
-        			if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
-        				damaged.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 100, 1));
-        			}
-        		}
-        	}
+            Player player = (Player) event.getDamager();
+            if (event.getEntity() instanceof Player) {
+                Player damaged = (Player) event.getEntity();
+                if (KitManager.isPlayerInKit(player, this)) {
+                    if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
+                        damaged.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 100, 1));
+                    }
+                }
+            }
         }
     }
 }

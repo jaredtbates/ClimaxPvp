@@ -27,9 +27,9 @@ public class FishermanKit extends Kit {
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 2, 35);
     }
-    
+
     protected void wearNoSoup(Player player) {
-    	ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         player.getInventory().addItem(new ItemStack(Material.FISHING_ROD));
@@ -47,7 +47,7 @@ public class FishermanKit extends Kit {
     public void onPlayerFish(PlayerFishEvent event) {
         Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
-        	if (event.getCaught() instanceof Player) {
+            if (event.getCaught() instanceof Player) {
                 event.getCaught().teleport(player.getLocation());
             }
         }

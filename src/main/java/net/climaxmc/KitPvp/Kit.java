@@ -40,8 +40,8 @@ public abstract class Kit implements Listener, CommandExecutor {
     /**
      * Defines a kit
      *
-     * @param name Name of the kit
-     * @param item Item representing the kit
+     * @param name  Name of the kit
+     * @param item  Item representing the kit
      * @param color Color of the kit
      */
     public Kit(String name, ItemStack item, ChatColor color) {
@@ -56,9 +56,9 @@ public abstract class Kit implements Listener, CommandExecutor {
     /**
      * Defines a kit
      *
-     * @param name Name of the kit
-     * @param item Item representing the kit
-     * @param lore Lore of the kit
+     * @param name  Name of the kit
+     * @param item  Item representing the kit
+     * @param lore  Lore of the kit
      * @param color Color of the kit
      */
     public Kit(String name, ItemStack item, String lore, ChatColor color) {

@@ -29,9 +29,9 @@ public class IronGolemKit extends Kit {
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 2, 35);
     }
-    
+
     protected void wearNoSoup(Player player) {
-    	ItemStack sword = new ItemStack(Material.GOLD_SWORD);
+        ItemStack sword = new ItemStack(Material.GOLD_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         sword.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().addItem(sword);
@@ -56,7 +56,7 @@ public class IronGolemKit extends Kit {
             if (event.getEntity() instanceof Player) {
                 Player target = (Player) event.getEntity();
                 if (KitManager.isPlayerInKit(player, this)) {
-                	if (player.getItemInHand().getType().equals(Material.RED_ROSE)) {
+                    if (player.getItemInHand().getType().equals(Material.RED_ROSE)) {
                         event.setCancelled(true);
                         target.setVelocity(new Vector(0, 1.2, 0));
                     }

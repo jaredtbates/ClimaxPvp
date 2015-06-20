@@ -23,13 +23,11 @@ public class ClimaxPvp extends JavaPlugin {
     @Getter
     private static ClimaxPvp instance;
     @Getter
+    public HashMap<UUID, Location> currentWarps = new HashMap<>();
+    @Getter
     private MySQL mySQL = null;
     @Getter
     private String prefix = ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.RED + "Climax" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.RESET;
-
-    @Getter
-    public HashMap<UUID, Location> currentWarps = new HashMap<>();
-
     // Warps Configuration
     @Getter
     private FileConfiguration warpsConfig = null;
@@ -88,6 +86,7 @@ public class ClimaxPvp extends JavaPlugin {
 
     /**
      * Respawns a player
+     *
      * @param player Player to respawn
      */
     public void respawn(Player player) {
@@ -98,6 +97,7 @@ public class ClimaxPvp extends JavaPlugin {
 
     /**
      * Gets temporary data of a player (clears on player join)
+     *
      * @param player Player to get data of
      * @return Temporary data of player
      */

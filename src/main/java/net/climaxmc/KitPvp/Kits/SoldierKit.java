@@ -18,8 +18,8 @@ public class SoldierKit extends Kit {
     }
 
     protected void wear(Player player) {
-    	ItemStack sword = new ItemStack(Material.IRON_SWORD);
-    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
@@ -29,10 +29,10 @@ public class SoldierKit extends Kit {
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 1, 35);
     }
-    
+
     protected void wearNoSoup(Player player) {
-    	ItemStack sword = new ItemStack(Material.IRON_SWORD);
-    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));

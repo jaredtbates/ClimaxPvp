@@ -7,6 +7,119 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class Ability {
+    private final int defaultCharges;
+    private final long defaultDelay;
+    private Map<String, Status> playerStatus = new HashMap<String, Status>();
+    public Ability(int defaultCharges, int defaultDelay, TimeUnit unit) {
+        this.defaultCharges = defaultCharges;
+        this.defaultDelay = TimeUnit.MILLISECONDS.convert(defaultDelay, unit);
+    }
+
+    /**
+     * Retrieve the cooldown time and charge count for a given player.
+     *
+     * @param player - the player.
+     * @return Associated status.
+     */
+    public Status getStatus(Player player) {
+        Status status = playerStatus.get(player.getName());
+
+        if (status == null) {
+            status = createStatus(player);
+            playerStatus.put(player.getName(), status);
+        } else {
+            checkStatus(player, status);
+        }
+        return status;
+    }
+
+    /**
+     * Attempt to use this ability. The player must have at least once charge for this operation
+     * to be successful. The player's charge count will be decremented by the given amount.
+     * <p>
+     * Otherwise, initiate the recharging cooldown and return FALSE.
+     *
+     * @param player - the player.
+     * @return TRUE if the operation was successful, FALSE otherwise.
+     */
+    public boolean tryUse(Player player) {
+        return tryUse(player, 1, defaultDelay, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * Attempt to use this ability. The player must have at least once charge for this operation
+     * to be successful. The player's charge count will be decremented by the given amount.
+     * <p>
+     * Otherwise, initiate the recharging cooldown and return FALSE.
+     *
+     * @param player - the player.
+     * @param delay  - the duration of the potential cooldown.
+     * @param unit   - the unit of the delay parameter.
+     * @return TRUE if the operation was successful, FALSE otherwise.
+     */
+    public boolean tryUse(Player player, long delay, TimeUnit unit) {
+        return tryUse(player, delay, unit);
+    }
+
+    /**
+     * Attempt to use this ability. The player must have at least once charge for this operation
+     * to be successful. The player's charge count will be decremented by the given amount.
+     * <p>
+     * Otherwise, initiate the recharging cooldown and return FALSE.
+     *
+     * @param player  - the player.
+     * @param charges - the number of charges to consume.
+     * @param delay   - the duration of the potential cooldown.
+     * @param unit    - the unit of the delay parameter.
+     * @return TRUE if the operation was successful, FALSE otherwise.
+     */
+    public boolean tryUse(Player player, int charges, long delay, TimeUnit unit) {
+        Status status = getStatus(player);
+        int current = status.getCharges();
+
+        // Check cooldown
+        if (!status.isExpired())
+            return false;
+
+        if (current <= charges) {
+            status.setRecharged(false);
+            status.setCharges(0);
+            status.setCooldown(delay, unit);
+        } else {
+            status.setCharges(current - charges);
+        }
+        return current > 0;
+    }
+
+    private void checkStatus(Player player, Status status) {
+        if (!status.isRecharged() && status.isExpired()) {
+            rechargeStatus(player, status);
+        }
+    }
+
+    /**
+     * Invoked when a status must be recharged.
+     *
+     * @param player - the player to recharge.
+     * @param status - the status to update.
+     * @return The updated status.
+     */
+    protected Status rechargeStatus(Player player, Status status) {
+        status.setRecharged(true);
+        status.setCharges(defaultCharges);
+        return status;
+    }
+
+    /**
+     * Invoked when we need to create a status object for a player.
+     *
+     * @param player - the player to create for.
+     * @return The new status object.
+     */
+    protected Status createStatus(Player player) {
+        return new Status(defaultCharges);
+    }
+
     /**
      * Contains the number of charges and cooldown.
      *
@@ -88,120 +201,5 @@ public class Ability {
         public long getRemainingTime(TimeUnit unit) {
             return unit.convert(cooldown - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
         }
-    }
-
-    private Map<String, Status> playerStatus = new HashMap<String, Status>();
-
-    private final int defaultCharges;
-    private final long defaultDelay;
-
-    public Ability(int defaultCharges, int defaultDelay, TimeUnit unit) {
-        this.defaultCharges = defaultCharges;
-        this.defaultDelay = TimeUnit.MILLISECONDS.convert(defaultDelay, unit);
-    }
-
-    /**
-     * Retrieve the cooldown time and charge count for a given player.
-     *
-     * @param player - the player.
-     * @return Associated status.
-     */
-    public Status getStatus(Player player) {
-        Status status = playerStatus.get(player.getName());
-
-        if (status == null) {
-            status = createStatus(player);
-            playerStatus.put(player.getName(), status);
-        } else {
-            checkStatus(player, status);
-        }
-        return status;
-    }
-
-    /**
-     * Attempt to use this ability. The player must have at least once charge for this operation
-     * to be successful. The player's charge count will be decremented by the given amount.
-     * <p>
-     * Otherwise, initiate the recharging cooldown and return FALSE.
-     *
-     * @param player  - the player.
-     * @return TRUE if the operation was successful, FALSE otherwise.
-     */
-    public boolean tryUse(Player player) {
-        return tryUse(player, 1, defaultDelay, TimeUnit.MILLISECONDS);
-    }
-
-    /**
-     * Attempt to use this ability. The player must have at least once charge for this operation
-     * to be successful. The player's charge count will be decremented by the given amount.
-     * <p>
-     * Otherwise, initiate the recharging cooldown and return FALSE.
-     *
-     * @param player - the player.
-     * @param delay  - the duration of the potential cooldown.
-     * @param unit   - the unit of the delay parameter.
-     * @return TRUE if the operation was successful, FALSE otherwise.
-     */
-    public boolean tryUse(Player player, long delay, TimeUnit unit) {
-        return tryUse(player, delay, unit);
-    }
-
-    /**
-     * Attempt to use this ability. The player must have at least once charge for this operation
-     * to be successful. The player's charge count will be decremented by the given amount.
-     * <p>
-     * Otherwise, initiate the recharging cooldown and return FALSE.
-     *
-     * @param player  - the player.
-     * @param charges - the number of charges to consume.
-     * @param delay   - the duration of the potential cooldown.
-     * @param unit    - the unit of the delay parameter.
-     * @return TRUE if the operation was successful, FALSE otherwise.
-     */
-    public boolean tryUse(Player player, int charges, long delay, TimeUnit unit) {
-        Status status = getStatus(player);
-        int current = status.getCharges();
-
-        // Check cooldown
-        if (!status.isExpired())
-            return false;
-
-        if (current <= charges) {
-            status.setRecharged(false);
-            status.setCharges(0);
-            status.setCooldown(delay, unit);
-        } else {
-            status.setCharges(current - charges);
-        }
-        return current > 0;
-    }
-
-    private void checkStatus(Player player, Status status) {
-        if (!status.isRecharged() && status.isExpired()) {
-            rechargeStatus(player, status);
-        }
-    }
-
-    /**
-     * Invoked when a status must be recharged.
-     *
-     * @param player - the player to recharge.
-     * @param status - the status to update.
-     * @return The updated status.
-     */
-    protected Status rechargeStatus(Player player, Status status) {
-        status.setRecharged(true);
-        status.setCharges(defaultCharges);
-        return status;
-    }
-
-    /**
-     * Invoked when we need to create a status object for a player.
-     *
-     * @param player - the player to create for.
-     * @return The new status object.
-     */
-    protected Status createStatus(Player player) {
-        return new Status(defaultCharges);
     }
 }

@@ -57,6 +57,14 @@ public class KitManager implements Listener {
         }
     }
 
+    public static boolean isPlayerInKit(Player player) {
+        return playersInKits.containsKey(player.getUniqueId());
+    }
+
+    public static boolean isPlayerInKit(Player player, Kit kit) {
+        return playersInKits.containsKey(player.getUniqueId()) && playersInKits.get(player.getUniqueId()).equals(kit);
+    }
+
     @EventHandler
     public final void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
@@ -86,14 +94,6 @@ public class KitManager implements Listener {
         if (isPlayerInKit(player)) {
             playersInKits.remove(player.getUniqueId());
         }
-    }
-
-    public static boolean isPlayerInKit(Player player) {
-        return playersInKits.containsKey(player.getUniqueId());
-    }
-
-    public static boolean isPlayerInKit(Player player, Kit kit) {
-        return playersInKits.containsKey(player.getUniqueId()) && playersInKits.get(player.getUniqueId()).equals(kit);
     }
 
     private PluginCommand getCommand(String name, Plugin plugin) {

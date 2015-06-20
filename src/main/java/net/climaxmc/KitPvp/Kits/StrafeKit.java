@@ -33,9 +33,9 @@ public class StrafeKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
         addSoup(player.getInventory(), 1, 35);
     }
-    
+
     protected void wearNoSoup(Player player) {
-    	for (PotionEffect effect : player.getActivePotionEffects()) {
+        for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
         player.getInventory().clear();

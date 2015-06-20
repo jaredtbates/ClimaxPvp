@@ -1,10 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
-import java.util.ArrayList;
-
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
@@ -15,6 +12,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.util.Vector;
+
+import java.util.ArrayList;
 
 public class RangerKit extends Kit {
     public RangerKit() {
@@ -64,9 +63,9 @@ public class RangerKit extends Kit {
         player.getInventory().addItem(new ItemStack(Material.ARROW, 64));
         player.getInventory().addItem(new ItemStack(Material.ARROW, 32));
     }
-    
-    protected void wearNoSoup(Player player){
-    	ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
+
+    protected void wearNoSoup(Player player) {
+        ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         LeatherArmorMeta helmetMeta = (LeatherArmorMeta) helmet.getItemMeta();
         helmetMeta.setColor(Color.ORANGE);
         helmet.setItemMeta(helmetMeta);
@@ -117,9 +116,9 @@ public class RangerKit extends Kit {
         }
 
         Player player = (Player) event.getEntity();
-        
+
         if (!KitManager.isPlayerInKit(player, this)) {
-        	return;
+            return;
         }
 
         if (player.isSneaking()) {

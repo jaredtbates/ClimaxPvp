@@ -13,12 +13,11 @@ import java.util.*;
 
 public class CombatLogListeners implements Listener {
     private ClimaxPvp plugin;
+    private Map<UUID, Long> tagged = new HashMap<>();
 
     public CombatLogListeners(ClimaxPvp plugin) {
         this.plugin = plugin;
     }
-
-    private Map<UUID, Long> tagged = new HashMap<>();
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamage(EntityDamageByEntityEvent event) {

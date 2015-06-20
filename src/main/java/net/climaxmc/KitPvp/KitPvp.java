@@ -3,10 +3,12 @@ package net.climaxmc.KitPvp;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Commands.*;
 import net.climaxmc.KitPvp.Listeners.*;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.UUID;
 
 public class KitPvp {
     public static Inventory kitSelectorInventory = Bukkit.createInventory(null, 54, ChatColor.RED + "" + ChatColor.BOLD + "Kit Selector");

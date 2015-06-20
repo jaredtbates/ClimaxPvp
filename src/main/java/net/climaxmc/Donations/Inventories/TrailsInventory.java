@@ -1,8 +1,8 @@
 package net.climaxmc.Donations.Inventories;
 
 import net.climaxmc.common.donations.trails.Trail;
-import org.bukkit.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;

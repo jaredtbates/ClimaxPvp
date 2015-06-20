@@ -1,7 +1,6 @@
 package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -16,11 +15,11 @@ public class SanicKit extends Kit {
     }
 
     protected void wear(Player player) {
-    	for (PotionEffect effect : player.getActivePotionEffects()) {
+        for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-    	ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
-    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         player.getInventory().addItem(sword);
         ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
@@ -28,13 +27,13 @@ public class SanicKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 3));
         addSoup(player.getInventory(), 1, 35);
     }
-    
+
     protected void wearNoSoup(Player player) {
-    	for (PotionEffect effect : player.getActivePotionEffects()) {
+        for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-    	ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
-    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         player.getInventory().addItem(sword);
         ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);

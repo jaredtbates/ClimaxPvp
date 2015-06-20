@@ -2,11 +2,8 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-
 import net.climaxmc.KitPvp.Utils.Ability;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -43,9 +40,9 @@ public class GhastKit extends Kit {
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 2, 35);
     }
-    
+
     protected void wearNoSoup(Player player) {
-    	ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
         player.getInventory().addItem(sword);
         ItemStack hoe = new ItemStack(Material.GOLD_HOE);

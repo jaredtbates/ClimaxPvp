@@ -28,9 +28,9 @@ public class EndermanKit extends Kit {
         player.getInventory().addItem(pearl);
         addSoup(player.getInventory(), 2, 35);
     }
-    
+
     protected void wearNoSoup(Player player) {
-    	player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
+        player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);

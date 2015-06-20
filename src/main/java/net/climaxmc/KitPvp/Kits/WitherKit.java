@@ -31,9 +31,9 @@ public class WitherKit extends Kit {
         addSoup(player.getInventory(), 2, 34);
         player.getInventory().setItem(17, new ItemStack(Material.ARROW, 64));
     }
-    
+
     protected void wearNoSoup(Player player) {
-    	player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
+        player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
         player.getInventory().addItem(new ItemStack(Material.BOW));
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
         helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
@@ -52,12 +52,12 @@ public class WitherKit extends Kit {
 
     @EventHandler
     public void onBowShoot(EntityShootBowEvent event) {
-    	if (event.getEntity() instanceof Player){
-    		Player player = (Player) event.getEntity();
-    		if (KitManager.isPlayerInKit(player, this)) {
-    			event.setCancelled(true);
-    			player.launchProjectile(WitherSkull.class).setVelocity(event.getProjectile().getVelocity());
-    		}
-    	}
+        if (event.getEntity() instanceof Player) {
+            Player player = (Player) event.getEntity();
+            if (KitManager.isPlayerInKit(player, this)) {
+                event.setCancelled(true);
+                player.launchProjectile(WitherSkull.class).setVelocity(event.getProjectile().getVelocity());
+            }
+        }
     }
 }

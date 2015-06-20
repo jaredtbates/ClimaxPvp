@@ -17,7 +17,7 @@ public class AnvilKit extends Kit {
     }
 
     protected void wear(Player player) {
-    	player.getInventory().addItem(new ItemStack(Material.DIAMOND_SWORD));
+        player.getInventory().addItem(new ItemStack(Material.DIAMOND_SWORD));
         ItemStack helmet = new ItemStack(Material.CHAINMAIL_HELMET);
         helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setHelmet(helmet);
@@ -30,7 +30,7 @@ public class AnvilKit extends Kit {
     }
 
     protected void wearNoSoup(Player player) {
-    	player.getInventory().addItem(new ItemStack(Material.DIAMOND_SWORD));
+        player.getInventory().addItem(new ItemStack(Material.DIAMOND_SWORD));
         ItemStack helmet = new ItemStack(Material.CHAINMAIL_HELMET);
         helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setHelmet(helmet);
@@ -47,16 +47,16 @@ public class AnvilKit extends Kit {
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player) {
-        	Player player = (Player) event.getDamager();
-        	if (event.getEntity() instanceof Player) {
-        		Player target = (Player) event.getEntity();
-        		if (KitManager.isPlayerInKit(player, this) || KitManager.isPlayerInKit(target, this)) {
+            Player player = (Player) event.getDamager();
+            if (event.getEntity() instanceof Player) {
+                Player target = (Player) event.getEntity();
+                if (KitManager.isPlayerInKit(player, this) || KitManager.isPlayerInKit(target, this)) {
                     Bukkit.getScheduler().runTask(ClimaxPvp.getInstance(), () -> {
                         player.setVelocity(new Vector());
                         target.setVelocity(new Vector());
                     });
                 }
-        	}
+            }
         }
     }
 }
