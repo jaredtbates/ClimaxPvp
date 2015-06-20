@@ -28,14 +28,14 @@ public class WarpCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.GREEN + "Available warps: " + ChatColor.AQUA + plugin.getWarpsConfig().getKeys(false).stream().collect(Collectors.joining(", ")));
+            player.sendMessage(ChatColor.GREEN + "Available currentWarps: " + ChatColor.AQUA + plugin.getWarpsConfig().getKeys(false).stream().collect(Collectors.joining(", ")));
             return true;
         }
 
         switch (args[0]) {
             case ("create"):
                 if (!(playerData.hasRank(Rank.ADMINISTRATOR) || playerData.getRank().equals(Rank.BUILDER))) {
-                    player.sendMessage(ChatColor.RED + "You do not have permission to create warps!");
+                    player.sendMessage(ChatColor.RED + "You do not have permission to create currentWarps!");
                     return true;
                 }
 
@@ -59,7 +59,7 @@ public class WarpCommand implements CommandExecutor {
                 break;
             case ("delete"):
                 if (!(playerData.hasRank(Rank.ADMINISTRATOR) || playerData.getRank().equals(Rank.BUILDER))) {
-                    player.sendMessage(ChatColor.RED + "You do not have permission to create warps!");
+                    player.sendMessage(ChatColor.RED + "You do not have permission to create currentWarps!");
                     return true;
                 }
 
@@ -83,26 +83,8 @@ public class WarpCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.GREEN + "Warp " + warpDeleteSection.getName() + " deleted!");
                 break;
             default:
-                ConfigurationSection warpSection;
-
-                try {
-                    warpSection = plugin.getWarpsConfig().getConfigurationSection(plugin.getWarpsConfig().getKeys(false).stream().filter(key -> key.equalsIgnoreCase(args[0])).findFirst().get());
-                } catch (NoSuchElementException e) {
-                    player.sendMessage(ChatColor.RED + "That warp does not exist!");
-                    return true;
-                }
-
-                Location warpLocation = new Location(
-                        plugin.getServer().getWorld(warpSection.getString("World")),
-                        warpSection.getDouble("X"),
-                        warpSection.getDouble("Y"),
-                        warpSection.getDouble("Z"),
-                        (float) warpSection.getDouble("Yaw"),
-                        (float) warpSection.getDouble("Pitch")
-                );
-
-                player.teleport(warpLocation);
-                player.sendMessage(ChatColor.GREEN + "You have been warped to " + warpSection.getName() + ".");
+                plugin.warp(args[0], player);
+                player.sendMessage(ChatColor.GREEN + "You have been warped to " + args[0] + ".");
                 break;
         }
 

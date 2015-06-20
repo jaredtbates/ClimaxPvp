@@ -6,15 +6,16 @@ import net.climaxmc.Donations.Donations;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.common.database.MySQL;
 import net.climaxmc.common.database.PlayerData;
-import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
+import org.bukkit.*;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -25,6 +26,9 @@ public class ClimaxPvp extends JavaPlugin {
     private MySQL mySQL = null;
     @Getter
     private String prefix = ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.RED + "Climax" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.RESET;
+
+    @Getter
+    public HashMap<UUID, Location> currentWarps = new HashMap<>();
 
     // Warps Configuration
     @Getter
@@ -102,7 +106,7 @@ public class ClimaxPvp extends JavaPlugin {
     }
 
     /**
-     * Saves the default warps configuration file
+     * Saves the default currentWarps configuration file
      */
     private void saveDefaultWarpsConfig() {
         if (warpsConfigFile == null) {
@@ -117,13 +121,55 @@ public class ClimaxPvp extends JavaPlugin {
     }
 
     /**
-     * Saves the warps configuration file
+     * Saves the currentWarps configuration file
      */
     public void saveWarpsConfig() {
         try {
             warpsConfig.save(warpsConfigFile);
         } catch (IOException e) {
-            getLogger().severe("Could not save warps configuration!");
+            getLogger().severe("Could not save currentWarps configuration!");
         }
+    }
+
+    /**
+     * Gets the location of a warp
+     *
+     * @param warp Name of warp to get location of
+     * @return Location of warp
+     */
+    public Location getWarpLocation(String warp) {
+        ConfigurationSection noSoupSection;
+
+        try {
+            noSoupSection = warpsConfig.getConfigurationSection(warpsConfig.getKeys(false).stream().filter(key -> key.equalsIgnoreCase(warp)).findFirst().get());
+        } catch (NoSuchElementException ignored) {
+            return null;
+        }
+
+        return new Location(
+                getServer().getWorld(noSoupSection.getString("World")),
+                noSoupSection.getDouble("X"),
+                noSoupSection.getDouble("Y"),
+                noSoupSection.getDouble("Z"),
+                (float) noSoupSection.getDouble("Yaw"),
+                (float) noSoupSection.getDouble("Pitch")
+        );
+    }
+
+    /**
+     * Warps a player to specified warp
+     *
+     * @param player Player to warp
+     */
+    public void warp(String warp, Player player) {
+        Location location = getWarpLocation(warp);
+
+        if (location == null) {
+            player.sendMessage(ChatColor.RED + "That warp does not exist!");
+        }
+
+        respawn(player);
+        player.teleport(getWarpLocation(warp));
+        currentWarps.put(player.getUniqueId(), getWarpLocation(warp));
     }
 }
