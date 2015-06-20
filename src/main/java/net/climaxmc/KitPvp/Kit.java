@@ -1,9 +1,10 @@
 package net.climaxmc.KitPvp;
 
 import lombok.Data;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
+import net.climaxmc.ClimaxPvp;
+import org.bukkit.*;
 import org.bukkit.command.*;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
@@ -12,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 /**
  * Represents a kit
@@ -95,6 +97,13 @@ public abstract class Kit implements Listener, CommandExecutor {
     protected abstract void wear(Player player);
 
     /**
+     * Wear the no soup version of the kit
+     *
+     * @param player Player to wear kit
+     */
+    protected abstract void wearNoSoup(Player player);
+
+    /**
      * Wear the kit with permissions and messages
      *
      * @param player Player to wear kit
@@ -107,9 +116,36 @@ public abstract class Kit implements Listener, CommandExecutor {
                 player.removePotionEffect(effect.getType());
             }
 
-            player.getInventory().clear();
-            wear(player);
             player.sendMessage(ChatColor.GOLD + "You have chosen " + getColor() + getName());
+
+            player.getInventory().clear();
+
+            ClimaxPvp plugin = ClimaxPvp.getInstance();
+
+            ConfigurationSection noSoupSection = null;
+
+            try {
+                noSoupSection = plugin.getWarpsConfig().getConfigurationSection(plugin.getWarpsConfig().getKeys(false).stream().filter(key -> key.equalsIgnoreCase("NoSoup")).findFirst().get());
+            } catch (NoSuchElementException ignored) {
+            }
+
+            if (noSoupSection != null) {
+                Location noSoupLocation = new Location(
+                        plugin.getServer().getWorld(noSoupSection.getString("World")),
+                        noSoupSection.getDouble("X"),
+                        noSoupSection.getDouble("Y"),
+                        noSoupSection.getDouble("Z"),
+                        (float) noSoupSection.getDouble("Yaw"),
+                        (float) noSoupSection.getDouble("Pitch")
+                );
+
+                if (player.getLocation().distance(noSoupLocation) < 100) {
+                    wearNoSoup(player);
+                    return;
+                }
+            }
+
+            wear(player);
         } else {
             player.sendMessage(ChatColor.RED + "You have not died yet!");
         }
