@@ -51,11 +51,6 @@ public class AnvilKit extends Kit {
         	if (event.getEntity() instanceof Player) {
         		Player target = (Player) event.getEntity();
         		if (KitManager.isPlayerInKit(player, this)) {
-        			event.setCancelled(true);
-        			if (KitManager.isPlayerInKit(target, this)) {
-        				event.setCancelled(true);
-        			}
-
                     Bukkit.getScheduler().runTask(ClimaxPvp.getInstance(), () -> target.setVelocity(new Vector()));
                 }
         	}
