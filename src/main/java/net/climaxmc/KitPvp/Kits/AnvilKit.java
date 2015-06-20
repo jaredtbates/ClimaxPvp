@@ -29,7 +29,8 @@ public class AnvilKit extends Kit {
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 1, 35);
     }
-    protected void wearNoSoup(Player player){
+
+    protected void wearNoSoup(Player player) {
     	player.getInventory().addItem(new ItemStack(Material.DIAMOND_SWORD));
         ItemStack helmet = new ItemStack(Material.CHAINMAIL_HELMET);
         helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
@@ -39,17 +40,18 @@ public class AnvilKit extends Kit {
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setBoots(boots);
-        ItemStack fishingrod = new ItemStack(Material.FISHING_ROD);
-        fishingrod.addEnchantment(Enchantment.DURABILITY, 3);
+        ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
+        fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(fishingRod);
     }
 
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {
-        if(event.getDamager() instanceof Player){
+        if (event.getDamager() instanceof Player) {
         	Player player = (Player) event.getDamager();
-        	if(event.getEntity() instanceof Player){
+        	if (event.getEntity() instanceof Player) {
         		Player target = (Player) event.getEntity();
-        		if(KitManager.isPlayerInKit(player, this)){
+        		if (KitManager.isPlayerInKit(player, this)) {
         			player.setVelocity(new Vector(0, 0, 0));
         			target.setVelocity(new Vector(0, 0, 0));
         		}

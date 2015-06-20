@@ -30,7 +30,7 @@ public class IronGolemKit extends Kit {
         addSoup(player.getInventory(), 2, 35);
     }
     
-    protected void wearNoSoup(Player player){
+    protected void wearNoSoup(Player player) {
     	ItemStack sword = new ItemStack(Material.GOLD_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         sword.addEnchantment(Enchantment.DURABILITY, 2);
@@ -40,8 +40,9 @@ public class IronGolemKit extends Kit {
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         player.getInventory().setBoots(boots);
-        ItemStack fishingrod = new ItemStack(Material.FISHING_ROD);
-        fishingrod.addEnchantment(Enchantment.DURABILITY, 3);
+        ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
+        fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(fishingRod);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

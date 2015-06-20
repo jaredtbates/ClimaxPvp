@@ -30,7 +30,7 @@ public class SoldierKit extends Kit {
         addSoup(player.getInventory(), 1, 35);
     }
     
-    protected void wearNoSoup(Player player){
+    protected void wearNoSoup(Player player) {
     	ItemStack sword = new ItemStack(Material.IRON_SWORD);
     	sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
@@ -40,8 +40,9 @@ public class SoldierKit extends Kit {
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
         player.getInventory().setBoots(boots);
-        ItemStack fishingrod = new ItemStack(Material.FISHING_ROD);
-        fishingrod.addEnchantment(Enchantment.DURABILITY, 3);
+        ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
+        fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(fishingRod);
     }
 
     @EventHandler

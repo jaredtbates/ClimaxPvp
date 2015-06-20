@@ -55,7 +55,7 @@ public class ArcherKit extends Kit {
         player.getInventory().addItem(new ItemStack(Material.ARROW, 64));
     }
     
-    protected void wearNoSoup(Player player){
+    protected void wearNoSoup(Player player) {
     	ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         LeatherArmorMeta helmetMeta = (LeatherArmorMeta) helmet.getItemMeta();
         helmetMeta.setColor(Color.WHITE);
@@ -88,8 +88,9 @@ public class ArcherKit extends Kit {
         bow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
         bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
         player.getInventory().addItem(bow);
-        ItemStack fishingrod = new ItemStack(Material.FISHING_ROD);
-        fishingrod.addEnchantment(Enchantment.DURABILITY, 3);
+        ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
+        fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(fishingRod);
         player.getInventory().addItem(new ItemStack(Material.ARROW, 64));
     }
 

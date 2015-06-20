@@ -29,7 +29,7 @@ public class EndermanKit extends Kit {
         addSoup(player.getInventory(), 2, 35);
     }
     
-    protected void wearNoSoup(Player player){
+    protected void wearNoSoup(Player player) {
     	player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
@@ -41,8 +41,9 @@ public class EndermanKit extends Kit {
         player.getInventory().addItem(sword);
         ItemStack pearl = new ItemStack(Material.ENDER_PEARL, 12);
         player.getInventory().addItem(pearl);
-        ItemStack fishingrod = new ItemStack(Material.FISHING_ROD);
-        fishingrod.addEnchantment(Enchantment.DURABILITY, 3);
+        ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
+        fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(fishingRod);
     }
 
     @EventHandler
