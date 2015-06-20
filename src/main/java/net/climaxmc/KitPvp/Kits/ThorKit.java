@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.concurrent.TimeUnit;
 
 public class ThorKit extends Kit {
-    private Ability lightning = new Ability(1, 5, TimeUnit.SECONDS);
+    private Ability lightning = new Ability(1, 4, TimeUnit.SECONDS);
 
     public ThorKit() {
         super("Thor", new ItemStack(Material.DIAMOND_AXE), "Punch a player with your Axe to Strike Lightning!", ChatColor.GREEN);
