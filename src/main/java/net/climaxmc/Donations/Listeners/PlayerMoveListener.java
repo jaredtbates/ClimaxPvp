@@ -34,8 +34,12 @@ public class PlayerMoveListener implements Listener {
         }
 
         if (player.getGameMode().equals(GameMode.SPECTATOR)) {
-            if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 150 ||
-                    player.getLocation().distance(plugin.getWarpLocation("NoSoup")) <= 100) {
+            if (player.getLocation().distance(player.getWorld().getSpawnLocation()) >= 150) {
+                if (plugin.getCurrentWarps().containsKey(player.getUniqueId())) {
+                    if (player.getLocation().distance(plugin.getWarpLocation("NoSoup")) <= 100) {
+                        return;
+                    }
+                }
                 plugin.respawn(player);
                 player.setGameMode(GameMode.SPECTATOR);
                 player.setFlySpeed(0.15F);

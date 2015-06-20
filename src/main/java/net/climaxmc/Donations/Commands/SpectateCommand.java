@@ -39,6 +39,9 @@ public class SpectateCommand implements Perk, CommandExecutor {
             player.sendMessage(ChatColor.GREEN + "You are now spectating");
         } else {
             plugin.respawn(player);
+            if (plugin.getCurrentWarps().containsKey(player.getUniqueId())) {
+                player.teleport(plugin.getCurrentWarps().get(player.getUniqueId()));
+            }
             player.sendMessage(ChatColor.GREEN + "You are no longer spectating");
         }
 
