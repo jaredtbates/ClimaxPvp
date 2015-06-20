@@ -32,6 +32,18 @@ public class ThorKit extends Kit {
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
         addSoup(player.getInventory(), 2, 35);
     }
+    
+    protected void wearNoSoup(Player player){
+    	ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+    	sword.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(sword);
+        player.getInventory().addItem(new ItemStack(Material.IRON_AXE));
+        player.getInventory().setHelmet(new ItemStack(Material.LEATHER_HELMET));
+        player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
+        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
+        addSoup(player.getInventory(), 2, 35);
+    }
 
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {

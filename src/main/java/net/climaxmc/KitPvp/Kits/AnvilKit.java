@@ -29,6 +29,18 @@ public class AnvilKit extends Kit {
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 1, 35);
     }
+    protected void wearNoSoup(Player player){
+    	player.getInventory().addItem(new ItemStack(Material.DIAMOND_SWORD));
+        ItemStack helmet = new ItemStack(Material.CHAINMAIL_HELMET);
+        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        player.getInventory().setHelmet(helmet);
+        player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        player.getInventory().setBoots(boots);
+        addSoup(player.getInventory(), 1, 35);
+    }
 
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {

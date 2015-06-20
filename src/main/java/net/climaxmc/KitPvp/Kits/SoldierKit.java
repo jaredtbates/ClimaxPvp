@@ -29,6 +29,19 @@ public class SoldierKit extends Kit {
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 1, 35);
     }
+    
+    protected void wearNoSoup(Player player){
+    	ItemStack sword = new ItemStack(Material.IRON_SWORD);
+    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        player.getInventory().addItem(sword);
+        player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
+        player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+        ItemStack boots = new ItemStack(Material.IRON_BOOTS);
+        boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
+        player.getInventory().setBoots(boots);
+        addSoup(player.getInventory(), 1, 35);
+    }
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {

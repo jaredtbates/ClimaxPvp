@@ -43,6 +43,24 @@ public class GhastKit extends Kit {
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 2, 35);
     }
+    
+    protected void wearNoSoup(Player player){
+    	ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
+        player.getInventory().addItem(sword);
+        ItemStack hoe = new ItemStack(Material.GOLD_HOE);
+        ItemMeta hoeMeta = hoe.getItemMeta();
+        hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher");
+        hoe.setItemMeta(hoeMeta);
+        player.getInventory().addItem(hoe);
+        player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
+        player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
+        player.getInventory().setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
+        ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
+        boots.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 3);
+        player.getInventory().setBoots(boots);
+        addSoup(player.getInventory(), 2, 35);
+    }
 
     @EventHandler
     protected void onInteract(PlayerInteractEvent event) {

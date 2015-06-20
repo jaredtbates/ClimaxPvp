@@ -28,6 +28,21 @@ public class EndermanKit extends Kit {
         player.getInventory().addItem(pearl);
         addSoup(player.getInventory(), 2, 35);
     }
+    
+    protected void wearNoSoup(Player player){
+    	player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
+        player.getInventory().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
+        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
+        boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
+        player.getInventory().setBoots(boots);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        player.getInventory().addItem(sword);
+        ItemStack pearl = new ItemStack(Material.ENDER_PEARL, 12);
+        player.getInventory().addItem(pearl);
+        addSoup(player.getInventory(), 2, 35);
+    }
 
     @EventHandler
     public void onPlayerTeleport(PlayerTeleportEvent event) {

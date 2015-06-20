@@ -31,6 +31,22 @@ public class WitherKit extends Kit {
         addSoup(player.getInventory(), 2, 34);
         player.getInventory().setItem(17, new ItemStack(Material.ARROW, 64));
     }
+    
+    protected void wearNoSoup(Player player){
+    	player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
+        player.getInventory().addItem(new ItemStack(Material.BOW));
+        ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
+        helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
+        player.getInventory().setHelmet(helmet);
+        player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
+        boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
+        boots.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
+        player.getInventory().setBoots(boots);
+        addSoup(player.getInventory(), 2, 34);
+        player.getInventory().setItem(17, new ItemStack(Material.ARROW, 64));
+    }
 
     @EventHandler
     public void onBowShoot(EntityShootBowEvent event) {

@@ -29,6 +29,19 @@ public class ViperKit extends Kit {
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
         addSoup(player.getInventory(), 1, 35);
     }
+    
+    protected void wearNoSoup(Player player){
+    	player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
+        ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
+        LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
+        meta.setColor(Color.LIME);
+        helmet.setItemMeta(meta);
+        player.getInventory().setHelmet(helmet);
+        player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
+        addSoup(player.getInventory(), 1, 35);
+    }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPvp(EntityDamageByEntityEvent event) {

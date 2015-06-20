@@ -22,4 +22,15 @@ public class PvpKit extends Kit {
         player.getInventory().addItem(sword);
         addSoup(player.getInventory(), 1, 35);
     }
+    
+    protected void wearNoSoup(Player player){
+    	player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
+        player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+        player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        player.getInventory().addItem(sword);
+        addSoup(player.getInventory(), 1, 35);
+    }
 }
