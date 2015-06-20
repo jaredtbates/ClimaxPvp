@@ -20,7 +20,7 @@ import org.bukkit.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 public class GhastKit extends Kit {
-    private Ability fireball = new Ability(1, 5, TimeUnit.SECONDS);
+    private Ability fireball = new Ability(1, 2, TimeUnit.SECONDS);
 
     public GhastKit() {
         super("Ghast", new ItemStack(Material.FIREBALL), "Set the world on Fire with the Ghast Kit!", ChatColor.BLUE);
