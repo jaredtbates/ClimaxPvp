@@ -44,6 +44,10 @@ public class PlayerDeathListener implements Listener {
             return;
         }
 
+        if (killer.getLocation().distance(plugin.getWarpLocation("NoSoup")) <= 100) {
+            killer.setHealth(20);
+        }
+
         if (KitPvp.killStreak.containsKey(killer.getUniqueId())) {
             KitPvp.killStreak.put(killer.getUniqueId(), KitPvp.killStreak.get(killer.getUniqueId()) + 1);
             int killerAmount = KitPvp.killStreak.get(killer.getUniqueId());
