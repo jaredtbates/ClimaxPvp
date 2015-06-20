@@ -21,7 +21,12 @@ public class PlayerDeathListener implements Listener {
         final Player player = event.getEntity();
         Player killer = player.getKiller();
 
-        plugin.getServer().getScheduler().runTask(plugin, () -> plugin.respawn(player));
+        plugin.getServer().getScheduler().runTask(plugin, () -> {
+            plugin.respawn(player);
+            if (plugin.getCurrentWarps().containsKey(player.getUniqueId())) {
+                player.teleport(plugin.getCurrentWarps().get(player.getUniqueId()));
+            }
+        });
 
         PlayerData playerData = plugin.getPlayerData(player);
         playerData.addDeaths(1);

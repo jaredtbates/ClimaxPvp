@@ -35,8 +35,6 @@ public class PlayerRespawnListener implements Listener {
             player.removePotionEffect(effect.getType());
         }
 
-        plugin.getCurrentWarps().remove(player.getUniqueId());
-
         ItemStack kitSelector = new ItemStack(Material.NETHER_STAR);
         ItemMeta kitSelectorMeta = kitSelector.getItemMeta();
         kitSelectorMeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "Kit Selector");
