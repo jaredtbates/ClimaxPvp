@@ -52,8 +52,8 @@ public class AnvilKit extends Kit {
         	if (event.getEntity() instanceof Player) {
         		Player target = (Player) event.getEntity();
         		if (KitManager.isPlayerInKit(player, this)) {
-        			player.setVelocity(new Vector(0, 0, 0));
-        			target.setVelocity(new Vector(0, 0, 0));
+        			event.setCancelled(true);
+        			target.damage(7, player);
         		}
         	}
         }
