@@ -110,7 +110,7 @@ public class PlayerInteractListener implements Listener {
                 blueKitsGlassMeta.setDisplayName(ChatColor.BLUE + "Blue Kit");
                 blueKitsGlassMeta.setLore(Collections.singletonList(ChatColor.BLUE + "" + ChatColor.ITALIC + "Unlocked at Level 50"));
                 blueKitsGlass.setItemMeta(blueKitsGlassMeta);
-                for (int i = 29; i < 34; i++) {
+                for (int i = 29; i < 33; i++) {
                     KitPvp.kitSelectorInventory.setItem(i, blueKitsGlass);
                 }
 
@@ -123,7 +123,7 @@ public class PlayerInteractListener implements Listener {
                     KitPvp.kitSelectorInventory.setItem(i, grayKitsGlass);
                 }
 
-                int goldSlot = 0, redSlot = 10, limeSlot = 19, blueSlot = 28, graySlot = 37;
+                int goldSlot = 1, redSlot = 10, limeSlot = 19, blueSlot = 28, graySlot = 37;
 
                 for (Kit kit : KitManager.getKits()) {
                     if (kit.getColor().equals(ChatColor.GOLD)) {
@@ -166,7 +166,7 @@ public class PlayerInteractListener implements Listener {
 
                 ItemStack moreKits = new ItemStack(Material.THIN_GLASS);
                 ItemMeta moreKitsMeta = moreKits.getItemMeta();
-                moreKitsMeta.setDisplayName(ChatColor.AQUA + "More Kits");
+                moreKitsMeta.setDisplayName(ChatColor.AQUA + "More Kits " + ChatColor.ITALIC + "(Currently Unavailable)");
                 moreKits.setItemMeta(moreKitsMeta);
                 KitPvp.kitSelectorInventory.setItem(53, moreKits);
 

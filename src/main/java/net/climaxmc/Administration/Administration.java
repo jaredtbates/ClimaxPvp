@@ -12,8 +12,10 @@ public class Administration {
         plugin.getServer().getPluginManager().registerEvents(new CombatLogListeners(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new SpawnProtectListeners(plugin), plugin);
 
-
         // Register commands
         plugin.getCommand("admin").setExecutor(new AdminCommand(plugin));
+
+        // Start runnables
+        //plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new AutoBroadcastRunnable(plugin), plugin.getConfig().getInt("AutoBroadcast.Time"))
     }
 }

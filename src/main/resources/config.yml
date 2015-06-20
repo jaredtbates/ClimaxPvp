@@ -6,3 +6,8 @@ Database:
   Password: password
 Donations:
   APIKey: MINECRAFT_MARKET_API_KEY
+AutoBroadcast:
+  Time: 60
+  Messages:
+    - This is an auto broadcast message!
+    - This is another auto broadcast message!

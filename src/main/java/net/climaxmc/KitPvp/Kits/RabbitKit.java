@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class RabbitKit extends Kit {
     public RabbitKit() {
-        super("Rabbit", new ItemStack(Material.CARROT), "Gain Jump-Boost 2 while Fighting!", ChatColor.BLUE);
+        super("Rabbit", new ItemStack(Material.CARROT_ITEM), "Gain Jump-Boost 2 while Fighting!", ChatColor.BLUE);
     }
 
     protected void wear(Player player) {
