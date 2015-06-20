@@ -2,6 +2,7 @@ package net.climaxmc.Administration;
 
 import net.climaxmc.Administration.Commands.AdminCommand;
 import net.climaxmc.Administration.Listeners.*;
+import net.climaxmc.Administration.Runnables.AutoBroadcastRunnable;
 import net.climaxmc.ClimaxPvp;
 
 public class Administration {
@@ -16,6 +17,6 @@ public class Administration {
         plugin.getCommand("admin").setExecutor(new AdminCommand(plugin));
 
         // Start runnables
-        //plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new AutoBroadcastRunnable(plugin), plugin.getConfig().getInt("AutoBroadcast.Time"))
+        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new AutoBroadcastRunnable(plugin), plugin.getConfig().getInt("AutoBroadcast.Time"), plugin.getConfig().getInt("AutoBroadcast.Time"));
     }
 }
