@@ -23,7 +23,9 @@ public class AutoBroadcastRunnable implements Runnable {
         }
 
         for (Player player : plugin.getServer().getOnlinePlayers()) {
-            sendActionBar(player, ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("AutoBroadcast.Messages").get(amount)));
+            if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 12) {
+                sendActionBar(player, ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("AutoBroadcast.Messages").get(amount)));
+            }
         }
 
         amount++;
