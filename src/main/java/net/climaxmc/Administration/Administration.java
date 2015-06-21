@@ -17,6 +17,6 @@ public class Administration {
         plugin.getCommand("admin").setExecutor(new AdminCommand(plugin));
 
         // Start runnables
-        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new AutoBroadcastRunnable(plugin), plugin.getConfig().getInt("AutoBroadcast.Time"), plugin.getConfig().getInt("AutoBroadcast.Time"));
+        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new AutoBroadcastRunnable(plugin), 20 * plugin.getConfig().getInt("AutoBroadcast.Time"), 20 * plugin.getConfig().getInt("AutoBroadcast.Time"));
     }
 }

@@ -4,10 +4,8 @@ Database:
   Database: ClimaxPvp
   Username: root
   Password: password
-Donations:
-  APIKey: MINECRAFT_MARKET_API_KEY
 AutoBroadcast:
-  Time: 60
+  Time: 5
   Messages:
     - This is an auto broadcast message!
     - This is another auto broadcast message!
