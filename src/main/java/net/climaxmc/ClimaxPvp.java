@@ -33,7 +33,7 @@ public class ClimaxPvp extends JavaPlugin {
     @Getter
     private String prefix = ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.RED + "Climax" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.RESET;
     @Getter
-    private String rules = null;
+    private List<String> rules = new ArrayList<String>();
     // Warps Configuration
     @Getter
     private FileConfiguration warpsConfig = null;
@@ -56,7 +56,7 @@ public class ClimaxPvp extends JavaPlugin {
             saveResource("rules.txt", false);
         }
         try {
-            Files.lines(FileSystems.getDefault().getPath(rulesFile.getPath())).forEach(rule -> rules += rule);
+            Files.lines(FileSystems.getDefault().getPath(rulesFile.getPath())).forEach(rule -> rules.add(ChatColor.translateAlternateColorCodes('&', rule)));
         } catch (IOException e) {
             getLogger().severe("Could not get rules!");
         }

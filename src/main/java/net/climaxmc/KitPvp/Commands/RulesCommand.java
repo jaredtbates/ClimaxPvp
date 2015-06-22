@@ -7,6 +7,8 @@ import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Arrays;
+
 public class RulesCommand implements CommandExecutor {
     private ClimaxPvp plugin;
 
@@ -21,23 +23,8 @@ public class RulesCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        PlayerData playerData = plugin.getPlayerData(player);
-        if (playerData.getBalance() >= 2) {
-            playerData.withdrawBalance(2);
-            for (ItemStack item : player.getInventory().getContents()) {
-                if (item != null) {
-                    item.setDurability((short) -100);
-                }
-            }
-            for (ItemStack item : player.getInventory().getArmorContents()) {
-                if (item != null) {
-                    item.setDurability((short) -100);
-                }
-            }
-            player.sendMessage(ChatColor.GREEN + "You repaired your inventory for $2!");
-        } else {
-            player.sendMessage(ChatColor.RED + "You do not have enough money to repair your inventory!");
-        }
+
+        player.sendMessage(plugin.getRules().toArray(new String[plugin.getRules().size()]));
 
         return true;
     }

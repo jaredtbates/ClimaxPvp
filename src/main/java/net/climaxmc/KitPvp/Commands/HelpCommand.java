@@ -21,23 +21,6 @@ public class HelpCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        PlayerData playerData = plugin.getPlayerData(player);
-        if (playerData.getBalance() >= 2) {
-            playerData.withdrawBalance(2);
-            for (ItemStack item : player.getInventory().getContents()) {
-                if (item != null) {
-                    item.setDurability((short) -100);
-                }
-            }
-            for (ItemStack item : player.getInventory().getArmorContents()) {
-                if (item != null) {
-                    item.setDurability((short) -100);
-                }
-            }
-            player.sendMessage(ChatColor.GREEN + "You repaired your inventory for $2!");
-        } else {
-            player.sendMessage(ChatColor.RED + "You do not have enough money to repair your inventory!");
-        }
 
         return true;
     }

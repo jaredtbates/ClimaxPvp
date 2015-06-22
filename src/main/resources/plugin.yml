@@ -33,3 +33,7 @@ commands:
     description: Warp to a different location
   suicide:
     description: Commit suicide
+  help:
+    description: Help
+  rules:
+    description: Rules
