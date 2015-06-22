@@ -16,18 +16,24 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.*;
 
 public class ClimaxPvp extends JavaPlugin {
     @Getter
-    private static ClimaxPvp instance;
+    private static ClimaxPvp instance = null;
     @Getter
     public HashMap<UUID, Location> currentWarps = new HashMap<>();
     @Getter
     private MySQL mySQL = null;
     @Getter
     private String prefix = ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.RED + "Climax" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.RESET;
+    @Getter
+    private String rules = null;
     // Warps Configuration
     @Getter
     private FileConfiguration warpsConfig = null;
@@ -43,6 +49,17 @@ public class ClimaxPvp extends JavaPlugin {
 
         // Save Default Warps Storage File
         saveDefaultWarpsConfig();
+
+        // Save Rules File
+        File rulesFile = new File(getDataFolder(), "rules.txt");
+        if (!rulesFile.exists()) {
+            saveResource("rules.txt", false);
+        }
+        try {
+            Files.lines(FileSystems.getDefault().getPath(rulesFile.getPath())).forEach(rule -> rules += rule);
+        } catch (IOException e) {
+            getLogger().severe("Could not get rules!");
+        }
 
         // Connect to MySQL
         mySQL = new MySQL(
