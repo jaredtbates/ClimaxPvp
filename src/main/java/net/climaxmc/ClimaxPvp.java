@@ -4,6 +4,7 @@ import lombok.Getter;
 import net.climaxmc.Administration.Administration;
 import net.climaxmc.Donations.Donations;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.common.database.MySQL;
 import net.climaxmc.common.database.PlayerData;
 import org.bukkit.*;
@@ -16,10 +17,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -33,7 +32,9 @@ public class ClimaxPvp extends JavaPlugin {
     @Getter
     private String prefix = ChatColor.BLACK + "" + ChatColor.BOLD + "[" + ChatColor.RED + "Climax" + ChatColor.BLACK + "" + ChatColor.BOLD + "] " + ChatColor.RESET;
     @Getter
-    private List<String> rules = new ArrayList<String>();
+    private List<String> rules = new ArrayList<>();
+    @Getter
+    private List<String> help = new ArrayList<>();
     // Warps Configuration
     @Getter
     private FileConfiguration warpsConfig = null;
@@ -50,13 +51,24 @@ public class ClimaxPvp extends JavaPlugin {
         // Save Default Warps Storage File
         saveDefaultWarpsConfig();
 
+        // Save Help File
+        File helpFile = new File(getDataFolder(), "help.txt");
+        if (!helpFile.exists()) {
+            saveResource("help.txt", false);
+        }
+        try {
+            Files.lines(FileSystems.getDefault().getPath(helpFile.getPath())).forEach(helpLine -> help.add(ChatColor.translateAlternateColorCodes('&', helpLine)));
+        } catch (IOException e) {
+            getLogger().severe("Could not get help!");
+        }
+
         // Save Rules File
         File rulesFile = new File(getDataFolder(), "rules.txt");
         if (!rulesFile.exists()) {
             saveResource("rules.txt", false);
         }
         try {
-            Files.lines(FileSystems.getDefault().getPath(rulesFile.getPath())).forEach(rule -> rules.add(ChatColor.translateAlternateColorCodes('&', rule)));
+            Files.lines(FileSystems.getDefault().getPath(rulesFile.getPath())).forEach(ruleLine -> rules.add(ChatColor.translateAlternateColorCodes('&', ruleLine)));
         } catch (IOException e) {
             getLogger().severe("Could not get rules!");
         }
@@ -188,5 +200,9 @@ public class ClimaxPvp extends JavaPlugin {
         respawn(player);
         player.teleport(getWarpLocation(warp));
         currentWarps.put(player.getUniqueId(), getWarpLocation(warp));
+
+        if (warp.equalsIgnoreCase("Fair")) {
+            new PvpKit().wearCheckPerms(player);
+        }
     }
 }

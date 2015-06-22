@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp.Listeners;
 
+import com.google.common.base.Joiner;
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -7,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
@@ -43,6 +45,14 @@ public class PlayerRespawnListener implements Listener {
         kitSelectorMeta.setLore(kitSelectorLores);
         kitSelector.setItemMeta(kitSelectorMeta);
 
+        ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+        BookMeta bookMeta = (BookMeta) book.getItemMeta();
+        bookMeta.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + "Help/Rules");
+        bookMeta.setTitle(ChatColor.RED + "" + ChatColor.BOLD + "Help/Rules");
+        bookMeta.setAuthor(ChatColor.GOLD + "" + ChatColor.BOLD + "Climax" + ChatColor.RED + "" + ChatColor.BOLD + "MC");
+        bookMeta.addPage(Joiner.on('\n').join(plugin.getRules().toArray()));
+        book.setItemMeta(bookMeta);
+
         ItemStack particles = new ItemStack(Material.SEEDS);
         ItemMeta particlesMeta = particles.getItemMeta();
         particlesMeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "Trail Selector");
@@ -52,6 +62,7 @@ public class PlayerRespawnListener implements Listener {
         particles.setItemMeta(particlesMeta);
 
         player.getInventory().setItem(0, kitSelector);
+        player.getInventory().setItem(7, book);
         player.getInventory().setItem(8, particles);
     }
 }

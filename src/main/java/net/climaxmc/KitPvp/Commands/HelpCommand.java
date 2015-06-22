@@ -1,11 +1,8 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.database.PlayerData;
-import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 public class HelpCommand implements CommandExecutor {
     private ClimaxPvp plugin;
@@ -21,6 +18,8 @@ public class HelpCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
+
+        player.sendMessage(plugin.getHelp().toArray(new String[plugin.getHelp().size()]));
 
         return true;
     }

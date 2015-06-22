@@ -84,8 +84,8 @@ public class WarpCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.GREEN + "Warp " + warpDeleteSection.getName() + " deleted!");
                 break;
             default:
-                plugin.warp(args[0], player);
                 player.sendMessage(ChatColor.GREEN + "You have been warped to " + args[0] + ".");
+                plugin.warp(args[0], player);
                 break;
         }
 

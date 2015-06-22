@@ -22,11 +22,13 @@ public class AutoBroadcastRunnable implements Runnable {
             amount = 0;
         }
 
-        for (Player player : plugin.getServer().getOnlinePlayers()) {
-            if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 12) {
-                sendActionBar(player, ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("AutoBroadcast.Messages").get(amount)));
-            }
-        }
+        plugin.getServer().getOnlinePlayers().stream().filter(player -> player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 12).forEach(player ->
+                sendActionBar(player, ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("AutoBroadcast.Messages").get(amount))));
+
+        plugin.getServer().getScheduler().runTaskLater(plugin, () ->
+            plugin.getServer().getOnlinePlayers().stream().filter(player -> player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 12).forEach(player ->
+                    sendActionBar(player, ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("AutoBroadcast.Messages").get(amount)))
+        ), 10 * plugin.getConfig().getInt("AutoBroadcast.Time"));
 
         amount++;
     }
