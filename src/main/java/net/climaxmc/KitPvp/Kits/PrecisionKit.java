@@ -2,10 +2,11 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
@@ -14,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.BlockIterator;
 
 public class PrecisionKit extends Kit {
     public PrecisionKit() {
@@ -37,11 +39,11 @@ public class PrecisionKit extends Kit {
     }
 
     protected void wearNoSoup(Player player) {
-    	for (PotionEffect effect : player.getActivePotionEffects()) {
+        for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-    	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
-    	ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         ItemMeta swordmeta = sword.getItemMeta();
         swordmeta.setDisplayName(ChatColor.AQUA + "Precision Sword");
         sword.setItemMeta(swordmeta);
@@ -63,13 +65,33 @@ public class PrecisionKit extends Kit {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
             if (player.getInventory().getItemInHand().getType() == Material.DIAMOND_SWORD) {
-                if (event.getAction() == Action.LEFT_CLICK_AIR) {
+                if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
+                    if (getTarget(player) != null) {
+                        return;
+                    }
                     player.damage(4);
-                }
-                if(event.getAction() == Action.LEFT_CLICK_BLOCK){
-                	player.damage(4);
                 }
             }
         }
+    }
+
+    private Entity getTarget(final Player player) {
+        BlockIterator iterator = new BlockIterator(player.getWorld(), player
+                .getLocation().toVector(), player.getEyeLocation()
+                .getDirection(), 0, 100);
+        while (iterator.hasNext()) {
+            Block item = iterator.next();
+            for (Entity entity : player.getNearbyEntities(100, 100, 100)) {
+                int acc = 2;
+                for (int x = -acc; x < acc; x++)
+                    for (int z = -acc; z < acc; z++)
+                        for (int y = -acc; y < acc; y++)
+                            if (entity.getLocation().getBlock()
+                                    .getRelative(x, y, z).equals(item)) {
+                                return entity;
+                            }
+            }
+        }
+        return null;
     }
 }

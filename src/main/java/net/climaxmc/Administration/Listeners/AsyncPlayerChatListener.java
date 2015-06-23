@@ -25,10 +25,11 @@ public class AsyncPlayerChatListener implements Listener {
 
         String level = playerData.getLevelColor() + Integer.toString(kills);
 
-        if (playerData.hasRank(Rank.TRUSTED)) {
-            if (playerData.hasPerk(() -> "")) {
+        if (playerData.hasPerk(() -> "Chat_Color")) {
+            event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
+        }
 
-            }
+        if (playerData.hasRank(Rank.TRUSTED)) {
             event.setFormat(level + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "{" + rank.getColor() + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
         } else {
             event.setFormat(level + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
