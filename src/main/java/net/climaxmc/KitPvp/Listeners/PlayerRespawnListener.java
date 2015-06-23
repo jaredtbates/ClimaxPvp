@@ -47,7 +47,7 @@ public class PlayerRespawnListener implements Listener {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta bookMeta = (BookMeta) book.getItemMeta();
         bookMeta.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + "Help/Rules");
-        bookMeta.setTitle(ChatColor.RED + "" + ChatColor.BOLD + "Help/Rules");
+        bookMeta.setTitle(ChatColor.AQUA + "" + ChatColor.BOLD + "Help/Rules");
         bookMeta.setAuthor(ChatColor.GOLD + "" + ChatColor.BOLD + "Climax" + ChatColor.RED + "" + ChatColor.BOLD + "MC");
 
         int fullPageNumber = plugin.getBook().length() / 256;
