@@ -39,7 +39,7 @@ public class PlayerRespawnListener implements Listener {
         ItemStack kitSelector = new ItemStack(Material.NETHER_STAR);
         ItemMeta kitSelectorMeta = kitSelector.getItemMeta();
         kitSelectorMeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "Kit Selector");
-        List<String> kitSelectorLores = new ArrayList<String>();
+        List<String> kitSelectorLores = new ArrayList<>();
         kitSelectorLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "(Right Click) to select a kit!");
         kitSelectorMeta.setLore(kitSelectorLores);
         kitSelector.setItemMeta(kitSelectorMeta);
@@ -62,7 +62,7 @@ public class PlayerRespawnListener implements Listener {
         ItemStack particles = new ItemStack(Material.SEEDS);
         ItemMeta particlesMeta = particles.getItemMeta();
         particlesMeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "Trail Selector");
-        List<String> particlesLores = new ArrayList<String>();
+        List<String> particlesLores = new ArrayList<>();
         particlesLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "(Right Click) to select a trail!");
         particlesMeta.setLore(particlesLores);
         particles.setItemMeta(particlesMeta);
