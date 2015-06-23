@@ -44,6 +44,7 @@ public class KitManager implements Listener {
         kits.add(new WitherKit());
         kits.add(new ThorKit());
         kits.add(new AnvilKit());
+        kits.add(new PrecisionKit());
 
         // Red Kits
         kits.add(new SoldierKit());
