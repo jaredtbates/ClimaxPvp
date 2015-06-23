@@ -69,6 +69,7 @@ public class PrecisionKit extends Kit {
                     if (getTarget(player) != null) {
                         return;
                     }
+
                     player.damage(4);
                 }
             }
@@ -78,10 +79,10 @@ public class PrecisionKit extends Kit {
     private Entity getTarget(final Player player) {
         BlockIterator iterator = new BlockIterator(player.getWorld(), player
                 .getLocation().toVector(), player.getEyeLocation()
-                .getDirection(), 0, 100);
+                .getDirection(), 0, 5);
         while (iterator.hasNext()) {
             Block item = iterator.next();
-            for (Entity entity : player.getNearbyEntities(100, 100, 100)) {
+            for (Entity entity : player.getNearbyEntities(5, 5, 5)) {
                 int acc = 2;
                 for (int x = -acc; x < acc; x++)
                     for (int z = -acc; z < acc; z++)
