@@ -1,6 +1,5 @@
 package net.climaxmc.KitPvp.Listeners;
 
-import com.google.common.base.Joiner;
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -50,7 +49,14 @@ public class PlayerRespawnListener implements Listener {
         bookMeta.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + "Help/Rules");
         bookMeta.setTitle(ChatColor.RED + "" + ChatColor.BOLD + "Help/Rules");
         bookMeta.setAuthor(ChatColor.GOLD + "" + ChatColor.BOLD + "Climax" + ChatColor.RED + "" + ChatColor.BOLD + "MC");
-        bookMeta.addPage(Joiner.on('\n').join(plugin.getRules().toArray()));
+
+        int fullPageNumber = plugin.getBook().length() / 256;
+        List<String> pages = new ArrayList<>();
+        for (int i = 0; i < fullPageNumber; i++){
+            pages.add(plugin.getBook().substring(256 * i, 255 * (i + 1)));
+        }
+        pages.add(plugin.getBook().substring(fullPageNumber * 256, plugin.getBook().length() - 1));
+        bookMeta.setPages(pages);
         book.setItemMeta(bookMeta);
 
         ItemStack particles = new ItemStack(Material.SEEDS);

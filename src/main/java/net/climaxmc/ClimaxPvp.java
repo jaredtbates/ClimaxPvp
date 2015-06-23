@@ -35,6 +35,8 @@ public class ClimaxPvp extends JavaPlugin {
     private List<String> rules = new ArrayList<>();
     @Getter
     private List<String> help = new ArrayList<>();
+    @Getter
+    private String book = "";
     // Warps Configuration
     @Getter
     private FileConfiguration warpsConfig = null;
@@ -71,6 +73,17 @@ public class ClimaxPvp extends JavaPlugin {
             Files.lines(FileSystems.getDefault().getPath(rulesFile.getPath())).forEach(ruleLine -> rules.add(ChatColor.translateAlternateColorCodes('&', ruleLine)));
         } catch (IOException e) {
             getLogger().severe("Could not get rules!");
+        }
+
+        // Save Book File
+        File bookFile = new File(getDataFolder(), "book.txt");
+        if (!bookFile.exists()) {
+            saveResource("book.txt", false);
+        }
+        try {
+            Files.lines(FileSystems.getDefault().getPath(bookFile.getPath())).forEach(bookLine -> book += "\n" + ChatColor.translateAlternateColorCodes('&', bookLine));
+        } catch (IOException e) {
+            getLogger().severe("Could not get book!");
         }
 
         // Connect to MySQL
