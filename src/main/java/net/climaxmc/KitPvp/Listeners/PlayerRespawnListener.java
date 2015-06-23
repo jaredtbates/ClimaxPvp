@@ -31,6 +31,7 @@ public class PlayerRespawnListener implements Listener {
         player.getInventory().setArmorContents(null);
         player.setHealth(20F);
         player.setMaxHealth(20F);
+        player.setFoodLevel(17);
         player.setFlySpeed(0.1F);
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());

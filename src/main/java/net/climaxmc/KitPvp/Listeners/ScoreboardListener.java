@@ -32,7 +32,7 @@ public class ScoreboardListener implements Listener {
         Objective objective = board.registerNewObjective("Player Data", "dummy");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         board.registerNewTeam("Team");
-        objective.setDisplayName(ChatColor.WHITE + "" + ChatColor.BOLD + "ClimaxPvp");
+        objective.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "Climax" + ChatColor.RED + "" + ChatColor.BOLD + "Pvp");
         objective.getScore(ChatColor.GREEN + "" + ChatColor.BOLD + "Balance").setScore(11);
         String balance = "$" + new Double(playerData.getBalance()).intValue();
         objective.getScore(balance).setScore(10);
