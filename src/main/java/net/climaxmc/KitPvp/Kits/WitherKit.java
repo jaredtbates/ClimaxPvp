@@ -66,6 +66,7 @@ public class WitherKit extends Kit {
             if (KitManager.isPlayerInKit(player, this)) {
                 event.setCancelled(true);
                 player.launchProjectile(WitherSkull.class).setVelocity(event.getProjectile().getVelocity());
+            	player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 1000, 1));
             }
         }
     }
@@ -75,7 +76,7 @@ public class WitherKit extends Kit {
     		Player target = (Player) event.getEntity();
     		if(event.getDamager() instanceof WitherSkull){
     			event.setCancelled(true);
-    			target.damage(6);
+    			target.damage(5);
     		}
     	}
     }
