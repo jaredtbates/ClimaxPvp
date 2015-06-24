@@ -26,11 +26,15 @@ public class ThorKit extends Kit {
 
     protected void wear(Player player) {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
-        sword.addEnchantment(Enchantment.DURABILITY, 3);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         player.getInventory().addItem(new ItemStack(Material.IRON_AXE));
-        player.getInventory().setHelmet(new ItemStack(Material.LEATHER_HELMET));
-        player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
+        ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
+        helm.addEnchantment(Enchantment.DURABILITY, 2);
+        player.getInventory().setHelmet(helm);
+        ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        player.getInventory().setChestplate(chestplate);
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
         addSoup(player.getInventory(), 2, 35);
@@ -41,12 +45,16 @@ public class ThorKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
     	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
-        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
-        sword.addEnchantment(Enchantment.DURABILITY, 3);
+    	ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         player.getInventory().addItem(new ItemStack(Material.IRON_AXE));
-        player.getInventory().setHelmet(new ItemStack(Material.LEATHER_HELMET));
-        player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
+        ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
+        helm.addEnchantment(Enchantment.DURABILITY, 2);
+        player.getInventory().setHelmet(helm);
+        ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        player.getInventory().setChestplate(chestplate);
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
@@ -71,6 +79,7 @@ public class ThorKit extends Kit {
                         }
 
                         event.setCancelled(true);
+                        target.getWorld().strikeLightning(target.getLocation());
                         target.getWorld().strikeLightning(target.getLocation());
                     }
                 }

@@ -18,9 +18,9 @@ public class EndermanKit extends Kit {
     }
 
     protected void wear(Player player) {
-        player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
+        player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
         player.getInventory().setBoots(boots);
@@ -37,9 +37,9 @@ public class EndermanKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
     	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
-        player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
+        player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
         player.getInventory().setBoots(boots);
@@ -51,16 +51,5 @@ public class EndermanKit extends Kit {
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
         fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(fishingRod);
-    }
-
-    @EventHandler
-    public void onPlayerTeleport(PlayerTeleportEvent event) {
-        Player player = event.getPlayer();
-        if (event.getCause().equals(PlayerTeleportEvent.TeleportCause.ENDER_PEARL)) {
-            if (event.getFrom().distance(event.getFrom()) > 10) {
-                player.sendMessage(ChatColor.RED + "You cannot teleport further than 10 blocks!");
-                event.setCancelled(true);
-            }
-        }
     }
 }

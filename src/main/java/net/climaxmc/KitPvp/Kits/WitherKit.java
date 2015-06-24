@@ -6,9 +6,11 @@ import net.climaxmc.KitPvp.KitManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -16,7 +18,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class WitherKit extends Kit {
     public WitherKit() {
-        super("Wither", new ItemStack(Material.SKULL_ITEM), "Shoot your WitherBow to Launch your Wither Head!", ChatColor.GREEN);
+        super("Wither", new ItemStack(Material.SKULL_ITEM), "Shoot your WitherBow to Launch your Wither Head!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
@@ -66,5 +68,15 @@ public class WitherKit extends Kit {
                 player.launchProjectile(WitherSkull.class).setVelocity(event.getProjectile().getVelocity());
             }
         }
+    }
+    @EventHandler
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event){
+    	if(event.getEntity() instanceof Player){
+    		Player target = (Player) event.getEntity();
+    		if(event.getDamager() instanceof WitherSkull){
+    			event.setCancelled(true);
+    			target.damage(6);
+    		}
+    	}
     }
 }
