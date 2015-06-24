@@ -66,7 +66,7 @@ public class WitherKit extends Kit {
             if (KitManager.isPlayerInKit(player, this)) {
                 event.setCancelled(true);
                 player.launchProjectile(WitherSkull.class).setVelocity(event.getProjectile().getVelocity());
-            	player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 1));
+            	player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 1));
             }
         }
     }
