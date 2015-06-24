@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp;
 
 import lombok.Data;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.common.database.PlayerData;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -106,27 +107,32 @@ public abstract class Kit implements Listener, CommandExecutor {
      *
      * @param player Player to wear kit
      */
-    public void wearCheckPerms(Player player) {
+    public void wearCheckLevel(Player player) {
         if (!KitManager.isPlayerInKit(player)) {
-            KitManager.getPlayersInKits().put(player.getUniqueId(), this);
+            PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
+            if (!playerData.getLevelColor().contains(String.valueOf(color.getChar()))) {
+                KitManager.getPlayersInKits().put(player.getUniqueId(), this);
 
-            for (PotionEffect effect : player.getActivePotionEffects()) {
-                player.removePotionEffect(effect.getType());
-            }
-
-            player.sendMessage(ChatColor.GOLD + "You have chosen " + getColor() + getName());
-
-            player.getInventory().clear();
-
-            Location noSoupLocation = ClimaxPvp.getInstance().getWarpLocation("NoSoup");
-            if (noSoupLocation != null) {
-                if (player.getLocation().distance(noSoupLocation) < 100) {
-                    wearNoSoup(player);
-                    return;
+                for (PotionEffect effect : player.getActivePotionEffects()) {
+                    player.removePotionEffect(effect.getType());
                 }
-            }
 
-            wear(player);
+                player.sendMessage(ChatColor.GOLD + "You have chosen " + getColor() + getName());
+
+                player.getInventory().clear();
+
+                Location noSoupLocation = ClimaxPvp.getInstance().getWarpLocation("NoSoup");
+                if (noSoupLocation != null) {
+                    if (player.getLocation().distance(noSoupLocation) < 100) {
+                        wearNoSoup(player);
+                        return;
+                    }
+                }
+
+                wear(player);
+            } else {
+                player.sendMessage(ChatColor.RED + "You must have level " + color + color.toString() + "!");
+            }
         } else {
             player.sendMessage(ChatColor.RED + "You have not died yet!");
         }
@@ -136,7 +142,7 @@ public abstract class Kit implements Listener, CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (command.getName().equalsIgnoreCase(getName().replaceAll("\\s+", ""))) {
-                wearCheckPerms(player);
+                wearCheckLevel(player);
             }
         }
         return false;

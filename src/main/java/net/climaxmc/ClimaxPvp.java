@@ -215,7 +215,7 @@ public class ClimaxPvp extends JavaPlugin {
         currentWarps.put(player.getUniqueId(), getWarpLocation(warp));
 
         if (warp.equalsIgnoreCase("Fair")) {
-            new PvpKit().wearCheckPerms(player);
+            new PvpKit().wearCheckLevel(player);
         }
     }
 }

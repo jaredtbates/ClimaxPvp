@@ -23,7 +23,7 @@ public class InventoryClickListener implements Listener {
             if (inventory.getName().equals(KitPvp.kitSelectorInventory.getName())) {
                 for (Kit kit : KitManager.getKits()) {
                     if (event.getCurrentItem().getItemMeta().getDisplayName().equals(kit.getItem().getItemMeta().getDisplayName())) {
-                        kit.wearCheckPerms(player);
+                        kit.wearCheckLevel(player);
                         plugin.getServer().getScheduler().runTask(plugin, player::closeInventory);
                     }
                     event.setCancelled(true);
