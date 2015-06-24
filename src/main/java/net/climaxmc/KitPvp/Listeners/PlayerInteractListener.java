@@ -110,7 +110,7 @@ public class PlayerInteractListener implements Listener {
                 blueKitsGlassMeta.setDisplayName(ChatColor.BLUE + "Blue Kit");
                 blueKitsGlassMeta.setLore(Collections.singletonList(ChatColor.BLUE + "" + ChatColor.ITALIC + "Unlocked at Level 50"));
                 blueKitsGlass.setItemMeta(blueKitsGlassMeta);
-                for (int i = 29; i < 33; i++) {
+                for (int i = 29; i < 34; i++) {
                     KitPvp.kitSelectorInventory.setItem(i, blueKitsGlass);
                 }
 

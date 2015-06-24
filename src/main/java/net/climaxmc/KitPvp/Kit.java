@@ -110,7 +110,7 @@ public abstract class Kit implements Listener, CommandExecutor {
     public void wearCheckLevel(Player player) {
         if (!KitManager.isPlayerInKit(player)) {
             PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
-            if (!playerData.getLevelColor().contains(String.valueOf(color.getChar()))) {
+            if (playerData.getLevelColor().contains(String.valueOf(color.getChar())) || playerData.getTemporaryPlayerData().containsKey("Admin Mode")) {
                 KitManager.getPlayersInKits().put(player.getUniqueId(), this);
 
                 for (PotionEffect effect : player.getActivePotionEffects()) {
@@ -131,7 +131,7 @@ public abstract class Kit implements Listener, CommandExecutor {
 
                 wear(player);
             } else {
-                player.sendMessage(ChatColor.RED + "You must have level " + color + color.toString() + "!");
+                player.sendMessage(ChatColor.RED + "You must have level " + color + color.name() + ChatColor.RED + "!");
             }
         } else {
             player.sendMessage(ChatColor.RED + "You have not died yet!");
