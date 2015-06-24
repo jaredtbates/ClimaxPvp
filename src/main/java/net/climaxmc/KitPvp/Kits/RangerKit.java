@@ -60,7 +60,7 @@ public class RangerKit extends Kit {
         lores.add("Knocks you back when fired, Shift to avoid Knockback!");
         bowmeta.setLore(lores);
         bow.setItemMeta(bowmeta);
-        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
+        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
         player.getInventory().addItem(bow);
         addSoup(player.getInventory(), 2, 33);
         player.getInventory().addItem(new ItemStack(Material.ARROW, 64));
@@ -108,7 +108,7 @@ public class RangerKit extends Kit {
         lores.add("Knocks you back when fired, Shift to avoid Knockback!");
         bowmeta.setLore(lores);
         bow.setItemMeta(bowmeta);
-        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
+        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 1);
         player.getInventory().addItem(bow);
         ItemStack fishingrod = new ItemStack(Material.FISHING_ROD);
         fishingrod.addEnchantment(Enchantment.DURABILITY, 3);
