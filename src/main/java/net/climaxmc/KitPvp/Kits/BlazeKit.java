@@ -1,16 +1,10 @@
 package net.climaxmc.KitPvp.Kits;
 
-import java.util.concurrent.TimeUnit;
-
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.Ability;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
@@ -20,6 +14,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.concurrent.TimeUnit;
 
 public class BlazeKit extends Kit {
 	private Ability blaze = new Ability(1, 10, TimeUnit.SECONDS);
@@ -94,17 +90,12 @@ public class BlazeKit extends Kit {
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
-        	if(!blaze.tryUse(player)){
+        	if (!blaze.tryUse(player)) {
         		return;
         	}
             if (player.getInventory().getItemInHand().getType() == Material.BLAZE_POWDER) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
-                	for (Entity entity : player.getNearbyEntities(5, 5, 5)) {
-                		if (entity instanceof Player) {
-                		    Player players = (Player) entity;
-                		    players.setFireTicks(140);
-                		}
-                	}
+                    player.getNearbyEntities(5, 5, 5).stream().filter(entity -> entity instanceof Player).forEach(entity -> entity.setFireTicks(140));
                 }
             }
         }
