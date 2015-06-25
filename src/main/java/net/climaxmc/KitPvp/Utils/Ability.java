@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp.Utils;
 
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -78,8 +79,10 @@ public class Ability {
         int current = status.getCharges();
 
         // Check cooldown
-        if (!status.isExpired())
+        if (!status.isExpired()) {
+            player.sendMessage(ChatColor.GRAY + "You cannot do this for " + ChatColor.GREEN + status.getRemainingTime(TimeUnit.SECONDS) + ChatColor.GRAY + " seconds.");
             return false;
+        }
 
         if (current <= charges) {
             status.setRecharged(false);
@@ -88,6 +91,7 @@ public class Ability {
         } else {
             status.setCharges(current - charges);
         }
+
         return current > 0;
     }
 

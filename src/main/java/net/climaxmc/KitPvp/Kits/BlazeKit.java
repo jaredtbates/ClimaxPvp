@@ -90,11 +90,11 @@ public class BlazeKit extends Kit {
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
-        	if (!blaze.tryUse(player)) {
-        		return;
-        	}
             if (player.getInventory().getItemInHand().getType() == Material.BLAZE_POWDER) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
+                    if (!blaze.tryUse(player)) {
+                        return;
+                    }
                     player.getNearbyEntities(5, 5, 5).stream().filter(entity -> entity instanceof Player).forEach(entity -> entity.setFireTicks(140));
                 }
             }
