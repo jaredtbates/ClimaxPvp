@@ -26,7 +26,6 @@ package net.climaxmc.Administration.Utils;
  * #L%
  */
 
-import com.google.common.base.Joiner;
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -89,16 +88,6 @@ public class PluginUtil {
     /**
      * Returns the formatted name of the plugin.
      *
-     * @param plugin the plugin to format
-     * @return the formatted name
-     */
-    public static String getFormattedName(Plugin plugin) {
-        return getFormattedName(plugin, false);
-    }
-
-    /**
-     * Returns the formatted name of the plugin.
-     *
      * @param plugin          the plugin to format
      * @param includeVersions whether to include the version
      * @return the formatted name
@@ -134,58 +123,6 @@ public class PluginUtil {
                 return plugin;
         }
         return null;
-    }
-
-    /**
-     * Returns a List of plugin names.
-     *
-     * @return list of plugin names
-     */
-    public static List<String> getPluginNames(boolean fullName) {
-        List<String> plugins = new ArrayList<>();
-        for (Plugin plugin : Bukkit.getPluginManager().getPlugins())
-            plugins.add(fullName ? plugin.getDescription().getFullName() : plugin.getName());
-        return plugins;
-    }
-
-    /**
-     * Get the version of another plugin.
-     *
-     * @param name the name of the other plugin.
-     * @return the version.
-     */
-    public static String getPluginVersion(String name) {
-        Plugin plugin = getPluginByName(name);
-        if (plugin != null && plugin.getDescription() != null)
-            return plugin.getDescription().getVersion();
-        return null;
-    }
-
-    /**
-     * Returns the commands a plugin has registered.
-     *
-     * @param plugin the plugin to deal with
-     * @return the commands registered
-     */
-    public static String getUsages(Plugin plugin) {
-
-        List<String> parsedCommands = new ArrayList<>();
-
-        Map commands = plugin.getDescription().getCommands();
-
-        if (commands != null) {
-            for (Object o : commands.entrySet()) {
-                Map.Entry thisEntry = (Map.Entry) o;
-                if (thisEntry != null)
-                    parsedCommands.add((String) thisEntry.getKey());
-            }
-        }
-
-        if (parsedCommands.isEmpty())
-            return "No commands registered.";
-
-        return Joiner.on(", ").join(parsedCommands);
-
     }
 
     /**
