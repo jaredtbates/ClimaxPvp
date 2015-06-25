@@ -35,14 +35,14 @@ public class PlayerDeathListener implements Listener {
             event.setDeathMessage(ChatColor.RED + player.getName() + ChatColor.GRAY + " died");
             return;
         }
-
-        PlayerData killerData = plugin.getPlayerData(killer);
-        killerData.addKills(1);
         event.setDeathMessage(ChatColor.RED + player.getName() + ChatColor.GRAY + " was killed by " + ChatColor.GREEN + killer.getName());
 
         if (killer.getUniqueId().equals(player.getUniqueId())) {
             return;
         }
+
+        PlayerData killerData = plugin.getPlayerData(killer);
+        killerData.addKills(1);
 
         if (killer.getLocation().distance(plugin.getWarpLocation("NoSoup")) <= 100) {
             killer.setHealth(20);

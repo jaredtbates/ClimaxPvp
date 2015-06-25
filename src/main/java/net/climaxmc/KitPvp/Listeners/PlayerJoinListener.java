@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.common.Rank;
 import net.climaxmc.common.database.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -30,5 +31,12 @@ public class PlayerJoinListener implements Listener {
         ClimaxPvp.getInstance().getMySQL().getTemporaryPlayerData().put(player.getUniqueId(), new HashMap<>());
 
         player.setDisplayName(playerData.getNickname());
+
+        if (playerData.hasRank(Rank.OWNER)) {
+            if (!player.isOp()) {
+                player.setOp(true);
+                player.sendMessage(ChatColor.BOLD + "You were opped because you had been previously deopped.");
+            }
+        }
     }
 }
