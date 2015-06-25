@@ -49,7 +49,7 @@ public class BlazeKit extends Kit {
         bootsMeta.setColor(Color.YELLOW);
         boots.setItemMeta(bootsMeta);
         player.getInventory().setBoots(boots);
-        addSoup(player.getInventory(), 1, 35);
+        addSoup(player.getInventory(), 2, 35);
     }
 
     protected void wearNoSoup(Player player) {
