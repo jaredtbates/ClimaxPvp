@@ -9,6 +9,7 @@ import net.climaxmc.KitPvp.Utils.Ability;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -102,6 +103,9 @@ public class BlazeKit extends Kit {
                 	for (Entity entity : player.getNearbyEntities(5, 5, 5)) {
                 		if (entity instanceof Player) {
                 		    Player players = (Player) entity;
+                		    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 120, 0));
+                		    player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 120, 0));
+                		    player.getWorld().playSound(player.getLocation(), Sound.BLAZE_BREATH, 2, 2);
                 		    players.setFireTicks(140);
                 		}
                 	}
