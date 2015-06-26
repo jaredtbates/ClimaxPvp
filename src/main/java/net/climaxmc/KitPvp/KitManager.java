@@ -47,8 +47,9 @@ public class KitManager implements Listener {
         kits.add(new SoldierKit());
 
         // Red Kits
-        kits.add(new WitherKit());
         kits.add(new BlazeKit());
+        kits.add(new WitherKit());
+        kits.add(new AssassinKit());
 
         // Gold Kits
         kits.add(new RangerKit());
