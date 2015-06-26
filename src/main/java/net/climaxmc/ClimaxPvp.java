@@ -211,10 +211,11 @@ public class ClimaxPvp extends JavaPlugin {
 
         if (location == null) {
             player.sendMessage(ChatColor.RED + "That warp does not exist!");
+            return;
         }
 
         respawn(player);
-        player.teleport(getWarpLocation(warp));
+        player.teleport(location);
         currentWarps.put(player.getUniqueId(), getWarpLocation(warp));
 
         if (warp.equalsIgnoreCase("Fair")) {

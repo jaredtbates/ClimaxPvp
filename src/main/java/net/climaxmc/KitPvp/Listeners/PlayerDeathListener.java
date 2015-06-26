@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.common.database.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -25,6 +26,9 @@ public class PlayerDeathListener implements Listener {
             plugin.respawn(player);
             if (plugin.getCurrentWarps().containsKey(player.getUniqueId())) {
                 player.teleport(plugin.getCurrentWarps().get(player.getUniqueId()));
+                if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
+                    new PvpKit().wearCheckLevel(player);
+                }
             }
         });
 
@@ -35,6 +39,7 @@ public class PlayerDeathListener implements Listener {
             event.setDeathMessage(ChatColor.RED + player.getName() + ChatColor.GRAY + " died");
             return;
         }
+
         event.setDeathMessage(ChatColor.RED + player.getName() + ChatColor.GRAY + " was killed by " + ChatColor.GREEN + killer.getName());
 
         if (killer.getUniqueId().equals(player.getUniqueId())) {
