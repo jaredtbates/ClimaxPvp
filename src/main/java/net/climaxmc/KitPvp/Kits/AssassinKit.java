@@ -103,9 +103,11 @@ public class AssassinKit extends Kit {
                 		    players.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 140, 0));
                 		    players.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 1));
                 		    players.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 140, 2));
+                		    player.removePotionEffect(PotionEffectType.SPEED);
                 		    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 1));
-                		    player.getWorld().playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 1, 1);
-                		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0)), 150);
+                		    player.getWorld().playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 2, 2);
+                		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> player.removePotionEffect(PotionEffectType.SPEED), 140);
+                		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0)), 141);
                 		}
                 	}
                 }
