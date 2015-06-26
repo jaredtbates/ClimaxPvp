@@ -44,7 +44,8 @@ public class SpawnProtectListeners implements Listener {
         Location location = player.getLocation();
 
         if (location.distance(location.getWorld().getSpawnLocation()) <= 12
-                || location.distance(plugin.getWarpLocation("NoSoup")) <= 7) {
+                || location.distance(plugin.getWarpLocation("NoSoup")) <= 7
+                || location.distance(plugin.getWarpLocation("Fair")) <= 4) {
             event.setCancelled(true);
         }
     }
