@@ -5,7 +5,6 @@ authors: [computerwizjared, Jonhan_]
 commands:
   repair:
     description: Repairs your inventory
-    permission: ${project.artifactId}.Repair
   spawn:
     description: Teleports you to spawn
   balance:

@@ -2,11 +2,9 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
@@ -72,9 +70,9 @@ public class WitherKit extends Kit {
     }
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event){
-    	if(event.getEntity() instanceof Player){
+    	if (event.getEntity() instanceof Player) {
     		Player target = (Player) event.getEntity();
-    		if(event.getDamager() instanceof WitherSkull){
+    		if (event.getDamager() instanceof WitherSkull) {
     			event.setCancelled(true);
     			target.damage(5);
     		}

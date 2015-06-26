@@ -18,7 +18,7 @@ public class SuicideCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        player.damage(20);
+        player.damage(1000);
 
         return true;
     }
