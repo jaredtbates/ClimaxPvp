@@ -55,7 +55,7 @@ public class AssassinKit extends Kit {
         bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
-        addSoup(player.getInventory(), 1, 35);
+        addSoup(player.getInventory(), 2, 35);
     }
 
     protected void wearNoSoup(Player player) {
