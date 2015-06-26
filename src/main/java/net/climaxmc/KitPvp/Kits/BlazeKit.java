@@ -1,7 +1,5 @@
 package net.climaxmc.KitPvp.Kits;
 
-import java.util.concurrent.TimeUnit;
-
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.Ability;
@@ -22,6 +20,8 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.concurrent.TimeUnit;
+
 public class BlazeKit extends Kit {
 	private Ability blaze = new Ability(1, 10, TimeUnit.SECONDS);
 	
@@ -30,31 +30,31 @@ public class BlazeKit extends Kit {
     }
 
     protected void wear(Player player) {
-        ItemStack sword = new ItemStack(Material.DIAMOND);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack blazepowder = new ItemStack(Material.BLAZE_POWDER);
-        ItemMeta blazemeta = blazepowder.getItemMeta();
-        blazemeta.setDisplayName(ChatColor.AQUA + "Blaze Ability");
-        blazepowder.setItemMeta(blazemeta);
-        player.getInventory().addItem(blazepowder);
+        ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
+        ItemMeta blazeMeta = blazePowder.getItemMeta();
+        blazeMeta.setDisplayName(ChatColor.AQUA + "Blaze Ability");
+        blazePowder.setItemMeta(blazeMeta);
+        player.getInventory().addItem(blazePowder);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
-        helmmeta.setColor(Color.YELLOW);
-        helm.setItemMeta(helmmeta);
+        LeatherArmorMeta helmMeta = (LeatherArmorMeta) helm.getItemMeta();
+        helmMeta.setColor(Color.YELLOW);
+        helm.setItemMeta(helmMeta);
         player.getInventory().setHelmet(helm);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 2);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
-        bootsmeta.setColor(Color.YELLOW);
-        boots.setItemMeta(bootsmeta);
+        LeatherArmorMeta bootsMeta = (LeatherArmorMeta) boots.getItemMeta();
+        bootsMeta.setColor(Color.YELLOW);
+        boots.setItemMeta(bootsMeta);
         player.getInventory().setBoots(boots);
-        addSoup(player.getInventory(), 1, 35);
+        addSoup(player.getInventory(), 2, 35);
     }
 
     protected void wearNoSoup(Player player) {
@@ -95,11 +95,12 @@ public class BlazeKit extends Kit {
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
-        	if(!blaze.tryUse(player)){
-        		return;
-        	}
             if (player.getInventory().getItemInHand().getType() == Material.BLAZE_POWDER) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
+                    if (!blaze.tryUse(player)) {
+                        return;
+                    }
+                    
                 	for (Entity entity : player.getNearbyEntities(5, 5, 5)) {
                 		if (entity instanceof Player) {
                 		    Player players = (Player) entity;
