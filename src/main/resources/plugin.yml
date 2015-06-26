@@ -36,3 +36,12 @@ commands:
     description: Help
   rules:
     description: Rules
+  inventory:
+    description: Open player inventory
+    aliases: inv
+  message:
+    description: Message a player
+    aliases: [msg, m, tell]
+  reply:
+    description: Reply to a message
+    aliases: r

@@ -37,8 +37,8 @@ public class CombatLogListeners implements Listener {
                 damaged.sendMessage(ChatColor.GRAY + "You are now in combat with " + ChatColor.GOLD + damager.getName() + ChatColor.GRAY + ".");
             }
 
-            tagged.put(damager.getUniqueId(), System.currentTimeMillis() + 20000);
-            tagged.put(damaged.getUniqueId(), System.currentTimeMillis() + 20000);
+            tagged.put(damager.getUniqueId(), System.currentTimeMillis() + 15000);
+            tagged.put(damaged.getUniqueId(), System.currentTimeMillis() + 15000);
 
             new BukkitRunnable() {
                 public void run() {

@@ -2,6 +2,8 @@ package net.climaxmc.KitPvp;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Commands.*;
+import net.climaxmc.KitPvp.Commands.Messaging.MessageCommand;
+import net.climaxmc.KitPvp.Commands.Messaging.ReplyCommand;
 import net.climaxmc.KitPvp.Listeners.*;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -49,5 +51,7 @@ public class KitPvp {
         plugin.getCommand("suicide").setExecutor(new SuicideCommand(plugin));
         plugin.getCommand("help").setExecutor(new HelpCommand(plugin));
         plugin.getCommand("rules").setExecutor(new RulesCommand(plugin));
+        plugin.getCommand("message").setExecutor(new MessageCommand(plugin));
+        plugin.getCommand("reply").setExecutor(new ReplyCommand(plugin));
     }
 }

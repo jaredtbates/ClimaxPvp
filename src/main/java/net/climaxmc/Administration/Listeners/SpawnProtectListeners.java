@@ -29,7 +29,8 @@ public class SpawnProtectListeners implements Listener {
 
         if ((damagerLocation.distance(damager.getWorld().getSpawnLocation()) <= 12 || (damagedLocation.distance(damaged.getWorld().getSpawnLocation()) <= 12))
                 || (damagerLocation.distance(plugin.getWarpLocation("NoSoup")) <= 7 || (damagedLocation.distance(plugin.getWarpLocation("NoSoup")) <= 7))
-                || (damagerLocation.distance(plugin.getWarpLocation("Fair")) <= 4 || (damagedLocation.distance(plugin.getWarpLocation("Fair"))) <= 4)) {
+                || (damagerLocation.distance(plugin.getWarpLocation("Fair")) <= 4 || (damagedLocation.distance(plugin.getWarpLocation("Fair")) <= 4))
+                || (damagerLocation.distance(plugin.getWarpLocation("Fps")) <= 3 || (damagedLocation.distance(plugin.getWarpLocation("Fps"))) <= 3)) {
             event.setCancelled(true);
         }
     }
