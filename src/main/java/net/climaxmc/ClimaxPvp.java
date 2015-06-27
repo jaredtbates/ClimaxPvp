@@ -96,9 +96,6 @@ public class ClimaxPvp extends JavaPlugin {
                 getConfig().getString("Database.Password")
         );
 
-        // Create temporary player data
-        getServer().getOnlinePlayers().forEach(player -> mySQL.getTemporaryPlayerData().put(player.getUniqueId(), new HashMap<>()));
-
         // Load Modules
         new KitPvp(this);
         new Donations(this);
@@ -109,6 +106,8 @@ public class ClimaxPvp extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        getServer().getOnlinePlayers().forEach(player -> getMySQL().savePlayerData(player.getUniqueId()));
+
         // Close MySQL Connection
         if (mySQL.getConnection() != null) {
             try {
@@ -138,16 +137,6 @@ public class ClimaxPvp extends JavaPlugin {
         player.spigot().respawn();
         player.teleport(player.getWorld().getSpawnLocation());
         getServer().getPluginManager().callEvent(new PlayerRespawnEvent(player, player.getWorld().getSpawnLocation(), false));
-    }
-
-    /**
-     * Gets temporary data of a player (clears on player join)
-     *
-     * @param player Player to get data of
-     * @return Temporary data of player
-     */
-    public Map<String, Object> getTemporaryPlayerData(OfflinePlayer player) {
-        return mySQL.getTemporaryPlayerData().get(player.getUniqueId());
     }
 
     /**

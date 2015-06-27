@@ -9,8 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.util.HashMap;
-
 public class PlayerJoinListener implements Listener {
     private ClimaxPvp plugin;
 
@@ -27,8 +25,6 @@ public class PlayerJoinListener implements Listener {
         event.setJoinMessage(ChatColor.DARK_AQUA + "Join" + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
 
         plugin.respawn(player);
-
-        ClimaxPvp.getInstance().getMySQL().getTemporaryPlayerData().put(player.getUniqueId(), new HashMap<>());
 
         player.setDisplayName(playerData.getNickname());
 

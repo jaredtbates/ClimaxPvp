@@ -41,7 +41,7 @@ commands:
     aliases: inv
   message:
     description: Message a player
-    aliases: [msg, m, tell]
+    aliases: [msg, m, tell, w, t]
   reply:
     description: Reply to a message
     aliases: r

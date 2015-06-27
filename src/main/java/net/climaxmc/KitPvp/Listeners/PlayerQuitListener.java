@@ -23,6 +23,8 @@ public class PlayerQuitListener implements Listener {
             KitPvp.killStreak.remove(player.getUniqueId());
         }
 
-        event.setQuitMessage(ChatColor.RED + "Quit " + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
+        event.setQuitMessage(ChatColor.RED + "Quit" + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
+
+        plugin.getMySQL().savePlayerData(player.getUniqueId());
     }
 }
