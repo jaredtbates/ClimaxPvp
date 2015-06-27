@@ -46,7 +46,7 @@ public class ArcherKit extends Kit {
         player.getInventory().addItem(sword);
         ItemStack bow = new ItemStack(Material.BOW);
         bow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
-        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
+        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
         player.getInventory().addItem(bow);
         addSoup(player.getInventory(), 2, 34);
         player.getInventory().addItem(new ItemStack(Material.ARROW, 64));
@@ -86,8 +86,7 @@ public class ArcherKit extends Kit {
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack bow = new ItemStack(Material.BOW);
-        bow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
-        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
+        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
         player.getInventory().addItem(bow);
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
         fishingRod.addEnchantment(Enchantment.DURABILITY, 3);

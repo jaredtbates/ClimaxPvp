@@ -20,7 +20,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class AssassinKit extends Kit {
-	private Ability cloak = new Ability(1, 20, TimeUnit.SECONDS);
+	private Ability cloak = new Ability(1, 15, TimeUnit.SECONDS);
 	
     public AssassinKit() {
         super("Assassin", new ItemStack(Material.GHAST_TEAR), "Use your Cloak Ability to take out opponents with stealth!", ChatColor.RED);
