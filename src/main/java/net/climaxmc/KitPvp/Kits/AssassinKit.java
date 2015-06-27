@@ -110,7 +110,10 @@ public class AssassinKit extends Kit {
                 		    player.getInventory().setLeggings(null);
                 		    player.getInventory().setBoots(null);
                 		    player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 140, 0));
-                		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> player.removePotionEffect(PotionEffectType.SPEED), 140);
+                		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
+                		    	player.removePotionEffect(PotionEffectType.SPEED);
+                		    	player.removePotionEffect(PotionEffectType.INVISIBILITY);
+                		    }, 140);
                 		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0)), 141);
                 		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
                 		    	ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
