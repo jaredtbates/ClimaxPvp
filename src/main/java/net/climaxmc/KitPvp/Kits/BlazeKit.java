@@ -23,7 +23,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class BlazeKit extends Kit {
-	private Ability blaze = new Ability(1, 10, TimeUnit.SECONDS);
+	private Ability blaze = new Ability(1, 20, TimeUnit.SECONDS);
 	
     public BlazeKit() {
         super("Blaze", new ItemStack(Material.BLAZE_POWDER), "Use your Blaze ability to set everyone within 5 Blocks on fire!", ChatColor.RED);
@@ -31,7 +31,6 @@ public class BlazeKit extends Kit {
 
     protected void wear(Player player) {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
         ItemMeta blazeMeta = blazePowder.getItemMeta();

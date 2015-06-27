@@ -77,6 +77,9 @@ public class ThorKit extends Kit {
                         if (!lightning.tryUse(player)) {
                             return;
                         }
+                        if(event.isCancelled()){
+                        	return;
+                        }
 
                         event.setCancelled(true);
                         target.getWorld().strikeLightning(target.getLocation());
