@@ -39,6 +39,7 @@ public class AssassinKit extends Kit {
         cloak.setItemMeta(cloakmeta);
         player.getInventory().addItem(cloak);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.BLACK);
         helm.setItemMeta(helmmeta);
@@ -46,6 +47,7 @@ public class AssassinKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
@@ -67,6 +69,7 @@ public class AssassinKit extends Kit {
         cloak.setItemMeta(cloakmeta);
         player.getInventory().addItem(cloak);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.BLACK);
         helm.setItemMeta(helmmeta);
@@ -74,6 +77,7 @@ public class AssassinKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
@@ -101,8 +105,29 @@ public class AssassinKit extends Kit {
                 		    player.removePotionEffect(PotionEffectType.SPEED);
                 		    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 1));
                 		    player.getWorld().playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 1);
+                		    player.getInventory().setHelmet(null);
+                		    player.getInventory().setChestplate(null);
+                		    player.getInventory().setLeggings(null);
+                		    player.getInventory().setBoots(null);
+                		    player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 140, 0));
                 		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> player.removePotionEffect(PotionEffectType.SPEED), 140);
                 		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0)), 141);
+                		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
+                		    	ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
+                		        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+                		        LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
+                		        helmmeta.setColor(Color.BLACK);
+                		        helm.setItemMeta(helmmeta);
+                		        player.getInventory().setHelmet(helm);
+                		        player.getInventory().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
+                		        player.getInventory().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
+                		        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
+                		        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+                		        LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
+                		        bootsmeta.setColor(Color.BLACK);
+                		        boots.setItemMeta(bootsmeta);
+                		        player.getInventory().setBoots(boots);
+                		    }, 140);
                 		}
                 	}
                 }
