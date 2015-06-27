@@ -53,5 +53,6 @@ public class KitPvp {
         plugin.getCommand("rules").setExecutor(new RulesCommand(plugin));
         plugin.getCommand("message").setExecutor(new MessageCommand(plugin));
         plugin.getCommand("reply").setExecutor(new ReplyCommand(plugin));
+        plugin.getCommand("ping").setExecutor(new PingCommand(plugin));
     }
 }
