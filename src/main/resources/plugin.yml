@@ -45,3 +45,5 @@ commands:
   reply:
     description: Reply to a message
     aliases: r
+  ping:
+    description: Get your ping or the ping of another player
