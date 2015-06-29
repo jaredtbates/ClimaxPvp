@@ -3,7 +3,7 @@ package net.climaxmc.Donations.Listeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Donations;
 import net.climaxmc.common.Rank;
-import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.CachedPlayerData;
 import net.climaxmc.common.donations.trails.Trail;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -31,7 +31,7 @@ public class InventoryClickListener implements Listener {
 
             for (Trail trail : Trail.values()) {
                 if (event.getCurrentItem().getType().equals(trail.getMaterial())) {
-                    PlayerData playerData = plugin.getPlayerData(player);
+                    CachedPlayerData playerData = plugin.getPlayerData(player);
 
                     if (!playerData.hasPerk(trail) && !playerData.hasRank(Rank.TRUSTED)) {
                         player.sendMessage(ChatColor.RED + "Please donate at https://donate.climaxmc.net for access to this trail!");

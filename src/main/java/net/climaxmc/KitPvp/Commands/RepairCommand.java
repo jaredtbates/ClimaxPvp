@@ -1,7 +1,7 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.CachedPlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -21,7 +21,7 @@ public class RepairCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        PlayerData playerData = plugin.getPlayerData(player);
+        CachedPlayerData playerData = plugin.getPlayerData(player);
         if (playerData.getBalance() >= 2) {
             playerData.withdrawBalance(2);
             for (ItemStack item : player.getInventory().getContents()) {
