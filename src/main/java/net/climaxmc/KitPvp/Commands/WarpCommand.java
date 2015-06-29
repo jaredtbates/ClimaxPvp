@@ -2,7 +2,7 @@ package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.Rank;
-import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.CachedPlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.*;
@@ -26,7 +26,7 @@ public class WarpCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        PlayerData playerData = plugin.getPlayerData(player);
+        CachedPlayerData playerData = plugin.getPlayerData(player);
 
         if (args.length == 0) {
             player.sendMessage(ChatColor.GREEN + "Available warps: " + ChatColor.AQUA + plugin.getWarpsConfig().getKeys(false).stream().collect(Collectors.joining(", ")));

@@ -3,7 +3,7 @@ package net.climaxmc.KitPvp.Listeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Inventories.TrailsInventory;
 import net.climaxmc.KitPvp.*;
-import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.CachedPlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -26,7 +26,7 @@ public class PlayerInteractListener implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        PlayerData playerData = plugin.getPlayerData(player);
+        CachedPlayerData playerData = plugin.getPlayerData(player);
         ItemStack item = event.getItem();
 
         if (event.getAction() == Action.PHYSICAL && event.getClickedBlock().getType() == Material.SOIL) {

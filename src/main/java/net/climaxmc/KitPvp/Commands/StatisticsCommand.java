@@ -1,7 +1,7 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.CachedPlayerData;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
@@ -23,7 +23,7 @@ public class StatisticsCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         Player target;
-        PlayerData data;
+        CachedPlayerData data;
 
         if (args.length == 0) {
             target = player;

@@ -6,8 +6,7 @@ import net.climaxmc.Administration.Runnables.UpdateRunnable;
 import net.climaxmc.Donations.Donations;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
-import net.climaxmc.common.database.MySQL;
-import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.*;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -42,6 +41,9 @@ public class ClimaxPvp extends JavaPlugin {
     @Getter
     private FileConfiguration warpsConfig = null;
     private File warpsConfigFile = null;
+
+    @Getter
+    private HashMap<UUID, CachedPlayerData> playerDataList = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -109,6 +111,8 @@ public class ClimaxPvp extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        getServer().getOnlinePlayers().forEach(player -> savePlayerData(getPlayerData(player)));
+
         // Close MySQL Connection
         if (mySQL.getConnection() != null) {
             try {
@@ -125,8 +129,22 @@ public class ClimaxPvp extends JavaPlugin {
      * @param player Player to get data of
      * @return Data of player
      */
-    public PlayerData getPlayerData(OfflinePlayer player) {
-        return mySQL.getPlayerData(player.getUniqueId());
+    public CachedPlayerData getPlayerData(OfflinePlayer player) {
+        if (!playerDataList.containsKey(player.getUniqueId())) {
+            playerDataList.put(player.getUniqueId(), mySQL.getCachedPlayerData(player.getUniqueId()));
+        }
+        return playerDataList.get(player.getUniqueId());
+    }
+
+    /**
+     * Saves player data
+     *
+     * @param playerData Player data to save
+     */
+    public void savePlayerData(CachedPlayerData playerData) {
+        if (playerDataList.containsKey(playerData.getUuid())) {
+            mySQL.saveCachedPlayerData(playerData);
+        }
     }
 
     /**
@@ -146,7 +164,6 @@ public class ClimaxPvp extends JavaPlugin {
      * @param player Player to get data of
      * @return Temporary data of player
      */
-
     public Map<String, Object> getTemporaryPlayerData(OfflinePlayer player) {
         return mySQL.getTemporaryPlayerData().get(player.getUniqueId());
     }

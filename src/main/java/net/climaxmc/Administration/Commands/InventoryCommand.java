@@ -2,7 +2,7 @@ package net.climaxmc.Administration.Commands;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.Rank;
-import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.CachedPlayerData;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -21,7 +21,7 @@ public class InventoryCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        PlayerData playerData = plugin.getPlayerData(player);
+        CachedPlayerData playerData = plugin.getPlayerData(player);
 
         if (!playerData.hasRank(Rank.HELPER)) {
             player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");

@@ -3,7 +3,7 @@ package net.climaxmc.KitPvp.Listeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
-import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.CachedPlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -32,7 +32,7 @@ public class PlayerDeathListener implements Listener {
             }
         });
 
-        PlayerData playerData = plugin.getPlayerData(player);
+        CachedPlayerData playerData = plugin.getPlayerData(player);
         playerData.addDeaths(1);
 
         if (killer == null) {
@@ -46,7 +46,7 @@ public class PlayerDeathListener implements Listener {
             return;
         }
 
-        PlayerData killerData = plugin.getPlayerData(killer);
+        CachedPlayerData killerData = plugin.getPlayerData(killer);
         killerData.addKills(1);
 
         if (killer.getLocation().distance(plugin.getWarpLocation("NoSoup")) <= 100) {
