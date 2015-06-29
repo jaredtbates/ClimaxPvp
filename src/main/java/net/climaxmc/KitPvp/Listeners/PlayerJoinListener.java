@@ -9,6 +9,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import java.util.HashMap;
+
 public class PlayerJoinListener implements Listener {
     private ClimaxPvp plugin;
 
@@ -26,6 +28,8 @@ public class PlayerJoinListener implements Listener {
 
         plugin.respawn(player);
 
+        plugin.getMySQL().getTemporaryPlayerData().put(player.getUniqueId(), new HashMap<>());
+
         player.setDisplayName(playerData.getNickname());
 
         if (playerData.hasRank(Rank.OWNER)) {
@@ -34,5 +38,7 @@ public class PlayerJoinListener implements Listener {
                 player.sendMessage(ChatColor.BOLD + "You were opped because you had been previously deopped.");
             }
         }
+
+        player.sendMessage(ChatColor.BLUE + "" + ChatColor.BOLD + "Please visit climaxmc.net for updates on the current issues.");
     }
 }
