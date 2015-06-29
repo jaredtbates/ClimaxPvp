@@ -96,12 +96,12 @@ public class AssassinKit extends Kit {
                 	if (!cloak.tryUse(player)) {
                         return;
                     }
-                	for (Entity entity : player.getNearbyEntities(7, 7, 7)) {
+                	for (Entity entity : player.getNearbyEntities(9, 9, 9)) {
                 		if (entity instanceof Player) {
                 		    Player players = (Player) entity;
                 		    players.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 140, 2));
                 		    players.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 1));
-                		    players.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 140, 0));
+                		    players.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 140, 1));
                 		    player.removePotionEffect(PotionEffectType.SPEED);
                 		    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 1));
                 		    player.getWorld().playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 1);

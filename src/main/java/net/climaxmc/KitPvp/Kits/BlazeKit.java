@@ -30,7 +30,7 @@ public class BlazeKit extends Kit {
     }
 
     protected void wear(Player player) {
-        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
         player.getInventory().addItem(sword);
         ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
         ItemMeta blazeMeta = blazePowder.getItemMeta();
@@ -61,7 +61,7 @@ public class BlazeKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
     	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
-    	ItemStack sword = new ItemStack(Material.IRON_SWORD);
+    	ItemStack sword = new ItemStack(Material.STONE_SWORD);
         player.getInventory().addItem(sword);
         ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
         ItemMeta blazeMeta = blazePowder.getItemMeta();
@@ -102,10 +102,10 @@ public class BlazeKit extends Kit {
                 	for (Entity entity : player.getNearbyEntities(5, 5, 5)) {
                 		if (entity instanceof Player) {
                 		    Player players = (Player) entity;
-                		    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 120, 0));
-                		    player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 120, 0));
+                		    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 0));
+                		    player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 100, 0));
                 		    player.getWorld().playSound(player.getLocation(), Sound.BLAZE_BREATH, 2, 2);
-                		    players.setFireTicks(140);
+                		    players.setFireTicks(100);
                 		}
                 	}
                 }
