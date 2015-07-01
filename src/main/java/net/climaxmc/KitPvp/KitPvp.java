@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class KitPvp {
-    public static Inventory kitSelectorInventory = Bukkit.createInventory(null, 54, ChatColor.RED + "" + ChatColor.BOLD + "Kit Selector");
     public static Inventory moreKitsInventory = Bukkit.createInventory(null, 54, ChatColor.AQUA + "" + ChatColor.BOLD + "More Kits");
     public static Inventory soupInventory = Bukkit.createInventory(null, 54, ChatColor.BOLD + "Free Soup!");
     public static HashMap<UUID, Integer> killStreak = new HashMap<>();
@@ -54,5 +53,7 @@ public class KitPvp {
         plugin.getCommand("message").setExecutor(new MessageCommand(plugin));
         plugin.getCommand("reply").setExecutor(new ReplyCommand(plugin));
         plugin.getCommand("ping").setExecutor(new PingCommand(plugin));
+        plugin.getCommand("soup").setExecutor(new SoupCommand(plugin));
+        plugin.getCommand("report").setExecutor(new ReportCommand(plugin));
     }
 }

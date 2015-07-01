@@ -131,7 +131,7 @@ public abstract class Kit implements Listener, CommandExecutor {
 
                 wear(player);
             } else {
-                player.sendMessage(ChatColor.RED + "You must have level " + color + color.name() + ChatColor.RED + "!");
+                player.sendMessage(ChatColor.RED + "You must have level " + color + color.name().toLowerCase() + ChatColor.RED + "!");
             }
         } else {
             player.sendMessage(ChatColor.RED + "You have not died yet!");

@@ -4,13 +4,13 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Inventories.TrailsInventory;
 import net.climaxmc.KitPvp.*;
 import net.climaxmc.common.database.CachedPlayerData;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -42,41 +42,43 @@ public class PlayerInteractListener implements Listener {
 
         if (item != null) {
             if (item.getType().equals(Material.NETHER_STAR)) {
+                Inventory kitSelectorInventory = Bukkit.createInventory(null, 54, ChatColor.RED + "" + ChatColor.BOLD + "Kit Selector");
+
                 // TODO: Clean up this code! It sucks!
                 ItemStack goldKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 1);
                 ItemMeta goldKitsMeta = goldKits.getItemMeta();
                 goldKitsMeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kits");
                 goldKits.setItemMeta(goldKitsMeta);
-                KitPvp.kitSelectorInventory.setItem(1, goldKits);
-                KitPvp.kitSelectorInventory.setItem(7, goldKits);
+                kitSelectorInventory.setItem(1, goldKits);
+                kitSelectorInventory.setItem(7, goldKits);
 
                 ItemStack redKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 14);
                 ItemMeta redKitsMeta = redKits.getItemMeta();
                 redKitsMeta.setDisplayName(ChatColor.RED + "Red Kits");
                 redKits.setItemMeta(redKitsMeta);
-                KitPvp.kitSelectorInventory.setItem(10, redKits);
-                KitPvp.kitSelectorInventory.setItem(16, redKits);
+                kitSelectorInventory.setItem(10, redKits);
+                kitSelectorInventory.setItem(16, redKits);
 
                 ItemStack greenKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 5);
                 ItemMeta greenKitsMeta = greenKits.getItemMeta();
                 greenKitsMeta.setDisplayName(ChatColor.GREEN + "Green Kits");
                 greenKits.setItemMeta(greenKitsMeta);
-                KitPvp.kitSelectorInventory.setItem(19, greenKits);
-                KitPvp.kitSelectorInventory.setItem(25, greenKits);
+                kitSelectorInventory.setItem(19, greenKits);
+                kitSelectorInventory.setItem(25, greenKits);
 
                 ItemStack blueKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 3);
                 ItemMeta blueKitsMeta = blueKits.getItemMeta();
                 blueKitsMeta.setDisplayName(ChatColor.BLUE + "Blue Kits");
                 blueKits.setItemMeta(blueKitsMeta);
-                KitPvp.kitSelectorInventory.setItem(28, blueKits);
-                KitPvp.kitSelectorInventory.setItem(34, blueKits);
+                kitSelectorInventory.setItem(28, blueKits);
+                kitSelectorInventory.setItem(34, blueKits);
 
                 ItemStack grayKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 7);
                 ItemMeta grayKitsMeta = grayKits.getItemMeta();
                 grayKitsMeta.setDisplayName(ChatColor.GRAY + "Gray Kits");
                 grayKits.setItemMeta(grayKitsMeta);
-                KitPvp.kitSelectorInventory.setItem(37, grayKits);
-                KitPvp.kitSelectorInventory.setItem(43, grayKits);
+                kitSelectorInventory.setItem(37, grayKits);
+                kitSelectorInventory.setItem(43, grayKits);
 
                 ItemStack goldKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 1);
                 ItemMeta goldKitsGlassMeta = goldKits.getItemMeta();
@@ -84,7 +86,7 @@ public class PlayerInteractListener implements Listener {
                 goldKitsGlassMeta.setLore(Collections.singletonList(ChatColor.GOLD + "" + ChatColor.ITALIC + "Unlocked at Level 500"));
                 goldKitsGlass.setItemMeta(goldKitsGlassMeta);
                 for (int i = 2; i < 7; i++) {
-                    KitPvp.kitSelectorInventory.setItem(i, goldKitsGlass);
+                    kitSelectorInventory.setItem(i, goldKitsGlass);
                 }
 
                 ItemStack redKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
@@ -93,7 +95,7 @@ public class PlayerInteractListener implements Listener {
                 redKitsGlassMeta.setLore(Collections.singletonList(ChatColor.RED + "" + ChatColor.ITALIC + "Unlocked at Level 300"));
                 redKitsGlass.setItemMeta(redKitsGlassMeta);
                 for (int i = 11; i < 16; i++) {
-                    KitPvp.kitSelectorInventory.setItem(i, redKitsGlass);
+                    kitSelectorInventory.setItem(i, redKitsGlass);
                 }
 
                 ItemStack greenKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 5);
@@ -102,7 +104,7 @@ public class PlayerInteractListener implements Listener {
                 greenKitsGlassMeta.setLore(Collections.singletonList(ChatColor.GREEN + "" + ChatColor.ITALIC + "Unlocked at Level 150"));
                 greenKitsGlass.setItemMeta(greenKitsGlassMeta);
                 for (int i = 20; i < 25; i++) {
-                    KitPvp.kitSelectorInventory.setItem(i, greenKitsGlass);
+                    kitSelectorInventory.setItem(i, greenKitsGlass);
                 }
 
                 ItemStack blueKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 3);
@@ -111,7 +113,7 @@ public class PlayerInteractListener implements Listener {
                 blueKitsGlassMeta.setLore(Collections.singletonList(ChatColor.BLUE + "" + ChatColor.ITALIC + "Unlocked at Level 50"));
                 blueKitsGlass.setItemMeta(blueKitsGlassMeta);
                 for (int i = 29; i < 34; i++) {
-                    KitPvp.kitSelectorInventory.setItem(i, blueKitsGlass);
+                    kitSelectorInventory.setItem(i, blueKitsGlass);
                 }
 
                 ItemStack grayKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
@@ -120,7 +122,7 @@ public class PlayerInteractListener implements Listener {
                 grayKitsGlassMeta.setLore(Collections.singletonList(ChatColor.GRAY + "" + ChatColor.ITALIC + "Unlocked at Level 0"));
                 grayKitsGlass.setItemMeta(grayKitsGlassMeta);
                 for (int i = 38; i < 42; i++) {
-                    KitPvp.kitSelectorInventory.setItem(i, grayKitsGlass);
+                    kitSelectorInventory.setItem(i, grayKitsGlass);
                 }
 
                 int goldSlot = 1, redSlot = 10, limeSlot = 19, blueSlot = 28, graySlot = 37;
@@ -129,27 +131,27 @@ public class PlayerInteractListener implements Listener {
                     if (kit.getColor().equals(ChatColor.GOLD)) {
                         if (playerData.hasData("Admin Mode") ||
                                 playerData.getLevelColor().contains(kit.getColor() + "")) {
-                            KitPvp.kitSelectorInventory.setItem(++goldSlot, kit.getItem());
+                            kitSelectorInventory.setItem(++goldSlot, kit.getItem());
                         }
                     } else if (kit.getColor().equals(ChatColor.RED)) {
                         if (playerData.hasData("Admin Mode") ||
                                 playerData.getLevelColor().contains(kit.getColor() + "")) {
-                            KitPvp.kitSelectorInventory.setItem(++redSlot, kit.getItem());
+                            kitSelectorInventory.setItem(++redSlot, kit.getItem());
                         }
                     } else if (kit.getColor().equals(ChatColor.GREEN)) {
                         if (playerData.hasData("Admin Mode") ||
                                 playerData.getLevelColor().contains(kit.getColor() + "")) {
-                            KitPvp.kitSelectorInventory.setItem(++limeSlot, kit.getItem());
+                            kitSelectorInventory.setItem(++limeSlot, kit.getItem());
                         }
                     } else if (kit.getColor().equals(ChatColor.BLUE)) {
                         if (playerData.hasData("Admin Mode") ||
                                 playerData.getLevelColor().contains(kit.getColor() + "")) {
-                            KitPvp.kitSelectorInventory.setItem(++blueSlot, kit.getItem());
+                            kitSelectorInventory.setItem(++blueSlot, kit.getItem());
                         }
                     } else if (kit.getColor().equals(ChatColor.GRAY)) {
                         if (playerData.hasData("Admin Mode") ||
                                 playerData.getLevelColor().contains(kit.getColor() + "")) {
-                            KitPvp.kitSelectorInventory.setItem(++graySlot, kit.getItem());
+                            kitSelectorInventory.setItem(++graySlot, kit.getItem());
                         }
                     }
                 }
@@ -158,9 +160,9 @@ public class PlayerInteractListener implements Listener {
                 ItemMeta moreKitsMeta = moreKits.getItemMeta();
                 moreKitsMeta.setDisplayName(ChatColor.AQUA + "More Kits " + ChatColor.ITALIC + "(Currently Unavailable)");
                 moreKits.setItemMeta(moreKitsMeta);
-                KitPvp.kitSelectorInventory.setItem(53, moreKits);
+                kitSelectorInventory.setItem(53, moreKits);
 
-                player.openInventory(KitPvp.kitSelectorInventory);
+                player.openInventory(kitSelectorInventory);
             } else if (item.getType().equals(Material.SEEDS)) {
                 new TrailsInventory(player);
             }

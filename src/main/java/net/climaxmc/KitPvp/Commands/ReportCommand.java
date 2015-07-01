@@ -1,13 +1,14 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
-public class RulesCommand implements CommandExecutor {
+public class ReportCommand implements CommandExecutor {
     private ClimaxPvp plugin;
 
-    public RulesCommand(ClimaxPvp plugin) {
+    public ReportCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
     }
 
@@ -19,7 +20,12 @@ public class RulesCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        player.sendMessage(plugin.getRules().toArray(new String[plugin.getRules().size()]));
+        if (args.length != 2) {
+            player.sendMessage(ChatColor.RED + "/report <player> <reason>");
+            return true;
+        }
+
+
 
         return true;
     }

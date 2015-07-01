@@ -4,7 +4,7 @@ version: ${project.version}
 authors: [computerwizjared, Jonhan_]
 commands:
   repair:
-    description: Repairs your inventory
+    description: Repairs your inventory for $2
   spawn:
     description: Teleports you to spawn
   balance:
@@ -47,3 +47,7 @@ commands:
     aliases: r
   ping:
     description: Get your ping or the ping of another player
+  soup:
+    description: Opens an inventory of soup for $10
+  report:
+    description: Report a player for hacking
