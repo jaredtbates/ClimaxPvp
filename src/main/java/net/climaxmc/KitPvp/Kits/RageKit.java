@@ -24,7 +24,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class RageKit extends Kit {
-	private Ability rage = new Ability(1, 16, TimeUnit.SECONDS);
+	private Ability rage = new Ability(1, 20, TimeUnit.SECONDS);
 	
     public RageKit() {
         super("Rage", new ItemStack(Material.MAGMA_CREAM), "Use your Rage Ability to take down Enemies!", ChatColor.RED);
@@ -34,8 +34,8 @@ public class RageKit extends Kit {
     	for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-    	player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
@@ -64,8 +64,8 @@ public class RageKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
     	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
-    	player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
-    	ItemStack sword = new ItemStack(Material.IRON_SWORD);
+    	ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
