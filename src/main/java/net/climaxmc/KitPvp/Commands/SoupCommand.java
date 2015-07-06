@@ -41,7 +41,7 @@ public class SoupCommand implements CommandExecutor {
         Kit.addSoup(soupInventory, 0, 53);
         player.openInventory(soupInventory);
 
-        player.sendMessage(ChatColor.GREEN + "You opened a soup inventory for $10!");
+        player.sendMessage(ChatColor.GREEN + "You opened a soup inventory for $50!");
 
         return true;
     }
