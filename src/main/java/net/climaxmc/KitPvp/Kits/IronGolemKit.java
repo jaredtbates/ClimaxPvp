@@ -21,7 +21,6 @@ public class IronGolemKit extends Kit {
     }
 
     protected void wear(Player player) {
-    	player.sendMessage(ChatColor.GOLD + "This kit is " + ChatColor.RED + ChatColor.BOLD + "Disabled!");
         ItemStack sword = new ItemStack(Material.GOLD_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         sword.addEnchantment(Enchantment.DURABILITY, 2);
@@ -35,7 +34,6 @@ public class IronGolemKit extends Kit {
     }
 
     protected void wearNoSoup(Player player) {
-    	player.sendMessage(ChatColor.GOLD + "This kit is " + ChatColor.RED + ChatColor.BOLD + "Disabled!");
     	for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
