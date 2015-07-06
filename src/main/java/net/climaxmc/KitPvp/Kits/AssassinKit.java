@@ -103,7 +103,7 @@ public class AssassinKit extends Kit {
                 		    Player players = (Player) entity;
                 		    players.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 140, 2));
                 		    players.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 1));
-                		    players.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 140, 3));
+                		    players.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 140, 1));
                 		    player.removePotionEffect(PotionEffectType.SPEED);
                 		    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 1));
                 		    player.getWorld().playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 1);
