@@ -56,7 +56,7 @@ public class RageKit extends Kit {
         magmameta.setDisplayName(ChatColor.AQUA + "Rage Ability");
         magmacream.setItemMeta(magmameta);
         player.getInventory().addItem(magmacream);
-        addSoup(player.getInventory(), 1, 35);
+        addSoup(player.getInventory(), 2, 35);
     }
 
     protected void wearNoSoup(Player player) {
