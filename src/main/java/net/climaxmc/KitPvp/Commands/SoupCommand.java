@@ -30,12 +30,12 @@ public class SoupCommand implements CommandExecutor {
             return true;
         }
 
-        if (playerData.getBalance() < 10) {
+        if (playerData.getBalance() < 50) {
             player.sendMessage(ChatColor.RED + "You do not have enough money to get more soup!");
             return true;
         }
 
-        playerData.withdrawBalance(10);
+        playerData.withdrawBalance(50);
 
         Inventory soupInventory = Bukkit.createInventory(null, 54, org.bukkit.ChatColor.BOLD + "Free Soup!");
         Kit.addSoup(soupInventory, 0, 53);

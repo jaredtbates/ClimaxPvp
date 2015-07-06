@@ -22,8 +22,8 @@ public class RepairCommand implements CommandExecutor {
 
         Player player = (Player) sender;
         CachedPlayerData playerData = plugin.getPlayerData(player);
-        if (playerData.getBalance() >= 2) {
-            playerData.withdrawBalance(2);
+        if (playerData.getBalance() >= 20) {
+            playerData.withdrawBalance(20);
             for (ItemStack item : player.getInventory().getContents()) {
                 if (item != null) {
                     item.setDurability((short) -100);
