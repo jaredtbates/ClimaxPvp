@@ -83,7 +83,7 @@ public class GhastKit extends Kit {
                     if (!fireball.tryUse(player)) {
                         return;
                     }
-
+                    player.sendMessage(ChatColor.GOLD + "You used the" + ChatColor.AQUA + "Fireball" + ChatColor.GOLD + "Ability!");
                     Fireball f = event.getPlayer().launchProjectile(Fireball.class);
                     player.getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 1);
                     f.setIsIncendiary(false);
@@ -101,7 +101,7 @@ public class GhastKit extends Kit {
         if (event.getDamager() instanceof Fireball) {
             Fireball f = (Fireball) event.getDamager();
             if (f.getShooter() instanceof Player) {
-                event.setDamage(20.0);
+                event.setDamage(25.0);
             }
         }
     }

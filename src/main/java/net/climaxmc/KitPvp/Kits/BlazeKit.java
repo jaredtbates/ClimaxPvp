@@ -98,7 +98,7 @@ public class BlazeKit extends Kit {
                     if (!blaze.tryUse(player)) {
                         return;
                     }
-                    
+                    player.sendMessage(ChatColor.GOLD + "You used the" + ChatColor.AQUA + "Blaze" + ChatColor.GOLD + "Ability!");
                 	for (Entity entity : player.getNearbyEntities(5, 5, 5)) {
                 		if (entity instanceof Player) {
                 		    Player players = (Player) entity;

@@ -4,6 +4,7 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.Ability;
+
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
@@ -96,6 +97,7 @@ public class AssassinKit extends Kit {
                 	if (!cloak.tryUse(player)) {
                         return;
                     }
+                	player.sendMessage(ChatColor.GOLD + "You used the" + ChatColor.AQUA + "Assassin" + ChatColor.GOLD + "Ability!");
                 	for (Entity entity : player.getNearbyEntities(9, 9, 9)) {
                 		if (entity instanceof Player) {
                 		    Player players = (Player) entity;
@@ -110,7 +112,7 @@ public class AssassinKit extends Kit {
                 		    player.getInventory().setLeggings(null);
                 		    player.getInventory().setBoots(null);
                 		    player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 140, 0));
-                		    player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 1));
+                		    player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 2));
                 		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
                 		    	player.removePotionEffect(PotionEffectType.SPEED);
                 		    	player.removePotionEffect(PotionEffectType.INVISIBILITY);

@@ -21,7 +21,7 @@ import org.bukkit.util.Vector;
 
 public class KangarooKit extends Kit {
     public KangarooKit() {
-        super("Kangaroo", new ItemStack(Material.FIREWORK), "Use your Firework to Jump like a Kangaroo!", ChatColor.RED);
+        super("Kangaroo", new ItemStack(Material.FIREWORK), "Use your Firework to Jump like a Kangaroo! (Shift for High Jumps)", ChatColor.GOLD);
     }
 
     protected void wear(Player player) {
@@ -46,7 +46,7 @@ public class KangarooKit extends Kit {
         player.getInventory().setBoots(boots);
         ItemStack firework = new ItemStack(Material.FIREWORK);
         ItemMeta fwmeta = firework.getItemMeta();
-        fwmeta.setDisplayName(ChatColor.AQUA + "Kangaroo Ability");
+        fwmeta.setDisplayName(ChatColor.GOLD + "Kangaroo Ability");
         firework.setItemMeta(fwmeta);
         player.getInventory().addItem(firework);
         addSoup(player.getInventory(), 2, 35);
@@ -78,7 +78,7 @@ public class KangarooKit extends Kit {
         player.getInventory().setBoots(boots);
         ItemStack firework = new ItemStack(Material.FIREWORK);
         ItemMeta fwmeta = firework.getItemMeta();
-        fwmeta.setDisplayName(ChatColor.AQUA + "Kangaroo Ability");
+        fwmeta.setDisplayName(ChatColor.GOLD + "Kangaroo Ability");
         firework.setItemMeta(fwmeta);
         player.getInventory().addItem(firework);
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
