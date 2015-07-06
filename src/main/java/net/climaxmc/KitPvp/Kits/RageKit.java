@@ -127,7 +127,7 @@ public class RageKit extends Kit {
                         helm2.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
                         LeatherArmorMeta helmmeta2 = (LeatherArmorMeta) helm2.getItemMeta();
                         helmmeta2.setColor(Color.BLUE);
-                        helm.setItemMeta(helmmeta2);
+                        helm2.setItemMeta(helmmeta2);
                         player.getInventory().setHelmet(helm2);
                         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
                         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
