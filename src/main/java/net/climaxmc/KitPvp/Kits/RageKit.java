@@ -100,7 +100,7 @@ public class RageKit extends Kit {
                 	if (!rage.tryUse(player)) {
                         return;
                     }
-                	player.sendMessage(ChatColor.GOLD + "You used the" + ChatColor.AQUA + "Rage" + ChatColor.GOLD + "Ability!");
+                	player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Rage" + ChatColor.GOLD + " Ability!");
                 	player.getWorld().playSound(player.getLocation(), Sound.GHAST_SCREAM, 3, 1);
                 	player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 2));
                 	player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 100, 0));

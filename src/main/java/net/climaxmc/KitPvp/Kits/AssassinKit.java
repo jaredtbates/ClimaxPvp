@@ -97,7 +97,7 @@ public class AssassinKit extends Kit {
                 	if (!cloak.tryUse(player)) {
                         return;
                     }
-                	player.sendMessage(ChatColor.GOLD + "You used the" + ChatColor.AQUA + "Assassin" + ChatColor.GOLD + "Ability!");
+                	player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Assassin" + ChatColor.GOLD + " Ability!");
                 	for (Entity entity : player.getNearbyEntities(9, 9, 9)) {
                 		if (entity instanceof Player) {
                 		    Player players = (Player) entity;
