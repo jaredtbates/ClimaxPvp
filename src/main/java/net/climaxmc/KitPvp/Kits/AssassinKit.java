@@ -20,7 +20,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class AssassinKit extends Kit {
-	private Ability cloak = new Ability(1, 15, TimeUnit.SECONDS);
+	private Ability cloak = new Ability(1, 12, TimeUnit.SECONDS);
 	
     public AssassinKit() {
         super("Assassin", new ItemStack(Material.GHAST_TEAR), "Use your Cloak Ability to take out opponents with stealth!", ChatColor.RED);
@@ -110,9 +110,11 @@ public class AssassinKit extends Kit {
                 		    player.getInventory().setLeggings(null);
                 		    player.getInventory().setBoots(null);
                 		    player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 140, 0));
+                		    player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 1));
                 		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
                 		    	player.removePotionEffect(PotionEffectType.SPEED);
                 		    	player.removePotionEffect(PotionEffectType.INVISIBILITY);
+                		    	player.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
                 		    }, 140);
                 		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0)), 141);
                 		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
