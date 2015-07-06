@@ -30,7 +30,7 @@ public class KangarooKit extends Kit {
         player.getInventory().addItem(sword);
         player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chestplate.getItemMeta();
         chestmeta.setColor(Color.RED);
         chestplate.setItemMeta(chestmeta);
@@ -62,7 +62,7 @@ public class KangarooKit extends Kit {
         player.getInventory().addItem(sword);
         player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chestplate.getItemMeta();
         chestmeta.setColor(Color.RED);
         chestplate.setItemMeta(chestmeta);
@@ -99,14 +99,14 @@ public class KangarooKit extends Kit {
                 if(!(player.isSneaking())){
                     player.setFallDistance(-(4F + 1));
                     Vector vector = player.getEyeLocation().getDirection();
-                    vector.multiply(0.6F);
-                    vector.setY(4F / 4F);
+                    vector.multiply(0.7F);
+                    vector.setY(0.6);
                     player.setVelocity(vector);
                     } else {
                         player.setFallDistance(-(4F + 1));
                         Vector vector = player.getEyeLocation().getDirection();
                         vector.multiply(1.2F);
-                        vector.setY(0.8);
+                        vector.setY(0.5);
                         player.setVelocity(vector);
                     }
             }
