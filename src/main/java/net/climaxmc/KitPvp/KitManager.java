@@ -50,10 +50,11 @@ public class KitManager implements Listener {
         kits.add(new BlazeKit());
         kits.add(new WitherKit());
         kits.add(new AssassinKit());
-        kits.add(new KangarooKit());
+        kits.add(new RageKit());
 
         // Gold Kits
         kits.add(new RangerKit());
+        kits.add(new KangarooKit());
 
         for (Kit kit : kits) {
             plugin.getServer().getPluginManager().registerEvents(kit, plugin);
