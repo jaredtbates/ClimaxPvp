@@ -190,7 +190,7 @@ public class HackListeners implements Listener {
         }
         if (count > 6) {
             sendWarning(player, "Fly (Float)");
-            player.damage(1000);
+            /*player.damage(1000);*/
             count = 0;
         }
         this.floatTicks.put(player, new AbstractMap.SimpleEntry<>(count, player.getLocation().getY()));
@@ -207,7 +207,7 @@ public class HackListeners implements Listener {
         }
         if (count > 3) {
             sendWarning(player, "Fly (Hover)");
-            player.damage(1000);
+            /*player.damage(1000);*/
             count = 0;
         }
         this.hoverTicks.put(player, new AbstractMap.SimpleEntry<>(count, player.getLocation().getY()));
@@ -235,7 +235,7 @@ public class HackListeners implements Listener {
         }
         if (count > 6) {
             sendWarning(player, "Fly (Rise)");
-            player.damage(1000);
+            /*player.damage(1000);*/
             count = 0;
         }
         this.riseTicks.put(player, new AbstractMap.SimpleEntry<>(count, player.getLocation().getY()));
