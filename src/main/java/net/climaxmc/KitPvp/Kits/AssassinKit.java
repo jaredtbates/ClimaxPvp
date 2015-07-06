@@ -40,7 +40,7 @@ public class AssassinKit extends Kit {
         cloak.setItemMeta(cloakmeta);
         player.getInventory().addItem(cloak);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.BLACK);
         helm.setItemMeta(helmmeta);
@@ -48,7 +48,7 @@ public class AssassinKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
@@ -70,7 +70,7 @@ public class AssassinKit extends Kit {
         cloak.setItemMeta(cloakmeta);
         player.getInventory().addItem(cloak);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.BLACK);
         helm.setItemMeta(helmmeta);
@@ -78,7 +78,7 @@ public class AssassinKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
@@ -103,7 +103,7 @@ public class AssassinKit extends Kit {
                 		    Player players = (Player) entity;
                 		    players.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 140, 2));
                 		    players.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 1));
-                		    players.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 140, 1));
+                		    players.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 140, 2));
                 		    player.removePotionEffect(PotionEffectType.SPEED);
                 		    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 1));
                 		    player.getWorld().playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 1);
