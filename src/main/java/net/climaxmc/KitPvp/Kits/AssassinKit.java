@@ -103,7 +103,7 @@ public class AssassinKit extends Kit {
                 		    Player players = (Player) entity;
                 		    players.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 140, 2));
                 		    players.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 1));
-                		    players.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 140, 1));
+                		    players.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 140, 2));
                 		    player.removePotionEffect(PotionEffectType.SPEED);
                 		    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 1));
                 		    player.getWorld().playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 1);
@@ -112,7 +112,7 @@ public class AssassinKit extends Kit {
                 		    player.getInventory().setLeggings(null);
                 		    player.getInventory().setBoots(null);
                 		    player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 140, 0));
-                		    player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 2));
+                		    player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 1));
                 		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
                 		    	player.removePotionEffect(PotionEffectType.SPEED);
                 		    	player.removePotionEffect(PotionEffectType.INVISIBILITY);

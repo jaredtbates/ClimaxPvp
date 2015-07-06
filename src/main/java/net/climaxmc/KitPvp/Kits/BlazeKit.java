@@ -61,7 +61,9 @@ public class BlazeKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
     	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
-    	ItemStack sword = new ItemStack(Material.STONE_SWORD);
+    	ItemStack sword = new ItemStack(Material.WOOD_SWORD);
+    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+    	sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
         ItemMeta blazeMeta = blazePowder.getItemMeta();
