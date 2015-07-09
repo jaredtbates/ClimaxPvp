@@ -84,7 +84,7 @@ public class PlayerInteractListener implements Listener {
                 ItemStack goldKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 1);
                 ItemMeta goldKitsGlassMeta = goldKits.getItemMeta();
                 goldKitsGlassMeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kit");
-                goldKitsGlassMeta.setLore(Collections.singletonList(ChatColor.GOLD + "" + ChatColor.ITALIC + "Unlocked at Level 1500"));
+                goldKitsGlassMeta.setLore(Collections.singletonList(ChatColor.GOLD + "" + ChatColor.ITALIC + "Unlocked at Level 1100"));
                 goldKitsGlass.setItemMeta(goldKitsGlassMeta);
                 for (int i = 2; i < 7; i++) {
                     kitSelectorInventory.setItem(i, goldKitsGlass);
@@ -93,7 +93,7 @@ public class PlayerInteractListener implements Listener {
                 ItemStack redKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
                 ItemMeta redKitsGlassMeta = goldKits.getItemMeta();
                 redKitsGlassMeta.setDisplayName(ChatColor.RED + "Red Kit");
-                redKitsGlassMeta.setLore(Collections.singletonList(ChatColor.RED + "" + ChatColor.ITALIC + "Unlocked at Level 850"));
+                redKitsGlassMeta.setLore(Collections.singletonList(ChatColor.RED + "" + ChatColor.ITALIC + "Unlocked at Level 700"));
                 redKitsGlass.setItemMeta(redKitsGlassMeta);
                 for (int i = 11; i < 16; i++) {
                     kitSelectorInventory.setItem(i, redKitsGlass);
@@ -111,7 +111,7 @@ public class PlayerInteractListener implements Listener {
                 ItemStack blueKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 3);
                 ItemMeta blueKitsGlassMeta = goldKits.getItemMeta();
                 blueKitsGlassMeta.setDisplayName(ChatColor.BLUE + "Blue Kit");
-                blueKitsGlassMeta.setLore(Collections.singletonList(ChatColor.BLUE + "" + ChatColor.ITALIC + "Unlocked at Level 150"));
+                blueKitsGlassMeta.setLore(Collections.singletonList(ChatColor.BLUE + "" + ChatColor.ITALIC + "Unlocked at Level 110"));
                 blueKitsGlass.setItemMeta(blueKitsGlassMeta);
                 for (int i = 29; i < 34; i++) {
                     kitSelectorInventory.setItem(i, blueKitsGlass);
