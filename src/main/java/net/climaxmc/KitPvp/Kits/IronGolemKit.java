@@ -22,12 +22,16 @@ public class IronGolemKit extends Kit {
 
     protected void wear(Player player) {
         ItemStack sword = new ItemStack(Material.GOLD_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         sword.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().addItem(sword);
         player.getInventory().addItem(new ItemStack(Material.RED_ROSE));
-        player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+        ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        player.getInventory().setChestplate(chestplate);
+        ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 2, 35);
@@ -38,13 +42,17 @@ public class IronGolemKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
     	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
-        ItemStack sword = new ItemStack(Material.GOLD_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+    	ItemStack sword = new ItemStack(Material.GOLD_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         sword.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().addItem(sword);
         player.getInventory().addItem(new ItemStack(Material.RED_ROSE));
-        player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+        ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        player.getInventory().setChestplate(chestplate);
+        ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         player.getInventory().setBoots(boots);
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
@@ -65,7 +73,7 @@ public class IronGolemKit extends Kit {
                 if (KitManager.isPlayerInKit(player, this)) {
                     if (player.getItemInHand().getType().equals(Material.RED_ROSE)) {
                         event.setCancelled(true);
-                        target.setVelocity(new Vector(0, 1.2, 0));
+                        target.setVelocity(new Vector(0, 1.3, 0));
                     }
                 }
             }
