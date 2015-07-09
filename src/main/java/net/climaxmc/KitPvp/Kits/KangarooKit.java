@@ -36,7 +36,7 @@ public class KangarooKit extends Kit {
         chestplate.setItemMeta(chestmeta);
         player.getInventory().setChestplate(chestplate);
         ItemStack leggings = (new ItemStack(Material.LEATHER_LEGGINGS));
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta legmeta = (LeatherArmorMeta) leggings.getItemMeta();
         legmeta.setColor(Color.RED);
         leggings.setItemMeta(legmeta);
@@ -62,13 +62,13 @@ public class KangarooKit extends Kit {
         player.getInventory().addItem(sword);
         player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chestplate.getItemMeta();
         chestmeta.setColor(Color.RED);
         chestplate.setItemMeta(chestmeta);
         player.getInventory().setChestplate(chestplate);
         ItemStack leggings = (new ItemStack(Material.LEATHER_LEGGINGS));
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta legmeta = (LeatherArmorMeta) leggings.getItemMeta();
         legmeta.setColor(Color.RED);
         leggings.setItemMeta(legmeta);
