@@ -16,6 +16,10 @@ public class ArcherKit extends Kit {
     }
 
     protected void wear(Player player) {
+    	for (PotionEffect effect : player.getActivePotionEffects()) {
+            player.removePotionEffect(effect.getType());
+        }
+    	player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         LeatherArmorMeta helmetMeta = (LeatherArmorMeta) helmet.getItemMeta();
         helmetMeta.setColor(Color.WHITE);
@@ -57,6 +61,7 @@ public class ArcherKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
     	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
+    	player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         LeatherArmorMeta helmetMeta = (LeatherArmorMeta) helmet.getItemMeta();
         helmetMeta.setColor(Color.WHITE);
