@@ -52,7 +52,7 @@ public class ChemistKit extends Kit {
         harmpot.setSplash(true);
         harmpot.apply(harm);
         player.getInventory().addItem(harm);
-        ItemStack poison = new ItemStack(Material.POTION, 5);
+        ItemStack poison = new ItemStack(Material.POTION, 3);
         Potion poisonpot = new Potion(PotionType.POISON, 1);
         poisonpot.setSplash(true);
         poisonpot.apply(poison);
@@ -99,7 +99,7 @@ public class ChemistKit extends Kit {
         harmpot.setSplash(true);
         harmpot.apply(harm);
         player.getInventory().addItem(harm);
-        ItemStack poison = new ItemStack(Material.POTION, 5);
+        ItemStack poison = new ItemStack(Material.POTION, 3);
         Potion poisonpot = new Potion(PotionType.POISON, 1);
         poisonpot.setSplash(true);
         poisonpot.apply(poison);
