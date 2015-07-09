@@ -27,7 +27,7 @@ public class RageKit extends Kit {
 	private Ability rage = new Ability(1, 20, TimeUnit.SECONDS);
 	
     public RageKit() {
-        super("Rage", new ItemStack(Material.MAGMA_CREAM), "Use your Rage Ability to take down Enemies!", ChatColor.GOLD);
+        super("Rage", new ItemStack(Material.MAGMA_CREAM), "Use your Rage Ability to take down Enemies!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
