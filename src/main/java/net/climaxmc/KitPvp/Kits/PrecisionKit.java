@@ -29,10 +29,10 @@ public class PrecisionKit extends Kit {
         sword.setItemMeta(swordmeta);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 4);
         player.getInventory().addItem(sword);
-        player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
+        player.getInventory().setHelmet(new ItemStack(Material.GOLD_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
-        ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
+        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 1, 35);
@@ -47,12 +47,12 @@ public class PrecisionKit extends Kit {
         ItemMeta swordmeta = sword.getItemMeta();
         swordmeta.setDisplayName(ChatColor.AQUA + "Precision Sword");
         sword.setItemMeta(swordmeta);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 4);
         player.getInventory().addItem(sword);
-        player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
+        player.getInventory().setHelmet(new ItemStack(Material.GOLD_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
-        ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
+        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
         player.getInventory().setBoots(boots);
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);

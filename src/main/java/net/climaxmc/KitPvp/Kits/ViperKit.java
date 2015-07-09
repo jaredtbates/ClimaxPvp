@@ -20,14 +20,15 @@ public class ViperKit extends Kit {
     }
 
     protected void wear(Player player) {
-        player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
+    	player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
+        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
         meta.setColor(Color.LIME);
         helmet.setItemMeta(meta);
         player.getInventory().setHelmet(helmet);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
         addSoup(player.getInventory(), 1, 35);
     }
@@ -39,12 +40,13 @@ public class ViperKit extends Kit {
     	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
+        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
         meta.setColor(Color.LIME);
         helmet.setItemMeta(meta);
         player.getInventory().setHelmet(helmet);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
         fishingRod.addEnchantment(Enchantment.DURABILITY, 3);

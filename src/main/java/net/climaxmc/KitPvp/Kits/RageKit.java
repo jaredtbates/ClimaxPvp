@@ -119,24 +119,26 @@ public class RageKit extends Kit {
                     boots.setItemMeta(bootsmeta);
                     player.getInventory().setBoots(boots);
                     Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
-                    	player.removePotionEffect(PotionEffectType.SPEED);
-                    	player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
-                    	player.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
-                    	player.removePotionEffect(PotionEffectType.JUMP);
-                    	ItemStack helm2 = new ItemStack(Material.LEATHER_HELMET);
-                        helm2.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-                        LeatherArmorMeta helmmeta2 = (LeatherArmorMeta) helm2.getItemMeta();
-                        helmmeta2.setColor(Color.BLUE);
-                        helm2.setItemMeta(helmmeta2);
-                        player.getInventory().setHelmet(helm2);
-                        player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-                        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
-                        ItemStack boots2 = new ItemStack(Material.LEATHER_BOOTS);
-                        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-                        LeatherArmorMeta bootsmeta2 = (LeatherArmorMeta) boots2.getItemMeta();
-                        bootsmeta2.setColor(Color.BLUE);
-                        boots2.setItemMeta(bootsmeta2);
-                        player.getInventory().setBoots(boots2);
+                    	if (KitManager.isPlayerInKit(player, this)) {
+                    		player.removePotionEffect(PotionEffectType.SPEED);
+                        	player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
+                        	player.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
+                        	player.removePotionEffect(PotionEffectType.JUMP);
+                        	ItemStack helm2 = new ItemStack(Material.LEATHER_HELMET);
+                            helm2.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+                            LeatherArmorMeta helmmeta2 = (LeatherArmorMeta) helm2.getItemMeta();
+                            helmmeta2.setColor(Color.BLUE);
+                            helm2.setItemMeta(helmmeta2);
+                            player.getInventory().setHelmet(helm2);
+                            player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+                            player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+                            ItemStack boots2 = new ItemStack(Material.LEATHER_BOOTS);
+                            boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+                            LeatherArmorMeta bootsmeta2 = (LeatherArmorMeta) boots2.getItemMeta();
+                            bootsmeta2.setColor(Color.BLUE);
+                            boots2.setItemMeta(bootsmeta2);
+                            player.getInventory().setBoots(boots2);
+                    	}
                     }, 100);
                 }
             }
