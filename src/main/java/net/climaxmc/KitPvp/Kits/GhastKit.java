@@ -23,7 +23,7 @@ public class GhastKit extends Kit {
     private Ability fireball = new Ability(1, 2, TimeUnit.SECONDS);
 
     public GhastKit() {
-        super("Ghast", new ItemStack(Material.FIREBALL), "Set the world on Fire with the Ghast Kit!", ChatColor.BLUE);
+        super("Ghast", new ItemStack(Material.FIREBALL), "Set the world on Fire with the Ghast Kit!", ChatColor.GREEN);
     }
 
     protected void wear(Player player) {
@@ -87,7 +87,7 @@ public class GhastKit extends Kit {
                     Fireball f = event.getPlayer().launchProjectile(Fireball.class);
                     player.getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 1);
                     f.setIsIncendiary(false);
-                    double vel = f.getVelocity().length() * (0.1D + 0.1D * 5);
+                    double vel = f.getVelocity().length() * (0.1D + 0.1D * 10);
                     // Knock player back
                     velocity(player, player.getLocation().getDirection().multiply(-1), vel,
                             false, 0.0D, 0.2D, 0.8D, true);

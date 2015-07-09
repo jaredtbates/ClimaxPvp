@@ -16,11 +16,13 @@ import org.bukkit.potion.PotionEffectType;
 
 public class ViperKit extends Kit {
     public ViperKit() {
-        super("Viper", new ItemStack(Material.SPIDER_EYE), "With each hit you poison your enemy!", ChatColor.BLUE);
+        super("Viper", new ItemStack(Material.SPIDER_EYE), "With each hit you poison your enemy!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
-    	player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
+    	ItemStack sword = new ItemStack(Material.IRON_SWORD);
+    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
@@ -38,7 +40,9 @@ public class ViperKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
     	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
-        player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
+    	ItemStack sword = new ItemStack(Material.IRON_SWORD);
+    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
@@ -65,7 +69,7 @@ public class ViperKit extends Kit {
                 Player damaged = (Player) event.getEntity();
                 if (KitManager.isPlayerInKit(player, this)) {
                     if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
-                        damaged.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 100, 1));
+                        damaged.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 120, 1));
                     }
                 }
             }

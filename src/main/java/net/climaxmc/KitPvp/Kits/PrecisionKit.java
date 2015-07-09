@@ -19,7 +19,7 @@ import org.bukkit.util.BlockIterator;
 
 public class PrecisionKit extends Kit {
     public PrecisionKit() {
-        super("Precision", new ItemStack(Material.ARROW), "Op Sword, but damages you if you miss!", ChatColor.GREEN);
+        super("Precision", new ItemStack(Material.ARROW), "Op Sword, but damages you if you miss!", ChatColor.BLUE);
     }
 
     protected void wear(Player player) {

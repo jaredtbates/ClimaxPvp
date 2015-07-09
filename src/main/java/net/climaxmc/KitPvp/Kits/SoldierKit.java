@@ -17,7 +17,7 @@ import org.bukkit.util.Vector;
 
 public class SoldierKit extends Kit {
     public SoldierKit() {
-        super("Soldier", new ItemStack(Material.FEATHER), "Right Click Blocks with your Sword to Climb Walls!", ChatColor.GREEN);
+        super("Soldier", new ItemStack(Material.FEATHER), "Right Click Blocks with your Sword to Climb Walls!", ChatColor.BLUE);
     }
 
     protected void wear(Player player) {

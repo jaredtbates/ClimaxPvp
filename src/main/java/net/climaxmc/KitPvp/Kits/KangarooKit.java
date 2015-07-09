@@ -21,7 +21,7 @@ import org.bukkit.util.Vector;
 
 public class KangarooKit extends Kit {
     public KangarooKit() {
-        super("Kangaroo", new ItemStack(Material.FIREWORK), "Use your Firework to Jump High! (Shift for higher)", ChatColor.GOLD);
+        super("Kangaroo", new ItemStack(Material.FIREWORK), "Use your Firework to Jump High! (Shift for higher)", ChatColor.RED);
     }
 
     protected void wear(Player player) {

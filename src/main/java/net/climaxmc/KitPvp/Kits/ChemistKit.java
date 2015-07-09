@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionType;
 
 public class ChemistKit extends Kit {
     public ChemistKit() {
-        super("Chemist", new ItemStack(Material.BREWING_STAND_ITEM), "Spam your Potions on everyone ^-^", ChatColor.RED);
+        super("Chemist", new ItemStack(Material.BREWING_STAND_ITEM), "Spam your Potions on everyone ^-^", ChatColor.GREEN);
     }
 
     protected void wear(Player player) {
