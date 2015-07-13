@@ -51,3 +51,5 @@ commands:
     description: Opens an inventory of soup for $10
   report:
     description: Report a player for hacking
+  list:
+    description: List online players

@@ -56,5 +56,6 @@ public class KitPvp {
         plugin.getCommand("ping").setExecutor(new PingCommand(plugin));
         plugin.getCommand("soup").setExecutor(new SoupCommand(plugin));
         plugin.getCommand("report").setExecutor(new ReportCommand(plugin));
+        plugin.getCommand("list").setExecutor(new ListCommand(plugin));
     }
 }
