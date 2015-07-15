@@ -20,6 +20,8 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 public class KangarooKit extends Kit {
+	
+	public boolean magic = false;
     public KangarooKit() {
         super("Kangaroo", new ItemStack(Material.FIREWORK), "Use your Firework to Jump High! (Shift for higher)", ChatColor.RED);
     }
@@ -96,20 +98,25 @@ public class KangarooKit extends Kit {
             event.setCancelled(true);
             Block b = player.getLocation().getBlock();
             if (b.getType() != Material.AIR || b.getRelative(BlockFace.DOWN).getType() != Material.AIR) {
-                if(!(player.isSneaking())){
+            	if(!(player.isSneaking())){
                     player.setFallDistance(-(4F + 1));
                     Vector vector = player.getEyeLocation().getDirection();
-                    vector.multiply(0.7F);
-                    vector.setY(0.6);
+                    vector.setY(0.8);
                     player.setVelocity(vector);
-                    } else {
-                        player.setFallDistance(-(4F + 1));
-                        Vector vector = player.getEyeLocation().getDirection();
-                        vector.multiply(1.2F);
-                        vector.setY(0.5);
-                        player.setVelocity(vector);
-                    }
+                }else{
+                	return;
+                }
+            	magic = true;
+            }else{
+            	return;
+            }
+                if(magic == true){
+                    player.setFallDistance(-(4F + 1));
+                    Vector vector = player.getEyeLocation().getDirection();
+                    vector.multiply(1.4F);
+                    vector.setY(0.3);
+                    player.setVelocity(vector);
+                }
             }
         }
     }
-}
