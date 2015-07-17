@@ -19,6 +19,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 public class VikingKit extends Kit {
+	
     public VikingKit() {
         super("Viking", new ItemStack(Material.DIAMOND_AXE), "You damage all players within 4 blocks of you!", ChatColor.GOLD);
     }
@@ -85,15 +86,17 @@ public class VikingKit extends Kit {
     	if(event.getDamager() instanceof Player){
     		Player player = (Player) event.getDamager();
     		if (KitManager.isPlayerInKit(player, this)) {
-    			for (Entity entity : player.getNearbyEntities(3, 3, 3)) {
-    				if (entity instanceof Player) {
-    					Player players = (Player) entity;
-    					event.setCancelled(true);
-    					players.damage(5, player);
-    					Vector vector = player.getEyeLocation().getDirection();
-    					vector.multiply(0.5F);
-    					vector.setY(0.3);
-    					players.setVelocity(vector);
+    			if(player.getInventory().getItemInHand().equals(new ItemStack(Material.DIAMOND_AXE))){
+    				for (Entity entity : player.getNearbyEntities(3, 3, 3)) {
+    					if (entity instanceof Player) {
+    						Player players = (Player) entity;
+    						event.setCancelled(true);
+    						players.damage(5);
+    						Vector vector = player.getEyeLocation().getDirection();
+    						vector.multiply(0.5F);
+    						vector.setY(0.3);
+    						players.setVelocity(vector);
+    					}
     				}
                 }
             }
