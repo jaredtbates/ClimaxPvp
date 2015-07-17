@@ -56,6 +56,7 @@ public class KitManager implements Listener {
         // Gold Kits
         kits.add(new RangerKit());
         kits.add(new AssassinKit());
+        kits.add(new VikingKit());
 
         for (Kit kit : kits) {
             plugin.getServer().getPluginManager().registerEvents(kit, plugin);
