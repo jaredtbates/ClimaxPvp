@@ -89,16 +89,15 @@ public class VikingKit extends Kit {
     			if(player.getInventory().getItemInHand().getType() == Material.DIAMOND_AXE){
     				for (Entity entity : event.getEntity().getNearbyEntities(3.5, 3.5, 3.5)) {
     					if (entity instanceof Player) {
-    						if(entity == player){
-    							return;
+    						if(!(entity == event.getDamager())){
+    							Player players = (Player) entity;
+    							event.setCancelled(true);
+    							players.damage(5);
+    							Vector vector = player.getEyeLocation().getDirection();
+    							vector.multiply(0.42F);
+    							vector.setY(0.25);
+    							players.setVelocity(vector);
     						}
-    						Player players = (Player) entity;
-    						event.setCancelled(true);
-    						players.damage(5);
-    						Vector vector = player.getEyeLocation().getDirection();
-    						vector.multiply(0.42F);
-    						vector.setY(0.25);
-    						players.setVelocity(vector);
     					}
     				}
                 }
