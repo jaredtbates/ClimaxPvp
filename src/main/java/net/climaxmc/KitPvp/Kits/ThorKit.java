@@ -21,7 +21,7 @@ public class ThorKit extends Kit {
     private Ability lightning = new Ability(1, 4, TimeUnit.SECONDS);
 
     public ThorKit() {
-        super("Thor", new ItemStack(Material.DIAMOND_AXE), "Punch a player with your Axe to Strike Lightning!", ChatColor.GREEN);
+        super("Thor", new ItemStack(Material.IRON_AXE), "Punch a player with your Axe to Strike Lightning!", ChatColor.GREEN);
     }
 
     protected void wear(Player player) {
