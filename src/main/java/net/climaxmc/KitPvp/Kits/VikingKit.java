@@ -21,7 +21,7 @@ import org.bukkit.util.Vector;
 public class VikingKit extends Kit {
 	
     public VikingKit() {
-        super("Viking", new ItemStack(Material.DIAMOND_AXE), "You damage all players within 4 blocks of you!", ChatColor.GOLD);
+        super("Viking", new ItemStack(Material.DIAMOND_AXE), "You damage all players within 3 blocks of you!", ChatColor.GOLD);
     }
 
     protected void wear(Player player) {
@@ -87,7 +87,7 @@ public class VikingKit extends Kit {
     		Player player = (Player) event.getDamager();
     		if (KitManager.isPlayerInKit(player, this)) {
     			if(player.getInventory().getItemInHand().getType() == Material.DIAMOND_AXE){
-    				for (Entity entity : player.getNearbyEntities(3.2, 3.2, 3.2)) {
+    				for (Entity entity : player.getNearbyEntities(3, 3, 3)) {
     					if (entity instanceof Player) {
     						if(!(entity == event.getEntity())){
     							Player players = (Player) entity;
