@@ -86,7 +86,7 @@ public class VikingKit extends Kit {
     	if(event.getDamager() instanceof Player){
     		Player player = (Player) event.getDamager();
     		if (KitManager.isPlayerInKit(player, this)) {
-    			if(player.getInventory().getItemInHand().equals(new ItemStack(Material.DIAMOND_AXE))){
+    			if(player.getInventory().getItemInHand().getType() == Material.DIAMOND_AXE){
     				for (Entity entity : player.getNearbyEntities(3, 3, 3)) {
     					if (entity instanceof Player) {
     						Player players = (Player) entity;
