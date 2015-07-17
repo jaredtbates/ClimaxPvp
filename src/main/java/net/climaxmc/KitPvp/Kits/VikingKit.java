@@ -85,12 +85,13 @@ public class VikingKit extends Kit {
     	if(event.getDamager() instanceof Player){
     		Player player = (Player) event.getDamager();
     		if (KitManager.isPlayerInKit(player, this)) {
-    			for (Entity entity : player.getNearbyEntities(4, 4, 4)) {
+    			for (Entity entity : player.getNearbyEntities(3, 3, 3)) {
     				if (entity instanceof Player) {
     					Player players = (Player) entity;
+    					event.setCancelled(true);
     					players.damage(5);
     					Vector vector = player.getEyeLocation().getDirection();
-    					vector.multiply(0.6F);
+    					vector.multiply(0.5F);
     					vector.setY(0.3);
     					players.setVelocity(vector);
     				}
