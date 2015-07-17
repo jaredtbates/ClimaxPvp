@@ -93,8 +93,8 @@ public class VikingKit extends Kit {
     						event.setCancelled(true);
     						players.damage(5);
     						Vector vector = player.getEyeLocation().getDirection();
-    						vector.multiply(0.5F);
-    						vector.setY(0.3);
+    						vector.multiply(0.42F);
+    						vector.setY(0.25);
     						players.setVelocity(vector);
     					}
     				}
