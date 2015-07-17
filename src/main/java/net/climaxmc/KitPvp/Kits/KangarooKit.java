@@ -113,8 +113,8 @@ public class KangarooKit extends Kit {
                 if(magic == true){
                     player.setFallDistance(-(4F + 1));
                     Vector vector = player.getEyeLocation().getDirection();
-                    vector.multiply(1.4F);
-                    vector.setY(0.3);
+                    vector.multiply(1.2F);
+                    vector.setY(0.5);
                     player.setVelocity(vector);
                 }
             }

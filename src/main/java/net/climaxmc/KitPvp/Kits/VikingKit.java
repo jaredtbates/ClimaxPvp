@@ -82,8 +82,8 @@ public class VikingKit extends Kit {
 
     @EventHandler
     public void onEntityDamge(EntityDamageByEntityEvent event) {
-    	if(event.getEntity() instanceof Player){
-    		Player player = (Player) event.getEntity();
+    	if(event.getDamager() instanceof Player){
+    		Player player = (Player) event.getDamager();
     		if (KitManager.isPlayerInKit(player, this)) {
     			for (Entity entity : player.getNearbyEntities(4, 4, 4)) {
     				if (entity instanceof Player) {
