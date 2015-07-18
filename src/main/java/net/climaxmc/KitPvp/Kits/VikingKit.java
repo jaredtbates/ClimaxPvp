@@ -92,7 +92,7 @@ public class VikingKit extends Kit {
     						if(!(entity == event.getDamager())){
     							Player players = (Player) entity;
     							event.setCancelled(true);
-    							players.damage(5);
+    							players.damage(4);
     							Vector vector = player.getEyeLocation().getDirection();
     							vector.multiply(0.4F);
     							vector.setY(0.2);
