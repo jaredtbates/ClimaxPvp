@@ -87,14 +87,14 @@ public class VikingKit extends Kit {
     		Player player = (Player) event.getDamager();
     		if (KitManager.isPlayerInKit(player, this)) {
     			if(player.getInventory().getItemInHand().getType() == Material.DIAMOND_AXE){
-    				for (Entity entity : event.getEntity().getNearbyEntities(4, 4, 4)) {
+    				for (Entity entity : player.getNearbyEntities(3.3, 3.3, 3.3)) {
     					if (entity instanceof Player) {
     						if(!(entity == event.getDamager())){
     							Player players = (Player) entity;
     							event.setCancelled(true);
     							players.damage(4);
     							Vector vector = player.getEyeLocation().getDirection();
-    							vector.multiply(0.4F);
+    							vector.multiply(0.5F);
     							vector.setY(0.2);
     							players.setVelocity(vector);
     						}
