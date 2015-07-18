@@ -21,7 +21,7 @@ import org.bukkit.util.Vector;
 public class VikingKit extends Kit {
 	
     public VikingKit() {
-        super("Viking", new ItemStack(Material.DIAMOND_AXE), "You damage all players within 4 blocks of who you're hitting!", ChatColor.GOLD);
+        super("Viking", new ItemStack(Material.DIAMOND_AXE), "You damage all players within 3.3 blocks of yourself!", ChatColor.GOLD);
     }
 
     protected void wear(Player player) {
