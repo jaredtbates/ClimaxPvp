@@ -14,9 +14,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-public class AnvilKit extends Kit {
-    public AnvilKit() {
-        super("Anvil", new ItemStack(Material.ANVIL), "You take, nor deal knockback!", ChatColor.GREEN);
+public class AnchorKit extends Kit {
+    public AnchorKit() {
+        super("Anchor", new ItemStack(Material.IRON_FENCE), "You take, nor deal knockback!", ChatColor.GREEN);
     }
 
     protected void wear(Player player) {

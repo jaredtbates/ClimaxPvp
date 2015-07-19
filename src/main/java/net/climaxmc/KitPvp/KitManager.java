@@ -42,7 +42,7 @@ public class KitManager implements Listener {
         // Green Kits
         kits.add(new IronGolemKit());
         kits.add(new ThorKit());
-        kits.add(new AnvilKit());
+        kits.add(new AnchorKit());
         kits.add(new GhastKit());
         kits.add(new ChemistKit());
 
