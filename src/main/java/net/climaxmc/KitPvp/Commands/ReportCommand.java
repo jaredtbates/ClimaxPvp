@@ -20,12 +20,16 @@ public class ReportCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        if (args.length != 2) {
+        if (args.length < 2) {
             player.sendMessage(ChatColor.RED + "/report <player> <reason>");
             return true;
         }
 
+        Player reported = plugin.getServer().getPlayer(args[0]);
 
+        if (reported == null) {
+            player.sendMessage(ChatColor.RED + "That player is not online!");
+        }
 
         return true;
     }
