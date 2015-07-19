@@ -24,7 +24,7 @@ public class PlayerJoinListener implements Listener {
         plugin.getMySQL().createPlayerData(player.getUniqueId());
         CachedPlayerData playerData = plugin.getPlayerData(player);
 
-        event.setJoinMessage(ChatColor.DARK_AQUA + "Join" + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
+        event.setJoinMessage((player.hasPlayedBefore() ? ChatColor.DARK_AQUA : ChatColor.GOLD) + "Join" + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
 
         plugin.respawn(player);
 

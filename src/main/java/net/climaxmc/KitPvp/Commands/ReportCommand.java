@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
 import net.md_5.bungee.api.ChatColor;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
@@ -29,7 +30,13 @@ public class ReportCommand implements CommandExecutor {
 
         if (reported == null) {
             player.sendMessage(ChatColor.RED + "That player is not online!");
+            return true;
         }
+
+        String message = StringUtils.join(args, ' ', 1, args.length);
+
+        player.sendMessage(ChatColor.GREEN + "You have reported " + reported.getName() + "!");
+        plugin.getServer().getOnlinePlayers().forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName() + " has reported " + ChatColor.BOLD + reported.getName() + ChatColor.RED + " for " + message + "!"));
 
         return true;
     }
