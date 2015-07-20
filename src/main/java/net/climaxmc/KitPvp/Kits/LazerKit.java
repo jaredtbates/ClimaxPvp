@@ -1,21 +1,19 @@
 package net.climaxmc.KitPvp.Kits;
 
-import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-import org.bukkit.*;
-import org.bukkit.entity.*;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
-public class GuardianKit extends Kit {
-    public GuardianKit() {
-        super("Guardian", new ItemStack(Material.BEACON), "Use the guardian's LAZER to attack players!", ChatColor.GOLD);
+public class LazerKit extends Kit {
+    public LazerKit() {
+        super("Lazer", new ItemStack(Material.BEACON), "Use the LAZER to attack players!", ChatColor.GOLD);
     }
 
     @Override
@@ -54,9 +52,6 @@ public class GuardianKit extends Kit {
             return;
         }
 
-        Guardian guardian = (Guardian) player.getWorld().spawnEntity(player.getLocation(), EntityType.GUARDIAN);
-        guardian.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 100, 1));
-        guardian.setTarget(player);
-        Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), guardian::remove, 10);
+        //new Line(player.getLocation(), player.getTargetBlock((Set<Material>) null, 10).getLocation()).forEach(block -> new ParticleEffect(new ParticleEffect.ParticleData(ParticleEffect.ParticleType.FLAME, 1, 1, 1)).sendToLocation(block.getLocation()));
     }
 }

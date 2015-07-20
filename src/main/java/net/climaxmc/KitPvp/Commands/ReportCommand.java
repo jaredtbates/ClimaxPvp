@@ -37,6 +37,7 @@ public class ReportCommand implements CommandExecutor {
         String message = StringUtils.join(args, ' ', 1, args.length);
 
         player.sendMessage(ChatColor.GREEN + "You have reported " + reported.getName() + "!");
+
         plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(player).hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName() + " has reported " + ChatColor.BOLD + reported.getName() + ChatColor.RED + " for " + message + "!"));
 
         return true;

@@ -112,7 +112,7 @@ public class HackListeners implements Listener {
     public void onPlayerReachTooFar(EntityDamageByEntityEvent event) {
         if ((event.getDamager() instanceof Player)) {
             Player player = (Player) event.getDamager();
-            if (!player.getNearbyEntities(3.5D, 3.0D, 3.5D).contains(event.getEntity())) {
+            if (!player.getNearbyEntities(4.5D, 4D, 4.5D).contains(event.getEntity())) {
                 //event.setCancelled(true);
                 sendWarning(player, "REACH");
             }
@@ -157,7 +157,8 @@ public class HackListeners implements Listener {
         }
         if (count > 6) {
             sendWarning(player, "SPEED");
-            player.damage(1000);
+            //event.setCancelled(true);
+            //player.damage(1000);
             count = 0;
         }
         speedTicks.put(player, new AbstractMap.SimpleEntry<>(count, System.currentTimeMillis()));
@@ -166,6 +167,17 @@ public class HackListeners implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void updateFlyhack(final PlayerMoveEvent event) {
         final Player player = event.getPlayer();
+        Block block = player.getLocation().getBlock();
+
+        if (block.getType().equals(Material.WATER_LILY)) {
+            return;
+        }
+
+        for (BlockFace face : BlockFace.values()) {
+            if (block.getRelative(face).getType().equals(Material.WATER_LILY)) {
+                return;
+            }
+        }
 
         if (isValid(player, true)) {
             return;
