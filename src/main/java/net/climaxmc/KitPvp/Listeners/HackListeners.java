@@ -120,7 +120,7 @@ public class HackListeners implements Listener {
     public void onPlayerRunTooFast(PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        if (player.getGameMode().equals(GameMode.CREATIVE) || player.getGameMode().equals(GameMode.SPECTATOR)) {
+        if (player.getGameMode().equals(GameMode.CREATIVE) || player.getGameMode().equals(GameMode.SPECTATOR) || player.getAllowFlight()) {
             return;
         }
 
@@ -260,12 +260,13 @@ public class HackListeners implements Listener {
     private boolean isGrounded(Entity ent) {
         boolean onGround = false;
 
+        /*TODO
         try {
             Object nmsEntity = ent.getClass().cast(Class.forName("org.bukkit.craftbukkit." + Bukkit.getServer().getClass().getPackage().getName().substring(Bukkit.getServer().getClass().getPackage().getName().lastIndexOf(".") + 1) + ".entity.CraftEntity")).getClass().getMethod("getInstance").invoke(ent);
             onGround = nmsEntity.getClass().getField("onGround").getBoolean(nmsEntity);
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
         return onGround;
     }
