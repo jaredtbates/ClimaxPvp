@@ -166,14 +166,22 @@ public class HackListeners implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void updateFlyhack(final PlayerMoveEvent event) {
         final Player player = event.getPlayer();
+
+        if (player.getGameMode().equals(GameMode.CREATIVE) || player.getGameMode().equals(GameMode.SPECTATOR)) {
+            return;
+        }
+
         if (isValid(player, true)) {
             return;
         }
+
         if (offset(event.getFrom(), event.getTo()) <= 0.0) {
             this.updateFloat(player);
             return;
         }
+
         this.updateHover(player);
+
         if (!(KitManager.isPlayerInKit(player, SoldierKit.class) || KitManager.isPlayerInKit(player, RangerKit.class))) {
             this.updateRise(player);
         }
