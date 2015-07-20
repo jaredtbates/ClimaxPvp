@@ -35,7 +35,7 @@ public class VikingKit extends Kit {
         axe.setItemMeta(axemeta);
         player.getInventory().addItem(axe);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 3);
+        helm.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.MAROON);
         helm.setItemMeta(helmmeta);
@@ -43,7 +43,7 @@ public class VikingKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addEnchantment(Enchantment.DURABILITY, 3);
+        boots.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.MAROON);
         boots.setItemMeta(bootsmeta);

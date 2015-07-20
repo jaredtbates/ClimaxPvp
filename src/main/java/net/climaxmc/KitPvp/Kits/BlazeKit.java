@@ -23,14 +23,14 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class BlazeKit extends Kit {
-	private Ability blaze = new Ability(1, 20, TimeUnit.SECONDS);
+	private Ability blaze = new Ability(1, 25, TimeUnit.SECONDS);
 	
     public BlazeKit() {
         super("Blaze", new ItemStack(Material.BLAZE_POWDER), "Use your Blaze ability to set everyone within 5 Blocks on fire!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.STONE_SWORD);
         player.getInventory().addItem(sword);
         ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
         ItemMeta blazeMeta = blazePowder.getItemMeta();
@@ -38,7 +38,7 @@ public class BlazeKit extends Kit {
         blazePowder.setItemMeta(blazeMeta);
         player.getInventory().addItem(blazePowder);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 2);
+        helm.addEnchantment(Enchantment.DURABILITY, 1);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta helmMeta = (LeatherArmorMeta) helm.getItemMeta();
         helmMeta.setColor(Color.YELLOW);
@@ -47,7 +47,7 @@ public class BlazeKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addEnchantment(Enchantment.DURABILITY, 2);
+        boots.addEnchantment(Enchantment.DURABILITY, 1);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta bootsMeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsMeta.setColor(Color.YELLOW);
