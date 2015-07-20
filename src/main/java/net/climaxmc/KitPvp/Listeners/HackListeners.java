@@ -124,7 +124,7 @@ public class HackListeners implements Listener {
     public void onPlayerRunTooFast(PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        if (player.getGameMode().equals(GameMode.ADVENTURE) || player.getGameMode().equals(GameMode.SURVIVAL)) {
+        if (player.getGameMode().equals(GameMode.CREATIVE) || player.getGameMode().equals(GameMode.SPECTATOR)) {
             return;
         }
 
@@ -166,10 +166,6 @@ public class HackListeners implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void updateFlyhack(final PlayerMoveEvent event) {
         final Player player = event.getPlayer();
-
-        if (player.getGameMode().equals(GameMode.CREATIVE) || player.getGameMode().equals(GameMode.SPECTATOR)) {
-            return;
-        }
 
         if (isValid(player, true)) {
             return;
