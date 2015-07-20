@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -9,6 +10,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -17,7 +19,8 @@ import org.bukkit.potion.PotionEffectType;
 
 public class KangarooKit extends Kit {
 
-    public boolean magic = false;
+    public boolean canGoForwards = false;
+    public boolean canGoUp = false;
 
     public KangarooKit() {
         super("Kangaroo", new ItemStack(Material.FIREWORK), "Use your Firework to Jump High! (Shift for higher)", ChatColor.RED);
@@ -84,6 +87,16 @@ public class KangarooKit extends Kit {
         fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(fishingRod);
     }
+    
+    @EventHandler
+    public void onMove(PlayerMoveEvent event){
+    	Player player = event.getPlayer();
+    	Block b = player.getLocation().getBlock();
+    	if (b.getType() == Material.AIR || b.getRelative(BlockFace.DOWN).getType() == Material.AIR) {
+    		canGoForwards = true;
+        	canGoUp = true;
+    	}
+    }
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
@@ -93,16 +106,15 @@ public class KangarooKit extends Kit {
         }
         if (player.getItemInHand().getType() == Material.FIREWORK) {
             event.setCancelled(true);
-            Block b = player.getLocation().getBlock();
-            if (b.getType() == Material.AIR || b.getRelative(BlockFace.DOWN).getType() == Material.AIR) {
-                if (player.isSneaking()) {
-                    player.setVelocity(player.getVelocity().setY(1));
+                if (player.isSneaking() && canGoForwards == true) {
+                    player.setVelocity(player.getEyeLocation().getDirection().setY(1));
+                    canGoForwards = false;
                 }
-            }
+        }
 
-            if (!player.isSneaking()) {
-                player.setVelocity(player.getEyeLocation().getDirection().setY(0));
-            }
+        if (!player.isSneaking() && canGoUp == true) {
+            	player.setVelocity(player.getVelocity().setY(1));
+            	canGoUp = false;
         }
     }
 }
