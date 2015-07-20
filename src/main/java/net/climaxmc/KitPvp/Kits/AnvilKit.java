@@ -15,7 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class AnvilKit extends Kit {
     public AnvilKit() {
-        super("Anvil", new ItemStack(Material.IRON_FENCE), "Drop to the ground like an anvil and deal damage to those around you!", ChatColor.GOLD);
+        super("Anvil", new ItemStack(Material.ANVIL), "Drop to the ground like an anvil and deal damage to those around you!", ChatColor.GOLD);
     }
 
     protected void wear(Player player) {
@@ -68,6 +68,6 @@ public class AnvilKit extends Kit {
 
         event.setCancelled(true);
 
-        player.getNearbyEntities(10, 10, 10).stream().filter(entity -> entity instanceof Player).forEach(target -> ((Player) target).damage(event.getDamage()));
+        player.getNearbyEntities(10, 10, 10).stream().filter(entity -> entity instanceof Player).forEach(target -> ((Player) target).damage(event.getDamage(), player));
     }
 }
