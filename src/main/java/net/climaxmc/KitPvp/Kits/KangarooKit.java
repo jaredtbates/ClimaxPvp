@@ -111,10 +111,12 @@ public class KangarooKit extends Kit {
                     canGoForwards = false;
                 }
         }
-
-        if (!player.isSneaking() && canGoUp == true) {
+        if (player.getItemInHand().getType() == Material.FIREWORK) {
+            event.setCancelled(true);
+            if (!player.isSneaking() && canGoUp == true) {
             	player.setVelocity(player.getVelocity().setY(1));
             	canGoUp = false;
+            }
         }
     }
 }
