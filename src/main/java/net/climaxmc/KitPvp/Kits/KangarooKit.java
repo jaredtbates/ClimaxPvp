@@ -2,10 +2,7 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.enchantments.Enchantment;
@@ -17,11 +14,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
 
 public class KangarooKit extends Kit {
-	
-	public boolean magic = false;
+
+    public boolean magic = false;
+
     public KangarooKit() {
         super("Kangaroo", new ItemStack(Material.FIREWORK), "Use your Firework to Jump High! (Shift for higher)", ChatColor.RED);
     }
@@ -55,11 +52,11 @@ public class KangarooKit extends Kit {
     }
 
     protected void wearNoSoup(Player player) {
-    	for (PotionEffect effect : player.getActivePotionEffects()) {
+        for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-    	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-    	ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
@@ -92,31 +89,20 @@ public class KangarooKit extends Kit {
     public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (!KitManager.isPlayerInKit(player, this)) {
-        	return;
+            return;
         }
         if (player.getItemInHand().getType() == Material.FIREWORK) {
             event.setCancelled(true);
             Block b = player.getLocation().getBlock();
-            if (b.getType() != Material.AIR || b.getRelative(BlockFace.DOWN).getType() != Material.AIR) {
-            	if(!(player.isSneaking())){
-                    player.setFallDistance(-(4F + 1));
-                    Vector vector = player.getEyeLocation().getDirection();
-                    vector.setY(0.8);
-                    player.setVelocity(vector);
-                }else{
-                	return;
+            if (b.getType() == Material.AIR || b.getRelative(BlockFace.DOWN).getType() == Material.AIR) {
+                if (player.isSneaking()) {
+                    player.setVelocity(player.getVelocity().setY(1));
                 }
-            	magic = true;
-            }else{
-            	return;
             }
-                if(magic == true){
-                    player.setFallDistance(-(4F + 1));
-                    Vector vector = player.getEyeLocation().getDirection();
-                    vector.multiply(1.2F);
-                    vector.setY(0.5);
-                    player.setVelocity(vector);
-                }
+
+            if (!player.isSneaking()) {
+                player.setVelocity(player.getEyeLocation().getDirection().setY(0));
             }
         }
     }
+}

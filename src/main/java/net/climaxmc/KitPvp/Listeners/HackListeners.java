@@ -2,8 +2,7 @@ package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitManager;
-import net.climaxmc.KitPvp.Kits.RangerKit;
-import net.climaxmc.KitPvp.Kits.SoldierKit;
+import net.climaxmc.KitPvp.Kits.*;
 import net.climaxmc.KitPvp.Utils.HackUtils;
 import net.climaxmc.common.Rank;
 import net.md_5.bungee.api.ChatColor;
@@ -35,18 +34,15 @@ public class HackListeners implements Listener {
 
     private void sendWarning(Player hacker, String hack) {
         plugin.getServer().getOnlinePlayers().stream().filter(player -> plugin.getPlayerData(player).hasRank(Rank.HELPER)).forEach(staff -> {
-            if (HackUtils.lastNotification(hacker) != 0L) {
-                if (TimeUnit.SECONDS.convert(System.nanoTime() - HackUtils.lastNotification(hacker), TimeUnit.NANOSECONDS) > 1L) {
-                    TextComponent message = new TextComponent(ChatColor.DARK_PURPLE + hacker.getName() + ChatColor.DARK_GRAY + " tried to " + ChatColor.DARK_PURPLE + hack);
+            if (TimeUnit.SECONDS.convert(System.nanoTime() - HackUtils.lastNotification(hacker), TimeUnit.NANOSECONDS) > 1L) {
+                TextComponent message = new TextComponent(ChatColor.DARK_PURPLE + hacker.getName() + ChatColor.DARK_GRAY + " tried to " + ChatColor.DARK_PURPLE + hack);
                     /*message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/hd tp " + hacker.getName()));
                     message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Click to teleport to " + hacker.getName()).create()));*/
-                    staff.spigot().sendMessage(message);
-                    HackUtils.updateLastNotification(hacker);
-                }
-            } else {
-                HackUtils.updateLastNotification(hacker);
+                staff.spigot().sendMessage(message);
             }
         });
+
+        HackUtils.updateLastNotification(hacker);
     }
 
     @EventHandler
@@ -125,6 +121,10 @@ public class HackListeners implements Listener {
         Player player = event.getPlayer();
 
         if (player.getGameMode().equals(GameMode.CREATIVE) || player.getGameMode().equals(GameMode.SPECTATOR)) {
+            return;
+        }
+
+        if (KitManager.isPlayerInKit(player, new KangarooKit())) {
             return;
         }
 
