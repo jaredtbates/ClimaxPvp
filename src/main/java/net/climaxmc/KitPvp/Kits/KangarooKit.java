@@ -107,7 +107,7 @@ public class KangarooKit extends Kit {
         if (player.getItemInHand().getType() == Material.FIREWORK) {
             event.setCancelled(true);
             if (player.isSneaking() && canGoForwards) {
-                player.setVelocity(player.getEyeLocation().getDirection().setY(1));
+                player.setVelocity(player.getEyeLocation().getDirection().setY(0.4));
                 canGoForwards = false;
             }
 
