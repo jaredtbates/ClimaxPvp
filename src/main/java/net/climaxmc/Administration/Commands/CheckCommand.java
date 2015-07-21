@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -35,7 +36,7 @@ public class CheckCommand implements CommandExecutor, Listener {
         Player player = (Player) sender;
         CachedPlayerData playerData = plugin.getPlayerData(player);
 
-        if (!(playerData.hasRank(Rank.MODERATOR))) {
+        if (!(playerData.hasRank(Rank.HELPER))) {
             player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
             return true;
         }
@@ -45,6 +46,7 @@ public class CheckCommand implements CommandExecutor, Listener {
             player.setAllowFlight(true);
             player.setFlying(true);
             player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false, false));
+            player.getInventory().clear();
             checking.add(player.getUniqueId());
         } else {
             player.sendMessage(ChatColor.RED + "You are no longer checking a player.");
@@ -54,6 +56,19 @@ public class CheckCommand implements CommandExecutor, Listener {
         }
 
         return true;
+    }
+
+    @EventHandler
+    public void onPlayerDamage(EntityDamageEvent event) {
+        if (!(event.getEntityType().equals(EntityType.PLAYER))) {
+            return;
+        }
+
+        Player player = (Player) event.getEntity();
+
+        if (checking.contains(player.getUniqueId())) {
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler
@@ -67,6 +82,10 @@ public class CheckCommand implements CommandExecutor, Listener {
 
         if (checking.contains(damaged.getUniqueId())) {
             damaged.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "You are being attacked by " + damager.getName() + "!");
+            event.setCancelled(true);
+        }
+
+        if (checking.contains(damager.getUniqueId())) {
             event.setCancelled(true);
         }
     }

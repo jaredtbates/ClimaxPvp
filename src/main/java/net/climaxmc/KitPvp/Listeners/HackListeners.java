@@ -38,7 +38,7 @@ public class HackListeners implements Listener {
                 TextComponent message = new TextComponent(ChatColor.DARK_PURPLE + hacker.getName() + ChatColor.DARK_GRAY + " tried to " + ChatColor.DARK_PURPLE + hack);
                     /*message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/hd tp " + hacker.getName()));
                     message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Click to teleport to " + hacker.getName()).create()));*/
-                staff.spigot().sendMessage(message);
+                //TODO staff.spigot().sendMessage(message);
             }
         });
 

@@ -1,12 +1,12 @@
 package net.climaxmc.Administration.Listeners;
 
+import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.Rank;
 import net.climaxmc.common.database.CachedPlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
+import org.bukkit.event.*;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class AsyncPlayerChatListener implements Listener {
@@ -16,9 +16,16 @@ public class AsyncPlayerChatListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onAsyncPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
+
+        if (VanishCommand.getVanished().contains(player.getUniqueId())) {
+            event.setCancelled(true);
+            player.sendMessage(ChatColor.RED + "You cannot chat while vanished!");
+            return;
+        }
+
         CachedPlayerData playerData = plugin.getPlayerData(player);
         int kills = playerData.getKills();
         Rank rank = playerData.getRank();

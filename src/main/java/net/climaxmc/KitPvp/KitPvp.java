@@ -58,5 +58,6 @@ public class KitPvp {
         plugin.getCommand("report").setExecutor(new ReportCommand(plugin));
         plugin.getCommand("list").setExecutor(new ListCommand(plugin));
         plugin.getCommand("realname").setExecutor(new RealNameCommand(plugin));
+        plugin.getCommand("baltop").setExecutor(new BalanceTopCommand(plugin));
     }
 }
