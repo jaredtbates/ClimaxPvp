@@ -23,6 +23,8 @@ public class KitManager implements Listener {
     private static List<Kit> kits = new ArrayList<>();
     @Getter
     private static Map<UUID, Kit> playersInKits = new HashMap<>();
+    @Getter
+    private static Map<UUID, Kit> previousKit = new HashMap<>();
 
     public KitManager(ClimaxPvp plugin) {
         // Gray Kits
@@ -83,6 +85,7 @@ public class KitManager implements Listener {
     public final void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
         if (isPlayerInKit(player)) {
+            previousKit.put(player.getUniqueId(), playersInKits.get(player.getUniqueId()));
             playersInKits.remove(player.getUniqueId());
         }
     }
@@ -91,6 +94,7 @@ public class KitManager implements Listener {
     public final void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
         if (isPlayerInKit(player)) {
+            previousKit.put(player.getUniqueId(), playersInKits.get(player.getUniqueId()));
             playersInKits.remove(player.getUniqueId());
         }
     }

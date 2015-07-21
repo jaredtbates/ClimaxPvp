@@ -166,6 +166,10 @@ public class PlayerInteractListener implements Listener {
                 player.openInventory(kitSelectorInventory);
             } else if (item.getType().equals(Material.SEEDS)) {
                 new TrailsInventory(player);
+            } else if (item.getType().equals(Material.REDSTONE)) {
+                if (KitManager.getPreviousKit().containsKey(player.getUniqueId())) {
+                    KitManager.getPreviousKit().get(player.getUniqueId()).wearCheckLevel(player);
+                }
             }
         }
     }

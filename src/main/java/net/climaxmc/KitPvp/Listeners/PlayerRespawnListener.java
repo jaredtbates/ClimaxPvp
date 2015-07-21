@@ -1,6 +1,8 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Kit;
+import net.climaxmc.KitPvp.KitManager;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -45,6 +47,19 @@ public class PlayerRespawnListener implements Listener {
         kitSelectorLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "(Right Click) to select a kit!");
         kitSelectorMeta.setLore(kitSelectorLores);
         kitSelector.setItemMeta(kitSelectorMeta);
+        player.getInventory().setItem(0, kitSelector);
+
+        if (KitManager.getPreviousKit().containsKey(player.getUniqueId())) {
+            Kit kit = KitManager.getPreviousKit().get(player.getUniqueId());
+            ItemStack previousKit = new ItemStack(Material.REDSTONE);
+            ItemMeta previousKitMeta = previousKit.getItemMeta();
+            previousKitMeta.setDisplayName(ChatColor.GREEN + "Previous Kit: " + kit.getColor() + kit.getName());
+            List<String> previousKitLores = new ArrayList<>();
+            previousKitLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "(Right Click) to select your previous kit!");
+            previousKitMeta.setLore(previousKitLores);
+            previousKit.setItemMeta(previousKitMeta);
+            player.getInventory().setItem(1, previousKit);
+        }
 
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta bookMeta = (BookMeta) book.getItemMeta();
@@ -60,6 +75,7 @@ public class PlayerRespawnListener implements Listener {
         pages.add(plugin.getBook().substring(fullPageNumber * 256, plugin.getBook().length() - 1));
         bookMeta.setPages(pages);
         book.setItemMeta(bookMeta);
+        player.getInventory().setItem(7, book);
 
         ItemStack particles = new ItemStack(Material.SEEDS);
         ItemMeta particlesMeta = particles.getItemMeta();
@@ -68,9 +84,6 @@ public class PlayerRespawnListener implements Listener {
         particlesLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "(Right Click) to select a trail!");
         particlesMeta.setLore(particlesLores);
         particles.setItemMeta(particlesMeta);
-
-        player.getInventory().setItem(0, kitSelector);
-        player.getInventory().setItem(7, book);
         player.getInventory().setItem(8, particles);
     }
 }
