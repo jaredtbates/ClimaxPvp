@@ -31,7 +31,7 @@ public class PlayerJoinListener implements Listener {
         plugin.getMySQL().getTemporaryPlayerData().put(player.getUniqueId(), new HashMap<>());
 
         player.setDisplayName(playerData.getNickname());
-        player.setPlayerListName(playerData.getNickname());
+        player.setPlayerListName(playerData.getLevelColor() + player.getName());
 
         if (playerData.hasRank(Rank.OWNER)) {
             if (!player.isOp()) {
