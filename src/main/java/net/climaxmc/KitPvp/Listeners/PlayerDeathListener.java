@@ -4,11 +4,13 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.common.database.CachedPlayerData;
+import net.climaxmc.common.donations.trails.ParticleEffect;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
+import org.bukkit.event.*;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.scheduler.BukkitTask;
 
 public class PlayerDeathListener implements Listener {
     private ClimaxPvp plugin;
@@ -17,10 +19,15 @@ public class PlayerDeathListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerDeath(PlayerDeathEvent event) {
         final Player player = event.getEntity();
         Player killer = player.getKiller();
+
+        final Location location = player.getLocation();
+
+        BukkitTask task = plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, () -> new ParticleEffect(new ParticleEffect.ParticleData(ParticleEffect.ParticleType.LAVA, 1, 2, 1)).sendToLocation(location), 1, 1);
+        plugin.getServer().getScheduler().runTaskLater(plugin, task::cancel, 10);
 
         plugin.getServer().getScheduler().runTask(plugin, () -> {
             plugin.respawn(player);

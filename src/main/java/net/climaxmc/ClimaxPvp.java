@@ -108,7 +108,7 @@ public class ClimaxPvp extends JavaPlugin {
         new Donations(this);
         new Administration(this);
 
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, new UpdateRunnable(this), 200, 200);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new UpdateRunnable(this), 120, 120);
     }
 
     @Override
