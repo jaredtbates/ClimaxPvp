@@ -54,5 +54,7 @@ commands:
   list:
     description: List online players
   vanish:
-    description: Vanish
+    description: Vanish to watch players
     aliases: v
+  check:
+    description: Check a player

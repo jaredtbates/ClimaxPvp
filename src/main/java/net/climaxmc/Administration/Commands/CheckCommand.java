@@ -1,5 +1,6 @@
 package net.climaxmc.Administration.Commands;
 
+import lombok.Getter;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.Rank;
 import net.climaxmc.common.database.CachedPlayerData;
@@ -18,7 +19,8 @@ import java.util.UUID;
 
 public class CheckCommand implements CommandExecutor, Listener {
     private ClimaxPvp plugin;
-    private HashSet<UUID> checking = new HashSet<>();
+    @Getter
+    private static HashSet<UUID> checking = new HashSet<>();
 
     public CheckCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
@@ -42,13 +44,12 @@ public class CheckCommand implements CommandExecutor, Listener {
             player.sendMessage(ChatColor.GREEN + "You are now checking a player.");
             player.setAllowFlight(true);
             player.setFlying(true);
-            player.setFlySpeed(0.3F);
-            player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 2, 2));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false, false));
             checking.add(player.getUniqueId());
         } else {
             player.sendMessage(ChatColor.RED + "You are no longer checking a player.");
             plugin.respawn(player);
-            plugin.getServer().getOnlinePlayers().stream().forEach(target -> target.showPlayer(player));
+            player.removePotionEffect(PotionEffectType.INVISIBILITY);
             checking.remove(player.getUniqueId());
         }
 
@@ -57,7 +58,7 @@ public class CheckCommand implements CommandExecutor, Listener {
 
     @EventHandler
     public void onPlayerHurtEntity(EntityDamageByEntityEvent event) {
-        if (!(event.getEntityType().equals(EntityType.PLAYER) || event.getDamager().getType().equals(EntityType.PLAYER))) {
+        if (!(event.getEntityType().equals(EntityType.PLAYER) && event.getDamager().getType().equals(EntityType.PLAYER))) {
             return;
         }
 
@@ -65,11 +66,7 @@ public class CheckCommand implements CommandExecutor, Listener {
         Player damager = (Player) event.getDamager();
 
         if (checking.contains(damaged.getUniqueId())) {
-            checking.remove(damaged.getUniqueId());
-            damaged.sendMessage(ChatColor.RED + "You are being attacked by " + damager.getName());
-        }
-
-        if (checking.contains(damager.getUniqueId())) {
+            damaged.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "You are being attacked by " + damager.getName() + "!");
             event.setCancelled(true);
         }
     }

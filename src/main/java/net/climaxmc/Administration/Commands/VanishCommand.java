@@ -1,5 +1,6 @@
 package net.climaxmc.Administration.Commands;
 
+import lombok.Getter;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.Rank;
 import net.climaxmc.common.database.CachedPlayerData;
@@ -16,7 +17,8 @@ import java.util.UUID;
 
 public class VanishCommand implements CommandExecutor, Listener {
     private ClimaxPvp plugin;
-    private HashSet<UUID> vanished = new HashSet<>();
+    @Getter
+    private static HashSet<UUID> vanished = new HashSet<>();
 
     public VanishCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
@@ -40,7 +42,7 @@ public class VanishCommand implements CommandExecutor, Listener {
             player.sendMessage(ChatColor.GREEN + "You are now vanished.");
             player.setAllowFlight(true);
             player.setFlying(true);
-            player.setFlySpeed(0.3F);
+            player.setFlySpeed(0.18F);
             plugin.getServer().getOnlinePlayers().stream().forEach(target -> target.hidePlayer(player));
             vanished.add(player.getUniqueId());
         } else {
@@ -63,10 +65,9 @@ public class VanishCommand implements CommandExecutor, Listener {
         Player damager = (Player) event.getDamager();
 
         if (vanished.contains(damaged.getUniqueId())) {
-            vanished.remove(damaged.getUniqueId());
             damaged.sendMessage(ChatColor.RED + "You are being attacked while vanished.");
             damaged.sendMessage(ChatColor.RED + "The only reason why this would occur is if you used /spawn before turning off vanish with /v.");
-            damaged.sendMessage(ChatColor.RED + "You are no longer vanished.");
+            damaged.performCommand("/v");
         }
 
         if (vanished.contains(damager.getUniqueId())) {
