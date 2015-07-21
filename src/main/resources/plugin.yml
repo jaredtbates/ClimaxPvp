@@ -58,3 +58,5 @@ commands:
     aliases: v
   check:
     description: Check a player
+  realname:
+    description: Figure out what a player's real name is

@@ -57,5 +57,6 @@ public class KitPvp {
         plugin.getCommand("soup").setExecutor(new SoupCommand(plugin));
         plugin.getCommand("report").setExecutor(new ReportCommand(plugin));
         plugin.getCommand("list").setExecutor(new ListCommand(plugin));
+        plugin.getCommand("realname").setExecutor(new RealNameCommand(plugin));
     }
 }
