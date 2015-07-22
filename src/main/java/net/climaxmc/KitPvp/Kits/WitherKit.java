@@ -16,7 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class WitherKit extends Kit {
     public WitherKit() {
-        super("Wither", new ItemStack(Material.SKULL_ITEM), "Shoot your WitherBow to Launch your Wither Head!", ChatColor.RED);
+        super("Wither", new ItemStack(Material.SKULL_ITEM, 1, (byte) 1), "Shoot your WitherBow to Launch your Wither Head!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
