@@ -2,12 +2,8 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -82,24 +78,24 @@ public class VikingKit extends Kit {
     }
 
     @EventHandler
-    public void onEntityDamge(EntityDamageByEntityEvent event) {
-    	if(event.getDamager() instanceof Player){
+    public void onEntityDamage(EntityDamageByEntityEvent event) {
+        if (event.isCancelled()) {
+            return;
+        }
+
+    	if (event.getDamager() instanceof Player) {
     		Player player = (Player) event.getDamager();
     		if (KitManager.isPlayerInKit(player, this)) {
-    			if(player.getInventory().getItemInHand().getType() == Material.DIAMOND_AXE){
-    				for (Entity entity : player.getNearbyEntities(3.3, 3.3, 3.3)) {
-    					if (entity instanceof Player) {
-    						if(!(entity == event.getDamager())){
-    							Player players = (Player) entity;
-    							event.setCancelled(true);
-    							players.damage(4);
-    							Vector vector = player.getEyeLocation().getDirection();
-    							vector.multiply(0.5F);
-    							vector.setY(0.2);
-    							players.setVelocity(vector);
-    						}
-    					}
-    				}
+    			if (player.getInventory().getItemInHand().getType() == Material.DIAMOND_AXE) {
+                    player.getNearbyEntities(3.3, 3.3, 3.3).stream().filter(entity -> entity instanceof Player).filter(entity -> !(entity == event.getDamager())).forEach(entity -> {
+                        Player players = (Player) entity;
+                        event.setCancelled(true);
+                        players.damage(4);
+                        Vector vector = player.getEyeLocation().getDirection();
+                        vector.multiply(0.5F);
+                        vector.setY(0.2);
+                        players.setVelocity(vector);
+                    });
                 }
             }
         }

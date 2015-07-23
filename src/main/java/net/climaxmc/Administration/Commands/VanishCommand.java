@@ -63,7 +63,7 @@ public class VanishCommand implements CommandExecutor, Listener {
 
     @EventHandler
     public void onPlayerHurtEntity(EntityDamageByEntityEvent event) {
-        if (!(event.getEntityType().equals(EntityType.PLAYER) || event.getDamager().getType().equals(EntityType.PLAYER))) {
+        if (!(event.getEntityType().equals(EntityType.PLAYER) && event.getDamager().getType().equals(EntityType.PLAYER))) {
             return;
         }
 

@@ -2,11 +2,11 @@ package net.climaxmc.Administration.Listeners;
 
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.*;
+import org.bukkit.event.entity.*;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 public class SpawnProtectListeners implements Listener {
     private ClimaxPvp plugin;
@@ -15,7 +15,7 @@ public class SpawnProtectListeners implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Player && event.getEntity() instanceof Player)) {
             return;
@@ -35,13 +35,65 @@ public class SpawnProtectListeners implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamage(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Player)) {
             return;
         }
 
         Player player = (Player) event.getEntity();
+        Location location = player.getLocation();
+
+        if (location.distance(location.getWorld().getSpawnLocation()) <= 12
+                || location.distance(plugin.getWarpLocation("NoSoup")) <= 7
+                || location.distance(plugin.getWarpLocation("Fair")) <= 4
+                || location.distance(plugin.getWarpLocation("Fps")) <= 3) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onProjectileLaunch(ProjectileLaunchEvent event) {
+        Entity entity = event.getEntity();
+        Location location = entity.getLocation();
+
+        if (location.distance(location.getWorld().getSpawnLocation()) <= 12
+                || location.distance(plugin.getWarpLocation("NoSoup")) <= 7
+                || location.distance(plugin.getWarpLocation("Fair")) <= 4
+                || location.distance(plugin.getWarpLocation("Fps")) <= 3) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onProjectileHit(ProjectileHitEvent event) {
+        Entity entity = event.getEntity();
+        Location location = entity.getLocation();
+
+        if (location.distance(location.getWorld().getSpawnLocation()) <= 12
+                || location.distance(plugin.getWarpLocation("NoSoup")) <= 7
+                || location.distance(plugin.getWarpLocation("Fair")) <= 4
+                || location.distance(plugin.getWarpLocation("Fps")) <= 3) {
+            entity.remove();
+        }
+    }
+
+    @EventHandler
+    public void onEntityExplode(EntityExplodeEvent event) {
+        Entity entity = event.getEntity();
+        Location location = entity.getLocation();
+
+        if (location.distance(location.getWorld().getSpawnLocation()) <= 12
+                || location.distance(plugin.getWarpLocation("NoSoup")) <= 7
+                || location.distance(plugin.getWarpLocation("Fair")) <= 4
+                || location.distance(plugin.getWarpLocation("Fps")) <= 3) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
         Location location = player.getLocation();
 
         if (location.distance(location.getWorld().getSpawnLocation()) <= 12
