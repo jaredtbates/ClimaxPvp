@@ -46,8 +46,13 @@ public class CombatLogListeners implements Listener {
 
     @EventHandler
     public void onPlayerLogout(PlayerQuitEvent event) {
-        if (tagged.contains(event.getPlayer().getUniqueId())) {
-            plugin.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + event.getPlayer().getName() + ChatColor.RED + " has logged out while in combat!");
+        Player player = event.getPlayer();
+
+        if (tagged.contains(player.getUniqueId())) {
+            plugin.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + player.getName() + ChatColor.RED + " has logged out while in combat!");
+            //TODO BAN THE PLAYER
+            tagged.remove(player.getUniqueId());
+            tagTime.remove(player.getUniqueId());
         }
     }
 
