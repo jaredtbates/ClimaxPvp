@@ -42,7 +42,7 @@ public class PlayerJoinListener implements Listener {
 
         int playersOnline = plugin.getServer().getOnlinePlayers().size();
 
-        if (playersOnline >= plugin.getConfig().getInt("HighestPlayerCount")) {
+        if (playersOnline > plugin.getConfig().getInt("HighestPlayerCount")) {
             plugin.getServer().broadcastMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "We have reached a new high player count of " + playersOnline + "!");
             plugin.getConfig().set("HighestPlayerCount", playersOnline);
             plugin.saveConfig();
