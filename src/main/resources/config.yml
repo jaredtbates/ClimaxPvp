@@ -9,3 +9,4 @@ AutoBroadcast:
   Messages:
     - This is an auto broadcast message!
     - This is another auto broadcast message!
+HighestPlayerCount: 0

@@ -68,6 +68,7 @@ public class WitherKit extends Kit {
             }
         }
     }
+
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event){
     	if (event.getEntity() instanceof Player) {

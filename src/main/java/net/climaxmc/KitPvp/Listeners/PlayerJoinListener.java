@@ -39,5 +39,13 @@ public class PlayerJoinListener implements Listener {
                 player.sendMessage(ChatColor.BOLD + "You were opped because you had been previously deopped.");
             }
         }
+
+        int playersOnline = plugin.getServer().getOnlinePlayers().size();
+
+        if (playersOnline >= plugin.getConfig().getInt("HighestPlayerCount")) {
+            plugin.getServer().broadcastMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "We have reached a new high player count of " + playersOnline + "!");
+            plugin.getConfig().set("HighestPlayerCount", playersOnline);
+            plugin.saveConfig();
+        }
     }
 }
