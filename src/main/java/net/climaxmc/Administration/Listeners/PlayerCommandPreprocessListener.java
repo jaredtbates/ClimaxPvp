@@ -13,12 +13,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.permissions.PermissionAttachment;
 
-import java.util.HashMap;
-import java.util.UUID;
-
 public class PlayerCommandPreprocessListener implements Listener {
     private ClimaxPvp plugin;
-    private HashMap<UUID, PermissionAttachment> attachments = new HashMap<>();
 
     public PlayerCommandPreprocessListener(ClimaxPvp plugin) {
         this.plugin = plugin;

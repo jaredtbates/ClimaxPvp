@@ -10,6 +10,10 @@ public class TagOff implements Runnable {
     ClimaxPvp plugin;
 
     public TagOff(ClimaxPvp plugin, Player p, long ticks) {
+        if (plugin == null) {
+            System.out.println("Plugin is null.");
+        }
+
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, this, ticks * 20L);
         this.player = p;
     }

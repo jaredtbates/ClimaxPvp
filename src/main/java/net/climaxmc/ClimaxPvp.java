@@ -36,6 +36,8 @@ public class ClimaxPvp extends JavaPlugin {
     @Getter
     private List<String> help = new ArrayList<>();
     @Getter
+    private List<String> filteredWords = new ArrayList<>();
+    @Getter
     private String book = "";
     // Warps Configuration
     @Getter
@@ -89,6 +91,17 @@ public class ClimaxPvp extends JavaPlugin {
             Files.lines(FileSystems.getDefault().getPath(bookFile.getPath())).forEach(bookLine -> book += "\n" + ChatColor.translateAlternateColorCodes('&', bookLine));
         } catch (IOException e) {
             getLogger().severe("Could not get book!");
+        }
+
+        // Save Filter File
+        File filterFile = new File(getDataFolder(), "filter.txt");
+        if (!filterFile.exists()) {
+            saveResource("filter.txt", false);
+        }
+        try {
+            Files.lines(FileSystems.getDefault().getPath(filterFile.getPath())).forEach(filterLine -> filteredWords.add(ChatColor.translateAlternateColorCodes('&', filterLine)));
+        } catch (IOException e) {
+            getLogger().severe("Could not get filtered words!");
         }
 
         // Connect to MySQL

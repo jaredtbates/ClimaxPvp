@@ -14,6 +14,7 @@ public class Administration {
         plugin.getServer().getPluginManager().registerEvents(new SpawnProtectListeners(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new VanishCommand(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new CheckCommand(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new ChatFilter(plugin), plugin);
 
         // Register commands
         plugin.getCommand("admin").setExecutor(new AdminCommand(plugin));
