@@ -22,13 +22,13 @@ public class SoldierKit extends Kit {
 
     protected void wear(Player player) {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
-        boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
+        boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 5);
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 1, 35);
     }
@@ -39,13 +39,13 @@ public class SoldierKit extends Kit {
         }
     	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
-        boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
+        boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 5);
         player.getInventory().setBoots(boots);
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
         fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
@@ -58,8 +58,8 @@ public class SoldierKit extends Kit {
         if (KitManager.isPlayerInKit(player, this)) {
             if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                    player.setVelocity(new Vector(0, 0.7, 0));
-                    player.damage(2);
+                    player.setVelocity(new Vector(0, 0.5, 0));
+                    player.damage(2.5);
                 }
             }
         }
