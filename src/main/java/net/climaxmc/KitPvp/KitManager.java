@@ -42,8 +42,8 @@ public class KitManager implements Listener {
         kits.add(new PrecisionKit());
 
         // Green Kits
-        kits.add(new IronGolemKit());
         kits.add(new ThorKit());
+        kits.add(new AnvilKit());
         kits.add(new AnchorKit());
         kits.add(new GhastKit());
         kits.add(new ChemistKit());
@@ -53,14 +53,14 @@ public class KitManager implements Listener {
         kits.add(new WitherKit());
         kits.add(new RageKit());
         kits.add(new ViperKit());
-        kits.add(new KangarooKit());
+        kits.add(new IronGolemKit());
 
         // Gold Kits
         kits.add(new RangerKit());
         kits.add(new AssassinKit());
         kits.add(new VikingKit());
         //kits.add(new LazerKit());
-        kits.add(new AnvilKit());
+        kits.add(new KangarooKit());
 
         for (Kit kit : kits) {
             plugin.getServer().getPluginManager().registerEvents(kit, plugin);

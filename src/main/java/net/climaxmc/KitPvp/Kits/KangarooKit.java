@@ -3,14 +3,13 @@ package net.climaxmc.KitPvp.Kits;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 
-import org.bukkit.*;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
+import org.bukkit.ChatColor;
+import org.bukkit.Color;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -19,11 +18,8 @@ import org.bukkit.potion.PotionEffectType;
 
 public class KangarooKit extends Kit {
 
-    public boolean canGoForwards = false;
-    public boolean canGoUp = false;
-
     public KangarooKit() {
-        super("Kangaroo", new ItemStack(Material.FIREWORK), "Use your Firework to Jump High! (Shift for higher)", ChatColor.RED);
+        super("Kangaroo", new ItemStack(Material.FIREWORK), "Use your Firework to Jump High! (Shift for higher)", ChatColor.GOLD);
     }
 
     protected void wear(Player player) {
@@ -32,7 +28,7 @@ public class KangarooKit extends Kit {
         player.getInventory().addItem(sword);
         player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chestplate.getItemMeta();
         chestmeta.setColor(Color.RED);
         chestplate.setItemMeta(chestmeta);
@@ -87,16 +83,6 @@ public class KangarooKit extends Kit {
         fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(fishingRod);
     }
-    
-    @EventHandler
-    public void onMove(PlayerMoveEvent event){
-    	Player player = event.getPlayer();
-    	Block b = player.getLocation().getBlock();
-    	if (b.getType() == Material.AIR || b.getRelative(BlockFace.DOWN).getType() == Material.AIR) {
-    		canGoForwards = true;
-        	canGoUp = true;
-    	}
-    }
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
@@ -106,14 +92,9 @@ public class KangarooKit extends Kit {
         }
         if (player.getItemInHand().getType() == Material.FIREWORK) {
             event.setCancelled(true);
-            if (player.isSneaking() && canGoForwards) {
-                player.setVelocity(player.getEyeLocation().getDirection().multiply(1.5).setY(0.5));
-                canGoForwards = false;
-            }
-
-            if (!player.isSneaking() && canGoUp) {
-            	player.setVelocity(player.getVelocity().setY(1));
-            	canGoUp = false;
+            player.setVelocity(player.getEyeLocation().getDirection().multiply(1.4).setY(0.5));
+            if (!player.isSneaking()) {
+                player.setVelocity(player.getEyeLocation().getDirection().multiply(1.8).setY(0.7));
             }
         }
     }

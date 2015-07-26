@@ -17,7 +17,7 @@ import org.bukkit.util.Vector;
 
 public class IronGolemKit extends Kit {
     public IronGolemKit() {
-        super("Iron Golem", new ItemStack(Material.RED_ROSE), "Punch people with your Rose to launch them in the air!", ChatColor.GREEN);
+        super("Iron Golem", new ItemStack(Material.RED_ROSE), "Punch people with your Rose to launch them in the air!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
@@ -27,10 +27,10 @@ public class IronGolemKit extends Kit {
         player.getInventory().addItem(sword);
         player.getInventory().addItem(new ItemStack(Material.RED_ROSE));
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setChestplate(chestplate);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS);
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         player.getInventory().setBoots(boots);
@@ -48,10 +48,10 @@ public class IronGolemKit extends Kit {
         player.getInventory().addItem(sword);
         player.getInventory().addItem(new ItemStack(Material.RED_ROSE));
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setChestplate(chestplate);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS);
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         player.getInventory().setBoots(boots);
@@ -73,7 +73,7 @@ public class IronGolemKit extends Kit {
                 if (KitManager.isPlayerInKit(player, this)) {
                     if (player.getItemInHand().getType().equals(Material.RED_ROSE)) {
                         event.setCancelled(true);
-                        target.setVelocity(new Vector(0, 1.3, 0));
+                        target.setVelocity(new Vector(0, 1.2, 0));
                     }
                 }
             }

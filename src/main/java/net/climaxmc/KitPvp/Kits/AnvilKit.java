@@ -15,7 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class AnvilKit extends Kit {
     public AnvilKit() {
-        super("Anvil", new ItemStack(Material.ANVIL), "Drop to the ground like an anvil and deal damage to those around you!", ChatColor.GOLD);
+        super("Anvil", new ItemStack(Material.ANVIL), "Drop to the ground like an anvil and deal damage to nearby players!", ChatColor.GREEN);
     }
 
     protected void wear(Player player) {
