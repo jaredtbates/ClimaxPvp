@@ -9,6 +9,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
@@ -84,5 +85,23 @@ public class WitherKit extends Kit {
                 target.setVelocity(vector);
     		}
     	}
+    }
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPvp(EntityDamageByEntityEvent event) {
+        if (event.isCancelled()) {
+            return;
+        }
+
+        if (event.getDamager() instanceof Player) {
+            Player player = (Player) event.getDamager();
+            if (event.getEntity() instanceof Player) {
+                Player damaged = (Player) event.getEntity();
+                if (KitManager.isPlayerInKit(player, this)) {
+                    if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
+                        damaged.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 60, 1));
+                    }
+                }
+            }
+        }
     }
 }
