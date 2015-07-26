@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -13,6 +14,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 public class WitherKit extends Kit {
     public WitherKit() {
@@ -76,6 +78,10 @@ public class WitherKit extends Kit {
     		if (event.getDamager() instanceof WitherSkull) {
     			event.setCancelled(true);
     			target.damage(5);
+    			Vector vector = target.getEyeLocation().getDirection();
+                vector.multiply(0.4F);
+                vector.setY(0.15);
+                target.setVelocity(vector);
     		}
     	}
     }

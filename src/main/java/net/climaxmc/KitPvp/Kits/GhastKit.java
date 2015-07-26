@@ -89,7 +89,7 @@ public class GhastKit extends Kit {
                     Fireball f = event.getPlayer().launchProjectile(Fireball.class);
                     player.getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 1);
                     f.setIsIncendiary(false);
-                    player.setVelocity(player.getEyeLocation().getDirection().setY(0.7));
+                    player.setVelocity(player.getVelocity().setY(0.4));
                 }
             }
         }
@@ -97,13 +97,15 @@ public class GhastKit extends Kit {
 
     @EventHandler
     public void onEntityDamge(EntityDamageByEntityEvent event) {
-    	Player target = (Player) event.getEntity();
-        if (event.getDamager() instanceof Fireball) {
-            Fireball f = (Fireball) event.getDamager();
-            if (f.getShooter() instanceof Player) {
-                event.setDamage(20.0);
-                target.setVelocity(target.getEyeLocation().getDirection().setY(1.0));
+    	if(event.getEntity() instanceof Player){
+    		Player target = (Player) event.getEntity();
+    		if (event.getDamager() instanceof Fireball) {
+                Fireball f = (Fireball) event.getDamager();
+                if (f.getShooter() instanceof Player) {
+                    event.setDamage(20.0);
+                    target.setVelocity(target.getVelocity().setY(1.0));
+                }
             }
-        }
+    	}
     }
 }
