@@ -1,12 +1,17 @@
 package net.climaxmc.KitPvp.Kits;
 
+import java.util.concurrent.TimeUnit;
+
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.Ability;
 
-import org.bukkit.*;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Fireball;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -15,9 +20,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
-
-import java.util.concurrent.TimeUnit;
 
 public class GhastKit extends Kit {
     private Ability fireball = new Ability(1, 2, TimeUnit.SECONDS);
@@ -87,10 +89,7 @@ public class GhastKit extends Kit {
                     Fireball f = event.getPlayer().launchProjectile(Fireball.class);
                     player.getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 1);
                     f.setIsIncendiary(false);
-                    double vel = f.getVelocity().length() * (0.2D + 0.2D * 20);
-                    // Knock player back
-                    velocity(player, player.getLocation().getDirection().multiply(-1), vel,
-                            false, 0.0D, 0.2D, 0.8D, true);
+                    player.setVelocity(player.getEyeLocation().getDirection().setY(0.7));
                 }
             }
         }
@@ -98,37 +97,13 @@ public class GhastKit extends Kit {
 
     @EventHandler
     public void onEntityDamge(EntityDamageByEntityEvent event) {
+    	Player target = (Player) event.getEntity();
         if (event.getDamager() instanceof Fireball) {
             Fireball f = (Fireball) event.getDamager();
             if (f.getShooter() instanceof Player) {
                 event.setDamage(20.0);
+                target.setVelocity(target.getEyeLocation().getDirection().setY(1.0));
             }
         }
-    }
-
-    private void velocity(Entity ent, Vector vec, double str, boolean ySet, double yBase, double yAdd, double yMax, boolean groundBoost) {
-        if ((Double.isNaN(vec.getX())) || (Double.isNaN(vec.getY())) || (Double.isNaN(vec.getZ())) || (vec.length() == 0.0D)) {
-            return;
-        }
-
-        if (ySet) {
-            vec.setY(yBase);
-        }
-
-        vec.normalize();
-        vec.multiply(str);
-
-        vec.setY(vec.getY() + yAdd);
-
-        if (vec.getY() > yMax) {
-            vec.setY(yMax);
-        }
-
-        if (groundBoost) {
-            vec.setY(vec.getY() + 0.2D);
-        }
-
-        ent.setFallDistance(0.0F);
-        ent.setVelocity(vec);
     }
 }
