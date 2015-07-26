@@ -93,6 +93,10 @@ public class KangarooKit extends Kit {
         if (!KitManager.isPlayerInKit(player, this)) {
             return;
         }
+        if(!(player.getInventory().getItemInHand().getType() == Material.FIREWORK)){
+        	return;
+        }
+        event.setCancelled(true);
         Block b = player.getLocation().getBlock();
         if (b.getType() != Material.AIR || b.getRelative(BlockFace.DOWN).getType() != Material.AIR) {
             if(!(player.isSneaking())){
