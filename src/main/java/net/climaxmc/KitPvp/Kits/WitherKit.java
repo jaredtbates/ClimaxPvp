@@ -80,8 +80,8 @@ public class WitherKit extends Kit {
     			event.setCancelled(true);
     			target.damage(5);
     			Vector vector = target.getEyeLocation().getDirection();
-                vector.multiply(0.4F);
-                vector.setY(0.15);
+                vector.multiply(-0.5F);
+                vector.setY(-0.2);
                 target.setVelocity(vector);
     		}
     	}
