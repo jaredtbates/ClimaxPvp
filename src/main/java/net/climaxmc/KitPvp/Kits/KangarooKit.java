@@ -102,14 +102,14 @@ public class KangarooKit extends Kit {
             if(!(player.isSneaking())){
                 player.setFallDistance(-(4F + 1));
                 Vector vector = player.getEyeLocation().getDirection();
-                vector.multiply(1.2F);
+                vector.multiply(1.1F);
                 vector.setY(0.6);
                 player.setVelocity(vector);
                 } else {
                     player.setFallDistance(-(4F + 1));
                     Vector vector = player.getEyeLocation().getDirection();
-                    vector.multiply(1.6F);
-                    vector.setY(0.7);
+                    vector.multiply(1.5F);
+                    vector.setY(0.5);
                     player.setVelocity(vector);
                 }
         }
