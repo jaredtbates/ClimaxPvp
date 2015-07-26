@@ -78,7 +78,7 @@ public class WitherKit extends Kit {
     		Player target = (Player) event.getEntity();
     		if (event.getDamager() instanceof WitherSkull) {
     			event.setCancelled(true);
-    			target.damage(5);
+    			target.damage(6);
     			Vector vector = target.getEyeLocation().getDirection();
                 vector.multiply(-0.5F);
                 vector.setY(-0.2);
@@ -98,7 +98,7 @@ public class WitherKit extends Kit {
                 Player damaged = (Player) event.getEntity();
                 if (KitManager.isPlayerInKit(player, this)) {
                     if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
-                        damaged.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 60, 1));
+                        damaged.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 80, 1));
                     }
                 }
             }
