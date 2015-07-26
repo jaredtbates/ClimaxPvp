@@ -6,6 +6,8 @@ import net.climaxmc.KitPvp.KitManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,6 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 public class KangarooKit extends Kit {
 
@@ -90,12 +93,21 @@ public class KangarooKit extends Kit {
         if (!KitManager.isPlayerInKit(player, this)) {
             return;
         }
-        if (player.getItemInHand().getType() == Material.FIREWORK) {
-            event.setCancelled(true);
-            player.setVelocity(player.getEyeLocation().getDirection().multiply(1.4).setY(0.5));
-            if (!player.isSneaking()) {
-                player.setVelocity(player.getEyeLocation().getDirection().multiply(1.8).setY(0.7));
-            }
+        Block b = player.getLocation().getBlock();
+        if (b.getType() != Material.AIR || b.getRelative(BlockFace.DOWN).getType() != Material.AIR) {
+            if(!(player.isSneaking())){
+                player.setFallDistance(-(4F + 1));
+                Vector vector = player.getEyeLocation().getDirection();
+                vector.multiply(1.5F);
+                vector.setY(0.5);
+                player.setVelocity(vector);
+                } else {
+                    player.setFallDistance(-(4F + 1));
+                    Vector vector = player.getEyeLocation().getDirection();
+                    vector.multiply(1.7F);
+                    vector.setY(0.7);
+                    player.setVelocity(vector);
+                }
         }
     }
 }
