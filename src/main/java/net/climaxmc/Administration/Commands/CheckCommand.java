@@ -47,6 +47,7 @@ public class CheckCommand implements CommandExecutor, Listener {
             player.setFlying(true);
             player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false, false));
             player.getInventory().clear();
+            player.getInventory().setArmorContents(null);
             checking.add(player.getUniqueId());
         } else {
             player.sendMessage(ChatColor.RED + "You are no longer checking a player.");
