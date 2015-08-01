@@ -6,13 +6,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class TagOff implements Runnable {
-    Player player;
-    ClimaxPvp plugin;
+    private Player player;
+    private ClimaxPvp plugin;
 
     public TagOff(ClimaxPvp plugin, Player p, long ticks) {
-        if (plugin == null) {
-            System.out.println("Plugin is null.");
-        }
+        this.plugin = plugin;
 
         plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, this, ticks * 20L);
         this.player = p;
