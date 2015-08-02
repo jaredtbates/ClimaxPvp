@@ -19,7 +19,9 @@
 package net.climaxmc.Administration.Utils;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.common.database.CachedPlayerData;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -169,8 +171,13 @@ public class VoteReceiver extends Thread {
                 // the main server thread, not this one.
                 plugin.getServer().getScheduler()
                         .scheduleSyncDelayedTask(plugin, () -> {
-                            plugin.getServer().broadcastMessage(ChatColor.GREEN + vote.getUsername() + " has voted for " + ChatColor.GOLD + "Climax" + ChatColor.RED + "MC" + ChatColor.GREEN + "!");
-                            //TODO Add any applicable code
+                            plugin.getServer().broadcastMessage(ChatColor.GREEN + vote.getUsername() + " has voted for " + ChatColor.GOLD + "Climax" + ChatColor.RED + "MC" + ChatColor.GREEN + "!\nVote every day for rewards!");
+                            Player player = plugin.getServer().getPlayer(username);
+                            if (player != null) {
+                                CachedPlayerData playerData = plugin.getPlayerData(player);
+                                playerData.depositBalance(100);
+                                player.sendMessage(ChatColor.GREEN + "You have been given $100 for voting! Vote every day for additional rewards!");
+                            }
                         });
 
                 // Clean up.
