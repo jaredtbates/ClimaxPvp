@@ -49,6 +49,8 @@ public class ClimaxPvp extends JavaPlugin {
     @Getter
     private HashMap<UUID, UUID> messagers = new HashMap<>();
 
+    private Donations donations;
+
     @Override
     public void onEnable() {
         // Initialize Instance
@@ -118,7 +120,7 @@ public class ClimaxPvp extends JavaPlugin {
 
         // Load Modules
         new KitPvp(this);
-        new Donations(this);
+        donations = new Donations(this);
         new Administration(this);
 
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new UpdateRunnable(this), 120, 120);
@@ -127,6 +129,10 @@ public class ClimaxPvp extends JavaPlugin {
     @Override
     public void onDisable() {
         getServer().getOnlinePlayers().forEach(player -> savePlayerData(getPlayerData(player)));
+
+        if (donations.getVoteReceiver() != null) {
+            donations.getVoteReceiver().shutdown();
+        }
 
         // Close MySQL Connection
         if (mySQL.getConnection() != null) {

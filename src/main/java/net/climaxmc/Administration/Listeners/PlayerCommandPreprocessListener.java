@@ -31,15 +31,18 @@ public class PlayerCommandPreprocessListener implements Listener {
             return;
         }
 
+        PermissionAttachment attachment = player.addAttachment(plugin);
+
         if (VanishCommand.getVanished().contains(player.getUniqueId()) || CheckCommand.getChecking().contains(player.getUniqueId())) {
             if (playerData.hasRank(Rank.MODERATOR)) {
-                PermissionAttachment attachment = player.addAttachment(plugin);
                 attachment.setPermission("bukkit.command.teleport", true);
                 attachment.setPermission("minecraft.command.tp", true);
-
-                plugin.getServer().getScheduler().runTaskLater(plugin, attachment::remove, 1);
             }
         }
+
+        attachment.setPermission("bukkit.command.tps", true);
+
+        plugin.getServer().getScheduler().runTaskLater(plugin, attachment::remove, 1);
 
         plugin.getServer().getOnlinePlayers().stream().filter(players -> plugin.getPlayerData(players).hasRank(Rank.HELPER)).forEach(players -> players.sendMessage(ChatColor.DARK_GRAY + player.getName() + ": " + ChatColor.GRAY + command));
     }
