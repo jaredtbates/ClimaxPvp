@@ -27,7 +27,7 @@ public class TagOff implements Runnable {
                 CombatLogListeners.tagTime.remove(player.getUniqueId());
             } else {
                 long time = System.currentTimeMillis() / 1000L - CombatLogListeners.tagTime.get(player.getUniqueId()) / 1000L;
-                new TagOff(plugin, player, time);
+                //new TagOff(plugin, player, time);
             }
         }
     }
