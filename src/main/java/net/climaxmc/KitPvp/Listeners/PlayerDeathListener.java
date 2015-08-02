@@ -53,8 +53,18 @@ public class PlayerDeathListener implements Listener {
 
         if (plugin.getServer().getOnlinePlayers().size() >= 15) {
             event.setDeathMessage(null);
+            if(((int) killer.getHealth() & 1) == 0) {
+                player.sendMessage(ChatColor.RED + killer.getName() + ChatColor.YELLOW + " had " + ChatColor.RED + (killer.getHealth() - 10) + " hearts" + ChatColor.YELLOW + " left");
+            } else {
+                player.sendMessage(ChatColor.RED + killer.getName() + ChatColor.YELLOW + " had " + ChatColor.RED + (killer.getHealth() - 11) + " 1/2 hearts" + ChatColor.YELLOW + " left");
+            }
         } else {
             event.setDeathMessage(ChatColor.RED + player.getName() + ChatColor.GRAY + " was killed by " + ChatColor.GREEN + killer.getName());
+            if(((int) killer.getHealth() & 1) == 0) {
+                player.sendMessage(ChatColor.RED + killer.getName() + ChatColor.YELLOW + " had " + ChatColor.RED + (killer.getHealth() - 10) + " hearts" + ChatColor.YELLOW + " left");
+            } else {
+                player.sendMessage(ChatColor.RED + killer.getName() + ChatColor.YELLOW + " had " + ChatColor.RED + (killer.getHealth() - 11) + " 1/2 hearts" + ChatColor.YELLOW + " left");
+            }
         }
 
         if (killer.getUniqueId().equals(player.getUniqueId())) {
