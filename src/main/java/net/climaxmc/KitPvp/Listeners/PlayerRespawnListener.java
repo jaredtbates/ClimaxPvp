@@ -3,10 +3,14 @@ package net.climaxmc.KitPvp.Listeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-import org.bukkit.*;
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
@@ -23,6 +27,14 @@ public class PlayerRespawnListener implements Listener {
         this.plugin = plugin;
     }
 
+
+    @EventHandler
+    public void onPlayerRegainHealth(EntityRegainHealthEvent event) {
+        if (event.getRegainReason() == RegainReason.SATIATED)
+            event.setCancelled(true);
+    }
+
+
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
@@ -33,7 +45,7 @@ public class PlayerRespawnListener implements Listener {
         player.getInventory().setArmorContents(null);
         player.setHealth(20F);
         player.setMaxHealth(20F);
-        player.setFoodLevel(17);
+        player.setFoodLevel(20);
         player.setFlying(false);
         player.setAllowFlight(false);
         player.setFlySpeed(0.1F);
@@ -70,7 +82,7 @@ public class PlayerRespawnListener implements Listener {
 
         int fullPageNumber = plugin.getBook().length() / 256;
         List<String> pages = new ArrayList<>();
-        for (int i = 0; i < fullPageNumber; i++){
+        for (int i = 0; i < fullPageNumber; i++) {
             pages.add(plugin.getBook().substring(256 * i, 255 * (i + 1)));
         }
         pages.add(plugin.getBook().substring(fullPageNumber * 256, plugin.getBook().length() - 1));
@@ -86,5 +98,15 @@ public class PlayerRespawnListener implements Listener {
         particlesMeta.setLore(particlesLores);
         particles.setItemMeta(particlesMeta);
         player.getInventory().setItem(8, particles);
+
+        ItemStack challenges = new ItemStack(Material.DIAMOND);
+        ItemMeta challengesItemMeta = challenges.getItemMeta();
+        challengesItemMeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenges" + ChatColor.GRAY + " [Right Click]");
+        List<String> challengesLore = new ArrayList<>();
+        challengesLore.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "View your challenges, start new");
+        challengesLore.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "ones, and receive rewards!");
+        challengesItemMeta.setLore(challengesLore);
+        challenges.setItemMeta(challengesItemMeta);
+        player.getInventory().setItem(4, challenges);
     }
 }

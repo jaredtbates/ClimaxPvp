@@ -15,7 +15,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class PlayerInteractListener implements Listener {
     private ClimaxPvp plugin;
@@ -170,6 +172,78 @@ public class PlayerInteractListener implements Listener {
                 if (KitManager.getPreviousKit().containsKey(player.getUniqueId())) {
                     KitManager.getPreviousKit().get(player.getUniqueId()).wearCheckLevel(player);
                 }
+            }
+
+            if(item.getType().equals(Material.DIAMOND)) {
+                player.sendMessage(ChatColor.RED + "Challenges are not finished yet!");
+
+                Inventory challengesInventory = Bukkit.createInventory(null, 27, "Challenges");
+
+                ItemStack c1 = new ItemStack(Material.MAP, 1);
+                {
+                    ItemMeta im = c1.getItemMeta();
+                    im.setDisplayName("Daily Challenge #1");
+                    List<String> c1lore = new ArrayList<String>();
+                    c1lore.add(ChatColor.RED + "Kill 20 players");
+                    c1lore.add("");
+                    c1lore.add(ChatColor.AQUA + "Ready to Start!");
+                    im.setLore(c1lore);
+                    c1.setItemMeta(im);
+                }
+
+                ItemStack c2 = new ItemStack(Material.MAP, 1);
+                {
+                    ItemMeta im = c1.getItemMeta();
+                    im.setDisplayName("Daily Challenge #2");
+                    List<String> c1lore = new ArrayList<String>();
+                    c1lore.add(ChatColor.RED + "Kill 75 players");
+                    c1lore.add("");
+                    c1lore.add(ChatColor.AQUA + "Ready to Start!");
+                    im.setLore(c1lore);
+                    c1.setItemMeta(im);
+                }
+
+                ItemStack c3 = new ItemStack(Material.MAP, 1);
+                {
+                    ItemMeta im = c1.getItemMeta();
+                    im.setDisplayName("Daily Challenge #3");
+                    List<String> c1lore = new ArrayList<String>();
+                    c1lore.add(ChatColor.RED + "Kill 150 players");
+                    c1lore.add("");
+                    c1lore.add(ChatColor.AQUA + "Ready to Start!");
+                    im.setLore(c1lore);
+                    c1.setItemMeta(im);
+                }
+
+                ItemStack c4 = new ItemStack(Material.MAP, 1);
+                {
+                    ItemMeta im = c1.getItemMeta();
+                    im.setDisplayName("Daily Challenge #4");
+                    List<String> c1lore = new ArrayList<String>();
+                    c1lore.add(ChatColor.RED + "Kill 200 players");
+                    c1lore.add("");
+                    c1lore.add(ChatColor.AQUA + "Ready to Start!");
+                    im.setLore(c1lore);
+                    c1.setItemMeta(im);
+                }
+
+                ItemStack c5 = new ItemStack(Material.MAP, 1);
+                {
+                    ItemMeta im = c1.getItemMeta();
+                    im.setDisplayName("Weekly Challenge #1");
+                    List<String> c1lore = new ArrayList<String>();
+                    c1lore.add(ChatColor.RED + "Kill 1000 players");
+                    c1lore.add("");
+                    c1lore.add(ChatColor.AQUA + "Ready to Start!");
+                    im.setLore(c1lore);
+                    c1.setItemMeta(im);
+                }
+
+                //challengesInventory.setItem(11, c1);
+                //challengesInventory.setItem(11, c2);
+                //challengesInventory.setItem(11, c3);
+                //challengesInventory.setItem(11, c4);
+                //challengesInventory.setItem(11, c5);
             }
         }
     }
