@@ -43,8 +43,8 @@ public class PlayerRespawnListener implements Listener {
         player.setGameMode(GameMode.SURVIVAL);
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
-        player.setHealth(20F);
-        player.setMaxHealth(20F);
+        player.setHealth(17);
+        player.setMaxHealth(20);
         player.setFoodLevel(20);
         player.setFlying(false);
         player.setAllowFlight(false);
