@@ -39,7 +39,7 @@ public class CombatLogListeners implements Listener {
                                 tagged.remove(damaged.getUniqueId());
                                 damaged.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
                             }
-                        }.runTaskLater(plugin, 40).getTaskId());
+                        }.runTaskLater(plugin, 240).getTaskId());
             } else {
                 plugin.getServer().getScheduler().cancelTask(tagged.get(damaged.getUniqueId()));
                 tagged.put(damaged.getUniqueId(),
@@ -48,7 +48,7 @@ public class CombatLogListeners implements Listener {
                                 tagged.remove(damaged.getUniqueId());
                                 damaged.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
                             }
-                        }.runTaskLater(plugin, 40).getTaskId());
+                        }.runTaskLater(plugin, 240).getTaskId());
             }
 
             if (!tagged.containsKey(damager.getUniqueId())) {
@@ -59,7 +59,7 @@ public class CombatLogListeners implements Listener {
                                 tagged.remove(damager.getUniqueId());
                                 damager.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
                             }
-                        }.runTaskLater(plugin, 40).getTaskId());
+                        }.runTaskLater(plugin, 240).getTaskId());
             } else {
                 plugin.getServer().getScheduler().cancelTask(tagged.get(damager.getUniqueId()));
                 tagged.put(damager.getUniqueId(),
@@ -68,7 +68,7 @@ public class CombatLogListeners implements Listener {
                                 tagged.remove(damager.getUniqueId());
                                 damager.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
                             }
-                        }.runTaskLater(plugin, 40).getTaskId());
+                        }.runTaskLater(plugin, 240).getTaskId());
             }
         }
     }
