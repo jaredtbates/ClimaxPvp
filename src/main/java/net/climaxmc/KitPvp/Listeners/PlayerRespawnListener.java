@@ -43,9 +43,9 @@ public class PlayerRespawnListener implements Listener {
         player.setGameMode(GameMode.SURVIVAL);
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
-        player.setHealth(17);
-        player.setMaxHealth(20);
-        player.setFoodLevel(20);
+        player.setHealth(20F);
+        player.setMaxHealth(20F);
+        player.setFoodLevel(17);
         player.setFlying(false);
         player.setAllowFlight(false);
         player.setFlySpeed(0.1F);
@@ -57,7 +57,8 @@ public class PlayerRespawnListener implements Listener {
         ItemMeta kitSelectorMeta = kitSelector.getItemMeta();
         kitSelectorMeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "Kit Selector");
         List<String> kitSelectorLores = new ArrayList<>();
-        kitSelectorLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "(Right Click) to select a kit!");
+        kitSelectorLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Select from a variety");
+        kitSelectorLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "of different kits!");
         kitSelectorMeta.setLore(kitSelectorLores);
         kitSelector.setItemMeta(kitSelectorMeta);
         player.getInventory().setItem(0, kitSelector);
@@ -68,7 +69,7 @@ public class PlayerRespawnListener implements Listener {
             ItemMeta previousKitMeta = previousKit.getItemMeta();
             previousKitMeta.setDisplayName(ChatColor.GREEN + "Previous Kit: " + kit.getColor() + kit.getName());
             List<String> previousKitLores = new ArrayList<>();
-            previousKitLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "(Right Click) to select your previous kit!");
+            previousKitLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Equip your previous kit.");
             previousKitMeta.setLore(previousKitLores);
             previousKit.setItemMeta(previousKitMeta);
             player.getInventory().setItem(1, previousKit);
@@ -94,17 +95,17 @@ public class PlayerRespawnListener implements Listener {
         ItemMeta particlesMeta = particles.getItemMeta();
         particlesMeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "Trail Selector");
         List<String> particlesLores = new ArrayList<>();
-        particlesLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "(Right Click) to select a trail!");
+        particlesLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Select a cool looking trail!");
         particlesMeta.setLore(particlesLores);
         particles.setItemMeta(particlesMeta);
         player.getInventory().setItem(8, particles);
 
         ItemStack challenges = new ItemStack(Material.DIAMOND);
         ItemMeta challengesItemMeta = challenges.getItemMeta();
-        challengesItemMeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenges" + ChatColor.GRAY + " [Right Click]");
+        challengesItemMeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenges");
         List<String> challengesLore = new ArrayList<>();
-        challengesLore.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "View your challenges, start new");
-        challengesLore.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "ones, and receive rewards!");
+        challengesLore.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "View your challenges,");
+        challengesLore.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "start new ones, and receive rewards!");
         challengesItemMeta.setLore(challengesLore);
         challenges.setItemMeta(challengesItemMeta);
         player.getInventory().setItem(4, challenges);

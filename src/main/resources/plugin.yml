@@ -65,3 +65,6 @@ commands:
   youtube:
     description: Enables YouTube/Twitch access to all kits
     aliases: twitch
+  clearchat:
+      description: Clears the chat using spaces
+      aliases: [cchat, cc]

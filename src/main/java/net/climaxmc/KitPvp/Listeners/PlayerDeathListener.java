@@ -3,6 +3,8 @@ package net.climaxmc.KitPvp.Listeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
+import net.climaxmc.KitPvp.Utils.Challenges;
+import net.climaxmc.KitPvp.Utils.ChallengesFiles;
 import net.climaxmc.common.database.CachedPlayerData;
 import net.climaxmc.common.donations.trails.ParticleEffect;
 import org.bukkit.ChatColor;
@@ -60,7 +62,7 @@ public class PlayerDeathListener implements Listener {
         if (killer.getHealth() % 2 == 0) {
             player.sendMessage(ChatColor.RED + killer.getName() + ChatColor.YELLOW + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + " hearts" + ChatColor.YELLOW + " left");
         } else {
-            player.sendMessage(ChatColor.RED + killer.getName() + ChatColor.YELLOW + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + " 1/2 hearts" + ChatColor.YELLOW + " left");
+            player.sendMessage(ChatColor.RED + killer.getName() + ChatColor.YELLOW + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + ".5 hearts" + ChatColor.YELLOW + " left");
         }
 
         if (killer.getUniqueId().equals(player.getUniqueId())) {
@@ -69,6 +71,15 @@ public class PlayerDeathListener implements Listener {
 
         CachedPlayerData killerData = plugin.getPlayerData(killer);
         killerData.addKills(1);
+        ChallengesFiles challengesFiles = new ChallengesFiles();
+        for(Challenges challenge : Challenges.values())
+        if(challengesFiles.challengeIsStarted(killer, challenge) == true) {
+            challengesFiles.addChallengeKill(killer, challenge);
+            if(challengesFiles.getChallengeKills(killer, challenge) >= challenge.getKillreq()) {
+                player.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenge Complete: " + ChatColor.AQUA + challenge.getName());
+                challengesFiles.setCompleted(killer, challenge);
+            }
+        }
 
         if (killer.getLocation().distance(plugin.getWarpLocation("NoSoup")) <= 100) {
             killer.setHealth(20);
