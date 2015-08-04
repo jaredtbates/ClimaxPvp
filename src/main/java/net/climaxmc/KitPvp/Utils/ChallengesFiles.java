@@ -1,7 +1,6 @@
 package net.climaxmc.KitPvp.Utils;
 
-import org.bukkit.Location;
-import org.bukkit.World;
+import net.climaxmc.ClimaxPvp;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -15,7 +14,7 @@ public class ChallengesFiles {
     private FileConfiguration config;
 
     public ChallengesFiles() {
-        this.file = new File("challenges.yml");
+        this.file = new File(ClimaxPvp.getInstance().getDataFolder() + File.separator + "challenges.yml");
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -58,14 +57,14 @@ public class ChallengesFiles {
      * @return Start time
      */
     public int getStartTime(Player p, Challenges challenge) {
-        if(get(p.getUniqueId() + "." + challenge + ".StartTime") == null) {
+        if (get(p.getUniqueId() + "." + challenge + ".StartTime") == null) {
             set(p.getUniqueId() + "." + challenge + ".StartTime", 0);
         }
         return (int) get(p.getUniqueId() + "." + challenge + ".StartTime");
     }
 
     public int getChallengeKills(Player p, Challenges challenge) {
-        if(get(p.getUniqueId() + "." + challenge + ".Kills") == null) {
+        if (get(p.getUniqueId() + "." + challenge + ".Kills") == null) {
             set(p.getUniqueId() + "." + challenge + ".Kills", 0);
         }
         return (int) get(p.getUniqueId() + "." + challenge + ".Kills");
@@ -76,14 +75,14 @@ public class ChallengesFiles {
     }
 
     public boolean challengeIsStarted(Player p, Challenges challenge) {
-        if(get(p.getUniqueId() + "." + challenge + ".Started") == null) {
+        if (get(p.getUniqueId() + "." + challenge + ".Started") == null) {
             set(p.getUniqueId() + "." + challenge + ".Started", false);
         }
         return (boolean) get(p.getUniqueId() + "." + challenge + ".Started");
     }
 
     public boolean challengeIsCompleted(Player p, Challenges challenge) {
-        if(get(p.getUniqueId() + "." + challenge + ".Completed") == null) {
+        if (get(p.getUniqueId() + "." + challenge + ".Completed") == null) {
             set(p.getUniqueId() + "." + challenge + ".Completed", false);
         }
         return (boolean) get(p.getUniqueId() + "." + challenge + ".Completed");
