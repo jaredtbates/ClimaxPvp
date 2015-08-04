@@ -66,6 +66,7 @@ public class ChallengesMenu implements Listener {
                             .lore(ChatColor.GRAY + "Kill " + challenge.getKillRequirement() + " players")
                             .lore("")
                             .lore(ChatColor.GREEN + "Complete!")
+                            .lore(ChatColor.RED + "You can do this challenge")
                             .lore(ChatColor.RED + "again in " + ChatColor.GOLD + cooldownText);
 
                     if (challengesFiles.challengeIsStarted(p, Challenge.Daily1)) {
