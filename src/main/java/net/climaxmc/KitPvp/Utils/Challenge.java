@@ -1,12 +1,6 @@
-package net.climaxmc.KitPvp.Utils;// AUTHOR: gamer_000 (8/3/2015)
+package net.climaxmc.KitPvp.Utils;
 
-import org.bukkit.ChatColor;
-
-import static org.bukkit.ChatColor.*;
-import static org.bukkit.ChatColor.GRAY;
-import static org.bukkit.ChatColor.YELLOW;
-
-public enum Challenges {
+public enum Challenge {
     Daily1("Daily Challenge #1", 86400, 20),
     Daily2("Daily Challenge #2", 86400, 75),
     Daily3("Daily Challenge #3", 86400, 150),
@@ -15,12 +9,12 @@ public enum Challenges {
 
     private String name;
     private int cooldown;
-    private int killreq;
+    private int killRequirement;
 
-    private Challenges(String name, int cooldown, int killreq) {
+    Challenge(String name, int cooldown, int killRequirement) {
         this.name = name;
         this.cooldown = cooldown;
-        this.killreq = killreq;
+        this.killRequirement = killRequirement;
     }
 
     public int getCooldownTime() {
@@ -31,7 +25,7 @@ public enum Challenges {
         return name;
     }
 
-    public int getKillreq() {
-        return killreq;
+    public int getKillRequirement() {
+        return killRequirement;
     }
 }

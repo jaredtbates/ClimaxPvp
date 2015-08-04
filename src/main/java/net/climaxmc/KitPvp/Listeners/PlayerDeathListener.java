@@ -3,7 +3,7 @@ package net.climaxmc.KitPvp.Listeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
-import net.climaxmc.KitPvp.Utils.Challenges;
+import net.climaxmc.KitPvp.Utils.Challenge;
 import net.climaxmc.KitPvp.Utils.ChallengesFiles;
 import net.climaxmc.common.database.CachedPlayerData;
 import net.climaxmc.common.donations.trails.ParticleEffect;
@@ -72,10 +72,10 @@ public class PlayerDeathListener implements Listener {
         CachedPlayerData killerData = plugin.getPlayerData(killer);
         killerData.addKills(1);
         ChallengesFiles challengesFiles = new ChallengesFiles();
-        for(Challenges challenge : Challenges.values())
+        for(Challenge challenge : Challenge.values())
         if(challengesFiles.challengeIsStarted(killer, challenge) == true) {
             challengesFiles.addChallengeKill(killer, challenge);
-            if(challengesFiles.getChallengeKills(killer, challenge) >= challenge.getKillreq()) {
+            if(challengesFiles.getChallengeKills(killer, challenge) >= challenge.getKillRequirement()) {
                 player.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenge Complete: " + ChatColor.AQUA + challenge.getName());
                 challengesFiles.setCompleted(killer, challenge);
             }

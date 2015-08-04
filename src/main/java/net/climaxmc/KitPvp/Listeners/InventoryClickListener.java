@@ -3,9 +3,8 @@ package net.climaxmc.KitPvp.Listeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.*;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
-import net.climaxmc.KitPvp.Utils.Challenges;
+import net.climaxmc.KitPvp.Utils.Challenge;
 import net.climaxmc.KitPvp.Utils.ChallengesFiles;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -45,31 +44,31 @@ public class InventoryClickListener implements Listener {
                 ChallengesMenu challengesMenu = new ChallengesMenu();
                 if(clickedItem.getType().equals(Material.MAP)) {
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #1")) {
-                        challengesFiles.setStarted(player, Challenges.Daily1);
+                        challengesFiles.setStarted(player, Challenge.Daily1);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
                         player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #1");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #2")) {
-                        challengesFiles.setStarted(player, Challenges.Daily2);
+                        challengesFiles.setStarted(player, Challenge.Daily2);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
                         player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #2");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #3")) {
-                        challengesFiles.setStarted(player, Challenges.Daily3);
+                        challengesFiles.setStarted(player, Challenge.Daily3);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
                         player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #3");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #4")) {
-                        challengesFiles.setStarted(player, Challenges.Daily4);
+                        challengesFiles.setStarted(player, Challenge.Daily4);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
                         player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #4");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Weekly Challenge #1")) {
-                        challengesFiles.setStarted(player, Challenges.Weekly1);
+                        challengesFiles.setStarted(player, Challenge.Weekly1);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
                         player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Weekly Challenge #1");
