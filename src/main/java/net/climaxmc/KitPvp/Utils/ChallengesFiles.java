@@ -57,11 +57,11 @@ public class ChallengesFiles {
      * @param p Player
      * @return Start time
      */
-    public long getStartTime(Player p, Challenges challenge) {
+    public int getStartTime(Player p, Challenges challenge) {
         if(get(p.getUniqueId() + "." + challenge + ".StartTime") == null) {
             set(p.getUniqueId() + "." + challenge + ".StartTime", 0);
         }
-        return (long) get(p.getUniqueId() + "." + challenge + ".StartTime");
+        return (int) get(p.getUniqueId() + "." + challenge + ".StartTime");
     }
 
     public int getChallengeKills(Player p, Challenges challenge) {

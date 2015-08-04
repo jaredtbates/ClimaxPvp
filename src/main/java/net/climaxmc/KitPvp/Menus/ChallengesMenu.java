@@ -2,7 +2,6 @@ package net.climaxmc.KitPvp.Menus;// AUTHOR: gamer_000 (8/3/2015)
 
 import net.climaxmc.KitPvp.Utils.Challenges;
 import net.climaxmc.KitPvp.Utils.ChallengesFiles;
-import net.climaxmc.common.database.CachedPlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -21,10 +20,28 @@ import java.util.List;
 
 public class ChallengesMenu implements Listener {
 
+    ChallengesFiles challengesFiles = new ChallengesFiles();
+
+    public ItemStack createChallengeInCooldownItem(Challenges challenge, String cooldownTime) {
+        ItemStack itemStack = new ItemStack(Material.PAPER);
+        ItemMeta im = itemStack.getItemMeta();
+        im.setDisplayName(ChatColor.RED + challenge.getName());
+        List<String> lore = new ArrayList<String>();
+        lore.add(ChatColor.GRAY + "Kill " + challenge.getKillreq() + " players");
+        lore.add("");
+        lore.add(ChatColor.GREEN + "Complete!");
+        lore.add(ChatColor.RED + "You can do this challenge");
+        lore.add(ChatColor.RED + "again in " + ChatColor.GOLD + cooldownTime);
+        im.setLore(lore);
+        itemStack.setItemMeta(im);
+        return itemStack;
+    }
+
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         Player p = event.getPlayer();
         ItemStack item = event.getItem();
+
 
         if (event.getAction() == Action.PHYSICAL && event.getClickedBlock().getType() == Material.SOIL) {
             event.setCancelled(true);
@@ -33,10 +50,9 @@ public class ChallengesMenu implements Listener {
         if (item != null) {
             if (item.getType().equals(Material.DIAMOND)) {
                 ChallengesMenu challengesMenu = new ChallengesMenu();
-                ChallengesFiles challengesFiles = new ChallengesFiles();
                 Inventory challengesInventory = Bukkit.createInventory(null, 27, "Challenges");
 
-                final ItemStack c1 = new ItemStack(Material.MAP, 1);
+                ItemStack c1 = new ItemStack(Material.MAP, 1);
                 {
                     ItemMeta im = c1.getItemMeta();
                     im.setDisplayName(ChatColor.AQUA + "Daily Challenge #1");
@@ -217,36 +233,64 @@ public class ChallengesMenu implements Listener {
                     c5completed.setItemMeta(im);
                 }
 
-                if (challengesFiles.challengeIsStarted(p, Challenges.Daily1) == true)
-                    challengesInventory.setItem(11, c1started);
-                if (challengesFiles.challengeIsStarted(p, Challenges.Daily2) == true)
-                    challengesInventory.setItem(12, c2started);
-                if (challengesFiles.challengeIsStarted(p, Challenges.Daily3) == true)
-                    challengesInventory.setItem(13, c3started);
-                if (challengesFiles.challengeIsStarted(p, Challenges.Daily4) == true)
-                    challengesInventory.setItem(14, c4started);
-                if (challengesFiles.challengeIsStarted(p, Challenges.Weekly1) == true)
-                    challengesInventory.setItem(15, c5started);
-                if (challengesFiles.challengeIsStarted(p, Challenges.Daily1) == false)
-                    challengesInventory.setItem(11, c1);
-                if (challengesFiles.challengeIsStarted(p, Challenges.Daily2) == false)
-                    challengesInventory.setItem(12, c2);
-                if (challengesFiles.challengeIsStarted(p, Challenges.Daily3) == false)
-                    challengesInventory.setItem(13, c3);
-                if (challengesFiles.challengeIsStarted(p, Challenges.Daily4) == false)
-                    challengesInventory.setItem(14, c4);
-                if (challengesFiles.challengeIsStarted(p, Challenges.Weekly1) == false)
-                    challengesInventory.setItem(15, c5);
-                if (challengesFiles.challengeIsCompleted(p, Challenges.Daily1) == true)
-                    challengesInventory.setItem(11, c1completed);
-                if (challengesFiles.challengeIsCompleted(p, Challenges.Daily2) == true)
-                    challengesInventory.setItem(12, c2completed);
-                if (challengesFiles.challengeIsCompleted(p, Challenges.Daily3) == true)
-                    challengesInventory.setItem(13, c3completed);
-                if (challengesFiles.challengeIsCompleted(p, Challenges.Daily4) == true)
-                    challengesInventory.setItem(14, c4completed);
-                if (challengesFiles.challengeIsCompleted(p, Challenges.Weekly1) == true)
-                    challengesInventory.setItem(15, c5completed);
+                for (Challenges challenge : Challenges.values()) {
+                    String cooldownText = "";
+                    long cooldown = challenge.getCooldownTime()
+                            - ((System.currentTimeMillis() / 1000)
+                            - (challengesFiles.getStartTime(p, challenge)));
+                    if (cooldown >= 86400) {
+                        cooldown = ((cooldown / 60) / 60) / 24;
+                        if (cooldown == 1) cooldownText = "1 day";
+                        if (cooldown > 1) cooldownText = cooldown + " days";
+                    } else if (cooldown >= 3600) {
+                        cooldown = (cooldown / 60) / 60;
+                        if (cooldown == 1) cooldownText = "1 hour";
+                        if (cooldown > 1) cooldownText = cooldown + " hours";
+                    } else if (cooldown >= 60) {
+                        cooldown = cooldown / 60;
+                        if (cooldown == 1) cooldownText = "1 minute";
+                        if (cooldown > 1) cooldownText = cooldown + " minutes";
+                    } else {
+                        if (cooldown == 1) cooldownText = "1 second";
+                        if (cooldown > 1) cooldownText = cooldown + " seconds";
+                    }
+
+                    for (int i = 11; i <= 15; i++) {
+                        if (challengesFiles.challengeIsCompleted(p, Challenges.Daily1))
+                            challengesInventory.setItem(11, createChallengeInCooldownItem(challenge, cooldownText));
+                        if (challengesFiles.challengeIsCompleted(p, Challenges.Daily2))
+                            challengesInventory.setItem(12, createChallengeInCooldownItem(challenge, cooldownText));
+                        if (challengesFiles.challengeIsCompleted(p, Challenges.Daily3))
+                            challengesInventory.setItem(13, createChallengeInCooldownItem(challenge, cooldownText));
+                        if (challengesFiles.challengeIsCompleted(p, Challenges.Daily4))
+                            challengesInventory.setItem(14, createChallengeInCooldownItem(challenge, cooldownText));
+                        if (challengesFiles.challengeIsCompleted(p, Challenges.Weekly1))
+                            challengesInventory.setItem(15, createChallengeInCooldownItem(challenge, cooldownText));
+                    }
+
+                    if (challengesFiles.challengeIsStarted(p, Challenges.Daily1))
+                        challengesInventory.setItem(11, c1started);
+                    if (challengesFiles.challengeIsStarted(p, Challenges.Daily2))
+                        challengesInventory.setItem(12, c2started);
+                    if (challengesFiles.challengeIsStarted(p, Challenges.Daily3))
+                        challengesInventory.setItem(13, c3started);
+                    if (challengesFiles.challengeIsStarted(p, Challenges.Daily4))
+                        challengesInventory.setItem(14, c4started);
+                    if (challengesFiles.challengeIsStarted(p, Challenges.Weekly1))
+                        challengesInventory.setItem(15, c5started);
+                    if (challengesFiles.challengeIsStarted(p, Challenges.Daily1) == false)
+                        challengesInventory.setItem(11, c1);
+                    if (challengesFiles.challengeIsStarted(p, Challenges.Daily2) == false)
+                        challengesInventory.setItem(12, c2);
+                    if (challengesFiles.challengeIsStarted(p, Challenges.Daily3) == false)
+                        challengesInventory.setItem(13, c3);
+                    if (challengesFiles.challengeIsStarted(p, Challenges.Daily4) == false)
+                        challengesInventory.setItem(14, c4);
+                    if (challengesFiles.challengeIsStarted(p, Challenges.Weekly1) == false)
+                        challengesInventory.setItem(15, c5);
+
+
+                }
 
                 p.openInventory(challengesInventory);
             }
