@@ -30,6 +30,7 @@ public class HelpCommand implements CommandExecutor {
 
             if (playerData.hasRank(Rank.MODERATOR)) {
                 player.sendMessage(ChatColor.RED + "/vanish" + ChatColor.GRAY + " - Vanish from the game (removes you from the player list and fake logs you out)");
+                player.sendMessage(ChatColor.RED + "/clearchat" + ChatColor.GRAY + " - Clear chat so that players cannot see messages sent");
             }
 
             if (playerData.hasRank(Rank.ADMINISTRATOR)) {

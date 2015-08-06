@@ -1,4 +1,4 @@
-package net.climaxmc.Administration.Commands;// AUTHOR: gamer_000 (8/3/2015)
+package net.climaxmc.Administration.Commands;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.Rank;
@@ -28,20 +28,20 @@ public class ChatCommands implements CommandExecutor {
         Player player = (Player) sender;
         CachedPlayerData playerData = plugin.getPlayerData(player);
 
-        if (!(playerData.hasRank(Rank.MODERATOR) || player.isOp() || playerData.hasRank(Rank.ADMINISTRATOR))) {
+        if (!playerData.hasRank(Rank.MODERATOR)) {
             player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
             return true;
         }
 
-        if(cmd.getName().equalsIgnoreCase("clearchat")) {
-            if(args.length > 0) {
+        if (cmd.getName().equalsIgnoreCase("clearchat")) {
+            if (args.length > 0) {
                 player.sendMessage(ChatColor.RED + "Too many arguments. Just use /clearchat");
             } else {
-                for(int i = 0; i <= 100; i++) {
+                for (int i = 0; i <= 100; i++) {
                     Bukkit.getServer().broadcastMessage(" ");
                 }
-                Bukkit.getServer().broadcastMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "The chat has been cleared.");
-                for(Player p : Bukkit.getOnlinePlayers()) {
+                Bukkit.getServer().broadcastMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "The chat has been cleared by " + player.getName() + "!");
+                for (Player p : Bukkit.getOnlinePlayers()) {
                     p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                 }
             }
