@@ -1,6 +1,9 @@
 package net.climaxmc.KitPvp.Utils;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.common.database.CachedPlayerData;
+import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -9,6 +12,12 @@ import java.io.File;
 import java.io.IOException;
 
 public class ChallengesFiles {
+
+    private ClimaxPvp plugin;
+
+    public ChallengesFiles(ClimaxPvp plugin) {
+        this.plugin = plugin;
+    }
 
     private File file;
     private FileConfiguration config;
@@ -41,13 +50,14 @@ public class ChallengesFiles {
     public void setStarted(Player p, Challenge challenge) {
         set(p.getUniqueId() + "." + challenge + ".Started", true);
         set(p.getUniqueId() + "." + challenge + ".Completed", false);
-        set(p.getUniqueId() + "." + challenge + ".StartTime", (System.currentTimeMillis() / 1000));
+        set(p.getUniqueId() + "." + challenge + ".CompletedTime", 0);
     }
 
     public void setCompleted(Player p, Challenge challenge) {
         set(p.getUniqueId() + "." + challenge + ".Started", false);
-        set(p.getUniqueId() + "." + challenge + ".Cooldown", true);
         set(p.getUniqueId() + "." + challenge + ".Completed", true);
+        set(p.getUniqueId() + "." + challenge + ".Kills", 0);
+        set(p.getUniqueId() + "." + challenge + ".CompletedTime", (System.currentTimeMillis() / 1000));
     }
 
     /**
@@ -56,11 +66,11 @@ public class ChallengesFiles {
      * @param p Player
      * @return Start time
      */
-    public int getStartTime(Player p, Challenge challenge) {
-        if (get(p.getUniqueId() + "." + challenge + ".StartTime") == null) {
-            set(p.getUniqueId() + "." + challenge + ".StartTime", 0);
+    public int getCompletedTime(Player p, Challenge challenge) {
+        if (get(p.getUniqueId() + "." + challenge + ".CompletedTime") == null) {
+            set(p.getUniqueId() + "." + challenge + ".CompletedTime", 0);
         }
-        return (int) get(p.getUniqueId() + "." + challenge + ".StartTime");
+        return (int) get(p.getUniqueId() + "." + challenge + ".CompletedTime");
     }
 
     public int getChallengeKills(Player p, Challenge challenge) {

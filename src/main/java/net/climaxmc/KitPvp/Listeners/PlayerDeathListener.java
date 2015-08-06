@@ -9,6 +9,7 @@ import net.climaxmc.common.database.CachedPlayerData;
 import net.climaxmc.common.donations.trails.ParticleEffect;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.*;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -71,13 +72,20 @@ public class PlayerDeathListener implements Listener {
 
         CachedPlayerData killerData = plugin.getPlayerData(killer);
         killerData.addKills(1);
+
         ChallengesFiles challengesFiles = new ChallengesFiles();
         for(Challenge challenge : Challenge.values())
         if(challengesFiles.challengeIsStarted(killer, challenge) == true) {
             challengesFiles.addChallengeKill(killer, challenge);
             if(challengesFiles.getChallengeKills(killer, challenge) >= challenge.getKillRequirement()) {
-                player.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenge Complete: " + ChatColor.AQUA + challenge.getName());
                 challengesFiles.setCompleted(killer, challenge);
+                killer.playSound(killer.getLocation(), Sound.LEVEL_UP, 1, 1);
+                killer.sendMessage(ChatColor.BOLD + "-------------------------------------------");
+                killer.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenge Complete: " + ChatColor.AQUA + challenge.getName());
+                killer.sendMessage(ChatColor.DARK_AQUA + "You've earned " + ChatColor.GREEN + "$" + challenge.getRewardMoney());
+                killer.sendMessage(ChatColor.DARK_AQUA + " for completing the challenge!");
+                killer.sendMessage(ChatColor.BOLD + "-------------------------------------------");
+                killerData.depositBalance(challenge.getRewardMoney());
             }
         }
 

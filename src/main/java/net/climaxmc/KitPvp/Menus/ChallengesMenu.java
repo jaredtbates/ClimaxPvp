@@ -32,7 +32,7 @@ public class ChallengesMenu implements Listener {
                     String cooldownText = "";
                     long cooldown = challenge.getCooldownTime()
                             - ((System.currentTimeMillis() / 1000)
-                            - (challengesFiles.getStartTime(p, challenge)));
+                            - (challengesFiles.getCompletedTime(p, challenge)));
                     if (cooldown >= 86400) {
                         cooldown = ((cooldown / 60) / 60) / 24;
                         if (cooldown == 1) cooldownText = "1 day";
@@ -53,6 +53,7 @@ public class ChallengesMenu implements Listener {
                     ItemStack challengeReady = new I(Material.MAP)
                             .name(ChatColor.AQUA + challenge.getName())
                             .lore(ChatColor.GRAY + "Kill " + challenge.getKillRequirement() + " players")
+                            .lore(ChatColor.DARK_AQUA + "Reward: " + ChatColor.GREEN + "$" + challenge.getRewardMoney())
                             .lore("")
                             .lore(ChatColor.AQUA + "Ready to Start!");
                     ItemStack challengeStarted = new I(Material.MAP)
@@ -60,7 +61,9 @@ public class ChallengesMenu implements Listener {
                             .lore(ChatColor.GRAY + "Kill " + challenge.getKillRequirement() + " players")
                             .lore("")
                             .lore(ChatColor.RED + "In Progress...")
-                            .lore(ChatColor.YELLOW + "Players Killed: " + ChatColor.GRAY + challengesFiles.getChallengeKills(p, Challenge.Daily1) + "/" + challenge.getKillRequirement()).enchantment(Enchantment.DURABILITY, i + 1);
+                            .lore(ChatColor.YELLOW + "Players Killed: "
+                                    + ChatColor.GRAY + challengesFiles.getChallengeKills(p, challenge)
+                                    + "/" + challenge.getKillRequirement()).enchantment(Enchantment.DURABILITY, i + 1);
                     ItemStack challengeCompleted = new I(Material.PAPER)
                             .name(ChatColor.RED + challenge.getName())
                             .lore(ChatColor.GRAY + "Kill " + challenge.getKillRequirement() + " players")
@@ -69,9 +72,9 @@ public class ChallengesMenu implements Listener {
                             .lore(ChatColor.RED + "You can do this challenge")
                             .lore(ChatColor.RED + "again in " + ChatColor.GOLD + cooldownText);
 
-                    if (challengesFiles.challengeIsStarted(p, Challenge.Daily1)) {
+                    if (challengesFiles.challengeIsStarted(p, challenge)) {
                         challengesInventory.setItem(11 + i, challengeStarted);
-                    } else if (challengesFiles.challengeIsCompleted(p, Challenge.Daily1)) {
+                    } else if (challengesFiles.challengeIsCompleted(p, challenge)) {
                         challengesInventory.setItem(11 + i, challengeCompleted);
                     } else {
                         challengesInventory.setItem(11 + i, challengeReady);

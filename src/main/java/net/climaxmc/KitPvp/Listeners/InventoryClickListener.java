@@ -41,7 +41,6 @@ public class InventoryClickListener implements Listener {
             if(inventory.getName().equals("Challenges")) {
                 ChallengesFiles challengesFiles = new ChallengesFiles();
                 ItemStack clickedItem = event.getCurrentItem();
-                ChallengesMenu challengesMenu = new ChallengesMenu();
                 if(clickedItem.getType().equals(Material.MAP)) {
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #1")) {
                         challengesFiles.setStarted(player, Challenge.Daily1);
@@ -82,7 +81,7 @@ public class InventoryClickListener implements Listener {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                         long cooldown = challengesFiles.getChallenge(clickedItem.getItemMeta().getDisplayName()).getCooldownTime()
                                 - ((System.currentTimeMillis() / 1000)
-                                - (challengesFiles.getStartTime(player, challengesFiles.getChallenge(clickedItem.getItemMeta().getDisplayName()))));
+                                - (challengesFiles.getCompletedTime(player, challengesFiles.getChallenge(clickedItem.getItemMeta().getDisplayName()))));
                     if (cooldown >= 86400) {
                         cooldown = ((cooldown / 60) / 60) / 24;
                         if(cooldown == 1) player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " day to start this challenge again!");
