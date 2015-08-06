@@ -35,7 +35,7 @@ public class PlayerInteractListener implements Listener {
 
         if(!player.isOp()) {
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType().equals(Material.TRAP_DOOR)) {
-                event.setCancelled(true);
+                    event.setCancelled(true);
                 }
         }
 
