@@ -60,6 +60,13 @@ public class ChallengesFiles {
         set(p.getUniqueId() + "." + challenge + ".CompletedTime", (System.currentTimeMillis() / 1000));
     }
 
+    public void setReady(Player p, Challenge challenge) {
+        set(p.getUniqueId() + "." + challenge + ".Started", false);
+        set(p.getUniqueId() + "." + challenge + ".Completed", false);
+        set(p.getUniqueId() + "." + challenge + ".Kills", 0);
+        set(p.getUniqueId() + "." + challenge + ".CompletedTime", 0);
+    }
+
     /**
      * Gets the time when the player started a challenge
      *
