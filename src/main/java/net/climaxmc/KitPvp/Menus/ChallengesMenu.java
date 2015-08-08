@@ -1,7 +1,11 @@
 package net.climaxmc.KitPvp.Menus;
 
-import net.climaxmc.KitPvp.Utils.*;
-import org.bukkit.*;
+import net.climaxmc.KitPvp.Utils.Challenge;
+import net.climaxmc.KitPvp.Utils.ChallengesFiles;
+import net.climaxmc.KitPvp.Utils.I;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -48,6 +52,16 @@ public class ChallengesMenu implements Listener {
                     } else {
                         if (cooldown == 1) cooldownText = "1 second";
                         if (cooldown > 1) cooldownText = cooldown + " seconds";
+                        if (cooldown == 0) {
+                            cooldownText = "";
+                            challengesFiles.setReady(p, challenge);
+                        }
+                    }
+
+                    if (challengesFiles.challengeIsCompleted(p, challenge)) {
+                        if (cooldownText.equals("")) {
+                            challengesFiles.setReady(p, challenge);
+                        }
                     }
 
                     ItemStack challengeReady = new I(Material.MAP)

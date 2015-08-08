@@ -32,6 +32,8 @@ public class PlayerJoinListener implements Listener {
 
         player.setDisplayName(playerData.getNickname());
         player.setPlayerListName(playerData.getLevelColor() + player.getName());
+        player.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Be a part of the community!");
+        player.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "Vote for which feature you'd like to see on Climax! " + ChatColor.RED + "http://www.strawpoll.me/5131832/");
 
         if (playerData.hasRank(Rank.OWNER)) {
             if (!player.isOp()) {

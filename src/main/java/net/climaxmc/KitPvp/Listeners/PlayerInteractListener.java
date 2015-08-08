@@ -33,6 +33,12 @@ public class PlayerInteractListener implements Listener {
         CachedPlayerData playerData = plugin.getPlayerData(player);
         ItemStack item = event.getItem();
 
+        if(!player.isOp()) {
+            if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType().equals(Material.TRAP_DOOR)) {
+                    event.setCancelled(true);
+                }
+        }
+
         if (event.getAction() == Action.PHYSICAL && event.getClickedBlock().getType() == Material.SOIL) {
             event.setCancelled(true);
         }
