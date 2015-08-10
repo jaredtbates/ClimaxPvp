@@ -109,5 +109,17 @@ public class PlayerRespawnListener implements Listener {
         challengesItemMeta.setLore(challengesLore);
         challenges.setItemMeta(challengesItemMeta);
         player.getInventory().setItem(4, challenges);
+
+        ItemStack crates = new ItemStack(Material.BEDROCK);
+        ItemMeta cratesItemMeta = crates.getItemMeta();
+        cratesItemMeta.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + "???");
+        List<String> cratesLore = new ArrayList<>();
+        cratesLore.add(ChatColor.DARK_PURPLE + "" + ChatColor.MAGIC + "B" + ChatColor.DARK_PURPLE + "" + ChatColor.MAGIC + "uy"
+                + ChatColor.DARK_PURPLE + " " + ChatColor.MAGIC + "crate" + ChatColor.DARK_PURPLE + "s that ");
+        cratesLore.add(ChatColor.DARK_PURPLE + "g" + ChatColor.DARK_PURPLE + "" + ChatColor.MAGIC + "ive"
+                + ChatColor.DARK_PURPLE + " you great " + ChatColor.DARK_PURPLE + "" + ChatColor.MAGIC + "rewards" + ChatColor.DARK_PURPLE + "!");
+        cratesItemMeta.setLore(cratesLore);
+        crates.setItemMeta(cratesItemMeta);
+        player.getInventory().setItem(3, crates);
     }
 }
