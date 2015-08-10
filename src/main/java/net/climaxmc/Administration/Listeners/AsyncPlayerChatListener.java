@@ -4,7 +4,7 @@ import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.Rank;
 import net.climaxmc.common.database.CachedPlayerData;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.*;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -37,7 +37,8 @@ public class AsyncPlayerChatListener implements Listener {
         }
 
         if (playerData.hasRank(Rank.TRUSTED)) {
-            event.setFormat(level + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "{" + rank.getColor() + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
+            ChatColor color = rank.getColor();
+            event.setFormat(level + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "{" + (color == null ? "" : color) + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
         } else {
             event.setFormat(level + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
         }
