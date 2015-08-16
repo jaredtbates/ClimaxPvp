@@ -34,8 +34,16 @@ public class PlayerCommandPreprocessListener implements Listener {
         PermissionAttachment attachment = player.addAttachment(plugin);
 
         if (VanishCommand.getVanished().contains(player.getUniqueId()) || CheckCommand.getChecking().contains(player.getUniqueId())) {
+            if (playerData.hasRank(Rank.HELPER)) {
+                attachment.setPermission("minecraft.command.kick", true);
+            }
+
             if (playerData.hasRank(Rank.MODERATOR)) {
-                attachment.setPermission("bukkit.command.teleport", true);
+                attachment.setPermission("minecraft.command.ban.player", true);
+                attachment.setPermission("minecraft.command.ban.ip", true);
+                attachment.setPermission("minecraft.command.ban.list", true);
+                attachment.setPermission("minecraft.command.unban.player", true);
+                attachment.setPermission("minecraft.command.unban.ip", true);
                 attachment.setPermission("minecraft.command.tp", true);
             }
         }
