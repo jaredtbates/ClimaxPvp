@@ -1,7 +1,7 @@
 name: ${project.artifactId}
 main: ${project.groupId}.${project.artifactId}
 version: ${project.version}
-authors: [computerwizjared, Jonhan_]
+authors: [computerwizjared, Jonhan_, GamerBah]
 commands:
   repair:
     description: Repairs your inventory for $2
