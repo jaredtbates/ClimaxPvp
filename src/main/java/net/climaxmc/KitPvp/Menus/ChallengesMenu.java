@@ -21,14 +21,13 @@ public class ChallengesMenu implements Listener {
         Player p = event.getPlayer();
         ItemStack item = event.getItem();
 
-        ChallengesFiles challengesFiles = new ChallengesFiles();
-
         if (event.getAction() == Action.PHYSICAL && event.getClickedBlock().getType() == Material.SOIL) {
             event.setCancelled(true);
         }
 
         if (item != null) {
             if (item.getType().equals(Material.DIAMOND)) {
+                ChallengesFiles challengesFiles = new ChallengesFiles();
                 Inventory challengesInventory = Bukkit.createInventory(null, 27, "Challenges");
 
                 int i = 0;
