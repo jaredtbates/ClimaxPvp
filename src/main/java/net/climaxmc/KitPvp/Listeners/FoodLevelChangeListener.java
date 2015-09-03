@@ -17,6 +17,6 @@ public class FoodLevelChangeListener implements Listener {
     public void onHungerChange(FoodLevelChangeEvent event) {
         Player player = (Player) event.getEntity();
         event.setCancelled(true);
-        player.setFoodLevel(17);
+        player.setFoodLevel(20);
     }
 }
