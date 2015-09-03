@@ -32,7 +32,9 @@ public class AssassinKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
     	player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+    	ItemStack sword = new ItemStack(Material.WOOD_SWORD);
+    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+    	sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack cloak = new ItemStack(Material.GHAST_TEAR);
         ItemMeta cloakmeta = cloak.getItemMeta();
@@ -62,7 +64,9 @@ public class AssassinKit extends Kit {
         }
     	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
     	player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
-    	ItemStack sword = new ItemStack(Material.IRON_SWORD);
+    	ItemStack sword = new ItemStack(Material.WOOD_SWORD);
+    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+    	sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack cloak = new ItemStack(Material.GHAST_TEAR);
         ItemMeta cloakmeta = cloak.getItemMeta();
@@ -102,8 +106,7 @@ public class AssassinKit extends Kit {
                 		if (entity instanceof Player) {
                 		    Player players = (Player) entity;
                 		    players.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 140, 2));
-                		    players.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 140, 1));
-                		    players.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 140, 2));
+                		    players.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 140, 1));
                 		    player.removePotionEffect(PotionEffectType.SPEED);
                 		    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 1));
                 		    player.getWorld().playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 1);
