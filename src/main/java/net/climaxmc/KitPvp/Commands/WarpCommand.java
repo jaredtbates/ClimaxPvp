@@ -86,6 +86,9 @@ public class WarpCommand implements CommandExecutor {
             default:
                 player.sendMessage(ChatColor.GREEN + "You have been warped to " + args[0] + ".");
                 plugin.warp(args[0], player);
+                if (args[0].equalsIgnoreCase("nosoup")) {
+                    player.setFoodLevel(17);
+                }
                 break;
         }
 
