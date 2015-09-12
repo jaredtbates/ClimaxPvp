@@ -2,7 +2,6 @@ package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,7 +22,7 @@ public class PlayerQuitListener implements Listener {
             KitPvp.killStreak.remove(player.getUniqueId());
         }
 
-        event.setQuitMessage(ChatColor.RED + "Quit" + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
+        event.setQuitMessage(null/*ChatColor.RED + "Quit" + ChatColor.DARK_GRAY + "\u00bb " + player.getName()*/);
 
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> plugin.savePlayerData(plugin.getPlayerData(player)));
     }

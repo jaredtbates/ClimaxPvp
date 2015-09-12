@@ -1,7 +1,5 @@
 package net.climaxmc.Administration.Listeners;
 
-import net.climaxmc.Administration.Commands.CheckCommand;
-import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.Rank;
 import net.climaxmc.common.database.CachedPlayerData;
@@ -33,17 +31,6 @@ public class PlayerCommandPreprocessListener implements Listener {
 
         PermissionAttachment attachment = player.addAttachment(plugin);
 
-        if (VanishCommand.getVanished().contains(player.getUniqueId()) || CheckCommand.getChecking().contains(player.getUniqueId())) {
-            if (playerData.hasRank(Rank.MODERATOR)) {
-                attachment.setPermission("bukkit.command.ban.player", true);
-                attachment.setPermission("bukkit.command.ban.ip", true);
-                attachment.setPermission("bukkit.command.ban.list", true);
-                attachment.setPermission("bukkit.command.unban.player", true);
-                attachment.setPermission("bukkit.command.unban.ip", true);
-                attachment.setPermission("bukkit.command.tp", true);
-            }
-        }
-
         if (playerData.hasRank(Rank.HELPER)) {
             attachment.setPermission("minecraft.command.kick", true);
             attachment.setPermission("bukkit.command.kick", true);
@@ -55,12 +42,13 @@ public class PlayerCommandPreprocessListener implements Listener {
             attachment.setPermission("minecraft.command.banlist", true);
             attachment.setPermission("minecraft.command.pardon", true);
             attachment.setPermission("minecraft.command.pardon-ip", true);
+            attachment.setPermission("minecraft.command.tp", true);
             attachment.setPermission("bukkit.command.ban.player", true);
             attachment.setPermission("bukkit.command.ban.ip", true);
             attachment.setPermission("bukkit.command.ban.list", true);
             attachment.setPermission("bukkit.command.unban.player", true);
             attachment.setPermission("bukkit.command.unban.ip", true);
-
+            attachment.setPermission("bukkit.command.teleport", true);
         }
 
         attachment.setPermission("bukkit.command.tps", true);
