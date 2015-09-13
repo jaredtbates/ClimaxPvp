@@ -22,6 +22,7 @@ public class Administration {
         plugin.getCommand("vanish").setExecutor(new VanishCommand(plugin));
         plugin.getCommand("check").setExecutor(new CheckCommand(plugin));
         plugin.getCommand("clearchat").setExecutor(new ChatCommands(plugin));
+        plugin.getCommand("rank").setExecutor(new RankCommand(plugin));
 
         // Start runnables
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new AutoBroadcastRunnable(plugin), 20 * plugin.getConfig().getInt("AutoBroadcast.Time"), 20 * plugin.getConfig().getInt("AutoBroadcast.Time"));

@@ -1,7 +1,7 @@
 name: ${project.artifactId}
 main: ${project.groupId}.${project.artifactId}
 version: ${project.version}
-authors: [computerwizjared, Jonhan_, GamerBah]
+authors: [computerwizjared, Jonhan_]
 commands:
   repair:
     description: Repairs your inventory for $2
@@ -66,5 +66,7 @@ commands:
     description: Enables YouTube/Twitch access to all kits
     aliases: twitch
   clearchat:
-      description: Clears the chat using spaces
-      aliases: [cchat, cc]
+    description: Clears the chat using spaces
+    aliases: [cchat, cc]
+  rank:
+    description: Sets the rank of a player
