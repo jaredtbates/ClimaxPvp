@@ -4,7 +4,7 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Kits.*;
 import net.climaxmc.KitPvp.Utils.HackUtils;
-import net.climaxmc.common.Rank;
+import net.climaxmc.common.database.Rank;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;

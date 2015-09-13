@@ -1,8 +1,8 @@
 package net.climaxmc.Administration.Commands;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.Rank;
-import net.climaxmc.common.database.CachedPlayerData;
+import net.climaxmc.common.database.Rank;
+import net.climaxmc.common.database.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -21,7 +21,7 @@ public class AdminCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        CachedPlayerData playerData = plugin.getPlayerData(player);
+        PlayerData playerData = plugin.getPlayerData(player);
 
         if (!(playerData.hasRank(Rank.ADMINISTRATOR) || player.isOp())) {
             player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");

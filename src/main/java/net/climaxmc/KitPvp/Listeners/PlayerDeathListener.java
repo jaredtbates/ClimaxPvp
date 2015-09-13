@@ -5,7 +5,7 @@ import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Utils.Challenge;
 import net.climaxmc.KitPvp.Utils.ChallengesFiles;
-import net.climaxmc.common.database.CachedPlayerData;
+import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.donations.trails.ParticleEffect;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -42,7 +42,7 @@ public class PlayerDeathListener implements Listener {
             }
         });
 
-        CachedPlayerData playerData = plugin.getPlayerData(player);
+        PlayerData playerData = plugin.getPlayerData(player);
         playerData.addDeaths(1);
 
         if (killer == null) {
@@ -70,7 +70,7 @@ public class PlayerDeathListener implements Listener {
             return;
         }
 
-        CachedPlayerData killerData = plugin.getPlayerData(killer);
+        PlayerData killerData = plugin.getPlayerData(killer);
         killerData.addKills(1);
 
         ChallengesFiles challengesFiles = new ChallengesFiles();

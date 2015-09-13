@@ -2,8 +2,8 @@ package net.climaxmc.Administration.Listeners;
 
 import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.Rank;
-import net.climaxmc.common.database.CachedPlayerData;
+import net.climaxmc.common.database.Rank;
+import net.climaxmc.common.database.PlayerData;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.*;
@@ -26,7 +26,7 @@ public class AsyncPlayerChatListener implements Listener {
             return;
         }
 
-        CachedPlayerData playerData = plugin.getPlayerData(player);
+        PlayerData playerData = plugin.getPlayerData(player);
         int kills = playerData.getKills();
         Rank rank = playerData.getRank();
 

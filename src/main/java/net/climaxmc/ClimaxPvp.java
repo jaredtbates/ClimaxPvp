@@ -45,7 +45,7 @@ public class ClimaxPvp extends JavaPlugin {
     private File warpsConfigFile = null;
 
     @Getter
-    private HashMap<UUID, CachedPlayerData> playerDataList = new HashMap<>();
+    private HashMap<UUID, PlayerData> playerDataList = new HashMap<>();
     @Getter
     private HashMap<UUID, UUID> messagers = new HashMap<>();
 
@@ -150,9 +150,9 @@ public class ClimaxPvp extends JavaPlugin {
      * @param player Player to get data of
      * @return Data of player
      */
-    public CachedPlayerData getPlayerData(OfflinePlayer player) {
+    public PlayerData getPlayerData(OfflinePlayer player) {
         if (!playerDataList.containsKey(player.getUniqueId())) {
-            playerDataList.put(player.getUniqueId(), mySQL.getCachedPlayerData(player.getUniqueId()));
+            playerDataList.put(player.getUniqueId(), mySQL.getPlayerData(player.getUniqueId()));
         }
         return playerDataList.get(player.getUniqueId());
     }
@@ -162,9 +162,9 @@ public class ClimaxPvp extends JavaPlugin {
      *
      * @param playerData Player data to save
      */
-    public void savePlayerData(CachedPlayerData playerData) {
+    public void savePlayerData(PlayerData playerData) {
         if (playerDataList.containsKey(playerData.getUuid())) {
-            mySQL.saveCachedPlayerData(playerData);
+            mySQL.savePlayerData(playerData);
         }
     }
 

@@ -1,8 +1,8 @@
 package net.climaxmc.Administration.Commands;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.Rank;
-import net.climaxmc.common.database.CachedPlayerData;
+import net.climaxmc.common.database.Rank;
+import net.climaxmc.common.database.PlayerData;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -19,10 +19,11 @@ public class RankCommand implements CommandExecutor {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            CachedPlayerData playerData = plugin.getPlayerData(player);
+            PlayerData playerData = plugin.getPlayerData(player);
             if (!playerData.hasRank(Rank.OWNER)) {
                 player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
                 return true;
@@ -43,7 +44,7 @@ public class RankCommand implements CommandExecutor {
 
         for (Rank rank : Rank.values()) {
             if (rank.toString().equalsIgnoreCase(args[1])) {
-                CachedPlayerData playerData = plugin.getPlayerData(target);
+                PlayerData playerData = plugin.getPlayerData(target);
                 if (playerData != null) {
                     playerData.setRank(rank);
                     sender.sendMessage(ChatColor.GREEN + "You have set " + target.getName() + "'s rank to " + WordUtils.capitalizeFully(rank.toString()) + ".");

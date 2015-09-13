@@ -1,7 +1,7 @@
 package net.climaxmc.Donations.Commands;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.database.CachedPlayerData;
+import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.donations.Perk;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -22,7 +22,7 @@ public class SpectateCommand implements Perk, CommandExecutor {
         }
 
         Player player = (Player) sender;
-        CachedPlayerData playerData = plugin.getPlayerData(player);
+        PlayerData playerData = plugin.getPlayerData(player);
 
         if (!playerData.hasPerk(this)) {
             player.sendMessage(ChatColor.RED + "Please donate at https://donate.climaxmc.net for access to spectator mode!");

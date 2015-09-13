@@ -5,7 +5,7 @@ import net.climaxmc.Donations.Inventories.TrailsInventory;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
-import net.climaxmc.common.database.CachedPlayerData;
+import net.climaxmc.common.database.PlayerData;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,7 +30,7 @@ public class PlayerInteractListener implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        CachedPlayerData playerData = plugin.getPlayerData(player);
+        PlayerData playerData = plugin.getPlayerData(player);
         ItemStack item = event.getItem();
 
         if(!player.isOp()) {

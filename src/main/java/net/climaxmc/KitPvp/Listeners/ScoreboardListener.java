@@ -1,8 +1,8 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.database.CachedPlayerData;
-import net.climaxmc.common.events.BukkitPlayerBalanceChangeEvent;
+import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.events.PlayerBalanceChangeEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -26,7 +26,7 @@ public class ScoreboardListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        CachedPlayerData playerData = plugin.getPlayerData(player);
+        PlayerData playerData = plugin.getPlayerData(player);
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
         player.setScoreboard(board);
         Objective objective = board.registerNewObjective("Player Data", "dummy");
@@ -56,13 +56,13 @@ public class ScoreboardListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerBalanceChange(BukkitPlayerBalanceChangeEvent event) {
+    public void onPlayerBalanceChange(PlayerBalanceChangeEvent event) {
         updateScoreboards();
     }
 
     public void updateScoreboards() {
         for (Player player : plugin.getServer().getOnlinePlayers()) {
-            CachedPlayerData playerData = plugin.getPlayerData(player);
+            PlayerData playerData = plugin.getPlayerData(player);
             Scoreboard board = player.getScoreboard();
             Objective objective = board.getObjective("Player Data");
             objective.setDisplayName(ChatColor.WHITE + "" + ChatColor.BOLD + "ClimaxPvp");

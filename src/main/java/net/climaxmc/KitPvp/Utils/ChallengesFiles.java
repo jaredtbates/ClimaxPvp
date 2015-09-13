@@ -1,7 +1,7 @@
 package net.climaxmc.KitPvp.Utils;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.database.CachedPlayerData;
+import net.climaxmc.common.database.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;

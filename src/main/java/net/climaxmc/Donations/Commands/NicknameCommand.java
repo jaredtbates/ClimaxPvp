@@ -1,8 +1,8 @@
 package net.climaxmc.Donations.Commands;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.Rank;
-import net.climaxmc.common.database.CachedPlayerData;
+import net.climaxmc.common.database.Rank;
+import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.donations.Perk;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
@@ -22,7 +22,7 @@ public class NicknameCommand implements Perk, CommandExecutor {
         }
 
         Player player = (Player) sender;
-        CachedPlayerData playerData = plugin.getPlayerData(player);
+        PlayerData playerData = plugin.getPlayerData(player);
 
         if (!playerData.hasPerk(this)) {
             player.sendMessage(ChatColor.RED + "Please donate at https://donate.climaxmc.net for access to this perk!");
@@ -32,7 +32,7 @@ public class NicknameCommand implements Perk, CommandExecutor {
         if (args.length == 2) {
             if (playerData.hasRank(Rank.MODERATOR)) {
                 Player target = plugin.getServer().getPlayer(args[0]);
-                CachedPlayerData targetData = plugin.getPlayerData(player);
+                PlayerData targetData = plugin.getPlayerData(player);
 
                 if (target == null) {
                     player.sendMessage(ChatColor.RED + "That player is not online!");

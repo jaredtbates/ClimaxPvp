@@ -1,8 +1,8 @@
 package net.climaxmc.Administration.Listeners;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.Rank;
-import net.climaxmc.common.database.CachedPlayerData;
+import net.climaxmc.common.database.Rank;
+import net.climaxmc.common.database.PlayerData;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -21,7 +21,7 @@ public class PlayerCommandPreprocessListener implements Listener {
     @EventHandler
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
-        CachedPlayerData playerData = plugin.getPlayerData(player);
+        PlayerData playerData = plugin.getPlayerData(player);
         String command = event.getMessage();
 
         if (StringUtils.startsWithIgnoreCase(event.getMessage(), "/me") || StringUtils.startsWithIgnoreCase(event.getMessage(), "/minecraft:me")) {

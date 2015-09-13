@@ -19,7 +19,7 @@
 package net.climaxmc.Administration.Utils;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.database.CachedPlayerData;
+import net.climaxmc.common.database.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -174,7 +174,7 @@ public class VoteReceiver extends Thread {
                             plugin.getServer().broadcastMessage(ChatColor.GREEN + vote.getUsername() + " has voted for " + ChatColor.GOLD + "Climax" + ChatColor.RED + "MC" + ChatColor.GREEN + "!\nVote every day for rewards!");
                             Player player = plugin.getServer().getPlayer(username);
                             if (player != null) {
-                                CachedPlayerData playerData = plugin.getPlayerData(player);
+                                PlayerData playerData = plugin.getPlayerData(player);
                                 playerData.depositBalance(100);
                                 player.sendMessage(ChatColor.GREEN + "You have been given $100 for voting! Vote every day for additional rewards!");
                             }

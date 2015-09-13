@@ -2,7 +2,7 @@ package net.climaxmc.KitPvp;
 
 import lombok.Data;
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.database.CachedPlayerData;
+import net.climaxmc.common.database.PlayerData;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -109,7 +109,7 @@ public abstract class Kit implements Listener, CommandExecutor {
      */
     public void wearCheckLevel(Player player) {
         if (!KitManager.isPlayerInKit(player)) {
-            CachedPlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
+            PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
             if (playerData.getLevelColor().contains(String.valueOf(color.getChar())) || playerData.getTemporaryPlayerData().containsKey("Admin Mode")) {
                 KitManager.getPlayersInKits().put(player.getUniqueId(), this);
 

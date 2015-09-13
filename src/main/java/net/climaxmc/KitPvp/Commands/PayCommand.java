@@ -1,7 +1,7 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.database.CachedPlayerData;
+import net.climaxmc.common.database.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
@@ -43,7 +43,7 @@ public class PayCommand implements CommandExecutor {
             return true;
         }
 
-        CachedPlayerData playerData = plugin.getPlayerData(player);
+        PlayerData playerData = plugin.getPlayerData(player);
 
         if (amount > playerData.getBalance()) {
             player.sendMessage(ChatColor.RED + "You do not have that much money!");
@@ -53,7 +53,7 @@ public class PayCommand implements CommandExecutor {
         playerData.withdrawBalance(amount);
         player.sendMessage(ChatColor.GREEN + "You have sent " + target.getName() + " $" + amount + ".");
 
-        CachedPlayerData targetData = plugin.getPlayerData(target);
+        PlayerData targetData = plugin.getPlayerData(target);
         targetData.depositBalance(amount);
         target.sendMessage(ChatColor.GREEN + "You have received $" + amount + " from " + player.getName() + ".");
 

@@ -1,8 +1,8 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.Rank;
-import net.climaxmc.common.database.CachedPlayerData;
+import net.climaxmc.common.database.Rank;
+import net.climaxmc.common.database.PlayerData;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -21,7 +21,7 @@ public class HelpCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        CachedPlayerData playerData = plugin.getPlayerData(player);
+        PlayerData playerData = plugin.getPlayerData(player);
 
         if (args.length == 1 && args[0].equals("staff") && playerData.hasRank(Rank.HELPER)) {
             player.sendMessage(ChatColor.RED + "/punish" + ChatColor.GRAY + " - Punish a player with warn/kick/tempmute" + (playerData.hasRank(Rank.MODERATOR) ? "/mute/tempban/ban" : ""));

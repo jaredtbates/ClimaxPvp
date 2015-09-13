@@ -2,7 +2,7 @@ package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
-import net.climaxmc.common.database.CachedPlayerData;
+import net.climaxmc.common.database.PlayerData;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
@@ -23,7 +23,7 @@ public class SoupCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        CachedPlayerData playerData = plugin.getPlayerData(player);
+        PlayerData playerData = plugin.getPlayerData(player);
 
         if (player.getLocation().distance(plugin.getWarpLocation("NoSoup")) <= 100) {
             player.sendMessage(ChatColor.RED + "You are at NoSoup!");

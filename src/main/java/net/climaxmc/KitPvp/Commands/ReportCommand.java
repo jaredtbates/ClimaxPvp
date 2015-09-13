@@ -1,7 +1,7 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.Rank;
+import net.climaxmc.common.database.Rank;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.*;

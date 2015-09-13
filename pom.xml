@@ -10,11 +10,6 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
         </repository>
-
-        <repository>
-            <id>climax-repo</id>
-            <url>https://admin.climaxmc.net/nexus/content/groups/public/</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -28,12 +23,6 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.8.7-R0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>net.climaxmc</groupId>
-            <artifactId>Common</artifactId>
-            <version>1.2.7</version>
         </dependency>
 
         <dependency>
@@ -70,30 +59,6 @@
 
                 <configuration>
                     <finalName>${project.artifactId}</finalName>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.3</version>
-
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-
-                <configuration>
-                    <minimizeJar>true</minimizeJar>
-                    <artifactSet>
-                        <includes>
-                            <include>net.climaxmc:Common</include>
-                        </includes>
-                    </artifactSet>
                 </configuration>
             </plugin>
         </plugins>
