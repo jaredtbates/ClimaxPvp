@@ -1,6 +1,7 @@
 package net.climaxmc.common.database;
 
 import lombok.Getter;
+import org.bukkit.plugin.Plugin;
 
 import java.sql.*;
 import java.util.*;
@@ -20,6 +21,7 @@ public class MySQL {
     private static final String CREATE_PUNISHMENTS_TABLE = "CREATE TABLE IF NOT EXISTS `climax_punishments` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `ban_date` BIGINT DEFAULT 0 NOT NULL, `ban_time` BIGINT DEFAULT 0 NOT NULL, `ban_reason` VARCHAR(128) DEFAULT '' NOT NULL, `banner` VARCHAR(36) NOT NULL, `mute_date` BIGINT DEFAULT 0 NOT NULL, `mute_time` BIGINT DEFAULT 0 NOT NULL, `mute_reason` VARCHAR(128) DEFAULT '' NOT NULL, `muter` VARCHAR(36) NOT NULL);";
     private static final String CREATE_PUNISHMENTS = "INSERT IGNORE INTO `climax_punishments` (`uuid`, `ban_date`, `ban_time`, `ban_reason`, `banner`, `mute_date`, `mute_time`, `mute_reason`, `muter`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
     private static final String UPDATE_PUNISHMENTS = "UPDATE `climax_punishments` SET `ban_date` = ?, `ban_time` = ?, `ban_reason` = ?, `banner` = ?, `mute_date` = ?, `mute_time` = ?, `mute_reason` = ?, `muter` = ? WHERE `uuid` = ?";
+    private final Plugin plugin;
     private final String address;
     private final int port;
     private final String name;
@@ -39,24 +41,23 @@ public class MySQL {
      * @param username Name of user with rights to the database
      * @param password Password of user with rights to the database
      */
-    public MySQL(String address, int port, String name, String username, String password) {
+    public MySQL(Plugin plugin, String address, int port, String name, String username, String password) {
+        this.plugin = plugin;
         this.address = address;
         this.port = port;
         this.name = name;
         this.username = username;
         this.password = password;
 
-        synchronized (this) {
-            try {
-                connection = DriverManager.getConnection("jdbc:mysql://" + address + ":" + port + "/" + name, username, password);
-            } catch (SQLException e) {
-                logger.severe("Could not create MySQL connection!");
-                e.printStackTrace();
-            }
-
-            executeUpdate(CREATE_PLAYERDATA_TABLE);
-            executeUpdate(CREATE_PUNISHMENTS_TABLE);
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://" + address + ":" + port + "/" + name, username, password);
+        } catch (SQLException e) {
+            logger.severe("Could not create MySQL connection!");
+            e.printStackTrace();
         }
+
+        executeUpdate(CREATE_PLAYERDATA_TABLE);
+        executeUpdate(CREATE_PUNISHMENTS_TABLE);
     }
 
     /**
@@ -69,7 +70,20 @@ public class MySQL {
     }
 
     /**
-     * Executes a MySQL query
+     * Runs a MySQL query asynchronously
+     *
+     * @param runnable Runnable to run async
+     */
+    private void runAsync(Runnable runnable) {
+        if (plugin.isEnabled()) {
+            plugin.getServer().getScheduler().runTaskAsynchronously(plugin, runnable);
+        } else {
+            runnable.run();
+        }
+    }
+
+    /**
+     * Executes a MySQL query (NON-ASYNC)
      *
      * @param query  The query to run on the database
      * @param values The values to insert into the query
@@ -101,23 +115,25 @@ public class MySQL {
      * @param query The query to run on the database
      */
     public synchronized void executeUpdate(String query, Object... values) {
-        try {
-            if (connection == null || connection.isClosed()) {
-                connection = DriverManager.getConnection("jdbc:mysql://" + address + ":" + port + "/" + name, username, password);
+        runAsync(() -> {
+            try {
+                if (connection == null || connection.isClosed()) {
+                    connection = DriverManager.getConnection("jdbc:mysql://" + address + ":" + port + "/" + name, username, password);
+                }
+
+                PreparedStatement statement = connection.prepareStatement(query);
+
+                int i = 0;
+                for (Object value : values) {
+                    statement.setObject(++i, value);
+                }
+
+                statement.executeUpdate();
+            } catch (SQLException e) {
+                logger.severe("Could not execute MySQL query!");
+                e.printStackTrace();
             }
-
-            PreparedStatement statement = connection.prepareStatement(query);
-
-            int i = 0;
-            for (Object value : values) {
-                statement.setObject(++i, value);
-            }
-
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            logger.severe("Could not execute MySQL query!");
-            e.printStackTrace();
-        }
+        });
     }
 
     /**

@@ -108,6 +108,7 @@ public class ClimaxPvp extends JavaPlugin {
 
         // Connect to MySQL
         mySQL = new MySQL(
+                this,
                 getConfig().getString("Database.Host"),
                 getConfig().getInt("Database.Port"),
                 getConfig().getString("Database.Database"),
