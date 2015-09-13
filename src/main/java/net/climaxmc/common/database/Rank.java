@@ -17,9 +17,9 @@ public enum Rank {
     TWITCH(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Twi" + ChatColor.WHITE + "" + ChatColor.BOLD + "tch", null, 30),
     YOUTUBE(ChatColor.RED + "" + ChatColor.BOLD + "You" + ChatColor.WHITE + "" + ChatColor.BOLD + "Tube", null, 30),
     TRUSTED("Trusted", ChatColor.DARK_AQUA, 20),
-    MASTER("Master", null, 3),
-    TITAN("Titan", null, 2),
-    NINJA("Ninja", null, 1),
+    MASTER("Master", ChatColor.DARK_RED, 3),
+    TITAN("Titan", ChatColor.GOLD, 2),
+    NINJA("Ninja", ChatColor.AQUA, 1),
     DEFAULT(null, null, 0);
 
     private String prefix;

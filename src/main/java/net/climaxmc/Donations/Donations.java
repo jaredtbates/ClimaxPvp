@@ -33,5 +33,7 @@ public class Donations {
             plugin.getLogger().warning("Could not enable Votifier!");
         }
         voteReceiver.start();
+
+        new DonationsChecker(plugin);
     }
 }
