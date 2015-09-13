@@ -3,6 +3,7 @@ package net.climaxmc.KitPvp.Listeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.Utils.I;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -53,26 +54,16 @@ public class PlayerRespawnListener implements Listener {
             player.removePotionEffect(effect.getType());
         }
 
-        ItemStack kitSelector = new ItemStack(Material.NETHER_STAR);
-        ItemMeta kitSelectorMeta = kitSelector.getItemMeta();
-        kitSelectorMeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "Kit Selector");
-        List<String> kitSelectorLores = new ArrayList<>();
-        kitSelectorLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Select from a variety");
-        kitSelectorLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "of different kits!");
-        kitSelectorMeta.setLore(kitSelectorLores);
-        kitSelector.setItemMeta(kitSelectorMeta);
-        player.getInventory().setItem(0, kitSelector);
+        player.getInventory().setItem(0, new I(Material.NETHER_STAR)
+                .name(ChatColor.GREEN + "" + ChatColor.BOLD + "Kit Selector")
+                .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Select from a variety")
+                .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "of different kits!"));
 
         if (KitManager.getPreviousKit().containsKey(player.getUniqueId())) {
             Kit kit = KitManager.getPreviousKit().get(player.getUniqueId());
-            ItemStack previousKit = new ItemStack(Material.REDSTONE);
-            ItemMeta previousKitMeta = previousKit.getItemMeta();
-            previousKitMeta.setDisplayName(ChatColor.GREEN + "Previous Kit: " + kit.getColor() + kit.getName());
-            List<String> previousKitLores = new ArrayList<>();
-            previousKitLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Equip your previous kit.");
-            previousKitMeta.setLore(previousKitLores);
-            previousKit.setItemMeta(previousKitMeta);
-            player.getInventory().setItem(1, previousKit);
+            player.getInventory().setItem(1, new I(Material.REDSTONE)
+                    .name(ChatColor.GREEN + "Previous Kit: " + kit.getColor() + kit.getName())
+                    .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Equip your previous kit."));
         }
 
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
@@ -80,7 +71,6 @@ public class PlayerRespawnListener implements Listener {
         bookMeta.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "Help/Rules");
         bookMeta.setTitle(ChatColor.AQUA + "" + ChatColor.BOLD + "Help/Rules");
         bookMeta.setAuthor(ChatColor.GOLD + "" + ChatColor.BOLD + "Climax" + ChatColor.RED + "" + ChatColor.BOLD + "MC");
-
         int fullPageNumber = plugin.getBook().length() / 256;
         List<String> pages = new ArrayList<>();
         for (int i = 0; i < fullPageNumber; i++) {
@@ -91,35 +81,13 @@ public class PlayerRespawnListener implements Listener {
         book.setItemMeta(bookMeta);
         player.getInventory().setItem(7, book);
 
-        ItemStack particles = new ItemStack(Material.SEEDS);
-        ItemMeta particlesMeta = particles.getItemMeta();
-        particlesMeta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "Trail Selector");
-        List<String> particlesLores = new ArrayList<>();
-        particlesLores.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Select a cool looking trail!");
-        particlesMeta.setLore(particlesLores);
-        particles.setItemMeta(particlesMeta);
-        player.getInventory().setItem(8, particles);
+        player.getInventory().setItem(8, new I(Material.SEEDS)
+                .name(ChatColor.GREEN + "" + ChatColor.BOLD + "Trail Selector")
+                .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Select a cool looking trail!"));
 
-        ItemStack challenges = new ItemStack(Material.DIAMOND);
-        ItemMeta challengesItemMeta = challenges.getItemMeta();
-        challengesItemMeta.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenges");
-        List<String> challengesLore = new ArrayList<>();
-        challengesLore.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "View your challenges,");
-        challengesLore.add(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "start new ones, and receive rewards!");
-        challengesItemMeta.setLore(challengesLore);
-        challenges.setItemMeta(challengesItemMeta);
-        player.getInventory().setItem(4, challenges);
-
-        ItemStack crates = new ItemStack(Material.BEDROCK);
-        ItemMeta cratesItemMeta = crates.getItemMeta();
-        cratesItemMeta.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + "???");
-        List<String> cratesLore = new ArrayList<>();
-        cratesLore.add(ChatColor.DARK_PURPLE + "" + ChatColor.MAGIC + "B" + ChatColor.DARK_PURPLE + "" + ChatColor.MAGIC + "uy"
-                + ChatColor.DARK_PURPLE + " " + ChatColor.MAGIC + "crate" + ChatColor.DARK_PURPLE + "s that ");
-        cratesLore.add(ChatColor.DARK_PURPLE + "g" + ChatColor.DARK_PURPLE + "" + ChatColor.MAGIC + "ive"
-                + ChatColor.DARK_PURPLE + " you great " + ChatColor.DARK_PURPLE + "" + ChatColor.MAGIC + "rewards" + ChatColor.DARK_PURPLE + "!");
-        cratesItemMeta.setLore(cratesLore);
-        crates.setItemMeta(cratesItemMeta);
-        player.getInventory().setItem(3, crates);
+        player.getInventory().setItem(4, new I(Material.DIAMOND)
+                .name(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenges")
+                .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "View your challenges,")
+                .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "start new ones, and receive rewards!"));
     }
 }

@@ -70,3 +70,5 @@ commands:
     aliases: [cchat, cc]
   rank:
     description: Sets the rank of a player
+  pei:
+    description: Receive a Pei!

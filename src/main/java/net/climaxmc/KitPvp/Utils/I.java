@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Utils;
 
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -189,5 +190,29 @@ public class I extends ItemStack {
             throw new IllegalArgumentException("color() only applicable for leather armor!");
         }
     }
-}
 
+    /**
+     * Adds an {@link ItemFlag} to the {@link ItemStack}
+     *
+     * @param flag the flag to add
+     * @return this builder for chaining
+     */
+    public I flag(ItemFlag flag) {
+        final ItemMeta meta = getItemMeta();
+        meta.addItemFlags(flag);
+        setItemMeta(meta);
+        return this;
+    }
+
+    /**
+     * Clears the list of {@link ItemFlag}s of the {@link ItemStack}
+     *
+     * @return this builder for chaining
+     */
+    public I clearFlags() {
+        final ItemMeta meta = getItemMeta();
+        meta.getItemFlags().forEach(meta::removeItemFlags);
+        setItemMeta(meta);
+        return this;
+    }
+}

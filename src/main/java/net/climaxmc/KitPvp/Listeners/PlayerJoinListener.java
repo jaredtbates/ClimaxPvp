@@ -3,11 +3,16 @@ package net.climaxmc.KitPvp.Listeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.Rank;
 import net.climaxmc.common.database.PlayerData;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
 
 import java.util.HashMap;
 
@@ -49,5 +54,12 @@ public class PlayerJoinListener implements Listener {
             plugin.getConfig().set("HighestPlayerCount", playersOnline);
             plugin.saveConfig();
         }
+
+        ScoreboardManager manager = Bukkit.getScoreboardManager();
+        Scoreboard board = manager.getNewScoreboard();
+
+
+
+        player.setScoreboard(board);
     }
 }

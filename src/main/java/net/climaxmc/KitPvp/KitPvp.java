@@ -64,5 +64,6 @@ public class KitPvp {
         plugin.getCommand("realname").setExecutor(new RealNameCommand(plugin));
         plugin.getCommand("baltop").setExecutor(new BalanceTopCommand(plugin));
         plugin.getCommand("youtube").setExecutor(new YoutubeCommand(plugin));
+        plugin.getCommand("pei").setExecutor(new PeiCommand(plugin));
     }
 }
