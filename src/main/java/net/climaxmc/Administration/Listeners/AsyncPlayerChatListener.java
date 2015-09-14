@@ -32,11 +32,8 @@ public class AsyncPlayerChatListener implements Listener {
 
         String level = playerData.getLevelColor() + Integer.toString(kills);
 
-        if (playerData.hasRank(Rank.TITAN)) {
-            event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
-        }
-
         if (playerData.hasRank(Rank.NINJA)) {
+            event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
             ChatColor color = rank.getColor();
             event.setFormat(level + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "{" + (color == null ? "" : color) + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
         } else {

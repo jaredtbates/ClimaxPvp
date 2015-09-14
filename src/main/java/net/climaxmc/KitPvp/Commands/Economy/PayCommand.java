@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Commands;
+package net.climaxmc.KitPvp.Commands.Economy;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.PlayerData;

@@ -27,12 +27,12 @@ public class Donations {
         plugin.getServer().getPluginManager().registerEvents(new InventoryClickListener(plugin, this), plugin);
 
         // Initialize Votifier
-        try {
+        /*try {
             voteReceiver = new VoteReceiver(plugin, "0.0.0.0", 8192);
         } catch (Exception e) {
             plugin.getLogger().warning("Could not enable Votifier!");
         }
-        voteReceiver.start();
+        voteReceiver.start();*/
 
         new DonationsChecker(plugin);
     }

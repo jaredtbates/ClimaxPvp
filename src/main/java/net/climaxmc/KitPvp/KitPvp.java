@@ -2,6 +2,10 @@ package net.climaxmc.KitPvp;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Commands.*;
+import net.climaxmc.KitPvp.Commands.Economy.BalanceCommand;
+import net.climaxmc.KitPvp.Commands.Economy.BalanceTopCommand;
+import net.climaxmc.KitPvp.Commands.Economy.EconomyCommand;
+import net.climaxmc.KitPvp.Commands.Economy.PayCommand;
 import net.climaxmc.KitPvp.Commands.Messaging.MessageCommand;
 import net.climaxmc.KitPvp.Commands.Messaging.ReplyCommand;
 import net.climaxmc.KitPvp.Listeners.*;

@@ -3,6 +3,7 @@ package net.climaxmc.KitPvp;
 import lombok.Data;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.Rank;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
@@ -110,7 +111,11 @@ public abstract class Kit implements Listener, CommandExecutor {
     public void wearCheckLevel(Player player) {
         if (!KitManager.isPlayerInKit(player)) {
             PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
-            if (playerData.getLevelColor().contains(String.valueOf(color.getChar())) || playerData.getTemporaryPlayerData().containsKey("Admin Mode")) {
+            if (playerData.getLevelColor().contains(String.valueOf(color.getChar()))
+                    || playerData.getTemporaryPlayerData().containsKey("Admin Mode")
+                    || (playerData.hasRank(Rank.NINJA) && (color.equals(ChatColor.BLUE) || color.equals(ChatColor.GREEN)))
+                    || (playerData.hasRank(Rank.TITAN) && color.equals(ChatColor.RED))
+                    || (playerData.hasRank(Rank.MASTER) && color.equals(ChatColor.GOLD))) {
                 KitManager.getPlayersInKits().put(player.getUniqueId(), this);
 
                 for (PotionEffect effect : player.getActivePotionEffects()) {

@@ -19,8 +19,6 @@ public class MySQL {
     private static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, `nickname` = ? WHERE `uuid` = ?;";
     private static final String GET_PUNISHMENTS = "SELECT * FROM `climax_punishments` WHERE `uuid` = ?;";
     private static final String CREATE_PUNISHMENTS_TABLE = "CREATE TABLE IF NOT EXISTS `climax_punishments` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `ban_date` BIGINT DEFAULT 0 NOT NULL, `ban_time` BIGINT DEFAULT 0 NOT NULL, `ban_reason` VARCHAR(128) DEFAULT '' NOT NULL, `banner` VARCHAR(36) NOT NULL, `mute_date` BIGINT DEFAULT 0 NOT NULL, `mute_time` BIGINT DEFAULT 0 NOT NULL, `mute_reason` VARCHAR(128) DEFAULT '' NOT NULL, `muter` VARCHAR(36) NOT NULL);";
-    private static final String CREATE_PUNISHMENTS = "INSERT IGNORE INTO `climax_punishments` (`uuid`, `ban_date`, `ban_time`, `ban_reason`, `banner`, `mute_date`, `mute_time`, `mute_reason`, `muter`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
-    private static final String UPDATE_PUNISHMENTS = "UPDATE `climax_punishments` SET `ban_date` = ?, `ban_time` = ?, `ban_reason` = ?, `banner` = ?, `mute_date` = ?, `mute_time` = ?, `mute_reason` = ?, `muter` = ? WHERE `uuid` = ?";
     private final Plugin plugin;
     private final String address;
     private final int port;
@@ -216,8 +214,7 @@ public class MySQL {
      * @param uuid UUID of the player to create data of
      */
     public synchronized void createPlayerData(UUID uuid) {
-        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), Rank.DEFAULT.toString(), 0, 0, 0, "", null);
-        executeUpdate(CREATE_PUNISHMENTS, uuid.toString(), 0, 0, "", "", 0, 0, "", "");
+        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), Rank.DEFAULT.toString(), 0, 0, 0, null);
     }
 
     /**
@@ -232,18 +229,6 @@ public class MySQL {
                 playerData.getKills(),
                 playerData.getDeaths(),
                 playerData.getNickname(),
-                playerData.getUuid().toString()
-        );
-
-        executeUpdate(UPDATE_PUNISHMENTS,
-                playerData.getBanDate(),
-                playerData.getBanTime(),
-                playerData.getBanReason(),
-                (playerData.getBanner() != null ? playerData.getBanner().toString() : "null"),
-                playerData.getMuteDate(),
-                playerData.getMuteTime(),
-                playerData.getMuteReason(),
-                (playerData.getMuter() != null ? playerData.getMuter().toString() : "null"),
                 playerData.getUuid().toString()
         );
     }
