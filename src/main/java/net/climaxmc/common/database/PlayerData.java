@@ -2,6 +2,7 @@ package net.climaxmc.common.database;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.common.events.PlayerBalanceChangeEvent;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -16,15 +17,7 @@ public class PlayerData {
     private Rank rank;
     private int balance, kills, deaths;
     private String nickname;
-
-    private long banDate;
-    private long banTime;
-    private String banReason;
-    private UUID banner;
-    private long muteDate;
-    private long muteTime;
-    private String muteReason;
-    private UUID muter;
+    private List<Punishment> punishments;
 
     /**
      * Sets the player's rank
@@ -208,79 +201,23 @@ public class PlayerData {
         getTemporaryPlayerData().remove(key);
     }
 
-    /*
-            ~~~~~ Punishments ~~~~~
-     */
-
     /**
-     * Sets the ban date of a player
+     * Adds a punishment to the player
      *
-     * @param date Date to set to
+     * @param punishment Punishment to apply
      */
-    public void setBanDate(long date) {
-        mySQL.updatePunishments("ban_date", banDate = date, uuid);
+    public void addPunishment(Punishment punishment) {
+        punishments.add(punishment);
+        mySQL.executeUpdate(MySQL.CREATE_PUNISHMENT, uuid.toString(), punishment.getType().name(), punishment.getTime(), punishment.getExpiration(), punishment.getPunisherUUID().toString(), punishment.getReason());
     }
 
     /**
-     * Sets the remaining ban time of a player
+     * Removes a punishment from the player
      *
-     * @param time Remaining time to set to
+     * @param punishment Punishment to remove
      */
-    public void setBanTime(long time) {
-        mySQL.updatePunishments("ban_time", banTime = time, uuid);
-    }
-
-    /**
-     * Sets the ban reason of a player
-     *
-     * @param reason Reason to set to
-     */
-    public void setBanReason(String reason) {
-        mySQL.updatePunishments("ban_reason", banReason = reason, uuid);
-    }
-
-    /**
-     * Sets the banner of a player
-     *
-     * @param bannerUUID UUID of the banner
-     */
-    public void setBanner(UUID bannerUUID) {
-        mySQL.updatePunishments("banner", (banner = bannerUUID).toString(), uuid);
-    }
-
-    /**
-     * Sets the mute date of a player
-     *
-     * @param date Date to set to
-     */
-    public void setMuteDate(long date) {
-        mySQL.updatePunishments("mute_date", muteDate = date, uuid);
-    }
-
-    /**
-     * Sets the remaining mute time of a player
-     *
-     * @param time Remaining time to set to
-     */
-    public void setMuteTime(long time) {
-        mySQL.updatePunishments("mute_time", muteTime = time, uuid);
-    }
-
-    /**
-     * Sets the mute reason of a player
-     *
-     * @param reason Reason to set to
-     */
-    public void setMuteReason(String reason) {
-        mySQL.updatePunishments("mute_reason", muteReason = reason, uuid);
-    }
-
-    /**
-     * Sets the muter of a player
-     *
-     * @param muterUUID UUID of the muter
-     */
-    public void setMuter(UUID muterUUID) {
-        mySQL.updatePunishments("muter", (muter = muterUUID).toString(), uuid);
+    public void removePunishment(Punishment punishment) {
+        punishments.remove(punishment);
+        mySQL.executeUpdate(MySQL.UPDATE_PUNISHMENT_TIME, 0, uuid.toString(), punishment.getType().name(), punishment.getTime());
     }
 }

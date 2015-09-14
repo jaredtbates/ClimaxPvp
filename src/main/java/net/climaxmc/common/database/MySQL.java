@@ -1,6 +1,7 @@
 package net.climaxmc.common.database;
 
 import lombok.Getter;
+import net.climaxmc.Administration.Punishments.Punishment;
 import org.bukkit.plugin.Plugin;
 
 import java.sql.*;
@@ -13,12 +14,14 @@ import java.util.logging.Logger;
  * @author computerwizjared
  */
 public class MySQL {
-    private static final String GET_PLAYERDATA = "SELECT * FROM `climax_playerdata` WHERE `uuid` = ?;";
-    private static final String CREATE_PLAYERDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_playerdata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, `nickname` VARCHAR(32) DEFAULT NULL);";
-    private static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `rank`, `balance`, `kills`, `deaths`, `nickname`) VALUES (?, ?, ?, ?, ?, ?);";
-    private static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, `nickname` = ? WHERE `uuid` = ?;";
-    private static final String GET_PUNISHMENTS = "SELECT * FROM `climax_punishments` WHERE `uuid` = ?;";
-    private static final String CREATE_PUNISHMENTS_TABLE = "CREATE TABLE IF NOT EXISTS `climax_punishments` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `ban_date` BIGINT DEFAULT 0 NOT NULL, `ban_time` BIGINT DEFAULT 0 NOT NULL, `ban_reason` VARCHAR(128) DEFAULT '' NOT NULL, `banner` VARCHAR(36) NOT NULL, `mute_date` BIGINT DEFAULT 0 NOT NULL, `mute_time` BIGINT DEFAULT 0 NOT NULL, `mute_reason` VARCHAR(128) DEFAULT '' NOT NULL, `muter` VARCHAR(36) NOT NULL);";
+    public static final String GET_PLAYERDATA = "SELECT * FROM `climax_playerdata` WHERE `uuid` = ?;";
+    public static final String CREATE_PLAYERDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_playerdata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, `nickname` VARCHAR(32) DEFAULT NULL);";
+    public static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `rank`, `balance`, `kills`, `deaths`, `nickname`) VALUES (?, ?, ?, ?, ?, ?);";
+    public static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, `nickname` = ? WHERE `uuid` = ?;";
+    public static final String CREATE_PUNISHMENTS_TABLE = "CREATE TABLE IF NOT EXISTS `climax_punishments` (`uuid` VARCHAR(36) NOT NULL, `type` VARCHAR(32) NOT NULL, `time` BIGINT(20) NOT NULL, `expiration` BIGINT(20) NOT NULL, `punisheruuid` VARCHAR(26) NOT NULL, `reason` TEXT NOT NULL);";
+    public static final String CREATE_PUNISHMENT = "INSERT IGNORE INTO `climax_punishments` (`uuid`, `type`, `time`, `expiration`, `punisheruuid`, `reason`) VALUES (?, ?, ?, ?, ?, ?);";
+    public static final String GET_PUNISHMENTS = "SELECT * FROM `climax_punishments` WHERE `uuid` = ?;";
+    public static final String UPDATE_PUNISHMENT_TIME = "UPDATE `climax_punishments` SET `expiration` = ? WHERE `uuid` = ? AND `type` = ? AND `time` = ?;";
     private final Plugin plugin;
     private final String address;
     private final int port;
@@ -168,38 +171,32 @@ public class MySQL {
         }
 
         ResultSet data = executeQuery(GET_PLAYERDATA, uuid.toString());
-        ResultSet punishments = executeQuery(GET_PUNISHMENTS, uuid.toString());
 
-        if (data == null || punishments == null) {
+        if (data == null) {
             return null;
         }
 
         try {
-            if (data.next() && punishments.next()) {
+            if (data.next()) {
                 Rank rank = Rank.valueOf(data.getString("rank"));
                 int balance = data.getInt("balance");
                 int kills = data.getInt("kills");
                 int deaths = data.getInt("deaths");
                 String nickname = data.getString("nickname");
 
-                long banDate = punishments.getLong("ban_date");
-                long banTime = punishments.getLong("ban_time");
-                String banReason = punishments.getString("ban_reason");
-                String bannerString = punishments.getString("banner");
-                UUID banner = null;
-                if (bannerString.length() == 36) {
-                    banner = UUID.fromString(bannerString);
-                }
-                long muteDate = punishments.getLong("mute_date");
-                long muteTime = punishments.getLong("mute_time");
-                String muteReason = punishments.getString("mute_reason");
-                String muterString = punishments.getString("muter");
-                UUID muter = null;
-                if (muterString.length() == 36) {
-                    muter = UUID.fromString(muterString);
+                PlayerData playerData = new PlayerData(this, uuid, rank, balance, kills, deaths, nickname, new ArrayList<>());
+
+                ResultSet punishments = executeQuery(GET_PUNISHMENTS, uuid.toString());
+                while (punishments != null && punishments.next()) {
+                    Punishment.PunishType type = Punishment.PunishType.valueOf(punishments.getString("type"));
+                    long time = punishments.getLong("time");
+                    long expiration = punishments.getLong("expiration");
+                    UUID punisherUUID = UUID.fromString(punishments.getString("punisheruuid"));
+                    String reason = punishments.getString("reason");
+                    playerData.getPunishments().add(new Punishment(uuid, type, time, expiration, punisherUUID, reason));
                 }
 
-                return new PlayerData(this, uuid, rank, balance, kills, deaths, nickname, banDate, banTime, banReason, banner, muteDate, muteTime, muteReason, muter);
+                return playerData;
             }
         } catch (SQLException e) {
             e.printStackTrace();
