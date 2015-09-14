@@ -33,7 +33,7 @@ public class InventoryClickListener implements Listener {
                 if (event.getCurrentItem().getType().equals(trail.getMaterial())) {
                     PlayerData playerData = plugin.getPlayerData(player);
 
-                    if (!playerData.hasPerk(trail) && !playerData.hasRank(Rank.TRUSTED)) {
+                    if (!playerData.hasRank(Rank.NINJA)) {
                         player.sendMessage(ChatColor.RED + "Please donate at https://donate.climaxmc.net for access to this trail!");
                         return;
                     }

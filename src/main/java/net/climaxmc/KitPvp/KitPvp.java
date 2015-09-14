@@ -6,7 +6,6 @@ import net.climaxmc.KitPvp.Commands.Messaging.MessageCommand;
 import net.climaxmc.KitPvp.Commands.Messaging.ReplyCommand;
 import net.climaxmc.KitPvp.Listeners.*;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
-import net.climaxmc.KitPvp.Menus.CratesMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
@@ -41,7 +40,6 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new BlockPlaceListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PortalListeners(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ChallengesMenu(), plugin);
-        plugin.getServer().getPluginManager().registerEvents(new CratesMenu(), plugin);
         //plugin.getServer().getPluginManager().registerEvents(new HackListeners(plugin), plugin);
 
         // Register commands

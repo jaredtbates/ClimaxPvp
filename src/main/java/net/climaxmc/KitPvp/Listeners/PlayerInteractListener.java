@@ -5,6 +5,7 @@ import net.climaxmc.Donations.Inventories.TrailsInventory;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
+import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.common.database.PlayerData;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -54,83 +55,47 @@ public class PlayerInteractListener implements Listener {
             if (item.getType().equals(Material.NETHER_STAR)) {
                 Inventory kitSelectorInventory = Bukkit.createInventory(null, 54, ChatColor.RED + "" + ChatColor.BOLD + "Kit Selector");
 
-                // TODO: Clean up this code! It sucks!
-                ItemStack goldKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 1);
-                ItemMeta goldKitsMeta = goldKits.getItemMeta();
-                goldKitsMeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kits");
-                goldKits.setItemMeta(goldKitsMeta);
+                ItemStack goldKits = new I(Material.STAINED_CLAY).durability(1).name(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kits").lore("Level 1500");
                 kitSelectorInventory.setItem(1, goldKits);
                 kitSelectorInventory.setItem(7, goldKits);
 
-                ItemStack redKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 14);
-                ItemMeta redKitsMeta = redKits.getItemMeta();
-                redKitsMeta.setDisplayName(ChatColor.RED + "Red Kits");
-                redKits.setItemMeta(redKitsMeta);
+                ItemStack redKits = new I(Material.STAINED_CLAY).durability(14).name(ChatColor.RED + "Red Kits").lore("Level 1000");
                 kitSelectorInventory.setItem(10, redKits);
                 kitSelectorInventory.setItem(16, redKits);
 
-                ItemStack greenKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 5);
-                ItemMeta greenKitsMeta = greenKits.getItemMeta();
-                greenKitsMeta.setDisplayName(ChatColor.GREEN + "Green Kits");
-                greenKits.setItemMeta(greenKitsMeta);
+                ItemStack greenKits = new I(Material.STAINED_CLAY).durability(5).name(ChatColor.GREEN + "Green Kits").lore("Level 500");
                 kitSelectorInventory.setItem(19, greenKits);
                 kitSelectorInventory.setItem(25, greenKits);
 
-                ItemStack blueKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 3);
-                ItemMeta blueKitsMeta = blueKits.getItemMeta();
-                blueKitsMeta.setDisplayName(ChatColor.BLUE + "Blue Kits");
-                blueKits.setItemMeta(blueKitsMeta);
+                ItemStack blueKits = new I(Material.STAINED_CLAY).durability(3).name(ChatColor.BLUE + "Blue Kits").lore("Level 250");
                 kitSelectorInventory.setItem(28, blueKits);
                 kitSelectorInventory.setItem(34, blueKits);
 
-                ItemStack grayKits = new ItemStack(Material.STAINED_CLAY, 1, (short) 7);
-                ItemMeta grayKitsMeta = grayKits.getItemMeta();
-                grayKitsMeta.setDisplayName(ChatColor.GRAY + "Gray Kits");
-                grayKits.setItemMeta(grayKitsMeta);
+                ItemStack grayKits = new I(Material.STAINED_CLAY).durability(7).name(ChatColor.GRAY + "Gray Kits");
                 kitSelectorInventory.setItem(37, grayKits);
                 kitSelectorInventory.setItem(43, grayKits);
 
-                ItemStack goldKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 1);
-                ItemMeta goldKitsGlassMeta = goldKits.getItemMeta();
-                goldKitsGlassMeta.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kit");
-                goldKitsGlassMeta.setLore(Collections.singletonList(ChatColor.GOLD + "" + ChatColor.ITALIC + "Unlocked at Level 1100"));
-                goldKitsGlass.setItemMeta(goldKitsGlassMeta);
+                ItemStack goldKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(1).name(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kit").lore(ChatColor.GOLD + "" + ChatColor.ITALIC + "Unlocked at Level 1500");
                 for (int i = 2; i < 7; i++) {
                     kitSelectorInventory.setItem(i, goldKitsGlass);
                 }
 
-                ItemStack redKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 14);
-                ItemMeta redKitsGlassMeta = goldKits.getItemMeta();
-                redKitsGlassMeta.setDisplayName(ChatColor.RED + "Red Kit");
-                redKitsGlassMeta.setLore(Collections.singletonList(ChatColor.RED + "" + ChatColor.ITALIC + "Unlocked at Level 700"));
-                redKitsGlass.setItemMeta(redKitsGlassMeta);
+                ItemStack redKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(14).name(ChatColor.RED + "Red Kit").lore(ChatColor.RED + "" + ChatColor.ITALIC + "Unlocked at Level 1000");
                 for (int i = 11; i < 16; i++) {
                     kitSelectorInventory.setItem(i, redKitsGlass);
                 }
 
-                ItemStack greenKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 5);
-                ItemMeta greenKitsGlassMeta = goldKits.getItemMeta();
-                greenKitsGlassMeta.setDisplayName(ChatColor.GREEN + "Green Kit");
-                greenKitsGlassMeta.setLore(Collections.singletonList(ChatColor.GREEN + "" + ChatColor.ITALIC + "Unlocked at Level 400"));
-                greenKitsGlass.setItemMeta(greenKitsGlassMeta);
+                ItemStack greenKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(5).name(ChatColor.GREEN + "Green Kit").lore(ChatColor.GREEN + "" + ChatColor.ITALIC + "Unlocked at Level 500");
                 for (int i = 20; i < 25; i++) {
                     kitSelectorInventory.setItem(i, greenKitsGlass);
                 }
 
-                ItemStack blueKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 3);
-                ItemMeta blueKitsGlassMeta = goldKits.getItemMeta();
-                blueKitsGlassMeta.setDisplayName(ChatColor.BLUE + "Blue Kit");
-                blueKitsGlassMeta.setLore(Collections.singletonList(ChatColor.BLUE + "" + ChatColor.ITALIC + "Unlocked at Level 110"));
-                blueKitsGlass.setItemMeta(blueKitsGlassMeta);
+                ItemStack blueKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(3).name(ChatColor.BLUE + "Blue Kit").lore(ChatColor.BLUE + "" + ChatColor.ITALIC + "Unlocked at Level 250");
                 for (int i = 29; i < 34; i++) {
                     kitSelectorInventory.setItem(i, blueKitsGlass);
                 }
 
-                ItemStack grayKitsGlass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
-                ItemMeta grayKitsGlassMeta = goldKits.getItemMeta();
-                grayKitsGlassMeta.setDisplayName(ChatColor.GRAY + "Gray Kit");
-                grayKitsGlassMeta.setLore(Collections.singletonList(ChatColor.GRAY + "" + ChatColor.ITALIC + "Unlocked at Level 0"));
-                grayKitsGlass.setItemMeta(grayKitsGlassMeta);
+                ItemStack grayKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(7).name(ChatColor.GRAY + "Gray Kit").lore(ChatColor.GRAY + "" + ChatColor.ITALIC + "Unlocked at Level 0");
                 for (int i = 38; i < 42; i++) {
                     kitSelectorInventory.setItem(i, grayKitsGlass);
                 }
@@ -138,39 +103,21 @@ public class PlayerInteractListener implements Listener {
                 int goldSlot = 1, redSlot = 10, limeSlot = 19, blueSlot = 28, graySlot = 37;
 
                 for (Kit kit : KitManager.getKits()) {
-                    if (kit.getColor().equals(ChatColor.GOLD)) {
-                        if (playerData.hasData("Admin Mode") ||
-                                playerData.getLevelColor().contains(kit.getColor() + "")) {
+                    if (playerData.hasData("Admin Mode") ||
+                            playerData.getLevelColor().contains(kit.getColor() + "")) {
+                        if (kit.getColor().equals(ChatColor.GOLD)) {
                             kitSelectorInventory.setItem(++goldSlot, kit.getItem());
-                        }
-                    } else if (kit.getColor().equals(ChatColor.RED)) {
-                        if (playerData.hasData("Admin Mode") ||
-                                playerData.getLevelColor().contains(kit.getColor() + "")) {
+                        } else if (kit.getColor().equals(ChatColor.RED)) {
                             kitSelectorInventory.setItem(++redSlot, kit.getItem());
-                        }
-                    } else if (kit.getColor().equals(ChatColor.GREEN)) {
-                        if (playerData.hasData("Admin Mode") ||
-                                playerData.getLevelColor().contains(kit.getColor() + "")) {
+                        } else if (kit.getColor().equals(ChatColor.GREEN)) {
                             kitSelectorInventory.setItem(++limeSlot, kit.getItem());
-                        }
-                    } else if (kit.getColor().equals(ChatColor.BLUE)) {
-                        if (playerData.hasData("Admin Mode") ||
-                                playerData.getLevelColor().contains(kit.getColor() + "")) {
+                        } else if (kit.getColor().equals(ChatColor.BLUE)) {
                             kitSelectorInventory.setItem(++blueSlot, kit.getItem());
-                        }
-                    } else if (kit.getColor().equals(ChatColor.GRAY)) {
-                        if (playerData.hasData("Admin Mode") ||
-                                playerData.getLevelColor().contains(kit.getColor() + "")) {
+                        } else if (kit.getColor().equals(ChatColor.GRAY)) {
                             kitSelectorInventory.setItem(++graySlot, kit.getItem());
                         }
                     }
                 }
-
-                ItemStack moreKits = new ItemStack(Material.THIN_GLASS);
-                ItemMeta moreKitsMeta = moreKits.getItemMeta();
-                moreKitsMeta.setDisplayName(ChatColor.AQUA + "More Kits " + ChatColor.ITALIC + "(Currently Unavailable)");
-                moreKits.setItemMeta(moreKitsMeta);
-                kitSelectorInventory.setItem(53, moreKits);
 
                 player.openInventory(kitSelectorInventory);
             } else if (item.getType().equals(Material.SEEDS)) {

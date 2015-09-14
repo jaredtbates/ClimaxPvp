@@ -12,13 +12,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class ChallengesFiles {
-
-    private ClimaxPvp plugin;
-
-    public ChallengesFiles(ClimaxPvp plugin) {
-        this.plugin = plugin;
-    }
-
     private File file;
     private FileConfiguration config;
 

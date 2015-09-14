@@ -59,7 +59,6 @@ public class KitManager implements Listener {
         kits.add(new RangerKit());
         kits.add(new AssassinKit());
         kits.add(new VikingKit());
-        //kits.add(new LazerKit());
         kits.add(new KangarooKit());
 
         for (Kit kit : kits) {

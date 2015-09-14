@@ -2,7 +2,6 @@ package net.climaxmc.common.database;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import net.climaxmc.common.donations.Perk;
 import net.climaxmc.common.events.PlayerBalanceChangeEvent;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -16,7 +15,6 @@ public class PlayerData {
     private final UUID uuid;
     private Rank rank;
     private int balance, kills, deaths;
-    private List<String> perks;
     private String nickname;
 
     private long banDate;
@@ -137,52 +135,20 @@ public class PlayerData {
      */
     public String getLevelColor() {
         String color = ChatColor.GRAY + "";
-        if (kills >= 110) {
+        if (kills >= 250) {
             color += ChatColor.BLUE;
         }
-        if (kills >= 400) {
+        if (kills >= 500) {
             color += ChatColor.GREEN;
         }
-        if (kills >= 700) {
+        if (kills >= 1000) {
             color += ChatColor.RED;
         }
-        if (kills >= 1100) {
+        if (kills >= 1500) {
             color += ChatColor.GOLD + "" + ChatColor.BOLD;
         }
 
         return color;
-    }
-
-    /**
-     * Checks if player has perk
-     *
-     * @param perk Perk to check
-     * @return If player has perk
-     */
-    public boolean hasPerk(Perk perk) {
-        return perks.contains(perk.getDBName().toLowerCase()) || hasRank(Rank.TRUSTED);
-    }
-
-    /**
-     * Adds a perk to a player
-     *
-     * @param perk Perk to add
-     */
-    public void addPerk(Perk perk) {
-        perks.add(perk.getDBName());
-        Collections.sort(perks);
-        mySQL.updatePlayerData("perks", Arrays.toString(perks.toArray()).replace("[", "").replace("]", "").toLowerCase(), uuid);
-    }
-
-    /**
-     * Removes a perk from a player
-     *
-     * @param perk Perk to remove
-     */
-    public void removePerk(Perk perk) {
-        perks.remove(perk.getDBName());
-        Collections.sort(perks);
-        mySQL.updatePlayerData("perks", Arrays.toString(perks.toArray()).replace("[", "").replace("]", "").toLowerCase(), uuid);
     }
 
     /**

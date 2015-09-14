@@ -1,10 +1,9 @@
 package net.climaxmc.common.donations.trails;
 
 import lombok.Getter;
-import net.climaxmc.common.donations.Perk;
 import org.bukkit.Material;
 
-public enum Trail implements Perk {
+public enum Trail {
     CLOUDS("Clouds", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.EXPLOSION_NORMAL, 0.1, 2, 0.5), Material.COAL),
     FLAME("Flame", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.LAVA, 0, 0, 0), Material.LAVA_BUCKET),
     RAIN("Rain", new ParticleEffect.ParticleData(ParticleEffect.ParticleType.DRIP_WATER, 0, 6, 0.2), Material.WATER_BUCKET, 0.5),
@@ -33,10 +32,5 @@ public enum Trail implements Perk {
         this.data = data;
         this.material = material;
         this.yOffset = yOffset;
-    }
-
-    @Override
-    public String getDBName() {
-        return "Trail_" + this.toString();
     }
 }

@@ -14,9 +14,9 @@ import java.util.logging.Logger;
  */
 public class MySQL {
     private static final String GET_PLAYERDATA = "SELECT * FROM `climax_playerdata` WHERE `uuid` = ?;";
-    private static final String CREATE_PLAYERDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_playerdata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, `perks` TEXT NOT NULL, `nickname` VARCHAR(32) DEFAULT NULL);";
-    private static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `rank`, `balance`, `kills`, `deaths`, `perks`, `nickname`) VALUES (?, ?, ?, ?, ?, ?, ?);";
-    private static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, `perks` = ?, `nickname` = ? WHERE `uuid` = ?;";
+    private static final String CREATE_PLAYERDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_playerdata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, `nickname` VARCHAR(32) DEFAULT NULL);";
+    private static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `rank`, `balance`, `kills`, `deaths`, `nickname`) VALUES (?, ?, ?, ?, ?, ?);";
+    private static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, `nickname` = ? WHERE `uuid` = ?;";
     private static final String GET_PUNISHMENTS = "SELECT * FROM `climax_punishments` WHERE `uuid` = ?;";
     private static final String CREATE_PUNISHMENTS_TABLE = "CREATE TABLE IF NOT EXISTS `climax_punishments` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `ban_date` BIGINT DEFAULT 0 NOT NULL, `ban_time` BIGINT DEFAULT 0 NOT NULL, `ban_reason` VARCHAR(128) DEFAULT '' NOT NULL, `banner` VARCHAR(36) NOT NULL, `mute_date` BIGINT DEFAULT 0 NOT NULL, `mute_time` BIGINT DEFAULT 0 NOT NULL, `mute_reason` VARCHAR(128) DEFAULT '' NOT NULL, `muter` VARCHAR(36) NOT NULL);";
     private static final String CREATE_PUNISHMENTS = "INSERT IGNORE INTO `climax_punishments` (`uuid`, `ban_date`, `ban_time`, `ban_reason`, `banner`, `mute_date`, `mute_time`, `mute_reason`, `muter`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
@@ -182,7 +182,6 @@ public class MySQL {
                 int balance = data.getInt("balance");
                 int kills = data.getInt("kills");
                 int deaths = data.getInt("deaths");
-                List<String> perks = new ArrayList<>(Arrays.asList(data.getString("perks").split(", ")));
                 String nickname = data.getString("nickname");
 
                 long banDate = punishments.getLong("ban_date");
@@ -202,7 +201,7 @@ public class MySQL {
                     muter = UUID.fromString(muterString);
                 }
 
-                return new PlayerData(this, uuid, rank, balance, kills, deaths, perks, nickname, banDate, banTime, banReason, banner, muteDate, muteTime, muteReason, muter);
+                return new PlayerData(this, uuid, rank, balance, kills, deaths, nickname, banDate, banTime, banReason, banner, muteDate, muteTime, muteReason, muter);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -232,7 +231,6 @@ public class MySQL {
                 playerData.getBalance(),
                 playerData.getKills(),
                 playerData.getDeaths(),
-                Arrays.toString(playerData.getPerks().toArray()).replace("[", "").replace("]", "").toLowerCase(),
                 playerData.getNickname(),
                 playerData.getUuid().toString()
         );

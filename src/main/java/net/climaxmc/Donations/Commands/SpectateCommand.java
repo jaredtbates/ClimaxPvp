@@ -2,13 +2,13 @@ package net.climaxmc.Donations.Commands;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.PlayerData;
-import net.climaxmc.common.donations.Perk;
+import net.climaxmc.common.database.Rank;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
-public class SpectateCommand implements Perk, CommandExecutor {
+public class SpectateCommand implements CommandExecutor {
     private ClimaxPvp plugin;
 
     public SpectateCommand(ClimaxPvp plugin) {
@@ -24,8 +24,8 @@ public class SpectateCommand implements Perk, CommandExecutor {
         Player player = (Player) sender;
         PlayerData playerData = plugin.getPlayerData(player);
 
-        if (!playerData.hasPerk(this)) {
-            player.sendMessage(ChatColor.RED + "Please donate at https://donate.climaxmc.net for access to spectator mode!");
+        if (!playerData.hasRank(Rank.TITAN)) {
+            player.sendMessage(ChatColor.RED + "Please donate for Titan at https://donate.climaxmc.net for access to spectator mode!");
             return true;
         }
 
@@ -46,10 +46,5 @@ public class SpectateCommand implements Perk, CommandExecutor {
         }
 
         return true;
-    }
-
-    @Override
-    public String getDBName() {
-        return "Spectator";
     }
 }

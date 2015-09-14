@@ -3,12 +3,11 @@ package net.climaxmc.Donations.Commands;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.Rank;
 import net.climaxmc.common.database.PlayerData;
-import net.climaxmc.common.donations.Perk;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
-public class NicknameCommand implements Perk, CommandExecutor {
+public class NicknameCommand implements CommandExecutor {
     private ClimaxPvp plugin;
 
     public NicknameCommand(ClimaxPvp plugin) {
@@ -24,8 +23,8 @@ public class NicknameCommand implements Perk, CommandExecutor {
         Player player = (Player) sender;
         PlayerData playerData = plugin.getPlayerData(player);
 
-        if (!playerData.hasPerk(this)) {
-            player.sendMessage(ChatColor.RED + "Please donate at https://donate.climaxmc.net for access to this perk!");
+        if (!playerData.hasRank(Rank.MASTER)) {
+            player.sendMessage(ChatColor.RED + "Please donate for Master at https://donate.climaxmc.net for access to this perk!");
             return true;
         }
 
@@ -78,10 +77,5 @@ public class NicknameCommand implements Perk, CommandExecutor {
         player.sendMessage(ChatColor.GREEN + "Your nickname has been set to " + nickname + ChatColor.GREEN + "!");
 
         return true;
-    }
-
-    @Override
-    public String getDBName() {
-        return "Nickname";
     }
 }
