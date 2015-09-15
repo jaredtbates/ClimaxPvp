@@ -94,10 +94,6 @@ public class ScoreboardListener implements Listener {
             objective.getScore("   ").setScore(3);
             objective.getScore(ChatColor.YELLOW + "" + ChatColor.BOLD + "Website").setScore(2);
             objective.getScore("climaxmc.net").setScore(1);
-            Objective healthObjective = board.registerNewObjective("showhealth", "health");
-            healthObjective.setDisplaySlot(DisplaySlot.BELOW_NAME);
-            healthObjective.setDisplayName("\u2764");
-            player.setHealth(player.getHealth());
         }
     }
 }
