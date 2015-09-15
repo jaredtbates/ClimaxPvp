@@ -24,7 +24,7 @@ public class Administration {
         plugin.getCommand("check").setExecutor(new CheckCommand(plugin));
         plugin.getCommand("clearchat").setExecutor(new ChatCommands(plugin));
         plugin.getCommand("rank").setExecutor(new RankCommand(plugin));
-        plugin.getCommand("ban").setExecutor(new BanCommand(plugin));
+        //plugin.getCommand("ban").setExecutor(new BanCommand(plugin));
 
         // Start runnables
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new AutoBroadcastRunnable(plugin), 20 * plugin.getConfig().getInt("AutoBroadcast.Time"), 20 * plugin.getConfig().getInt("AutoBroadcast.Time"));

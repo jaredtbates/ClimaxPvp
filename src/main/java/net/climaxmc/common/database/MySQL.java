@@ -149,17 +149,6 @@ public class MySQL {
     }
 
     /**
-     * Update Punishments
-     *
-     * @param column The column to update
-     * @param to     What to update the column to
-     * @param uuid   UUID of the player to update
-     */
-    public synchronized void updatePunishments(String column, Object to, UUID uuid) {
-        executeUpdate("UPDATE `climax_punishments` SET " + column + " = ? WHERE uuid = ?;", to, uuid.toString());
-    }
-
-    /**
      * Get data of a player
      *
      * @param uuid UUID of the player to get data of
