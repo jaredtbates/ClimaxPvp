@@ -1,5 +1,7 @@
 package net.climaxmc.KitPvp.Listeners;
 
+import net.climaxmc.Administration.Punishments.Punishment;
+import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.Rank;
 import net.climaxmc.common.database.PlayerData;
@@ -8,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -24,9 +27,31 @@ public class PlayerJoinListener implements Listener {
     }
 
     @EventHandler
+    public void onAsyncPlayerJoin(AsyncPlayerPreLoginEvent event) {
+        PlayerData playerData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(event.getUniqueId()));
+
+        if (playerData == null) {
+            plugin.getMySQL().createPlayerData(event.getUniqueId());
+            return;
+        }
+
+        playerData.getPunishments().forEach(punishment -> {
+            if (System.currentTimeMillis() <= (punishment.getTime() + punishment.getExpiration())) {
+                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, ChatColor.RED + "You were temporarily banned by " + plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()).getName()
+                        + " for " + punishment.getReason() + ".\n"
+                        + "You have " + Time.toString(punishment.getTime() + punishment.getExpiration() - System.currentTimeMillis()) + " left in your ban.\n"
+                        + "Appeal on forum.climaxmc.net if you believe that this is in error!");
+            } else if (punishment.getExpiration() == -1) {
+                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, ChatColor.RED + "You were permanently banned by " + plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()).getName()
+                        + " for " + punishment.getReason() + ".\n"
+                        + "Appeal on forum.climaxmc.net if you believe that this is in error!");
+            }
+        });
+    }
+
+    @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        plugin.getMySQL().createPlayerData(player.getUniqueId());
         PlayerData playerData = plugin.getPlayerData(player);
 
         event.setJoinMessage((player.hasPlayedBefore() ? ChatColor.DARK_AQUA : ChatColor.GOLD) + "Join" + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
@@ -37,8 +62,6 @@ public class PlayerJoinListener implements Listener {
 
         player.setDisplayName(playerData.getNickname());
         player.setPlayerListName(playerData.getLevelColor() + player.getName());
-        player.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Be a part of the community!");
-        player.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "Vote for which feature you'd like to see on Climax! " + ChatColor.RED + "http://www.strawpoll.me/5131832/");
 
         if (playerData.hasRank(Rank.OWNER)) {
             if (!player.isOp()) {

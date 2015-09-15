@@ -72,3 +72,15 @@ commands:
     description: Sets the rank of a player
   pei:
     description: Receive a Pei!
+  ban:
+    description: Ban a player
+  tempban:
+    description: Temporarily ban a player
+  mute:
+    description: Mute a player
+  tempmute:
+    description: Temporarily mute a player
+  kick:
+    description: Kick a player
+  warn:
+    description: Warn a player
