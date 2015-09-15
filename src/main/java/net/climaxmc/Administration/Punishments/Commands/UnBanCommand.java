@@ -31,7 +31,7 @@ public class UnBanCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (!playerData.hasRank(Rank.MODERATOR)) {
-            player.sendMessage("You do not have permission to execute that command!");
+            player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
             return true;
         }
 
@@ -43,7 +43,7 @@ public class UnBanCommand implements CommandExecutor {
         PlayerData targetData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(args[0]));
 
         if (targetData == null) {
-            player.sendMessage("That player has never joined!");
+            player.sendMessage(ChatColor.RED + "That player has never joined!");
             return true;
         }
 

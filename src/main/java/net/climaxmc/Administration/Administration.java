@@ -4,6 +4,7 @@ import net.climaxmc.Administration.Commands.*;
 import net.climaxmc.Administration.Listeners.*;
 import net.climaxmc.Administration.Punishments.Commands.BanCommand;
 import net.climaxmc.Administration.Punishments.Commands.TempBanCommand;
+import net.climaxmc.Administration.Punishments.Commands.UnBanCommand;
 import net.climaxmc.Administration.Runnables.AutoBroadcastRunnable;
 import net.climaxmc.ClimaxPvp;
 
@@ -27,6 +28,7 @@ public class Administration {
         plugin.getCommand("rank").setExecutor(new RankCommand(plugin));
         plugin.getCommand("ban").setExecutor(new BanCommand(plugin));
         plugin.getCommand("tempban").setExecutor(new TempBanCommand(plugin));
+        plugin.getCommand("unban").setExecutor(new UnBanCommand(plugin));
 
         // Start runnables
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new AutoBroadcastRunnable(plugin), 20 * plugin.getConfig().getInt("AutoBroadcast.Time"), 20 * plugin.getConfig().getInt("AutoBroadcast.Time"));
