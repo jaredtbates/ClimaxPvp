@@ -24,30 +24,18 @@ public class PlayerCommandPreprocessListener implements Listener {
         PlayerData playerData = plugin.getPlayerData(player);
         String command = event.getMessage();
 
-        if (StringUtils.startsWithIgnoreCase(event.getMessage(), "/me") || StringUtils.startsWithIgnoreCase(event.getMessage(), "/minecraft:me")) {
+        if (StringUtils.startsWithIgnoreCase(event.getMessage(), "/me")
+                || StringUtils.startsWithIgnoreCase(event.getMessage(), "/minecraft:")
+                || StringUtils.startsWithIgnoreCase(event.getMessage(), "/bukkit:")
+                || StringUtils.startsWithIgnoreCase(event.getMessage(), "/spigot:")) {
             event.setCancelled(true);
             return;
         }
 
         PermissionAttachment attachment = player.addAttachment(plugin);
 
-        if (playerData.hasRank(Rank.HELPER)) {
-            attachment.setPermission("minecraft.command.kick", true);
-            attachment.setPermission("bukkit.command.kick", true);
-        }
-
         if (playerData.hasRank(Rank.MODERATOR)) {
-            attachment.setPermission("minecraft.command.ban", true);
-            attachment.setPermission("minecraft.command.ban-ip", true);
-            attachment.setPermission("minecraft.command.banlist", true);
-            attachment.setPermission("minecraft.command.pardon", true);
-            attachment.setPermission("minecraft.command.pardon-ip", true);
             attachment.setPermission("minecraft.command.tp", true);
-            attachment.setPermission("bukkit.command.ban.player", true);
-            attachment.setPermission("bukkit.command.ban.ip", true);
-            attachment.setPermission("bukkit.command.ban.list", true);
-            attachment.setPermission("bukkit.command.unban.player", true);
-            attachment.setPermission("bukkit.command.unban.ip", true);
             attachment.setPermission("bukkit.command.teleport", true);
         }
 

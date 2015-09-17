@@ -1,11 +1,18 @@
 package net.climaxmc.KitPvp.Commands.Messaging;
 
+import com.google.common.collect.Sets;
+import net.climaxmc.Administration.Punishments.Punishment;
+import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.common.database.PlayerData;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Sound;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
+
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class MessageCommand implements CommandExecutor {
     private ClimaxPvp plugin;
@@ -21,6 +28,23 @@ public class MessageCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
+        PlayerData playerData = plugin.getPlayerData(player);
+
+        for (Punishment punishment : playerData.getPunishments().stream().filter(punishment1 -> punishment1.getType().equals(Punishment.PunishType.MUTE)).collect(Collectors.toSet())) {
+            PlayerData punisherData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()));
+            if (System.currentTimeMillis() <= (punishment.getTime() + punishment.getExpiration())) {
+                player.sendMessage(ChatColor.RED + "You were temporarily muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
+                        + " for " + punishment.getReason() + ".\n"
+                        + "You have " + Time.toString(punishment.getTime() + punishment.getExpiration() - System.currentTimeMillis()) + " left in your mute.\n"
+                        + "Appeal on forum.climaxmc.net if you believe that this is in error!");
+                return true;
+            } else if (punishment.getExpiration() == -1) {
+                player.sendMessage(ChatColor.RED + "You were permanently muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
+                        + " for " + punishment.getReason() + ".\n"
+                        + "Appeal on forum.climaxmc.net if you believe that this is in error!");
+                return true;
+            }
+        }
 
         if (args.length <= 1) {
             player.sendMessage(ChatColor.RED + "/" + label + " <player> <message>");

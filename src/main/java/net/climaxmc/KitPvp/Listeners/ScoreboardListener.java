@@ -33,19 +33,21 @@ public class ScoreboardListener implements Listener {
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         board.registerNewTeam("Team");
         objective.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "Climax" + ChatColor.RED + "" + ChatColor.BOLD + "Pvp");
-        objective.getScore(ChatColor.GREEN + "" + ChatColor.BOLD + "Balance").setScore(11);
-        String balance = "$" + new Double(playerData.getBalance()).intValue();
-        objective.getScore(balance).setScore(10);
-        balances.put(player.getUniqueId(), new Double(playerData.getBalance()).intValue());
-        objective.getScore(" ").setScore(9);
-        objective.getScore(ChatColor.RED + "" + ChatColor.BOLD + "Kills").setScore(8);
-        objective.getScore(Integer.toString(plugin.getPlayerData(player).getKills())).setScore(7);
-        kills.put(player.getUniqueId(), playerData.getKills());
-        objective.getScore("  ").setScore(6);
-        objective.getScore(ChatColor.RED + "" + ChatColor.BOLD + "Deaths").setScore(5);
-        deaths.put(player.getUniqueId(), playerData.getDeaths());
-        objective.getScore(Integer.toString(plugin.getPlayerData(player).getDeaths())).setScore(4);
-        objective.getScore("   ").setScore(3);
+        if (playerData != null) {
+            objective.getScore(ChatColor.GREEN + "" + ChatColor.BOLD + "Balance").setScore(11);
+            String balance = "$" + new Double(playerData.getBalance()).intValue();
+            objective.getScore(balance).setScore(10);
+            balances.put(player.getUniqueId(), new Double(playerData.getBalance()).intValue());
+            objective.getScore(" ").setScore(9);
+            objective.getScore(ChatColor.RED + "" + ChatColor.BOLD + "Kills").setScore(8);
+            objective.getScore(Integer.toString(plugin.getPlayerData(player).getKills())).setScore(7);
+            kills.put(player.getUniqueId(), playerData.getKills());
+            objective.getScore("  ").setScore(6);
+            objective.getScore(ChatColor.RED + "" + ChatColor.BOLD + "Deaths").setScore(5);
+            deaths.put(player.getUniqueId(), playerData.getDeaths());
+            objective.getScore(Integer.toString(plugin.getPlayerData(player).getDeaths())).setScore(4);
+            objective.getScore("   ").setScore(3);
+        }
         objective.getScore(ChatColor.YELLOW + "" + ChatColor.BOLD + "Website").setScore(2);
         objective.getScore("climaxmc.net").setScore(1);
         Objective healthObjective = board.registerNewObjective("showhealth", "health");

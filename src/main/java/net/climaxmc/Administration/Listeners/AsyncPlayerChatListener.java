@@ -1,6 +1,8 @@
 package net.climaxmc.Administration.Listeners;
 
 import net.climaxmc.Administration.Commands.VanishCommand;
+import net.climaxmc.Administration.Punishments.Punishment;
+import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.Rank;
 import net.climaxmc.common.database.PlayerData;
@@ -27,6 +29,23 @@ public class AsyncPlayerChatListener implements Listener {
         }
 
         PlayerData playerData = plugin.getPlayerData(player);
+
+        playerData.getPunishments().stream().filter(punishment -> punishment.getType().equals(Punishment.PunishType.MUTE)).forEach(punishment -> {
+            PlayerData punisherData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()));
+            if (System.currentTimeMillis() <= (punishment.getTime() + punishment.getExpiration())) {
+                event.setCancelled(true);
+                player.sendMessage(ChatColor.RED + "You were temporarily muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
+                        + " for " + punishment.getReason() + ".\n"
+                        + "You have " + Time.toString(punishment.getTime() + punishment.getExpiration() - System.currentTimeMillis()) + " left in your mute.\n"
+                        + "Appeal on forum.climaxmc.net if you believe that this is in error!");
+            } else if (punishment.getExpiration() == -1) {
+                event.setCancelled(true);
+                player.sendMessage(ChatColor.RED + "You were permanently muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
+                        + " for " + punishment.getReason() + ".\n"
+                        + "Appeal on forum.climaxmc.net if you believe that this is in error!");
+            }
+        });
+
         int kills = playerData.getKills();
         Rank rank = playerData.getRank();
 

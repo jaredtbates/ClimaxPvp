@@ -28,25 +28,23 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void onAsyncPlayerJoin(AsyncPlayerPreLoginEvent event) {
+        plugin.getMySQL().createPlayerData(event.getUniqueId());
         PlayerData playerData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(event.getUniqueId()));
 
-        if (playerData == null) {
-            plugin.getMySQL().createPlayerData(event.getUniqueId());
-            return;
+        if (playerData != null) {
+            playerData.getPunishments().forEach(punishment -> {
+                if (System.currentTimeMillis() <= (punishment.getTime() + punishment.getExpiration())) {
+                    event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, ChatColor.RED + "You were temporarily banned by " + plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()).getName()
+                            + " for " + punishment.getReason() + ".\n"
+                            + "You have " + Time.toString(punishment.getTime() + punishment.getExpiration() - System.currentTimeMillis()) + " left in your ban.\n"
+                            + "Appeal on forum.climaxmc.net if you believe that this is in error!");
+                } else if (punishment.getExpiration() == -1) {
+                    event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, ChatColor.RED + "You were permanently banned by " + plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()).getName()
+                            + " for " + punishment.getReason() + ".\n"
+                            + "Appeal on forum.climaxmc.net if you believe that this is in error!");
+                }
+            });
         }
-
-        playerData.getPunishments().forEach(punishment -> {
-            if (System.currentTimeMillis() <= (punishment.getTime() + punishment.getExpiration())) {
-                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, ChatColor.RED + "You were temporarily banned by " + plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()).getName()
-                        + " for " + punishment.getReason() + ".\n"
-                        + "You have " + Time.toString(punishment.getTime() + punishment.getExpiration() - System.currentTimeMillis()) + " left in your ban.\n"
-                        + "Appeal on forum.climaxmc.net if you believe that this is in error!");
-            } else if (punishment.getExpiration() == -1) {
-                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, ChatColor.RED + "You were permanently banned by " + plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()).getName()
-                        + " for " + punishment.getReason() + ".\n"
-                        + "Appeal on forum.climaxmc.net if you believe that this is in error!");
-            }
-        });
     }
 
     @EventHandler
@@ -60,13 +58,15 @@ public class PlayerJoinListener implements Listener {
 
         plugin.getMySQL().getTemporaryPlayerData().put(player.getUniqueId(), new HashMap<>());
 
-        player.setDisplayName(playerData.getNickname());
-        player.setPlayerListName(playerData.getLevelColor() + player.getName());
+        if (playerData != null) {
+            player.setDisplayName(playerData.getNickname());
+            player.setPlayerListName(playerData.getLevelColor() + player.getName());
 
-        if (playerData.hasRank(Rank.OWNER)) {
-            if (!player.isOp()) {
-                player.setOp(true);
-                player.sendMessage(ChatColor.BOLD + "You were opped because you had been previously deopped.");
+            if (playerData.hasRank(Rank.OWNER)) {
+                if (!player.isOp()) {
+                    player.setOp(true);
+                    player.sendMessage(ChatColor.BOLD + "You were opped because you had been previously deopped.");
+                }
             }
         }
 
@@ -80,8 +80,6 @@ public class PlayerJoinListener implements Listener {
 
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard board = manager.getNewScoreboard();
-
-
 
         player.setScoreboard(board);
     }

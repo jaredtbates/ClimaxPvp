@@ -76,15 +76,13 @@ commands:
     description: Ban a player
   tempban:
     description: Temporarily ban a player
+  unban:
+    description: Unban a player
   mute:
     description: Mute a player
   tempmute:
     description: Temporarily mute a player
-  kick:
-    description: Kick a player
-  warn:
-    description: Warn a player
-  unban:
-    description: Unban a player
   unmute:
     description: Unmute a player
+  kick:
+    description: Kick a player

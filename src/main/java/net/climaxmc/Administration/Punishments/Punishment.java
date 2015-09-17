@@ -18,7 +18,6 @@ public class Punishment {
     public enum PunishType {
         BAN,
         MUTE,
-        KICK,
-        WARNING
+        KICK
     }
 }

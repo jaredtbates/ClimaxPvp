@@ -12,10 +12,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class TempBanCommand implements CommandExecutor {
+public class TempMuteCommand implements CommandExecutor {
     private ClimaxPvp plugin;
 
-    public TempBanCommand(ClimaxPvp plugin) {
+    public TempMuteCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
     }
 
@@ -28,13 +28,13 @@ public class TempBanCommand implements CommandExecutor {
         Player player = (Player) sender;
         PlayerData playerData = plugin.getPlayerData(player);
 
-        if (!playerData.hasRank(Rank.MODERATOR)) {
+        if (!playerData.hasRank(Rank.HELPER)) {
             player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
             return true;
         }
 
         if (args.length < 3) {
-            player.sendMessage(ChatColor.RED + "/tempban <player> <time (d/h/m)> <reason>");
+            player.sendMessage(ChatColor.RED + "/tempmute <player> <time (d/h/m)> <reason>");
             return true;
         }
 
@@ -76,12 +76,12 @@ public class TempBanCommand implements CommandExecutor {
 
         final String finalReason = reason;
         final long finalTime = time;
-        targetData.addPunishment(new Punishment(targetData.getUuid(), Punishment.PunishType.BAN, System.currentTimeMillis(), time, playerData.getUuid(), reason));
-        plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName() + " temporarily banned " + plugin.getServer().getPlayer(targetData.getUuid()).getName() + " for " + Time.toString(finalTime) + " for " + finalReason + "."));
+        targetData.addPunishment(new Punishment(targetData.getUuid(), Punishment.PunishType.MUTE, System.currentTimeMillis(), time, playerData.getUuid(), reason));
+        plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName() + " temporarily muted " + plugin.getServer().getPlayer(targetData.getUuid()).getName() + " for " + Time.toString(finalTime) + " for " + finalReason + "."));
 
         Player target = Bukkit.getPlayer(targetData.getUuid());
         if (target != null) {
-            target.kickPlayer(ChatColor.RED + "You were temporarily banned by " + player.getName() + " for " + Time.toString(time) + " for " + reason + ".\n"
+            target.sendMessage(ChatColor.RED + "You were temporarily muted by " + player.getName() + " for " + Time.toString(time) + " for " + reason + ".\n"
                     + "Appeal on forum.climaxmc.net if you believe that this is in error!");
         }
 
