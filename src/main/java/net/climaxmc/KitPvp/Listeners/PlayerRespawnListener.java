@@ -28,7 +28,6 @@ public class PlayerRespawnListener implements Listener {
         this.plugin = plugin;
     }
 
-
     @EventHandler
     public void onPlayerRegainHealth(EntityRegainHealthEvent event) {
         if (event.getRegainReason() == RegainReason.SATIATED)
@@ -66,28 +65,14 @@ public class PlayerRespawnListener implements Listener {
                     .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Equip your previous kit."));
         }
 
-        ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-        BookMeta bookMeta = (BookMeta) book.getItemMeta();
-        bookMeta.setDisplayName(ChatColor.AQUA + "" + ChatColor.BOLD + "Help/Rules");
-        bookMeta.setTitle(ChatColor.AQUA + "" + ChatColor.BOLD + "Help/Rules");
-        bookMeta.setAuthor(ChatColor.GOLD + "" + ChatColor.BOLD + "Climax" + ChatColor.RED + "" + ChatColor.BOLD + "MC");
-        int fullPageNumber = plugin.getBook().length() / 256;
-        List<String> pages = new ArrayList<>();
-        for (int i = 0; i < fullPageNumber; i++) {
-            pages.add(plugin.getBook().substring(256 * i, 255 * (i + 1)));
-        }
-        pages.add(plugin.getBook().substring(fullPageNumber * 256, plugin.getBook().length() - 1));
-        bookMeta.setPages(pages);
-        book.setItemMeta(bookMeta);
-        player.getInventory().setItem(7, book);
+        player.getInventory().setItem(7, new I(Material.DIAMOND)
+                .name(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenges")
+                .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "View your challenges,")
+                .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "start new ones, and receive rewards!"));
 
         player.getInventory().setItem(8, new I(Material.SEEDS)
                 .name(ChatColor.GREEN + "" + ChatColor.BOLD + "Trail Selector")
                 .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Select a cool looking trail!"));
 
-        player.getInventory().setItem(4, new I(Material.DIAMOND)
-                .name(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenges")
-                .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "View your challenges,")
-                .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "start new ones, and receive rewards!"));
     }
 }
