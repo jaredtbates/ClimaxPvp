@@ -42,8 +42,8 @@ public class IPCommand implements CommandExecutor {
             return true;
         }
 
-        if (plugin.getPlayerData(target).hasRank(Rank.ADMINISTRATOR)) {
-            player.sendMessage(ChatColor.RED + "You may not check this player's IP!");
+        if (plugin.getPlayerData(target).hasRank(Rank.OWNER)) {
+            player.sendMessage(ChatColor.RED + "You may not check an owner's IP!");
             return true;
         }
 
