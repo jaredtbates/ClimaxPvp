@@ -86,3 +86,6 @@ commands:
     description: Unmute a player
   kick:
     description: Kick a player
+  donate:
+    description: View donation link
+    aliases: [buy, shop]

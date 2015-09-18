@@ -21,6 +21,7 @@ public class Donations {
         plugin.getCommand("trails").setExecutor(new TrailsCommand(plugin));
         plugin.getCommand("spectate").setExecutor(new SpectateCommand(plugin));
         plugin.getCommand("nickname").setExecutor(new NicknameCommand(plugin));
+        plugin.getCommand("donate").setExecutor(new DonateCommand(plugin));
 
         // Register Listeners
         plugin.getServer().getPluginManager().registerEvents(new PlayerMoveListener(plugin, this), plugin);
