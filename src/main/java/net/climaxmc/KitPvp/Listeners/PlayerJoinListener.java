@@ -32,7 +32,7 @@ public class PlayerJoinListener implements Listener {
         PlayerData playerData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(event.getUniqueId()));
 
         if (playerData != null) {
-            playerData.getPunishments().stream().filter(punishment -> punishment.getType().equals(Punishment.PunishType.KICK)).forEach(punishment -> {
+            playerData.getPunishments().stream().filter(punishment -> punishment.getType().equals(Punishment.PunishType.BAN)).forEach(punishment -> {
                 if (System.currentTimeMillis() <= (punishment.getTime() + punishment.getExpiration())) {
                     event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, ChatColor.RED + "You were temporarily banned by " + plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()).getName()
                             + " for " + punishment.getReason() + ".\n"
