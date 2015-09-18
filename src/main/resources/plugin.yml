@@ -89,3 +89,5 @@ commands:
   donate:
     description: View donation link
     aliases: [buy, shop]
+  ip:
+    description: Get the IP of a player

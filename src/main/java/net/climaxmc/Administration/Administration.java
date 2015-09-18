@@ -31,6 +31,7 @@ public class Administration {
         plugin.getCommand("tempmute").setExecutor(new TempMuteCommand(plugin));
         plugin.getCommand("unmute").setExecutor(new UnMuteCommand(plugin));
         plugin.getCommand("kick").setExecutor(new KickCommand(plugin));
+        plugin.getCommand("ip").setExecutor(new IPCommand(plugin));
 
         // Start runnables
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new AutoBroadcastRunnable(plugin), 20 * plugin.getConfig().getInt("AutoBroadcast.Time"), 20 * plugin.getConfig().getInt("AutoBroadcast.Time"));
