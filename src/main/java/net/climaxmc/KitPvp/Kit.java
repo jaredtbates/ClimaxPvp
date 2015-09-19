@@ -126,12 +126,9 @@ public abstract class Kit implements Listener, CommandExecutor {
 
                 player.getInventory().clear();
 
-                Location noSoupLocation = ClimaxPvp.getInstance().getWarpLocation("NoSoup");
-                if (noSoupLocation != null) {
-                    if (player.getLocation().distance(noSoupLocation) < 100) {
-                        wearNoSoup(player);
-                        return;
-                    }
+                if (player.getLocation().distance(player.getWorld().getSpawnLocation()) < 150) {
+                    wearNoSoup(player);
+                    return;
                 }
 
                 wear(player);

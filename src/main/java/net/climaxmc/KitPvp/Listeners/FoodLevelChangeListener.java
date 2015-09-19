@@ -17,7 +17,7 @@ public class FoodLevelChangeListener implements Listener {
     public void onHungerChange(FoodLevelChangeEvent event) {
         Player player = (Player) event.getEntity();
         event.setCancelled(true);
-        if (player.getLocation().distance(plugin.getWarpLocation("nosoup")) <= 250) {
+        if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 250) {
             player.setFoodLevel(17);
         } else {
             player.setFoodLevel(20);
