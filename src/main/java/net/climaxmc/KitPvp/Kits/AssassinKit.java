@@ -21,7 +21,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class AssassinKit extends Kit {
-	private Ability cloak = new Ability(1, 20, TimeUnit.SECONDS);
+	private Ability cloak = new Ability(1, 15, TimeUnit.SECONDS);
 	
     public AssassinKit() {
         super("Assassin", new ItemStack(Material.GHAST_TEAR), "Use your Cloak Ability to take out opponents with stealth!", ChatColor.GOLD);
@@ -33,7 +33,7 @@ public class AssassinKit extends Kit {
         }
     	player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
     	ItemStack sword = new ItemStack(Material.WOOD_SWORD);
-    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
     	sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack cloak = new ItemStack(Material.GHAST_TEAR);
@@ -50,7 +50,7 @@ public class AssassinKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
@@ -65,7 +65,7 @@ public class AssassinKit extends Kit {
     	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
     	player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
     	ItemStack sword = new ItemStack(Material.WOOD_SWORD);
-    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
     	sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack cloak = new ItemStack(Material.GHAST_TEAR);
@@ -82,7 +82,7 @@ public class AssassinKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
@@ -129,7 +129,7 @@ public class AssassinKit extends Kit {
                 		    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
                 		    	if (KitManager.isPlayerInKit(player, this)) {
                 		    		ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-                    		        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+                    		        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
                     		        LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
                     		        helmmeta.setColor(Color.BLACK);
                     		        helm.setItemMeta(helmmeta);
@@ -137,7 +137,7 @@ public class AssassinKit extends Kit {
                     		        player.getInventory().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
                     		        player.getInventory().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
                     		        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-                    		        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+                    		        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
                     		        LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
                     		        bootsmeta.setColor(Color.BLACK);
                     		        boots.setItemMeta(bootsmeta);

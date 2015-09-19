@@ -31,11 +31,12 @@ public class ThorKit extends Kit {
         player.getInventory().addItem(new ItemStack(Material.IRON_AXE));
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setHelmet(helm);
         ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
         chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chestplate);
-        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
         addSoup(player.getInventory(), 2, 35);
     }
@@ -51,11 +52,12 @@ public class ThorKit extends Kit {
         player.getInventory().addItem(new ItemStack(Material.IRON_AXE));
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setHelmet(helm);
         ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
         chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chestplate);
-        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
         fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
@@ -84,7 +86,7 @@ public class ThorKit extends Kit {
                         event.setCancelled(true);
                         target.getWorld().strikeLightning(target.getLocation());
                         event.setCancelled(true);
-                        target.damage(6);
+                        target.damage(8);
                     }
                 }
             }
