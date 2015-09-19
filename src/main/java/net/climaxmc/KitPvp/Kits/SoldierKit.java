@@ -29,6 +29,7 @@ public class SoldierKit extends Kit {
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 5);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 1, 35);
     }
@@ -46,6 +47,7 @@ public class SoldierKit extends Kit {
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 5);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setBoots(boots);
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
         fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
@@ -58,7 +60,7 @@ public class SoldierKit extends Kit {
         if (KitManager.isPlayerInKit(player, this)) {
             if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                    player.setVelocity(new Vector(0, 0.5, 0));
+                    player.setVelocity(new Vector(0, 0.7, 0));
                     player.damage(2.5);
                 }
             }

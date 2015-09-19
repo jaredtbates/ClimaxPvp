@@ -27,9 +27,9 @@ public class KangarooKit extends Kit {
 
     protected void wear(Player player) {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
-        player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
+        player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
         chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chestplate.getItemMeta();
@@ -42,7 +42,7 @@ public class KangarooKit extends Kit {
         legmeta.setColor(Color.RED);
         leggings.setItemMeta(legmeta);
         player.getInventory().setLeggings(leggings);
-        ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
+        ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_FALL, 2);
         player.getInventory().setBoots(boots);
         ItemStack firework = new ItemStack(Material.FIREWORK);
@@ -59,9 +59,9 @@ public class KangarooKit extends Kit {
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
-        player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
+        player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
         chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chestplate.getItemMeta();
@@ -74,7 +74,7 @@ public class KangarooKit extends Kit {
         legmeta.setColor(Color.RED);
         leggings.setItemMeta(legmeta);
         player.getInventory().setLeggings(leggings);
-        ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
+        ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_FALL, 2);
         player.getInventory().setBoots(boots);
         ItemStack firework = new ItemStack(Material.FIREWORK);
@@ -102,13 +102,13 @@ public class KangarooKit extends Kit {
             if(!(player.isSneaking())){
                 player.setFallDistance(-(4F + 1));
                 Vector vector = player.getEyeLocation().getDirection();
-                vector.multiply(1.1F);
+                vector.multiply(1.2F);
                 vector.setY(0.6);
                 player.setVelocity(vector);
                 } else {
                     player.setFallDistance(-(4F + 1));
                     Vector vector = player.getEyeLocation().getDirection();
-                    vector.multiply(1.5F);
+                    vector.multiply(1.7F);
                     vector.setY(0.5);
                     player.setVelocity(vector);
                 }

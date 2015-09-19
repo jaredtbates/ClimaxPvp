@@ -39,7 +39,7 @@ public class BlazeKit extends Kit {
         player.getInventory().addItem(blazePowder);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 1);
-        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta helmMeta = (LeatherArmorMeta) helm.getItemMeta();
         helmMeta.setColor(Color.YELLOW);
         helm.setItemMeta(helmMeta);
@@ -48,7 +48,7 @@ public class BlazeKit extends Kit {
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 1);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         LeatherArmorMeta bootsMeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsMeta.setColor(Color.YELLOW);
         boots.setItemMeta(bootsMeta);
@@ -61,8 +61,7 @@ public class BlazeKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
     	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-    	ItemStack sword = new ItemStack(Material.WOOD_SWORD);
-    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+    	ItemStack sword = new ItemStack(Material.STONE_SWORD);
     	sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
@@ -72,7 +71,7 @@ public class BlazeKit extends Kit {
         player.getInventory().addItem(blazePowder);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
-        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta helmMeta = (LeatherArmorMeta) helm.getItemMeta();
         helmMeta.setColor(Color.YELLOW);
         helm.setItemMeta(helmMeta);
@@ -81,7 +80,7 @@ public class BlazeKit extends Kit {
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 2);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         LeatherArmorMeta bootsMeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsMeta.setColor(Color.YELLOW);
         boots.setItemMeta(bootsMeta);
@@ -107,7 +106,7 @@ public class BlazeKit extends Kit {
                 		    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 0));
                 		    player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 100, 0));
                 		    player.getWorld().playSound(player.getLocation(), Sound.BLAZE_BREATH, 2, 2);
-                		    players.setFireTicks(100);
+                		    players.setFireTicks(170);
                 		}
                 	}
                 }

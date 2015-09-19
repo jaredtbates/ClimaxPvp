@@ -24,7 +24,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class RageKit extends Kit {
-	private Ability rage = new Ability(1, 20, TimeUnit.SECONDS);
+	private Ability rage = new Ability(1, 12, TimeUnit.SECONDS);
 	
     public RageKit() {
         super("Rage", new ItemStack(Material.MAGMA_CREAM), "Use your Rage Ability to take down Enemies!", ChatColor.RED);

@@ -41,9 +41,9 @@ public class GhastKit extends Kit {
         hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher");
         hoe.setItemMeta(hoeMeta);
         player.getInventory().addItem(hoe);
-        player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
+        player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 3);
         player.getInventory().setBoots(boots);
@@ -64,9 +64,9 @@ public class GhastKit extends Kit {
         hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher");
         hoe.setItemMeta(hoeMeta);
         player.getInventory().addItem(hoe);
-        player.getInventory().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET));
+        player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 3);
         player.getInventory().setBoots(boots);
@@ -102,7 +102,7 @@ public class GhastKit extends Kit {
     		if (event.getDamager() instanceof Fireball) {
                 Fireball f = (Fireball) event.getDamager();
                 if (f.getShooter() instanceof Player) {
-                    event.setDamage(20.0);
+                    event.setDamage(27.0);
                     target.setVelocity(target.getVelocity().setY(1.0));
                 }
             }

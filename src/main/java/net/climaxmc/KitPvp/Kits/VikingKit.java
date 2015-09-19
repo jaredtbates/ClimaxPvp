@@ -37,7 +37,7 @@ public class VikingKit extends Kit {
         helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
         player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+        player.getInventory().setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
@@ -65,7 +65,7 @@ public class VikingKit extends Kit {
         helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
         player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+        player.getInventory().setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
@@ -90,9 +90,9 @@ public class VikingKit extends Kit {
                     player.getNearbyEntities(3.3, 3.3, 3.3).stream().filter(entity -> entity instanceof Player).filter(entity -> !(entity == event.getDamager())).forEach(entity -> {
                         Player players = (Player) entity;
                         event.setCancelled(true);
-                        players.damage(4);
+                        players.damage(5);
                         Vector vector = player.getEyeLocation().getDirection();
-                        vector.multiply(0.5F);
+                        vector.multiply(0.6F);
                         vector.setY(0.2);
                         players.setVelocity(vector);
                     });

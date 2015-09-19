@@ -23,13 +23,15 @@ public class WitherKit extends Kit {
     }
 
     protected void wear(Player player) {
-        player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
+    	ItemStack sword = new ItemStack(Material.IRON_SWORD);
+    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        player.getInventory().addItem(sword);
         player.getInventory().addItem(new ItemStack(Material.BOW));
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
         helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         player.getInventory().setHelmet(helmet);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
@@ -43,13 +45,15 @@ public class WitherKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
     	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-        player.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
+    	ItemStack sword = new ItemStack(Material.IRON_SWORD);
+    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        player.getInventory().addItem(sword);
         player.getInventory().addItem(new ItemStack(Material.BOW));
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
         helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         player.getInventory().setHelmet(helmet);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
@@ -78,7 +82,7 @@ public class WitherKit extends Kit {
     		Player target = (Player) event.getEntity();
     		if (event.getDamager() instanceof WitherSkull) {
     			event.setCancelled(true);
-    			target.damage(6);
+    			target.damage(8);
     			Vector vector = target.getEyeLocation().getDirection();
                 vector.multiply(-0.5F);
                 vector.setY(-0.2);

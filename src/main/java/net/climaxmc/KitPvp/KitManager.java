@@ -60,6 +60,7 @@ public class KitManager implements Listener {
         kits.add(new AssassinKit());
         kits.add(new VikingKit());
         kits.add(new KangarooKit());
+        kits.add(new BomberKit());
 
         for (Kit kit : kits) {
             plugin.getServer().getPluginManager().registerEvents(kit, plugin);

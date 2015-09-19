@@ -17,7 +17,7 @@ public class EndermanKit extends Kit {
 
     protected void wear(Player player) {
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
-        player.getInventory().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
+        player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
@@ -25,7 +25,7 @@ public class EndermanKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack pearl = new ItemStack(Material.ENDER_PEARL, 12);
+        ItemStack pearl = new ItemStack(Material.ENDER_PEARL, 16);
         player.getInventory().addItem(pearl);
         addSoup(player.getInventory(), 2, 35);
     }
@@ -36,7 +36,7 @@ public class EndermanKit extends Kit {
         }
     	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
-        player.getInventory().setChestplate(new ItemStack(Material.CHAINMAIL_CHESTPLATE));
+        player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
@@ -44,7 +44,7 @@ public class EndermanKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack pearl = new ItemStack(Material.ENDER_PEARL, 12);
+        ItemStack pearl = new ItemStack(Material.ENDER_PEARL, 16);
         player.getInventory().addItem(pearl);
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
         fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
