@@ -34,7 +34,7 @@ public class InventoryClickListener implements Listener {
                     PlayerData playerData = plugin.getPlayerData(player);
 
                     if (!playerData.hasRank(Rank.NINJA)) {
-                        player.sendMessage(ChatColor.RED + "Please donate at https://donate.climaxmc.net for access to this trail!");
+                        player.sendMessage(ChatColor.RED + "Please donate for Ninja at https://donate.climaxmc.net for access to trails!");
                         return;
                     }
 
