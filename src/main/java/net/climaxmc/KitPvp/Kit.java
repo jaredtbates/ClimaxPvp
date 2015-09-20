@@ -128,6 +128,7 @@ public abstract class Kit implements Listener, CommandExecutor {
                 player.sendMessage(ChatColor.GOLD + "You have chosen " + getColor() + getName());
 
                 player.getInventory().clear();
+                player.getInventory().setArmorContents(null);
 
                 if (player.getLocation().distance(player.getWorld().getSpawnLocation()) < 150) {
                     wearNoSoup(player);
