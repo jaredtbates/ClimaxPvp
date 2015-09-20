@@ -104,7 +104,7 @@ public class GhastKit extends Kit {
             if (event.getDamager() instanceof Fireball) {
                 Fireball f = (Fireball) event.getDamager();
                 if (f.getShooter() instanceof Player) {
-                    event.setDamage(17);
+                    event.setDamage(27);
                     target.setVelocity(target.getVelocity().setY(1));
                 }
             }
