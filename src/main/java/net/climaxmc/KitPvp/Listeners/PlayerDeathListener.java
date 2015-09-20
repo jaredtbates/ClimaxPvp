@@ -68,7 +68,7 @@ public class PlayerDeathListener implements Listener {
             player.sendMessage(ChatColor.RED + killer.getName() + ChatColor.YELLOW + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + ".5 hearts" + ChatColor.YELLOW + " left");
         }
 
-        if (killer.getUniqueId().equals(player.getUniqueId())) {
+        if (killer.getName().equals(player.getName())) {
             return;
         }
 
@@ -76,8 +76,8 @@ public class PlayerDeathListener implements Listener {
         killerData.addKills(1);
 
         ChallengesFiles challengesFiles = new ChallengesFiles();
-        for (Challenge challenge : Challenge.values())
-            if (challengesFiles.challengeIsStarted(killer, challenge) == true) {
+        for (Challenge challenge : Challenge.values()) {
+            if (challengesFiles.challengeIsStarted(killer, challenge)) {
                 challengesFiles.addChallengeKill(killer, challenge);
                 if (challengesFiles.getChallengeKills(killer, challenge) >= challenge.getKillRequirement()) {
                     challengesFiles.setCompleted(killer, challenge);
@@ -90,6 +90,7 @@ public class PlayerDeathListener implements Listener {
                     killerData.depositBalance(challenge.getRewardMoney());
                 }
             }
+        }
 
         if (killer.getLocation().distance(player.getWorld().getSpawnLocation()) <= 100) {
             killer.setHealth(20);

@@ -116,9 +116,10 @@ public abstract class Kit implements Listener, CommandExecutor {
         if (!KitManager.isPlayerInKit(player) || (playerData.hasRank(Rank.MASTER) && player.getLocation().distance(player.getWorld().getSpawnLocation()) < 200)) {
             if (playerData.getLevelColor().contains(String.valueOf(color.getChar()))
                     || playerData.getTemporaryPlayerData().containsKey("Admin Mode")
-                    || (playerData.hasRank(Rank.NINJA) && (color.equals(ChatColor.BLUE) || color.equals(ChatColor.GREEN)))
+                    || ((playerData.hasRank(Rank.NINJA) && (color.equals(ChatColor.BLUE) || color.equals(ChatColor.GREEN)))
                     || (playerData.hasRank(Rank.TITAN) && color.equals(ChatColor.RED))
-                    || (playerData.hasRank(Rank.MASTER) && color.equals(ChatColor.GOLD))) {
+                    || (playerData.hasRank(Rank.MASTER) && color.equals(ChatColor.GOLD))
+                        && !playerData.hasRank(Rank.TRUSTED))) {
                 KitManager.getPlayersInKits().put(player.getUniqueId(), this);
 
                 for (PotionEffect effect : player.getActivePotionEffects()) {

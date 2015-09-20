@@ -25,7 +25,7 @@ public class AdminCommand implements CommandExecutor {
         Player player = (Player) sender;
         PlayerData playerData = plugin.getPlayerData(player);
 
-        if (!(playerData.hasRank(Rank.ADMINISTRATOR) || player.isOp())) {
+        if (!playerData.hasRank(Rank.ADMINISTRATOR)) {
             player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
             return true;
         }

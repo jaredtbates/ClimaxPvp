@@ -102,9 +102,10 @@ public class PlayerInteractListener implements Listener {
                 for (Kit kit : KitManager.getKits()) {
                     if (playerData.hasData("Admin Mode")
                             || playerData.getLevelColor().contains(kit.getColor() + "")
-                            || (playerData.hasRank(Rank.NINJA) && (kit.getColor().equals(ChatColor.BLUE) || kit.getColor().equals(ChatColor.GREEN)))
+                            || ((playerData.hasRank(Rank.NINJA) && (kit.getColor().equals(ChatColor.BLUE) || kit.getColor().equals(ChatColor.GREEN)))
                             || (playerData.hasRank(Rank.TITAN) && kit.getColor().equals(ChatColor.RED))
-                            || (playerData.hasRank(Rank.MASTER) && kit.getColor().equals(ChatColor.GOLD))) {
+                            || (playerData.hasRank(Rank.MASTER) && kit.getColor().equals(ChatColor.GOLD))
+                                && !playerData.hasRank(Rank.TRUSTED))) {
                         if (kit.getColor().equals(ChatColor.GOLD)) {
                             kitSelectorInventory.setItem(++goldSlot, kit.getItem());
                         } else if (kit.getColor().equals(ChatColor.RED)) {

@@ -3,6 +3,7 @@ package net.climaxmc.KitPvp.Kits;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.Ability;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -87,9 +88,9 @@ public class GhastKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Fireball" + ChatColor.GOLD + " Ability!");
-                    Fireball f = event.getPlayer().launchProjectile(Fireball.class);
+                    Fireball fireball = event.getPlayer().launchProjectile(Fireball.class);
                     player.getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 1);
-                    f.setIsIncendiary(false);
+                    fireball.setIsIncendiary(false);
                     player.setVelocity(player.getVelocity().setY(0.4));
                 }
             }
@@ -97,14 +98,14 @@ public class GhastKit extends Kit {
     }
 
     @EventHandler
-    public void onEntityDamge(EntityDamageByEntityEvent event) {
+    public void onEntityDamage(EntityDamageByEntityEvent event) {
         if (event.getEntity() instanceof Player) {
             Player target = (Player) event.getEntity();
             if (event.getDamager() instanceof Fireball) {
                 Fireball f = (Fireball) event.getDamager();
                 if (f.getShooter() instanceof Player) {
-                    event.setDamage(10.0);
-                    target.setVelocity(target.getVelocity().setY(1.0));
+                    event.setDamage(17);
+                    target.setVelocity(target.getVelocity().setY(1));
                 }
             }
         }
