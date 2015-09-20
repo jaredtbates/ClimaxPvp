@@ -45,7 +45,9 @@ public class BalanceTopCommand implements CommandExecutor {
 
         for (UUID uuid : topBalances.keySet()) {
             int balance = topBalances.get(uuid);
-            player.sendMessage(ChatColor.GREEN + "" + ++i + ". " + plugin.getServer().getOfflinePlayer(uuid).getName() + ChatColor.BLUE + " - " + ChatColor.GREEN + "$" + balance);
+            if (balance != 0) {
+                player.sendMessage(ChatColor.GREEN + "" + ++i + ". " + plugin.getServer().getOfflinePlayer(uuid).getName() + ChatColor.BLUE + " - " + ChatColor.GREEN + "$" + balance);
+            }
         }
 
         return true;

@@ -4,7 +4,10 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.TNTParticle;
-import org.bukkit.*;
+import org.bukkit.ChatColor;
+import org.bukkit.Color;
+import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
@@ -20,7 +23,6 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.Vector;
 
 public class BomberKit extends Kit {
@@ -52,20 +54,27 @@ public class BomberKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
-        player.getInventory().addItem(new ItemStack(Material.TNT));
         addSoup(player.getInventory(), 2, 35);
         new BukkitRunnable() {
             @Override
             public void run() {
-                for (ItemStack itemStack : player.getInventory().getContents()) {
-                    if (itemStack.getType().equals(Material.TNT)) {
-                        if (itemStack.getAmount() < 3) {
-                            itemStack.setAmount(itemStack.getAmount() + 1);
-                        }
-                    }
+                if (!KitManager.isPlayerInKit(player, BomberKit.class)) {
+                    cancel();
+                    return;
                 }
+
+                ItemStack itemStack = player.getInventory().getItem(2);
+                if (itemStack != null) {
+                    if (itemStack.getAmount() >= 3) {
+                        return;
+                    }
+                    itemStack.setAmount(itemStack.getAmount() + 1);
+                } else {
+                    player.getInventory().setItem(2, new ItemStack(Material.TNT));
+                }
+                player.playSound(player.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
             }
-        }.runTaskTimer(ClimaxPvp.getInstance(), 60, 60);
+        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 100);
     }
 
     protected void wearNoSoup(Player player) {
@@ -93,39 +102,34 @@ public class BomberKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
-        player.getInventory().addItem(new ItemStack(Material.TNT));
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
         fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(fishingRod);
+        player.getInventory().setItem(2, fishingRod);
         new BukkitRunnable() {
             @Override
             public void run() {
-                for (ItemStack itemStack : player.getInventory().getContents()) {
-                    if (itemStack.getType().equals(Material.TNT)) {
-                        if (itemStack.getAmount() < 3) {
-                            itemStack.setAmount(itemStack.getAmount() + 1);
-                        }
-                    }
+                if (!KitManager.isPlayerInKit(player, BomberKit.class)) {
+                    cancel();
+                    return;
                 }
+
+                ItemStack itemStack = player.getInventory().getItem(1);
+                if (itemStack != null) {
+                    if (itemStack.getAmount() >= 3) {
+                        return;
+                    }
+                    itemStack.setAmount(itemStack.getAmount() + 1);
+                } else {
+                    player.getInventory().setItem(1, new ItemStack(Material.TNT));
+                }
+                player.playSound(player.getLocation(), Sound.ITEM_PICKUP, 1, 1);
             }
-        }.runTaskTimer(ClimaxPvp.getInstance(), 60, 60);
+        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 100);
     }
     
     /* For the ability - Players should receive 1 TNT every 5 seconds and be able to throw the tnt by right/left clicking on the tnt.
      *  Maximum of 3 tnt at a time, and could you add all the little particle effects like before? make them red.
      *  and of course throwing the bomb should use up 1 in your inventory. */
-
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onPlayerDropTNT(PlayerDropItemEvent event) {
-        Player player = event.getPlayer();
-        Item item = event.getItemDrop();
-
-        if (!KitManager.isPlayerInKit(player, this) || !item.getItemStack().getType().equals(Material.TNT)) {
-            return;
-        }
-
-        spawnTNT(player);
-    }
 
     @EventHandler
     public void onPlayerClickDropTNT(PlayerInteractEvent event) {
@@ -139,7 +143,7 @@ public class BomberKit extends Kit {
     }
 
     private void spawnTNT(Player player) {
-        player.playSound(player.getLocation(), Sound.CREEPER_HISS, 1, 1);
+        player.playSound(player.getLocation(), Sound.FUSE, 1, 1);
         ItemStack tntInInv = player.getItemInHand();
         tntInInv.setAmount(tntInInv.getAmount() - 1);
         player.getInventory().setItem(player.getInventory().getHeldItemSlot(), tntInInv);

@@ -49,6 +49,7 @@ public class StatisticsCommand implements CommandExecutor {
         player.sendMessage(ChatColor.GREEN + "Balance: " + ChatColor.RED + "$" + data.getBalance());
         player.sendMessage(ChatColor.GREEN + "Kills: " + ChatColor.RED + data.getKills());
         player.sendMessage(ChatColor.GREEN + "Deaths: " + ChatColor.RED + data.getDeaths());
+        player.sendMessage(ChatColor.GREEN + "KDR: " + ChatColor.RED + ((double) Math.round((data.getKills() / data.getDeaths()) * 100D) / 100D));
 
         return true;
     }

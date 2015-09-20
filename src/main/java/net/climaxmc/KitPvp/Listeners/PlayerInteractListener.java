@@ -6,6 +6,7 @@ import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -99,8 +100,11 @@ public class PlayerInteractListener implements Listener {
                 int goldSlot = 1, redSlot = 10, limeSlot = 19, blueSlot = 28, graySlot = 37;
 
                 for (Kit kit : KitManager.getKits()) {
-                    if (playerData.hasData("Admin Mode") ||
-                            playerData.getLevelColor().contains(kit.getColor() + "")) {
+                    if (playerData.hasData("Admin Mode")
+                            || playerData.getLevelColor().contains(kit.getColor() + "")
+                            || (playerData.hasRank(Rank.NINJA) && (kit.getColor().equals(ChatColor.BLUE) || kit.getColor().equals(ChatColor.GREEN)))
+                            || (playerData.hasRank(Rank.MASTER) && kit.getColor().equals(ChatColor.RED))
+                            || (playerData.hasRank(Rank.TITAN) && kit.getColor().equals(ChatColor.GOLD))) {
                         if (kit.getColor().equals(ChatColor.GOLD)) {
                             kitSelectorInventory.setItem(++goldSlot, kit.getItem());
                         } else if (kit.getColor().equals(ChatColor.RED)) {

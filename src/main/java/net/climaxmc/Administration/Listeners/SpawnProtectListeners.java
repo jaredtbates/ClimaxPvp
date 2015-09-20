@@ -1,6 +1,7 @@
 package net.climaxmc.Administration.Listeners;
 
 import net.climaxmc.ClimaxPvp;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -98,10 +99,11 @@ public class SpawnProtectListeners implements Listener {
         Player player = event.getPlayer();
         Location location = player.getLocation();
 
-        if (location.distance(location.getWorld().getSpawnLocation()) <= 16
+        if ((location.distance(location.getWorld().getSpawnLocation()) <= 16
                 || location.distance(plugin.getWarpLocation("Soup")) <= 12
                 || location.distance(plugin.getWarpLocation("Fair")) <= 4
-                || location.distance(plugin.getWarpLocation("Fps")) <= 3) {
+                || location.distance(plugin.getWarpLocation("Fps")) <= 3)
+                && !player.getGameMode().equals(GameMode.CREATIVE)) {
             event.setCancelled(true);
         }
     }
