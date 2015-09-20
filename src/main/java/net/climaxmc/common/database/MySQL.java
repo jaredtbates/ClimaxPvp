@@ -5,7 +5,10 @@ import net.climaxmc.Administration.Punishments.Punishment;
 import org.bukkit.plugin.Plugin;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 /**

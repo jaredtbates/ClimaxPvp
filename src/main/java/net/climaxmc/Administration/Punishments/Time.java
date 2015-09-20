@@ -1,6 +1,8 @@
 package net.climaxmc.Administration.Punishments;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 public enum Time {

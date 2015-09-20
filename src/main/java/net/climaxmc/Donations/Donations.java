@@ -3,12 +3,17 @@ package net.climaxmc.Donations;
 import lombok.Getter;
 import net.climaxmc.Administration.Utils.VoteReceiver;
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.Donations.Commands.*;
+import net.climaxmc.Donations.Commands.DonateCommand;
+import net.climaxmc.Donations.Commands.NicknameCommand;
+import net.climaxmc.Donations.Commands.SpectateCommand;
+import net.climaxmc.Donations.Commands.TrailsCommand;
 import net.climaxmc.Donations.Listeners.InventoryClickListener;
 import net.climaxmc.Donations.Listeners.PlayerMoveListener;
 import net.climaxmc.common.donations.trails.Trail;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class Donations {
     @Getter

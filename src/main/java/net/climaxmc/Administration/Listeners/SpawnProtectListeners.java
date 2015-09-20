@@ -4,7 +4,9 @@ import net.climaxmc.ClimaxPvp;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerInteractEvent;
 
@@ -27,8 +29,8 @@ public class SpawnProtectListeners implements Listener {
         Location damagerLocation = damager.getLocation();
         Location damagedLocation = damaged.getLocation();
 
-        if ((damagerLocation.distance(damager.getWorld().getSpawnLocation()) <= 7 || (damagedLocation.distance(damaged.getWorld().getSpawnLocation()) <= 7))
-                || (damagerLocation.distance(plugin.getWarpLocation("Soup")) <= 17 || (damagedLocation.distance(plugin.getWarpLocation("Soup")) <= 17))
+        if ((damagerLocation.distance(damager.getWorld().getSpawnLocation()) <= 16 || (damagedLocation.distance(damaged.getWorld().getSpawnLocation()) <= 16))
+                || (damagerLocation.distance(plugin.getWarpLocation("Soup")) <= 12 || (damagedLocation.distance(plugin.getWarpLocation("Soup")) <= 12))
                 || (damagerLocation.distance(plugin.getWarpLocation("Fair")) <= 4 || (damagedLocation.distance(plugin.getWarpLocation("Fair")) <= 4))
                 || (damagerLocation.distance(plugin.getWarpLocation("Fps")) <= 3 || (damagedLocation.distance(plugin.getWarpLocation("Fps"))) <= 3)) {
             event.setCancelled(true);
@@ -44,8 +46,8 @@ public class SpawnProtectListeners implements Listener {
         Player player = (Player) event.getEntity();
         Location location = player.getLocation();
 
-        if (location.distance(location.getWorld().getSpawnLocation()) <= 7
-                || location.distance(plugin.getWarpLocation("Soup")) <= 17
+        if (location.distance(location.getWorld().getSpawnLocation()) <= 16
+                || location.distance(plugin.getWarpLocation("Soup")) <= 12
                 || location.distance(plugin.getWarpLocation("Fair")) <= 4
                 || location.distance(plugin.getWarpLocation("Fps")) <= 3) {
             event.setCancelled(true);
@@ -57,8 +59,8 @@ public class SpawnProtectListeners implements Listener {
         Entity entity = event.getEntity();
         Location location = entity.getLocation();
 
-        if (location.distance(location.getWorld().getSpawnLocation()) <= 7
-                || location.distance(plugin.getWarpLocation("Soup")) <= 17
+        if (location.distance(location.getWorld().getSpawnLocation()) <= 16
+                || location.distance(plugin.getWarpLocation("Soup")) <= 12
                 || location.distance(plugin.getWarpLocation("Fair")) <= 4
                 || location.distance(plugin.getWarpLocation("Fps")) <= 3) {
             event.setCancelled(true);
@@ -70,8 +72,8 @@ public class SpawnProtectListeners implements Listener {
         Entity entity = event.getEntity();
         Location location = entity.getLocation();
 
-        if (location.distance(location.getWorld().getSpawnLocation()) <= 7
-                || location.distance(plugin.getWarpLocation("Soup")) <= 17
+        if (location.distance(location.getWorld().getSpawnLocation()) <= 16
+                || location.distance(plugin.getWarpLocation("Soup")) <= 12
                 || location.distance(plugin.getWarpLocation("Fair")) <= 4
                 || location.distance(plugin.getWarpLocation("Fps")) <= 3) {
             entity.remove();
@@ -83,8 +85,8 @@ public class SpawnProtectListeners implements Listener {
         Entity entity = event.getEntity();
         Location location = entity.getLocation();
 
-        if (location.distance(location.getWorld().getSpawnLocation()) <= 7
-                || location.distance(plugin.getWarpLocation("Soup")) <= 17
+        if (location.distance(location.getWorld().getSpawnLocation()) <= 16
+                || location.distance(plugin.getWarpLocation("Soup")) <= 12
                 || location.distance(plugin.getWarpLocation("Fair")) <= 4
                 || location.distance(plugin.getWarpLocation("Fps")) <= 3) {
             event.setCancelled(true);
@@ -96,8 +98,8 @@ public class SpawnProtectListeners implements Listener {
         Player player = event.getPlayer();
         Location location = player.getLocation();
 
-        if (location.distance(location.getWorld().getSpawnLocation()) <= 7
-                || location.distance(plugin.getWarpLocation("Soup")) <= 17
+        if (location.distance(location.getWorld().getSpawnLocation()) <= 16
+                || location.distance(plugin.getWarpLocation("Soup")) <= 12
                 || location.distance(plugin.getWarpLocation("Fair")) <= 4
                 || location.distance(plugin.getWarpLocation("Fps")) <= 3) {
             event.setCancelled(true);

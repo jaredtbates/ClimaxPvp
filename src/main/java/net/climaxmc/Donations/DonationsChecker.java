@@ -1,15 +1,14 @@
 package net.climaxmc.Donations;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.database.PlayerData;
-import net.climaxmc.common.database.Rank;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.json.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
-import java.util.UUID;
 
 public class DonationsChecker extends BukkitRunnable {
     private ClimaxPvp plugin;

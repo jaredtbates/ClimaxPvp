@@ -2,7 +2,6 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -38,11 +37,11 @@ public class IronGolemKit extends Kit {
     }
 
     protected void wearNoSoup(Player player) {
-    	for (PotionEffect effect : player.getActivePotionEffects()) {
+        for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-    	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-    	ItemStack sword = new ItemStack(Material.GOLD_SWORD);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        ItemStack sword = new ItemStack(Material.GOLD_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         sword.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().addItem(sword);

@@ -11,6 +11,7 @@ public class Ability {
     private final int defaultCharges;
     private final long defaultDelay;
     private Map<String, Status> playerStatus = new HashMap<String, Status>();
+
     public Ability(int defaultCharges, int defaultDelay, TimeUnit unit) {
         this.defaultCharges = defaultCharges;
         this.defaultDelay = TimeUnit.MILLISECONDS.convert(defaultDelay, unit);

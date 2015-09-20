@@ -4,11 +4,13 @@ import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.database.Rank;
 import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.Rank;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class AsyncPlayerChatListener implements Listener {

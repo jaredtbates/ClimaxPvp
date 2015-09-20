@@ -1,17 +1,10 @@
 package net.climaxmc.KitPvp.Kits;
 
-import java.util.concurrent.TimeUnit;
-
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.Ability;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,15 +16,17 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.concurrent.TimeUnit;
+
 public class RageKit extends Kit {
-	private Ability rage = new Ability(1, 12, TimeUnit.SECONDS);
-	
+    private Ability rage = new Ability(1, 12, TimeUnit.SECONDS);
+
     public RageKit() {
         super("Rage", new ItemStack(Material.MAGMA_CREAM), "Use your Rage Ability to take down Enemies!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
-    	for (PotionEffect effect : player.getActivePotionEffects()) {
+        for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
         ItemStack sword = new ItemStack(Material.STONE_SWORD);
@@ -59,13 +54,13 @@ public class RageKit extends Kit {
     }
 
     protected void wearNoSoup(Player player) {
-    	for (PotionEffect effect : player.getActivePotionEffects()) {
+        for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-    	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-    	ItemStack sword = new ItemStack(Material.WOOD_SWORD);
-    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
-    	sword.addEnchantment(Enchantment.DURABILITY, 3);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        ItemStack sword = new ItemStack(Material.WOOD_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
@@ -97,16 +92,16 @@ public class RageKit extends Kit {
         if (KitManager.isPlayerInKit(player, this)) {
             if (player.getInventory().getItemInHand().getType() == Material.MAGMA_CREAM) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
-                	if (!rage.tryUse(player)) {
+                    if (!rage.tryUse(player)) {
                         return;
                     }
-                	player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Rage" + ChatColor.GOLD + " Ability!");
-                	player.getWorld().playSound(player.getLocation(), Sound.GHAST_SCREAM, 3, 1);
-                	player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 1));
-                	player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 80, 0));
-                	player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 100, 0));
-                	player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 80, 1));
-                	ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Rage" + ChatColor.GOLD + " Ability!");
+                    player.getWorld().playSound(player.getLocation(), Sound.GHAST_SCREAM, 3, 1);
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 1));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 80, 0));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 100, 0));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 80, 1));
+                    ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
                     LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
                     helmmeta.setColor(Color.RED);
                     helm.setItemMeta(helmmeta);
@@ -119,12 +114,12 @@ public class RageKit extends Kit {
                     boots.setItemMeta(bootsmeta);
                     player.getInventory().setBoots(boots);
                     Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
-                    	if (KitManager.isPlayerInKit(player, this)) {
-                    		player.removePotionEffect(PotionEffectType.SPEED);
-                        	player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
-                        	player.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
-                        	player.removePotionEffect(PotionEffectType.JUMP);
-                        	ItemStack helm2 = new ItemStack(Material.LEATHER_HELMET);
+                        if (KitManager.isPlayerInKit(player, this)) {
+                            player.removePotionEffect(PotionEffectType.SPEED);
+                            player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
+                            player.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
+                            player.removePotionEffect(PotionEffectType.JUMP);
+                            ItemStack helm2 = new ItemStack(Material.LEATHER_HELMET);
                             helm2.addEnchantment(Enchantment.DURABILITY, 2);
                             LeatherArmorMeta helmmeta2 = (LeatherArmorMeta) helm2.getItemMeta();
                             helmmeta2.setColor(Color.BLUE);
@@ -138,7 +133,7 @@ public class RageKit extends Kit {
                             bootsmeta2.setColor(Color.BLUE);
                             boots2.setItemMeta(bootsmeta2);
                             player.getInventory().setBoots(boots2);
-                    	}
+                        }
                     }, 100);
                 }
             }

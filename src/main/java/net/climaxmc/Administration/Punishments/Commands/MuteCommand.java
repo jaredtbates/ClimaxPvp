@@ -26,7 +26,7 @@ public class MuteCommand implements CommandExecutor {
 
         Player player = (Player) sender;
         PlayerData playerData = plugin.getPlayerData(player);
-        
+
         if (!playerData.hasRank(Rank.HELPER)) {
             player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
             return true;

@@ -2,23 +2,34 @@ package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitManager;
-import net.climaxmc.KitPvp.Kits.*;
+import net.climaxmc.KitPvp.Kits.KangarooKit;
+import net.climaxmc.KitPvp.Kits.RangerKit;
+import net.climaxmc.KitPvp.Kits.SoldierKit;
 import net.climaxmc.KitPvp.Utils.HackUtils;
 import net.climaxmc.common.database.Rank;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.*;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.*;
+import org.bukkit.event.player.PlayerAnimationEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class HackListeners implements Listener {

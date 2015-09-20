@@ -2,7 +2,9 @@ package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.Material;
-import org.bukkit.event.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 

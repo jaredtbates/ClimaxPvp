@@ -2,7 +2,9 @@ package net.climaxmc.Administration.Listeners;
 
 import net.climaxmc.ClimaxPvp;
 import org.apache.commons.lang.StringUtils;
-import org.bukkit.event.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatFilter implements Listener {

@@ -1,6 +1,7 @@
 package net.climaxmc.common.database;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import net.md_5.bungee.api.ChatColor;
 
 @Getter

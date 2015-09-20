@@ -22,17 +22,17 @@ public class AutoBroadcastRunnable implements Runnable {
             amount = 0;
         }
 
-        plugin.getServer().getOnlinePlayers().stream().filter(player -> player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 7).forEach(player ->
+        plugin.getServer().getOnlinePlayers().stream().filter(player -> player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 16).forEach(player ->
                 sendActionBar(player, ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("AutoBroadcast.Messages").get(amount))));
 
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
-            plugin.getServer().getOnlinePlayers().stream().filter(player -> player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 7).forEach(player ->
+            plugin.getServer().getOnlinePlayers().stream().filter(player -> player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 16).forEach(player ->
                     sendActionBar(player, ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("AutoBroadcast.Messages").get(amount))));
             amount++;
         }, 10 * plugin.getConfig().getInt("AutoBroadcast.Time"));
     }
 
-    private void sendActionBar(Player player, String message){
+    private void sendActionBar(Player player, String message) {
         String nmsVersion = Bukkit.getServer().getClass().getPackage().getName().substring(Bukkit.getServer().getClass().getPackage().getName().lastIndexOf(".") + 1);
         try {
             Class<?> obcPlayer = Class.forName("org.bukkit.craftbukkit." + nmsVersion + ".entity.CraftPlayer");

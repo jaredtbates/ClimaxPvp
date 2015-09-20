@@ -11,7 +11,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -74,20 +76,20 @@ public class PlayerDeathListener implements Listener {
         killerData.addKills(1);
 
         ChallengesFiles challengesFiles = new ChallengesFiles();
-        for(Challenge challenge : Challenge.values())
-        if(challengesFiles.challengeIsStarted(killer, challenge) == true) {
-            challengesFiles.addChallengeKill(killer, challenge);
-            if(challengesFiles.getChallengeKills(killer, challenge) >= challenge.getKillRequirement()) {
-                challengesFiles.setCompleted(killer, challenge);
-                killer.playSound(killer.getLocation(), Sound.LEVEL_UP, 1, 1);
-                killer.sendMessage(ChatColor.BOLD + "-------------------------------------------");
-                killer.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenge Complete: " + ChatColor.AQUA + challenge.getName());
-                killer.sendMessage(ChatColor.DARK_AQUA + "You've earned " + ChatColor.GREEN + "$" + challenge.getRewardMoney());
-                killer.sendMessage(ChatColor.DARK_AQUA + " for completing the challenge!");
-                killer.sendMessage(ChatColor.BOLD + "-------------------------------------------");
-                killerData.depositBalance(challenge.getRewardMoney());
+        for (Challenge challenge : Challenge.values())
+            if (challengesFiles.challengeIsStarted(killer, challenge) == true) {
+                challengesFiles.addChallengeKill(killer, challenge);
+                if (challengesFiles.getChallengeKills(killer, challenge) >= challenge.getKillRequirement()) {
+                    challengesFiles.setCompleted(killer, challenge);
+                    killer.playSound(killer.getLocation(), Sound.LEVEL_UP, 1, 1);
+                    killer.sendMessage(ChatColor.BOLD + "-------------------------------------------");
+                    killer.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenge Complete: " + ChatColor.AQUA + challenge.getName());
+                    killer.sendMessage(ChatColor.DARK_AQUA + "You've earned " + ChatColor.GREEN + "$" + challenge.getRewardMoney());
+                    killer.sendMessage(ChatColor.DARK_AQUA + " for completing the challenge!");
+                    killer.sendMessage(ChatColor.BOLD + "-------------------------------------------");
+                    killerData.depositBalance(challenge.getRewardMoney());
+                }
             }
-        }
 
         if (killer.getLocation().distance(player.getWorld().getSpawnLocation()) <= 100) {
             killer.setHealth(20);

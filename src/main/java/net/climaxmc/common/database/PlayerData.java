@@ -7,7 +7,9 @@ import net.climaxmc.common.events.PlayerBalanceChangeEvent;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor

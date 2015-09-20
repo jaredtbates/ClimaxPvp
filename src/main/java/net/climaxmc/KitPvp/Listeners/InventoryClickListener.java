@@ -1,8 +1,8 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.*;
-import net.climaxmc.KitPvp.Menus.ChallengesMenu;
+import net.climaxmc.KitPvp.Kit;
+import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.Challenge;
 import net.climaxmc.KitPvp.Utils.ChallengesFiles;
 import org.bukkit.ChatColor;
@@ -45,10 +45,10 @@ public class InventoryClickListener implements Listener {
             }
 
             // TODO: This code can probably be cleaned up a bit -Bert
-            if(inventory.getName().equals("Challenges")) {
+            if (inventory.getName().equals("Challenges")) {
                 ChallengesFiles challengesFiles = new ChallengesFiles();
                 ItemStack clickedItem = event.getCurrentItem();
-                if(clickedItem.getType().equals(Material.MAP)) {
+                if (clickedItem.getType().equals(Material.MAP)) {
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #1")) {
                         challengesFiles.setStarted(player, Challenge.Daily1);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
@@ -84,28 +84,34 @@ public class InventoryClickListener implements Listener {
                     }
                 }
 
-                if(clickedItem.getType().equals(Material.PAPER)) {
-                        player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                        long cooldown = challengesFiles.getChallenge(clickedItem.getItemMeta().getDisplayName()).getCooldownTime()
-                                - ((System.currentTimeMillis() / 1000)
-                                - (challengesFiles.getCompletedTime(player, challengesFiles.getChallenge(clickedItem.getItemMeta().getDisplayName()))));
+                if (clickedItem.getType().equals(Material.PAPER)) {
+                    player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                    long cooldown = challengesFiles.getChallenge(clickedItem.getItemMeta().getDisplayName()).getCooldownTime()
+                            - ((System.currentTimeMillis() / 1000)
+                            - (challengesFiles.getCompletedTime(player, challengesFiles.getChallenge(clickedItem.getItemMeta().getDisplayName()))));
                     if (cooldown >= 86400) {
                         cooldown = ((cooldown / 60) / 60) / 24;
-                        if(cooldown == 1) player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " day to start this challenge again!");
-                        if(cooldown > 1) player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " days to start this challenge again!");
-                    }
-                    else if(cooldown >= 3600) {
+                        if (cooldown == 1)
+                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " day to start this challenge again!");
+                        if (cooldown > 1)
+                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " days to start this challenge again!");
+                    } else if (cooldown >= 3600) {
                         cooldown = (cooldown / 60) / 60;
-                        if(cooldown == 1) player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " hour to start this challenge again!");
-                        if(cooldown > 1) player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " hours to start this challenge again!");
-                    }
-                    else if(cooldown >= 60) {
+                        if (cooldown == 1)
+                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " hour to start this challenge again!");
+                        if (cooldown > 1)
+                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " hours to start this challenge again!");
+                    } else if (cooldown >= 60) {
                         cooldown = cooldown / 60;
-                        if(cooldown == 1) player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " minute to start this challenge again!");
-                        if(cooldown > 1) player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " minutes to start this challenge again!");
+                        if (cooldown == 1)
+                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " minute to start this challenge again!");
+                        if (cooldown > 1)
+                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " minutes to start this challenge again!");
                     } else {
-                        if(cooldown == 1) player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " second to start this challenge again!");
-                        if(cooldown > 1) player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " seconds to start this challenge again!");
+                        if (cooldown == 1)
+                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " second to start this challenge again!");
+                        if (cooldown > 1)
+                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " seconds to start this challenge again!");
                     }
                 }
 

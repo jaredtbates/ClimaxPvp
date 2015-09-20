@@ -3,7 +3,6 @@ package net.climaxmc.KitPvp.Kits;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.Ability;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -23,8 +22,8 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class BlazeKit extends Kit {
-	private Ability blaze = new Ability(1, 25, TimeUnit.SECONDS);
-	
+    private Ability blaze = new Ability(1, 25, TimeUnit.SECONDS);
+
     public BlazeKit() {
         super("Blaze", new ItemStack(Material.BLAZE_POWDER), "Use your Blaze ability to set everyone within 5 Blocks on fire!", ChatColor.RED);
     }
@@ -57,12 +56,12 @@ public class BlazeKit extends Kit {
     }
 
     protected void wearNoSoup(Player player) {
-    	for (PotionEffect effect : player.getActivePotionEffects()) {
+        for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-    	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-    	ItemStack sword = new ItemStack(Material.STONE_SWORD);
-    	sword.addEnchantment(Enchantment.DURABILITY, 3);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
         ItemMeta blazeMeta = blazePowder.getItemMeta();
@@ -100,15 +99,15 @@ public class BlazeKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Blaze" + ChatColor.GOLD + " Ability!");
-                	for (Entity entity : player.getNearbyEntities(5, 5, 5)) {
-                		if (entity instanceof Player) {
-                		    Player players = (Player) entity;
-                		    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 0));
-                		    player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 100, 0));
-                		    player.getWorld().playSound(player.getLocation(), Sound.BLAZE_BREATH, 2, 2);
-                		    players.setFireTicks(170);
-                		}
-                	}
+                    for (Entity entity : player.getNearbyEntities(5, 5, 5)) {
+                        if (entity instanceof Player) {
+                            Player players = (Player) entity;
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 0));
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 100, 0));
+                            player.getWorld().playSound(player.getLocation(), Sound.BLAZE_BREATH, 2, 2);
+                            players.setFireTicks(170);
+                        }
+                    }
                 }
             }
         }

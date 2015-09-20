@@ -2,7 +2,9 @@ package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.ChatColor;
-import org.bukkit.command.*;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class SpawnCommand implements CommandExecutor {

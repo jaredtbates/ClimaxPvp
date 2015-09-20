@@ -2,7 +2,6 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -23,8 +22,8 @@ public class WitherKit extends Kit {
     }
 
     protected void wear(Player player) {
-    	ItemStack sword = new ItemStack(Material.IRON_SWORD);
-    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         player.getInventory().addItem(new ItemStack(Material.BOW));
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
@@ -41,12 +40,12 @@ public class WitherKit extends Kit {
     }
 
     protected void wearNoSoup(Player player) {
-    	for (PotionEffect effect : player.getActivePotionEffects()) {
+        for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-    	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-    	ItemStack sword = new ItemStack(Material.IRON_SWORD);
-    	sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         player.getInventory().addItem(new ItemStack(Material.BOW));
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
@@ -71,25 +70,26 @@ public class WitherKit extends Kit {
             if (KitManager.isPlayerInKit(player, this)) {
                 event.setCancelled(true);
                 player.launchProjectile(WitherSkull.class).setVelocity(event.getProjectile().getVelocity());
-            	player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 1));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 1));
             }
         }
     }
 
     @EventHandler
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent event){
-    	if (event.getEntity() instanceof Player) {
-    		Player target = (Player) event.getEntity();
-    		if (event.getDamager() instanceof WitherSkull) {
-    			event.setCancelled(true);
-    			target.damage(8);
-    			Vector vector = target.getEyeLocation().getDirection();
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        if (event.getEntity() instanceof Player) {
+            Player target = (Player) event.getEntity();
+            if (event.getDamager() instanceof WitherSkull) {
+                event.setCancelled(true);
+                target.damage(8);
+                Vector vector = target.getEyeLocation().getDirection();
                 vector.multiply(-0.5F);
                 vector.setY(-0.2);
                 target.setVelocity(vector);
-    		}
-    	}
+            }
+        }
     }
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPvp(EntityDamageByEntityEvent event) {
         if (event.isCancelled()) {

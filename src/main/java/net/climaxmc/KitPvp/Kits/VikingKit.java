@@ -2,7 +2,9 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-import org.bukkit.*;
+import org.bukkit.ChatColor;
+import org.bukkit.Color;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,13 +17,13 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 public class VikingKit extends Kit {
-	
+
     public VikingKit() {
         super("Viking", new ItemStack(Material.DIAMOND_AXE), "You damage all players within 3.3 blocks of yourself!", ChatColor.GOLD);
     }
 
     protected void wear(Player player) {
-    	for (PotionEffect effect : player.getActivePotionEffects()) {
+        for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
         ItemStack axe = new ItemStack(Material.DIAMOND_AXE);
@@ -48,11 +50,11 @@ public class VikingKit extends Kit {
     }
 
     protected void wearNoSoup(Player player) {
-    	for (PotionEffect effect : player.getActivePotionEffects()) {
+        for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-    	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-    	ItemStack axe = new ItemStack(Material.DIAMOND_AXE);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        ItemStack axe = new ItemStack(Material.DIAMOND_AXE);
         axe.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
         ItemMeta axemeta = axe.getItemMeta();
         axemeta.setDisplayName(ChatColor.GOLD + "Viking Axe");
@@ -83,10 +85,10 @@ public class VikingKit extends Kit {
             return;
         }
 
-    	if (event.getDamager() instanceof Player) {
-    		Player player = (Player) event.getDamager();
-    		if (KitManager.isPlayerInKit(player, this)) {
-    			if (player.getInventory().getItemInHand().getType() == Material.DIAMOND_AXE) {
+        if (event.getDamager() instanceof Player) {
+            Player player = (Player) event.getDamager();
+            if (KitManager.isPlayerInKit(player, this)) {
+                if (player.getInventory().getItemInHand().getType() == Material.DIAMOND_AXE) {
                     player.getNearbyEntities(3.3, 3.3, 3.3).stream().filter(entity -> entity instanceof Player).filter(entity -> !(entity == event.getDamager())).forEach(entity -> {
                         Player players = (Player) entity;
                         event.setCancelled(true);

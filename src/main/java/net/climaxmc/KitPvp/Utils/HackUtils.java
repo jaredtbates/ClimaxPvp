@@ -5,9 +5,13 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.UUID;
 
 public class HackUtils {
+    public static ArrayList<Location> instaBreak = new ArrayList<>();
     static ArrayList<UUID> cantBreak = new ArrayList<>();
     static ArrayList<UUID> waterWalking = new ArrayList<>();
     static ArrayList<UUID> cantClick = new ArrayList<>();
@@ -24,7 +28,6 @@ public class HackUtils {
     static HashMap<UUID, Long> lastNotification = new HashMap<>();
     static HashMap<UUID, Location> lastLoc = new HashMap<>();
     static HashMap<UUID, Block> lastBlockTarget = new HashMap<>();
-    public static ArrayList<Location> instaBreak = new ArrayList<>();
 
     public static void clearPlayer(Player player) {
         if (cantBreak.contains(player.getUniqueId())) {

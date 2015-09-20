@@ -27,9 +27,14 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.xml.bind.DatatypeConverter;
 import java.io.*;
-import java.net.*;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
 import java.security.*;
-import java.security.spec.*;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.RSAKeyGenParameterSpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -84,6 +89,49 @@ public class VoteReceiver extends Thread {
 
         initialize();
         createKeys();
+    }
+
+    /**
+     * Encrypts a block of data.
+     *
+     * @param data The data to encrypt
+     * @param key  The key to encrypt with
+     * @return The encrypted data
+     * @throws Exception If an error occurs
+     */
+    public static byte[] encrypt(byte[] data, PublicKey key) throws Exception {
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        return cipher.doFinal(data);
+    }
+
+    /**
+     * Decrypts a block of data.
+     *
+     * @param data The data to decrypt
+     * @param key  The key to decrypt with
+     * @return The decrypted data
+     * @throws Exception If an error occurs
+     */
+    public static byte[] decrypt(byte[] data, PrivateKey key) throws Exception {
+        Cipher cipher = Cipher.getInstance("RSA");
+        cipher.init(Cipher.DECRYPT_MODE, key);
+        return cipher.doFinal(data);
+    }
+
+    /**
+     * Generates an RSA key pair.
+     *
+     * @param bits The amount of bits
+     * @return The key pair
+     */
+    public static KeyPair generateKeyPair(int bits) throws Exception {
+        LOG.info("Votifier is generating an RSA key pair...");
+        KeyPairGenerator keygen = KeyPairGenerator.getInstance("RSA");
+        RSAKeyGenParameterSpec spec = new RSAKeyGenParameterSpec(bits,
+                RSAKeyGenParameterSpec.F4);
+        keygen.initialize(spec);
+        return keygen.generateKeyPair();
     }
 
     private void initialize() throws Exception {
@@ -216,137 +264,24 @@ public class VoteReceiver extends Thread {
         return builder.toString();
     }
 
-    /**
-     * Encrypts a block of data.
-     *
-     * @param data The data to encrypt
-     * @param key  The key to encrypt with
-     * @return The encrypted data
-     * @throws Exception If an error occurs
-     */
-    public static byte[] encrypt(byte[] data, PublicKey key) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.ENCRYPT_MODE, key);
-        return cipher.doFinal(data);
-    }
+    private void createKeys() {
+        File rsaDirectory = new File(plugin.getDataFolder() + "/rsa");
 
-    /**
-     * Decrypts a block of data.
-     *
-     * @param data The data to decrypt
-     * @param key  The key to decrypt with
-     * @return The decrypted data
-     * @throws Exception If an error occurs
-     */
-    public static byte[] decrypt(byte[] data, PrivateKey key) throws Exception {
-        Cipher cipher = Cipher.getInstance("RSA");
-        cipher.init(Cipher.DECRYPT_MODE, key);
-        return cipher.doFinal(data);
-    }
-
-    /**
-     * A model for a vote.
-     *
-     * @author Blake Beaupain
-     */
-    public class Vote {
-
-        /**
-         * The name of the vote service.
-         */
-        private String serviceName;
-
-        /**
-         * The username of the voter.
-         */
-        private String username;
-
-        /**
-         * The address of the voter.
-         */
-        private String address;
-
-        /**
-         * The date and time of the vote.
-         */
-        private String timeStamp;
-
-        @Override
-        public String toString() {
-            return "Vote (from:" + serviceName + " username:" + username
-                    + " address:" + address + " timeStamp:" + timeStamp + ")";
-        }
-
-        /**
-         * Sets the serviceName.
-         *
-         * @param serviceName The new serviceName
-         */
-        public void setServiceName(String serviceName) {
-            this.serviceName = serviceName;
-        }
-
-        /**
-         * Gets the serviceName.
-         *
-         * @return The serviceName
-         */
-        public String getServiceName() {
-            return serviceName;
-        }
-
-        /**
-         * Sets the username.
-         *
-         * @param username The new username
-         */
-        public void setUsername(String username) {
-            this.username = username.length() <= 16 ? username : username.substring(0, 16);
-        }
-
-        /**
-         * Gets the username.
-         *
-         * @return The username
-         */
-        public String getUsername() {
-            return username;
-        }
-
-        /**
-         * Sets the address.
-         *
-         * @param address The new address
-         */
-        public void setAddress(String address) {
-            this.address = address;
-        }
-
-        /**
-         * Gets the address.
-         *
-         * @return The address
-         */
-        public String getAddress() {
-            return address;
-        }
-
-        /**
-         * Sets the time stamp.
-         *
-         * @param timeStamp The new time stamp
-         */
-        public void setTimeStamp(String timeStamp) {
-            this.timeStamp = timeStamp;
-        }
-
-        /**
-         * Gets the time stamp.
-         *
-         * @return The time stamp
-         */
-        public String getTimeStamp() {
-            return timeStamp;
+        /*
+         * Create RSA directory and keys if it does not exist; otherwise, read
+		 * keys.
+		 */
+        try {
+            if (!rsaDirectory.exists()) {
+                rsaDirectory.mkdir();
+                keyPair = generateKeyPair(2048);
+                RSAIO.save(rsaDirectory, keyPair);
+            } else {
+                keyPair = RSAIO.load(rsaDirectory);
+            }
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE,
+                    "Error reading configuration file or RSA keys", ex);
         }
     }
 
@@ -426,39 +361,108 @@ public class VoteReceiver extends Thread {
     }
 
     /**
-     * Generates an RSA key pair.
+     * A model for a vote.
      *
-     * @param bits
-     *            The amount of bits
-     * @return The key pair
+     * @author Blake Beaupain
      */
-    public static KeyPair generateKeyPair(int bits) throws Exception {
-        LOG.info("Votifier is generating an RSA key pair...");
-        KeyPairGenerator keygen = KeyPairGenerator.getInstance("RSA");
-        RSAKeyGenParameterSpec spec = new RSAKeyGenParameterSpec(bits,
-                RSAKeyGenParameterSpec.F4);
-        keygen.initialize(spec);
-        return keygen.generateKeyPair();
-    }
+    public class Vote {
 
-    private void createKeys() {
-        File rsaDirectory = new File(plugin.getDataFolder() + "/rsa");
+        /**
+         * The name of the vote service.
+         */
+        private String serviceName;
 
-        /*
-		 * Create RSA directory and keys if it does not exist; otherwise, read
-		 * keys.
-		 */
-        try {
-            if (!rsaDirectory.exists()) {
-                rsaDirectory.mkdir();
-                keyPair = generateKeyPair(2048);
-                RSAIO.save(rsaDirectory, keyPair);
-            } else {
-                keyPair = RSAIO.load(rsaDirectory);
-            }
-        } catch (Exception ex) {
-            LOG.log(Level.SEVERE,
-                    "Error reading configuration file or RSA keys", ex);
+        /**
+         * The username of the voter.
+         */
+        private String username;
+
+        /**
+         * The address of the voter.
+         */
+        private String address;
+
+        /**
+         * The date and time of the vote.
+         */
+        private String timeStamp;
+
+        @Override
+        public String toString() {
+            return "Vote (from:" + serviceName + " username:" + username
+                    + " address:" + address + " timeStamp:" + timeStamp + ")";
+        }
+
+        /**
+         * Gets the serviceName.
+         *
+         * @return The serviceName
+         */
+        public String getServiceName() {
+            return serviceName;
+        }
+
+        /**
+         * Sets the serviceName.
+         *
+         * @param serviceName The new serviceName
+         */
+        public void setServiceName(String serviceName) {
+            this.serviceName = serviceName;
+        }
+
+        /**
+         * Gets the username.
+         *
+         * @return The username
+         */
+        public String getUsername() {
+            return username;
+        }
+
+        /**
+         * Sets the username.
+         *
+         * @param username The new username
+         */
+        public void setUsername(String username) {
+            this.username = username.length() <= 16 ? username : username.substring(0, 16);
+        }
+
+        /**
+         * Gets the address.
+         *
+         * @return The address
+         */
+        public String getAddress() {
+            return address;
+        }
+
+        /**
+         * Sets the address.
+         *
+         * @param address The new address
+         */
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        /**
+         * Gets the time stamp.
+         *
+         * @return The time stamp
+         */
+        public String getTimeStamp() {
+            return timeStamp;
+        }
+
+        /**
+         * Sets the time stamp.
+         *
+         * @param timeStamp The new time stamp
+         */
+        public void setTimeStamp(String timeStamp) {
+            this.timeStamp = timeStamp;
         }
     }
 }

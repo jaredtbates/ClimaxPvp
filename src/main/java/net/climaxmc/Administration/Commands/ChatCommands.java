@@ -1,8 +1,8 @@
 package net.climaxmc.Administration.Commands;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.database.Rank;
 import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;

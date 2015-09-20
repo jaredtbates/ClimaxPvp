@@ -4,22 +4,20 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Inventories.TrailsInventory;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-import net.climaxmc.KitPvp.Menus.ChallengesMenu;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.common.database.PlayerData;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class PlayerInteractListener implements Listener {
     private ClimaxPvp plugin;
@@ -28,16 +26,14 @@ public class PlayerInteractListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOW)
     public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         PlayerData playerData = plugin.getPlayerData(player);
         ItemStack item = event.getItem();
 
-        if(!player.isOp()) {
-            if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType().equals(Material.TRAP_DOOR)) {
-                    event.setCancelled(true);
-                }
+        if (!player.getGameMode().equals(GameMode.CREATIVE) && !(event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_AIR))) {
+            event.setCancelled(true);
         }
 
         if (event.getAction() == Action.PHYSICAL && event.getClickedBlock().getType() == Material.SOIL) {

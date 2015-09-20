@@ -2,7 +2,6 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -93,25 +92,25 @@ public class KangarooKit extends Kit {
         if (!KitManager.isPlayerInKit(player, this)) {
             return;
         }
-        if(!(player.getInventory().getItemInHand().getType() == Material.FIREWORK)){
-        	return;
+        if (!(player.getInventory().getItemInHand().getType() == Material.FIREWORK)) {
+            return;
         }
         event.setCancelled(true);
         Block b = player.getLocation().getBlock();
         if (b.getType() != Material.AIR || b.getRelative(BlockFace.DOWN).getType() != Material.AIR) {
-            if(!(player.isSneaking())){
+            if (!(player.isSneaking())) {
                 player.setFallDistance(-(4F + 1));
                 Vector vector = player.getEyeLocation().getDirection();
                 vector.multiply(1.2F);
                 vector.setY(0.6);
                 player.setVelocity(vector);
-                } else {
-                    player.setFallDistance(-(4F + 1));
-                    Vector vector = player.getEyeLocation().getDirection();
-                    vector.multiply(1.7F);
-                    vector.setY(0.5);
-                    player.setVelocity(vector);
-                }
+            } else {
+                player.setFallDistance(-(4F + 1));
+                Vector vector = player.getEyeLocation().getDirection();
+                vector.multiply(1.7F);
+                vector.setY(0.5);
+                player.setVelocity(vector);
+            }
         }
     }
 }

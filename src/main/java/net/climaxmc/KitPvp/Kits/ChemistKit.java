@@ -1,7 +1,6 @@
 package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -20,16 +19,16 @@ public class ChemistKit extends Kit {
     }
 
     protected void wear(Player player) {
-    	for (PotionEffect effect : player.getActivePotionEffects()) {
+        for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-    	ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-    	helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-    	helm.addEnchantment(Enchantment.DURABILITY, 3);
-    	LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
-    	helmmeta.setColor(Color.BLACK);
-    	helm.setItemMeta(helmmeta);
-    	player.getInventory().setHelmet(helm);
+        ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        helm.addEnchantment(Enchantment.DURABILITY, 3);
+        LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
+        helmmeta.setColor(Color.BLACK);
+        helm.setItemMeta(helmmeta);
+        player.getInventory().setHelmet(helm);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
         legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
@@ -66,17 +65,17 @@ public class ChemistKit extends Kit {
     }
 
     protected void wearNoSoup(Player player) {
-    	for (PotionEffect effect : player.getActivePotionEffects()) {
+        for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-    	player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-    	ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-    	helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-    	helm.addEnchantment(Enchantment.DURABILITY, 3);
-    	LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
-    	helmmeta.setColor(Color.BLACK);
-    	helm.setItemMeta(helmmeta);
-    	player.getInventory().setHelmet(helm);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        helm.addEnchantment(Enchantment.DURABILITY, 3);
+        LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
+        helmmeta.setColor(Color.BLACK);
+        helm.setItemMeta(helmmeta);
+        player.getInventory().setHelmet(helm);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
         legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);

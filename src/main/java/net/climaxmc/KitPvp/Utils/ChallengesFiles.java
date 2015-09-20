@@ -1,9 +1,6 @@
 package net.climaxmc.KitPvp.Utils;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.common.database.PlayerData;
-import org.bukkit.ChatColor;
-import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -99,7 +96,7 @@ public class ChallengesFiles {
     }
 
     public Challenge getChallenge(String name) {
-        if(name.contains("Daily")) {
+        if (name.contains("Daily")) {
             if (name.contains("#1")) return Challenge.Daily1;
             if (name.contains("#2")) return Challenge.Daily2;
             if (name.contains("#3")) return Challenge.Daily3;

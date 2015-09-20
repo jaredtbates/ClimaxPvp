@@ -2,8 +2,8 @@ package net.climaxmc.Donations.Listeners;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Donations;
-import net.climaxmc.common.database.Rank;
 import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.Rank;
 import net.climaxmc.common.donations.trails.Trail;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
