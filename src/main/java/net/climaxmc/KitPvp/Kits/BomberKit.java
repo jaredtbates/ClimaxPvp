@@ -63,16 +63,16 @@ public class BomberKit extends Kit {
                     return;
                 }
 
-                ItemStack itemStack = player.getInventory().getItem(2);
-                if (itemStack != null) {
+                ItemStack itemStack = player.getInventory().getItem(1);
+                if (itemStack != null && itemStack.getType().equals(Material.TNT)) {
                     if (itemStack.getAmount() >= 3) {
                         return;
                     }
                     itemStack.setAmount(itemStack.getAmount() + 1);
                 } else {
-                    player.getInventory().setItem(2, new ItemStack(Material.TNT));
+                    player.getInventory().setItem(1, new ItemStack(Material.TNT));
                 }
-                player.playSound(player.getLocation(), Sound.CHICKEN_EGG_POP, 1, 1);
+                player.playSound(player.getLocation(), Sound.ITEM_PICKUP, 1, 1);
             }
         }.runTaskTimer(ClimaxPvp.getInstance(), 20, 100);
     }

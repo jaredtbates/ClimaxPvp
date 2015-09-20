@@ -3,6 +3,7 @@ package net.climaxmc.KitPvp.Listeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.Kits.BomberKit;
 import net.climaxmc.KitPvp.Utils.Challenge;
 import net.climaxmc.KitPvp.Utils.ChallengesFiles;
 import org.bukkit.ChatColor;
@@ -13,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -24,7 +26,7 @@ public class InventoryClickListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Inventory inventory = event.getInventory();
         final Player player = (Player) event.getWhoClicked();
@@ -38,6 +40,10 @@ public class InventoryClickListener implements Listener {
             if (event.getCurrentItem().equals(itemStack)) {
                 event.setCancelled(true);
             }
+        }
+
+        if ((KitManager.isPlayerInKit(player, BomberKit.class) && event.getAction().equals(InventoryAction.HOTBAR_SWAP)) || event.getCursor().getType().equals(Material.TNT) || event.getCurrentItem().getType().equals(Material.TNT)) {
+            event.setCancelled(true);
         }
 
         if (inventory != null && event.getCurrentItem() != null && event.getCurrentItem().getItemMeta() != null && event.getCurrentItem().getItemMeta().getDisplayName() != null) {
