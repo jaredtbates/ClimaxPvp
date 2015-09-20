@@ -126,10 +126,6 @@ public class BomberKit extends Kit {
             }
         }.runTaskTimer(ClimaxPvp.getInstance(), 20, 100);
     }
-    
-    /* For the ability - Players should receive 1 TNT every 5 seconds and be able to throw the tnt by right/left clicking on the tnt.
-     *  Maximum of 3 tnt at a time, and could you add all the little particle effects like before? make them red.
-     *  and of course throwing the bomb should use up 1 in your inventory. */
 
     @EventHandler
     public void onPlayerClickDropTNT(PlayerInteractEvent event) {
