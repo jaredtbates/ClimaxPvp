@@ -3,7 +3,8 @@ package net.climaxmc.Administration;
 import net.climaxmc.Administration.Commands.*;
 import net.climaxmc.Administration.Listeners.*;
 import net.climaxmc.Administration.Punishments.Commands.*;
-import net.climaxmc.Administration.Runnables.AutoBroadcastRunnable;
+import net.climaxmc.Administration.Runnables.ChatAutoBroadcastRunnable;
+import net.climaxmc.Administration.Runnables.SpawnAutoBroadcastRunnable;
 import net.climaxmc.ClimaxPvp;
 
 public class Administration {
@@ -34,6 +35,7 @@ public class Administration {
         plugin.getCommand("ip").setExecutor(new IPCommand(plugin));
 
         // Start runnables
-        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new AutoBroadcastRunnable(plugin), 20 * plugin.getConfig().getInt("AutoBroadcast.Time"), 20 * plugin.getConfig().getInt("AutoBroadcast.Time"));
+        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new SpawnAutoBroadcastRunnable(plugin), 0, 20 * plugin.getConfig().getInt("SpawnAutoBroadcast.Time"));
+        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new ChatAutoBroadcastRunnable(plugin), 0, 20 * plugin.getConfig().getInt("ChatAutoBroadcast.Time"));
     }
 }

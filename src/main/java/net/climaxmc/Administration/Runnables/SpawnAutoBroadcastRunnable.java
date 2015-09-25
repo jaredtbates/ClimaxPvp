@@ -8,28 +8,28 @@ import org.bukkit.entity.Player;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public class AutoBroadcastRunnable implements Runnable {
+public class SpawnAutoBroadcastRunnable implements Runnable {
     private ClimaxPvp plugin;
     private int amount = 0;
 
-    public AutoBroadcastRunnable(ClimaxPvp plugin) {
+    public SpawnAutoBroadcastRunnable(ClimaxPvp plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public void run() {
-        if (amount >= plugin.getConfig().getStringList("AutoBroadcast.Messages").size()) {
+        if (amount >= plugin.getConfig().getStringList("SpawnAutoBroadcast.Messages").size()) {
             amount = 0;
         }
 
         plugin.getServer().getOnlinePlayers().stream().filter(player -> player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 16).forEach(player ->
-                sendActionBar(player, ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("AutoBroadcast.Messages").get(amount))));
+                sendActionBar(player, ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("SpawnAutoBroadcast.Messages").get(amount))));
 
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
             plugin.getServer().getOnlinePlayers().stream().filter(player -> player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 16).forEach(player ->
-                    sendActionBar(player, ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("AutoBroadcast.Messages").get(amount))));
+                    sendActionBar(player, ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("SpawnAutoBroadcast.Messages").get(amount))));
             amount++;
-        }, 10 * plugin.getConfig().getInt("AutoBroadcast.Time"));
+        }, 10 * plugin.getConfig().getInt("SpawnAutoBroadcast.Time"));
     }
 
     private void sendActionBar(Player player, String message) {

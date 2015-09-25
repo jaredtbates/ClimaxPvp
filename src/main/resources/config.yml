@@ -4,7 +4,12 @@ Database:
   Database: ClimaxPvp
   Username: root
   Password: password
-AutoBroadcast:
+SpawnAutoBroadcast:
+  Time: 5
+  Messages:
+    - This is an auto broadcast message!
+    - This is another auto broadcast message!
+ChatAutoBroadcast:
   Time: 5
   Messages:
     - This is an auto broadcast message!
