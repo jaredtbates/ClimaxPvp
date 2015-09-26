@@ -32,6 +32,7 @@ public class RageKit extends Kit {
         ItemStack sword = new ItemStack(Material.STONE_SWORD);
         player.getInventory().addItem(sword);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.BLUE);
@@ -40,6 +41,7 @@ public class RageKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         boots.addEnchantment(Enchantment.DURABILITY, 2);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLUE);
@@ -59,11 +61,11 @@ public class RageKit extends Kit {
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         ItemStack sword = new ItemStack(Material.WOOD_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.BLUE);
         helm.setItemMeta(helmmeta);
@@ -71,7 +73,7 @@ public class RageKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLUE);
         boots.setItemMeta(bootsmeta);
@@ -120,6 +122,7 @@ public class RageKit extends Kit {
                             player.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
                             player.removePotionEffect(PotionEffectType.JUMP);
                             ItemStack helm2 = new ItemStack(Material.LEATHER_HELMET);
+                            helm2.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
                             helm2.addEnchantment(Enchantment.DURABILITY, 2);
                             LeatherArmorMeta helmmeta2 = (LeatherArmorMeta) helm2.getItemMeta();
                             helmmeta2.setColor(Color.BLUE);
@@ -128,7 +131,8 @@ public class RageKit extends Kit {
                             player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
                             player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
                             ItemStack boots2 = new ItemStack(Material.LEATHER_BOOTS);
-                            boots.addEnchantment(Enchantment.DURABILITY, 2);
+                            boots2.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+                            boots2.addEnchantment(Enchantment.DURABILITY, 2);
                             LeatherArmorMeta bootsmeta2 = (LeatherArmorMeta) boots2.getItemMeta();
                             bootsmeta2.setColor(Color.BLUE);
                             boots2.setItemMeta(bootsmeta2);

@@ -31,6 +31,7 @@ public class BlazeKit extends Kit {
     protected void wear(Player player) {
         ItemStack sword = new ItemStack(Material.STONE_SWORD);
         player.getInventory().addItem(sword);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
         ItemMeta blazeMeta = blazePowder.getItemMeta();
         blazeMeta.setDisplayName(ChatColor.AQUA + "Blaze Ability");
@@ -47,7 +48,7 @@ public class BlazeKit extends Kit {
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 1);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
         LeatherArmorMeta bootsMeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsMeta.setColor(Color.YELLOW);
         boots.setItemMeta(bootsMeta);
@@ -63,6 +64,7 @@ public class BlazeKit extends Kit {
         ItemStack sword = new ItemStack(Material.STONE_SWORD);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
         ItemMeta blazeMeta = blazePowder.getItemMeta();
         blazeMeta.setDisplayName(ChatColor.AQUA + "Blaze Ability");
@@ -79,7 +81,7 @@ public class BlazeKit extends Kit {
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 2);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
         LeatherArmorMeta bootsMeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsMeta.setColor(Color.YELLOW);
         boots.setItemMeta(bootsMeta);

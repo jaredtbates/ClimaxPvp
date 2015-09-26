@@ -29,7 +29,9 @@ public class WitherKit extends Kit {
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
         helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         player.getInventory().setHelmet(helmet);
-        player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+        ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        player.getInventory().setChestplate(chestplate);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
@@ -51,7 +53,9 @@ public class WitherKit extends Kit {
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
         helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         player.getInventory().setHelmet(helmet);
-        player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+        ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        player.getInventory().setChestplate(chestplate);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
