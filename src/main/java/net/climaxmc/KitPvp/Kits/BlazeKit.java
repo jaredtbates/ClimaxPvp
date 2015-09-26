@@ -22,7 +22,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class BlazeKit extends Kit {
-    private Ability blaze = new Ability(1, 25, TimeUnit.SECONDS);
+    private Ability blaze = new Ability(1, 15, TimeUnit.SECONDS);
 
     public BlazeKit() {
         super("Blaze", new ItemStack(Material.BLAZE_POWDER), "Use your Blaze ability to set everyone within 5 Blocks on fire!", ChatColor.RED);
