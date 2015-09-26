@@ -33,9 +33,8 @@ public class GhastKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 0));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         ItemStack hoe = new ItemStack(Material.GOLD_HOE);
         ItemMeta hoeMeta = hoe.getItemMeta();
@@ -57,9 +56,8 @@ public class GhastKit extends Kit {
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 0));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         ItemStack hoe = new ItemStack(Material.GOLD_HOE);
         ItemMeta hoeMeta = hoe.getItemMeta();
@@ -104,7 +102,7 @@ public class GhastKit extends Kit {
             if (event.getDamager() instanceof Fireball) {
                 Fireball f = (Fireball) event.getDamager();
                 if (f.getShooter() instanceof Player) {
-                    event.setDamage(27);
+                    event.setDamage(23);
                     target.setVelocity(target.getVelocity().setY(1));
                 }
             }
