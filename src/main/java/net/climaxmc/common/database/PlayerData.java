@@ -130,7 +130,7 @@ public class PlayerData {
      */
     public String getLevelColor() {
         String color = ChatColor.GRAY + "";
-        if (kills >= 200) {
+        if (kills >= 150) {
             color += ChatColor.BLUE;
         }
         if (kills >= 500) {

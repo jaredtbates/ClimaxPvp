@@ -64,7 +64,7 @@ public class PlayerInteractListener implements Listener {
                 kitSelectorInventory.setItem(19, greenKits);
                 kitSelectorInventory.setItem(25, greenKits);
 
-                ItemStack blueKits = new I(Material.STAINED_CLAY).durability(3).name(ChatColor.BLUE + "Blue Kits").lore("Level 200");
+                ItemStack blueKits = new I(Material.STAINED_CLAY).durability(3).name(ChatColor.BLUE + "Blue Kits").lore("Level 150");
                 kitSelectorInventory.setItem(28, blueKits);
                 kitSelectorInventory.setItem(34, blueKits);
 
@@ -87,7 +87,7 @@ public class PlayerInteractListener implements Listener {
                     kitSelectorInventory.setItem(i, greenKitsGlass);
                 }
 
-                ItemStack blueKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(3).name(ChatColor.BLUE + "Blue Kit").lore(ChatColor.BLUE + "" + ChatColor.ITALIC + "Unlocked at Level 200");
+                ItemStack blueKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(3).name(ChatColor.BLUE + "Blue Kit").lore(ChatColor.BLUE + "" + ChatColor.ITALIC + "Unlocked at Level 150");
                 for (int i = 29; i < 34; i++) {
                     kitSelectorInventory.setItem(i, blueKitsGlass);
                 }
