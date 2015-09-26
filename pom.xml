@@ -61,6 +61,27 @@
                     <finalName>${project.artifactId}</finalName>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <artifactSet>
+                        <includes>
+                            <include>org.json:json</include>
+                        </includes>
+                    </artifactSet>
+                    <finalName>${project.artifactId}</finalName>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
