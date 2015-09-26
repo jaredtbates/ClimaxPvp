@@ -49,8 +49,29 @@ public class StatisticsCommand implements CommandExecutor {
         player.sendMessage(ChatColor.GREEN + "Balance: " + ChatColor.RED + "$" + data.getBalance());
         player.sendMessage(ChatColor.GREEN + "Kills: " + ChatColor.RED + data.getKills());
         player.sendMessage(ChatColor.GREEN + "Deaths: " + ChatColor.RED + data.getDeaths());
-        player.sendMessage(ChatColor.GREEN + "KDR: " + ChatColor.RED + ((double) Math.round((data.getKills() / data.getDeaths()) * 100D) / 100D));
+        player.sendMessage(ChatColor.GREEN + "KDR: " + ChatColor.RED + getRatio(data));
 
         return true;
+    }
+
+    private double getRatio(PlayerData playerData) {
+        double kills = playerData.getKills();
+        double deaths = playerData.getDeaths();
+        double ratio;
+        if ((kills == 0.0D) && (deaths == 0.0D)) {
+            ratio = 0.0D;
+        } else {
+            if ((kills > 0.0D) && (deaths == 0.0D)) {
+                ratio = kills;
+            } else {
+                if ((deaths > 0.0D) && (kills == 0.0D)) {
+                    ratio = -deaths;
+                } else {
+                    ratio = kills / deaths;
+                }
+            }
+        }
+        ratio = Math.round(ratio * 100.0D) / 100.0D;
+        return ratio;
     }
 }
