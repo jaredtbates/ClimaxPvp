@@ -35,14 +35,14 @@ public class BomberKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         chestplate.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chestplate.getItemMeta();
         chestmeta.setColor(Color.RED);
         chestplate.setItemMeta(chestmeta);
         player.getInventory().setChestplate(chestplate);
         ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS);
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         leggings.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta legmeta = (LeatherArmorMeta) leggings.getItemMeta();
         legmeta.setColor(Color.RED);
@@ -72,7 +72,7 @@ public class BomberKit extends Kit {
                 }
                 player.playSound(player.getLocation(), Sound.ITEM_PICKUP, 1, 1);
             }
-        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 100);
+        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 140);
     }
 
     protected void wearNoSoup(Player player) {
@@ -83,14 +83,14 @@ public class BomberKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         chestplate.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chestplate.getItemMeta();
         chestmeta.setColor(Color.RED);
         chestplate.setItemMeta(chestmeta);
         player.getInventory().setChestplate(chestplate);
         ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS);
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         leggings.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta legmeta = (LeatherArmorMeta) leggings.getItemMeta();
         legmeta.setColor(Color.RED);
@@ -122,7 +122,7 @@ public class BomberKit extends Kit {
                 }
                 player.playSound(player.getLocation(), Sound.ITEM_PICKUP, 1, 1);
             }
-        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 100);
+        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 140);
     }
 
     @EventHandler
@@ -142,7 +142,7 @@ public class BomberKit extends Kit {
         tntInInv.setAmount(tntInInv.getAmount() - 1);
         player.getInventory().setItem(player.getInventory().getHeldItemSlot(), tntInInv);
         TNTPrimed tnt = player.getWorld().spawn(player.getEyeLocation().add(player.getLocation().getDirection()), TNTPrimed.class);
-        tnt.setFuseTicks(20);
+        tnt.setFuseTicks(25);
         velocity(tnt, player.getLocation().getDirection().multiply(2), 0.5, false, 0.0, 0.1, 10.0, false);
         velocity(player, player.getLocation().getDirection().multiply(-1), tnt.getVelocity().length() + 0.02, false, 0.0, 0.2, 0.8, true);
         new TNTParticle(tnt);
