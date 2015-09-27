@@ -22,7 +22,7 @@ public class SnailKit extends Kit {
 
     protected void wear(Player player) {
         ItemStack sword = new ItemStack(Material.IRON_AXE);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
@@ -42,7 +42,7 @@ public class SnailKit extends Kit {
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         ItemStack sword = new ItemStack(Material.IRON_AXE);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
