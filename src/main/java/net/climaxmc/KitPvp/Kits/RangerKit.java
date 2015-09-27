@@ -29,7 +29,7 @@ public class RangerKit extends Kit {
         LeatherArmorMeta helmetMeta = (LeatherArmorMeta) helmet.getItemMeta();
         helmetMeta.setColor(Color.ORANGE);
         helmet.setItemMeta(helmetMeta);
-        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         helmet.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().setHelmet(helmet);
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
@@ -48,10 +48,10 @@ public class RangerKit extends Kit {
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_FALL, 4);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.WOOD_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 4);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack bow = new ItemStack(Material.BOW);
@@ -61,7 +61,7 @@ public class RangerKit extends Kit {
         lores.add("Knocks you back when fired, Shift to avoid Knockback!");
         bowmeta.setLore(lores);
         bow.setItemMeta(bowmeta);
-        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
+        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
         player.getInventory().addItem(bow);
         addSoup(player.getInventory(), 2, 33);
         player.getInventory().addItem(new ItemStack(Material.ARROW, 64));
@@ -77,7 +77,7 @@ public class RangerKit extends Kit {
         LeatherArmorMeta helmetMeta = (LeatherArmorMeta) helmet.getItemMeta();
         helmetMeta.setColor(Color.ORANGE);
         helmet.setItemMeta(helmetMeta);
-        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         helmet.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().setHelmet(helmet);
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
@@ -96,10 +96,10 @@ public class RangerKit extends Kit {
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_FALL, 4);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.WOOD_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 4);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack bow = new ItemStack(Material.BOW);
@@ -109,7 +109,7 @@ public class RangerKit extends Kit {
         lores.add("Knocks you back when fired, Shift to avoid Knockback!");
         bowmeta.setLore(lores);
         bow.setItemMeta(bowmeta);
-        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
+        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
         player.getInventory().addItem(bow);
         ItemStack fishingrod = new ItemStack(Material.FISHING_ROD);
         fishingrod.addEnchantment(Enchantment.DURABILITY, 3);

@@ -19,7 +19,7 @@ import org.bukkit.util.Vector;
 public class VikingKit extends Kit {
 
     public VikingKit() {
-        super("Viking", new ItemStack(Material.DIAMOND_AXE), "You damage all players within 3.3 blocks of yourself!", ChatColor.GOLD);
+        super("Viking", new ItemStack(Material.DIAMOND_AXE), "You damage all players within 3.3 blocks of yourself!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
@@ -92,7 +92,7 @@ public class VikingKit extends Kit {
                     player.getNearbyEntities(3.3, 3.3, 3.3).stream().filter(entity -> entity instanceof Player).filter(entity -> !(entity == event.getDamager())).forEach(entity -> {
                         Player players = (Player) entity;
                         event.setCancelled(true);
-                        players.damage(5);
+                        players.damage(4);
                         Vector vector = player.getEyeLocation().getDirection();
                         vector.multiply(0.6F);
                         vector.setY(0.2);

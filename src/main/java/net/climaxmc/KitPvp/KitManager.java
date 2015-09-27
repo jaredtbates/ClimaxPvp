@@ -46,7 +46,7 @@ public class KitManager implements Listener {
         // Green Kits
         kits.add(new ThorKit());
         kits.add(new AnvilKit());
-        kits.add(new AnchorKit());
+        kits.add(new SnailKit());
         kits.add(new GhastKit());
         kits.add(new ChemistKit());
 
@@ -55,12 +55,12 @@ public class KitManager implements Listener {
         kits.add(new WitherKit());
         kits.add(new RageKit());
         kits.add(new ViperKit());
-        kits.add(new IronGolemKit());
+        kits.add(new VikingKit());
 
         // Gold Kits
         kits.add(new RangerKit());
         kits.add(new AssassinKit());
-        kits.add(new VikingKit());
+        kits.add(new IronGolemKit());
         kits.add(new KangarooKit());
         kits.add(new BomberKit());
 

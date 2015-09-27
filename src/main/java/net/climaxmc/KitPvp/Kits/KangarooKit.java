@@ -42,7 +42,7 @@ public class KangarooKit extends Kit {
         leggings.setItemMeta(legmeta);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_FALL, 2);
+        boots.addEnchantment(Enchantment.PROTECTION_FALL, 4);
         player.getInventory().setBoots(boots);
         ItemStack firework = new ItemStack(Material.FIREWORK);
         ItemMeta fwmeta = firework.getItemMeta();
@@ -74,7 +74,7 @@ public class KangarooKit extends Kit {
         leggings.setItemMeta(legmeta);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_FALL, 2);
+        boots.addEnchantment(Enchantment.PROTECTION_FALL, 4);
         player.getInventory().setBoots(boots);
         ItemStack firework = new ItemStack(Material.FIREWORK);
         ItemMeta fwmeta = firework.getItemMeta();
@@ -101,13 +101,13 @@ public class KangarooKit extends Kit {
             if (!(player.isSneaking())) {
                 player.setFallDistance(-(4F + 1));
                 Vector vector = player.getEyeLocation().getDirection();
-                vector.multiply(1.2F);
+                vector.multiply(1.0F);
                 vector.setY(0.6);
                 player.setVelocity(vector);
             } else {
                 player.setFallDistance(-(4F + 1));
                 Vector vector = player.getEyeLocation().getDirection();
-                vector.multiply(1.7F);
+                vector.multiply(1.8F);
                 vector.setY(0.5);
                 player.setVelocity(vector);
             }
