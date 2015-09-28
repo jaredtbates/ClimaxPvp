@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
@@ -80,5 +81,14 @@ public class PlayerJoinListener implements Listener {
         Scoreboard board = manager.getNewScoreboard();
 
         player.setScoreboard(board);
+
+        PermissionAttachment attachment = player.addAttachment(plugin);
+
+        if (playerData != null && playerData.hasRank(Rank.MODERATOR)) {
+            attachment.setPermission("minecraft.command.tp", true);
+            attachment.setPermission("bukkit.command.teleport", true);
+        }
+
+        attachment.setPermission("bukkit.command.tps", true);
     }
 }
