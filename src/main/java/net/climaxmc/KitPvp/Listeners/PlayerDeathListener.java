@@ -19,6 +19,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class PlayerDeathListener implements Listener {
     private ClimaxPvp plugin;
+    ChallengesFiles challengesFiles = new ChallengesFiles();
 
     public PlayerDeathListener(ClimaxPvp plugin) {
         this.plugin = plugin;
@@ -75,7 +76,6 @@ public class PlayerDeathListener implements Listener {
         PlayerData killerData = plugin.getPlayerData(killer);
         killerData.addKills(1);
 
-        ChallengesFiles challengesFiles = new ChallengesFiles();
         for (Challenge challenge : Challenge.values()) {
             if (challengesFiles.challengeIsStarted(killer, challenge)) {
                 challengesFiles.addChallengeKill(killer, challenge);
