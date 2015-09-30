@@ -1,6 +1,5 @@
 package net.climaxmc.KitPvp.Commands;
 
-import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Utils.I;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -10,12 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class PeiCommand implements CommandExecutor {
-    private ClimaxPvp plugin;
-
-    public PeiCommand(ClimaxPvp plugin) {
-        this.plugin = plugin;
-    }
-
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {

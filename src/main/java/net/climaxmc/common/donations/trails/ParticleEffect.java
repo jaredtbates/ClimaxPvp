@@ -27,6 +27,7 @@ package net.climaxmc.common.donations.trails;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -44,6 +45,7 @@ import java.util.HashMap;
  * @author Maxim Roncace
  * @version 0.1.0
  */
+@SuppressWarnings("unchecked")
 public class ParticleEffect {
     private static Class<?> packetClass = null;
     private static Constructor<?> packetConstructor = null;
@@ -54,7 +56,7 @@ public class ParticleEffect {
     private static HashMap<Class<? extends Entity>, Method> handles = new HashMap<Class<? extends Entity>, Method>();
 
     private static boolean newParticlePacketConstructor = false;
-    private static Class<Enum> enumParticle = null;
+    private static Class<Enum<?>> enumParticle = null;
     /**
      * Gets whether ParticleLib is compatible with the server software.
      *
@@ -88,7 +90,7 @@ public class ParticleEffect {
                 } else { // use the new constructor for 1.8
                     Bukkit.getLogger().info("[ParticleLib] Version is >= 1.8 - using new packet constructor");
                     newParticlePacketConstructor = true;
-                    enumParticle = (Class<Enum>) getNmsClass("EnumParticle");
+                    enumParticle = (Class<Enum<?>>) getNmsClass("EnumParticle");
                     packetConstructor = packetClass.getDeclaredConstructor(enumParticle, boolean.class, float.class,
                             float.class, float.class, float.class, float.class, float.class, float.class, int.class,
                             int[].class);
