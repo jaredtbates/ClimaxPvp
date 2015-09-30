@@ -87,7 +87,7 @@ public class ThorKit extends Kit {
                         event.setCancelled(true);
                         target.getWorld().strikeLightning(target.getLocation());
                         event.setCancelled(true);
-                        target.damage(8);
+                        target.damage(6);
                     }
                 }
             }
