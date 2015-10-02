@@ -19,7 +19,6 @@ import org.bukkit.scheduler.BukkitTask;
 
 public class PlayerDeathListener implements Listener {
     private ClimaxPvp plugin;
-    ChallengesFiles challengesFiles = new ChallengesFiles();
 
     public PlayerDeathListener(ClimaxPvp plugin) {
         this.plugin = plugin;
@@ -77,10 +76,10 @@ public class PlayerDeathListener implements Listener {
         killerData.addKills(1);
 
         for (Challenge challenge : Challenge.values()) {
-            if (challengesFiles.challengeIsStarted(killer, challenge)) {
-                challengesFiles.addChallengeKill(killer, challenge);
-                if (challengesFiles.getChallengeKills(killer, challenge) >= challenge.getKillRequirement()) {
-                    challengesFiles.setCompleted(killer, challenge);
+            if (plugin.getChallengesFiles().challengeIsStarted(killer, challenge)) {
+                plugin.getChallengesFiles().addChallengeKill(killer, challenge);
+                if (plugin.getChallengesFiles().getChallengeKills(killer, challenge) >= challenge.getKillRequirement()) {
+                    plugin.getChallengesFiles().setCompleted(killer, challenge);
                     killer.playSound(killer.getLocation(), Sound.LEVEL_UP, 1, 1);
                     killer.sendMessage(ChatColor.BOLD + "-------------------------------------------");
                     killer.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenge Complete: " + ChatColor.AQUA + challenge.getName());

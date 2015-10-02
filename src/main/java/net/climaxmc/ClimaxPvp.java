@@ -6,6 +6,7 @@ import net.climaxmc.Administration.Runnables.UpdateRunnable;
 import net.climaxmc.Donations.Donations;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
+import net.climaxmc.KitPvp.Utils.ChallengesFiles;
 import net.climaxmc.common.database.MySQL;
 import net.climaxmc.common.database.PlayerData;
 import org.bukkit.ChatColor;
@@ -43,6 +44,8 @@ public class ClimaxPvp extends JavaPlugin {
     @Getter
     private FileConfiguration warpsConfig = null;
     private File warpsConfigFile = null;
+    @Getter
+    private ChallengesFiles challengesFiles = new ChallengesFiles();
 
     @Getter
     private HashMap<UUID, PlayerData> playerDataList = new HashMap<>();

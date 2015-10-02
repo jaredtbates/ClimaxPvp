@@ -59,35 +59,34 @@ public class InventoryClickListener implements Listener {
 
             // TODO: This code can probably be cleaned up a bit -Bert
             if (inventory.getName().equals("Challenges")) {
-                ChallengesFiles challengesFiles = new ChallengesFiles();
                 ItemStack clickedItem = event.getCurrentItem();
                 if (clickedItem.getType().equals(Material.MAP)) {
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #1")) {
-                        challengesFiles.setStarted(player, Challenge.Daily1);
+                        plugin.getChallengesFiles().setStarted(player, Challenge.Daily1);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
                         player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #1");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #2")) {
-                        challengesFiles.setStarted(player, Challenge.Daily2);
+                        plugin.getChallengesFiles().setStarted(player, Challenge.Daily2);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
                         player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #2");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #3")) {
-                        challengesFiles.setStarted(player, Challenge.Daily3);
+                        plugin.getChallengesFiles().setStarted(player, Challenge.Daily3);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
                         player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #3");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #4")) {
-                        challengesFiles.setStarted(player, Challenge.Daily4);
+                        plugin.getChallengesFiles().setStarted(player, Challenge.Daily4);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
                         player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #4");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Weekly Challenge #1")) {
-                        challengesFiles.setStarted(player, Challenge.Weekly1);
+                        plugin.getChallengesFiles().setStarted(player, Challenge.Weekly1);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
                         player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Weekly Challenge #1");
@@ -99,9 +98,9 @@ public class InventoryClickListener implements Listener {
 
                 if (clickedItem.getType().equals(Material.PAPER)) {
                     player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                    long cooldown = challengesFiles.getChallenge(clickedItem.getItemMeta().getDisplayName()).getCooldownTime()
+                    long cooldown = plugin.getChallengesFiles().getChallenge(clickedItem.getItemMeta().getDisplayName()).getCooldownTime()
                             - ((System.currentTimeMillis() / 1000)
-                            - (challengesFiles.getCompletedTime(player, challengesFiles.getChallenge(clickedItem.getItemMeta().getDisplayName()))));
+                            - (plugin.getChallengesFiles().getCompletedTime(player, plugin.getChallengesFiles().getChallenge(clickedItem.getItemMeta().getDisplayName()))));
                     if (cooldown >= 86400) {
                         cooldown = ((cooldown / 60) / 60) / 24;
                         if (cooldown == 1)

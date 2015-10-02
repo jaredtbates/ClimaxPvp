@@ -1,7 +1,7 @@
 package net.climaxmc.KitPvp.Menus;
 
+import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Utils.Challenge;
-import net.climaxmc.KitPvp.Utils.ChallengesFiles;
 import net.climaxmc.KitPvp.Utils.I;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -27,7 +27,6 @@ public class ChallengesMenu implements Listener {
 
         if (item != null) {
             if (item.getType().equals(Material.DIAMOND)) {
-                ChallengesFiles challengesFiles = new ChallengesFiles();
                 Inventory challengesInventory = Bukkit.createInventory(null, 27, "Challenges");
 
                 int i = 0;
@@ -35,7 +34,7 @@ public class ChallengesMenu implements Listener {
                     String cooldownText = "";
                     long cooldown = challenge.getCooldownTime()
                             - ((System.currentTimeMillis() / 1000)
-                            - (challengesFiles.getCompletedTime(p, challenge)));
+                            - (ClimaxPvp.getInstance().getChallengesFiles().getCompletedTime(p, challenge)));
                     if (cooldown >= 86400) {
                         cooldown = ((cooldown / 60) / 60) / 24;
                         if (cooldown == 1) cooldownText = "1 day";
@@ -53,13 +52,13 @@ public class ChallengesMenu implements Listener {
                         if (cooldown > 1) cooldownText = cooldown + " seconds";
                         if (cooldown == 0) {
                             cooldownText = "";
-                            challengesFiles.setReady(p, challenge);
+                            ClimaxPvp.getInstance().getChallengesFiles().setReady(p, challenge);
                         }
                     }
 
-                    if (challengesFiles.challengeIsCompleted(p, challenge)) {
+                    if (ClimaxPvp.getInstance().getChallengesFiles().challengeIsCompleted(p, challenge)) {
                         if (cooldownText.equals("")) {
-                            challengesFiles.setReady(p, challenge);
+                            ClimaxPvp.getInstance().getChallengesFiles().setReady(p, challenge);
                         }
                     }
 
@@ -75,7 +74,7 @@ public class ChallengesMenu implements Listener {
                             .lore("")
                             .lore(ChatColor.RED + "In Progress...")
                             .lore(ChatColor.YELLOW + "Players Killed: "
-                                    + ChatColor.GRAY + challengesFiles.getChallengeKills(p, challenge)
+                                    + ChatColor.GRAY + ClimaxPvp.getInstance().getChallengesFiles().getChallengeKills(p, challenge)
                                     + "/" + challenge.getKillRequirement()).enchantment(Enchantment.DURABILITY, i + 1);
                     ItemStack challengeCompleted = new I(Material.PAPER)
                             .name(ChatColor.RED + challenge.getName())
@@ -85,9 +84,9 @@ public class ChallengesMenu implements Listener {
                             .lore(ChatColor.RED + "You can do this challenge")
                             .lore(ChatColor.RED + "again in " + ChatColor.GOLD + cooldownText);
 
-                    if (challengesFiles.challengeIsStarted(p, challenge)) {
+                    if (ClimaxPvp.getInstance().getChallengesFiles().challengeIsStarted(p, challenge)) {
                         challengesInventory.setItem(11 + i, challengeStarted);
-                    } else if (challengesFiles.challengeIsCompleted(p, challenge)) {
+                    } else if (ClimaxPvp.getInstance().getChallengesFiles().challengeIsCompleted(p, challenge)) {
                         challengesInventory.setItem(11 + i, challengeCompleted);
                     } else {
                         challengesInventory.setItem(11 + i, challengeReady);
