@@ -122,7 +122,7 @@ public class BomberKit extends Kit {
                 }
                 player.playSound(player.getLocation(), Sound.ITEM_PICKUP, 1, 1);
             }
-        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 100);
+        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 200);
     }
 
     @EventHandler
