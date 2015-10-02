@@ -72,7 +72,7 @@ public class BomberKit extends Kit {
                 }
                 player.playSound(player.getLocation(), Sound.ITEM_PICKUP, 1, 1);
             }
-        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 200);
+        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 160);
     }
 
     protected void wearNoSoup(Player player) {
@@ -122,7 +122,7 @@ public class BomberKit extends Kit {
                 }
                 player.playSound(player.getLocation(), Sound.ITEM_PICKUP, 1, 1);
             }
-        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 200);
+        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 160);
     }
 
     @EventHandler
