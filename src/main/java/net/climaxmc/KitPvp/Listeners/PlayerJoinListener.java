@@ -67,6 +67,8 @@ public class PlayerJoinListener implements Listener {
                     player.sendMessage(ChatColor.BOLD + "You were opped because you had been previously deopped.");
                 }
             }
+        } else {
+            player.setPlayerListName(ChatColor.GRAY + player.getName());
         }
 
         int playersOnline = plugin.getServer().getOnlinePlayers().size();

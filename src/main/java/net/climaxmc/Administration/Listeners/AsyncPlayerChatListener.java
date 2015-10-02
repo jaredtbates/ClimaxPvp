@@ -7,6 +7,7 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import net.md_5.bungee.api.ChatColor;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -59,6 +60,11 @@ public class AsyncPlayerChatListener implements Listener {
             event.setFormat(level + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "{" + (color == null ? "" : color) + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
         } else {
             event.setFormat(level + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
+        }
+
+        if (StringUtils.containsIgnoreCase(event.getMessage(), "apply") && StringUtils.containsIgnoreCase(event.getMessage(), "staff")) {
+            event.setCancelled(true);
+            player.sendMessage(ChatColor.RED + "We are not currently accepting staff applications.");
         }
     }
 }
