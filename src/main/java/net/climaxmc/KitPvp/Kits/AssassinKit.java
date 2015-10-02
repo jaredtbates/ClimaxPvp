@@ -41,7 +41,7 @@ public class AssassinKit extends Kit {
         cloak.setItemMeta(cloakmeta);
         player.getInventory().addItem(cloak);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
+        helm.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.BLACK);
         helm.setItemMeta(helmmeta);
@@ -49,7 +49,7 @@ public class AssassinKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
+        boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
@@ -73,7 +73,7 @@ public class AssassinKit extends Kit {
         cloak.setItemMeta(cloakmeta);
         player.getInventory().addItem(cloak);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
+        helm.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.BLACK);
         helm.setItemMeta(helmmeta);
@@ -81,7 +81,7 @@ public class AssassinKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
+        boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
@@ -128,7 +128,7 @@ public class AssassinKit extends Kit {
                             Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
                                 if (KitManager.isPlayerInKit(player, this)) {
                                     ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-                                    helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
+                                    helm.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
                                     LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
                                     helmmeta.setColor(Color.BLACK);
                                     helm.setItemMeta(helmmeta);
@@ -136,7 +136,7 @@ public class AssassinKit extends Kit {
                                     player.getInventory().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
                                     player.getInventory().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
                                     ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-                                    boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
+                                    boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
                                     LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
                                     bootsmeta.setColor(Color.BLACK);
                                     boots.setItemMeta(bootsmeta);
