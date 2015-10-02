@@ -45,7 +45,7 @@ public class ClimaxPvp extends JavaPlugin {
     private FileConfiguration warpsConfig = null;
     private File warpsConfigFile = null;
     @Getter
-    private ChallengesFiles challengesFiles = new ChallengesFiles();
+    private ChallengesFiles challengesFiles = null;
 
     @Getter
     private HashMap<UUID, PlayerData> playerDataList = new HashMap<>();
@@ -117,6 +117,8 @@ public class ClimaxPvp extends JavaPlugin {
         new Administration(this);
 
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new UpdateRunnable(this), 120, 120);
+
+        challengesFiles = new ChallengesFiles();
     }
 
     @Override
