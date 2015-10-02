@@ -142,7 +142,7 @@ public class BomberKit extends Kit {
         tntInInv.setAmount(tntInInv.getAmount() - 1);
         player.getInventory().setItem(player.getInventory().getHeldItemSlot(), tntInInv);
         TNTPrimed tnt = player.getWorld().spawn(player.getEyeLocation().add(player.getLocation().getDirection()), TNTPrimed.class);
-        tnt.setFuseTicks(22);
+        tnt.setFuseTicks(17);
         velocity(tnt, player.getLocation().getDirection().multiply(2), 0.5, false, 0.0, 0.1, 10.0, false);
         velocity(player, player.getLocation().getDirection().multiply(-1), tnt.getVelocity().length() + 0.02, false, 0.0, 0.2, 0.8, true);
         new TNTParticle(tnt);
