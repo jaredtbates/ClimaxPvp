@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class StrafeKit extends Kit {
     public StrafeKit() {
-        super("Strafe", new ItemStack(Material.IRON_SWORD), "It's in the name! SpeedII Ftw!", ChatColor.GRAY);
+        super("Strafe", new ItemStack(Material.IRON_SWORD), "It's in the name! Speed II Ftw!", ChatColor.GRAY);
     }
 
     protected void wear(Player player) {
@@ -23,7 +23,7 @@ public class StrafeKit extends Kit {
         helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         player.getInventory().setHelmet(helmet);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+        player.getInventory().setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         player.getInventory().setBoots(boots);
@@ -44,7 +44,7 @@ public class StrafeKit extends Kit {
         helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         player.getInventory().setHelmet(helmet);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+        player.getInventory().setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         player.getInventory().setBoots(boots);

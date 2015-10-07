@@ -151,7 +151,7 @@ public class BomberKit extends Kit {
     @EventHandler
     public void onExplosion(EntityExplodeEvent event) {
         event.setCancelled(true);
-        event.getLocation().getWorld().createExplosion(event.getLocation().getX(), event.getLocation().getY(), event.getLocation().getZ(), 4, false, false);
+        event.getLocation().getWorld().createExplosion(event.getLocation().getX(), event.getLocation().getY(), event.getLocation().getZ(), 5, false, false);
     }
 
     private void velocity(Entity ent, Vector vec, double str, boolean ySet, double yBase, double yAdd, double yMax, boolean groundBoost) {

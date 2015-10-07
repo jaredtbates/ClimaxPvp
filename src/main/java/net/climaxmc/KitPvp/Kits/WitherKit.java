@@ -85,7 +85,7 @@ public class WitherKit extends Kit {
             Player target = (Player) event.getEntity();
             if (event.getDamager() instanceof WitherSkull) {
                 event.setCancelled(true);
-                target.damage(8);
+                target.damage(5);
                 Vector vector = target.getEyeLocation().getDirection();
                 vector.multiply(-0.5F);
                 vector.setY(-0.2);

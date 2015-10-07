@@ -39,7 +39,7 @@ public class ArcherKit extends Kit {
         LeatherArmorMeta leggingsMeta = (LeatherArmorMeta) leggings.getItemMeta();
         leggingsMeta.setColor(Color.WHITE);
         leggings.setItemMeta(leggingsMeta);
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         leggings.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
@@ -51,8 +51,8 @@ public class ArcherKit extends Kit {
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack bow = new ItemStack(Material.BOW);
-        bow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
-        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
+        bow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
+        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 4);
         bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
         player.getInventory().addItem(bow);
         addSoup(player.getInventory(), 2, 34);
@@ -83,7 +83,7 @@ public class ArcherKit extends Kit {
         LeatherArmorMeta leggingsMeta = (LeatherArmorMeta) leggings.getItemMeta();
         leggingsMeta.setColor(Color.WHITE);
         leggings.setItemMeta(leggingsMeta);
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         leggings.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
@@ -95,8 +95,8 @@ public class ArcherKit extends Kit {
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack bow = new ItemStack(Material.BOW);
-        bow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
-        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
+        bow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
+        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 4);
         bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
         player.getInventory().addItem(bow);
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);

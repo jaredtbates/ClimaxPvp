@@ -1,15 +1,25 @@
 package net.climaxmc.KitPvp.Kits;
 
+import java.util.concurrent.TimeUnit;
+
 import net.climaxmc.KitPvp.Kit;
+import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.Utils.Ability;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class EndermanKit extends Kit {
+	private Ability epearl = new Ability(1, 10, TimeUnit.SECONDS);
+	
     public EndermanKit() {
         super("Enderman", new ItemStack(Material.ENDER_PEARL), "Teleport around like an enderman!", ChatColor.BLUE);
     }
@@ -48,5 +58,21 @@ public class EndermanKit extends Kit {
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
         fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(fishingRod);
+    }
+    
+    @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event){
+    	Player player = event.getPlayer();
+    	if (KitManager.isPlayerInKit(player, this)){
+    		if(player.getInventory().getItemInHand().getType() == Material.ENDER_PEARL){
+    			if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK){
+    				if(epearl.tryUse(player)){
+    					event.setCancelled(false);
+    				}else{
+    					event.setCancelled(true);
+    				}
+    			}
+    		}
+        }
     }
 }
