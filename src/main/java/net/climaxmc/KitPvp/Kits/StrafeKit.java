@@ -23,8 +23,11 @@ public class StrafeKit extends Kit {
         helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         player.getInventory().setHelmet(helmet);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
+        ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
