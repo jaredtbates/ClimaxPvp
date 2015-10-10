@@ -50,7 +50,7 @@ public class BomberKit extends Kit {
         player.getInventory().setLeggings(leggings);
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         addSoup(player.getInventory(), 2, 35);
         new BukkitRunnable() {
@@ -72,7 +72,7 @@ public class BomberKit extends Kit {
                 }
                 player.playSound(player.getLocation(), Sound.ITEM_PICKUP, 1, 1);
             }
-        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 160);
+        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 120);
     }
 
     protected void wearNoSoup(Player player) {
@@ -98,7 +98,7 @@ public class BomberKit extends Kit {
         player.getInventory().setLeggings(leggings);
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
         fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
@@ -122,7 +122,7 @@ public class BomberKit extends Kit {
                 }
                 player.playSound(player.getLocation(), Sound.ITEM_PICKUP, 1, 1);
             }
-        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 160);
+        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 120);
     }
 
     @EventHandler
@@ -151,7 +151,7 @@ public class BomberKit extends Kit {
     @EventHandler
     public void onExplosion(EntityExplodeEvent event) {
         event.setCancelled(true);
-        event.getLocation().getWorld().createExplosion(event.getLocation().getX(), event.getLocation().getY(), event.getLocation().getZ(), 5, false, false);
+        event.getLocation().getWorld().createExplosion(event.getLocation().getX(), event.getLocation().getY(), event.getLocation().getZ(), 4, false, false);
     }
 
     private void velocity(Entity ent, Vector vec, double str, boolean ySet, double yBase, double yAdd, double yMax, boolean groundBoost) {
