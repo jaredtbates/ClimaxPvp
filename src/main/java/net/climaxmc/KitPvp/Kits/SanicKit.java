@@ -19,7 +19,7 @@ public class SanicKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
@@ -34,7 +34,7 @@ public class SanicKit extends Kit {
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);

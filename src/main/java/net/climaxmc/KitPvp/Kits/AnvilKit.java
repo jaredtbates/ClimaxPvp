@@ -23,12 +23,12 @@ public class AnvilKit extends Kit {
     protected void wear(Player player) {
         player.getInventory().addItem(new ItemStack(Material.DIAMOND_SWORD));
         ItemStack helmet = new ItemStack(Material.CHAINMAIL_HELMET);
-        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setHelmet(helmet);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 1, 35);
     }
@@ -40,12 +40,12 @@ public class AnvilKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         player.getInventory().addItem(new ItemStack(Material.DIAMOND_SWORD));
         ItemStack helmet = new ItemStack(Material.CHAINMAIL_HELMET);
-        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setHelmet(helmet);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setBoots(boots);
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
         fishingRod.addEnchantment(Enchantment.DURABILITY, 3);

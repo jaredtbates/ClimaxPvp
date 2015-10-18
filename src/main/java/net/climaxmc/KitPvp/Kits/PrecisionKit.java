@@ -27,7 +27,7 @@ public class PrecisionKit extends Kit {
         ItemMeta swordmeta = sword.getItemMeta();
         swordmeta.setDisplayName(ChatColor.AQUA + "Precision Sword");
         sword.setItemMeta(swordmeta);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 4);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         player.getInventory().addItem(sword);
         player.getInventory().setHelmet(new ItemStack(Material.GOLD_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
@@ -48,7 +48,7 @@ public class PrecisionKit extends Kit {
         ItemMeta swordmeta = sword.getItemMeta();
         swordmeta.setDisplayName(ChatColor.AQUA + "Precision Sword");
         sword.setItemMeta(swordmeta);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 4);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         player.getInventory().addItem(sword);
         player.getInventory().setHelmet(new ItemStack(Material.GOLD_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
