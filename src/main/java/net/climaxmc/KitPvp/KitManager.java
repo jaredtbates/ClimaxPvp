@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp;
 
 import lombok.Getter;
+import lombok.Setter;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kits.*;
 import org.bukkit.Bukkit;
@@ -27,6 +28,9 @@ public class KitManager implements Listener {
     private static Map<UUID, Kit> playersInKits = new HashMap<>();
     @Getter
     private static Map<UUID, Kit> previousKit = new HashMap<>();
+    @Getter
+    @Setter
+    private static boolean allKitsEnabled = false;
 
     public KitManager(ClimaxPvp plugin) {
         // Gray Kits

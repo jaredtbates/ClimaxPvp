@@ -1,6 +1,7 @@
 package net.climaxmc.Administration.Commands;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import org.bukkit.ChatColor;
@@ -31,7 +32,7 @@ public class AdminCommand implements CommandExecutor {
         }
 
         if (args.length != 1) {
-            player.sendMessage(ChatColor.RED + "/admin <on/off>");
+            player.sendMessage(ChatColor.RED + "/admin <on/off" + (playerData.hasRank(Rank.OWNER) ? "/allon/alloff" : "") + ">");
             return true;
         }
 
@@ -44,8 +45,24 @@ public class AdminCommand implements CommandExecutor {
                 playerData.removeData("Admin Mode");
                 player.sendMessage(ChatColor.GREEN + "Admin access to all kits has been " + ChatColor.RED + "disabled" + ChatColor.GREEN + "!");
                 break;
+            case "allon":
+                if (playerData.hasRank(Rank.OWNER)) {
+                    plugin.getConfig().set("AllKitsEnabled", true);
+                    plugin.saveConfig();
+                    KitManager.setAllKitsEnabled(true);
+                    player.sendMessage(ChatColor.GREEN + "All kits have been enabled for all players!");
+                    break;
+                }
+            case "alloff":
+                if (playerData.hasRank(Rank.OWNER)) {
+                    plugin.getConfig().set("AllKitsEnabled", false);
+                    plugin.saveConfig();
+                    KitManager.setAllKitsEnabled(false);
+                    player.sendMessage(ChatColor.GREEN + "All kits have been " + ChatColor.RED + "disabled" + ChatColor.GREEN + " for all players!");
+                    break;
+                }
             default:
-                player.sendMessage(ChatColor.RED + "/admin <on/off>");
+                player.sendMessage(ChatColor.RED + "/admin <on/off" + (playerData.hasRank(Rank.OWNER) ? "/allon/alloff" : "") + ">");
                 break;
         }
 

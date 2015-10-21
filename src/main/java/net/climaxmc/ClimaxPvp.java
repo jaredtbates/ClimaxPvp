@@ -4,6 +4,7 @@ import lombok.Getter;
 import net.climaxmc.Administration.Administration;
 import net.climaxmc.Administration.Runnables.UpdateRunnable;
 import net.climaxmc.Donations.Donations;
+import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Utils.ChallengesFiles;
@@ -119,6 +120,8 @@ public class ClimaxPvp extends JavaPlugin {
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new UpdateRunnable(this), 120, 120);
 
         challengesFiles = new ChallengesFiles();
+
+        KitManager.setAllKitsEnabled(getConfig().getBoolean("AllKitsEnabled"));
     }
 
     @Override
