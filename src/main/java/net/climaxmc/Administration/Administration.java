@@ -32,7 +32,6 @@ public class Administration {
         plugin.getCommand("tempmute").setExecutor(new TempMuteCommand(plugin));
         plugin.getCommand("unmute").setExecutor(new UnMuteCommand(plugin));
         plugin.getCommand("kick").setExecutor(new KickCommand(plugin));
-        plugin.getCommand("ip").setExecutor(new IPCommand(plugin));
         plugin.getCommand("lockchat").setExecutor(new ChatCommands(plugin));
         plugin.getCommand("cmdspy").setExecutor(new ChatCommands(plugin));
 

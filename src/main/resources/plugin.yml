@@ -89,8 +89,6 @@ commands:
   donate:
     description: View donation link
     aliases: [buy, shop]
-  ip:
-    description: Get the IP of a player
   cmdspy:
     description: Toggles command spy on and off
     aliases: [spy, commandspy, cspy]
