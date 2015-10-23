@@ -63,20 +63,13 @@ public class AsyncPlayerChatListener implements Listener {
             event.setFormat(level + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
         }
 
-        if (StringUtils.containsIgnoreCase(event.getMessage(), "apply") && StringUtils.containsIgnoreCase(event.getMessage(), "staff")) {
+        /*if (StringUtils.containsIgnoreCase(event.getMessage(), "apply") && StringUtils.containsIgnoreCase(event.getMessage(), "staff")) {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "We are not currently accepting staff applications.");
-        }
+        }*/
 
-        ChatCommands chatCommands = new ChatCommands(plugin);
-        if (chatCommands.chatSilenced == false) {
-            event.setCancelled(false);
-        } else {
-            if (playerData.hasRank(Rank.HELPER)) {
-                event.setCancelled(false);
-            } else {
-                event.setCancelled(true);
-            }
+        if (ChatCommands.chatSilenced && !playerData.hasRank(Rank.HELPER)) {
+            event.setCancelled(true);
         }
     }
 }

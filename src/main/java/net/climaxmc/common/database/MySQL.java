@@ -118,7 +118,7 @@ public class MySQL {
      *
      * @param query The query to run on the database
      */
-    public synchronized void executeUpdate(String query, Object... values) {
+    public void executeUpdate(String query, Object... values) {
         runAsync(() -> {
             try {
                 if (connection == null || connection.isClosed()) {

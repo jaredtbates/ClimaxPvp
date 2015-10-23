@@ -33,11 +33,6 @@ public class PlayerCommandPreprocessListener implements Listener {
             return;
         }
 
-        ChatCommands chatCommands = new ChatCommands(plugin);
-        if (chatCommands.cmdspies.contains(player)) {
-            plugin.getServer().getOnlinePlayers().stream().filter(players -> plugin.getPlayerData(players).hasRank(Rank.HELPER)).forEach(players -> players.sendMessage(ChatColor.DARK_GRAY + player.getName() + ": " + ChatColor.GRAY + command));
-        } else {
-            return;
-        }
+        plugin.getServer().getOnlinePlayers().stream().filter(players -> plugin.getPlayerData(players).hasRank(Rank.HELPER) && ChatCommands.cmdspies.contains(player.getUniqueId())).forEach(players -> players.sendMessage(ChatColor.DARK_GRAY + player.getName() + ": " + ChatColor.GRAY + command));
     }
 }

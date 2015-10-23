@@ -26,10 +26,10 @@ public class PlayerDeathListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerDeath(PlayerDeathEvent event) {
-        final Player player = event.getEntity();
+        Player player = event.getEntity();
         Player killer = player.getKiller();
 
-        final Location location = player.getLocation();
+        Location location = player.getLocation();
 
         BukkitTask task = plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, () -> new ParticleEffect(new ParticleEffect.ParticleData(ParticleEffect.ParticleType.LAVA, 1, 2, 1)).sendToLocation(location), 1, 1);
         plugin.getServer().getScheduler().runTaskLater(plugin, task::cancel, 10);

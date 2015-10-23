@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.HashSet;
+import java.util.UUID;
 
 public class ChatCommands implements CommandExecutor {
 
@@ -21,8 +22,8 @@ public class ChatCommands implements CommandExecutor {
         this.plugin = plugin;
     }
 
-    public HashSet<Player> cmdspies = new HashSet<>();
-    public boolean chatSilenced = false;
+    public static HashSet<UUID> cmdspies = new HashSet<>();
+    public static boolean chatSilenced = false;
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -38,16 +39,12 @@ public class ChatCommands implements CommandExecutor {
                 player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
                 return true;
             } else {
-                if (args.length > 0) {
-                    player.sendMessage(ChatColor.RED + "Too many arguments. Just use /clearchat");
-                } else {
-                    for (int i = 0; i <= 100; i++) {
-                        Bukkit.getServer().broadcastMessage(" ");
-                    }
-                    Bukkit.getServer().broadcastMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "The chat has been cleared by " + player.getName() + "!");
-                    for (Player p : Bukkit.getOnlinePlayers()) {
-                        p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
-                    }
+                for (int i = 0; i <= 100; i++) {
+                    Bukkit.getServer().broadcastMessage(" ");
+                }
+                Bukkit.getServer().broadcastMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "The chat has been cleared by " + player.getName() + "!");
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                 }
             }
         }
@@ -57,21 +54,17 @@ public class ChatCommands implements CommandExecutor {
                 player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
                 return true;
             } else {
-                if (args.length > 0) {
-                    player.sendMessage(ChatColor.RED + "Too many arguments. Just use /lockchat");
+                if (!chatSilenced) {
+                    chatSilenced = true;
+                    Bukkit.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + "The chat has been locked by " + player.getName() + "!");
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
+                    }
                 } else {
-                    if(chatSilenced == false) {
-                        chatSilenced = true;
-                        Bukkit.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + "The chat has been locked by " + player.getName() + "!");
-                        for (Player p : Bukkit.getOnlinePlayers()) {
-                            p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
-                        }
-                    } else {
-                        chatSilenced = false;
-                        Bukkit.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + "All chat has been re-enabled!");
-                        for (Player p : Bukkit.getOnlinePlayers()) {
-                            p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
-                        }
+                    chatSilenced = false;
+                    Bukkit.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + "All chat has been re-enabled!");
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                     }
                 }
             }
@@ -82,14 +75,12 @@ public class ChatCommands implements CommandExecutor {
                 player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
                 return true;
             } else {
-                if (args.length > 0) {
-                    player.sendMessage(ChatColor.RED + "Too many arguments. Just use /cmdspy");
+                if (!cmdspies.contains(player.getUniqueId())) {
+                    cmdspies.add(player.getUniqueId());
+                    player.sendMessage(ChatColor.GREEN + "Your command spy has been enabled!");
                 } else {
-                    if(!cmdspies.contains(player)) {
-                        cmdspies.add(player);
-                    } else {
-                        cmdspies.remove(player);
-                    }
+                    cmdspies.remove(player.getUniqueId());
+                    player.sendMessage(ChatColor.RED + "Your command spy has been disabled!");
                 }
             }
         }

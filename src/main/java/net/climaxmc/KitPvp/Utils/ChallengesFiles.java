@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Utils;
 
 import net.climaxmc.ClimaxPvp;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -26,11 +27,13 @@ public class ChallengesFiles {
 
     private void set(String path, Object object) {
         config.set(path, object);
-        try {
-            config.save(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Bukkit.getScheduler().runTaskAsynchronously(ClimaxPvp.getInstance(), () -> {
+            try {
+                config.save(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private Object get(String path) {
@@ -67,7 +70,7 @@ public class ChallengesFiles {
         if (get(p.getUniqueId() + "." + challenge + ".CompletedTime") == null) {
             set(p.getUniqueId() + "." + challenge + ".CompletedTime", 0);
         }
-        return (long) (int) get(p.getUniqueId() + "." + challenge + ".CompletedTime");
+        return (long) get(p.getUniqueId() + "." + challenge + ".CompletedTime");
     }
 
     public int getChallengeKills(Player p, Challenge challenge) {
