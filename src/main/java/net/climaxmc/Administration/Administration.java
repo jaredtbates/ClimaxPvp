@@ -33,6 +33,8 @@ public class Administration {
         plugin.getCommand("unmute").setExecutor(new UnMuteCommand(plugin));
         plugin.getCommand("kick").setExecutor(new KickCommand(plugin));
         plugin.getCommand("ip").setExecutor(new IPCommand(plugin));
+        plugin.getCommand("lockchat").setExecutor(new ChatCommands(plugin));
+        plugin.getCommand("cmdspy").setExecutor(new ChatCommands(plugin));
 
         // Start runnables
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new SpawnAutoBroadcastRunnable(plugin), 0, 20 * plugin.getConfig().getInt("SpawnAutoBroadcast.Time"));

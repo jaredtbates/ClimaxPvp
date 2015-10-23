@@ -1,5 +1,6 @@
 package net.climaxmc.Administration.Listeners;
 
+import net.climaxmc.Administration.Commands.ChatCommands;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
@@ -32,6 +33,11 @@ public class PlayerCommandPreprocessListener implements Listener {
             return;
         }
 
-        plugin.getServer().getOnlinePlayers().stream().filter(players -> plugin.getPlayerData(players).hasRank(Rank.HELPER)).forEach(players -> players.sendMessage(ChatColor.DARK_GRAY + player.getName() + ": " + ChatColor.GRAY + command));
+        ChatCommands chatCommands = new ChatCommands(plugin);
+        if (chatCommands.cmdspies.contains(player)) {
+            plugin.getServer().getOnlinePlayers().stream().filter(players -> plugin.getPlayerData(players).hasRank(Rank.HELPER)).forEach(players -> players.sendMessage(ChatColor.DARK_GRAY + player.getName() + ": " + ChatColor.GRAY + command));
+        } else {
+            return;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package net.climaxmc.Administration.Listeners;
 
+import net.climaxmc.Administration.Commands.ChatCommands;
 import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
@@ -40,12 +41,12 @@ public class AsyncPlayerChatListener implements Listener {
                 player.sendMessage(ChatColor.RED + "You were temporarily muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
                         + " for " + punishment.getReason() + ".\n"
                         + "You have " + Time.toString(punishment.getTime() + punishment.getExpiration() - System.currentTimeMillis()) + " left in your mute.\n"
-                        + "Appeal on forum.climaxmc.net if you believe that this is in error!");
+                        + "Appeal on forum.climaxmc.net if you believe that this is an error!");
             } else if (punishment.getExpiration() == -1) {
                 event.setCancelled(true);
                 player.sendMessage(ChatColor.RED + "You were permanently muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
                         + " for " + punishment.getReason() + ".\n"
-                        + "Appeal on forum.climaxmc.net if you believe that this is in error!");
+                        + "Appeal on forum.climaxmc.net if you believe that this is an error!");
             }
         });
 
@@ -65,6 +66,17 @@ public class AsyncPlayerChatListener implements Listener {
         if (StringUtils.containsIgnoreCase(event.getMessage(), "apply") && StringUtils.containsIgnoreCase(event.getMessage(), "staff")) {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "We are not currently accepting staff applications.");
+        }
+
+        ChatCommands chatCommands = new ChatCommands(plugin);
+        if (chatCommands.chatSilenced == false) {
+            event.setCancelled(false);
+        } else {
+            if (playerData.hasRank(Rank.HELPER)) {
+                event.setCancelled(false);
+            } else {
+                event.setCancelled(true);
+            }
         }
     }
 }
