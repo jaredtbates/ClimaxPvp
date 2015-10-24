@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp.Listeners;
 
+import net.climaxmc.Administration.Commands.ChatCommands;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
@@ -56,10 +57,14 @@ public class PlayerDeathListener implements Listener {
             return;
         }
 
-        if (plugin.getServer().getOnlinePlayers().size() >= 15) {
+        if (ChatCommands.chatSilenced) {
             event.setDeathMessage(null);
         } else {
-            event.setDeathMessage(ChatColor.RED + player.getName() + ChatColor.GRAY + " was killed by " + ChatColor.GREEN + killer.getName());
+            if (plugin.getServer().getOnlinePlayers().size() >= 15) {
+                event.setDeathMessage(null);
+            } else {
+                event.setDeathMessage(ChatColor.RED + player.getName() + ChatColor.GRAY + " was killed by " + ChatColor.GREEN + killer.getName());
+            }
         }
 
         if (killer.getHealth() % 2 == 0) {

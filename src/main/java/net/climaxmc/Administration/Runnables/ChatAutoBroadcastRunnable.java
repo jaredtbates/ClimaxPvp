@@ -17,6 +17,8 @@ public class ChatAutoBroadcastRunnable implements Runnable {
             amount = 0;
         }
 
+        plugin.getServer().broadcastMessage(" ");
         plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("ChatAutoBroadcast.Messages").get(amount++)));
+        plugin.getServer().broadcastMessage(" ");
     }
 }

@@ -50,7 +50,7 @@ public class ChatCommands implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("lockchat")) {
-            if (!playerData.hasRank(Rank.MODERATOR) || !playerData.hasRank(Rank.JR_DEVELOPER)) {
+            if (!playerData.hasRank(Rank.MODERATOR)) {
                 player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
                 return true;
             } else {
@@ -77,10 +77,12 @@ public class ChatCommands implements CommandExecutor {
             } else {
                 if (!cmdspies.contains(player.getUniqueId())) {
                     cmdspies.add(player.getUniqueId());
-                    player.sendMessage(ChatColor.GREEN + "Your command spy has been enabled!");
+                    player.sendMessage(ChatColor.YELLOW + "Command Spy " + ChatColor.GREEN + " ENABLED");
+                    player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                 } else {
                     cmdspies.remove(player.getUniqueId());
-                    player.sendMessage(ChatColor.RED + "Your command spy has been disabled!");
+                    player.sendMessage(ChatColor.YELLOW + "Command Spy " + ChatColor.RED + " DISABLED");
+                    player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                 }
             }
         }
