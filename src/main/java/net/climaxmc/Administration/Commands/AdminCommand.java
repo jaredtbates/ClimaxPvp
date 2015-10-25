@@ -19,51 +19,62 @@ public class AdminCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            return true;
-        }
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            PlayerData playerData = plugin.getPlayerData(player);
 
-        Player player = (Player) sender;
-        PlayerData playerData = plugin.getPlayerData(player);
+            if (!playerData.hasRank(Rank.ADMINISTRATOR)) {
+                player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
+                return true;
+            }
 
-        if (!playerData.hasRank(Rank.ADMINISTRATOR)) {
-            player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
-            return true;
-        }
+            if (args.length != 1) {
+                player.sendMessage(ChatColor.RED + "/admin <on/off" + (playerData.hasRank(Rank.OWNER) ? "/allon/alloff" : "") + ">");
+                return true;
+            }
 
-        if (args.length != 1) {
-            player.sendMessage(ChatColor.RED + "/admin <on/off" + (playerData.hasRank(Rank.OWNER) ? "/allon/alloff" : "") + ">");
-            return true;
-        }
-
-        switch (args[0]) {
-            case "on":
-                playerData.addData("Admin Mode", true);
-                player.sendMessage(ChatColor.GREEN + "Admin access to all kits has been enabled!");
-                break;
-            case "off":
-                playerData.removeData("Admin Mode");
-                player.sendMessage(ChatColor.GREEN + "Admin access to all kits has been " + ChatColor.RED + "disabled" + ChatColor.GREEN + "!");
-                break;
-            case "allon":
-                if (playerData.hasRank(Rank.OWNER)) {
+            switch (args[0]) {
+                case "on":
+                    playerData.addData("Admin Mode", true);
+                    player.sendMessage(ChatColor.GREEN + "Admin access to all kits has been enabled!");
+                    break;
+                case "off":
+                    playerData.removeData("Admin Mode");
+                    player.sendMessage(ChatColor.GREEN + "Admin access to all kits has been " + ChatColor.RED + "disabled" + ChatColor.GREEN + "!");
+                    break;
+                case "allon":
+                    if (playerData.hasRank(Rank.OWNER)) {
+                        plugin.getConfig().set("AllKitsEnabled", true);
+                        plugin.saveConfig();
+                        KitManager.setAllKitsEnabled(true);
+                        player.sendMessage(ChatColor.GREEN + "All kits have been enabled for all players!");
+                        break;
+                    }
+                case "alloff":
+                    if (playerData.hasRank(Rank.OWNER)) {
+                        plugin.getConfig().set("AllKitsEnabled", false);
+                        plugin.saveConfig();
+                        KitManager.setAllKitsEnabled(false);
+                        player.sendMessage(ChatColor.GREEN + "All kits have been " + ChatColor.RED + "disabled" + ChatColor.GREEN + " for all players!");
+                        break;
+                    }
+                default:
+                    player.sendMessage(ChatColor.RED + "/admin <on/off" + (playerData.hasRank(Rank.OWNER) ? "/allon/alloff" : "") + ">");
+                    break;
+            }
+        } else {
+            switch (args[0]) {
+                case "allon":
                     plugin.getConfig().set("AllKitsEnabled", true);
                     plugin.saveConfig();
                     KitManager.setAllKitsEnabled(true);
-                    player.sendMessage(ChatColor.GREEN + "All kits have been enabled for all players!");
                     break;
-                }
-            case "alloff":
-                if (playerData.hasRank(Rank.OWNER)) {
+                case "alloff":
                     plugin.getConfig().set("AllKitsEnabled", false);
                     plugin.saveConfig();
                     KitManager.setAllKitsEnabled(false);
-                    player.sendMessage(ChatColor.GREEN + "All kits have been " + ChatColor.RED + "disabled" + ChatColor.GREEN + " for all players!");
                     break;
-                }
-            default:
-                player.sendMessage(ChatColor.RED + "/admin <on/off" + (playerData.hasRank(Rank.OWNER) ? "/allon/alloff" : "") + ">");
-                break;
+            }
         }
 
         return true;
