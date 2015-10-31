@@ -33,7 +33,6 @@ public class ThorKit extends Kit {
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setHelmet(helm);
         ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chestplate);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
@@ -52,7 +51,6 @@ public class ThorKit extends Kit {
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setHelmet(helm);
         ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chestplate);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
@@ -82,7 +80,7 @@ public class ThorKit extends Kit {
                         event.setCancelled(true);
                         target.getWorld().strikeLightning(target.getLocation());
                         event.setCancelled(true);
-                        target.damage(5);
+                        target.damage(7);
                     }
                 }
             }
