@@ -80,7 +80,7 @@ public class PlayerDeathListener implements Listener {
         PlayerData killerData = plugin.getPlayerData(killer);
         killerData.addKills(1);
 
-        for (Challenge challenge : Challenge.values()) {
+        /*for (Challenge challenge : Challenge.values()) {
             if (plugin.getChallengesFiles().challengeIsStarted(killer, challenge)) {
                 plugin.getChallengesFiles().addChallengeKill(killer, challenge);
                 if (plugin.getChallengesFiles().getChallengeKills(killer, challenge) >= challenge.getKillRequirement()) {
@@ -94,7 +94,7 @@ public class PlayerDeathListener implements Listener {
                     killerData.depositBalance(challenge.getRewardMoney());
                 }
             }
-        }
+        }*/
 
         if (killer.getLocation().distance(player.getWorld().getSpawnLocation()) <= 100) {
             killer.setHealth(20);
