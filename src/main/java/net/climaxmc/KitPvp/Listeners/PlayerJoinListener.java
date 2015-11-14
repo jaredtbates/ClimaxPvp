@@ -59,7 +59,7 @@ public class PlayerJoinListener implements Listener {
                     new InputStreamReader(
                             connection.getInputStream()));
             double result = Double.valueOf(in.readLine());
-            if (result >= 0.8) {
+            if (result == 1) {
                 event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatColor.RED + "\nSorry, but we don't allow VPNs and proxies on Climax.\n" +
                         "Please disable your VPN or proxy and retry.");
             }
