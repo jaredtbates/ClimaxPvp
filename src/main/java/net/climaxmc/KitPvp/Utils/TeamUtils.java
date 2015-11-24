@@ -1,0 +1,61 @@
+package net.climaxmc.KitPvp.Utils;// AUTHOR: gamer_000 (11/22/2015)
+
+import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.KitPvp;
+import org.bukkit.entity.Player;
+
+public class TeamUtils {
+    private ClimaxPvp plugin;
+
+    public TeamUtils(ClimaxPvp plugin) {
+        this.plugin = plugin;
+    }
+
+    public static void createPendingRequest(Player target, Player sender) {
+        KitPvp.pendingTeams.put(target.getName(), sender.getName());
+    }
+
+    public static void removePendingRequest(Player target) {
+        if (KitPvp.pendingTeams.isEmpty() || !KitPvp.pendingTeams.containsKey(target.getName()) || KitPvp.pendingTeams == null) {
+            return;
+        } else {
+            KitPvp.pendingTeams.remove(target.getName());
+        }
+    }
+
+    public boolean hasPendingRequest(Player target) {
+        if (KitPvp.pendingTeams.containsKey(target.getName())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static void createTeam(Player target, Player sender) {
+        KitPvp.currentTeams.put(target.getName(), sender.getName());
+        removePendingRequest(target);
+    }
+
+    public static void removeTeam(Player target) {
+        if (KitPvp.currentTeams.isEmpty() || !KitPvp.currentTeams.containsKey(target.getName()) || KitPvp.currentTeams == null) {
+            return;
+        } else {
+            KitPvp.currentTeams.remove(target.getName());
+        }
+    }
+
+    public boolean isTeaming(Player target) {
+        for (Player sender : plugin.getServer().getOnlinePlayers()) {
+            if (KitPvp.currentTeams.containsKey(target.getName())) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public Player getRequester(Player target) {
+        return plugin.getServer().getPlayer(KitPvp.pendingTeams.get(target.getName()));
+    }
+}

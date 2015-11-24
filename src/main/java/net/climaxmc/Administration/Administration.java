@@ -13,7 +13,7 @@ public class Administration {
         plugin.getServer().getPluginManager().registerEvents(new PlayerCommandPreprocessListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new AsyncPlayerChatListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new CombatLogListeners(plugin), plugin);
-        plugin.getServer().getPluginManager().registerEvents(new SpawnProtectListeners(plugin), plugin);
+        //plugin.getServer().getPluginManager().registerEvents(new SpawnProtectListeners(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new VanishCommand(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new CheckCommand(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ChatFilter(plugin), plugin);

@@ -17,8 +17,9 @@ public class PlayerData {
     private final MySQL mySQL;
     private final UUID uuid;
     private Rank rank;
-    private int balance, kills, deaths;
+    private int balance, kills, deaths, duelKills, duelDeaths, duelStreak;
     private String nickname;
+    private boolean dueling;
     private List<Punishment> punishments;
 
     /**
@@ -221,5 +222,21 @@ public class PlayerData {
     public void removePunishment(Punishment punishment) {
         punishments.remove(punishment);
         mySQL.executeUpdate(MySQL.UPDATE_PUNISHMENT_TIME, 0, uuid.toString(), punishment.getType().name(), punishment.getTime());
+    }
+
+    public void setDuelKills(int amount) {
+        mySQL.executeUpdate(MySQL.UPDATE_DUELDATA, "kills", Integer.toString(duelKills = amount), uuid);
+    }
+
+    public void addDuelKill() {
+        setDuelDeaths(getDuelKills() + 1);
+    }
+
+    public void setDuelDeaths(int amount) {
+        mySQL.executeUpdate(MySQL.UPDATE_DUELDATA, "deaths", Integer.toString(duelDeaths = amount), uuid);
+    }
+
+    public void addDuelDeath() {
+        setDuelDeaths(getDuelDeaths() + 1);
     }
 }

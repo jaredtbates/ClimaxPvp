@@ -22,6 +22,14 @@ public class PlayerQuitListener implements Listener {
             KitPvp.killStreak.remove(player.getUniqueId());
         }
 
+        if (KitPvp.pendingDuels.containsKey(player)) {
+            KitPvp.pendingDuels.remove(player.getUniqueId());
+        }
+
+        if (KitPvp.pendingDuels.containsValue(player)) {
+            KitPvp.pendingDuels.remove(player);
+        }
+
         event.setQuitMessage(null/*ChatColor.RED + "Quit" + ChatColor.DARK_GRAY + "\u00bb " + player.getName()*/);
 
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> plugin.savePlayerData(plugin.getPlayerData(player)));

@@ -1,6 +1,7 @@
 package net.climaxmc.Administration.Listeners;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,44 +36,66 @@ public class CombatLogListeners implements Listener {
             Player damager = (Player) event.getDamager();
             Player damaged = (Player) event.getEntity();
 
-            if (!tagged.containsKey(damaged.getUniqueId())) {
-                damaged.sendMessage(ChatColor.GRAY + "You are now in combat with " + ChatColor.GOLD + damager.getName() + ChatColor.GRAY + ".");
-                tagged.put(damaged.getUniqueId(),
-                        new BukkitRunnable() {
-                            public void run() {
-                                tagged.remove(damaged.getUniqueId());
-                                damaged.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
-                            }
-                        }.runTaskLater(plugin, 240).getTaskId());
-            } else {
-                plugin.getServer().getScheduler().cancelTask(tagged.get(damaged.getUniqueId()));
-                tagged.put(damaged.getUniqueId(),
-                        new BukkitRunnable() {
-                            public void run() {
-                                tagged.remove(damaged.getUniqueId());
-                                damaged.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
-                            }
-                        }.runTaskLater(plugin, 240).getTaskId());
+            if (KitPvp.currentTeams.containsKey(damaged.getName()) || KitPvp.currentTeams.containsKey(damager.getName())) {
+                if (KitPvp.currentTeams.get(damaged.getName()) == damager.getName()
+                        || KitPvp.currentTeams.get(damager.getName()) == damaged.getName()) {
+                    damaged.sendMessage(ChatColor.GREEN + "You were not damaged by " + ChatColor.AQUA + damager.getName()
+                            + ChatColor.GREEN + " because you are teamed!");
+                    damager.sendMessage(ChatColor.GREEN + "You did not deal damage to " + ChatColor.AQUA + damaged.getName()
+                            + ChatColor.GREEN + " because you are teamed!");
+                    event.setCancelled(true);
+                } else {
+                    event.setCancelled(false);
+                }
             }
 
-            if (!tagged.containsKey(damager.getUniqueId())) {
-                damager.sendMessage(ChatColor.GRAY + "You are now in combat with " + ChatColor.GOLD + damaged.getName() + ChatColor.GRAY + ".");
-                tagged.put(damager.getUniqueId(),
-                        new BukkitRunnable() {
-                            public void run() {
-                                tagged.remove(damager.getUniqueId());
-                                damager.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
-                            }
-                        }.runTaskLater(plugin, 240).getTaskId());
+            if (!KitPvp.currentTeams.containsKey(damaged.getName()) || !KitPvp.currentTeams.containsKey(damager.getName())) {
+                if (KitPvp.currentTeams.get(damaged.getName()) != damager.getName()
+                        || KitPvp.currentTeams.get(damager.getName()) != damaged.getName()) {
+                    if (!tagged.containsKey(damaged.getUniqueId())) {
+                        damaged.sendMessage(ChatColor.GRAY + "You are now in combat with " + ChatColor.GOLD + damager.getName() + ChatColor.GRAY + ".");
+                        tagged.put(damaged.getUniqueId(),
+                                new BukkitRunnable() {
+                                    public void run() {
+                                        tagged.remove(damaged.getUniqueId());
+                                        damaged.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
+                                    }
+                                }.runTaskLater(plugin, 240).getTaskId());
+                    } else {
+                        plugin.getServer().getScheduler().cancelTask(tagged.get(damaged.getUniqueId()));
+                        tagged.put(damaged.getUniqueId(),
+                                new BukkitRunnable() {
+                                    public void run() {
+                                        tagged.remove(damaged.getUniqueId());
+                                        damaged.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
+                                    }
+                                }.runTaskLater(plugin, 240).getTaskId());
+                    }
+
+                    if (!tagged.containsKey(damager.getUniqueId())) {
+                        damager.sendMessage(ChatColor.GRAY + "You are now in combat with " + ChatColor.GOLD + damaged.getName() + ChatColor.GRAY + ".");
+                        tagged.put(damager.getUniqueId(),
+                                new BukkitRunnable() {
+                                    public void run() {
+                                        tagged.remove(damager.getUniqueId());
+                                        damager.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
+                                    }
+                                }.runTaskLater(plugin, 240).getTaskId());
+                    } else {
+                        plugin.getServer().getScheduler().cancelTask(tagged.get(damager.getUniqueId()));
+                        tagged.put(damager.getUniqueId(),
+                                new BukkitRunnable() {
+                                    public void run() {
+                                        tagged.remove(damager.getUniqueId());
+                                        damager.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
+                                    }
+                                }.runTaskLater(plugin, 240).getTaskId());
+                    }
+                } else {
+                    return;
+                }
             } else {
-                plugin.getServer().getScheduler().cancelTask(tagged.get(damager.getUniqueId()));
-                tagged.put(damager.getUniqueId(),
-                        new BukkitRunnable() {
-                            public void run() {
-                                tagged.remove(damager.getUniqueId());
-                                damager.sendMessage(ChatColor.GRAY + "You are no longer in combat.");
-                            }
-                        }.runTaskLater(plugin, 240).getTaskId());
+                return;
             }
         }
     }

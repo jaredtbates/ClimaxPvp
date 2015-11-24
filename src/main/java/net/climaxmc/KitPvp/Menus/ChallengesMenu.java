@@ -6,6 +6,7 @@ import net.climaxmc.KitPvp.Utils.I;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,6 +28,11 @@ public class ChallengesMenu implements Listener {
 
         if (item != null) {
             if (item.getType().equals(Material.DIAMOND)) {
+
+                p.sendMessage(ChatColor.RED + "Challenges are being fixed at the moment!");
+                p.playSound(p.getLocation(), Sound.CAT_MEOW, 1, 1);
+
+                /*
                 Inventory challengesInventory = Bukkit.createInventory(null, 27, "Challenges");
 
                 int i = 0;
@@ -96,6 +102,7 @@ public class ChallengesMenu implements Listener {
                 }
 
                 p.openInventory(challengesInventory);
+                */
             }
 
         }

@@ -13,6 +13,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 
 public class PlayerRespawnListener implements Listener {
@@ -68,5 +70,12 @@ public class PlayerRespawnListener implements Listener {
                 .name(ChatColor.GREEN + "" + ChatColor.BOLD + "Trail Selector")
                 .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Select a cool looking trail!"));
 
+        ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
+        SkullMeta meta = (SkullMeta) head.getItemMeta();
+        meta.setOwner(player.getName());
+        meta.setDisplayName(ChatColor.GREEN + "Profile Menu");
+        head.setItemMeta(meta);
+
+        player.getInventory().setItem(2, head);
     }
 }

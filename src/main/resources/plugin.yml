@@ -1,7 +1,7 @@
 name: ${project.artifactId}
 main: ${project.groupId}.${project.artifactId}
 version: ${project.version}
-authors: [computerwizjared, Jonhan]
+authors: [computerwizjared, Jonhan, GamerBah]
 commands:
   repair:
     description: Repairs your inventory for $2
@@ -95,3 +95,9 @@ commands:
   lockchat:
     description: Locks or unlocks the chat
     aliases: [lc, lchat]
+  duel:
+    description: Duel with another player
+    aliases: d
+  team:
+    description: Team up with another player
+    aliases: ally

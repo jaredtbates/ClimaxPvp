@@ -25,6 +25,10 @@ public class MySQL {
     public static final String CREATE_PUNISHMENT = "INSERT IGNORE INTO `climax_punishments` (`uuid`, `type`, `time`, `expiration`, `punisheruuid`, `reason`) VALUES (?, ?, ?, ?, ?, ?);";
     public static final String GET_PUNISHMENTS = "SELECT * FROM `climax_punishments` WHERE `uuid` = ?;";
     public static final String UPDATE_PUNISHMENT_TIME = "UPDATE `climax_punishments` SET `expiration` = ? WHERE `uuid` = ? AND `type` = ? AND `time` = ?;";
+    public static final String GET_DUELDATA = "SELECT * FROM `climax_dueldata` WHERE `uuid` = ?;";
+    public static final String CREATE_DUELDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_dueldata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, `streak` INT DEFAULT 0 NOT NULL, `dueling` BOOLEAN DEFAULT FALSE NOT NULL);";
+    public static final String CREATE_DUELDATA = "INSERT IGNORE INTO `climax_dueldata` (`uuid`, `kills`, `deaths`, `streak`, `dueling`) VALUES (?, ?, ?, ?, ?);";
+    public static final String UPDATE_DUELDATA = "UPDATE `climax_dueldata` SET `kills` = ?, `deaths` = ?, `streak` = ?, `dueling` = ? WHERE `uuid` = ?;";
     private final Plugin plugin;
     private final String address;
     private final int port;
@@ -62,6 +66,7 @@ public class MySQL {
 
         executeUpdate(CREATE_PLAYERDATA_TABLE);
         executeUpdate(CREATE_PUNISHMENTS_TABLE);
+        executeUpdate(CREATE_DUELDATA_TABLE);
     }
 
     /**
@@ -149,6 +154,7 @@ public class MySQL {
      */
     public synchronized void updatePlayerData(String column, Object to, UUID uuid) {
         executeUpdate("UPDATE `climax_playerdata` SET " + column + " = ? WHERE uuid = ?;", to, uuid.toString());
+        executeUpdate("UPDATE `climax_dueldata` SET " + column + " = ? WHERE uuid = ?;", to, uuid.toString());
     }
 
     /**
@@ -163,20 +169,25 @@ public class MySQL {
         }
 
         ResultSet data = executeQuery(GET_PLAYERDATA, uuid.toString());
+        ResultSet duelData = executeQuery(GET_DUELDATA, uuid.toString());
 
-        if (data == null) {
+        if (data == null || duelData == null) {
             return null;
         }
 
         try {
-            if (data.next()) {
+            if (data.next() && duelData.next()) {
                 Rank rank = Rank.valueOf(data.getString("rank"));
                 int balance = data.getInt("balance");
                 int kills = data.getInt("kills");
                 int deaths = data.getInt("deaths");
                 String nickname = data.getString("nickname");
+                int duelKills = duelData.getInt("kills");
+                int duelDeaths = duelData.getInt("deaths");
+                int duelStreak = duelData.getInt("streak");
+                boolean dueling = duelData.getBoolean("dueling");
 
-                PlayerData playerData = new PlayerData(this, uuid, rank, balance, kills, deaths, nickname, new ArrayList<>());
+                PlayerData playerData = new PlayerData(this, uuid, rank, balance, kills, deaths, duelKills, duelDeaths, duelStreak, nickname, dueling, new ArrayList<>());
 
                 ResultSet punishments = executeQuery(GET_PUNISHMENTS, uuid.toString());
                 while (punishments != null && punishments.next()) {
@@ -204,6 +215,7 @@ public class MySQL {
      */
     public synchronized void createPlayerData(UUID uuid) {
         executeUpdate(CREATE_PLAYERDATA, uuid.toString(), Rank.DEFAULT.toString(), 0, 0, 0, null);
+        executeUpdate(CREATE_DUELDATA, uuid.toString(), 0, 0, 0, false);
     }
 
     /**
@@ -218,6 +230,14 @@ public class MySQL {
                 playerData.getKills(),
                 playerData.getDeaths(),
                 playerData.getNickname(),
+                playerData.getUuid().toString()
+        );
+
+        executeUpdate(UPDATE_DUELDATA,
+                playerData.getDuelKills(),
+                playerData.getDuelDeaths(),
+                playerData.getDuelStreak(),
+                playerData.isDueling(),
                 playerData.getUuid().toString()
         );
     }

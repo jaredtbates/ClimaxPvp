@@ -4,8 +4,11 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Kits.BomberKit;
+import net.climaxmc.KitPvp.Menus.DuelsMenu;
+import net.climaxmc.KitPvp.Menus.PlayerProfile.CurrencyMenu;
 import net.climaxmc.KitPvp.Utils.Challenge;
 import net.climaxmc.KitPvp.Utils.ChallengesFiles;
+import net.climaxmc.KitPvp.Utils.DuelsMessages;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -18,6 +21,7 @@ import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 
 public class InventoryClickListener implements Listener {
     private ClimaxPvp plugin;
@@ -127,6 +131,37 @@ public class InventoryClickListener implements Listener {
                     }
                 }
 
+                event.setCancelled(true);
+            }
+
+            if (inventory.getName().equals("Select a Player to Duel")) {
+                ItemStack clickedItem = event.getCurrentItem();
+                if (clickedItem.getType().equals(Material.SKULL_ITEM)) {
+                    SkullMeta meta = (SkullMeta) clickedItem.getItemMeta();
+                    Player target = plugin.getServer().getPlayer(meta.getOwner());
+                    DuelsMessages.sendDuelRequestMessage(player, target);
+                    player.closeInventory();
+                }
+                event.setCancelled(true);
+            }
+
+            if (inventory.getName().equals("Profile Menu")) {
+                ItemStack clickedItem = event.getCurrentItem();
+                if (clickedItem.getType().equals(Material.SKULL_ITEM)) {
+                    player.sendMessage("  " + ChatColor.GOLD + "ClimaxMC Forums: " + ChatColor.AQUA + "https://forums.climaxmc.net/");
+                }
+                if (clickedItem.getType().equals(Material.GOLD_INGOT)) {
+                    CurrencyMenu currencyMenu = new CurrencyMenu();
+                    currencyMenu.open(player);
+                }
+                event.setCancelled(true);
+            }
+
+            if (inventory.getName().equals("Your Bank")) {
+                ItemStack clickedItem = event.getCurrentItem();
+                if (clickedItem.getType() != null) {
+                    event.setCancelled(true);
+                }
                 event.setCancelled(true);
             }
         }

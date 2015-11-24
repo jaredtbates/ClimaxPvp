@@ -5,12 +5,12 @@ Database:
   Username: root
   Password: password
 SpawnAutoBroadcast:
-  Time: 5
+  Time: 120
   Messages:
     - This is an auto broadcast message!
     - This is another auto broadcast message!
 ChatAutoBroadcast:
-  Time: 5
+  Time: 120
   Messages:
     - This is an auto broadcast message!
     - This is another auto broadcast message!
