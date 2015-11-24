@@ -11,22 +11,20 @@ import net.climaxmc.KitPvp.Commands.Messaging.ReplyCommand;
 import net.climaxmc.KitPvp.Listeners.*;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
 import net.climaxmc.KitPvp.Menus.PlayerProfile.PlayerProfileMenu;
+import net.climaxmc.KitPvp.Utils.Duel;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 public class KitPvp {
     public static Inventory moreKitsInventory = Bukkit.createInventory(null, 54, ChatColor.AQUA + "" + ChatColor.BOLD + "More Kits");
     public static Inventory soupInventory = Bukkit.createInventory(null, 54, ChatColor.BOLD + "Free Soup!");
-    public static HashMap<UUID, Integer> killStreak = new HashMap<>();
-    public static HashMap<UUID, UUID> pendingDuels = new HashMap<>();
-    public static HashMap<UUID, UUID> currentDuels = new HashMap<>();
-    public static HashMap<String, String> pendingTeams = new HashMap<>();
-    public static HashMap<String, String> currentTeams = new HashMap<>();
+    public static Map<UUID, Integer> killStreak = new HashMap<>();
+    public static Set<Duel> duels = new HashSet<>();
+    public static Map<String, String> pendingTeams = new HashMap<>();
+    public static Map<String, String> currentTeams = new HashMap<>();
 
     public KitPvp(ClimaxPvp plugin) {
         // Initalize kits

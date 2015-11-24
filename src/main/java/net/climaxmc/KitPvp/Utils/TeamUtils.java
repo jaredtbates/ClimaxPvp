@@ -16,7 +16,7 @@ public class TeamUtils {
     }
 
     public static void removePendingRequest(Player target) {
-        if (KitPvp.pendingTeams.isEmpty() || !KitPvp.pendingTeams.containsKey(target.getName()) || KitPvp.pendingTeams == null) {
+        if (KitPvp.pendingTeams.isEmpty() || !KitPvp.pendingTeams.containsKey(target.getName())) {
             return;
         } else {
             KitPvp.pendingTeams.remove(target.getName());

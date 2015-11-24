@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static org.bukkit.ChatColor.*;
@@ -60,8 +61,6 @@ public class DuelsMenu {
                 PlayerData playerData = plugin.getPlayerData(players);
                 if (playerData.isDueling()) {
                     return;
-                } else if (playersOnline.contains(duelCommand.viewerUUID)) {
-                    return;
                 } else {
                     ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
                     SkullMeta meta = (SkullMeta) head.getItemMeta();
@@ -71,7 +70,7 @@ public class DuelsMenu {
                     } else {
                         meta.setDisplayName(playerData.getLevelColor() + players.getName());
                     }
-                    ArrayList<String> lore = new ArrayList<String>();
+                    List<String> lore = new ArrayList<>();
                     if (playerData.getNickname() != null) {
                         lore.add(WHITE + "Real Name: " + playerData.getLevelColor() + players.getName());
                         lore.add("");
@@ -104,9 +103,7 @@ public class DuelsMenu {
                 PlayerData playerData = plugin.getPlayerData(players);
                 if (playerData.isDueling()) {
                     return;
-                } else if (playersOnline.contains(duelCommand.viewerUUID)) {
-                    return;
-                } else {
+                }else {
                     ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
                     SkullMeta meta = (SkullMeta) head.getItemMeta();
                     meta.setOwner(players.getName());
@@ -115,7 +112,7 @@ public class DuelsMenu {
                     } else {
                         meta.setDisplayName(playerData.getLevelColor() + players.getName());
                     }
-                    ArrayList<String> lore = new ArrayList<String>();
+                    List<String> lore = new ArrayList<>();
                     if (playerData.getNickname() != null) {
                         lore.add(WHITE + "Real Name: " + playerData.getLevelColor() + players.getName());
                         lore.add("");

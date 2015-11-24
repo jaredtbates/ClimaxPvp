@@ -12,12 +12,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
 import java.util.UUID;
 
 public class DuelCommand implements CommandExecutor {
     private ClimaxPvp plugin;
-    public UUID viewerUUID;
 
     public DuelCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
@@ -39,11 +37,10 @@ public class DuelCommand implements CommandExecutor {
             }
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("accept")) {
-                    DuelsUtils duelsUtils = new DuelsUtils(plugin);
-                    if (duelsUtils.hasPendingDuel(player)) {
-                        Player duelSender = duelsUtils.getDuelRequester(player);
+                    if (DuelsUtils.hasPendingDuel(player)) {
+                        Player duelSender = DuelsUtils.getDuelRequester(player);
                         DuelsMessages.sendDuelAcceptMessage(player, duelSender);
-                        DuelsUtils.createCurrentDuel(player, duelSender);
+                        DuelsUtils.createDuel(player, duelSender);
                         // TODO: Start Duel
                     } else {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
@@ -51,11 +48,10 @@ public class DuelCommand implements CommandExecutor {
                         return false;
                     }
                 } else if (args[0].equalsIgnoreCase("decline")) {
-                    DuelsUtils duelsUtils = new DuelsUtils(plugin);
-                    if (duelsUtils.hasPendingDuel(player)) {
-                        Player duelSender = duelsUtils.getDuelRequester(player);
+                    if (DuelsUtils.hasPendingDuel(player)) {
+                        Player duelSender = DuelsUtils.getDuelRequester(player);
                         DuelsMessages.sendDuelDeclineMessage(player, duelSender);
-                        DuelsUtils.removePendingDuel(player);
+                        DuelsUtils.removeDuel(player);
                     } else {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                         player.sendMessage(ChatColor.RED + "You do not have a pending duel request!");
@@ -63,7 +59,6 @@ public class DuelCommand implements CommandExecutor {
                     }
                 } else if (args[0].equalsIgnoreCase("list")) {
                     DuelsMenu duelsMenu = new DuelsMenu(plugin);
-                    viewerUUID = player.getUniqueId();
                     duelsMenu.openInventory(player);
                 } else {
                     Player target = Bukkit.getServer().getPlayerExact(args[0]);
@@ -71,18 +66,17 @@ public class DuelCommand implements CommandExecutor {
                         player.sendMessage(ChatColor.GOLD + "\"" + ChatColor.YELLOW + args[0] + ChatColor.GOLD + "\"" + ChatColor.RED + " is not online or doesn't exist!");
                         return false;
                     } else {
-                        DuelsUtils duelsUtils = new DuelsUtils(plugin);
-                        if (duelsUtils.hasPendingDuel(target)) {
+                        if (DuelsUtils.hasPendingDuel(target)) {
                             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                             player.sendMessage(ChatColor.RED + "The player already has a pending duel!");
                             return false;
-                        } else if (duelsUtils.hasPendingDuel(player)) {
+                        } else if (DuelsUtils.hasPendingDuel(player)) {
                             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                             player.sendMessage(ChatColor.RED + "You already have a pending duel with another player!");
                             return false;
                         } else {
                             DuelsMessages.sendDuelRequestMessage(player, target);
-                            DuelsUtils.createPendingDuel(target, player);
+                            DuelsUtils.createDuel(target, player);
                         }
                     }
                 }

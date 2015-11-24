@@ -2,6 +2,8 @@ package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.Duel;
+import net.climaxmc.KitPvp.Utils.DuelsUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,13 +24,7 @@ public class PlayerQuitListener implements Listener {
             KitPvp.killStreak.remove(player.getUniqueId());
         }
 
-        if (KitPvp.pendingDuels.containsKey(player)) {
-            KitPvp.pendingDuels.remove(player.getUniqueId());
-        }
-
-        if (KitPvp.pendingDuels.containsValue(player)) {
-            KitPvp.pendingDuels.remove(player);
-        }
+        DuelsUtils.removeDuel(player);
 
         event.setQuitMessage(null/*ChatColor.RED + "Quit" + ChatColor.DARK_GRAY + "\u00bb " + player.getName()*/);
 

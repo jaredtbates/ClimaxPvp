@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Utils;// AUTHOR: gamer_000 (11/20/2015)
+package net.climaxmc.KitPvp.Utils;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
@@ -13,8 +13,6 @@ public class DuelsRunnable implements Runnable {
     public DuelsRunnable(ClimaxPvp plugin) {
         this.plugin = plugin;
     }
-
-    DuelsUtils duelsUtils = new DuelsUtils(plugin);
 
     @Override
     public void run() {

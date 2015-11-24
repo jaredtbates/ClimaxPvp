@@ -1,56 +1,50 @@
-package net.climaxmc.KitPvp.Utils;// AUTHOR: gamer_000 (11/10/2015)
+package net.climaxmc.KitPvp.Utils;
 
-import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.Iterator;
+
 public class DuelsUtils {
-    private ClimaxPvp plugin;
-
-    public DuelsUtils(ClimaxPvp plugin) {
-        this.plugin = plugin;
+    public static void createDuel(Player sender, Player target) {
+        KitPvp.duels.add(new Duel(sender.getUniqueId(), target.getUniqueId()));
     }
 
-    public static void createPendingDuel(Player target, Player sender) {
-        KitPvp.pendingDuels.put(target.getUniqueId(), sender.getUniqueId());
+    public static void removeDuel(Player target) {
+            Iterator<Duel> pendingDuelsIterator = KitPvp.duels.iterator();
+            while (pendingDuelsIterator.hasNext()) {
+                Duel pendingDuel = pendingDuelsIterator.next();
+                if (pendingDuel.getPlayer1UUID().equals(target.getUniqueId()) || pendingDuel.getPlayer2UUID().equals(target.getUniqueId())) {
+                    pendingDuelsIterator.remove();
+                }
+            }
     }
 
-    public static void removePendingDuel(Player target) {
-        if (KitPvp.pendingDuels.isEmpty() || !KitPvp.pendingDuels.containsKey(target.getUniqueId()) || KitPvp.pendingDuels == null) {
-            return;
-        } else {
-            KitPvp.pendingDuels.remove(target.getUniqueId());
-        }
-    }
-
-    public boolean hasPendingDuel(Player target) {
-        for (Player sender : plugin.getServer().getOnlinePlayers()) {
-            return KitPvp.pendingDuels.containsKey(target.getUniqueId());
+    public static boolean hasPendingDuel(Player target) {
+        for (Duel pendingDuel : KitPvp.duels) {
+            if (pendingDuel.getPlayer1UUID().equals(target.getUniqueId()) || pendingDuel.getPlayer2UUID().equals(target.getUniqueId())) {
+                return true;
+            }
         }
         return false;
     }
 
-    public static void createCurrentDuel(Player target, Player sender) {
-        KitPvp.currentDuels.put(target.getUniqueId(), sender.getUniqueId());
-        removePendingDuel(target);
-    }
-
-    public static void removeCurrentDuel(Player target) {
-        if (KitPvp.currentDuels.isEmpty() || !KitPvp.currentDuels.containsKey(target.getUniqueId()) || KitPvp.currentDuels == null) {
-            return;
-        } else {
-            KitPvp.currentDuels.remove(target.getUniqueId());
-        }
-    }
-
-    public boolean isInDuel(Player target) {
-        for (Player sender : plugin.getServer().getOnlinePlayers()) {
-            return KitPvp.currentDuels.containsKey(target.getUniqueId());
+    public static boolean isInDuel(Player target) {
+        for (Duel duel : KitPvp.duels) {
+            if ((duel.getPlayer1UUID().equals(target.getUniqueId()) || duel.getPlayer2UUID().equals(target.getUniqueId())) && duel.isAccepted()) {
+                return true;
+            }
         }
         return false;
     }
 
-    public Player getDuelRequester(Player target) {
-        return plugin.getServer().getPlayer(KitPvp.pendingDuels.get(target.getUniqueId()));
+    public static Player getDuelRequester(Player target) {
+        for (Duel pendingDuel : KitPvp.duels) {
+            if (pendingDuel.getPlayer2UUID().equals(target.getUniqueId())) {
+                return Bukkit.getPlayer(pendingDuel.getPlayer1UUID());
+            }
+        }
+        return null;
     }
 }
