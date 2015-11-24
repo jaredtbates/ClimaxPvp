@@ -24,11 +24,7 @@ public class TeamUtils {
     }
 
     public boolean hasPendingRequest(Player target) {
-        if (KitPvp.pendingTeams.containsKey(target.getName())) {
-            return true;
-        } else {
-            return false;
-        }
+        return KitPvp.pendingTeams.containsKey(target.getName());
     }
 
     public static void createTeam(Player target, Player sender) {
@@ -46,11 +42,7 @@ public class TeamUtils {
 
     public boolean isTeaming(Player target) {
         for (Player sender : plugin.getServer().getOnlinePlayers()) {
-            if (KitPvp.currentTeams.containsKey(target.getName())) {
-                return true;
-            } else {
-                return false;
-            }
+            return KitPvp.currentTeams.containsKey(target.getName());
         }
         return false;
     }

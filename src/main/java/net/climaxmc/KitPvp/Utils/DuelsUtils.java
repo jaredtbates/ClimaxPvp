@@ -25,11 +25,7 @@ public class DuelsUtils {
 
     public boolean hasPendingDuel(Player target) {
         for (Player sender : plugin.getServer().getOnlinePlayers()) {
-            if (KitPvp.pendingDuels.containsKey(target.getUniqueId())) {
-                return true;
-            } else {
-                return false;
-            }
+            return KitPvp.pendingDuels.containsKey(target.getUniqueId());
         }
         return false;
     }
@@ -49,11 +45,7 @@ public class DuelsUtils {
 
     public boolean isInDuel(Player target) {
         for (Player sender : plugin.getServer().getOnlinePlayers()) {
-            if (KitPvp.currentDuels.containsKey(target.getUniqueId())) {
-                return true;
-            } else {
-                return false;
-            }
+            return KitPvp.currentDuels.containsKey(target.getUniqueId());
         }
         return false;
     }
