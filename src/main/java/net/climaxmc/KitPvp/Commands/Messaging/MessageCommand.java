@@ -70,7 +70,10 @@ public class MessageCommand implements CommandExecutor {
             player.sendMessage(ChatColor.GOLD + "Jared is often AFK due to plugin development. Please be patient for a reply.");
         } else if (target.getUniqueId().toString().equals("66ca47bf-14ae-405b-9ff5-ef4bb98035eb")) {
             player.sendMessage(ChatColor.RED + "Gamer is often AFK due to plugin development. He'll get back to you when he can!");
+        } else if (target.getUniqueId().toString().equals("9f781135-cc8d-4bd5-815b-4f16ca763d0b")) {
+            player.sendMessage(ChatColor.RED + "Jacop is often AFK due to plugin development. He'll get back to you when he can!");
         }
+    
 
         player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1, 1);
         target.playSound(target.getLocation(), Sound.NOTE_PIANO, 2, 2);
