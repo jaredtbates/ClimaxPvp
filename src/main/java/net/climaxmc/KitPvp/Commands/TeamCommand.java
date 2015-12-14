@@ -27,14 +27,13 @@ public class TeamCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-
+        TeamUtils teamUtils = new TeamUtils(plugin);
         if (command.getName().equalsIgnoreCase("team")) {
             if (args.length > 1 || args.length == 0) {
                 player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                 player.sendMessage(ChatColor.RED + "Incorrect Usage! Try this: /team <accept/deny/[player]>");
             } else {
                 if (args[0].equalsIgnoreCase("accept")) {
-                    TeamUtils teamUtils = new TeamUtils(plugin);
                     if (teamUtils.hasPendingRequest(player)) {
                         Player requester = teamUtils.getRequester(player);
                         TeamMessages.sendAcceptMessage(player, requester);
@@ -45,7 +44,6 @@ public class TeamCommand implements CommandExecutor {
                         return false;
                     }
                 } else if (args[0].equalsIgnoreCase("deny")) {
-                    TeamUtils teamUtils = new TeamUtils(plugin);
                     if (teamUtils.hasPendingRequest(player)) {
                         Player requester = teamUtils.getRequester(player);
                         TeamMessages.sendDeclineMessage(player, requester);
@@ -54,6 +52,12 @@ public class TeamCommand implements CommandExecutor {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                         player.sendMessage(ChatColor.RED + "You do not have a pending team request!");
                         return false;
+                    }
+                } else if (args[0].equalsIgnoreCase("leave")) {
+                    if (!teamUtils.isTeaming(player)) {
+                        player.sendMessage(ChatColor.RED + "You are not in a team!");
+                    } else {
+                        //TODO: Leave the team!
                     }
                 } else {
                     Player target = Bukkit.getServer().getPlayerExact(args[0]);
@@ -64,7 +68,6 @@ public class TeamCommand implements CommandExecutor {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                         player.sendMessage(ChatColor.RED + "Team with yourself? How would that even work...");
                     } else {
-                        TeamUtils teamUtils = new TeamUtils(plugin);
                         if (teamUtils.hasPendingRequest(target)) {
                             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                             player.sendMessage(ChatColor.RED + "The player already has a pending request to team!");

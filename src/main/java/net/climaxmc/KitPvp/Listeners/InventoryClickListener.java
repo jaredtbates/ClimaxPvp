@@ -148,11 +148,8 @@ public class InventoryClickListener implements Listener {
             if (inventory.getName().equals("Profile Menu")) {
                 ItemStack clickedItem = event.getCurrentItem();
                 if (clickedItem.getType().equals(Material.SKULL_ITEM)) {
+                    player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1.4F);
                     player.sendMessage("  " + ChatColor.GOLD + "ClimaxMC Forums: " + ChatColor.AQUA + "https://forums.climaxmc.net/");
-                }
-                if (clickedItem.getType().equals(Material.GOLD_INGOT)) {
-                    CurrencyMenu currencyMenu = new CurrencyMenu();
-                    currencyMenu.open(player);
                 }
                 event.setCancelled(true);
             }

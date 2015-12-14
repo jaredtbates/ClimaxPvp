@@ -2,8 +2,9 @@ package net.climaxmc.KitPvp.Utils;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
+
+import static org.bukkit.ChatColor.*;
 
 public class DuelsRunnable implements Runnable {
 
@@ -17,7 +18,13 @@ public class DuelsRunnable implements Runnable {
     @Override
     public void run() {
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
-
+            for (Duel duel : KitPvp.duels) {
+                if (duel.isAccepted()) {
+                    Player p1 = plugin.getServer().getPlayer(duel.getPlayer1UUID());
+                    Player p2 = plugin.getServer().getPlayer(duel.getPlayer2UUID());
+                    DuelsMessages.sendDuelMessage(p1, p2, RED + "Testing 1");
+                }
+            }
             amount++;
         }, 20);
     }

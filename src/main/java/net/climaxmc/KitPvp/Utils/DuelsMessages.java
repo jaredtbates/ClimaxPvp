@@ -7,6 +7,8 @@ import static org.bukkit.ChatColor.*;
 
 public class DuelsMessages {
 
+    public static String duelChatStarter = (AQUA + "" + BOLD + "  Climax" + YELLOW + "" + BOLD + "Duels" + WHITE + "\u00BB");
+
     public static void sendDuelRequestMessage(Player sender, Player target) {
         sender.playSound(sender.getLocation(), Sound.ITEM_PICKUP, 2F, 0.3F);
         sender.sendMessage(WHITE + "     \u00AB" + GREEN + " Your request to duel has been sent to " + YELLOW + target.getName() + WHITE + " \u00BB");
@@ -37,4 +39,10 @@ public class DuelsMessages {
         target.playSound(target.getLocation(), Sound.VILLAGER_NO, 1, 0.5F);
         target.sendMessage(RED + "     \u00AB " + YELLOW + "You have " + RED + "declined " + AQUA + target.getName() + YELLOW + "'s request to duel!" + RED + " \u00BB");
     }
+
+    public static void sendDuelMessage(Player player1, Player player2, String msg) {
+        player1.sendMessage(duelChatStarter + msg);
+        player2.sendMessage(duelChatStarter + msg);
+    }
+
 }

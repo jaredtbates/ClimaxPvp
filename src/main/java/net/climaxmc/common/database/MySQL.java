@@ -18,15 +18,24 @@ import java.util.logging.Logger;
  */
 public class MySQL {
     public static final String GET_PLAYERDATA = "SELECT * FROM `climax_playerdata` WHERE `uuid` = ?;";
-    public static final String CREATE_PLAYERDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_playerdata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, `nickname` VARCHAR(32) DEFAULT NULL);";
-    public static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `rank`, `balance`, `kills`, `deaths`, `nickname`) VALUES (?, ?, ?, ?, ?, ?);";
-    public static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, `nickname` = ? WHERE `uuid` = ?;";
-    public static final String CREATE_PUNISHMENTS_TABLE = "CREATE TABLE IF NOT EXISTS `climax_punishments` (`uuid` VARCHAR(36) NOT NULL, `type` VARCHAR(32) NOT NULL, `time` BIGINT(20) NOT NULL, `expiration` BIGINT(20) NOT NULL, `punisheruuid` VARCHAR(26) NOT NULL, `reason` TEXT NOT NULL);";
-    public static final String CREATE_PUNISHMENT = "INSERT IGNORE INTO `climax_punishments` (`uuid`, `type`, `time`, `expiration`, `punisheruuid`, `reason`) VALUES (?, ?, ?, ?, ?, ?);";
+    public static final String CREATE_PLAYERDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_playerdata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY," +
+            " `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL," +
+            " `deaths` INT DEFAULT 0 NOT NULL, `gold` INT DEFAULT 0 NOT NULL, `goldBlocks` INT DEFAULT 0 NOT NULL," +
+            " `diamonds` INT DEFAULT 0 NOT NULL, `diamondBlocks` INT DEFAULT 0 NOT NULL, `emeralds` INT DEFAULT 0 NOT NULL," +
+            " `nickname` VARCHAR(32) DEFAULT NULL);";
+    public static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `rank`, `balance`, `kills`, `deaths`," +
+            " `gold`, `goldBlocks`, `diamonds`, `diamondBlocks`, `emeralds`, `nickname`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    public static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, `gold` = ?," +
+            " `goldBlocks` = ?, `diamonds` = ?, `diamondBlocks` = ?, `emeralds` = ?, `nickname` = ? WHERE `uuid` = ?;";
+    public static final String CREATE_PUNISHMENTS_TABLE = "CREATE TABLE IF NOT EXISTS `climax_punishments` (`uuid` VARCHAR(36) NOT NULL," +
+            " `type` VARCHAR(32) NOT NULL, `time` BIGINT(20) NOT NULL, `expiration` BIGINT(20) NOT NULL, `punisheruuid` VARCHAR(26) NOT NULL, `reason` TEXT NOT NULL);";
+    public static final String CREATE_PUNISHMENT = "INSERT IGNORE INTO `climax_punishments` (`uuid`, `type`, `time`, `expiration`, `punisheruuid`, `reason`)" +
+            " VALUES (?, ?, ?, ?, ?, ?);";
     public static final String GET_PUNISHMENTS = "SELECT * FROM `climax_punishments` WHERE `uuid` = ?;";
     public static final String UPDATE_PUNISHMENT_TIME = "UPDATE `climax_punishments` SET `expiration` = ? WHERE `uuid` = ? AND `type` = ? AND `time` = ?;";
     public static final String GET_DUELDATA = "SELECT * FROM `climax_dueldata` WHERE `uuid` = ?;";
-    public static final String CREATE_DUELDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_dueldata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, `streak` INT DEFAULT 0 NOT NULL, `dueling` BOOLEAN DEFAULT FALSE NOT NULL);";
+    public static final String CREATE_DUELDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_dueldata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY," +
+            " `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, `streak` INT DEFAULT 0 NOT NULL, `dueling` BOOLEAN DEFAULT FALSE NOT NULL);";
     public static final String CREATE_DUELDATA = "INSERT IGNORE INTO `climax_dueldata` (`uuid`, `kills`, `deaths`, `streak`, `dueling`) VALUES (?, ?, ?, ?, ?);";
     public static final String UPDATE_DUELDATA = "UPDATE `climax_dueldata` SET `kills` = ?, `deaths` = ?, `streak` = ?, `dueling` = ? WHERE `uuid` = ?;";
     private final Plugin plugin;
@@ -181,13 +190,19 @@ public class MySQL {
                 int balance = data.getInt("balance");
                 int kills = data.getInt("kills");
                 int deaths = data.getInt("deaths");
+                int gold = data.getInt("gold");
+                int goldBlocks = data.getInt("goldBlocks");
+                int diamonds = data.getInt("diamonds");
+                int diamondBlocks = data.getInt("diamondBlocks");
+                int emeralds = data.getInt("emeralds");
                 String nickname = data.getString("nickname");
                 int duelKills = duelData.getInt("kills");
                 int duelDeaths = duelData.getInt("deaths");
                 int duelStreak = duelData.getInt("streak");
                 boolean dueling = duelData.getBoolean("dueling");
 
-                PlayerData playerData = new PlayerData(this, uuid, rank, balance, kills, deaths, duelKills, duelDeaths, duelStreak, nickname, dueling, new ArrayList<>());
+                PlayerData playerData = new PlayerData(this, uuid, rank, balance, kills, deaths, gold, goldBlocks, diamonds, diamondBlocks, emeralds,
+                        duelKills, duelDeaths, duelStreak, nickname, dueling, new ArrayList<>());
 
                 ResultSet punishments = executeQuery(GET_PUNISHMENTS, uuid.toString());
                 while (punishments != null && punishments.next()) {
@@ -214,7 +229,7 @@ public class MySQL {
      * @param uuid UUID of the player to create data of
      */
     public synchronized void createPlayerData(UUID uuid) {
-        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), Rank.DEFAULT.toString(), 0, 0, 0, null);
+        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), Rank.DEFAULT.toString(), 0, 0, 0, 0, 0, 0, 0, 0, null);
         executeUpdate(CREATE_DUELDATA, uuid.toString(), 0, 0, 0, false);
     }
 
@@ -225,12 +240,17 @@ public class MySQL {
      */
     public void savePlayerData(PlayerData playerData) {
         executeUpdate(UPDATE_PLAYERDATA,
+                playerData.getUuid().toString(),
                 playerData.getRank().toString(),
                 playerData.getBalance(),
                 playerData.getKills(),
                 playerData.getDeaths(),
-                playerData.getNickname(),
-                playerData.getUuid().toString()
+                playerData.getGold(),
+                playerData.getGoldBlocks(),
+                playerData.getDiamonds(),
+                playerData.getDiamondBlocks(),
+                playerData.getEmeralds(),
+                playerData.getNickname()
         );
 
         executeUpdate(UPDATE_DUELDATA,

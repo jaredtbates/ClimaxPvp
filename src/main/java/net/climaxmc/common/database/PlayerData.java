@@ -17,7 +17,7 @@ public class PlayerData {
     private final MySQL mySQL;
     private final UUID uuid;
     private Rank rank;
-    private int balance, kills, deaths, duelKills, duelDeaths, duelStreak;
+    private int balance, kills, deaths, duelKills, duelDeaths, duelStreak, gold, goldBlocks, diamonds, diamondBlocks, emeralds;
     private String nickname;
     private boolean dueling;
     private List<Punishment> punishments;
@@ -238,5 +238,65 @@ public class PlayerData {
 
     public void addDuelDeath() {
         setDuelDeaths(getDuelDeaths() + 1);
+    }
+
+    public void setGold(int amount) {
+        mySQL.executeUpdate(MySQL.UPDATE_DUELDATA, "gold", Integer.toString(gold = amount), uuid);
+    }
+
+    public void addGold(int amount) {
+        setGold(getGold() + amount);
+    }
+
+    public void removeGold(int amount) {
+        setGold(getGold() - amount);
+    }
+
+    public void setGoldBlocks(int amount) {
+        mySQL.executeUpdate(MySQL.UPDATE_DUELDATA, "goldBlocks", Integer.toString(goldBlocks = amount), uuid);
+    }
+
+    public void addGoldBlocks(int amount) {
+        setGoldBlocks(getGoldBlocks() + amount);
+    }
+
+    public void removeGoldBlocks(int amount) {
+        setGoldBlocks(getGoldBlocks() - amount);
+    }
+
+    public void setDiamonds(int amount) {
+        mySQL.executeUpdate(MySQL.UPDATE_DUELDATA, "diamonds", Integer.toString(diamonds = amount), uuid);
+    }
+
+    public void addDiamonds(int amount) {
+        setDiamonds(getDiamonds() + amount);
+    }
+
+    public void removeDiamonds(int amount) {
+        setDiamonds(getDiamonds() - amount);
+    }
+
+    public void setDiamondBlocks(int amount) {
+        mySQL.executeUpdate(MySQL.UPDATE_DUELDATA, "diamondBlocks", Integer.toString(diamondBlocks = amount), uuid);
+    }
+
+    public void addDiamondBlocks(int amount) {
+        setDiamondBlocks(getDiamondBlocks() + amount);
+    }
+
+    public void removeDiamondBlocks(int amount) {
+        setDiamondBlocks(getDiamondBlocks() - amount);
+    }
+
+    public void setEmeralds(int amount) {
+        mySQL.executeUpdate(MySQL.UPDATE_DUELDATA, "emeralds", Integer.toString(emeralds = amount), uuid);
+    }
+
+    public void addEmeralds(int amount) {
+        setEmeralds(getEmeralds() + amount);
+    }
+
+    public void removeEmeralds(int amount) {
+        setEmeralds(getEmeralds() - amount);
     }
 }

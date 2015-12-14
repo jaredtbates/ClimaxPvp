@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Utils;// AUTHOR: gamer_000 (11/22/2015)
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.entity.Player;
 
@@ -32,11 +33,11 @@ public class TeamUtils {
         removePendingRequest(target);
     }
 
-    public static void removeTeam(Player target) {
-        if (KitPvp.currentTeams.isEmpty() || !KitPvp.currentTeams.containsKey(target.getName()) || KitPvp.currentTeams == null) {
+    public static void removeTeam(Player player) {
+        if (KitPvp.currentTeams.isEmpty() || !KitPvp.currentTeams.containsKey(player.getName()) || KitPvp.currentTeams == null) {
             return;
         } else {
-            KitPvp.currentTeams.remove(target.getName());
+            KitPvp.currentTeams.remove(player.getName());
         }
     }
 
