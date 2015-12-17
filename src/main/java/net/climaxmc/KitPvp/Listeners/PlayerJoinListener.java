@@ -55,7 +55,7 @@ public class PlayerJoinListener implements Listener {
             }
         }
 
-        try {
+        /*try {
             URL url = new URL("http://check.getipintel.net/check.php?ip=" + event.getAddress().getHostAddress() + "&contact=computerwizjared@hotmail.com");
             URLConnection connection = url.openConnection();
             connection.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
@@ -70,7 +70,7 @@ public class PlayerJoinListener implements Listener {
             in.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @EventHandler
