@@ -17,6 +17,8 @@ import java.util.logging.Logger;
  * @author computerwizjared
  */
 public class MySQL {
+
+    // PLAYERDATA ---------------------------------------------------------------------
     public static final String GET_PLAYERDATA = "SELECT * FROM `climax_playerdata` WHERE `uuid` = ?;";
     public static final String CREATE_PLAYERDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_playerdata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY," +
             " `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL," +
@@ -27,17 +29,34 @@ public class MySQL {
             " `gold`, `goldBlocks`, `diamonds`, `diamondBlocks`, `emeralds`, `nickname`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     public static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, `gold` = ?," +
             " `goldBlocks` = ?, `diamonds` = ?, `diamondBlocks` = ?, `emeralds` = ?, `nickname` = ? WHERE `uuid` = ?;";
+
+    // PUNISHMENTS ---------------------------------------------------------------------
     public static final String CREATE_PUNISHMENTS_TABLE = "CREATE TABLE IF NOT EXISTS `climax_punishments` (`uuid` VARCHAR(36) NOT NULL," +
             " `type` VARCHAR(32) NOT NULL, `time` BIGINT(20) NOT NULL, `expiration` BIGINT(20) NOT NULL, `punisheruuid` VARCHAR(26) NOT NULL, `reason` TEXT NOT NULL);";
     public static final String CREATE_PUNISHMENT = "INSERT IGNORE INTO `climax_punishments` (`uuid`, `type`, `time`, `expiration`, `punisheruuid`, `reason`)" +
             " VALUES (?, ?, ?, ?, ?, ?);";
     public static final String GET_PUNISHMENTS = "SELECT * FROM `climax_punishments` WHERE `uuid` = ?;";
     public static final String UPDATE_PUNISHMENT_TIME = "UPDATE `climax_punishments` SET `expiration` = ? WHERE `uuid` = ? AND `type` = ? AND `time` = ?;";
+
+    // DUELS ---------------------------------------------------------------------------
     public static final String GET_DUELDATA = "SELECT * FROM `climax_dueldata` WHERE `uuid` = ?;";
     public static final String CREATE_DUELDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_dueldata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY," +
             " `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, `streak` INT DEFAULT 0 NOT NULL, `dueling` BOOLEAN DEFAULT FALSE NOT NULL);";
     public static final String CREATE_DUELDATA = "INSERT IGNORE INTO `climax_dueldata` (`uuid`, `kills`, `deaths`, `streak`, `dueling`) VALUES (?, ?, ?, ?, ?);";
     public static final String UPDATE_DUELDATA = "UPDATE `climax_dueldata` SET `kills` = ?, `deaths` = ?, `streak` = ?, `dueling` = ? WHERE `uuid` = ?;";
+
+    // SETTINGS ------------------------------------------------------------------------
+    public static final String GET_SETTINGS = "SELECT * FROM `climax_settings` WHERE `uuid` = ?;";
+    public static final String CREATE_SETTINGS_TABLE = "CREATE TABLE IF NOT EXISTS `climax_settings` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY," +
+            " `duelRequests` BOOLEAN DEFAULT TRUE NOT NULL, `teamRequests` BOOLEAN DEFAULT TRUE NOT NULL, `killEffect` VARCHAR(32) DEFAULT 'DEFAULT' NOT NULL," +
+            " `killSound` VARCHAR(32) DEFAULT 'NONE' NOT NULL,  `trail` VARCHAR(32) DEFAULT 'NONE' NOT NULL,  `privateMessaging` BOOLEAN DEFAULT TRUE NOT NULL);";
+    public static final String CREATE_SETTINGS = "INSERT IGNORE INTO `climax_settings` (`uuid`, `duelRequests`, `teamRequests`, `killEffect`, `killSound`," +
+            " `trail`, `privateMessaging`) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    public static final String UPDATE_SETTINGS = "UPDATE `climax_playerdata` SET `duelRequests` = ?, `teamRequests` = ?, `killEffect` = ?, `killSound` = ?, `trail` = ?," +
+            " `privateMessaging` = ? WHERE `uuid` = ?;";
+
+    // ACTUAL STUFF ---------------------------------------------------------------------
+
     private final Plugin plugin;
     private final String address;
     private final int port;
@@ -76,6 +95,7 @@ public class MySQL {
         executeUpdate(CREATE_PLAYERDATA_TABLE);
         executeUpdate(CREATE_PUNISHMENTS_TABLE);
         executeUpdate(CREATE_DUELDATA_TABLE);
+        executeUpdate(CREATE_SETTINGS_TABLE);
     }
 
     /**
@@ -164,6 +184,7 @@ public class MySQL {
     public synchronized void updatePlayerData(String column, Object to, UUID uuid) {
         executeUpdate("UPDATE `climax_playerdata` SET " + column + " = ? WHERE uuid = ?;", to, uuid.toString());
         executeUpdate("UPDATE `climax_dueldata` SET " + column + " = ? WHERE uuid = ?;", to, uuid.toString());
+        executeUpdate("UPDATE `climax_settings` SET " + column + " = ? WHERE uuid = ?;", to, uuid.toString());
     }
 
     /**
@@ -179,8 +200,9 @@ public class MySQL {
 
         ResultSet data = executeQuery(GET_PLAYERDATA, uuid.toString());
         ResultSet duelData = executeQuery(GET_DUELDATA, uuid.toString());
+        ResultSet playerSettings = executeQuery(GET_SETTINGS, uuid.toString());
 
-        if (data == null || duelData == null) {
+        if (data == null || duelData == null || playerSettings == null) {
             return null;
         }
 
@@ -200,9 +222,16 @@ public class MySQL {
                 int duelDeaths = duelData.getInt("deaths");
                 int duelStreak = duelData.getInt("streak");
                 boolean dueling = duelData.getBoolean("dueling");
+                boolean duelRequests = playerSettings.getBoolean("duelRequests");
+                boolean teamRequests = playerSettings.getBoolean("teamRequests");
+                String killEffect = playerSettings.getString("killEffect");
+                String killSound = playerSettings.getString("killSound");
+                String trail = playerSettings.getString("trail");
+                boolean privateMessaging = playerSettings.getBoolean("privateMessaging");
 
                 PlayerData playerData = new PlayerData(this, uuid, rank, balance, kills, deaths, gold, goldBlocks, diamonds, diamondBlocks, emeralds,
-                        duelKills, duelDeaths, duelStreak, nickname, dueling, new ArrayList<>());
+                        duelKills, duelDeaths, duelStreak, nickname, killEffect, killSound, trail, dueling, duelRequests, teamRequests, privateMessaging,
+                        new ArrayList<>());
 
                 ResultSet punishments = executeQuery(GET_PUNISHMENTS, uuid.toString());
                 while (punishments != null && punishments.next()) {
@@ -231,6 +260,7 @@ public class MySQL {
     public synchronized void createPlayerData(UUID uuid) {
         executeUpdate(CREATE_PLAYERDATA, uuid.toString(), Rank.DEFAULT.toString(), 0, 0, 0, 0, 0, 0, 0, 0, null);
         executeUpdate(CREATE_DUELDATA, uuid.toString(), 0, 0, 0, false);
+        executeUpdate(CREATE_SETTINGS, uuid.toString(), true, true, "DEFAULT", "NONE", "NONE", true);
     }
 
     /**
@@ -254,11 +284,21 @@ public class MySQL {
         );
 
         executeUpdate(UPDATE_DUELDATA,
+                playerData.getUuid().toString(),
                 playerData.getDuelKills(),
                 playerData.getDuelDeaths(),
                 playerData.getDuelStreak(),
-                playerData.isDueling(),
-                playerData.getUuid().toString()
+                playerData.isDueling()
+        );
+
+        executeUpdate(UPDATE_SETTINGS,
+                playerData.getUuid().toString(),
+                playerData.isDuelRequests(),
+                playerData.isTeamRequests(),
+                playerData.getKillEffect(),
+                playerData.getKillSound(),
+                playerData.getTrail(),
+                playerData.isPrivateMessaging()
         );
     }
 }
