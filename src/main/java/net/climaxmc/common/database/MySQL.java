@@ -207,7 +207,7 @@ public class MySQL {
         }
 
         try {
-            if (data.next() && duelData.next()) {
+            if (data.next() && duelData.next() && playerSettings.next()) {
                 Rank rank = Rank.valueOf(data.getString("rank"));
                 int balance = data.getInt("balance");
                 int kills = data.getInt("kills");

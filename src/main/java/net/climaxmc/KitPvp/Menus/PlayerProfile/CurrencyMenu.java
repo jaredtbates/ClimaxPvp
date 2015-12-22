@@ -29,15 +29,16 @@ public class CurrencyMenu implements Listener {
         Player player = (Player) event.getWhoClicked();
         ItemStack item = event.getCurrentItem();
         PlayerData playerData = plugin.getPlayerData(player);
-        if (player.getInventory().getName().contains("Profile Menu")) {
+        if (event.getInventory().getName().contains("Profile Menu")) {
             if (item.getType().equals(Material.GOLD_INGOT)) {
+
                 ItemStack goldBlock = new ItemStack(Material.GOLD_BLOCK, 1);
                 {
                     ItemMeta im = goldBlock.getItemMeta();
                     im.setDisplayName(GOLD + "Gold Blocks: " + GRAY + playerData.getGoldBlocks());
                     List<String> lore = new ArrayList<>();
-                    lore.add(GRAY + "1 of these = 64 " + GOLD + "Gold Ingots");
-                    lore.add(GRAY + "64 of these = 1 " + AQUA + "Diamond");
+                    lore.add(GRAY + "1 of these = 9 " + GOLD + "Gold Ingots");
+                    lore.add(GRAY + "15 of these = 1 " + AQUA + "Diamond");
                     im.setLore(lore);
                     goldBlock.setItemMeta(im);
                 }
@@ -47,9 +48,10 @@ public class CurrencyMenu implements Listener {
                     ItemMeta im = goldIngot.getItemMeta();
                     im.setDisplayName(GOLD + "Gold Ingots: " + GRAY + playerData.getGold());
                     List<String> lore = new ArrayList<>();
-                    lore.add(GRAY + "64 of these = 1 " + GOLD + "Gold Block");
+                    lore.add(GRAY + "9 of these = 1 " + GOLD + "Gold Block");
                     lore.add(GRAY + "Can be obtained by " + RED + "killing players" + GRAY + ",");
-                    lore.add(RED + "Completing Challenges" + GRAY + ", and " + RED + "Opening Crates" + GRAY + "!");
+                    lore.add(RED + "Completing Challenges" + GRAY + ", and");
+                    lore.add(RED + "Completing Achievements" + GRAY + "!");
                     im.setLore(lore);
                     goldIngot.setItemMeta(im);
                 }
@@ -59,8 +61,8 @@ public class CurrencyMenu implements Listener {
                     ItemMeta im = diamondBlock.getItemMeta();
                     im.setDisplayName(AQUA + "Diamond Blocks: " + GRAY + playerData.getDiamondBlocks());
                     List<String> lore = new ArrayList<>();
-                    lore.add(GRAY + "1 of these = 64 " + AQUA + "Diamonds");
-                    lore.add(GRAY + "64 of these = 1 " + GREEN + "Emerald");
+                    lore.add(GRAY + "1 of these = 9 " + AQUA + "Diamonds");
+                    lore.add(GRAY + "25 of these = 1 " + GREEN + "Emerald");
                     im.setLore(lore);
                     diamondBlock.setItemMeta(im);
                 }
@@ -70,8 +72,8 @@ public class CurrencyMenu implements Listener {
                     ItemMeta im = diamond.getItemMeta();
                     im.setDisplayName(AQUA + "Diamonds: " + GRAY + playerData.getDiamonds());
                     List<String> lore = new ArrayList<>();
-                    lore.add(GRAY + "1 of these = 64 " + GOLD + "Gold Blocks");
-                    lore.add(GRAY + "64 of these = 1 " + AQUA + "Diamond Blocks");
+                    lore.add(GRAY + "1 of these = 15 " + GOLD + "Gold Blocks");
+                    lore.add(GRAY + "9 of these = 1 " + AQUA + "Diamond Block");
                     im.setLore(lore);
                     diamond.setItemMeta(im);
                 }
@@ -81,7 +83,7 @@ public class CurrencyMenu implements Listener {
                     ItemMeta im = emerald.getItemMeta();
                     im.setDisplayName(GREEN + "Emeralds: " + GRAY + playerData.getEmeralds());
                     List<String> lore = new ArrayList<>();
-                    lore.add(GRAY + "1 of these = 64 " + AQUA + "Diamond Blocks");
+                    lore.add(GRAY + "1 of these = 25 " + AQUA + "Diamond Blocks");
                     lore.add(GRAY + "Used to purchase " + LIGHT_PURPLE + "LEGENDARY " + GRAY + "cosmetics!");
                     im.setLore(lore);
                     emerald.setItemMeta(im);

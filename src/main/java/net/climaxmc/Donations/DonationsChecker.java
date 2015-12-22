@@ -14,7 +14,7 @@ public class DonationsChecker extends BukkitRunnable {
     private ClimaxPvp plugin;
 
     public DonationsChecker(ClimaxPvp plugin) {
-        runTaskTimerAsynchronously(plugin, 30, 30);
+        //runTaskTimerAsynchronously(plugin, 30, 30);
         this.plugin = plugin;
     }
 
