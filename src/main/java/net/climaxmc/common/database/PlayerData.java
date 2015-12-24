@@ -3,9 +3,12 @@ package net.climaxmc.common.database;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import net.climaxmc.Administration.Punishments.Punishment;
+import net.climaxmc.KitPvp.Utils.Achievements.Achievement;
 import net.climaxmc.common.events.PlayerBalanceChangeEvent;
 import net.md_5.bungee.api.ChatColor;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +21,7 @@ public class PlayerData {
     private final UUID uuid;
     private Rank rank;
     private int balance, kills, deaths, duelKills, duelDeaths, duelStreak, gold, goldBlocks, diamonds, diamondBlocks, emeralds;
-    private String nickname, killEffect, killSound, trail;
+    private String achievements, nickname, killEffect, killSound, trail;
     private boolean dueling, duelRequests, teamRequests, privateMessaging;
     private List<Punishment> punishments;
 
@@ -299,4 +302,15 @@ public class PlayerData {
     public void removeEmeralds(int amount) {
         setEmeralds(getEmeralds() - amount);
     }
+
+    public void addAchievement(Achievement achievement) {
+        if (!getAchievements().contains(achievement.toString())) {
+            if(getAchievements() != null) {
+                setAchievements(getAchievements() + "," + achievement.toString());
+            } else {
+                setAchievements(achievement.toString());
+            }
+        }
+    }
+
 }

@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Utils;
+package net.climaxmc.KitPvp.Utils.Particles;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;

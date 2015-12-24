@@ -24,11 +24,11 @@ public class MySQL {
             " `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL," +
             " `deaths` INT DEFAULT 0 NOT NULL, `gold` INT DEFAULT 0 NOT NULL, `goldBlocks` INT DEFAULT 0 NOT NULL," +
             " `diamonds` INT DEFAULT 0 NOT NULL, `diamondBlocks` INT DEFAULT 0 NOT NULL, `emeralds` INT DEFAULT 0 NOT NULL," +
-            " `nickname` VARCHAR(32) DEFAULT NULL);";
+            " `achievements` VARCHAR(5000) DEFAULT NULL, `nickname` VARCHAR(32) DEFAULT NULL);";
     public static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `rank`, `balance`, `kills`, `deaths`," +
-            " `gold`, `goldBlocks`, `diamonds`, `diamondBlocks`, `emeralds`, `nickname`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            " `gold`, `goldBlocks`, `diamonds`, `diamondBlocks`, `emeralds`, `achievements`, `nickname`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     public static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, `gold` = ?," +
-            " `goldBlocks` = ?, `diamonds` = ?, `diamondBlocks` = ?, `emeralds` = ?, `nickname` = ? WHERE `uuid` = ?;";
+            " `goldBlocks` = ?, `diamonds` = ?, `diamondBlocks` = ?, `emeralds` = ?, `achievements` = ?, `nickname` = ? WHERE `uuid` = ?;";
 
     // PUNISHMENTS ---------------------------------------------------------------------
     public static final String CREATE_PUNISHMENTS_TABLE = "CREATE TABLE IF NOT EXISTS `climax_punishments` (`uuid` VARCHAR(36) NOT NULL," +
@@ -217,6 +217,7 @@ public class MySQL {
                 int diamonds = data.getInt("diamonds");
                 int diamondBlocks = data.getInt("diamondBlocks");
                 int emeralds = data.getInt("emeralds");
+                String achievements = data.getString("achievements");
                 String nickname = data.getString("nickname");
                 int duelKills = duelData.getInt("kills");
                 int duelDeaths = duelData.getInt("deaths");
@@ -230,7 +231,7 @@ public class MySQL {
                 boolean privateMessaging = playerSettings.getBoolean("privateMessaging");
 
                 PlayerData playerData = new PlayerData(this, uuid, rank, balance, kills, deaths, gold, goldBlocks, diamonds, diamondBlocks, emeralds,
-                        duelKills, duelDeaths, duelStreak, nickname, killEffect, killSound, trail, dueling, duelRequests, teamRequests, privateMessaging,
+                        duelKills, duelDeaths, duelStreak, achievements, nickname, killEffect, killSound, trail, dueling, duelRequests, teamRequests, privateMessaging,
                         new ArrayList<>());
 
                 ResultSet punishments = executeQuery(GET_PUNISHMENTS, uuid.toString());
@@ -258,7 +259,7 @@ public class MySQL {
      * @param uuid UUID of the player to create data of
      */
     public synchronized void createPlayerData(UUID uuid) {
-        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), Rank.DEFAULT.toString(), 0, 0, 0, 0, 0, 0, 0, 0, null);
+        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), Rank.DEFAULT.toString(), 0, 0, 0, 0, 0, 0, 0, 0, null, null);
         executeUpdate(CREATE_DUELDATA, uuid.toString(), 0, 0, 0, false);
         executeUpdate(CREATE_SETTINGS, uuid.toString(), true, true, "DEFAULT", "NONE", "NONE", true);
     }
@@ -280,6 +281,7 @@ public class MySQL {
                 playerData.getDiamonds(),
                 playerData.getDiamondBlocks(),
                 playerData.getEmeralds(),
+                playerData.getAchievements(),
                 playerData.getNickname()
         );
 

@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Utils;// AUTHOR: gamer_000 (11/10/2015)
+package net.climaxmc.KitPvp.Utils.Duels;// AUTHOR: gamer_000 (11/10/2015)
 
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

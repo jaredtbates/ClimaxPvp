@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Utils;
+package net.climaxmc.KitPvp.Utils.Duels;
 
 import lombok.Data;
 import lombok.Getter;

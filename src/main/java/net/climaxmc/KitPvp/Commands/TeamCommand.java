@@ -1,10 +1,8 @@
 package net.climaxmc.KitPvp.Commands;// AUTHOR: gamer_000 (11/22/2015)
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Utils.DuelsMessages;
-import net.climaxmc.KitPvp.Utils.DuelsUtils;
-import net.climaxmc.KitPvp.Utils.TeamUtils;
-import net.climaxmc.KitPvp.Utils.TeamMessages;
+import net.climaxmc.KitPvp.Utils.Teams.TeamUtils;
+import net.climaxmc.KitPvp.Utils.Teams.TeamMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;

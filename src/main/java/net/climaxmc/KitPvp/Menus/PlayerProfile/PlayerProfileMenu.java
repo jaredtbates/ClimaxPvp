@@ -39,6 +39,17 @@ public class PlayerProfileMenu implements Listener {
         gold.setItemMeta(im);
     }
 
+    ItemStack iron = new ItemStack(Material.IRON_INGOT, 1);
+    {
+        ItemMeta im = iron.getItemMeta();
+        im.setDisplayName(GREEN + "Achievements");
+        List<String> lore = new ArrayList<>();
+        lore.add(GRAY + "See your progress in completing");
+        lore.add(GRAY + "all the Achievements!");
+        im.setLore(lore);
+        iron.setItemMeta(im);
+    }
+
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
@@ -81,6 +92,7 @@ public class PlayerProfileMenu implements Listener {
             if (item.getType().equals(Material.SKULL_ITEM)) {
 
                 Inventory profileMenu = Bukkit.createInventory(null, 27, "Profile Menu");
+                profileMenu.setItem(11, iron);
                 profileMenu.setItem(12, gold);
                 profileMenu.setItem(13, head);
 

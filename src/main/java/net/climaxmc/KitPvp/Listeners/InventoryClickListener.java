@@ -4,18 +4,14 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Kits.BomberKit;
-import net.climaxmc.KitPvp.Menus.DuelsMenu;
-import net.climaxmc.KitPvp.Menus.PlayerProfile.CurrencyMenu;
-import net.climaxmc.KitPvp.Utils.Challenge;
-import net.climaxmc.KitPvp.Utils.ChallengesFiles;
-import net.climaxmc.KitPvp.Utils.DuelsMessages;
+import net.climaxmc.KitPvp.Utils.Challenges.Challenge;
+import net.climaxmc.KitPvp.Utils.Duels.DuelsMessages;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -155,6 +151,14 @@ public class InventoryClickListener implements Listener {
             }
 
             if (inventory.getName().equals("Your Bank")) {
+                ItemStack clickedItem = event.getCurrentItem();
+                if (clickedItem.getType() != null) {
+                    event.setCancelled(true);
+                }
+                event.setCancelled(true);
+            }
+
+            if (inventory.getName().equals("Achievements")) {
                 ItemStack clickedItem = event.getCurrentItem();
                 if (clickedItem.getType() != null) {
                     event.setCancelled(true);

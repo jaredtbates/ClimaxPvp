@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Utils;
+package net.climaxmc.KitPvp.Utils.Particles;
 
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.Bukkit;

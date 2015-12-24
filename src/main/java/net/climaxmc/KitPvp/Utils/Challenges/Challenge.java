@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Utils;
+package net.climaxmc.KitPvp.Utils.Challenges;
 
 public enum Challenge {
     Daily1("Daily Challenge #1", 86400, 20, 300),

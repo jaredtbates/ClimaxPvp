@@ -1,7 +1,6 @@
-package net.climaxmc.KitPvp.Utils;// AUTHOR: gamer_000 (11/22/2015)
+package net.climaxmc.KitPvp.Utils.Teams;// AUTHOR: gamer_000 (11/22/2015)
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.entity.Player;
 

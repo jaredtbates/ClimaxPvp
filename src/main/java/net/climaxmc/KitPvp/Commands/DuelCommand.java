@@ -2,8 +2,8 @@ package net.climaxmc.KitPvp.Commands;// AUTHOR: gamer_000 (10/25/2015)
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Menus.DuelsMenu;
-import net.climaxmc.KitPvp.Utils.DuelsMessages;
-import net.climaxmc.KitPvp.Utils.DuelsUtils;
+import net.climaxmc.KitPvp.Utils.Duels.DuelsMessages;
+import net.climaxmc.KitPvp.Utils.Duels.DuelsUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -11,8 +11,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.UUID;
 
 public class DuelCommand implements CommandExecutor {
     private ClimaxPvp plugin;

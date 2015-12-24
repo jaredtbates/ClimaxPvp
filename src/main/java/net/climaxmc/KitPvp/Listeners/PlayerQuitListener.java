@@ -2,8 +2,7 @@ package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
-import net.climaxmc.KitPvp.Utils.Duel;
-import net.climaxmc.KitPvp.Utils.DuelsUtils;
+import net.climaxmc.KitPvp.Utils.Duels.DuelsUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

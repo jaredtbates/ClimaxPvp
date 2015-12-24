@@ -7,7 +7,7 @@ import net.climaxmc.Donations.Donations;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
-import net.climaxmc.KitPvp.Utils.ChallengesFiles;
+import net.climaxmc.KitPvp.Utils.Challenges.ChallengesFiles;
 import net.climaxmc.common.database.MySQL;
 import net.climaxmc.common.database.PlayerData;
 import org.bukkit.ChatColor;

@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Utils;
+package net.climaxmc.KitPvp.Utils.Duels;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;

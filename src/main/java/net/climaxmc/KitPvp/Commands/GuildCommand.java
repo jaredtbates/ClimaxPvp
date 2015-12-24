@@ -1,7 +1,6 @@
 package net.climaxmc.KitPvp.Commands;// AUTHOR: gamer_000 (12/13/2015)
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Utils.TeamUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;

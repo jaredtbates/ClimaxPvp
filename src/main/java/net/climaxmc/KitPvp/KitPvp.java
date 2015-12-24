@@ -10,9 +10,10 @@ import net.climaxmc.KitPvp.Commands.Messaging.MessageCommand;
 import net.climaxmc.KitPvp.Commands.Messaging.ReplyCommand;
 import net.climaxmc.KitPvp.Listeners.*;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
+import net.climaxmc.KitPvp.Menus.PlayerProfile.AchievementMenu;
 import net.climaxmc.KitPvp.Menus.PlayerProfile.CurrencyMenu;
 import net.climaxmc.KitPvp.Menus.PlayerProfile.PlayerProfileMenu;
-import net.climaxmc.KitPvp.Utils.Duel;
+import net.climaxmc.KitPvp.Utils.Duels.Duel;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
@@ -51,6 +52,7 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new ChallengesMenu(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerProfileMenu(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new CurrencyMenu(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new AchievementMenu(plugin), plugin);
         //plugin.getServer().getPluginManager().registerEvents(new HackListeners(plugin), plugin);
 
         // Register commands
