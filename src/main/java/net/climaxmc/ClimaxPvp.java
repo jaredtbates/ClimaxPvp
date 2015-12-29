@@ -7,6 +7,7 @@ import net.climaxmc.Donations.Donations;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
+import net.climaxmc.KitPvp.Trails.TrailsRunnable;
 import net.climaxmc.KitPvp.Utils.Challenges.ChallengesFiles;
 import net.climaxmc.common.database.MySQL;
 import net.climaxmc.common.database.PlayerData;
@@ -47,13 +48,14 @@ public class ClimaxPvp extends JavaPlugin {
     private File warpsConfigFile = null;
     @Getter
     private ChallengesFiles challengesFiles = null;
-
     @Getter
     private HashMap<UUID, PlayerData> playerDataList = new HashMap<>();
     @Getter
     private HashMap<UUID, UUID> messagers = new HashMap<>();
 
     private Donations donations;
+
+    TrailsRunnable trailsRunnable = new TrailsRunnable(this);
 
     @Override
     public void onEnable() {
@@ -122,6 +124,8 @@ public class ClimaxPvp extends JavaPlugin {
         challengesFiles = new ChallengesFiles();
 
         KitManager.setAllKitsEnabled(getConfig().getBoolean("AllKitsEnabled"));
+
+        trailsRunnable.startTrails();
     }
 
     @Override
@@ -131,6 +135,8 @@ public class ClimaxPvp extends JavaPlugin {
         if (donations.getVoteReceiver() != null) {
             donations.getVoteReceiver().shutdown();
         }
+
+        trailsRunnable.stopTrails();
 
         // Close MySQL Connection
         if (mySQL.getConnection() != null) {

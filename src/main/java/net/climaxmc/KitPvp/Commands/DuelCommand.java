@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Commands;// AUTHOR: gamer_000 (10/25/2015)
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Menus.DuelsMenu;
 import net.climaxmc.KitPvp.Utils.Duels.DuelsMessages;
 import net.climaxmc.KitPvp.Utils.Duels.DuelsUtils;
@@ -26,10 +27,11 @@ public class DuelCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
+        DuelsMessages duelsMessages = new DuelsMessages(plugin);
 
         if (command.getName().equalsIgnoreCase("duel")) {
             if (args.length > 2 || args.length == 0) {
-                player.sendMessage(ChatColor.RED + "Incorrect Usage! Try this: /duel [<player>, accept, decline, list]");
+                player.sendMessage(ChatColor.RED + "Incorrect Usage! Try this: /duel [<player>, accept, deny, list]");
                 player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                 return false;
             }
@@ -37,7 +39,7 @@ public class DuelCommand implements CommandExecutor {
                 if (args[0].equalsIgnoreCase("accept")) {
                     if (DuelsUtils.hasPendingDuel(player)) {
                         Player duelSender = DuelsUtils.getDuelRequester(player);
-                        DuelsMessages.sendDuelAcceptMessage(player, duelSender);
+                        duelsMessages.sendDuelAcceptMessage(player, duelSender);
                         DuelsUtils.createDuel(player, duelSender);
                         // TODO: Start Duel
                     } else {
@@ -45,10 +47,10 @@ public class DuelCommand implements CommandExecutor {
                         player.sendMessage(ChatColor.RED + "You do not have a pending duel request!");
                         return false;
                     }
-                } else if (args[0].equalsIgnoreCase("decline")) {
+                } else if (args[0].equalsIgnoreCase("deny")) {
                     if (DuelsUtils.hasPendingDuel(player)) {
                         Player duelSender = DuelsUtils.getDuelRequester(player);
-                        DuelsMessages.sendDuelDeclineMessage(player, duelSender);
+                        duelsMessages.sendDuelDeclineMessage(player, duelSender);
                         DuelsUtils.removeDuel(player);
                     } else {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
@@ -73,11 +75,20 @@ public class DuelCommand implements CommandExecutor {
                             player.sendMessage(ChatColor.RED + "You already have a pending duel with another player!");
                             return false;
                         } else {
-                            DuelsMessages.sendDuelRequestMessage(player, target);
+                            duelsMessages.sendDuelRequestMessage(player, target);
                             DuelsUtils.createDuel(target, player);
                         }
                     }
                 }
+            }
+        }
+
+        if (command.getName().equalsIgnoreCase("fire")) {
+            if (KitPvp.trails.containsKey(player.getUniqueId())) {
+                KitPvp.trails.remove(player.getUniqueId());
+            } else {
+                KitPvp.trails.put(player.getUniqueId(), "fire");
+                player.sendMessage("FIREEEEE");
             }
         }
         return false;

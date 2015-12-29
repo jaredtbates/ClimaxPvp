@@ -77,6 +77,7 @@ public class PlayerDeathListener implements Listener {
 
         PlayerData killerData = plugin.getPlayerData(killer);
         killerData.addKills(1);
+        killer.sendMessage(ChatColor.GREEN + "You killed " + ChatColor.RED + player.getName());
         if(playerData.getKills() == 1) {
             playerData.addAchievement(Achievement.FIRST_KILL);
             killer.sendMessage("You got the achievement: Fresh from the Pile");

@@ -1,8 +1,8 @@
 package net.climaxmc.KitPvp.Commands;// AUTHOR: gamer_000 (11/22/2015)
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Utils.Teams.TeamUtils;
 import net.climaxmc.KitPvp.Utils.Teams.TeamMessages;
+import net.climaxmc.KitPvp.Utils.Teams.TeamUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -26,6 +26,7 @@ public class TeamCommand implements CommandExecutor {
 
         Player player = (Player) sender;
         TeamUtils teamUtils = new TeamUtils(plugin);
+        TeamMessages teamMessages = new TeamMessages(plugin);
         if (command.getName().equalsIgnoreCase("team")) {
             if (args.length > 1 || args.length == 0) {
                 player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
@@ -34,7 +35,7 @@ public class TeamCommand implements CommandExecutor {
                 if (args[0].equalsIgnoreCase("accept")) {
                     if (teamUtils.hasPendingRequest(player)) {
                         Player requester = teamUtils.getRequester(player);
-                        TeamMessages.sendAcceptMessage(player, requester);
+                        teamMessages.sendAcceptMessage(player, requester);
                         TeamUtils.createTeam(player, requester);
                     } else {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
@@ -44,7 +45,7 @@ public class TeamCommand implements CommandExecutor {
                 } else if (args[0].equalsIgnoreCase("deny")) {
                     if (teamUtils.hasPendingRequest(player)) {
                         Player requester = teamUtils.getRequester(player);
-                        TeamMessages.sendDeclineMessage(player, requester);
+                        teamMessages.sendDeclineMessage(player, requester);
                         TeamUtils.removePendingRequest(player);
                     } else {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
@@ -62,9 +63,9 @@ public class TeamCommand implements CommandExecutor {
                     if (!Bukkit.getServer().getOnlinePlayers().contains(target)) {
                         player.sendMessage(ChatColor.GOLD + "\"" + ChatColor.YELLOW + args[0] + ChatColor.GOLD + "\"" + ChatColor.RED + " is not online or doesn't exist!");
                         return false;
-                    } else if (target == player) {
+                    /*} else if (target == player) {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                        player.sendMessage(ChatColor.RED + "Team with yourself? How would that even work...");
+                        player.sendMessage(ChatColor.RED + "Team with yourself? How would that even work...");*/
                     } else {
                         if (teamUtils.hasPendingRequest(target)) {
                             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
@@ -75,7 +76,7 @@ public class TeamCommand implements CommandExecutor {
                             player.sendMessage(ChatColor.RED + "You already have a pending request to team with another player!");
                             return false;
                         } else {
-                            TeamMessages.sendRequestMessage(player, target);
+                            teamMessages.sendRequestMessage(player, target);
                             TeamUtils.createPendingRequest(target, player);
                         }
                     }

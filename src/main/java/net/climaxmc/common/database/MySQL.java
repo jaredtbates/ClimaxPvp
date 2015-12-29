@@ -110,7 +110,7 @@ public class MySQL {
     /**
      * Runs a MySQL query asynchronously
      *
-     * @param runnable Runnable to run async
+     * @param runnable TrailsRunnable to run async
      */
     private void runAsync(Runnable runnable) {
         if (plugin.isEnabled()) {

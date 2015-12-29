@@ -8,7 +8,6 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import net.md_5.bungee.api.ChatColor;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -53,14 +52,12 @@ public class AsyncPlayerChatListener implements Listener {
         int kills = playerData.getKills();
         Rank rank = playerData.getRank();
 
-        String level = playerData.getLevelColor() + Integer.toString(kills);
-
         if (playerData.hasRank(Rank.NINJA)) {
             event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
             ChatColor color = rank.getColor();
-            event.setFormat(level + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "{" + (color == null ? "" : color) + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
+            event.setFormat((color == null ? "" : color) + " " + ChatColor.BOLD + "" + rank.getPrefix() + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
         } else {
-            event.setFormat(level + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
+            event.setFormat(playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.GRAY + "%s");
         }
 
         /*if (StringUtils.containsIgnoreCase(event.getMessage(), "apply") && StringUtils.containsIgnoreCase(event.getMessage(), "staff")) {

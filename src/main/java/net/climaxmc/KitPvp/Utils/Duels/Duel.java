@@ -15,4 +15,7 @@ public class Duel {
     @Getter
     @Setter
     private boolean accepted;
+    @Getter
+    @Setter
+    private boolean started;
 }

@@ -101,3 +101,5 @@ commands:
   team:
     description: Team up with another player
     aliases: ally
+  fire:
+    description: Fire

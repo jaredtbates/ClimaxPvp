@@ -3,6 +3,8 @@ package net.climaxmc.Administration.Runnables;
 import net.climaxmc.Administration.Utils.PluginUtil;
 import net.climaxmc.ClimaxPvp;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,6 +45,9 @@ public class UpdateRunnable implements Runnable {
 
             PluginUtil.load("ClimaxPvp");
 
+            for (Player player : plugin.getServer().getOnlinePlayers()) {
+                player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1.5F, 1.2F);
+            }
             plugin.getServer().broadcastMessage(ChatColor.GRAY + "Reload complete!");
         }, 100);
     }

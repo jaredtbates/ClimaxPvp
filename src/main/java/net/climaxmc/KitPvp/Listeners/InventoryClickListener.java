@@ -132,10 +132,11 @@ public class InventoryClickListener implements Listener {
 
             if (inventory.getName().equals("Select a Player to Duel")) {
                 ItemStack clickedItem = event.getCurrentItem();
+                DuelsMessages duelsMessages = new DuelsMessages(plugin);
                 if (clickedItem.getType().equals(Material.SKULL_ITEM)) {
                     SkullMeta meta = (SkullMeta) clickedItem.getItemMeta();
                     Player target = plugin.getServer().getPlayer(meta.getOwner());
-                    DuelsMessages.sendDuelRequestMessage(player, target);
+                    duelsMessages.sendDuelRequestMessage(player, target);
                     player.closeInventory();
                 }
                 event.setCancelled(true);

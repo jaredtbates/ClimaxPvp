@@ -1,11 +1,11 @@
 package net.climaxmc.KitPvp;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Commands.*;
 import net.climaxmc.KitPvp.Commands.Economy.BalanceCommand;
 import net.climaxmc.KitPvp.Commands.Economy.BalanceTopCommand;
 import net.climaxmc.KitPvp.Commands.Economy.EconomyCommand;
 import net.climaxmc.KitPvp.Commands.Economy.PayCommand;
-import net.climaxmc.KitPvp.Commands.*;
 import net.climaxmc.KitPvp.Commands.Messaging.MessageCommand;
 import net.climaxmc.KitPvp.Commands.Messaging.ReplyCommand;
 import net.climaxmc.KitPvp.Listeners.*;
@@ -27,6 +27,7 @@ public class KitPvp {
     public static Set<Duel> duels = new HashSet<>();
     public static Map<String, String> pendingTeams = new HashMap<>();
     public static Map<String, String> currentTeams = new HashMap<>();
+    public static Map<UUID, String> trails = new HashMap<>();
 
     public KitPvp(ClimaxPvp plugin) {
         // Initalize kits
@@ -78,5 +79,6 @@ public class KitPvp {
         plugin.getCommand("pei").setExecutor(new PeiCommand());
         plugin.getCommand("duel").setExecutor(new DuelCommand(plugin));
         plugin.getCommand("team").setExecutor(new TeamCommand(plugin));
+        plugin.getCommand("fire").setExecutor(new DuelCommand(plugin));
     }
 }
