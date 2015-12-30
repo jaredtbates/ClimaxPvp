@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Utils.Duels;// AUTHOR: gamer_000 (11/10/2015)
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Utils.TextComponentMessages;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -29,7 +30,11 @@ public class DuelsMessages {
         target.sendMessage(" ");
         target.sendMessage(YELLOW + "             " + sender.getName() + AQUA + " has sent you a request to duel!");
         target.sendMessage(" ");
-        target.sendMessage(tcm.centerTextSpacesLeft() + tcm.duelAcceptButton() + tcm.centerTextSpacesMiddle() + tcm.duelDenyButton());
+        BaseComponent component = tcm.centerTextSpacesLeft();
+        component.addExtra(tcm.teamAcceptButton());
+        component.addExtra(tcm.centerTextSpacesMiddle());
+        component.addExtra(tcm.teamDenyButton());
+        target.spigot().sendMessage(component);
         target.sendMessage(GOLD + "     \u00AB" + WHITE + " ========================================" + GOLD + " \u00BB");
         target.sendMessage(" ");
     }

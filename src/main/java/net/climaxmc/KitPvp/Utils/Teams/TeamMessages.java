@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Utils.Teams;// AUTHOR: gamer_000 (11/22/2015)
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Utils.TextComponentMessages;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -27,7 +28,11 @@ public class TeamMessages {
         target.sendMessage(" ");
         target.sendMessage(YELLOW + "             " + sender.getName() + AQUA + " has sent you a request to team!");
         target.sendMessage(" ");
-        target.spigot().sendMessage(tcm.centerTextSpacesLeft() + tcm.teamAcceptButton() + tcm.centerTextSpacesMiddle() + tcm.teamDenyButton());
+        BaseComponent component = tcm.centerTextSpacesLeft();
+        component.addExtra(tcm.teamAcceptButton());
+        component.addExtra(tcm.centerTextSpacesMiddle());
+        component.addExtra(tcm.teamDenyButton());
+        target.spigot().sendMessage(component);
         target.sendMessage(GOLD + "     \u00AB" + WHITE + " ========================================" + GOLD + " \u00BB");
         target.sendMessage(" ");
     }
