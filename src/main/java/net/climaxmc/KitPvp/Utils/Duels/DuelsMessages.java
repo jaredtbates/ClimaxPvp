@@ -2,6 +2,8 @@ package net.climaxmc.KitPvp.Utils.Duels;// AUTHOR: gamer_000 (11/10/2015)
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Utils.JSONStrings;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.chat.ComponentSerializer;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -29,7 +31,7 @@ public class DuelsMessages {
         target.sendMessage(" ");
         target.sendMessage(YELLOW + "             " + sender.getName() + AQUA + " has sent you a request to duel!");
         target.sendMessage(" ");
-        plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "tellraw " + target.getName() + jsonStrings.acceptDenyDuelMessage);
+        target.spigot().sendMessage(ComponentSerializer.parse(jsonStrings.acceptDenyDuelMessage));
         target.sendMessage(GOLD + "     \u00AB" + WHITE + " ========================================" + GOLD + " \u00BB");
         target.sendMessage(" ");
     }

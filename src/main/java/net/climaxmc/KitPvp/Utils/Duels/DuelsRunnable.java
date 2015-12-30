@@ -9,10 +9,7 @@ import static org.bukkit.ChatColor.RED;
 public class DuelsRunnable implements Runnable {
 
     private ClimaxPvp plugin;
-    private int amount = 0;
     DuelsMessages duelsMessages = new DuelsMessages(plugin);
-    public Player p1;
-    public Player p2;
 
     public DuelsRunnable(ClimaxPvp plugin) {
         this.plugin = plugin;
@@ -20,15 +17,8 @@ public class DuelsRunnable implements Runnable {
 
     @Override
     public void run() {
-        plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
-            for (Duel duel : KitPvp.duels) {
-                if (duel.isAccepted()) {
-                    if (!duel.isStarted()) {
-                        duelsMessages.sendDuelMessage(p1, p2, RED + "Testing 1");
-                    }
-                }
-            }
-            amount++;
-        }, 20);
+        plugin.getServer().getScheduler().runTaskLater(plugin, () -> KitPvp.duels.stream().filter(Duel::isAccepted).filter(duel -> !duel.isStarted()).forEach(duel -> {
+            duelsMessages.sendDuelMessage(plugin.getServer().getPlayer(duel.getPlayer1UUID()), plugin.getServer().getPlayer(duel.getPlayer2UUID()), RED + "Testing 1");
+        }), 20);
     }
 }
