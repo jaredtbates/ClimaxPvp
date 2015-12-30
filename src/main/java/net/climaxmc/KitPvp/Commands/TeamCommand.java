@@ -99,7 +99,7 @@ public class TeamCommand implements CommandExecutor {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                         player.sendMessage(ChatColor.GOLD + " \"" + ChatColor.YELLOW + args[0] + ChatColor.GOLD + "\"" + ChatColor.RED + " is not online or doesn't exist!");
                         return false;
-                    } else if (target == player) {
+                    } else if (target.getUniqueId().equals(player.getUniqueId())) {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                         player.sendMessage(ChatColor.RED + "Team with yourself? How would that even work...");
                     } else {

@@ -15,7 +15,7 @@ public class TextComponentMessages {
 
     public TextComponent centerTextSpacesMiddle() {
         TextComponent spaces = new TextComponent("         ");
-        return spaces.;
+        return spaces;
     }
 
     public TextComponent duelAcceptButton() {
