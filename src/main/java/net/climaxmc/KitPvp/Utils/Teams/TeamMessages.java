@@ -1,7 +1,7 @@
 package net.climaxmc.KitPvp.Utils.Teams;// AUTHOR: gamer_000 (11/22/2015)
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Utils.JSONStrings;
+import net.climaxmc.KitPvp.Utils.TextComponentMessages;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -15,7 +15,7 @@ public class TeamMessages {
         this.plugin = plugin;
     }
 
-    JSONStrings jsonStrings = new JSONStrings();
+    TextComponentMessages tcm = new TextComponentMessages();
 
     public void sendRequestMessage(Player sender, Player target) {
         sender.playSound(sender.getLocation(), Sound.ITEM_PICKUP, 2F, 0.3F);
@@ -27,7 +27,7 @@ public class TeamMessages {
         target.sendMessage(" ");
         target.sendMessage(YELLOW + "             " + sender.getName() + AQUA + " has sent you a request to team!");
         target.sendMessage(" ");
-        plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "tellraw " + target.getName() + jsonStrings.acceptDenyTeamMessage);
+        target.spigot().sendMessage(tcm.centerTextSpacesLeft() + tcm.teamAcceptButton() + tcm.centerTextSpacesMiddle() + tcm.teamDenyButton());
         target.sendMessage(GOLD + "     \u00AB" + WHITE + " ========================================" + GOLD + " \u00BB");
         target.sendMessage(" ");
     }

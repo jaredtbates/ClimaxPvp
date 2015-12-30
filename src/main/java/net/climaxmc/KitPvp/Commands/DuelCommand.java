@@ -39,6 +39,7 @@ public class DuelCommand implements CommandExecutor {
                     if (DuelsUtils.hasPendingDuel(player)) {
                         Player duelSender = DuelsUtils.getDuelRequester(player);
                         duelsMessages.sendDuelAcceptMessage(player, duelSender);
+                        DuelsUtils.removeDuel(player);
                         DuelsUtils.createDuel(player, duelSender);
                         // TODO: Start Duel
                     } else {
