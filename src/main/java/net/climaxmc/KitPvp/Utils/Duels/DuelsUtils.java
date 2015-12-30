@@ -27,7 +27,7 @@ public class DuelsUtils {
 
     public static boolean hasPendingDuel(Player target) {
         for (Duel pendingDuel : KitPvp.duels) {
-            if ((pendingDuel.getPlayer1UUID().equals(target.getUniqueId()) || pendingDuel.getPlayer2UUID().equals(target.getUniqueId())) && !pendingDuel.isAccepted()) {
+            if ((pendingDuel.getPlayer1UUID().equals(target.getUniqueId()) || pendingDuel.getPlayer2UUID().equals(target.getUniqueId()))) {
                 return true;
             }
         }
