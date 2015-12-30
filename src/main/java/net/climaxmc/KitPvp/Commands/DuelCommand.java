@@ -1,7 +1,6 @@
 package net.climaxmc.KitPvp.Commands;// AUTHOR: gamer_000 (10/25/2015)
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Menus.DuelsMenu;
 import net.climaxmc.KitPvp.Utils.Duels.DuelsMessages;
 import net.climaxmc.KitPvp.Utils.Duels.DuelsUtils;
@@ -31,7 +30,7 @@ public class DuelCommand implements CommandExecutor {
 
         if (command.getName().equalsIgnoreCase("duel")) {
             if (args.length > 2 || args.length == 0) {
-                player.sendMessage(ChatColor.RED + "Incorrect Usage! Try this: /duel [<player>, accept, deny, list]");
+                player.sendMessage(ChatColor.RED + " Incorrect Usage! Try this: /duel [<player>, accept, deny, list]");
                 player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                 return false;
             }
@@ -44,7 +43,7 @@ public class DuelCommand implements CommandExecutor {
                         // TODO: Start Duel
                     } else {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                        player.sendMessage(ChatColor.RED + "You do not have a pending duel request!");
+                        player.sendMessage(ChatColor.RED + " You do not have a pending duel request!");
                         return false;
                     }
                 } else if (args[0].equalsIgnoreCase("deny")) {
@@ -54,7 +53,7 @@ public class DuelCommand implements CommandExecutor {
                         DuelsUtils.removeDuel(player);
                     } else {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                        player.sendMessage(ChatColor.RED + "You do not have a pending duel request!");
+                        player.sendMessage(ChatColor.RED + " You do not have a pending duel request!");
                         return false;
                     }
                 } else if (args[0].equalsIgnoreCase("list")) {
@@ -63,16 +62,20 @@ public class DuelCommand implements CommandExecutor {
                 } else {
                     Player target = Bukkit.getServer().getPlayerExact(args[0]);
                     if (!Bukkit.getServer().getOnlinePlayers().contains(target)) {
-                        player.sendMessage(ChatColor.GOLD + "\"" + ChatColor.YELLOW + args[0] + ChatColor.GOLD + "\"" + ChatColor.RED + " is not online or doesn't exist!");
+                        player.sendMessage(ChatColor.GOLD + " \"" + ChatColor.YELLOW + args[0] + ChatColor.GOLD + "\"" + ChatColor.RED + " is not online or doesn't exist!");
                         return false;
                     } else {
                         if (DuelsUtils.hasPendingDuel(target)) {
                             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                            player.sendMessage(ChatColor.RED + "The player already has a pending duel!");
+                            player.sendMessage(ChatColor.RED + " That player already has a pending duel!");
                             return false;
                         } else if (DuelsUtils.hasPendingDuel(player)) {
                             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                            player.sendMessage(ChatColor.RED + "You already have a pending duel with another player!");
+                            player.sendMessage(ChatColor.RED + " You already have a pending duel with another player!");
+                            return false;
+                        } else if (DuelsUtils.isInDuel(target)) {
+                            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                            player.sendMessage(ChatColor.RED + " That player is already in a duel!");
                             return false;
                         } else {
                             duelsMessages.sendDuelRequestMessage(player, target);
@@ -80,15 +83,6 @@ public class DuelCommand implements CommandExecutor {
                         }
                     }
                 }
-            }
-        }
-
-        if (command.getName().equalsIgnoreCase("fire")) {
-            if (KitPvp.trails.containsKey(player.getUniqueId())) {
-                KitPvp.trails.remove(player.getUniqueId());
-            } else {
-                KitPvp.trails.put(player.getUniqueId(), "fire");
-                player.sendMessage("FIREEEEE");
             }
         }
         return false;
