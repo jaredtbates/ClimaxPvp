@@ -41,10 +41,10 @@ public class TeamMessages {
     }
 
     public void sendDeclineMessage(Player target, Player sender) {
-        sender.playSound(sender.getLocation(), Sound.VILLAGER_NO, 1, 0.5F);
+        sender.playSound(sender.getLocation(), Sound.VILLAGER_NO, 1, 0.75F);
         sender.sendMessage(RED + "     \u00AB " + AQUA + target.getName() + YELLOW + " has " + RED + "declined " + YELLOW + "your request to team!" + RED + " \u00BB");
 
-        target.playSound(target.getLocation(), Sound.VILLAGER_NO, 1, 0.5F);
+        target.playSound(target.getLocation(), Sound.VILLAGER_NO, 1, 0.75F);
         target.sendMessage(RED + "     \u00AB " + YELLOW + "You have " + RED + "declined " + AQUA + target.getName() + YELLOW + "'s request to team!" + RED + " \u00BB");
     }
 }
