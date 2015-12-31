@@ -55,7 +55,8 @@ public class AsyncPlayerChatListener implements Listener {
         if (playerData.hasRank(Rank.NINJA)) {
             event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
             ChatColor color = rank.getColor();
-            event.setFormat((color == null ? "" : color) + " " + ChatColor.BOLD + "" + rank.getPrefix() + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+            //event.setFormat((color == null ? "" : color) + " " + ChatColor.BOLD + "" + rank.getPrefix() + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+            event.setFormat(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "{" + rank.getColor() + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + ChatColor.RESET + " %s" + ChatColor.RESET + ": %s");
         } else {
             event.setFormat(playerData.getLevelColor() + " %s" + ChatColor.RESET + ": "/*\u00BB " + ChatColor.GRAY*/ + "%s");
         }
