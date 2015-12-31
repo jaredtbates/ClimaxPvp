@@ -103,6 +103,10 @@ public class TeamCommand implements CommandExecutor {
                                 player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                                 player.sendMessage(ChatColor.RED + " That player is already on a team!");
                                 return false;
+                            } else if (teamUtils.isTeaming(player)) {
+                                player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                                player.sendMessage(ChatColor.RED + " You are already already on a team!");
+                                return false;
                             } else {
                                 teamMessages.sendRequestMessage(player, target);
                                 TeamUtils.createPendingRequest(target, player);
