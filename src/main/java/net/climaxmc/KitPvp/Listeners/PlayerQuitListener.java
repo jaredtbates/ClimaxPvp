@@ -25,6 +25,12 @@ public class PlayerQuitListener implements Listener {
             KitPvp.killStreak.remove(player.getUniqueId());
         }
 
+        if (plugin.getServer().getOnlinePlayers().size() < 7) {
+            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+            player.sendMessage(ChatColor.RED + "Since there are less than 7 players online, your team has been suspended!");
+            player.sendMessage(ChatColor.GRAY + "It will resume once there are 7 players online again.");
+        }
+
         if (KitPvp.currentTeams.containsKey(player.getName())) {
             Player teammate = Bukkit.getServer().getPlayer(KitPvp.currentTeams.get(player.getName()));
             teammate.playSound(teammate.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);

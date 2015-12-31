@@ -95,11 +95,6 @@ commands:
   lockchat:
     description: Locks or unlocks the chat
     aliases: [lc, lchat]
-  duel:
-    description: Duel with another player
-    aliases: d
   team:
     description: Team up with another player
     aliases: ally
-  fire:
-    description: Fire

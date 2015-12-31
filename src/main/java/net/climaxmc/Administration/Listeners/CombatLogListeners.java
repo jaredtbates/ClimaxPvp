@@ -39,11 +39,15 @@ public class CombatLogListeners implements Listener {
             if (KitPvp.currentTeams.containsKey(damaged.getName()) || KitPvp.currentTeams.containsKey(damager.getName())) {
                 if (KitPvp.currentTeams.get(damaged.getName()) == damager.getName()
                         || KitPvp.currentTeams.get(damager.getName()) == damaged.getName()) {
-                    damaged.sendMessage(ChatColor.GREEN + "You were not damaged by " + ChatColor.AQUA + damager.getName()
-                            + ChatColor.GREEN + " because you are teamed!");
-                    damager.sendMessage(ChatColor.GREEN + "You did not deal damage to " + ChatColor.AQUA + damaged.getName()
-                            + ChatColor.GREEN + " because you are teamed!");
-                    event.setCancelled(true);
+                    if (plugin.getServer().getOnlinePlayers().size() >= 7) {
+                        damaged.sendMessage(ChatColor.GREEN + "You were not damaged by " + ChatColor.AQUA + damager.getName()
+                                + ChatColor.GREEN + " because you are teamed!");
+                        damager.sendMessage(ChatColor.GREEN + "You did not deal damage to " + ChatColor.AQUA + damaged.getName()
+                                + ChatColor.GREEN + " because you are teamed!");
+                        event.setCancelled(true);
+                    } else {
+                        event.setCancelled(false);
+                    }
                 } else {
                     event.setCancelled(false);
                 }
