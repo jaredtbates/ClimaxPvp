@@ -1,21 +1,8 @@
 package net.climaxmc.KitPvp.Menus;// AUTHOR: gamer_000 (10/29/2015)
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Commands.DuelCommand;
-import net.climaxmc.common.database.PlayerData;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import static org.bukkit.ChatColor.*;
 
 public class DuelsMenu {
 
@@ -24,7 +11,7 @@ public class DuelsMenu {
     private Inventory inv2;
 
     public DuelsMenu(ClimaxPvp plugin) {
-        this.plugin = plugin;
+        /*this.plugin = plugin;
         DuelCommand duelCommand = new DuelCommand(plugin);
 
         ArrayList<UUID> playersOnline = new ArrayList<UUID>();
@@ -139,15 +126,11 @@ public class DuelsMenu {
                     inv2.setItem(48, previousPage);
                 }
             }
-        }
+        }*/
     }
 
     public void openInventory(Player player) {
         player.openInventory(inv);
-    }
-
-    public void openInventory2(Player player) {
-        player.openInventory(inv2);
     }
 
 }

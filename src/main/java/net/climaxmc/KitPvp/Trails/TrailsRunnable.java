@@ -1,12 +1,6 @@
 package net.climaxmc.KitPvp.Trails;// AUTHOR: gamer_000 (12/26/2015)
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.KitPvp;
-import net.climaxmc.KitPvp.Utils.Particles.ParticleEffect2;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.UUID;
 
 public class TrailsRunnable {
 
@@ -16,7 +10,7 @@ public class TrailsRunnable {
         this.plugin = plugin;
     }
 
-    BukkitRunnable trails = new BukkitRunnable() {
+    /*BukkitRunnable trails = new BukkitRunnable() {
 
         @Override
         public void run() {
@@ -47,5 +41,5 @@ public class TrailsRunnable {
             return false;
         }
         return false;
-    }
+    }*/
 }

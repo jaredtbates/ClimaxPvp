@@ -4,7 +4,6 @@ import net.climaxmc.Administration.Commands.ChatCommands;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
-import net.climaxmc.KitPvp.Utils.Achievements.Achievement;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.donations.trails.ParticleEffect;
 import org.bukkit.ChatColor;
@@ -78,10 +77,10 @@ public class PlayerDeathListener implements Listener {
         PlayerData killerData = plugin.getPlayerData(killer);
         killerData.addKills(1);
         killer.sendMessage(ChatColor.GREEN + "You killed " + ChatColor.RED + player.getName());
-        if(playerData.getKills() == 1) {
+        /*if(playerData.getKills() == 1) {
             playerData.addAchievement(Achievement.FIRST_KILL);
             killer.sendMessage("You got the achievement: Fresh from the Pile");
-        }
+        }*/
 
         /*for (Challenge challenge : Challenge.values()) {
             if (plugin.getChallengesFiles().challengeIsStarted(killer, challenge)) {

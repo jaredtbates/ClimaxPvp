@@ -2,7 +2,6 @@ package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
-import net.climaxmc.KitPvp.Utils.Duels.DuelsUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -44,7 +43,7 @@ public class PlayerQuitListener implements Listener {
             }
         }
 
-        DuelsUtils.removeDuel(player);
+        //DuelsUtils.removeDuel(player);
 
         event.setQuitMessage(null/*ChatColor.RED + "Quit" + ChatColor.DARK_GRAY + "\u00bb " + player.getName()*/);
 

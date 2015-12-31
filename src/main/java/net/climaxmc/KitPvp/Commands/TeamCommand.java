@@ -101,7 +101,7 @@ public class TeamCommand implements CommandExecutor {
                         return false;
                     } else if (target.getUniqueId().equals(player.getUniqueId())) {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                        player.sendMessage(ChatColor.RED + "Team with yourself? How would that even work...");
+                        player.sendMessage(ChatColor.RED + " Team with yourself? How would that even work...");
                     } else {
                         if (teamUtils.hasPendingRequest(target)) {
                             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);

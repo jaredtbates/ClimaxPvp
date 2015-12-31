@@ -31,9 +31,9 @@ public class DuelsMessages {
         target.sendMessage(YELLOW + "             " + sender.getName() + AQUA + " has sent you a request to duel!");
         target.sendMessage(" ");
         BaseComponent component = tcm.centerTextSpacesLeft();
-        component.addExtra(tcm.teamAcceptButton());
+        component.addExtra(tcm.duelAcceptButton());
         component.addExtra(tcm.centerTextSpacesMiddle());
-        component.addExtra(tcm.teamDenyButton());
+        component.addExtra(tcm.duelDenyButton());
         target.spigot().sendMessage(component);
         target.sendMessage(GOLD + "     \u00AB" + WHITE + " ========================================" + GOLD + " \u00BB");
         target.sendMessage(" ");

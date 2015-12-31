@@ -1,8 +1,6 @@
 package net.climaxmc.KitPvp.Commands;// AUTHOR: gamer_000 (12/13/2015)
 
 import net.climaxmc.ClimaxPvp;
-import org.bukkit.ChatColor;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,10 +21,10 @@ public class GuildCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        if (command.getName().equalsIgnoreCase("guild")) {
+        /*if (command.getName().equalsIgnoreCase("guild")) {
             player.sendMessage(ChatColor.RED + "Hmm...");
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-        }
+        }*/
         return false;
     }
 }

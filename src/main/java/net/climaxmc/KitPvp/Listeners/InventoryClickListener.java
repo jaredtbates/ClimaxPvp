@@ -128,9 +128,7 @@ public class InventoryClickListener implements Listener {
                 }
 
                 event.setCancelled(true);
-            }
-
-            if (inventory.getName().equals("Select a Player to Duel")) {
+            } else if (inventory.getName().equals("Select a Player to Duel")) {
                 ItemStack clickedItem = event.getCurrentItem();
                 DuelsMessages duelsMessages = new DuelsMessages(plugin);
                 if (clickedItem.getType().equals(Material.SKULL_ITEM)) {
@@ -140,31 +138,27 @@ public class InventoryClickListener implements Listener {
                     player.closeInventory();
                 }
                 event.setCancelled(true);
-            }
-
-            if (inventory.getName().equals("Profile Menu")) {
+            } else if (inventory.getName().equals("Profile Menu")) {
                 ItemStack clickedItem = event.getCurrentItem();
                 if (clickedItem.getType().equals(Material.SKULL_ITEM)) {
                     player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1.4F);
                     player.sendMessage("  " + ChatColor.GOLD + "ClimaxMC Forums: " + ChatColor.AQUA + "https://forums.climaxmc.net/");
                 }
                 event.setCancelled(true);
-            }
-
-            if (inventory.getName().equals("Your Bank")) {
+            } else if (inventory.getName().equals("Your Bank")) {
                 ItemStack clickedItem = event.getCurrentItem();
                 if (clickedItem.getType() != null) {
                     event.setCancelled(true);
                 }
                 event.setCancelled(true);
-            }
-
-            if (inventory.getName().equals("Achievements")) {
+            } else if (inventory.getName().equals("Achievements")) {
                 ItemStack clickedItem = event.getCurrentItem();
                 if (clickedItem.getType() != null) {
                     event.setCancelled(true);
                 }
                 event.setCancelled(true);
+            } else {
+                return;
             }
         }
     }

@@ -3,12 +3,9 @@ package net.climaxmc.common.database;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import net.climaxmc.Administration.Punishments.Punishment;
-import net.climaxmc.KitPvp.Utils.Achievements.Achievement;
 import net.climaxmc.common.events.PlayerBalanceChangeEvent;
 import net.md_5.bungee.api.ChatColor;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Sound;
 
 import java.util.List;
 import java.util.Map;
@@ -20,9 +17,9 @@ public class PlayerData {
     private final MySQL mySQL;
     private final UUID uuid;
     private Rank rank;
-    private int balance, kills, deaths, duelKills, duelDeaths, duelStreak, gold, goldBlocks, diamonds, diamondBlocks, emeralds;
-    private String achievements, nickname, killEffect, killSound, trail;
-    private boolean dueling, duelRequests, teamRequests, privateMessaging;
+    private int balance, kills, deaths /*duelKills, duelDeaths, duelStreak, gold, goldBlocks, diamonds, diamondBlocks, emeralds*/;
+    private String /*achievements,*/ nickname /*killEffect, killSound, trail*/;
+    //private boolean dueling, duelRequests, teamRequests, privateMessaging;
     private List<Punishment> punishments;
 
     /**
@@ -227,7 +224,7 @@ public class PlayerData {
         mySQL.executeUpdate(MySQL.UPDATE_PUNISHMENT_TIME, 0, uuid.toString(), punishment.getType().name(), punishment.getTime());
     }
 
-    public void setDuelKills(int amount) {
+    /*public void setDuelKills(int amount) {
         mySQL.executeUpdate(MySQL.UPDATE_DUELDATA, "kills", Integer.toString(duelKills = amount), uuid);
     }
 
@@ -311,6 +308,6 @@ public class PlayerData {
                 setAchievements(achievement.toString());
             }
         }
-    }
+    }*/
 
 }

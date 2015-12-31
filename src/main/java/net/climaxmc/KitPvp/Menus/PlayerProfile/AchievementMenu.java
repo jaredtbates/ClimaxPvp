@@ -1,17 +1,7 @@
 package net.climaxmc.KitPvp.Menus.PlayerProfile;// AUTHOR: gamer_000 (12/23/2015)
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Utils.Achievements.Achievement;
-import net.climaxmc.KitPvp.Utils.I;
-import net.climaxmc.common.database.PlayerData;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 public class AchievementMenu implements Listener {
     private ClimaxPvp plugin;
@@ -20,7 +10,7 @@ public class AchievementMenu implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    /*@EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         ItemStack item = event.getCurrentItem();
@@ -68,10 +58,10 @@ public class AchievementMenu implements Listener {
                             }
                         }
                     }
-                    player.openInventory(achievementMenu);
+                    //player.openInventory(achievementMenu);
                 }
             }
         }
-    }
+    }*/
 
 }

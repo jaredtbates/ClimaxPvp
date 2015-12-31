@@ -1,13 +1,7 @@
 package net.climaxmc.KitPvp.Commands;// AUTHOR: gamer_000 (10/25/2015)
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Menus.DuelsMenu;
-import net.climaxmc.KitPvp.Utils.Duels.Duel;
 import net.climaxmc.KitPvp.Utils.Duels.DuelsMessages;
-import net.climaxmc.KitPvp.Utils.Duels.DuelsUtils;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,7 +23,7 @@ public class DuelCommand implements CommandExecutor {
         Player player = (Player) sender;
         DuelsMessages duelsMessages = new DuelsMessages(plugin);
 
-        if (command.getName().equalsIgnoreCase("duel")) {
+        /*if (command.getName().equalsIgnoreCase("duel")) {
             if (args.length > 2 || args.length == 0) {
                 player.sendMessage(ChatColor.RED + " Incorrect Usage! Try this: /duel [<player>, accept, deny, list]");
                 player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
@@ -85,7 +79,7 @@ public class DuelCommand implements CommandExecutor {
                     }
                 }
             }
-        }
+        }*/
         return false;
     }
 }

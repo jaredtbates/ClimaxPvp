@@ -9,7 +9,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 public class TextComponentMessages {
 
     public TextComponent centerTextSpacesLeft() {
-        TextComponent spaces = new TextComponent("                    ");
+        TextComponent spaces = new TextComponent("                           ");
         return spaces;
     }
 
