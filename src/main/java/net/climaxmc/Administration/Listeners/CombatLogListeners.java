@@ -46,10 +46,10 @@ public class CombatLogListeners implements Listener {
                                 + ChatColor.GREEN + " because you are teamed!");
                         event.setCancelled(true);
                     } else {
-                        event.setCancelled(false);
+                        return;
                     }
                 } else {
-                    event.setCancelled(false);
+                    return;
                 }
             }
 
