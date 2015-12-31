@@ -57,7 +57,7 @@ public class TeamCommand implements CommandExecutor {
                     } else if (args[0].equalsIgnoreCase("leave")) {
                         if (!teamUtils.isTeaming(player)) {
                             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                            player.sendMessage(ChatColor.RED + " You are not in a team!");
+                            player.sendMessage(ChatColor.RED + " You are not on a team!");
                         } else {
                             if (KitPvp.currentTeams.containsKey(player.getName())) {
                                 Player teammate = Bukkit.getServer().getPlayer(KitPvp.currentTeams.get(player.getName()));
