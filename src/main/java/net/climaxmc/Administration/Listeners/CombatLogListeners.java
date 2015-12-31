@@ -45,11 +45,7 @@ public class CombatLogListeners implements Listener {
                         damager.sendMessage(ChatColor.GREEN + "You did not deal damage to " + ChatColor.AQUA + damaged.getName()
                                 + ChatColor.GREEN + " because you are teamed!");
                         event.setCancelled(true);
-                    } else {
-                        return;
                     }
-                } else {
-                    return;
                 }
             }
 
