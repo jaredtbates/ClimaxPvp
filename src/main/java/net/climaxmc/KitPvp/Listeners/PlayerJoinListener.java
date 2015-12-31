@@ -49,6 +49,10 @@ public class PlayerJoinListener implements Listener {
                             + "Appeal on forum.climaxmc.net if you believe that this is in error!");
                 }
             });
+
+            if (playerData.hasRank(Rank.OWNER)) {
+                return;
+            }
         }
 
         try {
