@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 public class DuelsUtils {
     public static void createDuel(Player sender, Player target) {
@@ -12,13 +13,22 @@ public class DuelsUtils {
     }
 
     public static void removeDuel(Player target) {
-            Iterator<Duel> pendingDuelsIterator = KitPvp.duels.iterator();
-            while (pendingDuelsIterator.hasNext()) {
-                Duel pendingDuel = pendingDuelsIterator.next();
-                if (pendingDuel.getPlayer1UUID().equals(target.getUniqueId()) || pendingDuel.getPlayer2UUID().equals(target.getUniqueId())) {
-                    pendingDuelsIterator.remove();
-                }
+        Iterator<Duel> pendingDuelsIterator = KitPvp.duels.iterator();
+        while (pendingDuelsIterator.hasNext()) {
+            Duel pendingDuel = pendingDuelsIterator.next();
+            if (pendingDuel.getPlayer1UUID().equals(target.getUniqueId()) || pendingDuel.getPlayer2UUID().equals(target.getUniqueId())) {
+                pendingDuelsIterator.remove();
             }
+        }
+    }
+
+    public static Duel getDuel(Player target) {
+        Optional<Duel> duelOptional = KitPvp.duels.stream().filter(duel -> (duel.getPlayer1UUID().equals(target.getUniqueId()) || duel.getPlayer2UUID().equals(target.getUniqueId()) && duel.isAccepted())).findFirst();
+        if (duelOptional.isPresent()) {
+            return duelOptional.get();
+        } else {
+            return null;
+        }
     }
 
     public static void startDuel(Duel duel) {
@@ -26,12 +36,7 @@ public class DuelsUtils {
     }
 
     public static boolean hasPendingDuel(Player target) {
-        for (Duel pendingDuel : KitPvp.duels) {
-            if ((pendingDuel.getPlayer1UUID().equals(target.getUniqueId()) || pendingDuel.getPlayer2UUID().equals(target.getUniqueId()))) {
-                return true;
-            }
-        }
-        return false;
+        return getDuel(target) != null;
     }
 
     public static boolean isInDuel(Player target) {

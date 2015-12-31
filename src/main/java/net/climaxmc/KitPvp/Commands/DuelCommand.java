@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Commands;// AUTHOR: gamer_000 (10/25/2015)
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Menus.DuelsMenu;
+import net.climaxmc.KitPvp.Utils.Duels.Duel;
 import net.climaxmc.KitPvp.Utils.Duels.DuelsMessages;
 import net.climaxmc.KitPvp.Utils.Duels.DuelsUtils;
 import org.bukkit.Bukkit;
@@ -36,12 +37,11 @@ public class DuelCommand implements CommandExecutor {
             }
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("accept")) {
-                    if (DuelsUtils.hasPendingDuel(player)) {
+                    Duel duel = DuelsUtils.getDuel(player);
+                    if (duel != null) {
                         Player duelSender = DuelsUtils.getDuelRequester(player);
                         duelsMessages.sendDuelAcceptMessage(player, duelSender);
-                        DuelsUtils.removeDuel(player);
-                        DuelsUtils.createDuel(player, duelSender);
-                        // TODO: Start Duel
+                        duel.setAccepted(true);
                     } else {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                         player.sendMessage(ChatColor.RED + " You do not have a pending duel request!");
