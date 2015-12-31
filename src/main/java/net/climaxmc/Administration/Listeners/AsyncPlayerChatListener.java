@@ -60,7 +60,7 @@ public class AsyncPlayerChatListener implements Listener {
             //event.setFormat((color == null ? "" : color) + " " + ChatColor.BOLD + "" + rank.getPrefix() + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
             event.setFormat(level + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "{" + (color == null ? "" : color) + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
         } else {
-            event.setFormat(playerData.getLevelColor() + " %s" + ChatColor.RESET + ": "/*\u00BB " + ChatColor.GRAY*/ + "%s");
+            event.setFormat(level + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": "/*\u00BB " + ChatColor.GRAY*/ + "%s");
         }
 
         /*if (StringUtils.containsIgnoreCase(event.getMessage(), "apply") && StringUtils.containsIgnoreCase(event.getMessage(), "staff")) {
