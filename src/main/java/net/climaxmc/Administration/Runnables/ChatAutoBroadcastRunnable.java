@@ -1,5 +1,6 @@
 package net.climaxmc.Administration.Runnables;
 
+import net.climaxmc.Administration.Commands.ChatCommands;
 import net.climaxmc.ClimaxPvp;
 import net.md_5.bungee.api.ChatColor;
 
@@ -17,8 +18,10 @@ public class ChatAutoBroadcastRunnable implements Runnable {
             amount = 0;
         }
 
-        plugin.getServer().broadcastMessage(" ");
-        plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("ChatAutoBroadcast.Messages").get(amount++)));
-        plugin.getServer().broadcastMessage(" ");
+        if (ChatCommands.chatSilenced == false) {
+            plugin.getServer().broadcastMessage(" ");
+            plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("ChatAutoBroadcast.Messages").get(amount++)));
+            plugin.getServer().broadcastMessage(" ");
+        }
     }
 }

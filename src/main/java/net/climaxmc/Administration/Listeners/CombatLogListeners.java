@@ -1,5 +1,6 @@
 package net.climaxmc.Administration.Listeners;
 
+import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.ChatColor;
@@ -47,6 +48,10 @@ public class CombatLogListeners implements Listener {
                         event.setCancelled(true);
                     }
                 }
+            }
+
+            if (VanishCommand.getVanished().contains(damaged)) {
+                event.setCancelled(true);
             }
 
             if (!KitPvp.currentTeams.containsKey(damaged.getName()) || !KitPvp.currentTeams.containsKey(damager.getName())) {

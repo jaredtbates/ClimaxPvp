@@ -1,8 +1,12 @@
 package net.climaxmc.KitPvp.Kits;
 
+import net.climaxmc.Administration.Commands.CheckCommand;
+import net.climaxmc.Administration.Commands.VanishCommand;
+import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -17,8 +21,12 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 public class WitherKit extends Kit {
-    public WitherKit() {
+
+    private ClimaxPvp plugin;
+
+    public WitherKit(ClimaxPvp plugin) {
         super("Wither", new ItemStack(Material.SKULL_ITEM, 1, (byte) 1), "Shoot your WitherBow to Launch your Wither Head!", ChatColor.RED);
+        this.plugin = plugin;
     }
 
     protected void wear(Player player) {
@@ -85,11 +93,20 @@ public class WitherKit extends Kit {
             Player target = (Player) event.getEntity();
             if (event.getDamager() instanceof WitherSkull) {
                 event.setCancelled(true);
-                target.damage(5);
-                Vector vector = target.getEyeLocation().getDirection();
-                vector.multiply(-0.5F);
-                vector.setY(-0.2);
-                target.setVelocity(vector);
+                if (!VanishCommand.getVanished().contains(target.getUniqueId()) && !CheckCommand.getChecking().contains(target.getUniqueId())) {
+                    target.damage(5);
+                    Vector vector = target.getEyeLocation().getDirection();
+                    vector.multiply(-0.5F);
+                    vector.setY(-0.2);
+                    target.setVelocity(vector);
+                }
+                Location location = target.getLocation();
+                if (location.distance(location.getWorld().getSpawnLocation()) <= 16
+                        || location.distance(plugin.getWarpLocation("Soup")) <= 12
+                        || location.distance(plugin.getWarpLocation("Fair")) <= 4
+                        || location.distance(plugin.getWarpLocation("Fps")) <= 3) {
+                    return;
+                }
             }
         }
     }
@@ -106,7 +123,9 @@ public class WitherKit extends Kit {
                 Player damaged = (Player) event.getEntity();
                 if (KitManager.isPlayerInKit(player, this)) {
                     if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
-                        damaged.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 80, 1));
+                        if (!VanishCommand.getVanished().contains(damaged.getUniqueId()) && !CheckCommand.getChecking().contains(damaged.getUniqueId())) {
+                            damaged.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 80, 1));
+                        }
                     }
                 }
             }

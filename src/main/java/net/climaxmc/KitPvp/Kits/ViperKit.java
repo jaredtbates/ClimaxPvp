@@ -1,5 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
+import net.climaxmc.Administration.Commands.CheckCommand;
+import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import org.bukkit.ChatColor;
@@ -70,7 +72,9 @@ public class ViperKit extends Kit {
                 Player damaged = (Player) event.getEntity();
                 if (KitManager.isPlayerInKit(player, this)) {
                     if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
-                        damaged.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 120, 1));
+                        if (!VanishCommand.getVanished().contains(damaged.getUniqueId()) && !CheckCommand.getChecking().contains(damaged.getUniqueId())) {
+                            damaged.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 120, 1));
+                        }
                     }
                 }
             }

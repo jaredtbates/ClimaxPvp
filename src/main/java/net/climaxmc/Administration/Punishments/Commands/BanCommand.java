@@ -40,7 +40,7 @@ public class BanCommand implements CommandExecutor {
         PlayerData targetData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(args[0]));
 
         if (targetData == null) {
-            player.sendMessage(ChatColor.RED + "That player has never joined!");
+            player.sendMessage(ChatColor.RED + "That player doesn't exist!");
             return true;
         }
 
@@ -52,12 +52,18 @@ public class BanCommand implements CommandExecutor {
         final String finalReason = reason;
 
         targetData.addPunishment(new Punishment(targetData.getUuid(), Punishment.PunishType.BAN, System.currentTimeMillis(), -1, playerData.getUuid(), reason));
-        plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName() + " permanently banned " + plugin.getServer().getPlayer(targetData.getUuid()).getName() + " for " + finalReason + "."));
+        plugin.getServer().getOnlinePlayers().stream().filter(staff ->
+                plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
+                staff.sendMessage(ChatColor.RED + player.getName() + " permanently banned "
+                        + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for " + finalReason));
 
         Player target = Bukkit.getPlayer(targetData.getUuid());
         if (target != null) {
-            target.kickPlayer(ChatColor.RED + "You were permanently banned by " + player.getName() + " for " + reason + ".\n"
+            target.kickPlayer(ChatColor.RED + "You were permanently banned by " + player.getName() + " for " + reason + "\n"
                     + "Appeal on forum.climaxmc.net if you believe that this is in error!");
+        } else {
+            player.sendMessage(ChatColor.GREEN + "Offline player " + ChatColor.GOLD + plugin.getServer().getOfflinePlayer(args[0]).getName()
+                    + ChatColor.GREEN + " successfully banned.");
         }
 
         return true;

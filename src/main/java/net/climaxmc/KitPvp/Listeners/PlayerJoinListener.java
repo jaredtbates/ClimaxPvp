@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp.Listeners;
 
+import net.climaxmc.Administration.Commands.ChatCommands;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
@@ -17,9 +18,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
@@ -104,6 +103,10 @@ public class PlayerJoinListener implements Listener {
             plugin.getServer().broadcastMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "We have reached a new high player count of " + playersOnline + "!");
             plugin.getConfig().set("HighestPlayerCount", playersOnline);
             plugin.saveConfig();
+        }
+
+        if (ChatCommands.cmdspies.contains(player.getUniqueId()) && !playerData.hasRank(Rank.HELPER)) {
+            ChatCommands.cmdspies.remove(player.getUniqueId());
         }
 
         ScoreboardManager manager = Bukkit.getScoreboardManager();

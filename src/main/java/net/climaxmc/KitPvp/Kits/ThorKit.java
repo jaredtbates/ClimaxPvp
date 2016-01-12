@@ -1,5 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
+import net.climaxmc.Administration.Commands.CheckCommand;
+import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.Ability;
@@ -78,9 +80,11 @@ public class ThorKit extends Kit {
                             return;
                         }
                         event.setCancelled(true);
-                        target.getWorld().strikeLightning(target.getLocation());
-                        event.setCancelled(true);
-                        target.damage(7);
+                        if (!VanishCommand.getVanished().contains(target.getUniqueId()) && !CheckCommand.getChecking().contains(target.getUniqueId())) {
+                            target.getWorld().strikeLightning(target.getLocation());
+                            event.setCancelled(true);
+                            target.damage(7);
+                        }
                     }
                 }
             }

@@ -77,12 +77,16 @@ public class TempMuteCommand implements CommandExecutor {
         final String finalReason = reason;
         final long finalTime = time;
         targetData.addPunishment(new Punishment(targetData.getUuid(), Punishment.PunishType.MUTE, System.currentTimeMillis(), time, playerData.getUuid(), reason));
-        plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName() + " temporarily muted " + plugin.getServer().getPlayer(targetData.getUuid()).getName() + " for " + Time.toString(finalTime) + " for " + finalReason + "."));
+        plugin.getServer().getOnlinePlayers().stream().filter(staff ->
+                plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
+                staff.sendMessage(ChatColor.RED + player.getName() + " temporarily muted "
+                        + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED
+                        + " for " + Time.toString(finalTime) + " for " + finalReason));
 
         Player target = Bukkit.getPlayer(targetData.getUuid());
         if (target != null) {
-            target.sendMessage(ChatColor.RED + "You were temporarily muted by " + player.getName() + " for " + Time.toString(time) + " for " + reason + ".\n"
-                    + "Appeal on forum.climaxmc.net if you believe that this is in error!");
+            target.sendMessage(ChatColor.RED + "You were temporarily muted by " + player.getName() + " for " + Time.toString(time) + " for " + reason + "\n"
+                    + "Appeal on forum.climaxmc.net if you believe that this is an error!");
         }
 
         return true;

@@ -4,7 +4,6 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.Particles.TNTParticle;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -150,7 +149,7 @@ public class BomberKit extends Kit {
 
     @EventHandler
     public void onExplosion(EntityExplodeEvent event) {
-        event.setCancelled(false); // This should fisx the bomber issue! It should also enable damage from tnt!
+        event.setCancelled(false); // This should fix the bomber issue! It should also enable damage from tnt!
         event.getLocation().getWorld().createExplosion(event.getLocation().getX(), event.getLocation().getY(), event.getLocation().getZ(), 4, false, false);
     }
 

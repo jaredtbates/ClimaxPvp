@@ -26,7 +26,7 @@ public class NicknameCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (!playerData.hasRank(Rank.TITAN)) {
-            player.sendMessage(ChatColor.RED + "Please donate for Master at https://donate.climaxmc.net for access to this perk!");
+            player.sendMessage(ChatColor.RED + "Please donate for Master at donate.climaxmc.net for access to this perk!");
             return true;
         }
 
@@ -51,33 +51,29 @@ public class NicknameCommand implements CommandExecutor {
                 target.setDisplayName(nickname);
                 targetData.setNickname(nickname);
                 player.sendMessage(ChatColor.GREEN + target.getName() + "'s nickname has been set to " + nickname + ChatColor.GREEN + "!");
-
                 return true;
             }
-        }
-
-        if (args.length != 1) {
+        } else if (args.length == 1) {
+            if (args[0].length() >= 32) {
+                player.sendMessage(ChatColor.RED + "You cannot have a nickname longer than 32 characters!");
+                return true;
+            } else if (args[0].equalsIgnoreCase("off")) {
+                player.sendMessage(ChatColor.GREEN + "Your nickname has been disabled!");
+                player.setDisplayName(null);
+                playerData.setNickname(null);
+                return true;
+            } else {
+                String nickname = ChatColor.translateAlternateColorCodes('&', args[0]);
+                player.setDisplayName(nickname);
+                playerData.setNickname(nickname);
+                player.sendMessage(ChatColor.GREEN + "Your nickname has been set to " + nickname + ChatColor.GREEN + "!");
+                return true;
+            }
+        } else {
             player.sendMessage(ChatColor.RED + "/" + label + " <nickname/off>");
             return true;
         }
 
-        if (args[0].length() >= 32) {
-            player.sendMessage(ChatColor.RED + "You cannot have a nickname longer than 32 characters!");
-            return true;
-        }
-
-        if (args[0].equalsIgnoreCase("off")) {
-            player.sendMessage(ChatColor.GREEN + "Your nickname has been disabled!");
-            player.setDisplayName(null);
-            playerData.setNickname(null);
-            return true;
-        }
-
-        String nickname = ChatColor.translateAlternateColorCodes('&', args[0]);
-        player.setDisplayName(nickname);
-        playerData.setNickname(nickname);
-        player.sendMessage(ChatColor.GREEN + "Your nickname has been set to " + nickname + ChatColor.GREEN + "!");
-
-        return true;
+        return false;
     }
 }

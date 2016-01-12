@@ -56,7 +56,7 @@ public class KitManager implements Listener {
 
         // Red Kits
         kits.add(new BlazeKit());
-        kits.add(new WitherKit());
+        kits.add(new WitherKit(plugin));
         kits.add(new RageKit());
         kits.add(new ViperKit());
         kits.add(new VikingKit());
