@@ -2,7 +2,10 @@ package net.climaxmc.KitPvp.Utils.Teams;// AUTHOR: gamer_000 (11/22/2015)
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.util.Map;
 
 public class TeamUtils {
     private ClimaxPvp plugin;
@@ -27,6 +30,10 @@ public class TeamUtils {
         return KitPvp.pendingTeams.containsKey(target.getName());
     }
 
+    public boolean hasRequested(Player player) {
+        return KitPvp.pendingTeams.containsValue(player.getName());
+    }
+
     public static void createTeam(Player target, Player sender) {
         KitPvp.currentTeams.put(target.getName(), sender.getName());
         removePendingRequest(target);
@@ -40,14 +47,24 @@ public class TeamUtils {
         }
     }
 
-    public boolean isTeaming(Player target) {
-        for (Player sender : plugin.getServer().getOnlinePlayers()) {
-            return KitPvp.currentTeams.containsKey(target.getName());
-        }
-        return false;
+    public boolean isOnTeam(Player target) {
+        return KitPvp.currentTeams.containsKey(target.getName());
+    }
+
+    public boolean isTeaming(Player player) {
+        return KitPvp.currentTeams.containsValue(player.getName());
     }
 
     public Player getRequester(Player target) {
         return plugin.getServer().getPlayer(KitPvp.pendingTeams.get(target.getName()));
+    }
+
+    public Player getTeammate(Player player) {
+        for (Map.Entry<String, String> entry : KitPvp.currentTeams.entrySet()) {
+            if (entry.getValue().equals(player.getName())) {
+                return Bukkit.getServer().getPlayer(entry.getKey());
+            }
+        }
+        return null;
     }
 }

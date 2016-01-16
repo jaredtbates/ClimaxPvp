@@ -34,24 +34,43 @@ public class InventoryClickListener implements Listener {
         if (player.getGameMode().equals(GameMode.CREATIVE)) {
             event.setCancelled(false);
             return;
-        }
+        } else {
+            if (event.getClickedInventory() == null) {
+                event.setCancelled(false);
+                return;
+            }
+            if (event.getSlotType() == null) {
+                event.setCancelled(false);
+                return;
+            }
+            for (ItemStack itemStack : player.getInventory().getArmorContents()) {
+                if (itemStack == null) {
+                    event.setCancelled(true);
+                }
+                if (event.getCurrentItem().equals(itemStack)) {
+                    event.setCancelled(true);
+                }
+            }
 
-        for (ItemStack itemStack : player.getInventory().getArmorContents()) {
-            if (event.getCurrentItem().equals(itemStack)) {
+            if (event.getClickedInventory().equals(player.getInventory()) && !event.getCurrentItem().equals(Material.MUSHROOM_SOUP)) {
                 event.setCancelled(true);
             }
-        }
 
-        if ((KitManager.isPlayerInKit(player, BomberKit.class) && event.getAction().equals(InventoryAction.HOTBAR_SWAP)) || event.getCursor().getType().equals(Material.TNT) || event.getCurrentItem().getType().equals(Material.TNT)) {
-            event.setCancelled(true);
-        }
+            if ((KitManager.isPlayerInKit(player, BomberKit.class)
+                    && event.getAction().equals(InventoryAction.HOTBAR_SWAP))
+                    || event.getCursor().getType().equals(Material.TNT)
+                    || event.getCurrentItem().getType().equals(Material.TNT)) {
+                event.setCancelled(true);
+            }
 
-        if (inventory != null && event.getCurrentItem() != null && event.getCurrentItem().getItemMeta() != null && event.getCurrentItem().getItemMeta().getDisplayName() != null) {
-            if (inventory.getName().equals(ChatColor.RED + "" + ChatColor.BOLD + "Kit Selector")) {
-                for (Kit kit : KitManager.getKits()) {
-                    if (event.getCurrentItem().getItemMeta().getDisplayName().equals(kit.getItem().getItemMeta().getDisplayName())) {
-                        kit.wearCheckLevel(player);
-                        plugin.getServer().getScheduler().runTask(plugin, player::closeInventory);
+            if (inventory != null && event.getCurrentItem() != null && event.getCurrentItem().getItemMeta() != null
+                    && event.getCurrentItem().getItemMeta().getDisplayName() != null) {
+                if (inventory.getName().equals(ChatColor.RED + "" + ChatColor.BOLD + "Kit Selector")) {
+                    for (Kit kit : KitManager.getKits()) {
+                        if (event.getCurrentItem().getItemMeta().getDisplayName().equals(kit.getItem().getItemMeta().getDisplayName())) {
+                            kit.wearCheckLevel(player);
+                            plugin.getServer().getScheduler().runTask(plugin, player::closeInventory);
+                        }
                     }
                     event.setCancelled(true);
                 }
@@ -128,7 +147,9 @@ public class InventoryClickListener implements Listener {
                 }
 
                 event.setCancelled(true);
-            } else if (inventory.getName().equals("Select a Player to Duel")) {
+            }
+
+            if (inventory.getName().equals("Select a Player to Duel")) {
                 ItemStack clickedItem = event.getCurrentItem();
                 DuelsMessages duelsMessages = new DuelsMessages(plugin);
                 if (clickedItem.getType().equals(Material.SKULL_ITEM)) {
@@ -138,27 +159,25 @@ public class InventoryClickListener implements Listener {
                     player.closeInventory();
                 }
                 event.setCancelled(true);
-            } else if (inventory.getName().equals("Profile Menu")) {
+            }
+
+            if (inventory.getName().equals("Profile Menu")) {
                 ItemStack clickedItem = event.getCurrentItem();
                 if (clickedItem.getType().equals(Material.SKULL_ITEM)) {
                     player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1.4F);
                     player.sendMessage("  " + ChatColor.GOLD + "ClimaxMC Forums: " + ChatColor.AQUA + "https://forums.climaxmc.net/");
+                    player.closeInventory();
                 }
                 event.setCancelled(true);
-            } else if (inventory.getName().equals("Your Bank")) {
-                ItemStack clickedItem = event.getCurrentItem();
-                if (clickedItem.getType() != null) {
-                    event.setCancelled(true);
-                }
+            }
+
+            if (inventory.getName().equals("Your Bank")) {
                 event.setCancelled(true);
-            } else if (inventory.getName().equals("Achievements")) {
-                ItemStack clickedItem = event.getCurrentItem();
-                if (clickedItem.getType() != null) {
-                    event.setCancelled(true);
-                }
+            }
+
+            if (inventory.getName().equals("Achievements")) {
+
                 event.setCancelled(true);
-            } else {
-                return;
             }
         }
     }

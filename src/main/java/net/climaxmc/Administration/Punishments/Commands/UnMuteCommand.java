@@ -30,7 +30,7 @@ public class UnMuteCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (!playerData.hasRank(Rank.HELPER)) {
-            player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
+            player.sendMessage(ChatColor.RED + "You do not have permission to execute this command!");
             return true;
         }
 
@@ -42,7 +42,7 @@ public class UnMuteCommand implements CommandExecutor {
         PlayerData targetData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(args[0]));
 
         if (targetData == null) {
-            player.sendMessage(ChatColor.RED + "That player has never joined!");
+            player.sendMessage(ChatColor.RED + "That player is not online or doesn't exist!");
             return true;
         }
 

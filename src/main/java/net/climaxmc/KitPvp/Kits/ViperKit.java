@@ -4,6 +4,7 @@ import net.climaxmc.Administration.Commands.CheckCommand;
 import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -69,11 +70,14 @@ public class ViperKit extends Kit {
         if (event.getDamager() instanceof Player) {
             Player player = (Player) event.getDamager();
             if (event.getEntity() instanceof Player) {
-                Player damaged = (Player) event.getEntity();
+                Player target = (Player) event.getEntity();
                 if (KitManager.isPlayerInKit(player, this)) {
                     if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
-                        if (!VanishCommand.getVanished().contains(damaged.getUniqueId()) && !CheckCommand.getChecking().contains(damaged.getUniqueId())) {
-                            damaged.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 120, 1));
+                        if (!VanishCommand.getVanished().contains(target.getUniqueId())
+                                && !CheckCommand.getChecking().contains(target.getUniqueId())
+                                && (KitPvp.currentTeams.get(player.getName()) != target.getName()
+                                && KitPvp.currentTeams.get(target.getName()) != player.getName())) {
+                            target.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 120, 1));
                         }
                     }
                 }

@@ -40,6 +40,6 @@ public class Donations {
         }
         voteReceiver.start();*/
 
-        new DonationsChecker(plugin);
+        //new DonationsChecker(plugin);
     }
 }

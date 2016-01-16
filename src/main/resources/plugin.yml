@@ -80,8 +80,6 @@ commands:
     description: Unban a player
   mute:
     description: Mute a player
-  tempmute:
-    description: Temporarily mute a player
   unmute:
     description: Unmute a player
   kick:
@@ -98,3 +96,12 @@ commands:
   team:
     description: Team up with another player
     aliases: ally
+  staff:
+    description: Staff chat
+    aliases: s
+  checkPending:
+    description: checks pending teams
+    aliases: cp
+  checkTeaming:
+      description: checks teams
+      aliases: ct

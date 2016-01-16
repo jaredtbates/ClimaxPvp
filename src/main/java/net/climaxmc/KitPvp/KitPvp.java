@@ -8,6 +8,7 @@ import net.climaxmc.KitPvp.Commands.Economy.PayCommand;
 import net.climaxmc.KitPvp.Commands.*;
 import net.climaxmc.KitPvp.Commands.Messaging.MessageCommand;
 import net.climaxmc.KitPvp.Commands.Messaging.ReplyCommand;
+import net.climaxmc.KitPvp.Commands.Messaging.StaffChat;
 import net.climaxmc.KitPvp.Listeners.*;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
 import org.bukkit.Bukkit;
@@ -77,5 +78,6 @@ public class KitPvp {
         plugin.getCommand("pei").setExecutor(new PeiCommand());
         //plugin.getCommand("duel").setExecutor(new DuelCommand(plugin));
         plugin.getCommand("team").setExecutor(new TeamCommand(plugin));
+        plugin.getCommand("staff").setExecutor(new StaffChat(plugin));
     }
 }

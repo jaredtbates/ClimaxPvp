@@ -4,6 +4,7 @@ import net.climaxmc.Administration.Commands.CheckCommand;
 import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.Ability;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -105,10 +106,13 @@ public class GhastKit extends Kit {
             if (event.getDamager() instanceof Fireball) {
                 Fireball f = (Fireball) event.getDamager();
                 if (f.getShooter() instanceof Player) {
-                    if (!VanishCommand.getVanished().contains(target.getUniqueId()) && !CheckCommand.getChecking().contains(target.getUniqueId())) {
+                    if (!VanishCommand.getVanished().contains(target.getUniqueId())
+                            && !CheckCommand.getChecking().contains(target.getUniqueId())
+                            && (KitPvp.currentTeams.get(target.getName()) != ((Player) f.getShooter()).getName()
+                            && KitPvp.currentTeams.get(((Player) f.getShooter()).getName()) != target.getName())) {
                         event.setDamage(23);
-                        target.setVelocity(target.getVelocity().setY(1));
                     }
+                    target.setVelocity(target.getVelocity().setY(1));
                 }
             }
         }

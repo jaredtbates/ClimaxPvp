@@ -5,6 +5,7 @@ import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -93,7 +94,10 @@ public class WitherKit extends Kit {
             Player target = (Player) event.getEntity();
             if (event.getDamager() instanceof WitherSkull) {
                 event.setCancelled(true);
-                if (!VanishCommand.getVanished().contains(target.getUniqueId()) && !CheckCommand.getChecking().contains(target.getUniqueId())) {
+                if (!VanishCommand.getVanished().contains(target.getUniqueId())
+                        && !CheckCommand.getChecking().contains(target.getUniqueId())
+                        && (KitPvp.currentTeams.get(event.getDamager().getName()) != target.getName()
+                        && KitPvp.currentTeams.get(target.getName()) != event.getDamager().getName())) {
                     target.damage(5);
                     Vector vector = target.getEyeLocation().getDirection();
                     vector.multiply(-0.5F);
