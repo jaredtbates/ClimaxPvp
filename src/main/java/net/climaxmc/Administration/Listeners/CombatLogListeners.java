@@ -40,13 +40,13 @@ public class CombatLogListeners implements Listener {
             if ((KitPvp.currentTeams.containsKey(damaged.getName()) || KitPvp.currentTeams.containsKey(damager.getName()))
                     && (KitPvp.currentTeams.get(damaged.getName()) == damager.getName()
                     || KitPvp.currentTeams.get(damager.getName()) == damaged.getName())) {
-                //if (plugin.getServer().getOnlinePlayers().size() >= 7) {
+                if (plugin.getServer().getOnlinePlayers().size() >= 7) {
                 damaged.sendMessage(ChatColor.GREEN + "You were not damaged by " + ChatColor.AQUA + damager.getName()
                         + ChatColor.GREEN + " because you are teamed!");
                 damager.sendMessage(ChatColor.GREEN + "You did not deal damage to " + ChatColor.AQUA + damaged.getName()
                         + ChatColor.GREEN + " because you are teamed!");
                 event.setCancelled(true);
-                //}
+                }
             } else {
                 if (!tagged.containsKey(damaged.getUniqueId())) {
                     damaged.sendMessage(ChatColor.GRAY + "You are now in combat with " + ChatColor.GOLD + damager.getName() + ChatColor.GRAY + ".");
