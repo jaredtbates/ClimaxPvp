@@ -31,7 +31,7 @@ public class TeamCommand implements CommandExecutor {
         if (plugin.getServer().getOnlinePlayers().size() > 7) {
             if (args.length > 1 || args.length == 0) {
                 player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                player.sendMessage(ChatColor.RED + " Incorrect Usage! Try this: /team <accept/deny/[player]>");
+                player.sendMessage(ChatColor.RED + " Incorrect Usage! Try this: /team <[player]/accept/deny/leave>");
             } else {
                 if (args[0].equalsIgnoreCase("accept")) {
                     if (teamUtils.hasPendingRequest(player)) {
@@ -65,17 +65,14 @@ public class TeamCommand implements CommandExecutor {
                                     teammate = plugin.getServer().getPlayer(possibleTeammate);
                                 }
                             }
-                            if (teammate == null) {
-                                player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                                player.sendMessage(ChatColor.RED + " You are not in a team!");
-                                return false;
+                            if (teammate != null) {
+                                teammate.playSound(teammate.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
+                                teammate.sendMessage(ChatColor.RED + " " + player.getName() + " has left the team. Therefore, the team has been disbanded!");
+                                KitPvp.currentTeams.remove(teammate.getName());
                             }
-                            teammate.playSound(teammate.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
                             player.playSound(player.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
-                            teammate.sendMessage(ChatColor.RED + " " + player.getName() + " has left the team. Therefore, the team has been disbanded!");
                             player.sendMessage(ChatColor.RED + " You have left the team. Therefore, the team has been disbanded!");
                             KitPvp.currentTeams.remove(player.getName());
-                            KitPvp.currentTeams.remove(teammate.getName());
                         } else if (KitPvp.currentTeams.values().contains(player.getName())) {
                             KitPvp.currentTeams.keySet().stream().filter(key -> KitPvp.currentTeams.get(key).equalsIgnoreCase(player.getName())).forEach(key -> {
                                 Player teammate = Bukkit.getServer().getPlayer(KitPvp.currentTeams.get(key));
