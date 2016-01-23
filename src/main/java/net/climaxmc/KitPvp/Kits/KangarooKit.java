@@ -81,9 +81,6 @@ public class KangarooKit extends Kit {
         fwmeta.setDisplayName(ChatColor.GOLD + "Kangaroo Ability");
         firework.setItemMeta(fwmeta);
         player.getInventory().addItem(firework);
-        ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
-        fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(fishingRod);
     }
 
     @EventHandler

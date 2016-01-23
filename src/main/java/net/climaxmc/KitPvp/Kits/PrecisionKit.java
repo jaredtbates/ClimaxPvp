@@ -57,9 +57,6 @@ public class PrecisionKit extends Kit {
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setBoots(boots);
-        ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
-        fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(fishingRod);
     }
 
     @EventHandler

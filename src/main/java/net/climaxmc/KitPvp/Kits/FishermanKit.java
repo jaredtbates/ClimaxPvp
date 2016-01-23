@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Kits;
+ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
