@@ -44,7 +44,7 @@ public class BanCommand implements CommandExecutor {
         PlayerData targetData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(args[0]));
 
         if (targetData == null) {
-            player.sendMessage(ChatColor.RED + "That player is not online or doesn't exist!");
+            player.sendMessage(ChatColor.RED + "That player hasn't ever joined!");
             return true;
         }
 
@@ -75,7 +75,7 @@ public class BanCommand implements CommandExecutor {
                         staff.sendMessage(ChatColor.RED + player.getName() + " permanently banned "
                                 + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for " + finalReason));
                 target.kickPlayer(ChatColor.RED + "You were permanently banned by " + player.getName() + " for " + reason + "\n"
-                        + "Appeal on forum.climaxmc.net if you believe that this is in error!");
+                        + "Appeal on forums.climaxmc.net if you believe that this is in error!");
             } else {
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->
                         plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->

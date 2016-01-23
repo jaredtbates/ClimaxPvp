@@ -40,7 +40,7 @@ public class KickCommand implements CommandExecutor {
         PlayerData targetData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(args[0]));
 
         if (targetData == null) {
-            player.sendMessage(ChatColor.RED + "That player is not online or doesn't exist!");
+            player.sendMessage(ChatColor.RED + "That player hasn't ever joined!");
             return true;
         }
 

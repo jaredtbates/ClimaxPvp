@@ -42,32 +42,9 @@ public class MuteCommand implements CommandExecutor {
             PlayerData targetData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(args[0]));
 
             if (targetData == null) {
-                player.sendMessage(ChatColor.RED + "That player is not online or doesn't exist!");
+                player.sendMessage(ChatColor.RED + "That player hasn't ever joined!");
                 return true;
             }
-
-            long time;
-
-            String timeString = args[1];
-            char timeChar = Character.toLowerCase(timeString.charAt(timeString.length() - 1));
-            Time timeUnit;
-            String timeNumeral = timeString.substring(0, timeString.length() - 1);
-
-            try {
-                time = Long.parseLong(timeNumeral);
-            } catch (NumberFormatException e) {
-                player.sendMessage(ChatColor.RED + "That is not a valid time!");
-                return true;
-            }
-
-            timeUnit = Time.fromId(timeChar);
-
-            if (timeUnit == null) {
-                player.sendMessage(ChatColor.RED + "That is not a valid time unit! Here's some examples of time labels: 2m, 5d, 6h");
-                return true;
-            }
-
-            time = time * timeUnit.getMilliseconds();
 
             String reason = "";
             for (int i = 2; i < args.length; i++) {
@@ -76,18 +53,16 @@ public class MuteCommand implements CommandExecutor {
             reason = reason.trim();
 
             final String finalReason = reason;
-            final long finalTime = time;
-            targetData.addPunishment(new Punishment(targetData.getUuid(), Punishment.PunishType.MUTE, System.currentTimeMillis(), time, playerData.getUuid(), reason));
+            targetData.addPunishment(new Punishment(targetData.getUuid(), Punishment.PunishType.MUTE, System.currentTimeMillis(), -1, playerData.getUuid(), reason));
             plugin.getServer().getOnlinePlayers().stream().filter(staff ->
                     plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
-                    staff.sendMessage(ChatColor.RED + player.getName() + " temporarily muted "
-                            + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED
-                            + " for " + Time.toString(finalTime) + " for " + finalReason));
+                    staff.sendMessage(ChatColor.RED + player.getName() + " permanently muted "
+                            + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for " + finalReason));
 
             Player target = Bukkit.getPlayer(targetData.getUuid());
             if (target != null) {
-                target.sendMessage(ChatColor.RED + "You were temporarily muted by " + player.getName() + " for " + Time.toString(time) + " for " + reason + "\n"
-                        + "Appeal on forum.climaxmc.net if you believe that this is an error!");
+                target.sendMessage(ChatColor.RED + "You were permanently muted by " + player.getName() + " for " + reason + "\n"
+                        + "Appeal on forums.climaxmc.net if you believe that this is an error!");
             }
         }
 

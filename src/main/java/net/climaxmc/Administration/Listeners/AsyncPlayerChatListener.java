@@ -40,12 +40,12 @@ public class AsyncPlayerChatListener implements Listener {
                 player.sendMessage(ChatColor.RED + "You were temporarily muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
                         + " for " + punishment.getReason() + ".\n"
                         + "You have " + Time.toString(punishment.getTime() + punishment.getExpiration() - System.currentTimeMillis()) + " left in your mute.\n"
-                        + "Appeal on forum.climaxmc.net if you believe that this is an error!");
+                        + "Appeal on forums.climaxmc.net if you believe that this is an error!");
             } else if (punishment.getExpiration() == -1) {
                 event.setCancelled(true);
                 player.sendMessage(ChatColor.RED + "You were permanently muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
                         + " for " + punishment.getReason() + ".\n"
-                        + "Appeal on forum.climaxmc.net if you believe that this is an error!");
+                        + "Appeal on forums.climaxmc.net if you believe that this is an error!");
             }
         });
 
