@@ -12,10 +12,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class TempMuteCommanda implements CommandExecutor {
+public class TempMuteCommand implements CommandExecutor {
     private ClimaxPvp plugin;
 
-    public TempMuteCommanda(ClimaxPvp plugin) {
+    public TempMuteCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
     }
 

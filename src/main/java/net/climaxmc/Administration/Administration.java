@@ -29,7 +29,7 @@ public class Administration {
         plugin.getCommand("tempban").setExecutor(new TempBanCommand(plugin));
         plugin.getCommand("unban").setExecutor(new UnBanCommand(plugin));
         plugin.getCommand("mute").setExecutor(new MuteCommand(plugin));
-        plugin.getCommand("tempmute").setExecutor(new TempMuteCommanda(plugin));
+        plugin.getCommand("tempmute").setExecutor(new TempMuteCommand(plugin));
         plugin.getCommand("unmute").setExecutor(new UnMuteCommand(plugin));
         plugin.getCommand("kick").setExecutor(new KickCommand(plugin));
         plugin.getCommand("lockchat").setExecutor(new ChatCommands(plugin));
