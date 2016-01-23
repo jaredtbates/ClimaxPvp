@@ -37,8 +37,5 @@ public class PvpKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
-        fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(fishingRod);
     }
 }

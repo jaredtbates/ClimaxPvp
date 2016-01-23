@@ -43,8 +43,5 @@ public class HeavyKit extends Kit {
         player.getInventory().addItem(sword);
         player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 2));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, 1));
-        ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
-        fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(fishingRod);
     }
 }

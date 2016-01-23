@@ -99,9 +99,6 @@ public class BomberKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
-        fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().setItem(2, fishingRod);
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -149,7 +146,7 @@ public class BomberKit extends Kit {
 
     @EventHandler
     public void onExplosion(EntityExplodeEvent event) {
-        event.setCancelled(false); // This should fix the bomber issue! It should also enable damage from tnt!
+        event.setCancelled(true); // This should fix the bomber issue! It should also enable damage from tnt!
         event.getLocation().getWorld().createExplosion(event.getLocation().getX(), event.getLocation().getY(), event.getLocation().getZ(), 4, false, false);
     }
 

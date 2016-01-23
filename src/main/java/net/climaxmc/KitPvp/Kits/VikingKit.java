@@ -26,7 +26,8 @@ public class VikingKit extends Kit {
     }
 
     protected void wear(Player player) {
-        for (PotionEffect effect : player.getActivePotionEffects()) {
+        player.sendMessage(ChatColor.DARK_RED + "This kit is disabled, sorry!");
+        /*for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
         ItemStack axe = new ItemStack(Material.DIAMOND_AXE);
@@ -49,11 +50,12 @@ public class VikingKit extends Kit {
         bootsmeta.setColor(Color.MAROON);
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
-        addSoup(player.getInventory(), 1, 35);
+        addSoup(player.getInventory(), 1, 35);*/
     }
 
     protected void wearNoSoup(Player player) {
-        for (PotionEffect effect : player.getActivePotionEffects()) {
+        player.sendMessage(ChatColor.DARK_RED + "This kit is disabled, sorry!");
+        /*for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
@@ -79,7 +81,7 @@ public class VikingKit extends Kit {
         player.getInventory().setBoots(boots);
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
         fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(fishingRod);
+        player.getInventory().addItem(fishingRod);*/
     }
 
     @EventHandler

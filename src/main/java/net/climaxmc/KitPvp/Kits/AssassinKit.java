@@ -89,9 +89,6 @@ public class AssassinKit extends Kit {
         bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
-        ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
-        fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(fishingRod);
     }
 
     @EventHandler

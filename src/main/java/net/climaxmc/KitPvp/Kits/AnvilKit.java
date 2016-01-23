@@ -47,9 +47,6 @@ public class AnvilKit extends Kit {
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setBoots(boots);
-        ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
-        fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(fishingRod);
     }
 
     @EventHandler
