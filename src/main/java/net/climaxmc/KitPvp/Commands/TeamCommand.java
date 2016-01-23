@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Commands;// AUTHOR: gamer_000 (11/22/2015)
+package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
@@ -28,85 +28,90 @@ public class TeamCommand implements CommandExecutor {
         Player player = (Player) sender;
         TeamUtils teamUtils = new TeamUtils(plugin);
         TeamMessages teamMessages = new TeamMessages(plugin);
-        if (command.getName().equalsIgnoreCase("team")) {
-            if (plugin.getServer().getOnlinePlayers().size() >= 7) {
-                if (args.length > 1 || args.length == 0) {
-                    player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                    player.sendMessage(ChatColor.RED + " Incorrect Usage! Try this: /team <accept/deny/[player]>");
-                } else {
-                    if (args[0].equalsIgnoreCase("accept")) {
-                        if (teamUtils.hasPendingRequest(player)) {
-                            Player requester = teamUtils.getRequester(player);
-                            teamMessages.sendAcceptMessage(player, requester);
-                            TeamUtils.createTeam(player, requester);
-                        } else {
-                            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                            player.sendMessage(ChatColor.RED + " You do not have a pending team request!");
-                            return false;
-                        }
-                    } else if (args[0].equalsIgnoreCase("deny")) {
-                        if (teamUtils.hasPendingRequest(player)) {
-                            Player requester = teamUtils.getRequester(player);
-                            teamMessages.sendDeclineMessage(player, requester);
-                            TeamUtils.removePendingRequest(player);
-                        } else {
-                            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                            player.sendMessage(ChatColor.RED + " You do not have a pending team request!");
-                            return false;
-                        }
-                    } else if (args[0].equalsIgnoreCase("leave")) {
-                        if (!teamUtils.isTeaming(player)) {
-                            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                            player.sendMessage(ChatColor.RED + " You are not in a team!");
-                        } else {
-                            if (KitPvp.currentTeams.containsKey(player.getName())) {
-                                Player teammate = Bukkit.getServer().getPlayer(KitPvp.currentTeams.get(player.getName()));
+        if (plugin.getServer().getOnlinePlayers().size() >= 1) {
+            if (args.length > 1 || args.length == 0) {
+                player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                player.sendMessage(ChatColor.RED + " Incorrect Usage! Try this: /team <accept/deny/[player]>");
+            } else {
+                if (args[0].equalsIgnoreCase("accept")) {
+                    if (teamUtils.hasPendingRequest(player)) {
+                        Player requester = teamUtils.getRequester(player);
+                        teamMessages.sendAcceptMessage(player, requester);
+                        TeamUtils.createTeam(player, requester);
+                    } else {
+                        player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                        player.sendMessage(ChatColor.RED + " You do not have a pending team request!");
+                        return false;
+                    }
+                } else if (args[0].equalsIgnoreCase("deny")) {
+                    if (teamUtils.hasPendingRequest(player)) {
+                        Player requester = teamUtils.getRequester(player);
+                        teamMessages.sendDeclineMessage(player, requester);
+                        TeamUtils.removePendingRequest(player);
+                    } else {
+                        player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                        player.sendMessage(ChatColor.RED + " You do not have a pending team request!");
+                        return false;
+                    }
+                } else if (args[0].equalsIgnoreCase("leave")) {
+                    if (!teamUtils.isTeaming(player)) {
+                        player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                        player.sendMessage(ChatColor.RED + " You are not in a team!");
+                    } else {
+                        if (KitPvp.currentTeams.containsKey(player.getName()) || KitPvp.currentTeams.containsValue(player.getName())) {
+                            Player teammate = null;
+                            for (String possibleTeammate : KitPvp.currentTeams.keySet()) {
+                                if (KitPvp.currentTeams.get(possibleTeammate).equals(player.getName())) {
+                                    teammate = plugin.getServer().getPlayer(possibleTeammate);
+                                }
+                            }
+                            if (teammate == null) {
+                                player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                                player.sendMessage(ChatColor.RED + " You are not in a team!");
+                                return false;
+                            }
+                            teammate.playSound(teammate.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
+                            player.playSound(player.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
+                            teammate.sendMessage(ChatColor.RED + " " + player.getName() + " has left the team. Therefore, the team has been disbanded!");
+                            player.sendMessage(ChatColor.RED + " You have left the team. Therefore, the team has been disbanded!");
+                            KitPvp.currentTeams.remove(player.getName());
+                            KitPvp.currentTeams.remove(teammate.getName());
+                        } else if (KitPvp.currentTeams.values().contains(player.getName())) {
+                            KitPvp.currentTeams.keySet().stream().filter(key -> KitPvp.currentTeams.get(key).equalsIgnoreCase(player.getName())).forEach(key -> {
+                                Player teammate = Bukkit.getServer().getPlayer(KitPvp.currentTeams.get(key));
                                 teammate.playSound(teammate.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
                                 player.playSound(player.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
                                 teammate.sendMessage(ChatColor.RED + " " + player.getName() + " has left the team. Therefore, the team has been disbanded!");
                                 player.sendMessage(ChatColor.RED + " You have left the team. Therefore, the team has been disbanded!");
-                                KitPvp.currentTeams.remove(player.getName());
-                            } else if (KitPvp.currentTeams.values().contains(player.getName())) {
-                                int i = 0;
-                                for (String key : KitPvp.currentTeams.keySet()) {
-                                    i++;
-                                    if (KitPvp.currentTeams.get(key).equalsIgnoreCase(player.getName())) {
-                                        Player teammate = Bukkit.getServer().getPlayer(KitPvp.currentTeams.get(key));
-                                        teammate.playSound(teammate.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
-                                        player.playSound(player.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
-                                        teammate.sendMessage(ChatColor.RED + " " + player.getName() + " has left the team. Therefore, the team has been disbanded!");
-                                        player.sendMessage(ChatColor.RED + " You have left the team. Therefore, the team has been disbanded!");
-                                        KitPvp.currentTeams.remove(KitPvp.currentTeams.get(key));
-                                    }
-                                }
-                            }
+                                KitPvp.currentTeams.remove(KitPvp.currentTeams.get(key));
+                            });
                         }
+                    }
+                } else {
+                    Player target = Bukkit.getServer().getPlayerExact(args[0]);
+                    if (!Bukkit.getServer().getOnlinePlayers().contains(target)) {
+                        player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                        player.sendMessage(ChatColor.GOLD + " \"" + ChatColor.YELLOW + args[0] + ChatColor.GOLD + "\"" + ChatColor.RED + " is not online or doesn't exist!");
+                        return false;
+                    } else if (target.getUniqueId().equals(player.getUniqueId())) {
+                        player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                        player.sendMessage(ChatColor.RED + " Team with yourself? How would that even work...");
                     } else {
-                        Player target = Bukkit.getServer().getPlayerExact(args[0]);
-                        if (!Bukkit.getServer().getOnlinePlayers().contains(target)) {
+                        if (teamUtils.hasPendingRequest(target)) {
                             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                            player.sendMessage(ChatColor.GOLD + " \"" + ChatColor.YELLOW + args[0] + ChatColor.GOLD + "\"" + ChatColor.RED + " is not online or doesn't exist!");
+                            player.sendMessage(ChatColor.RED + " That player already has a pending request to team!");
                             return false;
-                        } else if (target.getUniqueId().equals(player.getUniqueId())) {
+                        } else if (teamUtils.hasPendingRequest(player)) {
                             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                            player.sendMessage(ChatColor.RED + " Team with yourself? How would that even work...");
+                            player.sendMessage(ChatColor.RED + " You already have a pending request to team with another player!");
+                            return false;
+                        } else if (teamUtils.isTeaming(target)) {
+                            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                            player.sendMessage(ChatColor.RED + " That player is already on a team!");
+                            return false;
                         } else {
-                            if (teamUtils.hasPendingRequest(target)) {
-                                player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                                player.sendMessage(ChatColor.RED + " That player already has a pending request to team!");
-                                return false;
-                            } else if (teamUtils.hasPendingRequest(player)) {
-                                player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                                player.sendMessage(ChatColor.RED + " You already have a pending request to team with another player!");
-                                return false;
-                            } else if (teamUtils.isTeaming(target)) {
-                                player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                                player.sendMessage(ChatColor.RED + " That player is already on a team!");
-                                return false;
-                            } else {
-                                teamMessages.sendRequestMessage(player, target);
-                                TeamUtils.createPendingRequest(target, player);
-                            }
+                            teamMessages.sendRequestMessage(player, target);
+                            TeamUtils.createPendingRequest(target, player);
                         }
                     }
                 }

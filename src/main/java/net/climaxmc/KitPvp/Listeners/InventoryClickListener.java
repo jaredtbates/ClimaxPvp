@@ -31,18 +31,11 @@ public class InventoryClickListener implements Listener {
         Inventory inventory = event.getInventory();
         final Player player = (Player) event.getWhoClicked();
 
-        if (player.getGameMode().equals(GameMode.CREATIVE)) {
-            event.setCancelled(false);
-            return;
-        } else {
-            if (event.getClickedInventory() == null) {
-                event.setCancelled(false);
+        if (!player.getGameMode().equals(GameMode.CREATIVE)) {
+            if (inventory == null || event.getClickedInventory() == null || event.getSlotType() == null) {
                 return;
             }
-            if (event.getSlotType() == null) {
-                event.setCancelled(false);
-                return;
-            }
+
             for (ItemStack itemStack : player.getInventory().getArmorContents()) {
                 if (itemStack == null) {
                     event.setCancelled(true);
@@ -52,7 +45,7 @@ public class InventoryClickListener implements Listener {
                 }
             }
 
-            if (event.getClickedInventory().equals(player.getInventory()) && !event.getCurrentItem().equals(Material.MUSHROOM_SOUP)) {
+            if (event.getClickedInventory().equals(player.getInventory()) && !event.getCurrentItem().getType().equals(Material.MUSHROOM_SOUP)) {
                 event.setCancelled(true);
             }
 
@@ -63,7 +56,7 @@ public class InventoryClickListener implements Listener {
                 event.setCancelled(true);
             }
 
-            if (inventory != null && event.getCurrentItem() != null && event.getCurrentItem().getItemMeta() != null
+            if (event.getCurrentItem() != null && event.getCurrentItem().getItemMeta() != null
                     && event.getCurrentItem().getItemMeta().getDisplayName() != null) {
                 if (inventory.getName().equals(ChatColor.RED + "" + ChatColor.BOLD + "Kit Selector")) {
                     for (Kit kit : KitManager.getKits()) {

@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Utils.Teams;// AUTHOR: gamer_000 (11/22/2015)
+package net.climaxmc.KitPvp.Utils.Teams;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
@@ -42,7 +42,9 @@ public class TeamUtils {
 
     public boolean isTeaming(Player target) {
         for (Player sender : plugin.getServer().getOnlinePlayers()) {
-            return KitPvp.currentTeams.containsKey(target.getName());
+            if (KitPvp.currentTeams.containsKey(target.getName()) || KitPvp.currentTeams.containsValue(target.getName())) {
+                return true;
+            }
         }
         return false;
     }

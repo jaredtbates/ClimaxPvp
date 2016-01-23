@@ -17,6 +17,7 @@ import org.bukkit.inventory.Inventory;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class KitPvp {
     public static Inventory moreKitsInventory = Bukkit.createInventory(null, 54, ChatColor.AQUA + "" + ChatColor.BOLD + "More Kits");
@@ -24,7 +25,7 @@ public class KitPvp {
     public static Map<UUID, Integer> killStreak = new HashMap<>();
     //public static Set<Duel> duels = new HashSet<>();
     public static Map<String, String> pendingTeams = new HashMap<>();
-    public static Map<String, String> currentTeams = new HashMap<>();
+    public static Map<String, String> currentTeams = new ConcurrentHashMap<>();
     public static Map<UUID, String> trails = new HashMap<>();
 
     public KitPvp(ClimaxPvp plugin) {
@@ -48,6 +49,7 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new BlockBreakListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new BlockPlaceListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PortalListeners(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new EntityDamageByEntityListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ChallengesMenu(), plugin);
         //plugin.getServer().getPluginManager().registerEvents(new PlayerProfileMenu(plugin), plugin);
         //plugin.getServer().getPluginManager().registerEvents(new CurrencyMenu(plugin), plugin);
