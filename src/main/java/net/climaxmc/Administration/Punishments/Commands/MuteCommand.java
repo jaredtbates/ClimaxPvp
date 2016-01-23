@@ -34,8 +34,8 @@ public class MuteCommand implements CommandExecutor {
                 return true;
             }
 
-            if (args.length < 3) {
-                player.sendMessage(ChatColor.RED + "/mute <player> <time> <reason>");
+            if (args.length < 2) {
+                player.sendMessage(ChatColor.RED + "/mute <player> <reason>");
                 return true;
             }
 
@@ -47,7 +47,7 @@ public class MuteCommand implements CommandExecutor {
             }
 
             String reason = "";
-            for (int i = 2; i < args.length; i++) {
+            for (int i = 1; i < args.length; i++) {
                 reason += args[i] + " ";
             }
             reason = reason.trim();
