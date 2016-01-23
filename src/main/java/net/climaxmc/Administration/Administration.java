@@ -13,7 +13,7 @@ public class Administration {
         plugin.getServer().getPluginManager().registerEvents(new PlayerCommandPreprocessListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new AsyncPlayerChatListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new CombatLogListeners(plugin), plugin);
-        //plugin.getServer().getPluginManager().registerEvents(new SpawnProtectListeners(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new SpawnProtectListeners(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new VanishCommand(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new CheckCommand(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ChatFilter(plugin), plugin);
@@ -29,7 +29,6 @@ public class Administration {
         plugin.getCommand("tempban").setExecutor(new TempBanCommand(plugin));
         plugin.getCommand("unban").setExecutor(new UnBanCommand(plugin));
         plugin.getCommand("mute").setExecutor(new MuteCommand(plugin));
-        plugin.getCommand("tempmute").setExecutor(new TempMuteCommand(plugin));
         plugin.getCommand("unmute").setExecutor(new UnMuteCommand(plugin));
         plugin.getCommand("kick").setExecutor(new KickCommand(plugin));
         plugin.getCommand("lockchat").setExecutor(new ChatCommands(plugin));

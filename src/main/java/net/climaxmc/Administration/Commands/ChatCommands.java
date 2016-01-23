@@ -23,6 +23,8 @@ public class ChatCommands implements CommandExecutor {
     }
 
     public static HashSet<UUID> cmdspies = new HashSet<>();
+    public static HashSet<UUID> staffChat = new HashSet<>();
+
     public static boolean chatSilenced = false;
 
     @Override

@@ -1,8 +1,11 @@
 package net.climaxmc.KitPvp.Kits;
 
+import net.climaxmc.Administration.Commands.CheckCommand;
+import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.Ability;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
@@ -101,8 +104,13 @@ public class AssassinKit extends Kit {
                     for (Entity entity : player.getNearbyEntities(9, 9, 9)) {
                         if (entity instanceof Player) {
                             Player players = (Player) entity;
-                            players.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 140, 2));
-                            players.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 140, 1));
+                            if (!VanishCommand.getVanished().contains(players.getUniqueId())
+                                    && !CheckCommand.getChecking().contains(players.getUniqueId())
+                                    && (KitPvp.currentTeams.get(player.getName()) != players.getName()
+                                    && KitPvp.currentTeams.get(players.getName()) != player.getName())) {
+                                players.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 140, 2));
+                                players.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 140, 1));
+                            }
                             player.removePotionEffect(PotionEffectType.SPEED);
                             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 1));
                             player.getWorld().playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 1);

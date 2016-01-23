@@ -51,7 +51,6 @@ public class ClimaxPvp extends JavaPlugin {
     private HashMap<UUID, PlayerData> playerDataList = new HashMap<>();
     @Getter
     private HashMap<UUID, UUID> messagers = new HashMap<>();
-
     private Donations donations;
 
     //TrailsRunnable trailsRunnable = new TrailsRunnable(this);

@@ -1,7 +1,10 @@
 package net.climaxmc.KitPvp.Kits;
 
+import net.climaxmc.Administration.Commands.CheckCommand;
+import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.Ability;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -104,7 +107,12 @@ public class BlazeKit extends Kit {
                             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 0));
                             player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 100, 0));
                             player.getWorld().playSound(player.getLocation(), Sound.BLAZE_BREATH, 2, 2);
-                            players.setFireTicks(170);
+                            if (!VanishCommand.getVanished().contains(players.getUniqueId())
+                                    && !CheckCommand.getChecking().contains(players.getUniqueId())
+                                    && (KitPvp.currentTeams.get(player.getName()) != players.getName()
+                                    && KitPvp.currentTeams.get(players.getName()) != player.getName())) {
+                                players.setFireTicks(170);
+                            }
                         }
                     }
                 }

@@ -3,7 +3,6 @@ package net.climaxmc.Donations;
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
@@ -14,7 +13,7 @@ public class DonationsChecker extends BukkitRunnable {
     private ClimaxPvp plugin;
 
     public DonationsChecker(ClimaxPvp plugin) {
-        //runTaskTimerAsynchronously(plugin, 30, 30);
+        runTaskTimerAsynchronously(plugin, 200, 200);
         this.plugin = plugin;
     }
 
@@ -66,7 +65,7 @@ public class DonationsChecker extends BukkitRunnable {
         plugin.getServer().getScheduler().runTask(plugin, () -> plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), cmd));
     }
 
-    private String getJSON(String url) throws JSONException {
+    private String getJSON(String url) {
         try {
             URL u = new URL(url);
             HttpURLConnection c = (HttpURLConnection) u.openConnection();

@@ -1,7 +1,10 @@
 package net.climaxmc.KitPvp.Kits;
 
+import net.climaxmc.Administration.Commands.CheckCommand;
+import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.Ability;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -75,9 +78,14 @@ public class ThorKit extends Kit {
                             return;
                         }
                         event.setCancelled(true);
-                        target.getWorld().strikeLightning(target.getLocation());
-                        event.setCancelled(true);
-                        target.damage(7);
+                        if (!VanishCommand.getVanished().contains(target.getUniqueId())
+                                && !CheckCommand.getChecking().contains(target.getUniqueId())
+                                && (KitPvp.currentTeams.get(player.getName()) != target.getName()
+                                && KitPvp.currentTeams.get(target.getName()) != player.getName())) {
+                            target.getWorld().strikeLightning(target.getLocation());
+                            event.setCancelled(true);
+                            target.damage(7);
+                        }
                     }
                 }
             }

@@ -1,7 +1,10 @@
  package net.climaxmc.KitPvp.Kits;
 
+import net.climaxmc.Administration.Commands.CheckCommand;
+import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -55,7 +58,12 @@ public class FishermanKit extends Kit {
         Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
             if (event.getCaught() instanceof Player) {
-                event.getCaught().teleport(player.getLocation());
+                if (!VanishCommand.getVanished().contains(event.getCaught().getUniqueId())
+                        && !CheckCommand.getChecking().contains(event.getCaught().getUniqueId())
+                        && (KitPvp.currentTeams.get(player.getName()) != event.getCaught().getName()
+                        && KitPvp.currentTeams.get(event.getCaught().getName()) != player.getName())) {
+                    event.getCaught().teleport(player.getLocation());
+                }
             }
         }
     }

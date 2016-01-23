@@ -24,7 +24,7 @@ public class MySQL {
             " `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL," +
             " `deaths` INT DEFAULT 0 NOT NULL," + /*`gold` INT DEFAULT 0 NOT NULL, `goldBlocks` INT DEFAULT 0 NOT NULL," +
             " `diamonds` INT DEFAULT 0 NOT NULL, `diamondBlocks` INT DEFAULT 0 NOT NULL, `emeralds` INT DEFAULT 0 NOT NULL," +
-            " `achievements` VARCHAR(5000) DEFAULT NULL,*/ "`nickname` VARCHAR(32) DEFAULT NULL);";
+            " `achievements` VARCHAR(5000) DEFAULT NULL,*/ " `nickname` VARCHAR(32) DEFAULT NULL);";
     public static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `rank`, `balance`, `kills`, `deaths`," +
             /*" `gold`, `goldBlocks`, `diamonds`, `diamondBlocks`, `emeralds`, `achievements`,*/ " `nickname`) VALUES (?, ?, ?, ?, ?, " + /*?, ?, ?, ?, ?, ?,*/ " ?);";
     public static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, " + /*`gold` = ?," +
@@ -264,7 +264,7 @@ public class MySQL {
      * @param uuid UUID of the player to create data of
      */
     public synchronized void createPlayerData(UUID uuid) {
-        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), Rank.DEFAULT.toString(), 0, 0, 0, 0, 0, 0, 0, 0, null, null);
+        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), Rank.DEFAULT.toString(), 0, 0, 0, /*0, 0, 0, 0, 0, null,*/ null);
         //executeUpdate(CREATE_DUELDATA, uuid.toString(), 0, 0, 0, false);
         //executeUpdate(CREATE_SETTINGS, uuid.toString(), true, true, "DEFAULT", "NONE", "NONE", true);
     }

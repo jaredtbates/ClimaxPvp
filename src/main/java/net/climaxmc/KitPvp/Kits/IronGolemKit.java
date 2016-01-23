@@ -1,7 +1,10 @@
 package net.climaxmc.KitPvp.Kits;
 
+import net.climaxmc.Administration.Commands.CheckCommand;
+import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -71,7 +74,12 @@ public class IronGolemKit extends Kit {
                 if (KitManager.isPlayerInKit(player, this)) {
                     if (player.getItemInHand().getType().equals(Material.RED_ROSE)) {
                         event.setCancelled(true);
-                        target.setVelocity(new Vector(0, 1.3, 0));
+                        if (!VanishCommand.getVanished().contains(target.getUniqueId())
+                                && !CheckCommand.getChecking().contains(target.getUniqueId())
+                                && (KitPvp.currentTeams.get(player.getName()) != target.getName()
+                                && KitPvp.currentTeams.get(target.getName()) != player.getName())) {
+                            target.setVelocity(new Vector(0, 1.3, 0));
+                        }
                     }
                 }
             }

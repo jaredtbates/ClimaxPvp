@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.permissions.PermissionAttachment;
 
 public class PlayerCommandPreprocessListener implements Listener {
     private ClimaxPvp plugin;
@@ -33,6 +32,8 @@ public class PlayerCommandPreprocessListener implements Listener {
             return;
         }
 
-        plugin.getServer().getOnlinePlayers().stream().filter(players -> plugin.getPlayerData(players).hasRank(Rank.HELPER) && ChatCommands.cmdspies.contains(players.getUniqueId())).forEach(players -> players.sendMessage(ChatColor.DARK_GRAY + player.getName() + ": " + ChatColor.GRAY + command));
+        plugin.getServer().getOnlinePlayers().stream().filter(players ->
+                plugin.getPlayerData(players).hasRank(Rank.HELPER) && ChatCommands.cmdspies.contains(players.getUniqueId()))
+                .forEach(players -> players.sendMessage(ChatColor.DARK_GRAY + player.getName() + ": " + ChatColor.GRAY + command));
     }
 }

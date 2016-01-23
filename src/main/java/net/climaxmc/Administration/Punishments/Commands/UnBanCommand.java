@@ -42,7 +42,7 @@ public class UnBanCommand implements CommandExecutor {
         PlayerData targetData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(args[0]));
 
         if (targetData == null) {
-            player.sendMessage(ChatColor.RED + "That player has never joined!");
+            player.sendMessage(ChatColor.RED + "That player is not online or doesn't exist!");
             return true;
         }
 
@@ -55,9 +55,13 @@ public class UnBanCommand implements CommandExecutor {
             if (remove.size() == 0) {
                 player.sendMessage(ChatColor.RED + "That player is not banned!");
                 return true;
+            } else {
+                remove.forEach(targetData::removePunishment);
+                plugin.getServer().getOnlinePlayers().stream().filter(staff ->
+                        plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
+                        staff.sendMessage(ChatColor.RED + player.getName() + " unbanned "
+                                + plugin.getServer().getOfflinePlayer(targetData.getUuid()).getName() + "."));
             }
-            remove.forEach(targetData::removePunishment);
-            plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName() + " unbanned " + plugin.getServer().getOfflinePlayer(targetData.getUuid()).getName() + "."));
         } else {
             player.sendMessage(ChatColor.RED + "That player is not banned!");
         }
