@@ -23,8 +23,8 @@ public class KitPvp {
     public static Inventory soupInventory = Bukkit.createInventory(null, 54, ChatColor.BOLD + "Free Soup!");
     public static Map<UUID, Integer> killStreak = new HashMap<>();
     //public static Set<Duel> duels = new HashSet<>();
-    public static Map<String, String> pendingTeams = new HashMap<>();
-    public static Map<String, String> currentTeams = new HashMap<>();
+    //public static Map<String, String> pendingTeams = new HashMap<>();
+    //public static Map<String, String> currentTeams = new HashMap<>();
     //public static Map<UUID, String> trails = new HashMap<>();
 
     public KitPvp(ClimaxPvp plugin) {
@@ -76,6 +76,6 @@ public class KitPvp {
         plugin.getCommand("youtube").setExecutor(new YoutubeCommand(plugin));
         plugin.getCommand("pei").setExecutor(new PeiCommand());
         //plugin.getCommand("duel").setExecutor(new DuelCommand(plugin));
-        plugin.getCommand("team").setExecutor(new TeamCommand(plugin));
+        //plugin.getCommand("team").setExecutor(new TeamCommand(plugin));
     }
 }

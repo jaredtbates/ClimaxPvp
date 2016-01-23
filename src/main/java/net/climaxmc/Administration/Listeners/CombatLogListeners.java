@@ -36,7 +36,7 @@ public class CombatLogListeners implements Listener {
             Player damager = (Player) event.getDamager();
             Player damaged = (Player) event.getEntity();
 
-            if (KitPvp.currentTeams.containsKey(damaged.getName()) || KitPvp.currentTeams.containsKey(damager.getName())) {
+           /*if (KitPvp.currentTeams.containsKey(damaged.getName()) || KitPvp.currentTeams.containsKey(damager.getName())) {
                 if (KitPvp.currentTeams.get(damaged.getName()) == damager.getName()
                         || KitPvp.currentTeams.get(damager.getName()) == damaged.getName()) {
                     if (plugin.getServer().getOnlinePlayers().size() >= 7) {
@@ -95,12 +95,8 @@ public class CombatLogListeners implements Listener {
                                     }
                                 }.runTaskLater(plugin, 240).getTaskId());
                     }
-                } else {
-                    return;
                 }
-            } else {
-                return;
-            }
+            }*/
         }
     }
 

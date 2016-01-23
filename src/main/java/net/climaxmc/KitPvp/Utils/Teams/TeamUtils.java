@@ -11,7 +11,7 @@ public class TeamUtils {
         this.plugin = plugin;
     }
 
-    public static void createPendingRequest(Player target, Player sender) {
+    /*public static void createPendingRequest(Player target, Player sender) {
         KitPvp.pendingTeams.put(target.getName(), sender.getName());
     }
 
@@ -49,5 +49,5 @@ public class TeamUtils {
 
     public Player getRequester(Player target) {
         return plugin.getServer().getPlayer(KitPvp.pendingTeams.get(target.getName()));
-    }
+    }*/
 }

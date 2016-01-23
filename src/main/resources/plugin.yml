@@ -95,6 +95,3 @@ commands:
   lockchat:
     description: Locks or unlocks the chat
     aliases: [lc, lchat]
-  team:
-    description: Team up with another player
-    aliases: ally
