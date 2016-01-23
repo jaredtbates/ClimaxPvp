@@ -10,20 +10,22 @@ import net.climaxmc.KitPvp.Commands.Messaging.MessageCommand;
 import net.climaxmc.KitPvp.Commands.Messaging.ReplyCommand;
 import net.climaxmc.KitPvp.Listeners.*;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
+import net.climaxmc.KitPvp.Menus.PlayerProfile.AchievementMenu;
+import net.climaxmc.KitPvp.Menus.PlayerProfile.CurrencyMenu;
+import net.climaxmc.KitPvp.Menus.PlayerProfile.PlayerProfileMenu;
+import net.climaxmc.KitPvp.Utils.Duels.Duel;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class KitPvp {
     public static Inventory moreKitsInventory = Bukkit.createInventory(null, 54, ChatColor.AQUA + "" + ChatColor.BOLD + "More Kits");
     public static Inventory soupInventory = Bukkit.createInventory(null, 54, ChatColor.BOLD + "Free Soup!");
     public static Map<UUID, Integer> killStreak = new HashMap<>();
-    //public static Set<Duel> duels = new HashSet<>();
+    public static Set<Duel> duels = new HashSet<>();
     public static Map<String, String> pendingTeams = new HashMap<>();
     public static Map<String, String> currentTeams = new ConcurrentHashMap<>();
     public static Map<UUID, String> trails = new HashMap<>();
@@ -52,9 +54,9 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new EntityDamageByEntityListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerItemConsumeListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ChallengesMenu(), plugin);
-        //plugin.getServer().getPluginManager().registerEvents(new PlayerProfileMenu(plugin), plugin);
-        //plugin.getServer().getPluginManager().registerEvents(new CurrencyMenu(plugin), plugin);
-        //plugin.getServer().getPluginManager().registerEvents(new AchievementMenu(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerProfileMenu(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new CurrencyMenu(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new AchievementMenu(plugin), plugin);
         //plugin.getServer().getPluginManager().registerEvents(new HackListeners(plugin), plugin);
 
         // Register commands
@@ -78,7 +80,7 @@ public class KitPvp {
         plugin.getCommand("baltop").setExecutor(new BalanceTopCommand(plugin));
         plugin.getCommand("youtube").setExecutor(new YoutubeCommand(plugin));
         plugin.getCommand("pei").setExecutor(new PeiCommand());
-        //plugin.getCommand("duel").setExecutor(new DuelCommand(plugin));
+        plugin.getCommand("duel").setExecutor(new DuelCommand(plugin));
         plugin.getCommand("team").setExecutor(new TeamCommand(plugin));
     }
 }
