@@ -21,7 +21,7 @@ public class TeamCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        /*if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player)) {
             return true;
         }
 
@@ -115,7 +115,7 @@ public class TeamCommand implements CommandExecutor {
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
             player.sendMessage(ChatColor.RED + "Since there are less than 7 players online, you can't team!");
             return false;
-        }*/
+        }
         return false;
     }
 }
