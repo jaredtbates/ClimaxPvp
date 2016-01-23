@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Utils.Teams;// AUTHOR: gamer_000 (11/22/2015)
+package net.climaxmc.KitPvp.Utils.Teams;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Utils.TextComponentMessages;
