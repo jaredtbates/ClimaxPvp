@@ -29,7 +29,10 @@ public class EntityDamageByEntityListener implements Listener {
         Player player = (Player) event.getDamager();
         Player target = (Player) event.getEntity();
 
-        if ((KitPvp.currentTeams.containsKey(player.getName()) && KitPvp.currentTeams.containsValue(target.getName())) || (KitPvp.currentTeams.containsKey(target.getName()) && KitPvp.currentTeams.containsValue(player.getName()))) {
+        if ((KitPvp.currentTeams.containsKey(player.getName())
+                && KitPvp.currentTeams.get(player.getName()).equals(target.getName()))
+                || (KitPvp.currentTeams.containsKey(target.getName())
+                && KitPvp.currentTeams.get(target.getName()).equals(player.getName()))) {
             event.setCancelled(true);
         }
     }
