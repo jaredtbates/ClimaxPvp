@@ -1,16 +1,24 @@
 package net.climaxmc.KitPvp.Menus.PlayerProfile;// AUTHOR: gamer_000 (11/21/2015)
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.common.database.PlayerData;
+import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.bukkit.ChatColor.GRAY;
-import static org.bukkit.ChatColor.GREEN;
+import static org.bukkit.ChatColor.*;
 
 public class PlayerProfileMenu implements Listener {
     private ClimaxPvp plugin;
@@ -41,7 +49,7 @@ public class PlayerProfileMenu implements Listener {
         iron.setItemMeta(im);
     }
 
-    /*@EventHandler
+    @EventHandler
     public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
@@ -87,7 +95,7 @@ public class PlayerProfileMenu implements Listener {
                 profileMenu.setItem(12, gold);
                 profileMenu.setItem(13, head);
 
-                //player.openInventory(profileMenu);
+                player.openInventory(profileMenu);
             }
         }
     }
@@ -152,7 +160,7 @@ public class PlayerProfileMenu implements Listener {
         }
         ratio = Math.round(ratio * 100.0D) / 100.0D;
         return ratio;
-    }*/
+    }
 
 
 }

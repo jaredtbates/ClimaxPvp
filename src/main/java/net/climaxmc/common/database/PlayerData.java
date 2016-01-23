@@ -17,9 +17,9 @@ public class PlayerData {
     private final MySQL mySQL;
     private final UUID uuid;
     private Rank rank;
-    private int balance, kills, deaths /*duelKills, duelDeaths, duelStreak, gold, goldBlocks, diamonds, diamondBlocks, emeralds*/;
-    private String /*achievements,*/ nickname /*killEffect, killSound, trail*/;
-    //private boolean dueling, duelRequests, teamRequests, privateMessaging;
+    private int balance, kills, deaths, duelKills, duelDeaths, duelStreak, gold, goldBlocks, diamonds, diamondBlocks, emeralds;
+    private String achievements, nickname, killEffect, killSound, trail;
+    private boolean dueling, duelRequests, teamRequests, privateMessaging;
     private List<Punishment> punishments;
 
     /**

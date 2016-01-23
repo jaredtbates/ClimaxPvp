@@ -1,13 +1,19 @@
 package net.climaxmc.KitPvp.Menus;
 
+import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Utils.Challenges.Challenge;
+import net.climaxmc.KitPvp.Utils.I;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class ChallengesMenu implements Listener {
@@ -26,7 +32,6 @@ public class ChallengesMenu implements Listener {
                 p.sendMessage(ChatColor.RED + "Challenges are being fixed at the moment!");
                 p.playSound(p.getLocation(), Sound.CAT_MEOW, 1, 1);
 
-                /*
                 Inventory challengesInventory = Bukkit.createInventory(null, 27, "Challenges");
 
                 int i = 0;
@@ -96,7 +101,7 @@ public class ChallengesMenu implements Listener {
                 }
 
                 p.openInventory(challengesInventory);
-                */
+
             }
 
         }

@@ -1,7 +1,14 @@
 package net.climaxmc.KitPvp.Utils.Duels;
 
+import net.climaxmc.KitPvp.KitPvp;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
+import java.util.Iterator;
+import java.util.Optional;
+
 public class DuelsUtils {
-    /*public static void createDuel(Player sender, Player target) {
+    public static void createDuel(Player sender, Player target) {
         KitPvp.duels.add(new Duel(sender.getUniqueId(), target.getUniqueId()));
     }
 
@@ -48,5 +55,5 @@ public class DuelsUtils {
             }
         }
         return null;
-    }*/
+    }
 }
