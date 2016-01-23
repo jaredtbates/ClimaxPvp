@@ -28,7 +28,7 @@ public class TeamCommand implements CommandExecutor {
         Player player = (Player) sender;
         TeamUtils teamUtils = new TeamUtils(plugin);
         TeamMessages teamMessages = new TeamMessages(plugin);
-        if (plugin.getServer().getOnlinePlayers().size() >= 1) {
+        if (plugin.getServer().getOnlinePlayers().size() > 7) {
             if (args.length > 1 || args.length == 0) {
                 player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                 player.sendMessage(ChatColor.RED + " Incorrect Usage! Try this: /team <accept/deny/[player]>");
