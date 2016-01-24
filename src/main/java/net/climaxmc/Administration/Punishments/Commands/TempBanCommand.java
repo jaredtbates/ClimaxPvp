@@ -109,8 +109,7 @@ public class TempBanCommand implements CommandExecutor {
                 message.setChannel("#general");
                 message.setIcon("http://i.imgur.com/vm2Kaw8.png");
                 message.setUsername("Climax Bans");
-                SlackApi slack = new SlackApi("https://hooks.slack.com/services/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");
-                slack.call(message);
+                plugin.getSlack().call(message);
 
                 target.kickPlayer(ChatColor.RED + "You were temporarily banned by " + player.getName() + " for " + Time.toString(time) + " for " + reason + "\n"
                         + "Appeal on forum.climaxmc.net if you believe that this is in error!");

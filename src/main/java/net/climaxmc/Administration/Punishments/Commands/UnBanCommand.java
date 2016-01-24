@@ -2,10 +2,9 @@ package net.climaxmc.Administration.Punishments.Commands;
 
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Utils.Slack.SlackApi;
-import net.climaxmc.KitPvp.Utils.Slack.SlackMessage;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
+import net.gpedro.integrations.slack.SlackMessage;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -59,8 +58,7 @@ public class UnBanCommand implements CommandExecutor {
                     message.setChannel("#general");
                     message.setIcon("http://i.imgur.com/vm2Kaw8.png");
                     message.setUsername("Climax Bans");
-                    SlackApi slack = new SlackApi("https://hooks.slack.com/services/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");
-                    slack.call(message);
+                    plugin.getSlack().call(message);
                 }
             } else {
                 System.out.print(ChatColor.RED + "That player is not banned!");
@@ -109,8 +107,7 @@ public class UnBanCommand implements CommandExecutor {
                     message.setChannel("#general");
                     message.setIcon("http://i.imgur.com/vm2Kaw8.png");
                     message.setUsername("Climax Bans");
-                    SlackApi slack = new SlackApi("https://hooks.slack.com/services/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");
-                    slack.call(message);
+                    plugin.getSlack().call(message);
                 }
             } else {
                 player.sendMessage(ChatColor.RED + "That player is not banned!");
