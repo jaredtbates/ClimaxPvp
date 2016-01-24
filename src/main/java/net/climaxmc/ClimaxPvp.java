@@ -10,6 +10,7 @@ import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Utils.Challenges.ChallengesFiles;
 import net.climaxmc.common.database.MySQL;
 import net.climaxmc.common.database.PlayerData;
+import net.gpedro.integrations.slack.SlackApi;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -51,7 +52,9 @@ public class ClimaxPvp extends JavaPlugin {
     private HashMap<UUID, PlayerData> playerDataList = new HashMap<>();
     @Getter
     private HashMap<UUID, UUID> messagers = new HashMap<>();
-    private Donations donations;
+    private Donations donations = null;
+    @Getter
+    private SlackApi slack = null;
 
     //TrailsRunnable trailsRunnable = new TrailsRunnable(this);
 
@@ -124,6 +127,8 @@ public class ClimaxPvp extends JavaPlugin {
         KitManager.setAllKitsEnabled(getConfig().getBoolean("AllKitsEnabled"));
 
         //trailsRunnable.startTrails();
+
+        slack = new SlackApi("https://hooks.slack.com/services/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");
     }
 
     @Override

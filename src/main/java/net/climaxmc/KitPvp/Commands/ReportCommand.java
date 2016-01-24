@@ -2,6 +2,8 @@ package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.Rank;
+import net.gpedro.integrations.slack.SlackApi;
+import net.gpedro.integrations.slack.SlackMessage;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Sound;
@@ -53,6 +55,8 @@ public class ReportCommand implements CommandExecutor {
                     .hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName()
                     + " has reported " + ChatColor.BOLD + reported.getName() + ChatColor.RED + " for " + message + "!"));
 
+            plugin.getSlack().call(new SlackMessage("Player Reported!", ">>>*" + player.getName() + "* _has reported_ *" + reported.getName() + "* _for:_ " + message));
+
             cooldown.put(player.getUniqueId(), 60);
 
             BukkitRunnable runnable = new BukkitRunnable() {
@@ -70,13 +74,11 @@ public class ReportCommand implements CommandExecutor {
                     }
                 }
             };
-            int id = runnable.runTaskTimer(plugin, 1L, 20L).getTaskId();
-
+            runnable.runTaskTimer(plugin, 1L, 20L).getTaskId();
         } else {
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
             player.sendMessage(ChatColor.RED + "You must wait " + ChatColor.YELLOW
                     + cooldown.get(player.getUniqueId()) + " seconds " + ChatColor.RED + "before you report another player!");
-            return false;
         }
         return false;
     }
