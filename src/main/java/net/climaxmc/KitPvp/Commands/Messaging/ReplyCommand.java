@@ -66,7 +66,7 @@ public class ReplyCommand implements CommandExecutor {
         player.sendMessage(ChatColor.DARK_AQUA + "You" + ChatColor.RED + " \u00BB " + ChatColor.AQUA + "" + ChatColor.BOLD + target.getName() + ChatColor.WHITE + ": " + ChatColor.AQUA + message.trim());
         target.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + player.getName() + ChatColor.DARK_AQUA + "" + ChatColor.RED + " \u00BB " + ChatColor.DARK_AQUA + "You" + ChatColor.WHITE + ": " + ChatColor.AQUA + message);
 
-        player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1, 1);
+        player.playSound(player.getLocation(), Sound.NOTE_PIANO, 2, 2);
         target.playSound(target.getLocation(), Sound.NOTE_PIANO, 2, 2);
 
         return true;
