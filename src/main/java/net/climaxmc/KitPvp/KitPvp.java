@@ -52,6 +52,7 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new BlockPlaceListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PortalListeners(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new EntityDamageByEntityListener(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerItemConsumeListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ChallengesMenu(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerProfileMenu(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new CurrencyMenu(plugin), plugin);

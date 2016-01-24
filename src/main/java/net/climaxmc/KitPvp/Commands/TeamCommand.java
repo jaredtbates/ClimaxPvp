@@ -109,6 +109,21 @@ public class TeamCommand implements CommandExecutor {
                         } else {
                             teamMessages.sendRequestMessage(player, target);
                             TeamUtils.createPendingRequest(target, player);
+                            plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
+                                @Override
+                                public void run() {
+                                    if(teamUtils.hasPendingRequest(target)) {
+                                        player.sendMessage(ChatColor.RED + "Your request to duel with "
+                                                + ChatColor.GOLD + target.getName() + ChatColor.RED + " has expired!");
+                                        player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 2, 0.5F);
+
+                                        target.sendMessage(ChatColor.GOLD + player.getName() + "'s" + ChatColor.RED + " request to duel with you has expired!");
+                                        target.playSound(target.getLocation(), Sound.NOTE_BASS_GUITAR, 2, 0.5F);
+
+                                        TeamUtils.removePendingRequest(target);
+                                    }
+                                }
+                            }, 600L);
                         }
                     }
                 }

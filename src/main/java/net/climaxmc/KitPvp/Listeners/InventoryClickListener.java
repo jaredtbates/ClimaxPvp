@@ -45,9 +45,9 @@ public class InventoryClickListener implements Listener {
                 }
             }
 
-            if (event.getClickedInventory().equals(player.getInventory()) && !event.getCurrentItem().getType().equals(Material.MUSHROOM_SOUP)) {
+            /*if (event.getClickedInventory().equals(player.getInventory()) && !event.getCurrentItem().getType().equals(Material.MUSHROOM_SOUP)) {
                 event.setCancelled(true);
-            }
+            }*/
 
             if ((KitManager.isPlayerInKit(player, BomberKit.class)
                     && event.getAction().equals(InventoryAction.HOTBAR_SWAP))
@@ -59,12 +59,10 @@ public class InventoryClickListener implements Listener {
             if (event.getCurrentItem() != null && event.getCurrentItem().getItemMeta() != null
                     && event.getCurrentItem().getItemMeta().getDisplayName() != null) {
                 if (inventory.getName().equals(ChatColor.RED + "" + ChatColor.BOLD + "Kit Selector")) {
-                    for (Kit kit : KitManager.getKits()) {
-                        if (event.getCurrentItem().getItemMeta().getDisplayName().equals(kit.getItem().getItemMeta().getDisplayName())) {
-                            kit.wearCheckLevel(player);
-                            plugin.getServer().getScheduler().runTask(plugin, player::closeInventory);
-                        }
-                    }
+                    KitManager.getKits().stream().filter(kit -> event.getCurrentItem().getItemMeta().getDisplayName().equals(kit.getItem().getItemMeta().getDisplayName())).forEach(kit -> {
+                        kit.wearCheckLevel(player);
+                        plugin.getServer().getScheduler().runTask(plugin, player::closeInventory);
+                    });
                     event.setCancelled(true);
                 }
             }

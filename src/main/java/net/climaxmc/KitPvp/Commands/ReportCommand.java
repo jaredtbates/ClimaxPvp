@@ -59,7 +59,7 @@ public class ReportCommand implements CommandExecutor {
                     .hasRank(Rank.HELPER)).forEach(staff -> staff.playSound(staff.getLocation(), Sound.NOTE_PIANO, 2, 2));
 
             SlackApi slack = new SlackApi("https://hooks.slack.com/services/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");
-            slack.call(new SlackMessage("Climax Reports", ">>>*" + player.getName() + "* _has reported_ *" + reported.getName() + "* _for:_ " + message));
+            slack.call(new SlackMessage("Player Reported!", ">>>*" + player.getName() + "* _has reported_ *" + reported.getName() + "* _for:_ " + message));
 
             cooldown.put(player.getUniqueId(), 60);
 

@@ -30,6 +30,12 @@
             <artifactId>json</artifactId>
             <version>LATEST</version>
         </dependency>
+
+        <dependency>
+            <groupId>net.gpedro.integrations.slack</groupId>
+            <artifactId>slack-webhook</artifactId>
+            <version>1.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -77,6 +83,7 @@
                     <artifactSet>
                         <includes>
                             <include>org.json:json</include>
+                            <include>net.gpedro.integrations.slack:slack-webhook</include>
                         </includes>
                     </artifactSet>
                     <finalName>${project.artifactId}</finalName>
