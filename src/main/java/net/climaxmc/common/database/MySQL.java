@@ -201,12 +201,12 @@ public class MySQL {
         ResultSet duelData = executeQuery(GET_DUELDATA, uuid.toString());
         ResultSet playerSettings = executeQuery(GET_SETTINGS, uuid.toString());
 
-        if (data == null /*|| duelData == null || playerSettings == null*/) {
+        if (data == null || duelData == null || playerSettings == null) {
             return null;
         }
 
         try {
-            if (data.next() /*&& duelData.next() && playerSettings.next()*/) {
+            if (data.next() && duelData.next() && playerSettings.next()) {
                 Rank rank = Rank.valueOf(data.getString("rank"));
                 int balance = data.getInt("balance");
                 int kills = data.getInt("kills");
