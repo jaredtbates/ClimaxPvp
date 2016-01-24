@@ -4,6 +4,8 @@ import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
+import net.gpedro.integrations.slack.SlackApi;
+import net.gpedro.integrations.slack.SlackMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -74,6 +76,15 @@ public class BanCommand implements CommandExecutor {
                         plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
                         staff.sendMessage(ChatColor.RED + player.getName() + " permanently banned "
                                 + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for " + finalReason));
+
+                SlackMessage message = new SlackMessage(">>>*" + player.getName() +
+                        "* _permanently banned_ *" + target.getName() + "* _for:_ " + reason);
+                message.setChannel("#general");
+                message.setIcon("http://i.imgur.com/vm2Kaw8.png");
+                message.setUsername("Climax Bans");
+                SlackApi slack = new SlackApi("https://hooks.slack.com/services/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");
+                slack.call(message);
+
                 target.kickPlayer(ChatColor.RED + "You were permanently banned by " + player.getName() + " for " + reason + "\n"
                         + "Appeal on forums.climaxmc.net if you believe that this is in error!");
             } else {

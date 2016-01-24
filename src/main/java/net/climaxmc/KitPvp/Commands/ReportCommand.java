@@ -58,7 +58,8 @@ public class ReportCommand implements CommandExecutor {
             plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff)
                     .hasRank(Rank.HELPER)).forEach(staff -> staff.playSound(staff.getLocation(), Sound.NOTE_PIANO, 2, 2));
 
-            plugin.getSlack().call(new SlackMessage("Player Reported!", ">>>*" + player.getName() + "* _has reported_ *" + reported.getName() + "* _for:_ " + message));
+            SlackApi slack = new SlackApi("https://hooks.slack.com/services/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");
+            slack.call(new SlackMessage("Climax Reports", ">>>*" + player.getName() + "* _has reported_ *" + reported.getName() + "* _for:_ " + message));
 
             player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
 
