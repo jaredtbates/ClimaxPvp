@@ -77,7 +77,7 @@ public class BanCommand implements CommandExecutor {
                         staff.sendMessage(ChatColor.RED + player.getName() + " permanently banned "
                                 + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for " + finalReason));
 
-                SlackMessage message = new SlackMessage("*" + player.getName() +
+                SlackMessage message = new SlackMessage(">>>*" + player.getName() +
                         "* _permanently banned_ *" + target.getName() + "* _for:_ " + reason);
                 message.setChannel("#general");
                 message.setIcon("http://i.imgur.com/vm2Kaw8.png");

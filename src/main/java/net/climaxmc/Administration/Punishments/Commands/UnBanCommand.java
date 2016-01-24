@@ -55,7 +55,7 @@ public class UnBanCommand implements CommandExecutor {
                             staff.sendMessage(ChatColor.RED
                                     + plugin.getServer().getOfflinePlayer(targetData.getUuid()).getName() + " was unbanned by the console."));
 
-                    SlackMessage message = new SlackMessage("*" + target.getName() + "* _was unbanned by the console._");
+                    SlackMessage message = new SlackMessage(">>>*" + target.getName() + "* _was unbanned by the console._");
                     message.setChannel("#general");
                     message.setIcon("http://i.imgur.com/vm2Kaw8.png");
                     message.setUsername("Climax Bans");
@@ -104,7 +104,7 @@ public class UnBanCommand implements CommandExecutor {
                             staff.sendMessage(ChatColor.RED + player.getName() + " unbanned "
                                     + plugin.getServer().getOfflinePlayer(targetData.getUuid()).getName() + "."));
 
-                    SlackMessage message = new SlackMessage("*" + player.getName() +
+                    SlackMessage message = new SlackMessage(">>>*" + player.getName() +
                             "* _unbanned_ *" + target.getName() + "*");
                     message.setChannel("#general");
                     message.setIcon("http://i.imgur.com/vm2Kaw8.png");
