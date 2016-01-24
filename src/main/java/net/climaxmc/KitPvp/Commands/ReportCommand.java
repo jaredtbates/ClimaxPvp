@@ -57,6 +57,8 @@ public class ReportCommand implements CommandExecutor {
 
             plugin.getSlack().call(new SlackMessage("Player Reported!", ">>>*" + player.getName() + "* _has reported_ *" + reported.getName() + "* _for:_ " + message));
 
+            player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
+
             cooldown.put(player.getUniqueId(), 60);
 
             BukkitRunnable runnable = new BukkitRunnable() {
