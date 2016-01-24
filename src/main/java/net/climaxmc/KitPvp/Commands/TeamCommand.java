@@ -121,8 +121,6 @@ public class TeamCommand implements CommandExecutor {
                                         target.playSound(target.getLocation(), Sound.NOTE_BASS_GUITAR, 2, 0.5F);
 
                                         TeamUtils.removePendingRequest(target);
-                                    } else {
-                                        return;
                                     }
                                 }
                             }, 600L);
