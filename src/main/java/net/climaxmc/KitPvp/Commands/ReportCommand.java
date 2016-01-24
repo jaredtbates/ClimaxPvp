@@ -62,10 +62,6 @@ public class ReportCommand implements CommandExecutor {
 
             player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
 
-            player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
-
-            player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
-
             cooldown.put(player.getUniqueId(), 60);
 
             BukkitRunnable runnable = new BukkitRunnable() {
