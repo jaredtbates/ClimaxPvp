@@ -98,3 +98,6 @@ commands:
   team:
     description: Team up with another player
     aliases: ally
+  duel:
+    description: Duel another player
+    aliases: 1v1
