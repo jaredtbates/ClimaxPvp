@@ -79,7 +79,7 @@ public class ReportCommand implements CommandExecutor {
                     }
                 }
             };
-            int id = runnable.runTaskTimer(plugin, 1L, 20L).getTaskId();
+            runnable.runTaskTimer(plugin, 1L, 20L).getTaskId();
 
         } else {
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
