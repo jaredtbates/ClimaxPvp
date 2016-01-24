@@ -71,9 +71,8 @@ public class MessageCommand implements CommandExecutor {
         } else if (target.getUniqueId().toString().equals("66ca47bf-14ae-405b-9ff5-ef4bb98035eb")) {
             player.sendMessage(ChatColor.RED + "Gamer is often AFK due to plugin development. He'll get back to you when he can!");
         }
-    
 
-        player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1, 1);
+        player.playSound(player.getLocation(), Sound.NOTE_PIANO, 2, 2);
         target.playSound(target.getLocation(), Sound.NOTE_PIANO, 2, 2);
 
         return true;
