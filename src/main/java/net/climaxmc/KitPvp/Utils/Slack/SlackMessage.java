@@ -30,9 +30,6 @@ public class SlackMessage {
     private boolean unfurlMedia = false;
     private boolean unfurlLinks = false;
 
-    public SlackMessage() {
-    }
-
     public SlackMessage(String text) {
         this(null, null, text);
     }

@@ -58,6 +58,7 @@ public class ClimaxPvp extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         // Initialize Instance
         instance = this;
 
