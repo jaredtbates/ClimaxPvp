@@ -53,9 +53,6 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new EntityDamageByEntityListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerItemConsumeListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ChallengesMenu(), plugin);
-        //plugin.getServer().getPluginManager().registerEvents(new PlayerProfileMenu(plugin), plugin);
-        //plugin.getServer().getPluginManager().registerEvents(new CurrencyMenu(plugin), plugin);
-        //plugin.getServer().getPluginManager().registerEvents(new AchievementMenu(plugin), plugin);
         //plugin.getServer().getPluginManager().registerEvents(new HackListeners(plugin), plugin);
 
         // Register commands
@@ -79,7 +76,6 @@ public class KitPvp {
         plugin.getCommand("baltop").setExecutor(new BalanceTopCommand(plugin));
         plugin.getCommand("youtube").setExecutor(new YoutubeCommand(plugin));
         plugin.getCommand("pei").setExecutor(new PeiCommand());
-        //plugin.getCommand("duel").setExecutor(new DuelCommand(plugin));
         plugin.getCommand("team").setExecutor(new TeamCommand(plugin));
         plugin.getCommand("staff").setExecutor(new StaffChat(plugin));
     }
