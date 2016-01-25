@@ -11,6 +11,7 @@ import net.climaxmc.KitPvp.Commands.Messaging.ReplyCommand;
 import net.climaxmc.KitPvp.Commands.Messaging.StaffChat;
 import net.climaxmc.KitPvp.Listeners.*;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
+import net.climaxmc.KitPvp.Menus.ReportGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
@@ -53,6 +54,8 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new EntityDamageByEntityListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerItemConsumeListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ChallengesMenu(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new ReportGUI(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new InventoryCloseListener(plugin), plugin);
         //plugin.getServer().getPluginManager().registerEvents(new HackListeners(plugin), plugin);
 
         // Register commands

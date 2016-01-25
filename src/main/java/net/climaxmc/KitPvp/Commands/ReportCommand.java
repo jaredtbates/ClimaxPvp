@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Menus.ReportGUI;
 import net.climaxmc.common.database.Rank;
 import net.gpedro.integrations.slack.SlackApi;
 import net.gpedro.integrations.slack.SlackMessage;
@@ -19,7 +20,8 @@ import java.util.UUID;
 public class ReportCommand implements CommandExecutor {
     private ClimaxPvp plugin;
 
-    private HashMap<UUID, Integer> cooldown = new HashMap<>();
+    public HashMap<UUID, Integer> cooldown = new HashMap<>();
+    public static HashMap<UUID, String> reportBuilders = new HashMap<>();
 
     public ReportCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
@@ -33,12 +35,17 @@ public class ReportCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        if (args.length < 2) {
-            player.sendMessage(ChatColor.RED + "/report <player> <reason>");
+        if (args.length < 1) {
+            player.sendMessage(ChatColor.RED + "/report <player>");
             return true;
         }
 
-        Player reported = plugin.getServer().getPlayer(args[0]);
+        if (args.length > 1) {
+            player.sendMessage(ChatColor.RED + "/report <player>");
+            return true;
+        }
+
+        Player reported = plugin.getServer().getPlayerExact(args[0]);
 
         if (reported == null) {
             player.sendMessage(ChatColor.RED + "That player is not online!");
@@ -46,41 +53,9 @@ public class ReportCommand implements CommandExecutor {
         }
 
         if (!cooldown.containsKey(player.getUniqueId())) {
-            String message = StringUtils.join(args, ' ', 1, args.length);
-
-            player.sendMessage(ChatColor.GREEN + "You have successfully reported "
-                    + ChatColor.DARK_AQUA + reported.getName() + ChatColor.GREEN + "!");
-
-            plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff)
-                    .hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName()
-                    + " has reported " + ChatColor.BOLD + reported.getName() + ChatColor.RED + " for " + message + "!"));
-
-            plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff)
-                    .hasRank(Rank.HELPER)).forEach(staff -> staff.playSound(staff.getLocation(), Sound.NOTE_PIANO, 2, 2));
-
-            plugin.getSlack().call(new SlackMessage("Climax Reports", ">>>*" + player.getName() + "* _has reported_ *" + reported.getName() + "* _for:_ " + message));
-
-            player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
-
-            cooldown.put(player.getUniqueId(), 60);
-
-            BukkitRunnable runnable = new BukkitRunnable() {
-                @Override
-                public void run() {
-                    if (cooldown.get(player.getUniqueId()) >= 0) {
-                        cooldown.replace(player.getUniqueId(), cooldown.get(player.getUniqueId()) - 1);
-                    }
-
-                    if (cooldown.get(player.getUniqueId()) == 0) {
-                        cooldown.remove(player.getUniqueId());
-                        player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1, 1.5F);
-                        player.sendMessage(ChatColor.GREEN + "You are now able to report another player!");
-                        this.cancel();
-                    }
-                }
-            };
-            runnable.runTaskTimer(plugin, 1L, 20L).getTaskId();
-
+            ReportGUI reportGUI = new ReportGUI(plugin);
+            reportBuilders.put(player.getUniqueId(), " ");
+            reportGUI.openInventory(player, reported);
         } else {
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
             player.sendMessage(ChatColor.RED + "You must wait " + ChatColor.YELLOW

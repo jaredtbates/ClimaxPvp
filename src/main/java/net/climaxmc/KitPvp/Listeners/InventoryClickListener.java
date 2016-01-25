@@ -1,23 +1,25 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Kit;
+import net.climaxmc.KitPvp.Commands.ReportCommand;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Kits.BomberKit;
+import net.climaxmc.KitPvp.Menus.ReportGUI;
 import net.climaxmc.KitPvp.Utils.Challenges.Challenge;
-import net.climaxmc.KitPvp.Utils.Duels.DuelsMessages;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
+
+import java.util.List;
 
 public class InventoryClickListener implements Listener {
     private ClimaxPvp plugin;
@@ -26,14 +28,18 @@ public class InventoryClickListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onInventoryClick(InventoryClickEvent event) {
         Inventory inventory = event.getInventory();
         final Player player = (Player) event.getWhoClicked();
 
         if (!player.getGameMode().equals(GameMode.CREATIVE)) {
-            if (inventory == null || event.getClickedInventory() == null || event.getSlotType() == null) {
+            if (event.getSlotType() == null || event.getCurrentItem() == null
+                    || event.getCurrentItem().getType() == null) {
                 return;
+            }
+            if (inventory == player.getInventory()) {
+                event.setCancelled(true);
             }
 
             for (ItemStack itemStack : player.getInventory().getArmorContents()) {
@@ -59,7 +65,8 @@ public class InventoryClickListener implements Listener {
             if (event.getCurrentItem() != null && event.getCurrentItem().getItemMeta() != null
                     && event.getCurrentItem().getItemMeta().getDisplayName() != null) {
                 if (inventory.getName().equals(ChatColor.RED + "" + ChatColor.BOLD + "Kit Selector")) {
-                    KitManager.getKits().stream().filter(kit -> event.getCurrentItem().getItemMeta().getDisplayName().equals(kit.getItem().getItemMeta().getDisplayName())).forEach(kit -> {
+                    KitManager.getKits().stream().filter(kit -> event.getCurrentItem().getItemMeta().getDisplayName()
+                            .equals(kit.getItem().getItemMeta().getDisplayName())).forEach(kit -> {
                         kit.wearCheckLevel(player);
                         plugin.getServer().getScheduler().runTask(plugin, player::closeInventory);
                     });
@@ -67,7 +74,6 @@ public class InventoryClickListener implements Listener {
                 }
             }
 
-            // TODO: This code can probably be cleaned up a bit -Bert
             if (inventory.getName().equals("Challenges")) {
                 ItemStack clickedItem = event.getCurrentItem();
                 if (clickedItem.getType().equals(Material.MAP)) {
@@ -110,7 +116,8 @@ public class InventoryClickListener implements Listener {
                     player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                     long cooldown = plugin.getChallengesFiles().getChallenge(clickedItem.getItemMeta().getDisplayName()).getCooldownTime()
                             - ((System.currentTimeMillis() / 1000)
-                            - (plugin.getChallengesFiles().getCompletedTime(player, plugin.getChallengesFiles().getChallenge(clickedItem.getItemMeta().getDisplayName()))));
+                            - (plugin.getChallengesFiles().getCompletedTime(player,
+                            plugin.getChallengesFiles().getChallenge(clickedItem.getItemMeta().getDisplayName()))));
                     if (cooldown >= 86400) {
                         cooldown = ((cooldown / 60) / 60) / 24;
                         if (cooldown == 1)
@@ -136,40 +143,63 @@ public class InventoryClickListener implements Listener {
                             player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " seconds to start this challenge again!");
                     }
                 }
-
                 event.setCancelled(true);
             }
-
-            if (inventory.getName().equals("Select a Player to Duel")) {
-                ItemStack clickedItem = event.getCurrentItem();
-                DuelsMessages duelsMessages = new DuelsMessages(plugin);
-                if (clickedItem.getType().equals(Material.SKULL_ITEM)) {
-                    SkullMeta meta = (SkullMeta) clickedItem.getItemMeta();
-                    Player target = plugin.getServer().getPlayer(meta.getOwner());
-                    duelsMessages.sendDuelRequestMessage(player, target);
-                    player.closeInventory();
+            if (event.getClickedInventory().getName().contains("Climax Reports")) {
+                ItemStack item = event.getCurrentItem();
+                ReportGUI reportGUI = new ReportGUI(plugin);
+                String targetName = inventory.getName().replace("Climax Reports: ", "");
+                Player target = plugin.getServer().getPlayerExact(targetName);
+                player.sendMessage(targetName);
+                int slot = event.getSlot();
+                if (item.getType().equals(Material.BOOK)) {
+                    if (!ReportCommand.reportBuilders.get(player.getUniqueId()).equals(" ")) {
+                        ReportCommand.reportBuilders.put(player.getUniqueId(),
+                                ReportCommand.reportBuilders.get(player.getUniqueId())
+                                        + item.getItemMeta().getDisplayName().replace(ChatColor.RED + "", ", "));
+                    }
+                    if (ReportCommand.reportBuilders.get(player.getUniqueId()).equals(" ")) {
+                        ReportCommand.reportBuilders.put(player.getUniqueId(),
+                                ReportCommand.reportBuilders.get(player.getUniqueId())
+                                        + item.getItemMeta().getDisplayName().replace(ChatColor.RED + "", ""));
+                    }
+                    reportGUI.setWool(inventory, target, ReportCommand.reportBuilders.get(player.getUniqueId()));
+                    inventory.setItem(slot, reportGUI.setSelected(item));
+                }
+                if (item.getType().equals(Material.ENCHANTED_BOOK)) {
+                    if (ReportCommand.reportBuilders.get(player.getUniqueId()).equals(" ")) {
+                        return;
+                    }
+                    if (ReportCommand.reportBuilders.get(player.getUniqueId()).contains(", ")) {
+                        ReportCommand.reportBuilders.put(player.getUniqueId(),
+                                ReportCommand.reportBuilders.get(player.getUniqueId())
+                                        .replace(item.getItemMeta().getDisplayName().replace(ChatColor.GREEN + "", ""), ""));
+                    }
+                    if (!ReportCommand.reportBuilders.get(player.getUniqueId()).contains(", ")) {
+                        ReportCommand.reportBuilders.put(player.getUniqueId(),
+                                ReportCommand.reportBuilders.get(player.getUniqueId())
+                                        .replace(item.getItemMeta().getDisplayName().replace(ChatColor.GREEN + "", ""), ""));
+                    }
+                    reportGUI.setWool(inventory, target, ReportCommand.reportBuilders.get(player.getUniqueId()));
+                    inventory.setItem(slot, reportGUI.setUnSelected(item));
+                }
+                if (item.getType().equals(Material.WOOL)) {
+                    List<String> lore = item.getItemMeta().getLore();
+                    String message = ReportCommand.reportBuilders.get(player.getUniqueId());
+                    if (message.equals(" ")) {
+                        player.closeInventory();
+                        player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                        player.sendMessage(ChatColor.RED + "You tried to report a player without selecting any report options!" +
+                                " Try selecting report options next time!");
+                    } else {
+                        reportGUI.report(player, target, message);
+                    }
                 }
                 event.setCancelled(true);
             }
 
-            if (inventory.getName().equals("Profile Menu")) {
-                ItemStack clickedItem = event.getCurrentItem();
-                if (clickedItem.getType().equals(Material.SKULL_ITEM)) {
-                    player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1.4F);
-                    player.sendMessage("  " + ChatColor.GOLD + "ClimaxMC Forums: " + ChatColor.AQUA + "https://forums.climaxmc.net/");
-                    player.closeInventory();
-                }
-                event.setCancelled(true);
-            }
-
-            if (inventory.getName().equals("Your Bank")) {
-                event.setCancelled(true);
-            }
-
-            if (inventory.getName().equals("Achievements")) {
-
-                event.setCancelled(true);
-            }
+        } else {
+            event.setCancelled(false);
         }
     }
 }
