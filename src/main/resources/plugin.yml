@@ -98,3 +98,6 @@ commands:
   team:
     description: Team up with another player
     aliases: ally
+  staff:
+    description: In-game Staff Chat
+    aliases: [s, staffchat]
