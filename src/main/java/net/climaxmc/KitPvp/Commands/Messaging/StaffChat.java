@@ -40,7 +40,7 @@ public class StaffChat implements CommandExecutor {
                     String message = StringUtils.join(args, ' ', 0, args.length);
 
                     plugin.getServer().getOnlinePlayers().stream().filter(players ->
-                            plugin.getPlayerData(players).hasRank(Rank.HELPER) && ChatCommands.staffChat.contains(players.getUniqueId()))
+                            plugin.getPlayerData(players).hasRank(Rank.HELPER))
                             .forEach(players -> players.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "[STAFF] "
                                     + ChatColor.RED + player.getName() + ": " + message));
                 }

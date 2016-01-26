@@ -109,14 +109,6 @@ public class PlayerJoinListener implements Listener {
             ChatCommands.cmdspies.remove(player.getUniqueId());
         }
 
-        if (ChatCommands.staffChat.contains(player.getUniqueId()) && !playerData.hasRank(Rank.HELPER)) {
-            ChatCommands.staffChat.remove(player.getUniqueId());
-        }
-
-        if (playerData.hasRank(Rank.HELPER) && !ChatCommands.staffChat.contains(player.getUniqueId())) {
-            ChatCommands.staffChat.add(player.getUniqueId());
-        }
-
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard board = manager.getNewScoreboard();
 
