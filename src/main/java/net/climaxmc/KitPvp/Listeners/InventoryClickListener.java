@@ -20,7 +20,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class InventoryClickListener implements Listener {
     private ClimaxPvp plugin;
@@ -159,7 +158,7 @@ public class InventoryClickListener implements Listener {
                     rm.add(item.getItemMeta().getDisplayName().replace(ChatColor.RED + "", ""));
                     int size = ReportCommand.reportArray.get(player.getUniqueId()).size();
                     for (int i = 0; i <= size - 1; i++) {
-                        if(message != null) {
+                        if (message != null) {
                             message = message + ", " + rm.get(i);
                         } else {
                             message = rm.get(i);
@@ -173,7 +172,7 @@ public class InventoryClickListener implements Listener {
                     message = null;
                     int size = ReportCommand.reportArray.get(player.getUniqueId()).size();
                     for (int i = 0; i <= size - 1; i++) {
-                        if(message != null) {
+                        if (message != null) {
                             message = message + ", " + rm.get(i);
                         } else {
                             message = rm.get(i);
@@ -203,7 +202,7 @@ public class InventoryClickListener implements Listener {
                             player.closeInventory();
                         }
                     }
-                    if(item.getDurability() == 14) {
+                    if (item.getDurability() == 14) {
                         player.closeInventory();
                         player.sendMessage(ChatColor.RED + "Report cancelled.");
                     }

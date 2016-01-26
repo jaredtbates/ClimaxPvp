@@ -1,8 +1,8 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Commands.ReportCommand;
 import net.climaxmc.KitPvp.KitPvp;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -23,6 +23,18 @@ public class PlayerQuitListener implements Listener {
 
         if (KitPvp.killStreak.containsKey(player.getUniqueId())) {
             KitPvp.killStreak.remove(player.getUniqueId());
+        }
+
+        if (ReportCommand.reportBuilders.containsKey(player.getUniqueId())) {
+            ReportCommand.reportBuilders.remove(player.getUniqueId());
+        } else {
+            return;
+        }
+
+        if (ReportCommand.reportArray.containsKey(player.getUniqueId())) {
+            ReportCommand.reportArray.remove(player.getUniqueId());
+        } else {
+            return;
         }
 
         if (plugin.getServer().getOnlinePlayers().size() < 7) {
@@ -48,8 +60,6 @@ public class PlayerQuitListener implements Listener {
                 }
             }
         }*/
-
-        //DuelsUtils.removeDuel(player);
 
         event.setQuitMessage(null/*ChatColor.RED + "Quit" + ChatColor.DARK_GRAY + "\u00bb " + player.getName()*/);
 

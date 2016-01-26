@@ -113,9 +113,9 @@ public class ReportGUI implements Listener {
                 .name(ChatColor.GREEN + "" + ChatColor.BOLD + "ACCEPT & SEND").durability(5);
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.GRAY + "Reporting: " + ChatColor.YELLOW + target.getName());
-        if(message != null) {
+        if (message != null) {
             lore.add(ChatColor.GRAY + "For: " + ChatColor.GOLD + message);
-        } else  {
+        } else {
             lore.add(ChatColor.GRAY + "For: " + ChatColor.RED + "Nothing here yet! Click the books");
             lore.add(ChatColor.RED + "        to add reasons to your report!");
         }

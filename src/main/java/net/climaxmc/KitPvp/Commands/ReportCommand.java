@@ -2,17 +2,12 @@ package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Menus.ReportGUI;
-import net.climaxmc.common.database.Rank;
-import net.gpedro.integrations.slack.SlackApi;
-import net.gpedro.integrations.slack.SlackMessage;
 import net.md_5.bungee.api.ChatColor;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
