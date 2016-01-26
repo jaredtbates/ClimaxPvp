@@ -19,6 +19,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryClickListener implements Listener {
@@ -150,49 +151,61 @@ public class InventoryClickListener implements Listener {
                 ReportGUI reportGUI = new ReportGUI(plugin);
                 String targetName = inventory.getName().replace("Climax Reports: ", "");
                 Player target = plugin.getServer().getPlayerExact(targetName);
-                player.sendMessage(targetName);
                 int slot = event.getSlot();
+                String message = ReportCommand.reportBuilders.get(player.getUniqueId());
+                ArrayList<String> rm = ReportCommand.reportArray.get(player.getUniqueId());
+
                 if (item.getType().equals(Material.BOOK)) {
-                    if (!ReportCommand.reportBuilders.get(player.getUniqueId()).equals(" ")) {
-                        ReportCommand.reportBuilders.put(player.getUniqueId(),
-                                ReportCommand.reportBuilders.get(player.getUniqueId())
-                                        + item.getItemMeta().getDisplayName().replace(ChatColor.RED + "", ", "));
+                    rm.add(item.getItemMeta().getDisplayName().replace(ChatColor.RED + "", ""));
+                    int size = ReportCommand.reportArray.get(player.getUniqueId()).size();
+                    for (int i = 0; i <= size - 1; i++) {
+                        if(message != null) {
+                            message = message + ", " + rm.get(i);
+                        } else {
+                            message = rm.get(i);
+                        }
                     }
-                    if (ReportCommand.reportBuilders.get(player.getUniqueId()).equals(" ")) {
-                        ReportCommand.reportBuilders.put(player.getUniqueId(),
-                                ReportCommand.reportBuilders.get(player.getUniqueId())
-                                        + item.getItemMeta().getDisplayName().replace(ChatColor.RED + "", ""));
-                    }
-                    reportGUI.setWool(inventory, target, ReportCommand.reportBuilders.get(player.getUniqueId()));
+                    reportGUI.setWool(inventory, target, message);
                     inventory.setItem(slot, reportGUI.setSelected(item));
                 }
                 if (item.getType().equals(Material.ENCHANTED_BOOK)) {
-                    if (ReportCommand.reportBuilders.get(player.getUniqueId()).equals(" ")) {
-                        return;
+                    rm.remove(item.getItemMeta().getDisplayName().replace(ChatColor.GREEN + "", ""));
+                    message = null;
+                    int size = ReportCommand.reportArray.get(player.getUniqueId()).size();
+                    for (int i = 0; i <= size - 1; i++) {
+                        if(message != null) {
+                            message = message + ", " + rm.get(i);
+                        } else {
+                            message = rm.get(i);
+                        }
                     }
-                    if (ReportCommand.reportBuilders.get(player.getUniqueId()).contains(", ")) {
-                        ReportCommand.reportBuilders.put(player.getUniqueId(),
-                                ReportCommand.reportBuilders.get(player.getUniqueId())
-                                        .replace(item.getItemMeta().getDisplayName().replace(ChatColor.GREEN + "", ""), ""));
-                    }
-                    if (!ReportCommand.reportBuilders.get(player.getUniqueId()).contains(", ")) {
-                        ReportCommand.reportBuilders.put(player.getUniqueId(),
-                                ReportCommand.reportBuilders.get(player.getUniqueId())
-                                        .replace(item.getItemMeta().getDisplayName().replace(ChatColor.GREEN + "", ""), ""));
-                    }
-                    reportGUI.setWool(inventory, target, ReportCommand.reportBuilders.get(player.getUniqueId()));
+                    reportGUI.setWool(inventory, target, message);
                     inventory.setItem(slot, reportGUI.setUnSelected(item));
                 }
                 if (item.getType().equals(Material.WOOL)) {
-                    List<String> lore = item.getItemMeta().getLore();
-                    String message = ReportCommand.reportBuilders.get(player.getUniqueId());
-                    if (message.equals(" ")) {
+                    if (item.getDurability() == 5) {
+                        message = null;
+                        int size = ReportCommand.reportArray.get(player.getUniqueId()).size();
+                        for (int i = 0; i <= size - 1; i++) {
+                            if (message != null) {
+                                message = message + ", " + rm.get(i);
+                            } else {
+                                message = rm.get(i);
+                            }
+                        }
+                        if (message == null) {
+                            player.closeInventory();
+                            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                            player.sendMessage(ChatColor.RED + "You tried to report a player without selecting any report options!" +
+                                    " Try selecting report options next time!");
+                        } else {
+                            reportGUI.report(player, target, message);
+                            player.closeInventory();
+                        }
+                    }
+                    if(item.getDurability() == 14) {
                         player.closeInventory();
-                        player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                        player.sendMessage(ChatColor.RED + "You tried to report a player without selecting any report options!" +
-                                " Try selecting report options next time!");
-                    } else {
-                        reportGUI.report(player, target, message);
+                        player.sendMessage(ChatColor.RED + "Report cancelled.");
                     }
                 }
                 event.setCancelled(true);

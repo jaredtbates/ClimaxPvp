@@ -14,14 +14,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
 public class ReportCommand implements CommandExecutor {
     private ClimaxPvp plugin;
 
-    public HashMap<UUID, Integer> cooldown = new HashMap<>();
+    public static HashMap<UUID, Integer> cooldown = new HashMap<>();
     public static HashMap<UUID, String> reportBuilders = new HashMap<>();
+    public static HashMap<UUID, ArrayList<String>> reportArray = new HashMap<>();
 
     public ReportCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
@@ -54,7 +56,8 @@ public class ReportCommand implements CommandExecutor {
 
         if (!cooldown.containsKey(player.getUniqueId())) {
             ReportGUI reportGUI = new ReportGUI(plugin);
-            reportBuilders.put(player.getUniqueId(), " ");
+            reportBuilders.put(player.getUniqueId(), null);
+            reportArray.put(player.getUniqueId(), new ArrayList<>());
             reportGUI.openInventory(player, reported);
         } else {
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
