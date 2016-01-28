@@ -27,14 +27,10 @@ public class PlayerQuitListener implements Listener {
 
         if (ReportCommand.reportBuilders.containsKey(player.getUniqueId())) {
             ReportCommand.reportBuilders.remove(player.getUniqueId());
-        } else {
-            return;
         }
 
         if (ReportCommand.reportArray.containsKey(player.getUniqueId())) {
             ReportCommand.reportArray.remove(player.getUniqueId());
-        } else {
-            return;
         }
 
         if (plugin.getServer().getOnlinePlayers().size() < 7) {
