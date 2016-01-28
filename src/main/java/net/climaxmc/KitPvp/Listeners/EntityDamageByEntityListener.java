@@ -20,9 +20,10 @@ public class EntityDamageByEntityListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOW)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (event.getEntityType() != EntityType.PLAYER || event.getDamager().getType() != EntityType.PLAYER) {
+        if (event.getEntityType() != EntityType.PLAYER || event.getDamager().getType() != EntityType.PLAYER
+            || event.getDamager().getType() != EntityType.ARROW || event.getDamager().getType() != EntityType.FISHING_HOOK) {
             event.setCancelled(true);
         }
 
