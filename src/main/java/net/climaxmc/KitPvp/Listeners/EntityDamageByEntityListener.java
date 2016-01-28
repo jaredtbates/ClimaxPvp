@@ -9,6 +9,7 @@ import org.bukkit.block.DoubleChest;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
@@ -25,6 +26,7 @@ public class EntityDamageByEntityListener implements Listener {
         if (event.getEntityType() != EntityType.PLAYER || event.getDamager().getType() != EntityType.PLAYER
             || event.getDamager().getType() != EntityType.ARROW || event.getDamager().getType() != EntityType.FISHING_HOOK) {
             event.setCancelled(true);
+            return;
         }
 
         Player player = (Player) event.getDamager();
