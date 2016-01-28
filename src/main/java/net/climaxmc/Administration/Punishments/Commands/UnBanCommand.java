@@ -79,7 +79,7 @@ public class UnBanCommand implements CommandExecutor {
             }
 
             OfflinePlayer target = plugin.getServer().getOfflinePlayer(args[0]);
-            PlayerData targetData = plugin.getPlayerData(target);
+            PlayerData targetData = plugin.getMySQL().getPlayerData(target.getUniqueId());
 
             if (targetData == null) {
                 player.sendMessage(ChatColor.RED + "That player is not online or doesn't exist!");
