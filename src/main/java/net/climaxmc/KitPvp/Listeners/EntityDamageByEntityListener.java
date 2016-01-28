@@ -6,8 +6,7 @@ import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Dispenser;
 import org.bukkit.block.DoubleChest;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -29,14 +28,25 @@ public class EntityDamageByEntityListener implements Listener {
             return;
         }
 
-        Player player = (Player) event.getDamager();
-        Player target = (Player) event.getEntity();
+        if (event.getEntityType().equals(EntityType.PLAYER)) {
+            Player target = (Player) event.getEntity();
+            Player player = null;
 
-        if ((KitPvp.currentTeams.containsKey(player.getName())
-                && KitPvp.currentTeams.get(player.getName()).equals(target.getName()))
-                || (KitPvp.currentTeams.containsKey(target.getName())
-                && KitPvp.currentTeams.get(target.getName()).equals(player.getName()))) {
-            event.setCancelled(true);
+            if (event.getEntityType().equals(EntityType.PLAYER) && event.getDamager().getType().equals(EntityType.PLAYER)) {
+                player = (Player) event.getDamager();
+            } else if (event.getDamager().getType().equals(EntityType.ARROW) || event.getDamager().getType().equals(EntityType.FISHING_HOOK)) {
+                Projectile projectile = (Projectile) event.getDamager();
+                if (projectile.getShooter() instanceof Player) {
+                    player = (Player) projectile.getShooter();
+                }
+            }
+
+            if (player != null && ((KitPvp.currentTeams.containsKey(player.getName())
+                    && KitPvp.currentTeams.get(player.getName()).equals(target.getName()))
+                    || (KitPvp.currentTeams.containsKey(target.getName())
+                    && KitPvp.currentTeams.get(target.getName()).equals(player.getName())))) {
+                event.setCancelled(true);
+            }
         }
     }
 }
