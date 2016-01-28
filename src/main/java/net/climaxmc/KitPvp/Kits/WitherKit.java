@@ -71,6 +71,9 @@ public class WitherKit extends Kit {
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         player.getInventory().setBoots(boots);
         player.getInventory().setItem(17, new ItemStack(Material.ARROW, 64));
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
     }
 
     @EventHandler

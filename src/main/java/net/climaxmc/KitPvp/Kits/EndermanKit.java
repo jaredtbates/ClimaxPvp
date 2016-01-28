@@ -55,6 +55,9 @@ public class EndermanKit extends Kit {
         player.getInventory().addItem(sword);
         ItemStack pearl = new ItemStack(Material.ENDER_PEARL, 16);
         player.getInventory().addItem(pearl);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
     }
     
     @EventHandler

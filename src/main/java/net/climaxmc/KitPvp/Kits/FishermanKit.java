@@ -51,6 +51,9 @@ public class FishermanKit extends Kit {
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         player.getInventory().setBoots(boots);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
     }
 
     @EventHandler
