@@ -64,7 +64,6 @@ public class UnBanCommand implements CommandExecutor {
                 System.out.print(ChatColor.RED + "That player is not banned!");
             }
         } else {
-
             Player player = (Player) sender;
             PlayerData playerData = plugin.getPlayerData(player);
 
