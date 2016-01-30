@@ -62,7 +62,7 @@ public class MuteCommand implements CommandExecutor {
             Player target = Bukkit.getPlayer(targetData.getUuid());
             if (target != null) {
                 target.sendMessage(ChatColor.RED + "You were permanently muted by " + player.getName() + " for " + reason + "\n"
-                        + "Appeal on forums.climaxmc.net if you believe that this is an error!");
+                        + "Appeal on climaxmc.net/forum if you believe that this is an error!");
             }
         }
 

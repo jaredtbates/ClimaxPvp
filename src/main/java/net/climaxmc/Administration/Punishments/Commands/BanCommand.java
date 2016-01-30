@@ -79,7 +79,7 @@ public class BanCommand implements CommandExecutor {
                                 + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for " + finalReason));
 
                 target.getPlayer().kickPlayer(ChatColor.RED + "You were permanently banned by " + player.getName() + " for " + reason + "\n"
-                        + "Appeal on forums.climaxmc.net if you believe that this is in error!");
+                        + "Appeal on climaxmc.net/forum if you believe that this is in error!");
             } else {
                 target = plugin.getServer().getOfflinePlayer(args[0]);
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->

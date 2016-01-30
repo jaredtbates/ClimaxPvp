@@ -87,7 +87,7 @@ public class TempMuteCommand implements CommandExecutor {
             Player target = Bukkit.getPlayer(targetData.getUuid());
             if (target != null) {
                 target.sendMessage(ChatColor.RED + "You were temporarily muted by " + player.getName() + " for " + Time.toString(time) + " for " + reason + "\n"
-                        + "Appeal on forums.climaxmc.net if you believe that this is an error!");
+                        + "Appeal on climaxmc.net/forum if you believe that this is an error!");
             }
         }
 
