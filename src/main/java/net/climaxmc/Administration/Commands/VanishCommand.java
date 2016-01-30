@@ -46,7 +46,6 @@ public class VanishCommand implements CommandExecutor, Listener {
             player.sendMessage(ChatColor.GREEN + "You are now vanished.");
             player.setAllowFlight(true);
             player.setFlying(true);
-            player.setFlySpeed(0.18F);
             plugin.getServer().getOnlinePlayers().stream().forEach(target -> target.hidePlayer(player));
             player.setPlayerListName(null);
             vanished.add(player.getUniqueId());
