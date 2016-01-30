@@ -2,6 +2,7 @@ name: ${project.artifactId}
 main: ${project.groupId}.${project.artifactId}
 version: ${project.version}
 authors: [computerwizjared, Jonhan, GamerBah]
+depend: [ProtocolLib]
 commands:
   repair:
     description: Repairs your inventory for $2
