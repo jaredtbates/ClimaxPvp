@@ -22,12 +22,6 @@ public class EntityDamageByEntityListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if ((event.getEntityType() != EntityType.PLAYER || event.getDamager().getType() != EntityType.PLAYER)
-            && event.getDamager().getType() != EntityType.ARROW && event.getDamager().getType() != EntityType.FISHING_HOOK) {
-            event.setCancelled(true);
-            return;
-        }
-
         if (event.getEntityType().equals(EntityType.PLAYER)) {
             Player target = (Player) event.getEntity();
             Player player = null;
