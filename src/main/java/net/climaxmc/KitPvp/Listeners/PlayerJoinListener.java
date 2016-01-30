@@ -21,7 +21,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class PlayerJoinListener implements Listener {
     private ClimaxPvp plugin;
@@ -32,27 +34,32 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void onAsyncPlayerJoin(AsyncPlayerPreLoginEvent event) {
-        plugin.getMySQL().createPlayerData(event.getUniqueId());
+        plugin.getMySQL().createPlayerData(event.getUniqueId(), event.getAddress().getHostAddress());
+        List<Punishment> punishments = new ArrayList<>();
         PlayerData playerData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(event.getUniqueId()));
 
         if (playerData != null) {
-            playerData.getPunishments().stream().filter(punishment -> punishment.getType().equals(Punishment.PunishType.BAN)).forEach(punishment -> {
-                if (System.currentTimeMillis() <= (punishment.getTime() + punishment.getExpiration())) {
-                    event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, ChatColor.RED + "You were temporarily banned by " + plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()).getName()
-                            + " for " + punishment.getReason() + ".\n"
-                            + "You have " + Time.toString(punishment.getTime() + punishment.getExpiration() - System.currentTimeMillis()) + " left in your ban.\n"
-                            + "Appeal on forum.climaxmc.net if you believe that this is in error!");
-                } else if (punishment.getExpiration() == -1) {
-                    event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, ChatColor.RED + "You were permanently banned by " + plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()).getName()
-                            + " for " + punishment.getReason() + ".\n"
-                            + "Appeal on forum.climaxmc.net if you believe that this is in error!");
-                }
-            });
-
             if (playerData.hasRank(Rank.OWNER)) {
                 return;
             }
+
+            punishments.addAll(playerData.getPunishments());
         }
+
+        punishments.addAll(plugin.getMySQL().getPunishmentsFromIP(event.getAddress().getHostAddress()));
+
+        punishments.stream().filter(punishment -> punishment.getType().equals(Punishment.PunishType.BAN)).forEach(punishment -> {
+            if (System.currentTimeMillis() <= (punishment.getTime() + punishment.getExpiration())) {
+                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, ChatColor.RED + "You were temporarily banned by " + plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()).getName()
+                        + " for " + punishment.getReason() + ".\n"
+                        + "You have " + Time.toString(punishment.getTime() + punishment.getExpiration() - System.currentTimeMillis()) + " left in your ban.\n"
+                        + "Appeal on forum.climaxmc.net if you believe that this is in error!");
+            } else if (punishment.getExpiration() == -1) {
+                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, ChatColor.RED + "You were permanently banned by " + plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()).getName()
+                        + " for " + punishment.getReason() + ".\n"
+                        + "Appeal on forum.climaxmc.net if you believe that this is in error!");
+            }
+        });
 
         try {
             URL url = new URL("http://check.getipintel.net/check.php?ip=" + event.getAddress().getHostAddress() + "&contact=computerwizjared@hotmail.com&flags=m");
@@ -84,6 +91,10 @@ public class PlayerJoinListener implements Listener {
         plugin.getMySQL().getTemporaryPlayerData().put(player.getUniqueId(), new HashMap<>());
 
         if (playerData != null) {
+            if (!playerData.getIp().equals(player.getAddress().getAddress().getHostAddress())) {
+                playerData.setIP(player.getAddress().getAddress().getHostAddress());
+            }
+
             player.setDisplayName(playerData.getNickname());
             player.setPlayerListName(playerData.getLevelColor() + player.getName());
 

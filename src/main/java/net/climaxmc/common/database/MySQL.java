@@ -5,10 +5,7 @@ import net.climaxmc.Administration.Punishments.Punishment;
 import org.bukkit.plugin.Plugin;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Logger;
 
 /**
@@ -19,15 +16,16 @@ import java.util.logging.Logger;
 public class MySQL {
 
     // PLAYERDATA ---------------------------------------------------------------------
-    public static final String GET_PLAYERDATA = "SELECT * FROM `climax_playerdata` WHERE `uuid` = ?;";
-    public static final String CREATE_PLAYERDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_playerdata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY," +
+    public static final String GET_PLAYERDATA_FROM_UUID = "SELECT * FROM `climax_playerdata` WHERE `uuid` = ?;";
+    public static final String GET_PLAYERDATA_FROM_IP = "SELECT * FROM `climax_playerdata` WHERE `ip` = ?;";
+    public static final String CREATE_PLAYERDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_playerdata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `ip` VARCHAR(15) DEFAULT '' NOT NULL, " +
             " `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL," +
             " `deaths` INT DEFAULT 0 NOT NULL," + /*`gold` INT DEFAULT 0 NOT NULL, `goldBlocks` INT DEFAULT 0 NOT NULL," +
             " `diamonds` INT DEFAULT 0 NOT NULL, `diamondBlocks` INT DEFAULT 0 NOT NULL, `emeralds` INT DEFAULT 0 NOT NULL," +
             " `achievements` VARCHAR(5000) DEFAULT NULL,*/ " `nickname` VARCHAR(32) DEFAULT NULL);";
-    public static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `rank`, `balance`, `kills`, `deaths`," +
+    public static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `ip`, `rank`, `balance`, `kills`, `deaths`," +
             /*" `gold`, `goldBlocks`, `diamonds`, `diamondBlocks`, `emeralds`, `achievements`,*/ " `nickname`) VALUES (?, ?, ?, ?, ?, " + /*?, ?, ?, ?, ?, ?,*/ " ?);";
-    public static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, " + /*`gold` = ?," +
+    public static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `ip` = ?, `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, " + /*`gold` = ?," +
             " `goldBlocks` = ?, `diamonds` = ?, `diamondBlocks` = ?, `emeralds` = ?, `achievements` = ?,*/ " `nickname` = ? WHERE `uuid` = ?;";
 
     // PUNISHMENTS ---------------------------------------------------------------------
@@ -35,7 +33,8 @@ public class MySQL {
             " `type` VARCHAR(32) NOT NULL, `time` BIGINT(20) NOT NULL, `expiration` BIGINT(20) NOT NULL, `punisheruuid` VARCHAR(26) NOT NULL, `reason` TEXT NOT NULL);";
     public static final String CREATE_PUNISHMENT = "INSERT IGNORE INTO `climax_punishments` (`uuid`, `type`, `time`, `expiration`, `punisheruuid`, `reason`)" +
             " VALUES (?, ?, ?, ?, ?, ?);";
-    public static final String GET_PUNISHMENTS = "SELECT * FROM `climax_punishments` WHERE `uuid` = ?;";
+    public static final String GET_PUNISHMENTS_FROM_UUID = "SELECT * FROM `climax_punishments` WHERE `uuid` = ?;";
+    public static final String GET_PUNISHMENTS_FROM_IP = "SELECT * FROM `climax_punishments` WHERE `ip` = ?;";
     public static final String UPDATE_PUNISHMENT_TIME = "UPDATE `climax_punishments` SET `expiration` = ? WHERE `uuid` = ? AND `type` = ? AND `time` = ?;";
 
     // DUELS ---------------------------------------------------------------------------
@@ -122,7 +121,8 @@ public class MySQL {
     }
 
     /**
-     * Executes a MySQL query (NON-ASYNC)
+     * Executes a MySQL query
+     * <b>WARNING:</b> NOT ASYNC
      *
      * @param query  The query to run on the database
      * @param values The values to insert into the query
@@ -199,7 +199,7 @@ public class MySQL {
             return null;
         }
 
-        ResultSet data = executeQuery(GET_PLAYERDATA, uuid.toString());
+        ResultSet data = executeQuery(GET_PLAYERDATA_FROM_UUID, uuid.toString());
         //ResultSet duelData = executeQuery(GET_DUELDATA, uuid.toString());
         //ResultSet playerSettings = executeQuery(GET_SETTINGS, uuid.toString());
 
@@ -209,6 +209,7 @@ public class MySQL {
 
         try {
             if (data.next() /*&& duelData.next() && playerSettings.next()*/) {
+                String ip = data.getString("ip");
                 Rank rank = Rank.valueOf(data.getString("rank"));
                 int balance = data.getInt("balance");
                 int kills = data.getInt("kills");
@@ -235,11 +236,11 @@ public class MySQL {
                 boolean privateMessaging = playerSettings.getBoolean("privateMessaging");
                 */
 
-                PlayerData playerData = new PlayerData(this, uuid, rank, balance, kills, deaths, /*gold, goldBlocks, diamonds, diamondBlocks, emeralds,
+                PlayerData playerData = new PlayerData(this, uuid, ip, rank, balance, kills, deaths, /*gold, goldBlocks, diamonds, diamondBlocks, emeralds,
                         duelKills, duelDeaths, duelStreak, achievements,*/ nickname, /*killEffect, killSound, trail, dueling, duelRequests, teamRequests, privateMessaging,*/
                         new ArrayList<>());
 
-                ResultSet punishments = executeQuery(GET_PUNISHMENTS, uuid.toString());
+                ResultSet punishments = executeQuery(GET_PUNISHMENTS_FROM_UUID, uuid.toString());
                 while (punishments != null && punishments.next()) {
                     Punishment.PunishType type = Punishment.PunishType.valueOf(punishments.getString("type"));
                     long time = punishments.getLong("time");
@@ -262,9 +263,10 @@ public class MySQL {
      * Create player data
      *
      * @param uuid UUID of the player to create data of
+     * @param ip IP address of the player to create data of
      */
-    public synchronized void createPlayerData(UUID uuid) {
-        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), Rank.DEFAULT.toString(), 0, 0, 0, /*0, 0, 0, 0, 0, null,*/ null);
+    public synchronized void createPlayerData(UUID uuid, String ip) {
+        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), ip, Rank.DEFAULT.toString(), 0, 0, 0, /*0, 0, 0, 0, 0, null,*/ null);
         //executeUpdate(CREATE_DUELDATA, uuid.toString(), 0, 0, 0, false);
         //executeUpdate(CREATE_SETTINGS, uuid.toString(), true, true, "DEFAULT", "NONE", "NONE", true);
     }
@@ -277,6 +279,7 @@ public class MySQL {
     public void savePlayerData(PlayerData playerData) {
         executeUpdate(UPDATE_PLAYERDATA,
                 playerData.getUuid().toString(),
+                playerData.getIp(),
                 playerData.getRank().toString(),
                 playerData.getBalance(),
                 playerData.getKills(),
@@ -307,5 +310,37 @@ public class MySQL {
                 playerData.getTrail(),
                 playerData.isPrivateMessaging()
         );*/
+    }
+
+    /**
+     * Get punishment's from an IP address
+     * <b>WARNING:</b> NOT ASYNC
+     *
+     * @param ip IP address to get punishments of
+     * @return List of punishments
+     */
+    public List<Punishment> getPunishmentsFromIP(String ip) {
+        List<Punishment> punishments = new ArrayList<>();
+        ResultSet data = executeQuery(GET_PLAYERDATA_FROM_IP, ip);
+
+        try {
+            if (data != null && data.next()) {
+                UUID uuid = UUID.fromString(data.getString("uuid"));
+
+                ResultSet punishmentsResults = executeQuery(GET_PUNISHMENTS_FROM_UUID, uuid.toString());
+                while (punishmentsResults != null && punishmentsResults.next()) {
+                    Punishment.PunishType type = Punishment.PunishType.valueOf(punishmentsResults.getString("type"));
+                    long time = punishmentsResults.getLong("time");
+                    long expiration = punishmentsResults.getLong("expiration");
+                    UUID punisherUUID = UUID.fromString(punishmentsResults.getString("punisheruuid"));
+                    String reason = punishmentsResults.getString("reason");
+                    punishments.add(new Punishment(uuid, type, time, expiration, punisherUUID, reason));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return punishments;
     }
 }

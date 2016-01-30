@@ -16,11 +16,21 @@ import java.util.UUID;
 public class PlayerData {
     private final MySQL mySQL;
     private final UUID uuid;
+    private String ip;
     private Rank rank;
     private int balance, kills, deaths /*duelKills, duelDeaths, duelStreak, gold, goldBlocks, diamonds, diamondBlocks, emeralds*/;
     private String /*achievements,*/ nickname /*killEffect, killSound, trail*/;
     //private boolean dueling, duelRequests, teamRequests, privateMessaging;
     private List<Punishment> punishments;
+
+    /**
+     * Sets the player's IP address
+     *
+     * @param ip IP address of the player
+     */
+    public void setIP(String ip) {
+        mySQL.updatePlayerData("ip", this.ip = ip, uuid);
+    }
 
     /**
      * Sets the player's rank
