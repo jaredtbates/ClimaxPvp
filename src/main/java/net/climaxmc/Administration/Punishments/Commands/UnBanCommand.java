@@ -93,7 +93,6 @@ public class UnBanCommand implements CommandExecutor {
                         .forEach(remove::add);
                 if (remove.size() == 0) {
                     player.sendMessage(ChatColor.RED + "That player is not banned!");
-                    return true;
                 } else {
                     remove.forEach(targetData::removePunishment);
                     plugin.getServer().getOnlinePlayers().stream().filter(staff ->
@@ -111,8 +110,7 @@ public class UnBanCommand implements CommandExecutor {
             } else {
                 player.sendMessage(ChatColor.RED + "That player is not banned!");
             }
-            return true;
         }
-        return false;
+        return true;
     }
 }
