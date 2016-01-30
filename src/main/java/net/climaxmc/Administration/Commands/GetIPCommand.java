@@ -36,13 +36,14 @@ public class GetIPCommand implements CommandExecutor {
 
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
             OfflinePlayer target = plugin.getServer().getOfflinePlayer(args[0]);
+            PlayerData targetData = plugin.getPlayerData(target);
 
-            if (target == null) {
+            if (targetData == null) {
                 sender.sendMessage(ChatColor.RED + "That player does not exist!");
                 return;
             }
 
-            sender.sendMessage(ChatColor.GRAY + target.getName() + "'s IP is " + ChatColor.RED + plugin.getPlayerData(target).getIp());
+            sender.sendMessage(ChatColor.GRAY + target.getName() + "'s IP is " + ChatColor.RED + targetData.getIp());
         });
 
         return true;
