@@ -24,7 +24,7 @@ public class MySQL {
             " `diamonds` INT DEFAULT 0 NOT NULL, `diamondBlocks` INT DEFAULT 0 NOT NULL, `emeralds` INT DEFAULT 0 NOT NULL," +
             " `achievements` VARCHAR(5000) DEFAULT NULL,*/ " `nickname` VARCHAR(32) DEFAULT NULL);";
     public static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `ip`, `rank`, `balance`, `kills`, `deaths`," +
-            /*" `gold`, `goldBlocks`, `diamonds`, `diamondBlocks`, `emeralds`, `achievements`,*/ " `nickname`) VALUES (?, ?, ?, ?, ?, " + /*?, ?, ?, ?, ?, ?,*/ " ?);";
+            /*" `gold`, `goldBlocks`, `diamonds`, `diamondBlocks`, `emeralds`, `achievements`,*/ " `nickname`) VALUES (?, ?, ?, ?, ?, ?, " + /*?, ?, ?, ?, ?, ?,*/ " ?);";
     public static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `ip` = ?, `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, " + /*`gold` = ?," +
             " `goldBlocks` = ?, `diamonds` = ?, `diamondBlocks` = ?, `emeralds` = ?, `achievements` = ?,*/ " `nickname` = ? WHERE `uuid` = ?;";
 
