@@ -1,6 +1,7 @@
 package net.climaxmc.Administration.Listeners;
 
 import net.climaxmc.Administration.Commands.ChatCommands;
+import net.climaxmc.Administration.Commands.StaffChatCommand;
 import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
@@ -24,6 +25,15 @@ public class AsyncPlayerChatListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onAsyncPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
+
+        if (StaffChatCommand.getToggled().contains(player.getUniqueId())) {
+            event.setCancelled(true);
+            plugin.getServer().getOnlinePlayers().stream().filter(players ->
+                    plugin.getPlayerData(players).hasRank(Rank.HELPER))
+                    .forEach(players -> players.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "[STAFF] "
+                            + ChatColor.RED + player.getName() + ": " + event.getMessage()));
+            return;
+        }
 
         if (VanishCommand.getVanished().contains(player.getUniqueId())) {
             event.setCancelled(true);

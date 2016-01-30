@@ -8,7 +8,7 @@ import net.climaxmc.KitPvp.Commands.Economy.PayCommand;
 import net.climaxmc.KitPvp.Commands.*;
 import net.climaxmc.KitPvp.Commands.Messaging.MessageCommand;
 import net.climaxmc.KitPvp.Commands.Messaging.ReplyCommand;
-import net.climaxmc.KitPvp.Commands.Messaging.StaffChat;
+import net.climaxmc.Administration.Commands.StaffChatCommand;
 import net.climaxmc.KitPvp.Listeners.*;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
 import net.climaxmc.KitPvp.Menus.ReportGUI;
@@ -80,6 +80,5 @@ public class KitPvp {
         plugin.getCommand("youtube").setExecutor(new YoutubeCommand(plugin));
         plugin.getCommand("pei").setExecutor(new PeiCommand());
         plugin.getCommand("team").setExecutor(new TeamCommand(plugin));
-        plugin.getCommand("staff").setExecutor(new StaffChat(plugin));
     }
 }

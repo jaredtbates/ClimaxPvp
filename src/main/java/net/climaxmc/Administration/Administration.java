@@ -35,6 +35,7 @@ public class Administration {
         plugin.getCommand("lockchat").setExecutor(new ChatCommands(plugin));
         plugin.getCommand("cmdspy").setExecutor(new ChatCommands(plugin));
         plugin.getCommand("getip").setExecutor(new GetIPCommand(plugin));
+        plugin.getCommand("staff").setExecutor(new StaffChatCommand(plugin));
 
         // Start runnables
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new SpawnAutoBroadcastRunnable(plugin), 0, 20 * plugin.getConfig().getInt("SpawnAutoBroadcast.Time"));
