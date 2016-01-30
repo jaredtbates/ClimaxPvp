@@ -3,7 +3,6 @@ package net.climaxmc.Administration.Commands;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
-import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -11,12 +10,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
-
-public class RankCommand implements CommandExecutor {
+public class GetIPCommand implements CommandExecutor {
     private ClimaxPvp plugin;
 
-    public RankCommand(ClimaxPvp plugin) {
+    public GetIPCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
     }
 
@@ -26,14 +23,14 @@ public class RankCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             PlayerData playerData = plugin.getPlayerData(player);
-            if (!playerData.hasRank(Rank.OWNER)) {
+            if (!playerData.hasRank(Rank.ADMINISTRATOR)) {
                 player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
                 return true;
             }
         }
 
-        if (args.length != 2) {
-            sender.sendMessage(ChatColor.RED + "/rank <player> <rank>");
+        if (args.length != 1) {
+            sender.sendMessage(ChatColor.RED + "/getip <player>");
             return true;
         }
 
@@ -45,21 +42,7 @@ public class RankCommand implements CommandExecutor {
                 return;
             }
 
-            for (Rank rank : Rank.values()) {
-                if (rank.toString().equalsIgnoreCase(args[1])) {
-                    PlayerData playerData = plugin.getPlayerData(target);
-                    if (playerData != null) {
-                        playerData.setRank(rank);
-                        sender.sendMessage(ChatColor.GREEN + "You have set " + target.getName() + "'s rank to " + WordUtils.capitalizeFully(rank.toString()) + ".");
-                        return;
-                    } else {
-                        sender.sendMessage(ChatColor.RED + "That player does not exist!");
-                        return;
-                    }
-                }
-            }
-
-            sender.sendMessage(ChatColor.RED + "Incorrect rank! Please use one of the following: " + WordUtils.capitalizeFully(Arrays.toString(Rank.values()).replace("[", "").replace("]", "")));
+            sender.sendMessage(ChatColor.GRAY + target.getName() + "'s IP is " + ChatColor.RED + plugin.getPlayerData(target).getIp());
         });
 
         return true;
