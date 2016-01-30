@@ -43,6 +43,11 @@ public class GetIPCommand implements CommandExecutor {
                 return;
             }
 
+            if (targetData.hasRank(Rank.MANAGER)) {
+                sender.sendMessage(ChatColor.RED + "You cannot check that person's IP!");
+                return;
+            }
+
             sender.sendMessage(ChatColor.GRAY + target.getName() + "'s IP is " + ChatColor.RED + targetData.getIp());
         });
 
