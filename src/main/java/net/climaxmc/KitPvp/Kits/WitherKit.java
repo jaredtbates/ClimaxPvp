@@ -105,12 +105,6 @@ public class WitherKit extends Kit {
                     target.setVelocity(vector);
                 }
                 Location location = target.getLocation();
-                if (location.distance(location.getWorld().getSpawnLocation()) <= 16
-                        || location.distance(plugin.getWarpLocation("Soup")) <= 12
-                        || location.distance(plugin.getWarpLocation("Fair")) <= 4
-                        || location.distance(plugin.getWarpLocation("Fps")) <= 3) {
-                    return;
-                }
             }
         }
     }

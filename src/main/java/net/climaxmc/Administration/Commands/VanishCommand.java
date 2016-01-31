@@ -1,5 +1,6 @@
 package net.climaxmc.Administration.Commands;
 
+import com.google.common.collect.Iterables;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import lombok.Getter;
@@ -32,12 +33,16 @@ public class VanishCommand implements CommandExecutor, Listener {
         this.plugin = plugin;
 
         plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
+            if (plugin.getServer().getOnlinePlayers().size() <= 0) {
+                return;
+            }
+
             try {
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
                 ObjectOutputStream oos = new ObjectOutputStream(bos);
                 oos.writeUTF("ClimaxVanish");
                 oos.writeObject(vanished);
-                plugin.getServer().sendPluginMessage(plugin, "BungeeCord", bos.toByteArray());
+                Iterables.get(plugin.getServer().getOnlinePlayers(), 1).sendPluginMessage(plugin, "BungeeCord", bos.toByteArray());
             } catch (IOException e) {
                 e.printStackTrace();
             }
