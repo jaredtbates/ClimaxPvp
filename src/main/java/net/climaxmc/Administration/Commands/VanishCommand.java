@@ -1,13 +1,7 @@
 package net.climaxmc.Administration.Commands;
 
-import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.events.ListenerOptions;
-import com.comphenix.protocol.events.ListenerPriority;
-import com.comphenix.protocol.events.PacketAdapter;
-import com.comphenix.protocol.events.PacketEvent;
-import com.comphenix.protocol.wrappers.WrappedGameProfile;
-import com.comphenix.protocol.wrappers.WrappedServerPing;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import lombok.Getter;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.PlayerData;
@@ -24,6 +18,9 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class VanishCommand implements CommandExecutor, Listener {
@@ -34,13 +31,17 @@ public class VanishCommand implements CommandExecutor, Listener {
     public VanishCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
 
-        ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(plugin, ListenerPriority.NORMAL,
-                Collections.singletonList(PacketType.Status.Server.OUT_SERVER_INFO), ListenerOptions.ASYNC) {
-            @Override
-            public void onPacketSending(PacketEvent event) {
-                handlePing(event.getPacket().getServerPings().read(0));
+        plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
+            try {
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                ObjectOutputStream oos = new ObjectOutputStream(bos);
+                oos.writeUTF("ClimaxVanish");
+                oos.writeObject(vanished);
+                plugin.getServer().sendPluginMessage(plugin, "BungeeCord", bos.toByteArray());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });
+        }, 200, 200);
     }
 
     @Override
@@ -108,13 +109,5 @@ public class VanishCommand implements CommandExecutor, Listener {
         if (vanished.contains(player.getUniqueId())) {
             vanished.remove(player.getUniqueId());
         }
-    }
-
-    private void handlePing(WrappedServerPing ping) {
-        Set<WrappedGameProfile> players = new HashSet<>();
-        players.addAll(ping.getPlayers());
-        players.removeIf(player -> vanished.contains(player.getUUID()));
-        ping.setPlayers(players);
-        ping.setPlayersOnline(players.size());
     }
 }

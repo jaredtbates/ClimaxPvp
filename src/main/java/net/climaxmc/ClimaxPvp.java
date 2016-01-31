@@ -115,6 +115,8 @@ public class ClimaxPvp extends JavaPlugin {
         // Create temporary player data
         getServer().getOnlinePlayers().forEach(player -> mySQL.getTemporaryPlayerData().put(player.getUniqueId(), new HashMap<>()));
 
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+
         // Load Modules
         new KitPvp(this);
         donations = new Donations(this);
