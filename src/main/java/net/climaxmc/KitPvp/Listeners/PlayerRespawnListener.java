@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp.Listeners;
 
+import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
@@ -45,6 +46,11 @@ public class PlayerRespawnListener implements Listener {
         player.setFlySpeed(0.1F);
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
+        }
+
+        if (VanishCommand.getVanished().contains(player.getUniqueId())) {
+            player.setAllowFlight(true);
+            player.setFlying(true);
         }
 
         player.getInventory().setItem(0, new I(Material.NETHER_STAR)
