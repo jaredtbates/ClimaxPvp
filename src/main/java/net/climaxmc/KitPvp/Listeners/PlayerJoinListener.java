@@ -91,7 +91,7 @@ public class PlayerJoinListener implements Listener {
         plugin.getMySQL().getTemporaryPlayerData().put(player.getUniqueId(), new HashMap<>());
 
         if (playerData != null) {
-            if (!playerData.getIp().equals(player.getAddress().getAddress().getHostAddress())) {
+            if (!playerData.getIp().equals(player.getAddress().getAddress().getHostAddress()) && !playerData.getIp().equals("0.0.0.0")) {
                 playerData.setIP(player.getAddress().getAddress().getHostAddress());
             }
 
