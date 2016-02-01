@@ -19,9 +19,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class VanishCommand implements CommandExecutor, Listener {
@@ -37,15 +34,12 @@ public class VanishCommand implements CommandExecutor, Listener {
                 return;
             }
 
-            try {
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                ObjectOutputStream oos = new ObjectOutputStream(bos);
-                oos.writeUTF("ClimaxVanish");
-                oos.writeObject(vanished);
-                Iterables.get(plugin.getServer().getOnlinePlayers(), 1).sendPluginMessage(plugin, "BungeeCord", bos.toByteArray());
-            } catch (IOException e) {
-                e.printStackTrace();
+            ByteArrayDataOutput bos = ByteStreams.newDataOutput();
+            bos.writeUTF("ClimaxVanish");
+            for (UUID vanishedUUID : vanished) {
+                bos.writeUTF(vanishedUUID.toString());
             }
+            Iterables.get(plugin.getServer().getOnlinePlayers(), 1).sendPluginMessage(plugin, "BungeeCord", bos.toByteArray());
         }, 200, 200);
     }
 
