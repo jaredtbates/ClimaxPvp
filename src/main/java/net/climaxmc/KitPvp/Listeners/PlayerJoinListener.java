@@ -24,6 +24,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class PlayerJoinListener implements Listener {
     private ClimaxPvp plugin;
@@ -67,13 +68,15 @@ public class PlayerJoinListener implements Listener {
             }
         }
 
-        if (plugin.getConfig().getLong("IPQueriesTime") > System.currentTimeMillis()) {
+        if (plugin.getConfig().getLong("IPQueriesTime") > System.currentTimeMillis() || plugin.getConfig().getLong("IPQueriesTime") == 0) {
             plugin.getConfig().set("IPQueries", 0);
-            plugin.getConfig().set("IPQueriesTime", System.currentTimeMillis());
+            plugin.getConfig().set("IPQueriesTime", System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1));
+            plugin.saveConfig();
         }
 
         if (plugin.getConfig().getInt("IPQueries") < 450) {
             plugin.getConfig().set("IPQueries", plugin.getConfig().getInt("IPQueries") + 1);
+            plugin.saveConfig();
             try {
                 URL url = new URL("http://check.getipintel.net/check.php?ip=" + event.getAddress().getHostAddress() + "&contact=computerwizjared@hotmail.com&flags=m");
                 URLConnection connection = url.openConnection();
