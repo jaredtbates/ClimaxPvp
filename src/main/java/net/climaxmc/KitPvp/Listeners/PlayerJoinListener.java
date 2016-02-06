@@ -68,7 +68,7 @@ public class PlayerJoinListener implements Listener {
             }
         }
 
-        if (plugin.getConfig().getLong("IPQueriesTime") > System.currentTimeMillis() || plugin.getConfig().getLong("IPQueriesTime") == 0) {
+        if (plugin.getConfig().getLong("IPQueriesTime") < System.currentTimeMillis() || plugin.getConfig().getLong("IPQueriesTime") == 0) {
             plugin.getConfig().set("IPQueries", 0);
             plugin.getConfig().set("IPQueriesTime", System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1));
             plugin.saveConfig();
