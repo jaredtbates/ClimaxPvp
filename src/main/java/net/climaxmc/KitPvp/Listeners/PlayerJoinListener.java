@@ -48,7 +48,7 @@ public class PlayerJoinListener implements Listener {
 
         punishments.addAll(plugin.getMySQL().getPunishmentsFromIP(event.getAddress().getHostAddress()));
 
-        punishments.stream().filter(punishment -> punishment.getType().equals(Punishment.PunishType.BAN)).forEach(punishment -> {
+        punishments.stream().filter(punishment -> punishment.getType().equals(Punishment.PunishType.BAN)).forEach( punishment -> {
             if (System.currentTimeMillis() <= (punishment.getTime() + punishment.getExpiration())) {
                 event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, ChatColor.RED + "You were temporarily banned by " + plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()).getName()
                         + " for " + punishment.getReason() + ".\n"
@@ -58,25 +58,23 @@ public class PlayerJoinListener implements Listener {
                 event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED, ChatColor.RED + "You were permanently banned by " + plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()).getName()
                         + " for " + punishment.getReason() + ".\n"
                         + "Appeal on forum.climaxmc.net if you believe that this is in error!");
-            } else {
-                try {
-                    URL url = new URL("http://check.getipintel.net/check.php?ip=" + event.getAddress().getHostAddress() + "&contact=computerwizjared@hotmail.com&flags=m");
-                    URLConnection connection = url.openConnection();
-                    connection.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-                    BufferedReader in = new BufferedReader(
-                            new InputStreamReader(
-                                    connection.getInputStream()));
-                    double result = Double.valueOf(in.readLine());
-                    if (result == 1) {
-                        event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatColor.RED + "\nSorry, but we don't allow VPNs and proxies on Climax.\n" +
-                                "Please disable your VPN or proxy and retry.");
-                    }
-                    in.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             }
         });
+
+        try {
+            URL url = new URL("http://check.getipintel.net/check.php?ip=" + event.getAddress().getHostAddress() + "&contact=computerwizjared@hotmail.com&flags=m");
+            URLConnection connection = url.openConnection();
+            connection.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            double result = Double.valueOf(in.readLine());
+            if (result == 1) {
+                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatColor.RED + "\nSorry, but we don't allow VPNs and proxies on Climax.\n" +
+                        "Please disable your VPN or proxy and retry.");
+            }
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @EventHandler
