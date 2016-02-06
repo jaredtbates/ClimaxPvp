@@ -19,7 +19,7 @@ public class ListCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        String players = "Online players (%d): ";
+        String players = " Online players (%d): ";
 
         int amount = 0;
 

@@ -26,18 +26,18 @@ public class HelpCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (args.length == 1 && args[0].equals("staff") && playerData.hasRank(Rank.HELPER)) {
-            player.sendMessage(ChatColor.RED + "/punish" + ChatColor.GRAY + " - Punish a player with warn/kick/tempmute" + (playerData.hasRank(Rank.MODERATOR) ? "/mute/tempban/ban" : ""));
-            player.sendMessage(ChatColor.RED + "/inventory" + ChatColor.GRAY + " - Check if a player is autosouping");
-            player.sendMessage(ChatColor.RED + "/check" + ChatColor.GRAY + " - Check if a player is hacking");
+            player.sendMessage(ChatColor.RED + " /punish" + ChatColor.GRAY + " - Punish a player with warn/kick/tempmute" + (playerData.hasRank(Rank.MODERATOR) ? "/mute/tempban/ban" : ""));
+            player.sendMessage(ChatColor.RED + " /inventory" + ChatColor.GRAY + " - Check if a player is autosouping");
+            player.sendMessage(ChatColor.RED + " /check" + ChatColor.GRAY + " - Check if a player is hacking");
 
             if (playerData.hasRank(Rank.MODERATOR)) {
-                player.sendMessage(ChatColor.RED + "/vanish" + ChatColor.GRAY + " - Vanish from the game (removes you from the player list and fake logs you out)");
-                player.sendMessage(ChatColor.RED + "/clearchat" + ChatColor.GRAY + " - Clear chat so that players cannot see messages sent");
+                player.sendMessage(ChatColor.RED + " /vanish" + ChatColor.GRAY + " - Vanish from the game (removes you from the player list and fake logs you out)");
+                player.sendMessage(ChatColor.RED + " /clearchat" + ChatColor.GRAY + " - Clear chat so that players cannot see messages sent");
             }
 
             if (playerData.hasRank(Rank.ADMINISTRATOR)) {
-                player.sendMessage(ChatColor.RED + "/admin" + ChatColor.GRAY + " - Enable/disable all kits (used mainly for testing)");
-                player.sendMessage(ChatColor.RED + "/economy" + ChatColor.GRAY + " - Access economy settings");
+                player.sendMessage(ChatColor.RED + " /admin" + ChatColor.GRAY + " - Enable/disable all kits (used mainly for testing)");
+                player.sendMessage(ChatColor.RED + " /economy" + ChatColor.GRAY + " - Access economy settings");
             }
 
             return true;
@@ -46,7 +46,7 @@ public class HelpCommand implements CommandExecutor {
         player.sendMessage(plugin.getHelp().toArray(new String[plugin.getHelp().size()]));
 
         if (playerData.hasRank(Rank.HELPER)) {
-            player.sendMessage(ChatColor.RED + "Execute " + ChatColor.GREEN + "/help staff" + ChatColor.RED + " for information on staff commands.");
+            player.sendMessage(ChatColor.RED + " Execute " + ChatColor.GREEN + "/help staff" + ChatColor.RED + " for information on staff commands.");
         }
 
         return true;

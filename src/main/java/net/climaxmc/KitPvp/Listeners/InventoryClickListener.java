@@ -75,31 +75,31 @@ public class InventoryClickListener implements Listener {
                         plugin.getChallengesFiles().setStarted(player, Challenge.Daily1);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
-                        player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #1");
+                        player.sendMessage(ChatColor.YELLOW + " You've started " + ChatColor.AQUA + "Daily Challenge #1");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #2")) {
                         plugin.getChallengesFiles().setStarted(player, Challenge.Daily2);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
-                        player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #2");
+                        player.sendMessage(ChatColor.YELLOW + " You've started " + ChatColor.AQUA + "Daily Challenge #2");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #3")) {
                         plugin.getChallengesFiles().setStarted(player, Challenge.Daily3);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
-                        player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #3");
+                        player.sendMessage(ChatColor.YELLOW + " You've started " + ChatColor.AQUA + "Daily Challenge #3");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #4")) {
                         plugin.getChallengesFiles().setStarted(player, Challenge.Daily4);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
-                        player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #4");
+                        player.sendMessage(ChatColor.YELLOW + " You've started " + ChatColor.AQUA + "Daily Challenge #4");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Weekly Challenge #1")) {
                         plugin.getChallengesFiles().setStarted(player, Challenge.Weekly1);
                         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
-                        player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Weekly Challenge #1");
+                        player.sendMessage(ChatColor.YELLOW + " You've started " + ChatColor.AQUA + "Weekly Challenge #1");
                     }
                     if (clickedItem.getEnchantments() != null) {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
@@ -114,26 +114,26 @@ public class InventoryClickListener implements Listener {
                     if (cooldown >= 86400) {
                         cooldown = ((cooldown / 60) / 60) / 24;
                         if (cooldown == 1)
-                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " day to start this challenge again!");
+                            player.sendMessage(ChatColor.RED + " Come back in " + cooldown + " day to start this challenge again!");
                         if (cooldown > 1)
-                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " days to start this challenge again!");
+                            player.sendMessage(ChatColor.RED + " Come back in " + cooldown + " days to start this challenge again!");
                     } else if (cooldown >= 3600) {
                         cooldown = (cooldown / 60) / 60;
                         if (cooldown == 1)
-                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " hour to start this challenge again!");
+                            player.sendMessage(ChatColor.RED + " Come back in " + cooldown + " hour to start this challenge again!");
                         if (cooldown > 1)
-                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " hours to start this challenge again!");
+                            player.sendMessage(ChatColor.RED + " Come back in " + cooldown + " hours to start this challenge again!");
                     } else if (cooldown >= 60) {
                         cooldown = cooldown / 60;
                         if (cooldown == 1)
-                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " minute to start this challenge again!");
+                            player.sendMessage(ChatColor.RED + " Come back in " + cooldown + " minute to start this challenge again!");
                         if (cooldown > 1)
-                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " minutes to start this challenge again!");
+                            player.sendMessage(ChatColor.RED + " Come back in " + cooldown + " minutes to start this challenge again!");
                     } else {
                         if (cooldown == 1)
-                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " second to start this challenge again!");
+                            player.sendMessage(ChatColor.RED + " Come back in " + cooldown + " second to start this challenge again!");
                         if (cooldown > 1)
-                            player.sendMessage(ChatColor.RED + "Come back in " + cooldown + " seconds to start this challenge again!");
+                            player.sendMessage(ChatColor.RED + " Come back in " + cooldown + " seconds to start this challenge again!");
                     }
                 }
 
@@ -167,7 +167,6 @@ public class InventoryClickListener implements Listener {
             }
 
             if (inventory.getName().equals("Achievements")) {
-
                 event.setCancelled(true);
             }
         }

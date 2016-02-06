@@ -34,25 +34,25 @@ public class ReportCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length < 2) {
-            player.sendMessage(ChatColor.RED + "/report <player> <reason>");
+            player.sendMessage(ChatColor.RED + " /report <player> <reason>");
             return true;
         }
 
         Player reported = plugin.getServer().getPlayer(args[0]);
 
         if (reported == null) {
-            player.sendMessage(ChatColor.RED + "That player is not online!");
+            player.sendMessage(ChatColor.RED + " That player is not online!");
             return true;
         }
 
         if (!cooldown.containsKey(player.getUniqueId())) {
             String message = StringUtils.join(args, ' ', 1, args.length);
 
-            player.sendMessage(ChatColor.GREEN + "You have successfully reported "
+            player.sendMessage(ChatColor.GREEN + " You have successfully reported "
                     + ChatColor.DARK_AQUA + reported.getName() + ChatColor.GREEN + "!");
 
             plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff)
-                    .hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName()
+                    .hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(" " + ChatColor.RED + player.getName()
                     + " has reported " + ChatColor.BOLD + reported.getName() + ChatColor.RED + " for " + message + "!"));
 
             plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff)
@@ -73,7 +73,7 @@ public class ReportCommand implements CommandExecutor {
                     if (cooldown.get(player.getUniqueId()) == 0) {
                         cooldown.remove(player.getUniqueId());
                         player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1, 1.5F);
-                        player.sendMessage(ChatColor.GREEN + "You are now able to report another player!");
+                        player.sendMessage(ChatColor.GREEN + " You are now able to report another player!");
                         this.cancel();
                     }
                 }
@@ -82,7 +82,7 @@ public class ReportCommand implements CommandExecutor {
 
         } else {
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-            player.sendMessage(ChatColor.RED + "You must wait " + ChatColor.YELLOW
+            player.sendMessage(ChatColor.RED + " You must wait " + ChatColor.YELLOW
                     + cooldown.get(player.getUniqueId()) + " seconds " + ChatColor.RED + "before you report another player!");
             return false;
         }

@@ -28,19 +28,19 @@ public class KickCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (!playerData.hasRank(Rank.HELPER)) {
-            player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
+            player.sendMessage(ChatColor.RED + " You do not have permission to execute that command!");
             return true;
         }
 
         if (args.length < 2) {
-            player.sendMessage(ChatColor.RED + "/kick <player> <reason>");
+            player.sendMessage(ChatColor.RED + " /kick <player> <reason>");
             return true;
         }
 
         PlayerData targetData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(args[0]));
 
         if (targetData == null) {
-            player.sendMessage(ChatColor.RED + "That player hasn't ever joined!");
+            player.sendMessage(ChatColor.RED + " That player hasn't ever joined!");
             return true;
         }
 
@@ -56,7 +56,7 @@ public class KickCommand implements CommandExecutor {
 
         Player target = Bukkit.getPlayer(targetData.getUuid());
         if (target != null) {
-            target.kickPlayer(ChatColor.RED + "You were kicked by " + player.getName() + " for " + reason + ".");
+            target.kickPlayer(ChatColor.RED + " You were kicked by " + player.getName() + " for " + reason + ".");
         }
 
         return true;

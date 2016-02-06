@@ -27,7 +27,7 @@ public class SpectateCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (!playerData.hasRank(Rank.NINJA)) {
-            player.sendMessage(ChatColor.RED + "Please donate for Titan at https://donate.climaxmc.net for access to spectator mode!");
+            player.sendMessage(ChatColor.RED + " Please donate for Titan at https://donate.climaxmc.net for access to spectator mode!");
             return true;
         }
 
@@ -38,10 +38,10 @@ public class SpectateCommand implements CommandExecutor {
             }
             player.setGameMode(GameMode.SPECTATOR);
             player.setFlySpeed(0.15F);
-            player.sendMessage(ChatColor.GREEN + "You are now spectating");
+            player.sendMessage(ChatColor.GREEN + " You are now spectating");
         } else {
             plugin.respawn(player);
-            player.sendMessage(ChatColor.GREEN + "You are no longer spectating");
+            player.sendMessage(ChatColor.GREEN + " You are no longer spectating");
         }
 
         return true;

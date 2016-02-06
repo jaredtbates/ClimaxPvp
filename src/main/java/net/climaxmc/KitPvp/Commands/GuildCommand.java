@@ -24,7 +24,7 @@ public class GuildCommand implements CommandExecutor {
 
         Player player = (Player) sender;
         if (command.getName().equalsIgnoreCase("guild")) {
-            player.sendMessage(ChatColor.RED + "Hmm...");
+            player.sendMessage(ChatColor.RED + " Hmm...");
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
         }
         return false;

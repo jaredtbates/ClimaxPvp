@@ -31,19 +31,19 @@ public class WarpCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.GREEN + "Available warps: " + ChatColor.AQUA + plugin.getWarpsConfig().getKeys(false).stream().collect(Collectors.joining(", ")));
+            player.sendMessage(ChatColor.GREEN + " Available warps: " + ChatColor.AQUA + plugin.getWarpsConfig().getKeys(false).stream().collect(Collectors.joining(", ")));
             return true;
         }
 
         switch (args[0]) {
             case ("create"):
                 if (!(playerData.hasRank(Rank.ADMINISTRATOR) || playerData.getRank().equals(Rank.BUILDER))) {
-                    player.sendMessage(ChatColor.RED + "You do not have permission to create warps!");
+                    player.sendMessage(ChatColor.RED + " You do not have permission to create warps!");
                     return true;
                 }
 
                 if (args.length != 2) {
-                    player.sendMessage(ChatColor.RED + "/warp create <name>");
+                    player.sendMessage(ChatColor.RED + " /warp create <name>");
                     return true;
                 }
 
@@ -58,16 +58,16 @@ public class WarpCommand implements CommandExecutor {
                 newWarpSection.set("World", newWarpLocation.getWorld().getName());
                 plugin.saveWarpsConfig();
 
-                player.sendMessage(ChatColor.GREEN + "Warp " + newWarpSection.getName() + " created!");
+                player.sendMessage(ChatColor.GREEN + " Warp " + newWarpSection.getName() + " created!");
                 break;
             case ("delete"):
                 if (!(playerData.hasRank(Rank.ADMINISTRATOR) || playerData.getRank().equals(Rank.BUILDER))) {
-                    player.sendMessage(ChatColor.RED + "You do not have permission to create warps!");
+                    player.sendMessage(ChatColor.RED + " You do not have permission to create warps!");
                     return true;
                 }
 
                 if (args.length != 2) {
-                    player.sendMessage(ChatColor.RED + "/warp delete <name>");
+                    player.sendMessage(ChatColor.RED + " /warp delete <name>");
                     return true;
                 }
 
@@ -76,17 +76,17 @@ public class WarpCommand implements CommandExecutor {
                 try {
                     warpDeleteSection = plugin.getWarpsConfig().getConfigurationSection(plugin.getWarpsConfig().getKeys(false).stream().filter(key -> key.equalsIgnoreCase(args[1])).findFirst().get());
                 } catch (NoSuchElementException e) {
-                    player.sendMessage(ChatColor.RED + "That warp does not exist!");
+                    player.sendMessage(ChatColor.RED + " That warp does not exist!");
                     return true;
                 }
 
                 plugin.getWarpsConfig().set(warpDeleteSection.getName(), null);
                 plugin.saveWarpsConfig();
 
-                player.sendMessage(ChatColor.GREEN + "Warp " + warpDeleteSection.getName() + " deleted!");
+                player.sendMessage(ChatColor.GREEN + " Warp " + warpDeleteSection.getName() + " deleted!");
                 break;
             default:
-                player.sendMessage(ChatColor.GREEN + "You have been warped to " + args[0] + ".");
+                player.sendMessage(ChatColor.GREEN + " You have been warped to " + args[0] + ".");
                 plugin.warp(args[0], player);
                 if (args[0].equalsIgnoreCase("nosoup")) {
                     player.setFoodLevel(17);

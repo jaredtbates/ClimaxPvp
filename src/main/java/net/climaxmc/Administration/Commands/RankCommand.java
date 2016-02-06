@@ -27,20 +27,20 @@ public class RankCommand implements CommandExecutor {
             Player player = (Player) sender;
             PlayerData playerData = plugin.getPlayerData(player);
             if (!playerData.hasRank(Rank.OWNER)) {
-                player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
+                player.sendMessage(ChatColor.RED + " You do not have permission to execute that command!");
                 return true;
             }
         }
 
         if (args.length != 2) {
-            sender.sendMessage(ChatColor.RED + "/rank <player> <rank>");
+            sender.sendMessage(ChatColor.RED + " /rank <player> <rank>");
             return true;
         }
 
         OfflinePlayer target = plugin.getServer().getOfflinePlayer(args[0]);
 
         if (target == null) {
-            sender.sendMessage(ChatColor.RED + "That player does not exist!");
+            sender.sendMessage(ChatColor.RED + " That player does not exist!");
             return true;
         }
 
@@ -49,16 +49,16 @@ public class RankCommand implements CommandExecutor {
                 PlayerData playerData = plugin.getPlayerData(target);
                 if (playerData != null) {
                     playerData.setRank(rank);
-                    sender.sendMessage(ChatColor.GREEN + "You have set " + target.getName() + "'s rank to " + WordUtils.capitalizeFully(rank.toString()) + ".");
+                    sender.sendMessage(ChatColor.GREEN + " You have set " + target.getName() + "'s rank to " + WordUtils.capitalizeFully(rank.toString()) + ".");
                     return true;
                 } else {
-                    sender.sendMessage(ChatColor.RED + "That player does not exist!");
+                    sender.sendMessage(ChatColor.RED + " That player does not exist!");
                     return true;
                 }
             }
         }
 
-        sender.sendMessage(ChatColor.RED + "Incorrect rank! Please use one of the following: " + WordUtils.capitalizeFully(Arrays.toString(Rank.values()).replace("[", "").replace("]", "")));
+        sender.sendMessage(ChatColor.RED + " Incorrect rank! Please use one of the following: " + WordUtils.capitalizeFully(Arrays.toString(Rank.values()).replace("[", "").replace("]", "")));
         return true;
     }
 }

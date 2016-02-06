@@ -36,9 +36,9 @@ public class RepairCommand implements CommandExecutor {
                     item.setDurability((short) -100);
                 }
             }
-            player.sendMessage(ChatColor.GREEN + "You repaired your inventory for $20!");
+            player.sendMessage(ChatColor.GREEN + " You repaired your inventory for $20!");
         } else {
-            player.sendMessage(ChatColor.RED + "You do not have enough money to repair your inventory!");
+            player.sendMessage(ChatColor.RED + " You do not have enough money to repair your inventory!");
         }
 
         return true;

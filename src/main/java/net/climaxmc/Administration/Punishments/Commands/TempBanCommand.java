@@ -35,19 +35,19 @@ public class TempBanCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (!playerData.hasRank(Rank.MODERATOR)) {
-            player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
+            player.sendMessage(ChatColor.RED + " You do not have permission to execute that command!");
             return true;
         }
 
         if (args.length < 3) {
-            player.sendMessage(ChatColor.RED + "/tempban <player> <time> <reason>");
+            player.sendMessage(ChatColor.RED + " /tempban <player> <time> <reason>");
             return true;
         }
 
         PlayerData targetData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(args[0]));
 
         if (targetData == null) {
-            player.sendMessage(ChatColor.RED + "That player hasn't ever joined!");
+            player.sendMessage(ChatColor.RED + " That player hasn't ever joined!");
             return true;
         }
 
@@ -57,7 +57,7 @@ public class TempBanCommand implements CommandExecutor {
                 .filter(punishment -> punishment.getType().equals(Punishment.PunishType.BAN))
                 .forEach(remove::add);
         if (remove.size() != 0) {
-            player.sendMessage(ChatColor.RED + "That player is already banned!");
+            player.sendMessage(ChatColor.RED + " That player is already banned!");
             return true;
         } else {
 
@@ -71,14 +71,14 @@ public class TempBanCommand implements CommandExecutor {
             try {
                 time = Long.parseLong(timeNumeral);
             } catch (NumberFormatException e) {
-                player.sendMessage(ChatColor.RED + "That is not a valid time!");
+                player.sendMessage(ChatColor.RED + " That is not a valid time!");
                 return true;
             }
 
             timeUnit = Time.fromId(timeChar);
 
             if (timeUnit == null) {
-                player.sendMessage(ChatColor.RED + "That is not a valid time unit! Here's some examples of time labels: 2m, 5d, 6h");
+                player.sendMessage(ChatColor.RED + " That is not a valid time unit! Here's some examples of time labels: 2m, 5d, 6h");
                 return true;
             }
 
@@ -100,7 +100,7 @@ public class TempBanCommand implements CommandExecutor {
             if (target != null) {
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->
                         plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
-                        staff.sendMessage(ChatColor.RED + player.getName() + " temporarily banned "
+                        staff.sendMessage(" " + ChatColor.RED + player.getName() + " temporarily banned "
                                 + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for "
                                 + Time.toString(finalTime) + " for " + finalReason));
 
@@ -112,15 +112,15 @@ public class TempBanCommand implements CommandExecutor {
                 SlackApi slack = new SlackApi("https://hooks.slack.com/services/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");
                 slack.call(message);
 
-                target.kickPlayer(ChatColor.RED + "You were temporarily banned by " + player.getName() + " for " + Time.toString(time) + " for " + reason + "\n"
+                target.kickPlayer(ChatColor.RED + " You were temporarily banned by " + player.getName() + " for " + Time.toString(time) + " for " + reason + "\n"
                         + "Appeal on forum.climaxmc.net if you believe that this is in error!");
             } else {
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->
                         plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
-                        staff.sendMessage(ChatColor.RED + player.getName() + " temporarily banned "
+                        staff.sendMessage(" " + ChatColor.RED + player.getName() + " temporarily banned "
                                 + ChatColor.GRAY + offlinePlayer.getName() + ChatColor.RED + " for "
                                 + Time.toString(finalTime) + " for " + finalReason));
-                player.sendMessage(ChatColor.GREEN + "Offline player " + ChatColor.GOLD + plugin.getServer().getOfflinePlayer(args[0]).getName()
+                player.sendMessage(ChatColor.GREEN + " Offline player " + ChatColor.GOLD + plugin.getServer().getOfflinePlayer(args[0]).getName()
                         + ChatColor.GREEN + " successfully banned.");
             }
         }
