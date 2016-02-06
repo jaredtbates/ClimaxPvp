@@ -61,20 +61,34 @@ public class PlayerJoinListener implements Listener {
             }
         });
 
-        /*try {
-            URL url = new URL("http://check.getipintel.net/check.php?ip=" + event.getAddress().getHostAddress() + "&contact=computerwizjared@hotmail.com&flags=m");
-            URLConnection connection = url.openConnection();
-            connection.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            double result = Double.valueOf(in.readLine());
-            if (result == 1) {
-                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatColor.RED + "\nSorry, but we don't allow VPNs and proxies on Climax.\n" +
-                        "Please disable your VPN or proxy and retry.");
+        if (playerData != null) {
+            if (playerData.hasRank(Rank.TRUSTED)) {
+                return;
             }
-            in.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
+        }
+
+        if (plugin.getConfig().getLong("IPQueriesTime") > System.currentTimeMillis()) {
+            plugin.getConfig().set("IPQueries", 0);
+            plugin.getConfig().set("IPQueriesTime", System.currentTimeMillis());
+        }
+
+        if (plugin.getConfig().getInt("IPQueries") < 450) {
+            plugin.getConfig().set("IPQueries", plugin.getConfig().getInt("IPQueries") + 1);
+            try {
+                URL url = new URL("http://check.getipintel.net/check.php?ip=" + event.getAddress().getHostAddress() + "&contact=computerwizjared@hotmail.com&flags=m");
+                URLConnection connection = url.openConnection();
+                connection.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                double result = Double.valueOf(in.readLine());
+                if (result == 1) {
+                    event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatColor.RED + "\nSorry, but we don't allow VPNs and proxies on Climax.\n" +
+                            "Please disable your VPN or proxy and retry.");
+                }
+                in.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @EventHandler
