@@ -60,5 +60,8 @@ public class StrafeKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
     }
 }

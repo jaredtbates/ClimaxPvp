@@ -16,3 +16,5 @@ ChatAutoBroadcast:
     - This is another auto broadcast message!
 HighestPlayerCount: 0
 AllKitsEnabled: false
+IPQueries: 0
+IPQueriesTime: 0

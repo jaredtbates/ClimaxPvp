@@ -38,8 +38,13 @@ public class CheckCommand implements CommandExecutor, Listener {
         Player player = (Player) sender;
         PlayerData playerData = plugin.getPlayerData(player);
 
+<<<<<<< HEAD
         if (!(playerData.hasRank(Rank.HELPER))) {
             player.sendMessage(ChatColor.RED + " You do not have permission to execute that command!");
+=======
+        if (!playerData.hasRank(Rank.HELPER)) {
+            player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
+>>>>>>> refs/remotes/origin/master
             return true;
         }
 
@@ -51,6 +56,14 @@ public class CheckCommand implements CommandExecutor, Listener {
             player.getInventory().clear();
             player.getInventory().setArmorContents(null);
             checking.add(player.getUniqueId());
+            if (args.length == 1) {
+                Player target = plugin.getServer().getPlayer(args[0]);
+                if (target != null) {
+                    player.teleport(target);
+                } else {
+                    player.sendMessage(ChatColor.RED + "That player is not online!");
+                }
+            }
         } else {
             player.sendMessage(ChatColor.RED + " You are no longer checking a player.");
             plugin.respawn(player);

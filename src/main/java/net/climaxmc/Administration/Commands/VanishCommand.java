@@ -1,5 +1,8 @@
 package net.climaxmc.Administration.Commands;
 
+import com.google.common.collect.Iterables;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import lombok.Getter;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.PlayerData;
@@ -16,8 +19,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.util.HashSet;
-import java.util.UUID;
+import java.util.*;
 
 public class VanishCommand implements CommandExecutor, Listener {
     @Getter
@@ -26,6 +28,19 @@ public class VanishCommand implements CommandExecutor, Listener {
 
     public VanishCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
+
+        plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
+            if (plugin.getServer().getOnlinePlayers().size() <= 0) {
+                return;
+            }
+
+            ByteArrayDataOutput bos = ByteStreams.newDataOutput();
+            bos.writeUTF("ClimaxVanish");
+            for (UUID vanishedUUID : vanished) {
+                bos.writeUTF(vanishedUUID.toString());
+            }
+            Iterables.get(plugin.getServer().getOnlinePlayers(), 1).sendPluginMessage(plugin, "BungeeCord", bos.toByteArray());
+        }, 200, 200);
     }
 
     @Override
@@ -46,7 +61,6 @@ public class VanishCommand implements CommandExecutor, Listener {
             player.sendMessage(ChatColor.GREEN + " You are now vanished.");
             player.setAllowFlight(true);
             player.setFlying(true);
-            player.setFlySpeed(0.18F);
             plugin.getServer().getOnlinePlayers().stream().forEach(target -> target.hidePlayer(player));
             player.setPlayerListName(null);
             vanished.add(player.getUniqueId());

@@ -4,7 +4,6 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Inventories.TrailsInventory;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-import net.climaxmc.KitPvp.Menus.PlayerProfile.PlayerProfileMenu;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;

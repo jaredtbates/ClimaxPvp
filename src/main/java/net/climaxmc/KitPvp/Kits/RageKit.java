@@ -83,6 +83,9 @@ public class RageKit extends Kit {
         magmameta.setDisplayName(ChatColor.AQUA + "Rage Ability");
         magmacream.setItemMeta(magmameta);
         player.getInventory().addItem(magmacream);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
     }
 
     @EventHandler

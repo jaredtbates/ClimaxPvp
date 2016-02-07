@@ -28,12 +28,12 @@ public class TeamCommand implements CommandExecutor {
         Player player = (Player) sender;
         TeamUtils teamUtils = new TeamUtils(plugin);
         TeamMessages teamMessages = new TeamMessages(plugin);
-        if (plugin.getServer().getOnlinePlayers().size() > 7) {
-            if (args.length > 1 || args.length == 0) {
-                player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                player.sendMessage(ChatColor.RED + " Incorrect Usage! Try this: /team <[player]/accept/deny/leave>");
-            } else {
-                if (args[0].equalsIgnoreCase("accept")) {
+        if (args.length > 1 || args.length == 0) {
+            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+            player.sendMessage(ChatColor.RED + " Incorrect Usage! Try this: /team <[player]/accept/deny/leave>");
+        } else {
+            if (args[0].equalsIgnoreCase("accept")) {
+                if (plugin.getServer().getOnlinePlayers().size() > 7) {
                     if (teamUtils.hasPendingRequest(player)) {
                         Player requester = teamUtils.getRequester(player);
                         teamMessages.sendAcceptMessage(player, requester);
@@ -43,7 +43,12 @@ public class TeamCommand implements CommandExecutor {
                         player.sendMessage(ChatColor.RED + " You do not have a pending team request!");
                         return false;
                     }
-                } else if (args[0].equalsIgnoreCase("deny")) {
+                } else {
+                    player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                    player.sendMessage(ChatColor.RED + "Since there are less than 7 players online, you can't team!");
+                }
+            } else if (args[0].equalsIgnoreCase("deny")) {
+                if (plugin.getServer().getOnlinePlayers().size() > 7) {
                     if (teamUtils.hasPendingRequest(player)) {
                         Player requester = teamUtils.getRequester(player);
                         teamMessages.sendDeclineMessage(player, requester);
@@ -53,38 +58,43 @@ public class TeamCommand implements CommandExecutor {
                         player.sendMessage(ChatColor.RED + " You do not have a pending team request!");
                         return false;
                     }
-                } else if (args[0].equalsIgnoreCase("leave")) {
-                    if (!teamUtils.isTeaming(player)) {
-                        player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                        player.sendMessage(ChatColor.RED + " You are not in a team!");
-                    } else {
-                        if (KitPvp.currentTeams.containsKey(player.getName()) || KitPvp.currentTeams.containsValue(player.getName())) {
-                            Player teammate = null;
-                            for (String possibleTeammate : KitPvp.currentTeams.keySet()) {
-                                if (KitPvp.currentTeams.get(possibleTeammate).equals(player.getName())) {
-                                    teammate = plugin.getServer().getPlayer(possibleTeammate);
-                                }
-                            }
-                            if (teammate != null) {
-                                teammate.playSound(teammate.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
-                                teammate.sendMessage(ChatColor.RED + " " + player.getName() + " has left the team. Therefore, the team has been disbanded!");
-                                KitPvp.currentTeams.remove(teammate.getName());
-                            }
-                            player.playSound(player.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
-                            player.sendMessage(ChatColor.RED + " You have left the team. Therefore, the team has been disbanded!");
-                            KitPvp.currentTeams.remove(player.getName());
-                        } else if (KitPvp.currentTeams.values().contains(player.getName())) {
-                            KitPvp.currentTeams.keySet().stream().filter(key -> KitPvp.currentTeams.get(key).equalsIgnoreCase(player.getName())).forEach(key -> {
-                                Player teammate = Bukkit.getServer().getPlayer(KitPvp.currentTeams.get(key));
-                                teammate.playSound(teammate.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
-                                player.playSound(player.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
-                                teammate.sendMessage(ChatColor.RED + " " + player.getName() + " has left the team. Therefore, the team has been disbanded!");
-                                player.sendMessage(ChatColor.RED + " You have left the team. Therefore, the team has been disbanded!");
-                                KitPvp.currentTeams.remove(KitPvp.currentTeams.get(key));
-                            });
-                        }
-                    }
                 } else {
+                    player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                    player.sendMessage(ChatColor.RED + "Since there are less than 7 players online, you can't team!");
+                }
+            } else if (args[0].equalsIgnoreCase("leave")) {
+                if (!teamUtils.isTeaming(player)) {
+                    player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                    player.sendMessage(ChatColor.RED + " You are not in a team!");
+                } else {
+                    if (KitPvp.currentTeams.containsKey(player.getName()) || KitPvp.currentTeams.containsValue(player.getName())) {
+                        Player teammate = null;
+                        for (String possibleTeammate : KitPvp.currentTeams.keySet()) {
+                            if (KitPvp.currentTeams.get(possibleTeammate).equals(player.getName())) {
+                                teammate = plugin.getServer().getPlayer(possibleTeammate);
+                            }
+                        }
+                        if (teammate != null) {
+                            teammate.playSound(teammate.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
+                            teammate.sendMessage(ChatColor.RED + " " + player.getName() + " has left the team. Therefore, the team has been disbanded!");
+                            KitPvp.currentTeams.remove(teammate.getName());
+                        }
+                        player.playSound(player.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
+                        player.sendMessage(ChatColor.RED + " You have left the team. Therefore, the team has been disbanded!");
+                        KitPvp.currentTeams.remove(player.getName());
+                    } else if (KitPvp.currentTeams.values().contains(player.getName())) {
+                        KitPvp.currentTeams.keySet().stream().filter(key -> KitPvp.currentTeams.get(key).equalsIgnoreCase(player.getName())).forEach(key -> {
+                            Player teammate = Bukkit.getServer().getPlayer(KitPvp.currentTeams.get(key));
+                            teammate.playSound(teammate.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
+                            player.playSound(player.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
+                            teammate.sendMessage(ChatColor.RED + " " + player.getName() + " has left the team. Therefore, the team has been disbanded!");
+                            player.sendMessage(ChatColor.RED + " You have left the team. Therefore, the team has been disbanded!");
+                            KitPvp.currentTeams.remove(KitPvp.currentTeams.get(key));
+                        });
+                    }
+                }
+            } else {
+                if (plugin.getServer().getOnlinePlayers().size() > 7) {
                     Player target = Bukkit.getServer().getPlayerExact(args[0]);
                     if (!Bukkit.getServer().getOnlinePlayers().contains(target)) {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
@@ -112,8 +122,13 @@ public class TeamCommand implements CommandExecutor {
                             plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
                                 @Override
                                 public void run() {
+<<<<<<< HEAD
                                     if(teamUtils.hasPendingRequest(target)) {
                                         player.sendMessage(ChatColor.RED + " Your request to duel with "
+=======
+                                    if (teamUtils.hasPendingRequest(target)) {
+                                        player.sendMessage(ChatColor.RED + "Your request to duel with "
+>>>>>>> refs/remotes/origin/master
                                                 + ChatColor.GOLD + target.getName() + ChatColor.RED + " has expired!");
                                         player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 2, 0.5F);
 
@@ -126,12 +141,11 @@ public class TeamCommand implements CommandExecutor {
                             }, 600L);
                         }
                     }
+                } else {
+                    player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                    player.sendMessage(ChatColor.RED + "Since there are less than 7 players online, you can't team!");
                 }
             }
-        } else {
-            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-            player.sendMessage(ChatColor.RED + "Since there are less than 7 players online, you can't team!");
-            return false;
         }
         return false;
     }

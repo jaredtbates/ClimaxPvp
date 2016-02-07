@@ -44,5 +44,8 @@ public class RabbitKit extends Kit {
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setBoots(boots);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
     }
 }

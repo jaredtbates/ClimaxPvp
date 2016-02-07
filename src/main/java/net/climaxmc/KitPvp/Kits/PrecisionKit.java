@@ -57,6 +57,9 @@ public class PrecisionKit extends Kit {
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setBoots(boots);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
     }
 
     @EventHandler
@@ -76,22 +79,24 @@ public class PrecisionKit extends Kit {
     }
 
     private Entity getTarget(final Player player) {
-        BlockIterator iterator = new BlockIterator(player.getWorld(), player
-                .getLocation().toVector(), player.getEyeLocation()
-                .getDirection(), 0, 5);
-        while (iterator.hasNext()) {
-            Block item = iterator.next();
-            for (Entity entity : player.getNearbyEntities(5, 5, 5)) {
-                int acc = 2;
-                for (int x = -acc; x < acc; x++)
-                    for (int z = -acc; z < acc; z++)
-                        for (int y = -acc; y < acc; y++)
-                            if (entity.getLocation().getBlock()
-                                    .getRelative(x, y, z).equals(item)) {
-                                return entity;
-                            }
+        try {
+            BlockIterator iterator = new BlockIterator(player.getWorld(), player
+                    .getLocation().toVector(), player.getEyeLocation()
+                    .getDirection(), 0, 5);
+            while (iterator.hasNext()) {
+                Block item = iterator.next();
+                for (Entity entity : player.getNearbyEntities(5, 5, 5)) {
+                    int acc = 2;
+                    for (int x = -acc; x < acc; x++)
+                        for (int z = -acc; z < acc; z++)
+                            for (int y = -acc; y < acc; y++)
+                                if (entity.getLocation().getBlock()
+                                        .getRelative(x, y, z).equals(item)) {
+                                    return entity;
+                                }
+                }
             }
-        }
+        } catch (Exception ignored) {}
         return null;
     }
 }

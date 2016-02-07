@@ -1,25 +1,30 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
+<<<<<<< HEAD
 import net.climaxmc.KitPvp.Utils.Slack.SlackApi;
 import net.climaxmc.KitPvp.Utils.Slack.SlackMessage;
 import net.climaxmc.common.database.Rank;
+=======
+import net.climaxmc.KitPvp.Menus.ReportGUI;
+>>>>>>> refs/remotes/origin/master
 import net.md_5.bungee.api.ChatColor;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
 public class ReportCommand implements CommandExecutor {
     private ClimaxPvp plugin;
 
-    private HashMap<UUID, Integer> cooldown = new HashMap<>();
+    public static HashMap<UUID, Integer> cooldown = new HashMap<>();
+    public static HashMap<UUID, String> reportBuilders = new HashMap<>();
+    public static HashMap<UUID, ArrayList<String>> reportArray = new HashMap<>();
 
     public ReportCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
@@ -33,12 +38,22 @@ public class ReportCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
+<<<<<<< HEAD
         if (args.length < 2) {
             player.sendMessage(ChatColor.RED + " /report <player> <reason>");
+=======
+        if (args.length < 1) {
+            player.sendMessage(ChatColor.RED + "/report <player>");
+>>>>>>> refs/remotes/origin/master
             return true;
         }
 
-        Player reported = plugin.getServer().getPlayer(args[0]);
+        if (args.length > 1) {
+            player.sendMessage(ChatColor.RED + "/report <player>");
+            return true;
+        }
+
+        Player reported = plugin.getServer().getPlayerExact(args[0]);
 
         if (reported == null) {
             player.sendMessage(ChatColor.RED + " That player is not online!");
@@ -46,6 +61,7 @@ public class ReportCommand implements CommandExecutor {
         }
 
         if (!cooldown.containsKey(player.getUniqueId())) {
+<<<<<<< HEAD
             String message = StringUtils.join(args, ' ', 1, args.length);
 
             player.sendMessage(ChatColor.GREEN + " You have successfully reported "
@@ -80,6 +96,12 @@ public class ReportCommand implements CommandExecutor {
             };
             int id = runnable.runTaskTimer(plugin, 1L, 20L).getTaskId();
 
+=======
+            ReportGUI reportGUI = new ReportGUI(plugin);
+            reportBuilders.put(player.getUniqueId(), null);
+            reportArray.put(player.getUniqueId(), new ArrayList<>());
+            reportGUI.openInventory(player, reported);
+>>>>>>> refs/remotes/origin/master
         } else {
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
             player.sendMessage(ChatColor.RED + " You must wait " + ChatColor.YELLOW

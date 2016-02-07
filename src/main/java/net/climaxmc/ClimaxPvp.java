@@ -117,6 +117,8 @@ public class ClimaxPvp extends JavaPlugin {
         // Create temporary player data
         getServer().getOnlinePlayers().forEach(player -> mySQL.getTemporaryPlayerData().put(player.getUniqueId(), new HashMap<>()));
 
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+
         // Load Modules
         new KitPvp(this);
         donations = new Donations(this);
@@ -178,14 +180,24 @@ public class ClimaxPvp extends JavaPlugin {
     }
 
     /**
-     * Respawns a player
+     * Respawns a player at a location
+     *
+     * @param player Player to respawn
+     * @param location Location for player to respawn at
+     */
+    public void respawn(Player player, Location location) {
+        player.spigot().respawn();
+        player.teleport(location);
+        getServer().getPluginManager().callEvent(new PlayerRespawnEvent(player, location, false));
+    }
+
+    /**
+     * Respawns a player at the world spawn
      *
      * @param player Player to respawn
      */
     public void respawn(Player player) {
-        player.spigot().respawn();
-        player.teleport(player.getWorld().getSpawnLocation());
-        getServer().getPluginManager().callEvent(new PlayerRespawnEvent(player, player.getWorld().getSpawnLocation(), false));
+        respawn(player, player.getWorld().getSpawnLocation());
     }
 
     /**
@@ -252,8 +264,7 @@ public class ClimaxPvp extends JavaPlugin {
             return;
         }
 
-        respawn(player);
-        player.teleport(location);
+        respawn(player, location);
         currentWarps.put(player.getUniqueId(), getWarpLocation(warp));
 
         if (warp.equalsIgnoreCase("Fair")) {

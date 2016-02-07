@@ -7,6 +7,8 @@ import net.climaxmc.KitPvp.Utils.Slack.SlackApi;
 import net.climaxmc.KitPvp.Utils.Slack.SlackMessage;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
+import net.gpedro.integrations.slack.SlackApi;
+import net.gpedro.integrations.slack.SlackMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -26,6 +28,7 @@ public class TempBanCommand implements CommandExecutor {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
             return true;
@@ -96,7 +99,7 @@ public class TempBanCommand implements CommandExecutor {
             targetData.addPunishment(new Punishment(targetData.getUuid(), Punishment.PunishType.BAN, System.currentTimeMillis(), time, playerData.getUuid(), reason));
             OfflinePlayer offlinePlayer = plugin.getServer().getOfflinePlayer(targetData.getUuid());
 
-            Player target = Bukkit.getPlayer(targetData.getUuid());
+            OfflinePlayer target = Bukkit.getPlayer(targetData.getUuid());
             if (target != null) {
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->
                         plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
@@ -104,6 +107,7 @@ public class TempBanCommand implements CommandExecutor {
                                 + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for "
                                 + Time.toString(finalTime) + " for " + finalReason));
 
+<<<<<<< HEAD
                 SlackMessage message = new SlackMessage(">>>*" + player.getName() +
                         "* _temporarily banned_ *" + target.getName() + "* _for *" + Time.toString(finalTime) + "* for:_ " + reason);
                 message.setChannel("#general");
@@ -113,16 +117,31 @@ public class TempBanCommand implements CommandExecutor {
                 slack.call(message);
 
                 target.kickPlayer(ChatColor.RED + " You were temporarily banned by " + player.getName() + " for " + Time.toString(time) + " for " + reason + "\n"
+=======
+                target.getPlayer().kickPlayer(ChatColor.RED + "You were temporarily banned by " + player.getName() + " for " + Time.toString(time) + " for " + reason + "\n"
+>>>>>>> refs/remotes/origin/master
                         + "Appeal on forum.climaxmc.net if you believe that this is in error!");
             } else {
+                target = plugin.getServer().getOfflinePlayer(args[0]);
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->
                         plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
                         staff.sendMessage(" " + ChatColor.RED + player.getName() + " temporarily banned "
                                 + ChatColor.GRAY + offlinePlayer.getName() + ChatColor.RED + " for "
                                 + Time.toString(finalTime) + " for " + finalReason));
+<<<<<<< HEAD
                 player.sendMessage(ChatColor.GREEN + " Offline player " + ChatColor.GOLD + plugin.getServer().getOfflinePlayer(args[0]).getName()
+=======
+                player.sendMessage(ChatColor.GREEN + "Offline player " + ChatColor.GOLD + target.getName()
+>>>>>>> refs/remotes/origin/master
                         + ChatColor.GREEN + " successfully banned.");
             }
+
+            SlackMessage message = new SlackMessage(">>>*" + player.getName() +
+                    "* _temporarily banned_ *" + target.getName() + "* _for *" + Time.toString(finalTime) + "* for:_ " + reason);
+            message.setChannel("#general");
+            message.setIcon("http://i.imgur.com/vm2Kaw8.png");
+            message.setUsername("Climax Bans");
+            plugin.getSlack().call(message);
         }
         return true;
     }

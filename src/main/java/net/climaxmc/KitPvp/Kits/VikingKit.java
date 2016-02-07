@@ -81,7 +81,10 @@ public class VikingKit extends Kit {
         player.getInventory().setBoots(boots);
         ItemStack fishingRod = new ItemStack(Material.FISHING_ROD);
         fishingRod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(fishingRod);*/
+        player.getInventory().addItem(fishingRod);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);*/
     }
 
     @EventHandler

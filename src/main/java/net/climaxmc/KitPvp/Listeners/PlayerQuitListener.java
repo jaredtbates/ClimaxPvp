@@ -1,8 +1,8 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Commands.ReportCommand;
 import net.climaxmc.KitPvp.KitPvp;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -25,10 +25,27 @@ public class PlayerQuitListener implements Listener {
             KitPvp.killStreak.remove(player.getUniqueId());
         }
 
+        if (ReportCommand.reportBuilders.containsKey(player.getUniqueId())) {
+            ReportCommand.reportBuilders.remove(player.getUniqueId());
+        }
+
+        if (ReportCommand.reportArray.containsKey(player.getUniqueId())) {
+            ReportCommand.reportArray.remove(player.getUniqueId());
+        }
+
         if (plugin.getServer().getOnlinePlayers().size() < 7) {
+<<<<<<< HEAD
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
             player.sendMessage(ChatColor.RED + " Since there are less than 7 players online, your team has been suspended!");
             player.sendMessage(ChatColor.GRAY + " It will resume once there are 7 players online again.");
+=======
+            plugin.getServer().getOnlinePlayers().stream().filter(players -> KitPvp.currentTeams.containsKey(players.getName())
+                    || KitPvp.currentTeams.containsValue(players.getName())).forEach(players -> {
+                players.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                players.sendMessage(ChatColor.RED + "Since there are less than 7 players online, your team has been suspended!");
+                players.sendMessage(ChatColor.GRAY + "It will resume once there are 7 players online again.");
+            });
+>>>>>>> refs/remotes/origin/master
         }
 
         /*if (KitPvp.currentTeams.containsKey(player.getName())) {
@@ -48,8 +65,6 @@ public class PlayerQuitListener implements Listener {
                 }
             }
         }*/
-
-        //DuelsUtils.removeDuel(player);
 
         event.setQuitMessage(null/*ChatColor.RED + "Quit" + ChatColor.DARK_GRAY + "\u00bb " + player.getName()*/);
 

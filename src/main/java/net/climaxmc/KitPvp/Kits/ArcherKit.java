@@ -100,5 +100,8 @@ public class ArcherKit extends Kit {
         bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
         player.getInventory().addItem(bow);
         player.getInventory().addItem(new ItemStack(Material.ARROW, 1));
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
     }
 }

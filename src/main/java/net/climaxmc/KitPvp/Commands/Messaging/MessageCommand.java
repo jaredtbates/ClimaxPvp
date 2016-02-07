@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp.Commands.Messaging;
 
+import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
@@ -53,8 +54,13 @@ public class MessageCommand implements CommandExecutor {
 
         Player target = plugin.getServer().getPlayer(args[0]);
 
+<<<<<<< HEAD
         if (target == null) {
             player.sendMessage(ChatColor.RED + " That player is not online!");
+=======
+        if (target == null || VanishCommand.getVanished().contains(target.getUniqueId())) {
+            player.sendMessage(ChatColor.RED + "That player is not online!");
+>>>>>>> refs/remotes/origin/master
             return true;
         }
 
