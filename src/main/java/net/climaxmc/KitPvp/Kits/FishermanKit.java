@@ -21,7 +21,8 @@ public class FishermanKit extends Kit {
     }
 
     protected void wear(Player player) {
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        player.sendMessage(ChatColor.DARK_RED + "This kit is disabled, sorry! -- Do /spawn to choose another kit!");
+        /*ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         player.getInventory().addItem(new ItemStack(Material.FISHING_ROD));
@@ -32,11 +33,12 @@ public class FishermanKit extends Kit {
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         player.getInventory().setBoots(boots);
-        addSoup(player.getInventory(), 2, 35);
+        addSoup(player.getInventory(), 2, 35);*/
     }
 
     protected void wearNoSoup(Player player) {
-        for (PotionEffect effect : player.getActivePotionEffects()) {
+        player.sendMessage(ChatColor.DARK_RED + "This kit is disabled, sorry! -- Do /spawn to choose another kit!");
+        /*for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
@@ -53,7 +55,7 @@ public class FishermanKit extends Kit {
         player.getInventory().setBoots(boots);
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
+        player.getInventory().addItem(rod);*/
     }
 
     @EventHandler

@@ -25,7 +25,8 @@ public class RangerKit extends Kit {
     }
 
     protected void wear(Player player) {
-        ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
+        player.sendMessage(ChatColor.DARK_RED + "This kit is disabled, sorry! -- Do /spawn to choose another kit!");
+        /*ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         LeatherArmorMeta helmetMeta = (LeatherArmorMeta) helmet.getItemMeta();
         helmetMeta.setColor(Color.ORANGE);
         helmet.setItemMeta(helmetMeta);
@@ -65,11 +66,12 @@ public class RangerKit extends Kit {
         player.getInventory().addItem(bow);
         addSoup(player.getInventory(), 2, 33);
         player.getInventory().addItem(new ItemStack(Material.ARROW, 64));
-        player.getInventory().addItem(new ItemStack(Material.ARROW, 32));
+        player.getInventory().addItem(new ItemStack(Material.ARROW, 32));*/
     }
 
     protected void wearNoSoup(Player player) {
-        for (PotionEffect effect : player.getActivePotionEffects()) {
+        player.sendMessage(ChatColor.DARK_RED + "This kit is disabled, sorry! -- Do /spawn to choose another kit!");
+        /*for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
@@ -115,7 +117,7 @@ public class RangerKit extends Kit {
         player.getInventory().addItem(new ItemStack(Material.ARROW, 32));
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
+        player.getInventory().addItem(rod);*/
     }
 
     @EventHandler
