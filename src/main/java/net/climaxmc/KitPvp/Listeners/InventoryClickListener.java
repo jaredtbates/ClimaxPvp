@@ -114,7 +114,7 @@ public class InventoryClickListener implements Listener {
 
                 if (clickedItem.getType().equals(Material.PAPER)) {
                     player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                    long cooldown = plugin.getChallengesFiles().getChallenge(clickedItem.getItemMeta().getDisplayName()).getCooldownTime()
+                    long cooldown = plugin.getChallengesFiles().getChallenge(clickedItem.getItemMeta().getDisplayName()).getCooldown()
                             - ((System.currentTimeMillis() / 1000)
                             - (plugin.getChallengesFiles().getCompletedTime(player,
                             plugin.getChallengesFiles().getChallenge(clickedItem.getItemMeta().getDisplayName()))));
@@ -195,7 +195,7 @@ public class InventoryClickListener implements Listener {
                         if (message == null) {
                             player.closeInventory();
                             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                            player.sendMessage(ChatColor.RED + "You tried to report a player without selecting any report options!" +
+                            player.sendMessage(ChatColor.RED + " You tried to report a player without selecting any report options!" +
                                     " Try selecting report options next time!");
                         } else {
                             reportGUI.report(player, target, message);
@@ -210,7 +210,6 @@ public class InventoryClickListener implements Listener {
                 event.setCancelled(true);
             }
 
-<<<<<<< HEAD
             if (inventory.getName().equals("Your Bank")) {
                 event.setCancelled(true);
             }
@@ -218,10 +217,8 @@ public class InventoryClickListener implements Listener {
             if (inventory.getName().equals("Achievements")) {
                 event.setCancelled(true);
             }
-=======
         } else {
             event.setCancelled(false);
->>>>>>> refs/remotes/origin/master
         }
     }
 }

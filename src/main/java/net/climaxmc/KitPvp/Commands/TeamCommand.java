@@ -45,7 +45,7 @@ public class TeamCommand implements CommandExecutor {
                     }
                 } else {
                     player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                    player.sendMessage(ChatColor.RED + "Since there are less than 7 players online, you can't team!");
+                    player.sendMessage(ChatColor.RED + " Since there are less than 7 players online, you can't team!");
                 }
             } else if (args[0].equalsIgnoreCase("deny")) {
                 if (plugin.getServer().getOnlinePlayers().size() > 7) {
@@ -60,7 +60,7 @@ public class TeamCommand implements CommandExecutor {
                     }
                 } else {
                     player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                    player.sendMessage(ChatColor.RED + "Since there are less than 7 players online, you can't team!");
+                    player.sendMessage(ChatColor.RED + " Since there are less than 7 players online, you can't team!");
                 }
             } else if (args[0].equalsIgnoreCase("leave")) {
                 if (!teamUtils.isTeaming(player)) {
@@ -119,31 +119,23 @@ public class TeamCommand implements CommandExecutor {
                         } else {
                             teamMessages.sendRequestMessage(player, target);
                             TeamUtils.createPendingRequest(target, player);
-                            plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
-                                @Override
-                                public void run() {
-<<<<<<< HEAD
-                                    if(teamUtils.hasPendingRequest(target)) {
-                                        player.sendMessage(ChatColor.RED + " Your request to duel with "
-=======
+                            plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
                                     if (teamUtils.hasPendingRequest(target)) {
-                                        player.sendMessage(ChatColor.RED + "Your request to duel with "
->>>>>>> refs/remotes/origin/master
+                                        player.sendMessage(ChatColor.RED + " Your request to duel with "
                                                 + ChatColor.GOLD + target.getName() + ChatColor.RED + " has expired!");
                                         player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 2, 0.5F);
 
-                                        target.sendMessage(ChatColor.GOLD + player.getName() + "'s" + ChatColor.RED + " request to duel with you has expired!");
+                                        target.sendMessage(" " + ChatColor.GOLD + player.getName() + "'s" + ChatColor.RED + " request to duel with you has expired!");
                                         target.playSound(target.getLocation(), Sound.NOTE_BASS_GUITAR, 2, 0.5F);
 
                                         TeamUtils.removePendingRequest(target);
-                                    }
                                 }
                             }, 600L);
                         }
                     }
                 } else {
                     player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                    player.sendMessage(ChatColor.RED + "Since there are less than 7 players online, you can't team!");
+                    player.sendMessage(ChatColor.RED + " Since there are less than 7 players online, you can't team!");
                 }
             }
         }

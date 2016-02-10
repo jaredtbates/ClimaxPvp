@@ -22,19 +22,11 @@ public class MySQL {
             " `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL," +
             " `deaths` INT DEFAULT 0 NOT NULL, `gold` INT DEFAULT 0 NOT NULL, `goldBlocks` INT DEFAULT 0 NOT NULL," +
             " `diamonds` INT DEFAULT 0 NOT NULL, `diamondBlocks` INT DEFAULT 0 NOT NULL, `emeralds` INT DEFAULT 0 NOT NULL," +
-<<<<<<< HEAD
             " `achievements` VARCHAR(5000) DEFAULT NULL, `nickname` VARCHAR(32) DEFAULT NULL);";
-    public static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `rank`, `balance`, `kills`, `deaths`," +
-            " `gold`, `goldBlocks`, `diamonds`, `diamondBlocks`, `emeralds`, `achievements`, `nickname`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    public static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `ip`, `rank`, `balance`, `kills`, `deaths`," +
+            " `gold`, `goldBlocks`, `diamonds`, `diamondBlocks`, `emeralds`, `achievements`, `nickname`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
     public static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, `gold` = ?," +
             " `goldBlocks` = ?, `diamonds` = ?, `diamondBlocks` = ?, `emeralds` = ?, `achievements` = ?, `nickname` = ? WHERE `uuid` = ?;";
-=======
-            " `achievements` VARCHAR(5000) DEFAULT NULL,*/ " `nickname` VARCHAR(32) DEFAULT NULL);";
-    public static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `ip`, `rank`, `balance`, `kills`, `deaths`," +
-            /*" `gold`, `goldBlocks`, `diamonds`, `diamondBlocks`, `emeralds`, `achievements`,*/ " `nickname`) VALUES (?, ?, ?, ?, ?, ?, " + /*?, ?, ?, ?, ?, ?,*/ " ?);";
-    public static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `ip` = ?, `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, " + /*`gold` = ?," +
-            " `goldBlocks` = ?, `diamonds` = ?, `diamondBlocks` = ?, `emeralds` = ?, `achievements` = ?,*/ " `nickname` = ? WHERE `uuid` = ?;";
->>>>>>> refs/remotes/origin/master
 
     // PUNISHMENTS ---------------------------------------------------------------------
     public static final String CREATE_PUNISHMENTS_TABLE = "CREATE TABLE IF NOT EXISTS `climax_punishments` (`uuid` VARCHAR(36) NOT NULL," +
@@ -205,27 +197,17 @@ public class MySQL {
             return null;
         }
 
-<<<<<<< HEAD
-        ResultSet data = executeQuery(GET_PLAYERDATA, uuid.toString());
         ResultSet duelData = executeQuery(GET_DUELDATA, uuid.toString());
         ResultSet playerSettings = executeQuery(GET_SETTINGS, uuid.toString());
-=======
         ResultSet data = executeQuery(GET_PLAYERDATA_FROM_UUID, uuid.toString());
-        //ResultSet duelData = executeQuery(GET_DUELDATA, uuid.toString());
-        //ResultSet playerSettings = executeQuery(GET_SETTINGS, uuid.toString());
->>>>>>> refs/remotes/origin/master
 
         if (data == null || duelData == null || playerSettings == null) {
             return null;
         }
 
         try {
-<<<<<<< HEAD
             if (data.next() && duelData.next() && playerSettings.next()) {
-=======
-            if (data.next() /*&& duelData.next() && playerSettings.next()*/) {
                 String ip = data.getString("ip");
->>>>>>> refs/remotes/origin/master
                 Rank rank = Rank.valueOf(data.getString("rank"));
                 int balance = data.getInt("balance");
                 int kills = data.getInt("kills");
@@ -248,13 +230,8 @@ public class MySQL {
                 String trail = playerSettings.getString("trail");
                 boolean privateMessaging = playerSettings.getBoolean("privateMessaging");
 
-<<<<<<< HEAD
-                PlayerData playerData = new PlayerData(this, uuid, rank, balance, kills, deaths, gold, goldBlocks, diamonds, diamondBlocks, emeralds,
+                PlayerData playerData = new PlayerData(this, uuid, ip, rank, balance, kills, deaths, gold, goldBlocks, diamonds, diamondBlocks, emeralds,
                         duelKills, duelDeaths, duelStreak, achievements, nickname, killEffect, killSound, trail, dueling, duelRequests, teamRequests, privateMessaging,
-=======
-                PlayerData playerData = new PlayerData(this, uuid, ip, rank, balance, kills, deaths, /*gold, goldBlocks, diamonds, diamondBlocks, emeralds,
-                        duelKills, duelDeaths, duelStreak, achievements,*/ nickname, /*killEffect, killSound, trail, dueling, duelRequests, teamRequests, privateMessaging,*/
->>>>>>> refs/remotes/origin/master
                         new ArrayList<>());
 
                 ResultSet punishments = executeQuery(GET_PUNISHMENTS_FROM_UUID, uuid.toString());
@@ -282,17 +259,10 @@ public class MySQL {
      * @param uuid UUID of the player to create data of
      * @param ip IP address of the player to create data of
      */
-<<<<<<< HEAD
-    public synchronized void createPlayerData(UUID uuid) {
-        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), Rank.DEFAULT.toString(), 0, 0, 0, 0, 0, 0, 0, 0, null, null);
+    public synchronized void createPlayerData(UUID uuid, String ip) {
+        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), ip, Rank.DEFAULT.toString(), 0, 0, 0, 0, 0, 0, 0, 0, null, null);
         executeUpdate(CREATE_DUELDATA, uuid.toString(), 0, 0, 0, false);
         executeUpdate(CREATE_SETTINGS, uuid.toString(), true, true, "DEFAULT", "NONE", "NONE", true);
-=======
-    public synchronized void createPlayerData(UUID uuid, String ip) {
-        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), ip, Rank.DEFAULT.toString(), 0, 0, 0, /*0, 0, 0, 0, 0, null,*/ null);
-        //executeUpdate(CREATE_DUELDATA, uuid.toString(), 0, 0, 0, false);
-        //executeUpdate(CREATE_SETTINGS, uuid.toString(), true, true, "DEFAULT", "NONE", "NONE", true);
->>>>>>> refs/remotes/origin/master
     }
 
     /**

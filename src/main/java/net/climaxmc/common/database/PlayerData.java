@@ -3,6 +3,7 @@ package net.climaxmc.common.database;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import net.climaxmc.Administration.Punishments.Punishment;
+import net.climaxmc.KitPvp.Utils.Achievement;
 import net.climaxmc.common.events.PlayerBalanceChangeEvent;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -234,82 +235,11 @@ public class PlayerData {
         mySQL.executeUpdate(MySQL.UPDATE_PUNISHMENT_TIME, 0, uuid.toString(), punishment.getType().name(), punishment.getTime());
     }
 
-    /*public void setDuelKills(int amount) {
-        mySQL.executeUpdate(MySQL.UPDATE_DUELDATA, "kills", Integer.toString(duelKills = amount), uuid);
-    }
-
-    public void addDuelKill() {
-        setDuelDeaths(getDuelKills() + 1);
-    }
-
-    public void setDuelDeaths(int amount) {
-        mySQL.executeUpdate(MySQL.UPDATE_DUELDATA, "deaths", Integer.toString(duelDeaths = amount), uuid);
-    }
-
-    public void addDuelDeath() {
-        setDuelDeaths(getDuelDeaths() + 1);
-    }
-
-    public void setGold(int amount) {
-        mySQL.executeUpdate(MySQL.UPDATE_DUELDATA, "gold", Integer.toString(gold = amount), uuid);
-    }
-
-    public void addGold(int amount) {
-        setGold(getGold() + amount);
-    }
-
-    public void removeGold(int amount) {
-        setGold(getGold() - amount);
-    }
-
-    public void setGoldBlocks(int amount) {
-        mySQL.executeUpdate(MySQL.UPDATE_DUELDATA, "goldBlocks", Integer.toString(goldBlocks = amount), uuid);
-    }
-
-    public void addGoldBlocks(int amount) {
-        setGoldBlocks(getGoldBlocks() + amount);
-    }
-
-    public void removeGoldBlocks(int amount) {
-        setGoldBlocks(getGoldBlocks() - amount);
-    }
-
-    public void setDiamonds(int amount) {
-        mySQL.executeUpdate(MySQL.UPDATE_DUELDATA, "diamonds", Integer.toString(diamonds = amount), uuid);
-    }
-
-    public void addDiamonds(int amount) {
-        setDiamonds(getDiamonds() + amount);
-    }
-
-    public void removeDiamonds(int amount) {
-        setDiamonds(getDiamonds() - amount);
-    }
-
-    public void setDiamondBlocks(int amount) {
-        mySQL.executeUpdate(MySQL.UPDATE_DUELDATA, "diamondBlocks", Integer.toString(diamondBlocks = amount), uuid);
-    }
-
-    public void addDiamondBlocks(int amount) {
-        setDiamondBlocks(getDiamondBlocks() + amount);
-    }
-
-    public void removeDiamondBlocks(int amount) {
-        setDiamondBlocks(getDiamondBlocks() - amount);
-    }
-
-    public void setEmeralds(int amount) {
-        mySQL.executeUpdate(MySQL.UPDATE_DUELDATA, "emeralds", Integer.toString(emeralds = amount), uuid);
-    }
-
-    public void addEmeralds(int amount) {
-        setEmeralds(getEmeralds() + amount);
-    }
-
-    public void removeEmeralds(int amount) {
-        setEmeralds(getEmeralds() - amount);
-    }
-
+    /**
+     * Gives an achievement to the player
+     *
+     * @param achievement Achievement to give
+     */
     public void addAchievement(Achievement achievement) {
         if (!getAchievements().contains(achievement.toString())) {
             if(getAchievements() != null) {
@@ -318,6 +248,6 @@ public class PlayerData {
                 setAchievements(achievement.toString());
             }
         }
-    }*/
+    }
 
 }

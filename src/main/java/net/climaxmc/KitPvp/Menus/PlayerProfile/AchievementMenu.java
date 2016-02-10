@@ -1,7 +1,7 @@
 package net.climaxmc.KitPvp.Menus.PlayerProfile;// AUTHOR: gamer_000 (12/23/2015)
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Utils.Achievements.Achievement;
+import net.climaxmc.KitPvp.Utils.Achievement;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.common.database.PlayerData;
 import org.bukkit.Bukkit;

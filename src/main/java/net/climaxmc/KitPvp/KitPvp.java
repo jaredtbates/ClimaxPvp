@@ -8,17 +8,13 @@ import net.climaxmc.KitPvp.Commands.Economy.PayCommand;
 import net.climaxmc.KitPvp.Commands.*;
 import net.climaxmc.KitPvp.Commands.Messaging.MessageCommand;
 import net.climaxmc.KitPvp.Commands.Messaging.ReplyCommand;
-import net.climaxmc.Administration.Commands.StaffChatCommand;
 import net.climaxmc.KitPvp.Listeners.*;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
-<<<<<<< HEAD
 import net.climaxmc.KitPvp.Menus.PlayerProfile.AchievementMenu;
 import net.climaxmc.KitPvp.Menus.PlayerProfile.CurrencyMenu;
 import net.climaxmc.KitPvp.Menus.PlayerProfile.PlayerProfileMenu;
-import net.climaxmc.KitPvp.Utils.Duels.Duel;
-=======
 import net.climaxmc.KitPvp.Menus.ReportGUI;
->>>>>>> refs/remotes/origin/master
+import net.climaxmc.KitPvp.Utils.Duels.Duel;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
@@ -59,14 +55,11 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new EntityDamageByEntityListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerItemConsumeListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ChallengesMenu(), plugin);
-<<<<<<< HEAD
         plugin.getServer().getPluginManager().registerEvents(new PlayerProfileMenu(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new CurrencyMenu(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new AchievementMenu(plugin), plugin);
-=======
         plugin.getServer().getPluginManager().registerEvents(new ReportGUI(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new InventoryCloseListener(plugin), plugin);
->>>>>>> refs/remotes/origin/master
         //plugin.getServer().getPluginManager().registerEvents(new HackListeners(plugin), plugin);
 
         // Register commands
@@ -90,10 +83,7 @@ public class KitPvp {
         plugin.getCommand("baltop").setExecutor(new BalanceTopCommand(plugin));
         plugin.getCommand("youtube").setExecutor(new YoutubeCommand(plugin));
         plugin.getCommand("pei").setExecutor(new PeiCommand());
-<<<<<<< HEAD
         plugin.getCommand("duel").setExecutor(new DuelCommand(plugin));
-=======
->>>>>>> refs/remotes/origin/master
         plugin.getCommand("team").setExecutor(new TeamCommand(plugin));
     }
 }

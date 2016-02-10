@@ -40,7 +40,7 @@ public class DuelCommand implements CommandExecutor {
                     Duel duel = DuelsUtils.getDuel(player);
                     if (duel != null) {
                         Player duelSender = DuelsUtils.getDuelRequester(player);
-                        duelsMessages.sendDuelAcceptMessage(player, duelSender);
+                        duelsMessages.sendAcceptMessage(player, duelSender);
                         duel.setAccepted(true);
                     } else {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
@@ -50,7 +50,7 @@ public class DuelCommand implements CommandExecutor {
                 } else if (args[0].equalsIgnoreCase("deny")) {
                     if (DuelsUtils.hasPendingDuel(player)) {
                         Player duelSender = DuelsUtils.getDuelRequester(player);
-                        duelsMessages.sendDuelDeclineMessage(player, duelSender);
+                        duelsMessages.sendDeclineMessage(player, duelSender);
                         DuelsUtils.removeDuel(player);
                     } else {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
@@ -79,7 +79,7 @@ public class DuelCommand implements CommandExecutor {
                             player.sendMessage(ChatColor.RED + " That player is already in a duel!");
                             return false;
                         } else {
-                            duelsMessages.sendDuelRequestMessage(player, target);
+                            duelsMessages.sendRequestMessage(player, target);
                             DuelsUtils.createDuel(target, player);
                         }
                     }

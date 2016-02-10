@@ -3,8 +3,6 @@ package net.climaxmc.Administration.Punishments.Commands;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Utils.Slack.SlackApi;
-import net.climaxmc.KitPvp.Utils.Slack.SlackMessage;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import net.gpedro.integrations.slack.SlackApi;
@@ -107,19 +105,7 @@ public class TempBanCommand implements CommandExecutor {
                                 + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for "
                                 + Time.toString(finalTime) + " for " + finalReason));
 
-<<<<<<< HEAD
-                SlackMessage message = new SlackMessage(">>>*" + player.getName() +
-                        "* _temporarily banned_ *" + target.getName() + "* _for *" + Time.toString(finalTime) + "* for:_ " + reason);
-                message.setChannel("#general");
-                message.setIcon("http://i.imgur.com/vm2Kaw8.png");
-                message.setUsername("Climax Bans");
-                SlackApi slack = new SlackApi("https://hooks.slack.com/services/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");
-                slack.call(message);
-
-                target.kickPlayer(ChatColor.RED + " You were temporarily banned by " + player.getName() + " for " + Time.toString(time) + " for " + reason + "\n"
-=======
-                target.getPlayer().kickPlayer(ChatColor.RED + "You were temporarily banned by " + player.getName() + " for " + Time.toString(time) + " for " + reason + "\n"
->>>>>>> refs/remotes/origin/master
+                target.getPlayer().kickPlayer(ChatColor.RED + " You were temporarily banned by " + player.getName() + " for " + Time.toString(time) + " for " + reason + "\n"
                         + "Appeal on forum.climaxmc.net if you believe that this is in error!");
             } else {
                 target = plugin.getServer().getOfflinePlayer(args[0]);
@@ -128,11 +114,7 @@ public class TempBanCommand implements CommandExecutor {
                         staff.sendMessage(" " + ChatColor.RED + player.getName() + " temporarily banned "
                                 + ChatColor.GRAY + offlinePlayer.getName() + ChatColor.RED + " for "
                                 + Time.toString(finalTime) + " for " + finalReason));
-<<<<<<< HEAD
-                player.sendMessage(ChatColor.GREEN + " Offline player " + ChatColor.GOLD + plugin.getServer().getOfflinePlayer(args[0]).getName()
-=======
-                player.sendMessage(ChatColor.GREEN + "Offline player " + ChatColor.GOLD + target.getName()
->>>>>>> refs/remotes/origin/master
+                player.sendMessage(ChatColor.GREEN + " Offline player " + ChatColor.GOLD + target.getName()
                         + ChatColor.GREEN + " successfully banned.");
             }
 

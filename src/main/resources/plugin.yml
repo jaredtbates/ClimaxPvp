@@ -98,15 +98,12 @@ commands:
   team:
     description: Team up with another player
     aliases: ally
-<<<<<<< HEAD
   duel:
     description: Duel another player
     aliases: 1v1
-=======
   staff:
     description: In-game Staff Chat
     aliases: [s, staffchat]
   getip:
     description: Get a player's IP address
     aliases: ip
->>>>>>> refs/remotes/origin/master

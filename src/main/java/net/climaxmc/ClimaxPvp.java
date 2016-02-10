@@ -7,7 +7,6 @@ import net.climaxmc.Donations.Donations;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
-import net.climaxmc.KitPvp.Trails.TrailsRunnable;
 import net.climaxmc.KitPvp.Utils.Challenges.ChallengesFiles;
 import net.climaxmc.common.database.MySQL;
 import net.climaxmc.common.database.PlayerData;
@@ -56,8 +55,6 @@ public class ClimaxPvp extends JavaPlugin {
     private Donations donations = null;
     @Getter
     private SlackApi slack = null;
-
-    TrailsRunnable trailsRunnable = new TrailsRunnable(this);
 
     @Override
     public void onEnable() {

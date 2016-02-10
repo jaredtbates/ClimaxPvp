@@ -33,20 +33,12 @@ public class PlayerQuitListener implements Listener {
             ReportCommand.reportArray.remove(player.getUniqueId());
         }
 
-        if (plugin.getServer().getOnlinePlayers().size() < 7) {
-<<<<<<< HEAD
-            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-            player.sendMessage(ChatColor.RED + " Since there are less than 7 players online, your team has been suspended!");
-            player.sendMessage(ChatColor.GRAY + " It will resume once there are 7 players online again.");
-=======
-            plugin.getServer().getOnlinePlayers().stream().filter(players -> KitPvp.currentTeams.containsKey(players.getName())
-                    || KitPvp.currentTeams.containsValue(players.getName())).forEach(players -> {
-                players.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                players.sendMessage(ChatColor.RED + "Since there are less than 7 players online, your team has been suspended!");
-                players.sendMessage(ChatColor.GRAY + "It will resume once there are 7 players online again.");
-            });
->>>>>>> refs/remotes/origin/master
-        }
+        plugin.getServer().getOnlinePlayers().stream().filter(players -> KitPvp.currentTeams.containsKey(players.getName())
+                || KitPvp.currentTeams.containsValue(players.getName())).forEach(players -> {
+            players.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+            players.sendMessage(ChatColor.RED + " Since there are less than 7 players online, your team has been suspended!");
+            players.sendMessage(ChatColor.GRAY + " It will resume once there are 7 players online again.");
+        });
 
         /*if (KitPvp.currentTeams.containsKey(player.getName())) {
             Player teammate = Bukkit.getServer().getPlayer(KitPvp.currentTeams.get(player.getName()));

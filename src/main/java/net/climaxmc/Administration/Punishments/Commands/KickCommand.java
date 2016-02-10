@@ -52,7 +52,10 @@ public class KickCommand implements CommandExecutor {
         final String finalReason = reason;
 
         targetData.addPunishment(new Punishment(targetData.getUuid(), Punishment.PunishType.KICK, System.currentTimeMillis(), -1, playerData.getUuid(), reason));
-        plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName() + " kicked " + plugin.getServer().getPlayer(targetData.getUuid()).getName() + " for " + finalReason + "."));
+        plugin.getServer().getOnlinePlayers().stream().filter(staff ->
+                plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
+                staff.sendMessage(ChatColor.RED + player.getName() + " kicked "
+                        + plugin.getServer().getPlayer(targetData.getUuid()).getName() + " for " + finalReason + "."));
 
         Player target = Bukkit.getPlayer(targetData.getUuid());
         if (target != null) {

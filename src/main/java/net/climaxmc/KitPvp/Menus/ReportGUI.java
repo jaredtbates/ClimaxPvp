@@ -133,11 +133,11 @@ public class ReportGUI implements Listener {
     }
 
     public void report(Player player, Player target, String message) {
-        player.sendMessage(ChatColor.GREEN + "You have successfully reported "
+        player.sendMessage(ChatColor.GREEN + " You have successfully reported "
                 + ChatColor.DARK_AQUA + target.getName() + ChatColor.GREEN + "!");
 
         plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff)
-                .hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName()
+                .hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(" " + ChatColor.RED + player.getName()
                 + " has reported " + ChatColor.BOLD + target.getName() + ChatColor.RED + " for: " + message + "!"));
 
         plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff)
@@ -161,7 +161,7 @@ public class ReportGUI implements Listener {
                 if (ReportCommand.cooldown.get(player.getUniqueId()) == 0) {
                     ReportCommand.cooldown.remove(player.getUniqueId());
                     player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1, 1.5F);
-                    player.sendMessage(ChatColor.GREEN + "You are now able to report another player!");
+                    player.sendMessage(ChatColor.GREEN + " You are now able to report another player!");
                     this.cancel();
                 }
             }

@@ -1,5 +1,10 @@
 package net.climaxmc.KitPvp.Utils.Challenges;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum Challenge {
     Daily1("Daily Challenge #1", 86400, 20, 300),
     Daily2("Daily Challenge #2", 86400, 75, 1200),
@@ -12,26 +17,4 @@ public enum Challenge {
     private int killRequirement;
     private int rewardMoney;
 
-    Challenge(String name, int cooldown, int killRequirement, int rewardMoney) {
-        this.name = name;
-        this.cooldown = cooldown;
-        this.killRequirement = killRequirement;
-        this.rewardMoney = rewardMoney;
-    }
-
-    public int getCooldownTime() {
-        return cooldown;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getKillRequirement() {
-        return killRequirement;
-    }
-
-    public int getRewardMoney() {
-        return rewardMoney;
-    }
 }
