@@ -26,7 +26,7 @@ public class VikingKit extends Kit {
     }
 
     protected void wear(Player player) {
-        player.sendMessage(ChatColor.DARK_RED + "This kit is disabled, sorry!");
+        player.sendMessage(ChatColor.DARK_RED + "This kit is disabled, sorry! -- Do /spawn to choose another kit!");
         /*for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
@@ -54,7 +54,7 @@ public class VikingKit extends Kit {
     }
 
     protected void wearNoSoup(Player player) {
-        player.sendMessage(ChatColor.DARK_RED + "This kit is disabled, sorry!");
+        player.sendMessage(ChatColor.DARK_RED + "This kit is disabled, sorry! -- Do /spawn to choose another kit!");
         /*for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }

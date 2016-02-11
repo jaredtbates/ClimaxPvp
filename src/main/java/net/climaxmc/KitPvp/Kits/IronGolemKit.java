@@ -5,6 +5,7 @@ import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.Ability;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -17,7 +18,11 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
+import java.util.concurrent.TimeUnit;
+
 public class IronGolemKit extends Kit {
+    private Ability Throw = new Ability(1, 5, TimeUnit.SECONDS);
+
     public IronGolemKit() {
         super("Iron Golem", new ItemStack(Material.RED_ROSE), "Punch people with your Rose to launch them in the air!", ChatColor.GOLD);
     }
@@ -77,6 +82,9 @@ public class IronGolemKit extends Kit {
                 if (KitManager.isPlayerInKit(player, this)) {
                     if (player.getItemInHand().getType().equals(Material.RED_ROSE)) {
                         event.setCancelled(true);
+                        if (!Throw.tryUse(player)) {
+                            return;
+                        }
                         if (!VanishCommand.getVanished().contains(target.getUniqueId())
                                 && !CheckCommand.getChecking().contains(target.getUniqueId())
                                 && (KitPvp.currentTeams.get(player.getName()) != target.getName()
