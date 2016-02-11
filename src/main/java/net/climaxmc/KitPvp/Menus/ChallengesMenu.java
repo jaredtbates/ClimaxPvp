@@ -23,7 +23,7 @@ public class ChallengesMenu implements Listener {
         if (item != null) {
             if (item.getType().equals(Material.DIAMOND)) {
 
-                p.sendMessage(ChatColor.RED + "Challenges are being fixed at the moment!");
+                p.sendMessage(ChatColor.RED + " Challenges are being fixed at the moment!");
                 p.playSound(p.getLocation(), Sound.CAT_MEOW, 1, 1);
 
                 /*
@@ -32,7 +32,7 @@ public class ChallengesMenu implements Listener {
                 int i = 0;
                 for (Challenge challenge : Challenge.values()) {
                     String cooldownText = "";
-                    long cooldown = challenge.getCooldownTime()
+                    long cooldown = challenge.getCooldown()
                             - ((System.currentTimeMillis() / 1000)
                             - (ClimaxPvp.getInstance().getChallengesFiles().getCompletedTime(p, challenge)));
                     if (cooldown >= 86400) {

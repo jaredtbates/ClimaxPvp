@@ -204,7 +204,7 @@ public class InventoryClickListener implements Listener {
                     }
                     if (item.getDurability() == 14) {
                         player.closeInventory();
-                        player.sendMessage(ChatColor.RED + "Report cancelled.");
+                        player.sendMessage(ChatColor.RED + " Report cancelled.");
                     }
                 }
                 event.setCancelled(true);

@@ -4,10 +4,11 @@ import net.climaxmc.Administration.Commands.ChatCommands;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Utils.TabText;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -84,8 +85,8 @@ public class PlayerJoinListener implements Listener {
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 double result = Double.valueOf(in.readLine());
                 if (result == 1) {
-                    event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatColor.RED + "\nSorry, but we don't allow VPNs and proxies on Climax.\n" +
-                            "Please disable your VPN or proxy and retry.");
+                    event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, ChatColor.RED + "\nSorry, but we don't allow VPNs or Proxies on Climax.\n" +
+                            "Please disable your VPN or Proxy and retry!");
                 }
                 in.close();
             } catch (Exception e) {
@@ -100,6 +101,9 @@ public class PlayerJoinListener implements Listener {
         PlayerData playerData = plugin.getPlayerData(player);
 
         event.setJoinMessage((player.hasPlayedBefore() ? ChatColor.DARK_AQUA : ChatColor.GOLD) + "Join" + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
+
+        TabText tabText = new TabText(plugin);
+        tabText.setTabHeader(player, ChatColor.AQUA + "Hello", ChatColor.RED + "Testing");
 
         plugin.respawn(player);
 
