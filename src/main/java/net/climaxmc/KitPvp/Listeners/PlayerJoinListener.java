@@ -4,7 +4,6 @@ import net.climaxmc.Administration.Commands.ChatCommands;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Utils.TabText;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import net.md_5.bungee.api.ChatColor;
@@ -101,9 +100,6 @@ public class PlayerJoinListener implements Listener {
         PlayerData playerData = plugin.getPlayerData(player);
 
         event.setJoinMessage((player.hasPlayedBefore() ? ChatColor.DARK_AQUA : ChatColor.GOLD) + "Join" + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
-
-        TabText tabText = new TabText(plugin);
-        tabText.setTabHeader(player, ChatColor.AQUA + "Hello", ChatColor.RED + "Testing");
 
         plugin.respawn(player);
 
