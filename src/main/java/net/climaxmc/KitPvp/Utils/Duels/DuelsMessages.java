@@ -16,7 +16,7 @@ public class DuelsMessages {
         this.plugin = plugin;
     }
 
-    TextComponentMessages tcm = new TextComponentMessages();
+    TextComponentMessages tcm = new TextComponentMessages(plugin);
 
     public void sendRequestMessage(Player sender, Player target) {
         sender.playSound(sender.getLocation(), Sound.ITEM_PICKUP, 2F, 0.3F);
@@ -51,5 +51,9 @@ public class DuelsMessages {
 
         target.playSound(target.getLocation(), Sound.VILLAGER_NO, 1, 0.75F);
         target.sendMessage(RED + "     \u00AB " + YELLOW + "You have " + RED + "declined " + AQUA + sender.getName() + YELLOW + "'s request to duel!" + RED + " \u00BB");
+    }
+
+    public void sendMessage(Player player1, Player player2, String message) {
+
     }
 }

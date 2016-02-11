@@ -67,6 +67,24 @@ public class ReportGUI implements Listener {
                 .lore(ChatColor.RED + "NOTE: Lag can sometimes cause issues with")
                 .lore(ChatColor.RED + "knockback. Be sure to check the player's ping!").lore(" ")
                 .lore(ChatColor.WHITE + "Difficulty to Detect: " + ChatColor.YELLOW + "■■ □ □"));
+        inv.setItem(21, new I(Material.BOOK).name(ChatColor.RED + "Regen Hacks")
+                .lore(ChatColor.AQUA + "Click to add to your report!").lore(" ")
+                .lore(ChatColor.GRAY + "A player with regeneration hacks can be")
+                .lore(ChatColor.GRAY + "detected by looking at the hearts above")
+                .lore(ChatColor.GRAY + "their head. If the number is constantly around")
+                .lore(ChatColor.GRAY + "20, they're probably cheating!").lore(" ")
+                .lore(ChatColor.WHITE + "Difficulty to Detect: " + ChatColor.GOLD + "■■■ □"));
+        inv.setItem(22, new I(Material.BOOK).name(ChatColor.RED + "Auto Soup")
+                .lore(ChatColor.AQUA + "Click to add to your report!").lore(" ")
+                .lore(ChatColor.GRAY + "Players with Auto Soup cheats usually won't")
+                .lore(ChatColor.GRAY + "die in Soup PvP. They seem too MLG for any")
+                .lore(ChatColor.GRAY + "player of any skill level!").lore(" ")
+                .lore(ChatColor.WHITE + "Difficulty to Detect: " + ChatColor.GOLD + "■■■ □"));
+        inv.setItem(23, new I(Material.BOOK).name(ChatColor.RED + "FFA in /warp fair")
+                .lore(ChatColor.AQUA + "Click to add to your report!").lore(" ")
+                .lore(ChatColor.GRAY + "Report players that aren't following the")
+                .lore(ChatColor.YELLOW + "/warp fair " + ChatColor.GRAY + "rules.").lore(" ")
+                .lore(ChatColor.WHITE + "Difficulty to Detect: " + ChatColor.GOLD + "■ □ □ □"));
         inv.setItem(32, new I(Material.WOOL).name(ChatColor.RED + "" + ChatColor.BOLD + "CANCEL REPORT")
                 .durability(14));
 

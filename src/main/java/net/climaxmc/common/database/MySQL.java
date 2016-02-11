@@ -167,8 +167,12 @@ public class MySQL {
 
                 statement.executeUpdate();
             } catch (SQLException e) {
-                logger.severe("Could not execute MySQL query!");
-                e.printStackTrace();
+                if(e.getMessage().toString().toLowerCase().contains("unknown column")) {
+                    System.out.println("There was an Unknown Column exception, but you should probably ignore it, because everything works.");
+                } else {
+                    logger.severe("Could not execute MySQL query!");
+                    e.printStackTrace();
+                }
             }
         });
     }

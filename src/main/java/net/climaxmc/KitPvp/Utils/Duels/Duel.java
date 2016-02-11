@@ -10,12 +10,15 @@ public class Duel {
 
     @Getter
     @Setter
-    private UUID player1uuid;
+    private UUID player1UUID;
     @Getter
     @Setter
-    private UUID player2uuid;
+    private UUID player2UUID;
     @Getter
     @Setter
     private boolean accepted;
+    @Getter
+    @Setter
+    private boolean isStarted;
 
 }

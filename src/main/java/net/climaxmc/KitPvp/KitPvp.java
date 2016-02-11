@@ -85,5 +85,6 @@ public class KitPvp {
         plugin.getCommand("pei").setExecutor(new PeiCommand());
         plugin.getCommand("duel").setExecutor(new DuelCommand(plugin));
         plugin.getCommand("team").setExecutor(new TeamCommand(plugin));
+        plugin.getCommand("options").setExecutor(new OptionsCommand(plugin));
     }
 }

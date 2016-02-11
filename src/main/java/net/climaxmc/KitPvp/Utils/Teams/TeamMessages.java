@@ -16,7 +16,7 @@ public class TeamMessages {
         this.plugin = plugin;
     }
 
-    TextComponentMessages tcm = new TextComponentMessages();
+    TextComponentMessages tcm = new TextComponentMessages(plugin);
 
     public void sendRequestMessage(Player sender, Player target) {
         sender.playSound(sender.getLocation(), Sound.ITEM_PICKUP, 2F, 0.3F);

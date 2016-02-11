@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public class DuelsUtils {
     public static void createDuel(Player sender, Player target) {
-        KitPvp.duels.add(new Duel(sender.getUniqueId(), target.getUniqueId()));
+        //KitPvp.duels.add(new Duel(sender.getUniqueId(), target.getUniqueId()));
     }
 
     public static void removeDuel(Player target) {

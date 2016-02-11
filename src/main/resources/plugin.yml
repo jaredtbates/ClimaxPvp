@@ -107,3 +107,5 @@ commands:
   getip:
     description: Get a player's IP address
     aliases: ip
+  options:
+    description: Opens the options menu for a player

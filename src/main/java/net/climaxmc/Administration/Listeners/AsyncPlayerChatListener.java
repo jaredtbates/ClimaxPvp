@@ -6,9 +6,12 @@ import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Utils.TextComponentMessages;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.BaseComponent;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -59,7 +62,7 @@ public class AsyncPlayerChatListener implements Listener {
             }
         });
 
-        Rank rank = playerData.getRank();
+        /*Rank rank = playerData.getRank();
 
         if (playerData.hasRank(Rank.NINJA)) {
             event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
@@ -68,7 +71,11 @@ public class AsyncPlayerChatListener implements Listener {
                     + rank.getPrefix() + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
         } else {
             event.setFormat(" " + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.GRAY + "%s");
-        }
+        }*/
+
+        event.setCancelled(true);
+        TextComponentMessages tcm = new TextComponentMessages(plugin);
+        tcm.sendChatMessage(player, event.getMessage());
 
         /*if (StringUtils.containsIgnoreCase(event.getMessage(), "apply") && StringUtils.containsIgnoreCase(event.getMessage(), "staff")) {
             event.setCancelled(true);
@@ -79,5 +86,6 @@ public class AsyncPlayerChatListener implements Listener {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + " The chat has been momentarily disabled.");
         }
+
     }
 }

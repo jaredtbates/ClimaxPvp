@@ -17,7 +17,7 @@ public class DuelsRunnable implements Runnable {
     @Override
     public void run() {
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> KitPvp.duels.stream().filter(Duel::isAccepted).filter(duel -> !duel.isStarted()).forEach(duel -> {
-            duelsMessages.sendDuelMessage(plugin.getServer().getPlayer(duel.getPlayer1UUID()), plugin.getServer().getPlayer(duel.getPlayer2UUID()), RED + "Testing 1");
+            duelsMessages.sendMessage(plugin.getServer().getPlayer(duel.getPlayer1UUID()), plugin.getServer().getPlayer(duel.getPlayer2UUID()), RED + "Testing 1");
         }), 20);
     }
 }

@@ -37,7 +37,7 @@ public class ChallengesMenu implements Listener {
                 int i = 0;
                 for (Challenge challenge : Challenge.values()) {
                     String cooldownText = "";
-                    long cooldown = challenge.getCooldownTime()
+                    long cooldown = challenge.getCooldown()
                             - ((System.currentTimeMillis() / 1000)
                             - (ClimaxPvp.getInstance().getChallengesFiles().getCompletedTime(p, challenge)));
                     if (cooldown >= 86400) {

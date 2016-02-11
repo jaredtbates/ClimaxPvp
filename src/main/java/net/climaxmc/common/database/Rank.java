@@ -9,7 +9,7 @@ import net.md_5.bungee.api.ChatColor;
 public enum Rank {
     OWNER("OWNER", ChatColor.RED, Integer.MAX_VALUE),
     MANAGER("MANAGER", ChatColor.RED, 150),
-    DEVELOPER("DEVELOPER", ChatColor.GOLD, 130),
+    DEVELOPER("DEV", ChatColor.GOLD, 130),
     ADMINISTRATOR("ADMIN", ChatColor.RED, 100),
     MODERATOR("MOD", ChatColor.DARK_PURPLE, 80),
     HEAD_BUILDER("BUILDER", ChatColor.YELLOW, 70),

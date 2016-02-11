@@ -66,10 +66,10 @@ public class PlayerProfileMenu implements Listener {
         }
         lore.add(YELLOW + "" + UNDERLINE + "                 STATS                 ");
         lore.add("");
-        lore.add(WHITE + "" + BOLD + "Total Kills: " + ChatColor.GREEN + (playerData.getKills() + playerData.getDuelKills()));
+        lore.add(WHITE + "" + BOLD + "Total Kills: " + ChatColor.GREEN + ChatColor.BOLD + (playerData.getKills() + playerData.getDuelKills()));
         lore.add(GRAY + "   Regular Kills: " + playerData.getKills());
-        lore.add(GRAY + "   Duels Kills: " + playerData.getDuelKills());
-        lore.add(WHITE + "" + BOLD + "Total Deaths: " + ChatColor.RED + (playerData.getDeaths() + playerData.getDuelDeaths()));
+        lore.add(GRAY + "   Duel Kills: " + playerData.getDuelKills());
+        lore.add(WHITE + "" + BOLD + "Total Deaths: " + ChatColor.RED + ChatColor.BOLD + (playerData.getDeaths() + playerData.getDuelDeaths()));
         lore.add(GRAY + "   Regular Deaths: " + playerData.getDeaths());
         lore.add(GRAY + "   Duel Deaths: " + playerData.getDuelDeaths());
         lore.add("");
@@ -100,7 +100,7 @@ public class PlayerProfileMenu implements Listener {
         }
     }
 
-    private double getRegularRatio(PlayerData playerData) {
+    public static double getRegularRatio(PlayerData playerData) {
         double kills = playerData.getKills();
         double deaths = playerData.getDeaths();
         double ratio;
@@ -121,7 +121,7 @@ public class PlayerProfileMenu implements Listener {
         return ratio;
     }
 
-    private double getDuelsRatio(PlayerData playerData) {
+    public static double getDuelsRatio(PlayerData playerData) {
         double kills = playerData.getDuelKills();
         double deaths = playerData.getDuelDeaths();
         double ratio;
@@ -141,7 +141,7 @@ public class PlayerProfileMenu implements Listener {
         ratio = Math.round(ratio * 100.0D) / 100.0D;
         return ratio;
     }
-    private double getTotalRatio(PlayerData playerData) {
+    public static double getTotalRatio(PlayerData playerData) {
         double kills = playerData.getKills() + playerData.getDuelKills();
         double deaths = playerData.getDeaths() + playerData.getDuelDeaths();
         double ratio;
