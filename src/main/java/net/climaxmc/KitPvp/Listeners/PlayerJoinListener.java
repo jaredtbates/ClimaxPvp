@@ -142,9 +142,17 @@ public class PlayerJoinListener implements Listener {
 
         PermissionAttachment attachment = player.addAttachment(plugin);
 
-        if (playerData != null && playerData.hasRank(Rank.MODERATOR)) {
-            attachment.setPermission("minecraft.command.tp", true);
-            attachment.setPermission("bukkit.command.teleport", true);
+        if (playerData != null ) {
+            if (playerData.hasRank(Rank.HELPER)) {
+                attachment.setPermission("AAC.admin", true);
+                attachment.setPermission("AAC.notify", true);
+                attachment.setPermission("AAC.verbose", true);
+            }
+
+            if (playerData.hasRank(Rank.MODERATOR)) {
+                attachment.setPermission("minecraft.command.tp", true);
+                attachment.setPermission("bukkit.command.teleport", true);
+            }
         }
 
         attachment.setPermission("bukkit.command.tps", true);
