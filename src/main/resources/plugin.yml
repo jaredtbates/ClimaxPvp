@@ -104,3 +104,6 @@ commands:
   getip:
     description: Get a player's IP address
     aliases: ip
+  alert:
+    description: Sends an alert to the server
+    aliases: a

@@ -83,7 +83,7 @@ public class ReportGUI implements Listener {
                 .lore(ChatColor.AQUA + "Click to add to your report!").lore(" ")
                 .lore(ChatColor.GRAY + "Report players that aren't following the")
                 .lore(ChatColor.YELLOW + "/warp fair " + ChatColor.GRAY + "rules.").lore(" ")
-                .lore(ChatColor.WHITE + "Difficulty to Detect: " + ChatColor.GOLD + "■ □ □ □"));
+                .lore(ChatColor.WHITE + "Difficulty to Detect: " + ChatColor.GREEN + "■ □ □ □"));
         inv.setItem(32, new I(Material.WOOL).name(ChatColor.RED + "" + ChatColor.BOLD + "CANCEL REPORT")
                 .durability(14));
 
