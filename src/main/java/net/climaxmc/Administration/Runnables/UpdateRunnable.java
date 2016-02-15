@@ -32,7 +32,7 @@ public class UpdateRunnable implements Runnable {
             return;
         }
 
-        plugin.getServer().broadcastMessage(ChatColor.GRAY + "Reloading in 5 seconds for an update...");
+        plugin.getServer().broadcastMessage(ChatColor.GRAY + " Reloading in 5 seconds for an update...");
 
         plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
             PluginUtil.unload(plugin);
@@ -48,7 +48,7 @@ public class UpdateRunnable implements Runnable {
             for (Player player : plugin.getServer().getOnlinePlayers()) {
                 player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1.5F, 1.2F);
             }
-            plugin.getServer().broadcastMessage(ChatColor.GRAY + "Reload complete!");
+            plugin.getServer().broadcastMessage(ChatColor.GRAY + " Reload complete!");
         }, 100);
     }
 }

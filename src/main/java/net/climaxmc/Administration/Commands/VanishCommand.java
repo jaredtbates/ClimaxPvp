@@ -39,7 +39,7 @@ public class VanishCommand implements CommandExecutor, Listener {
             for (UUID vanishedUUID : vanished) {
                 bos.writeUTF(vanishedUUID.toString());
             }
-            //Iterables.get(plugin.getServer().getOnlinePlayers(), 1).sendPluginMessage(plugin, "BungeeCord", bos.toByteArray());
+            Iterables.get(plugin.getServer().getOnlinePlayers(), 0).sendPluginMessage(plugin, "BungeeCord", bos.toByteArray());
         }, 200, 200);
     }
 
@@ -68,7 +68,7 @@ public class VanishCommand implements CommandExecutor, Listener {
             player.sendMessage(ChatColor.RED + " You are no longer vanished.");
             plugin.respawn(player);
             plugin.getServer().getOnlinePlayers().stream().forEach(target -> target.showPlayer(player));
-            plugin.getServer().broadcastMessage(ChatColor.DARK_AQUA + "Join" + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
+            plugin.getServer().broadcastMessage(ChatColor.DARK_AQUA + " Join" + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
             player.setPlayerListName(playerData.getLevelColor() + player.getName());
             vanished.remove(player.getUniqueId());
         }

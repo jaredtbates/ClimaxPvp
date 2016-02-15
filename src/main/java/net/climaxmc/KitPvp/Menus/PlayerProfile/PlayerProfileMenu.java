@@ -100,65 +100,65 @@ public class PlayerProfileMenu implements Listener {
         }
     }
 
-    public static double getRegularRatio(PlayerData playerData) {
-        double kills = playerData.getKills();
-        double deaths = playerData.getDeaths();
-        double ratio;
-        if ((kills == 0.0D) && (deaths == 0.0D)) {
-            ratio = 0.0D;
+    public static float getRegularRatio(PlayerData playerData) {
+        float kills = playerData.getKills();
+        float deaths = playerData.getDeaths();
+        float ratio;
+        if ((kills == 0.00F) && (deaths == 0.00F)) {
+            ratio = 0.00F;
         } else {
-            if ((kills > 0.0D) && (deaths == 0.0D)) {
+            if ((kills > 0.00F) && (deaths == 0.00F)) {
                 ratio = kills;
             } else {
-                if ((deaths > 0.0D) && (kills == 0.0D)) {
-                    ratio = -deaths;
+                if ((deaths > 0.00) && (kills == 0.00F)) {
+                    ratio = 0.00F;
                 } else {
                     ratio = kills / deaths;
                 }
             }
         }
-        ratio = Math.round(ratio * 100.0D) / 100.0D;
+        ratio = Math.round(ratio * 100.00F) / 100.00F;
         return ratio;
     }
 
-    public static double getDuelsRatio(PlayerData playerData) {
-        double kills = playerData.getDuelKills();
-        double deaths = playerData.getDuelDeaths();
-        double ratio;
-        if ((kills == 0.0D) && (deaths == 0.0D)) {
-            ratio = 0.0D;
+    public static float getDuelsRatio(PlayerData playerData) {
+        float kills = playerData.getDuelKills();
+        float deaths = playerData.getDuelDeaths();
+        float ratio;
+        if ((kills == 0.00F) && (deaths == 0.00F)) {
+            ratio = 0.00F;
         } else {
-            if ((kills > 0.0D) && (deaths == 0.0D)) {
+            if ((kills > 0.00F) && (deaths == 0.00F)) {
                 ratio = kills;
             } else {
-                if ((deaths > 0.0D) && (kills == 0.0D)) {
-                    ratio = -deaths;
+                if ((deaths > 0.00F) && (kills == 0.00F)) {
+                    ratio = 0.00F;
                 } else {
                     ratio = kills / deaths;
                 }
             }
         }
-        ratio = Math.round(ratio * 100.0D) / 100.0D;
+        ratio = Math.round(ratio * 100.00F) / 100.00F;
         return ratio;
     }
-    public static double getTotalRatio(PlayerData playerData) {
-        double kills = playerData.getKills() + playerData.getDuelKills();
-        double deaths = playerData.getDeaths() + playerData.getDuelDeaths();
-        double ratio;
-        if ((kills == 0.0D) && (deaths == 0.0D)) {
-            ratio = 0.0D;
+    public static float getTotalRatio(PlayerData playerData) {
+        float kills = playerData.getKills() + playerData.getDuelKills();
+        float deaths = playerData.getDeaths() + playerData.getDuelDeaths();
+        float ratio;
+        if ((kills == 0.00F) && (deaths == 0.00F)) {
+            ratio = 0.00F;
         } else {
-            if ((kills > 0.0D) && (deaths == 0.0D)) {
+            if ((kills > 0.00F) && (deaths == 0.00F)) {
                 ratio = kills;
             } else {
-                if ((deaths > 0.0D) && (kills == 0.0D)) {
-                    ratio = -deaths;
+                if ((deaths > 0.00F) && (kills == 0.00F)) {
+                    ratio = 0.00F;
                 } else {
                     ratio = kills / deaths;
                 }
             }
         }
-        ratio = Math.round(ratio * 100.0D) / 100.0D;
+        ratio = Math.round(ratio * 100.00F) / 100.00F;
         return ratio;
     }
 

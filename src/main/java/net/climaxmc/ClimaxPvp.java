@@ -130,6 +130,7 @@ public class ClimaxPvp extends JavaPlugin {
         //trailsRunnable.startTrails();
 
         slack = new SlackApi("https://hooks.slack.com/services/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");
+
     }
 
     @Override

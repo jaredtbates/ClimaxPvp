@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Menus.PlayerProfile.PlayerProfileMenu;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.events.PlayerBalanceChangeEvent;
 import org.bukkit.Bukkit;
@@ -22,6 +23,7 @@ import java.util.UUID;
 public class ScoreboardListener implements Listener {
     private ClimaxPvp plugin;
     private Map<UUID, Integer> balances = new HashMap<>();
+    private Map<UUID, Integer> gold = new HashMap<>();
     private Map<UUID, Integer> kills = new HashMap<>();
     private Map<UUID, Integer> deaths = new HashMap<>();
 
@@ -40,22 +42,36 @@ public class ScoreboardListener implements Listener {
         board.registerNewTeam("Team");
         objective.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "Climax" + ChatColor.RED + "" + ChatColor.BOLD + "Pvp");
         if (playerData != null) {
-            objective.getScore(ChatColor.GREEN + "" + ChatColor.BOLD + "Balance").setScore(11);
             String balance = "$" + new Double(playerData.getBalance()).intValue();
-            objective.getScore(balance).setScore(10);
+            objective.getScore(ChatColor.GREEN + "" + ChatColor.BOLD
+                    + "Cash: " + ChatColor.WHITE + balance).setScore(11);
             balances.put(player.getUniqueId(), new Double(playerData.getBalance()).intValue());
-            objective.getScore(" ").setScore(9);
-            objective.getScore(ChatColor.RED + "" + ChatColor.BOLD + "Kills").setScore(8);
-            objective.getScore(Integer.toString(plugin.getPlayerData(player).getKills())).setScore(7);
+
+            objective.getScore(" ").setScore(10);
+            objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD
+                    + "Gold: " + ChatColor.WHITE + Integer.toString(plugin.getPlayerData(player).getGold())).setScore(9);
+            gold.put(player.getUniqueId(), playerData.getGold());
+
+            objective.getScore("  ").setScore(8);
+            objective.getScore(ChatColor.RED + "" + ChatColor.BOLD
+                    + "Kills: " + playerData.getLevelColor() + Integer.toString(plugin.getPlayerData(player).getKills())).setScore(7);
             kills.put(player.getUniqueId(), playerData.getKills());
-            objective.getScore("  ").setScore(6);
-            objective.getScore(ChatColor.RED + "" + ChatColor.BOLD + "Deaths").setScore(5);
+
+            objective.getScore("   ").setScore(6);
+            objective.getScore(ChatColor.RED + "" + ChatColor.BOLD
+                    + "Deaths: " + ChatColor.WHITE + Integer.toString(plugin.getPlayerData(player).getDeaths())).setScore(5);
             deaths.put(player.getUniqueId(), playerData.getDeaths());
-            objective.getScore(Integer.toString(plugin.getPlayerData(player).getDeaths())).setScore(4);
-            objective.getScore("   ").setScore(3);
+
+            objective.getScore("    ").setScore(4);
+            String kd = PlayerProfileMenu.getTotalRatio(playerData) + "";
+            objective.getScore(ChatColor.AQUA + "" + ChatColor.BOLD
+                    + "KD: " + ChatColor.WHITE + kd).setScore(3);
+            deaths.put(player.getUniqueId(), playerData.getDeaths());
+            objective.getScore("     ").setScore(2);
+
         }
-        objective.getScore(ChatColor.YELLOW + "" + ChatColor.BOLD + "Website").setScore(2);
-        objective.getScore("climaxmc.net").setScore(1);
+        objective.getScore(ChatColor.YELLOW + "" + ChatColor.BOLD + "climaxmc.net").setScore(1);
+
         Objective healthObjective = board.registerNewObjective("showhealth", "health");
         healthObjective.setDisplaySlot(DisplaySlot.BELOW_NAME);
         healthObjective.setDisplayName(ChatColor.RED + "\u2764");
