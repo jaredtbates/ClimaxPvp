@@ -147,6 +147,7 @@ public class PlayerJoinListener implements Listener {
                 attachment.setPermission("AAC.admin", true);
                 attachment.setPermission("AAC.notify", true);
                 attachment.setPermission("AAC.verbose", true);
+                attachment.setPermission("-AAC.bypass", true);
             }
 
             if (playerData.hasRank(Rank.MODERATOR)) {
