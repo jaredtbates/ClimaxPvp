@@ -157,5 +157,10 @@ public class PlayerJoinListener implements Listener {
         }
 
         attachment.setPermission("bukkit.command.tps", true);
+
+        String joinMOTD = plugin.getConfig().getString("JoinMOTD");
+        if (joinMOTD != null) {
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', joinMOTD));
+        }
     }
 }
