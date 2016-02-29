@@ -123,11 +123,11 @@ public class TeamCommand implements CommandExecutor {
                                 @Override
                                 public void run() {
                                     if (teamUtils.hasPendingRequest(target)) {
-                                        player.sendMessage(ChatColor.RED + "Your request to duel with "
+                                        player.sendMessage(ChatColor.RED + "Your request to team with "
                                                 + ChatColor.GOLD + target.getName() + ChatColor.RED + " has expired!");
                                         player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 2, 0.5F);
 
-                                        target.sendMessage(ChatColor.GOLD + player.getName() + "'s" + ChatColor.RED + " request to duel with you has expired!");
+                                        target.sendMessage(ChatColor.GOLD + player.getName() + "'s" + ChatColor.RED + " request to team with you has expired!");
                                         target.playSound(target.getLocation(), Sound.NOTE_BASS_GUITAR, 2, 0.5F);
 
                                         TeamUtils.removePendingRequest(target);

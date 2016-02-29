@@ -42,7 +42,7 @@ public class AlertCommand implements CommandExecutor {
             }
 
             plugin.getServer().broadcastMessage(" ");
-            plugin.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + "[ALERT] " + ChatColor.WHITE + message);
+            plugin.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + "[ALERT] " + ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', message));
             plugin.getServer().broadcastMessage(" ");
 
         }
