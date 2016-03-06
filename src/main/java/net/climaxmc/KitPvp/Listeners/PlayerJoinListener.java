@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.Administration.Commands.ChatCommands;
+import net.climaxmc.Administration.Commands.FreezeCommand;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
@@ -133,6 +134,12 @@ public class PlayerJoinListener implements Listener {
 
         if (ChatCommands.cmdspies.contains(player.getUniqueId()) && !playerData.hasRank(Rank.HELPER)) {
             ChatCommands.cmdspies.remove(player.getUniqueId());
+        }
+
+        if (FreezeCommand.frozen == true || FreezeCommand.frozenPlayers.contains(player)) {
+            player.setWalkSpeed(0F);
+        } else {
+            player.setWalkSpeed(0.2F);
         }
 
         ScoreboardManager manager = Bukkit.getScoreboardManager();

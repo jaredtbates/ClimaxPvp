@@ -160,7 +160,7 @@ public class ReportGUI implements Listener {
         plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff)
                 .hasRank(Rank.HELPER)).forEach(staff -> staff.playSound(staff.getLocation(), Sound.NOTE_PIANO, 2, 2));
 
-        plugin.getSlack().call(new SlackMessage("Climax Reports", ">>>*" + player.getName() + "* _has reported_ *" + target.getName() + "* _for:_ " + message));
+        plugin.getSlackReports().call(new SlackMessage(">>>*" + player.getName() + "* _has reported_ *" + target.getName() + "* _for:_ " + message));
 
         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
 

@@ -54,7 +54,12 @@ public class ClimaxPvp extends JavaPlugin {
     private HashMap<UUID, UUID> messagers = new HashMap<>();
     private Donations donations = null;
     @Getter
-    private SlackApi slack = null;
+    private SlackApi slackReports = null;
+    @Getter
+    private SlackApi slackBans = null;
+    @Getter
+    private SlackApi slackStaffHelp = null;
+
 
     //TrailsRunnable trailsRunnable = new TrailsRunnable(this);
 
@@ -130,7 +135,9 @@ public class ClimaxPvp extends JavaPlugin {
 
         //trailsRunnable.startTrails();
 
-        slack = new SlackApi("https://hooks.slack.com/services/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");
+        slackReports = new SlackApi("https://hooks.slack.com/services/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");
+        slackBans = new SlackApi("https://hooks.slack.com/services/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");
+        slackStaffHelp = new SlackApi("https://hooks.slack.com/services/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");
     }
 
     @Override

@@ -17,6 +17,7 @@ public class Administration {
         plugin.getServer().getPluginManager().registerEvents(new VanishCommand(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new CheckCommand(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ChatFilter(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new FreezeCommand(plugin), plugin);
 
         // Register commands
         plugin.getCommand("admin").setExecutor(new AdminCommand(plugin));
@@ -37,6 +38,7 @@ public class Administration {
         plugin.getCommand("getip").setExecutor(new GetIPCommand(plugin));
         plugin.getCommand("staff").setExecutor(new StaffChatCommand(plugin));
         plugin.getCommand("alert").setExecutor(new AlertCommand(plugin));
+        plugin.getCommand("freeze").setExecutor(new FreezeCommand(plugin));
 
         // Start runnables
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new SpawnAutoBroadcastRunnable(plugin), 0, 20 * plugin.getConfig().getInt("SpawnAutoBroadcast.Time"));

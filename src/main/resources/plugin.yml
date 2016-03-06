@@ -107,3 +107,8 @@ commands:
   alert:
     description: Sends an alert to the server
     aliases: a
+  freeze:
+    description: Freezes all players
+  staffreq:
+    description: Sends a message to offline Staff Members
+    aliases: [staffhelp, shelp, sreq]

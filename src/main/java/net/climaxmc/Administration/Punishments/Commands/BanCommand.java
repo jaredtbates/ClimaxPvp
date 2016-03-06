@@ -90,12 +90,8 @@ public class BanCommand implements CommandExecutor {
                         + ChatColor.GREEN + " successfully banned.");
             }
 
-            SlackMessage message = new SlackMessage(">>>*" + player.getName() +
-                    "* _permanently banned_ *" + target.getName() + "* _for:_ " + reason);
-            message.setChannel("#general");
-            message.setIcon("http://i.imgur.com/vm2Kaw8.png");
-            message.setUsername("Climax Bans");
-            plugin.getSlack().call(message);
+            plugin.getSlackBans().call(new SlackMessage(">>>*" + player.getName() +
+                    "* _permanently banned_ *" + target.getName() + "* _for:_ " + reason));
         }
 
         return true;

@@ -1,5 +1,7 @@
 package net.climaxmc.KitPvp;
 
+import net.climaxmc.Administration.Commands.CheckCommand;
+import net.climaxmc.Administration.Commands.FreezeCommand;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Commands.Economy.BalanceCommand;
 import net.climaxmc.KitPvp.Commands.Economy.BalanceTopCommand;
@@ -25,13 +27,11 @@ public class KitPvp {
     public static Inventory moreKitsInventory = Bukkit.createInventory(null, 54, ChatColor.AQUA + "" + ChatColor.BOLD + "More Kits");
     public static Inventory soupInventory = Bukkit.createInventory(null, 54, ChatColor.BOLD + "Free Soup!");
     public static Map<UUID, Integer> killStreak = new HashMap<>();
-    //public static Set<Duel> duels = new HashSet<>();
     public static Map<String, String> pendingTeams = new HashMap<>();
     public static Map<String, String> currentTeams = new ConcurrentHashMap<>();
-    public static Map<UUID, String> trails = new HashMap<>();
 
     public KitPvp(ClimaxPvp plugin) {
-        // Initalize kits
+        // Initialize kits
         plugin.getServer().getPluginManager().registerEvents(new KitManager(plugin), plugin);
 
         // Register listeners
@@ -80,5 +80,7 @@ public class KitPvp {
         plugin.getCommand("youtube").setExecutor(new YoutubeCommand(plugin));
         plugin.getCommand("pei").setExecutor(new PeiCommand());
         plugin.getCommand("team").setExecutor(new TeamCommand(plugin));
+        plugin.getCommand("staffreq").setExecutor(new StaffReqCommand(plugin));
+
     }
 }

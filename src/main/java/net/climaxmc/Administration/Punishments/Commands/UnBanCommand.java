@@ -54,11 +54,7 @@ public class UnBanCommand implements CommandExecutor {
                             staff.sendMessage(ChatColor.RED
                                     + plugin.getServer().getOfflinePlayer(targetData.getUuid()).getName() + " was unbanned by the console."));
 
-                    SlackMessage message = new SlackMessage(">>>*" + target.getName() + "* _was unbanned by the console._");
-                    message.setChannel("#general");
-                    message.setIcon("http://i.imgur.com/vm2Kaw8.png");
-                    message.setUsername("Climax Bans");
-                    plugin.getSlack().call(message);
+                    plugin.getSlackBans().call(new SlackMessage(">>>*" + target.getName() + "* _was unbanned by the console._"));
                 }
             } else {
                 System.out.print(ChatColor.RED + "That player is not banned!");
@@ -100,12 +96,8 @@ public class UnBanCommand implements CommandExecutor {
                             staff.sendMessage(ChatColor.RED + player.getName() + " unbanned "
                                     + plugin.getServer().getOfflinePlayer(targetData.getUuid()).getName() + "."));
 
-                    SlackMessage message = new SlackMessage(">>>*" + player.getName() +
-                            "* _unbanned_ *" + target.getName() + "*");
-                    message.setChannel("#general");
-                    message.setIcon("http://i.imgur.com/vm2Kaw8.png");
-                    message.setUsername("Climax Bans");
-                    plugin.getSlack().call(message);
+                    plugin.getSlackBans().call(new SlackMessage(">>>*" + player.getName() +
+                            "* _unbanned_ *" + target.getName() + "*"));
                 }
             } else {
                 player.sendMessage(ChatColor.RED + "That player is not banned!");

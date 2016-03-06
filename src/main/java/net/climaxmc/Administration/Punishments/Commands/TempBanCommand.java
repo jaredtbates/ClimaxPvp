@@ -118,12 +118,8 @@ public class TempBanCommand implements CommandExecutor {
                         + ChatColor.GREEN + " successfully banned.");
             }
 
-            SlackMessage message = new SlackMessage(">>>*" + player.getName() +
-                    "* _temporarily banned_ *" + target.getName() + "* _for *" + Time.toString(finalTime) + "* for:_ " + reason);
-            message.setChannel("#general");
-            message.setIcon("http://i.imgur.com/vm2Kaw8.png");
-            message.setUsername("Climax Bans");
-            plugin.getSlack().call(message);
+            plugin.getSlackBans().call(new SlackMessage(">>>*" + player.getName() +
+                    "* _temporarily banned_ *" + target.getName() + "* _for *" + Time.toString(finalTime) + "* for:_ " + reason));
         }
         return true;
     }
