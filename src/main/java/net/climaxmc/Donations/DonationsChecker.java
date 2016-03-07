@@ -1,6 +1,7 @@
 package net.climaxmc.Donations;
 
 import net.climaxmc.ClimaxPvp;
+import net.gpedro.integrations.slack.SlackMessage;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,6 +37,7 @@ public class DonationsChecker extends BukkitRunnable {
                             if (!cmd.equals("")) {
                                 plugin.getLogger().info("Executing \"/" + cmd + "\" on behalf of " + username);
                                 executeCommand(cmd);
+                                plugin.getSlackDonations().call(new SlackMessage(">>>*" + username + "* just donated for *" + cmd.substring(7 + username.length(), cmd.length()) + "*!"));
                             }
                         }
                     }
@@ -54,6 +56,7 @@ public class DonationsChecker extends BukkitRunnable {
                         if (getJSON("http://www.minecraftmarket.com/api/" + apiKey + "/executed/" + cmdID) != null) {
                             plugin.getLogger().info("Executing \"/" + cmd + "\" on behalf of " + username);
                             executeCommand(cmd);
+                            plugin.getSlackDonations().call(new SlackMessage(">>>*" + username + "* just donated for *" + cmd.substring(7 + username.length(), cmd.length()) + "*!"));
                         }
                     }
                 }

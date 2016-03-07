@@ -60,7 +60,7 @@ public class PlayerDeathListener implements Listener {
             if (plugin.getServer().getOnlinePlayers().size() >= 15) {
                 event.setDeathMessage(null);
             } else {
-                event.setDeathMessage(ChatColor.RED + player.getName() + ChatColor.GRAY + " was killed by " + ChatColor.GREEN + killer.getName());
+                event.setDeathMessage(ChatColor.RED + killer.getName() + ChatColor.GRAY + " killed " + ChatColor.GREEN + player.getName());
             }
         }
 

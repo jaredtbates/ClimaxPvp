@@ -59,9 +59,8 @@ public class ClimaxPvp extends JavaPlugin {
     private SlackApi slackBans = null;
     @Getter
     private SlackApi slackStaffHelp = null;
-
-
-    //TrailsRunnable trailsRunnable = new TrailsRunnable(this);
+    @Getter
+    private SlackApi slackDonations = null;
 
     @Override
     public void onEnable() {
@@ -119,7 +118,6 @@ public class ClimaxPvp extends JavaPlugin {
 
         // Create temporary player data
         getServer().getOnlinePlayers().forEach(player -> mySQL.getTemporaryPlayerData().put(player.getUniqueId(), new HashMap<>()));
-
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
         // Load Modules
@@ -133,11 +131,11 @@ public class ClimaxPvp extends JavaPlugin {
 
         KitManager.setAllKitsEnabled(getConfig().getBoolean("AllKitsEnabled"));
 
-        //trailsRunnable.startTrails();
-
+        // Initialize SlackApi
         slackReports = new SlackApi("https://hooks.slack.com/services/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");
         slackBans = new SlackApi("https://hooks.slack.com/services/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");
         slackStaffHelp = new SlackApi("https://hooks.slack.com/services/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");
+        slackDonations = new SlackApi("https://hooks.slack.com/services/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");
     }
 
     @Override
