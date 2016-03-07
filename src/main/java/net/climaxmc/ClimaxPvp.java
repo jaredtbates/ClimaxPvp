@@ -124,11 +124,8 @@ public class ClimaxPvp extends JavaPlugin {
         new KitPvp(this);
         donations = new Donations(this);
         new Administration(this);
-
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new UpdateRunnable(this), 120, 120);
-
         challengesFiles = new ChallengesFiles();
-
         KitManager.setAllKitsEnabled(getConfig().getBoolean("AllKitsEnabled"));
 
         // Initialize SlackApi
