@@ -64,8 +64,12 @@ public class FreezeCommand implements CommandExecutor, Listener {
                 frozen = false;
                 Bukkit.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + "Movement has been re-enabled!");
                 for (Player p : Bukkit.getOnlinePlayers()) {
-                    p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
-                    p.setWalkSpeed(0.2F);
+                    PlayerData pData = plugin.getPlayerData(p);
+                    if (!pData.hasRank(Rank.MODERATOR)) {
+                        plugin.respawn(p);
+                        p.setWalkSpeed(0.2F);
+                    }
+                        p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                 }
                 return true;
             }
@@ -79,6 +83,7 @@ public class FreezeCommand implements CommandExecutor, Listener {
             if (frozenPlayers.contains(target)) {
                 frozenPlayers.remove(target);
                 target.setWalkSpeed(0.2F);
+                plugin.respawn(target);
                 target.sendMessage(ChatColor.RED + "Your movement has been re-enabled!");
                 target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
             } else {
@@ -87,12 +92,19 @@ public class FreezeCommand implements CommandExecutor, Listener {
                 target.sendMessage(ChatColor.RED + "You have been frozen by " + player.getName() + "!");
                 target.sendMessage(ChatColor.RED + "You will automatically be unfrozen in 5 minutes.");
                 target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
+
+                player.sendMessage(ChatColor.RED + "You have successfully frozen " + target.getName() + "!");
+                player.sendMessage(ChatColor.RED + "He will automatically be unfrozen in 5 minutes.");
+                target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
+
+
                 plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
                     @Override
                     public void run() {
                         if (frozenPlayers.contains(target)) {
                             frozenPlayers.remove(target);
                             target.setWalkSpeed(0.2F);
+                            plugin.respawn(target);
                             target.sendMessage(ChatColor.RED + "Your movement has been automatically re-enabled!");
                             target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         } else {

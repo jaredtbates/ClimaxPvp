@@ -18,9 +18,13 @@ public class MySQL {
     // PLAYERDATA ---------------------------------------------------------------------
     public static final String GET_PLAYERDATA_FROM_UUID = "SELECT * FROM `climax_playerdata` WHERE `uuid` = ?;";
     public static final String GET_PLAYERDATA_FROM_IP = "SELECT * FROM `climax_playerdata` WHERE `ip` = ?;";
-    public static final String CREATE_PLAYERDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_playerdata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, `ip` VARCHAR(15) DEFAULT '' NOT NULL, `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, `kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, `achievements` VARCHAR(5000) DEFAULT NULL, `nickname` VARCHAR(32) DEFAULT NULL);";
-    public static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `ip`, `rank`, `balance`, `kills`, `deaths`, `achievements`,  `nickname`) VALUES (?, ?, ?, ?, ?, ?, ?);";
-    public static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `ip` = ?, `rank` = ?, `balance` = ?, `kills` = ?, `deaths` = ?, `achievements` = ?, `nickname` = ? WHERE `uuid` = ?;";
+    public static final String CREATE_PLAYERDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_playerdata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, " +
+            "`ip` VARCHAR(15) DEFAULT '' NOT NULL, `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, " +
+            "`kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, " /*`achievements` "VARCHAR(5000) DEFAULT NULL,*/ + "`nickname` VARCHAR(32) DEFAULT NULL);";
+    public static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `ip`, `rank`, `balance`, `kills`, " +
+            "`deaths`, " /*`achievements`,*/ + "`nickname`) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    public static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `ip` = ?, `rank` = ?, `balance` = ?, `kills` = ?, " +
+            "`deaths` = ?, " /*`achievements` = ?,*/ + "`nickname` = ? WHERE `uuid` = ?;";
 
     // PUNISHMENTS ---------------------------------------------------------------------
     public static final String CREATE_PUNISHMENTS_TABLE = "CREATE TABLE IF NOT EXISTS `climax_punishments` (`uuid` VARCHAR(36) NOT NULL," +
