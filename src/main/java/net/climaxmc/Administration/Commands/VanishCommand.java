@@ -29,7 +29,7 @@ public class VanishCommand implements CommandExecutor, Listener {
     public VanishCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
 
-        plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
+        /*plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
             if (plugin.getServer().getOnlinePlayers().size() <= 0) {
                 return;
             }
@@ -40,7 +40,7 @@ public class VanishCommand implements CommandExecutor, Listener {
                 bos.writeUTF(vanishedUUID.toString());
             }
             Iterables.get(plugin.getServer().getOnlinePlayers(), 1).sendPluginMessage(plugin, "BungeeCord", bos.toByteArray());
-        }, 200, 200);
+        }, 200, 200);*/
     }
 
     @Override

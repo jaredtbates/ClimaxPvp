@@ -86,6 +86,9 @@ public class FreezeCommand implements CommandExecutor, Listener {
                 plugin.respawn(target);
                 target.sendMessage(ChatColor.RED + "Your movement has been re-enabled!");
                 target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
+
+                player.sendMessage(ChatColor.GREEN + "You unfroze " + target.getName());
+                player.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
             } else {
                 frozenPlayers.add(target);
                 target.setWalkSpeed(0F);
@@ -93,9 +96,9 @@ public class FreezeCommand implements CommandExecutor, Listener {
                 target.sendMessage(ChatColor.RED + "You will automatically be unfrozen in 5 minutes.");
                 target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
 
-                player.sendMessage(ChatColor.RED + "You have successfully frozen " + target.getName() + "!");
-                player.sendMessage(ChatColor.RED + "He will automatically be unfrozen in 5 minutes.");
-                target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
+                player.sendMessage(ChatColor.GREEN + "You have successfully frozen " + target.getName() + "!");
+                player.sendMessage(ChatColor.RED + "They will automatically be unfrozen in 5 minutes.");
+                player.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
 
 
                 plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
