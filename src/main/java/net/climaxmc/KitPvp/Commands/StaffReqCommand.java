@@ -33,7 +33,7 @@ public class StaffReqCommand implements CommandExecutor {
             return true;
         }
 
-        String message = StringUtils.join(args, ' ', 1, args.length);
+        String message = StringUtils.join(args, ' ', 0, args.length);
 
         plugin.getSlackStaffHelp().call(new SlackMessage(">>>*" + player.getName() + ":* _" + message + "_"));
 
