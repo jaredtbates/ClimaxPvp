@@ -40,18 +40,10 @@ public class SpawnAutoBroadcastRunnable implements Runnable {
             Object packet;
             Class<?> chatPacket = Class.forName("net.minecraft.server." + nmsVersion + ".PacketPlayOutChat");
             Class<?> nmsPacket = Class.forName("net.minecraft.server." + nmsVersion + ".Packet");
-            if (nmsVersion.equalsIgnoreCase("v1_8_R1") || !nmsVersion.startsWith("v1_8_")) {
-                Class<?> serializer = Class.forName("net.minecraft.server." + nmsVersion + ".ChatSerializer");
-                Class<?> baseComponent = Class.forName("net.minecraft.server." + nmsVersion + ".IChatBaseComponent");
-                Method a = serializer.getDeclaredMethod("a", String.class);
-                Object cbc = baseComponent.cast(a.invoke(serializer, "{\"text\": \"" + message + "\"}"));
-                packet = chatPacket.getConstructor(baseComponent, byte.class).newInstance(cbc, (byte) 2);
-            } else {
-                Class<?> chatComponent = Class.forName("net.minecraft.server." + nmsVersion + ".ChatComponentText");
-                Class<?> baseComponent = Class.forName("net.minecraft.server." + nmsVersion + ".IChatBaseComponent");
-                Object component = chatComponent.getConstructor(String.class).newInstance(message);
-                packet = chatPacket.getConstructor(baseComponent, byte.class).newInstance(component, (byte) 2);
-            }
+            Class<?> chatComponent = Class.forName("net.minecraft.server." + nmsVersion + ".ChatComponentText");
+            Class<?> baseComponent = Class.forName("net.minecraft.server." + nmsVersion + ".IChatBaseComponent");
+            Object component = chatComponent.getConstructor(String.class).newInstance(message);
+            packet = chatPacket.getConstructor(baseComponent, byte.class).newInstance(component, (byte) 2);
             Method getHandle = obcPlayer.getDeclaredMethod("getHandle");
             Object handle = getHandle.invoke(p);
             Field playerConnection = handle.getClass().getDeclaredField("playerConnection");
