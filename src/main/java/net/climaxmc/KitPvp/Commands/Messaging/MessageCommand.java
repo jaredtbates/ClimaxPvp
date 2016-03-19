@@ -73,8 +73,8 @@ public class MessageCommand implements CommandExecutor {
             player.sendMessage(ChatColor.RED + "Gamer is often AFK due to plugin development. He'll get back to you when he can!");
         }
 
-        player.playSound(player.getLocation(), Sound.NOTE_PIANO, 2, 2);
-        target.playSound(target.getLocation(), Sound.NOTE_PIANO, 2, 2);
+        //player.playSound(player.getLocation(), Sound.NOTE_PIANO, 2, 2);
+        //target.playSound(target.getLocation(), Sound.NOTE_PIANO, 2, 2);
 
         return true;
     }

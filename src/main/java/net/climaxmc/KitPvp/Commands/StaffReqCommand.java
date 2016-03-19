@@ -38,7 +38,7 @@ public class StaffReqCommand implements CommandExecutor {
         plugin.getSlackStaffHelp().call(new SlackMessage(">>>*" + player.getName() + ":* _" + message + "_"));
 
         player.sendMessage(ChatColor.GREEN + "Your message has been sent! A staff member has been notified of your request and should be able to help you shortly!");
-        player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
+        //player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
 
         return false;
     }

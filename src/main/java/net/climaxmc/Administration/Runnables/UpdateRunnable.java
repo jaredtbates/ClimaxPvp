@@ -46,7 +46,7 @@ public class UpdateRunnable implements Runnable {
             PluginUtil.load("ClimaxPvp");
 
             for (Player player : plugin.getServer().getOnlinePlayers()) {
-                player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1.5F, 1.2F);
+                //player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1.5F, 1.2F);
             }
             plugin.getServer().broadcastMessage(ChatColor.GRAY + " Reload complete!");
         }, 100);

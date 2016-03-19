@@ -1,5 +1,4 @@
 package net.climaxmc.KitPvp.Menus;
-/* Created by GamerBah on 1/24/2016 */
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Commands.ReportCommand;
@@ -157,12 +156,12 @@ public class ReportGUI implements Listener {
                 .hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName()
                 + " has reported " + ChatColor.BOLD + target.getName() + ChatColor.RED + " for: " + message + "!"));
 
-        plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff)
-                .hasRank(Rank.HELPER)).forEach(staff -> staff.playSound(staff.getLocation(), Sound.NOTE_PIANO, 2, 2));
+        /*plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff)
+                .hasRank(Rank.HELPER)).forEach(staff -> staff.playSound(staff.getLocation(), Sound.NOTE_PIANO, 2, 2));*/
 
         plugin.getSlackReports().call(new SlackMessage(">>>*" + player.getName() + "* _has reported_ *" + target.getName() + "* _for:_ " + message));
 
-        player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
+        //player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
 
         ReportCommand.cooldown.put(player.getUniqueId(), 60);
         ReportCommand.reportBuilders.remove(player.getUniqueId());
@@ -177,7 +176,7 @@ public class ReportGUI implements Listener {
 
                 if (ReportCommand.cooldown.get(player.getUniqueId()) == 0) {
                     ReportCommand.cooldown.remove(player.getUniqueId());
-                    player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1, 1.5F);
+                    //player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1, 1.5F);
                     player.sendMessage(ChatColor.GREEN + "You are now able to report another player!");
                     this.cancel();
                 }

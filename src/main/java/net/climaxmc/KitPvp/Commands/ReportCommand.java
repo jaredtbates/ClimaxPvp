@@ -55,7 +55,7 @@ public class ReportCommand implements CommandExecutor {
             reportArray.put(player.getUniqueId(), new ArrayList<>());
             reportGUI.openInventory(player, reported);
         } else {
-            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+            //player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
             player.sendMessage(ChatColor.RED + "You must wait " + ChatColor.YELLOW
                     + cooldown.get(player.getUniqueId()) + " seconds " + ChatColor.RED + "before you report another player!");
             return false;
