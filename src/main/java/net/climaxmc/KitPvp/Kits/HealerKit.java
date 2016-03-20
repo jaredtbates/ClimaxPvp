@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp.Kits;
 
+import me.xericker.disguiseabilities.DisguiseAbilities;
 import net.climaxmc.KitPvp.Kit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -28,7 +29,7 @@ public class HealerKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         addSoup(player.getInventory(), 1, 35);
-        
+        DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.ZOMBIE);
     }
 
     protected void wearNoSoup(Player player) {
@@ -50,5 +51,6 @@ public class HealerKit extends Kit {
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
+        DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.ZOMBIE);
     }
 }
