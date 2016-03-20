@@ -42,7 +42,6 @@ public class NinjaKit extends Kit {
         boots.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.GLOWSTONE_DUST);
         ItemMeta abilitymeta = ability.getItemMeta();
@@ -67,7 +66,6 @@ public class NinjaKit extends Kit {
         boots.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.GLOWSTONE_DUST);
         ItemMeta abilitymeta = ability.getItemMeta();
