@@ -36,8 +36,8 @@ public class KitManager implements Listener {
         // Gray Kits
         kits.add(new PvpKit());
         kits.add(new KnightKit());
-        kits.add(new HealerKit());
         kits.add(new AxeKit());
+        kits.add(new HealerKit());
         kits.add(new StrafeKit());
 
         // Blue Kits
@@ -49,15 +49,15 @@ public class KitManager implements Listener {
 
         // Green Kits
         kits.add(new ThorKit());
-        kits.add(new AnvilKit());
+        kits.add(new MagnetKit());
         kits.add(new SnailKit());
         kits.add(new GhastKit());
         kits.add(new VortexKit());
 
         // Red Kits
-        kits.add(new BlazeKit());
+        kits.add(new DragonKit());
         kits.add(new WitherKit(plugin));
-        kits.add(new RageKit());
+        kits.add(new PhoenixKit());
         kits.add(new ViperKit());
         kits.add(new VikingKit());
 

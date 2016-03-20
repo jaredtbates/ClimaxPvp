@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp.Kits;
 
+import me.xericker.disguiseabilities.DisguiseAbilities;
 import net.climaxmc.Administration.Commands.CheckCommand;
 import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.KitPvp.Kit;
@@ -13,16 +14,19 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.concurrent.TimeUnit;
 
 public class ThorKit extends Kit {
-    private Ability lightning = new Ability(1, 4, TimeUnit.SECONDS);
+    private Ability lightning = new Ability(1, 7, TimeUnit.SECONDS);
 
     public ThorKit() {
         super("Thor", new ItemStack(Material.IRON_AXE), "Punch a player with your Axe to Strike Lightning!", ChatColor.GREEN);
@@ -31,7 +35,11 @@ public class ThorKit extends Kit {
     protected void wear(Player player) {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         player.getInventory().addItem(sword);
-        player.getInventory().addItem(new ItemStack(Material.IRON_AXE));
+        ItemStack ability = new ItemStack(Material.GOLD_AXE);
+        ItemMeta abilitymeta = ability.getItemMeta();
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Lightning Strike Ability");
+        ability.setItemMeta(abilitymeta);
+        player.getInventory().addItem(ability);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setHelmet(helm);
@@ -49,7 +57,11 @@ public class ThorKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         player.getInventory().addItem(sword);
-        player.getInventory().addItem(new ItemStack(Material.IRON_AXE));
+        ItemStack ability = new ItemStack(Material.GOLD_AXE);
+        ItemMeta abilitymeta = ability.getItemMeta();
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Lightning Strike Ability");
+        ability.setItemMeta(abilitymeta);
+        player.getInventory().addItem(ability);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setHelmet(helm);
@@ -57,48 +69,21 @@ public class ThorKit extends Kit {
         player.getInventory().setChestplate(chestplate);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
     }
 
     @EventHandler
-    public void onEntityDamage(EntityDamageByEntityEvent event) {
-        if (event.getEntity() instanceof LightningStrike) {
-            return;
-        }
-
-        if (event.getDamager() instanceof Player) {
-            Player player = (Player) event.getDamager();
-            if (event.getEntity() instanceof Player) {
-                Player target = (Player) event.getEntity();
-                if (KitManager.isPlayerInKit(player, this)) {
-                    if (player.getItemInHand().getType() == Material.IRON_AXE) {
-                        if (!lightning.tryUse(player)) {
-                            return;
-                        }
-                        if (event.isCancelled()) {
-                            return;
-                        }
-                        event.setCancelled(true);
-                        if (!VanishCommand.getVanished().contains(target.getUniqueId())
-                                && !CheckCommand.getChecking().contains(target.getUniqueId())
-                                && (KitPvp.currentTeams.get(player.getName()) != target.getName()
-                                && KitPvp.currentTeams.get(target.getName()) != player.getName())) {
-                            target.getWorld().strikeLightning(target.getLocation());
-                            event.setCancelled(true);
-                            target.damage(7);
-                        }
+    public void onInteract(PlayerInteractEvent event) {
+        final Player player = event.getPlayer();
+        if (KitManager.isPlayerInKit(player, this)) {
+            if (player.getInventory().getItemInHand().getType() == Material.GOLD_AXE) {
+                if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
+                    if (!lightning.tryUse(player)) {
+                        return;
                     }
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Lightning Strike" + ChatColor.GOLD + " Ability!");
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.HEROBRINE);
                 }
             }
-        }
-    }
-
-    @EventHandler
-    public void onBlockIgnite(BlockIgniteEvent event) {
-        if (event.getIgnitingEntity().getType() == EntityType.LIGHTNING) {
-            event.setCancelled(true);
         }
     }
 }
