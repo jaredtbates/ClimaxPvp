@@ -91,7 +91,7 @@ public class GhastKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Fireball" + ChatColor.GOLD + " Ability!");
                     Fireball fireball = event.getPlayer().launchProjectile(Fireball.class);
-                    //player.getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 1);
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GHAST_SHOOT, 1, 1);
                     fireball.setIsIncendiary(false);
                     player.setVelocity(player.getVelocity().setY(0.4));
                 }

@@ -116,7 +116,7 @@ public class AssassinKit extends Kit {
                             }
                             player.removePotionEffect(PotionEffectType.SPEED);
                             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 140, 1));
-                            //player.getWorld().playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 3, 1);
+                            player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ENDERDRAGON_FLAP, 3, 1);
                             player.getInventory().setHelmet(null);
                             player.getInventory().setChestplate(null);
                             player.getInventory().setLeggings(null);
