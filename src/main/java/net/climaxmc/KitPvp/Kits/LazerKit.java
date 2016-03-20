@@ -28,7 +28,7 @@ public class LazerKit extends Kit {
     private Ability beam = new Ability(1, 7, TimeUnit.SECONDS);
 
     public LazerKit() {
-        super("Healer", new ItemStack(Material.PRISMARINE_SHARD), "Pew pew!", ChatColor.RED);
+        super("Lazer", new ItemStack(Material.PRISMARINE_SHARD), "Pew pew!", ChatColor.RED);
     }
 
     protected void wear(Player player) {

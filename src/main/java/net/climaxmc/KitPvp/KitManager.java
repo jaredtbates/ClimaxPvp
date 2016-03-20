@@ -59,7 +59,7 @@ public class KitManager implements Listener {
         kits.add(new WitherKit(plugin));
         kits.add(new PhoenixKit());
         kits.add(new ViperKit());
-        kits.add(new VikingKit());
+        kits.add(new LazerKit());
 
         // Gold Kits
         kits.add(new RangerKit());
