@@ -28,7 +28,7 @@ public class BoulderKit extends Kit {
     private Ability bouldertoss = new Ability(1, 12, TimeUnit.SECONDS);
 
     public BoulderKit() {
-        super("Boulder", new ItemStack(Material.DIRT), "Throw giant rocks at people to kill them!", ChatColor.GRAY);
+        super("Boulder", new ItemStack(Material.DIRT), "Throw giant rocks at people to kill them!", ChatColor.BLUE);
     }
 
     protected void wear(Player player) {
