@@ -27,8 +27,8 @@ import java.util.concurrent.TimeUnit;
 public class KnightKit extends Kit {
     private Ability heal = new Ability(1, 10, TimeUnit.SECONDS);
 
-    public HealerKit() {
-        super("Healer", new ItemStack(Material.GOLDEN_APPLE), "This kit gives you the ability to heal yourself!", ChatColor.GRAY);
+    public KnightKit() {
+        super("Knight", new ItemStack(Material.GOLDEN_APPLE), "Use your shield to protect you in battle!", ChatColor.GRAY);
     }
 
     protected void wear(Player player) {
