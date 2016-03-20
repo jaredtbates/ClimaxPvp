@@ -16,7 +16,7 @@ public class PlayerDropItemListener implements Listener {
     @EventHandler
     public void onPlayerDropItem(PlayerDropItemEvent event) {
         Material item = event.getItemDrop().getItemStack().getType();
-        if (item != Material.BOWL && item != Material.GLASS_BOTTLE) {
+        if (item != Material.BOWL && item != Material.GLASS_BOTTLE && item != Material.POTION) {
             event.setCancelled(true);
         }
     }
