@@ -24,36 +24,30 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.concurrent.TimeUnit;
 
-public class BoulderKit extends Kit {
-    private Ability bouldertoss = new Ability(1, 12, TimeUnit.SECONDS);
+public class LazerKit extends Kit {
+    private Ability beam = new Ability(1, 7, TimeUnit.SECONDS);
 
-    public BoulderKit() {
-        super("Boulder", new ItemStack(Material.CLAY_BALL), "Throw giant rocks at people to kill them!", ChatColor.BLUE);
+    public LazerKit() {
+        super("Healer", new ItemStack(Material.PRISMARINE_SHARD), "Pew pew!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
-        ItemStack helm = new ItemStack(Material.IRON_HELMET);
+        ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
+        helm.addEnchantment(Enchantment.DURABILITY, 3);
+        LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
+        helmmeta.setColor(Color.AQUA);
+        helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
-        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
-        chest.addEnchantment(Enchantment.DURABILITY, 3);
+        ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-        LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
-        chestmeta.setColor(Color.NAVY);
-        chest.setItemMeta(chestmeta);
         player.getInventory().setChestplate(chest);
-        ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
-        legs.addEnchantment(Enchantment.DURABILITY, 3);
-        legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-        LeatherArmorMeta legsmeta = (LeatherArmorMeta) legs.getItemMeta();
-        legsmeta.setColor(Color.NAVY);
-        legs.setItemMeta(legsmeta);
-        player.getInventory().setLeggings(legs);
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.CLAY_BALL);
+        ItemStack ability = new ItemStack(Material.PRISMARINE_SHARD);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Boulder Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Beam Ability");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
@@ -64,28 +58,22 @@ public class BoulderKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-        ItemStack helm = new ItemStack(Material.IRON_HELMET);
+        ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
+        helm.addEnchantment(Enchantment.DURABILITY, 3);
+        LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
+        helmmeta.setColor(Color.AQUA);
+        helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
-        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
-        chest.addEnchantment(Enchantment.DURABILITY, 3);
+        ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-        LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
-        chestmeta.setColor(Color.NAVY);
-        chest.setItemMeta(chestmeta);
         player.getInventory().setChestplate(chest);
-        ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
-        legs.addEnchantment(Enchantment.DURABILITY, 3);
-        legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-        LeatherArmorMeta legsmeta = (LeatherArmorMeta) legs.getItemMeta();
-        legsmeta.setColor(Color.NAVY);
-        legs.setItemMeta(legsmeta);
-        player.getInventory().setLeggings(legs);
+        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.CLAY_BALL);
+        ItemStack ability = new ItemStack(Material.PRISMARINE_SHARD);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Boulder Toss Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Beam Ability");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -94,13 +82,13 @@ public class BoulderKit extends Kit {
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
-            if (player.getInventory().getItemInHand().getType() == Material.CLAY_BALL) {
+            if (player.getInventory().getItemInHand().getType() == Material.PRISMARINE_SHARD) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
-                    if (!bouldertoss.tryUse(player)) {
+                    if (!beam.tryUse(player)) {
                         return;
                     }
-                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Boulder Toss" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.BULK);
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Beam" + ChatColor.GOLD + " Ability!");
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.ARCANIST);
                 }
             }
         }
