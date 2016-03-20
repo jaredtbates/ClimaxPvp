@@ -28,7 +28,7 @@ public class PirateKit extends Kit {
     private Ability heal = new Ability(1, 10, TimeUnit.SECONDS);
 
     public PirateKit() {
-        super("Pirate", new ItemStack(Material.STONE_AXE), "Shoot yer cannon balls ye matey, Argh!", ChatColor.BLUE);
+        super("Pirate", new ItemStack(Material.GOLD_AXE), "Shoot yer cannon balls ye matey, Argh!", ChatColor.BLUE);
     }
 
     protected void wear(Player player) {
@@ -46,7 +46,7 @@ public class PirateKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.IRON_AXE);
+        ItemStack ability = new ItemStack(Material.GOLD_AXE);
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Cannon Ability");
         ability.setItemMeta(abilitymeta);
@@ -73,7 +73,7 @@ public class PirateKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.IRON_AXE);
+        ItemStack ability = new ItemStack(Material.GOLD_AXE);
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Cannon Ability");
         ability.setItemMeta(abilitymeta);
@@ -84,7 +84,7 @@ public class PirateKit extends Kit {
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
-            if (player.getInventory().getItemInHand().getType() == Material.IRON_AXE) {
+            if (player.getInventory().getItemInHand().getType() == Material.GOLD_AXE) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
                     if (!heal.tryUse(player)) {
                         return;
