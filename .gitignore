@@ -1,3 +1,5 @@
+!lib/
+
 ### Java ###
 *.class
 
@@ -108,5 +110,3 @@ local.properties
 .project
 
 dependency-reduced-pom.xml
-
-!lib/
