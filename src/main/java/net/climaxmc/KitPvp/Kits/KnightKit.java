@@ -37,7 +37,7 @@ public class KnightKit extends Kit {
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
-        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
         player.getInventory().addItem(sword);
         player.getInventory().setItemInOffHand(new ItemStack(Material.SHIELD));
         addSoup(player.getInventory(), 1, 35);
@@ -53,7 +53,7 @@ public class KnightKit extends Kit {
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
-        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
         player.getInventory().addItem(sword);
         player.getInventory().setItemInOffHand(new ItemStack(Material.SHIELD));
     }
