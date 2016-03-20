@@ -33,7 +33,6 @@ public class KnightKit extends Kit {
 
     protected void wear(Player player) {
         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
-        chest.addEnchantment(Enchantment.DURABILITY, 3);
         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
