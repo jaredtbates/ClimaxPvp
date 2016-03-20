@@ -17,6 +17,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -31,19 +32,30 @@ public class HealerKit extends Kit {
     }
 
     protected void wear(Player player) {
-        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
-        LeatherArmorMeta helmmeta = (LeatherArmorMeta) chest.getItemMeta();
+        ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
+        helm.addEnchantment(Enchantment.DURABILITY, 3);
+        LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.MAROON);
-        chest.setItemMeta(helmmeta);
+        helm.setItemMeta(helmmeta);
+        player.getInventory().setHelmet(helm);
+        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
+        chest.addEnchantment(Enchantment.DURABILITY, 3);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
+        chestmeta.setColor(Color.MAROON);
+        chest.setItemMeta(chestmeta);
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        player.getInventory().addItem(new ItemStack(Material.BLAZE_ROD));
+        ItemStack ability = new ItemStack(Material.BLAZE_ROD);
+        ItemMeta abilitymeta = ability.getItemMeta();
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal Ability");
+        ability.setItemMeta(abilitymeta);
+        player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
-        DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.ZOMBIE);
     }
 
     protected void wearNoSoup(Player player) {
@@ -51,17 +63,29 @@ public class HealerKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
-        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
-        LeatherArmorMeta helmmeta = (LeatherArmorMeta) chest.getItemMeta();
+        ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
+        helm.addEnchantment(Enchantment.DURABILITY, 3);
+        LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.MAROON);
-        chest.setItemMeta(helmmeta);
+        helm.setItemMeta(helmmeta);
+        player.getInventory().setHelmet(helm);
+        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
+        chest.addEnchantment(Enchantment.DURABILITY, 3);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
+        chestmeta.setColor(Color.MAROON);
+        chest.setItemMeta(chestmeta);
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        player.getInventory().addItem(new ItemStack(Material.BLAZE_ROD));
+        ItemStack ability = new ItemStack(Material.BLAZE_ROD);
+        ItemMeta abilitymeta = ability.getItemMeta();
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal Ability");
+        ability.setItemMeta(abilitymeta);
+        player.getInventory().addItem(ability);
     }
 
     @EventHandler
