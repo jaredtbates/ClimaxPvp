@@ -57,7 +57,7 @@ public class KitManager implements Listener {
         // Red Kits
         kits.add(new TimeLordKit());
         kits.add(new WitherKit(plugin));
-        kits.add(new PhoenixKit());
+        kits.add(new DragonKit());
         kits.add(new ViperKit());
         kits.add(new LazerKit());
 
@@ -65,7 +65,7 @@ public class KitManager implements Listener {
         kits.add(new EmberKit());
         kits.add(new AssassinKit());
         kits.add(new IronGolemKit());
-        kits.add(new DragonKit());
+        kits.add(new PhoenixKit());
         kits.add(new BomberKit());
 
         for (Kit kit : kits) {

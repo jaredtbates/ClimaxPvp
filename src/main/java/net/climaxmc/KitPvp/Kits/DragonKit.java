@@ -28,7 +28,7 @@ public class DragonKit extends Kit {
     private Ability flamebreath = new Ability(1, 10, TimeUnit.SECONDS);
 
     public DragonKit() {
-        super("Dragon", new ItemStack(Material.BLAZE_POWDER), "Use your firey blaze breath to murder your foes!", ChatColor.GOLD);
+        super("Dragon", new ItemStack(Material.MAGMA_CREAM), "Use your firey blaze breath to murder your foes!", ChatColor.RED);
     }
 
     protected void wear(Player player) {

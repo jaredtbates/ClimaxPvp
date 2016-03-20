@@ -28,7 +28,7 @@ public class PhoenixKit extends Kit {
     private Ability flamebreath = new Ability(1, 10, TimeUnit.SECONDS);
 
     public PhoenixKit() {
-        super("Phoenix", new ItemStack(Material.MAGMA_CREAM), "Rush towards your foe with great speed to take them out!", ChatColor.RED);
+        super("Phoenix", new ItemStack(Material.BLAZE_POWDER), "Rush towards your foe with great speed to take them out!", ChatColor.GOLD);
     }
 
     protected void wear(Player player) {
