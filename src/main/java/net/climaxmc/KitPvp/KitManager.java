@@ -52,7 +52,7 @@ public class KitManager implements Listener {
         kits.add(new AnvilKit());
         kits.add(new SnailKit());
         kits.add(new GhastKit());
-        kits.add(new ChemistKit());
+        kits.add(new VortexKit());
 
         // Red Kits
         kits.add(new BlazeKit());

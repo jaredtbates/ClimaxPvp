@@ -24,29 +24,39 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.concurrent.TimeUnit;
 
-public class NinjaKit extends Kit {
-    private Ability burst = new Ability(1, 10, TimeUnit.SECONDS);
+public class VortexKit extends Kit {
+    private Ability tornado = new Ability(1, 15, TimeUnit.SECONDS);
 
-    public NinjaKit() {
-        super("Ninja", new ItemStack(Material.GOLD_HELMET), "Move and strike with the speed of a Ninja!", ChatColor.BLUE);
+    public VortexKit() {
+        super("Vortex", new ItemStack(Material.STRING), "Summon great tornadoes to consume your foes!", ChatColor.GREEN);
     }
 
     protected void wear(Player player) {
         ItemStack helm = new ItemStack(Material.GOLD_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setHelmet(helm);
-        ItemStack chest = new ItemStack(Material.CHAINMAIL_CHESTPLATE);
+        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
+        chest.addEnchantment(Enchantment.DURABILITY, 3);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
+        chestmeta.setColor(Color.OLIVE);
+        chest.setItemMeta(chestmeta);
         player.getInventory().setChestplate(chest);
-        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
+        legs.addEnchantment(Enchantment.DURABILITY, 3);
+        legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        LeatherArmorMeta legsmeta = (LeatherArmorMeta) legs.getItemMeta();
+        legsmeta.setColor(Color.OLIVE);
+        legs.setItemMeta(legsmeta);
+        player.getInventory().setLeggings(legs);
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 2);
-        player.getInventory().setBoots(boots);
+        player.getInventory().setBoots(new ItemStack(boots));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.GLOWSTONE_DUST);
+        ItemStack ability = new ItemStack(Material.STRING);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Agility Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Tornado Ability");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
@@ -60,18 +70,28 @@ public class NinjaKit extends Kit {
         ItemStack helm = new ItemStack(Material.GOLD_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setHelmet(helm);
-        ItemStack chest = new ItemStack(Material.CHAINMAIL_CHESTPLATE);
+        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
+        chest.addEnchantment(Enchantment.DURABILITY, 3);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
+        chestmeta.setColor(Color.ORANGE);
+        chest.setItemMeta(chestmeta);
         player.getInventory().setChestplate(chest);
-        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
+        legs.addEnchantment(Enchantment.DURABILITY, 3);
+        legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        LeatherArmorMeta legsmeta = (LeatherArmorMeta) legs.getItemMeta();
+        legsmeta.setColor(Color.ORANGE);
+        legs.setItemMeta(legsmeta);
+        player.getInventory().setLeggings(legs);
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 2);
-        player.getInventory().setBoots(boots);
+        player.getInventory().setBoots(new ItemStack(boots));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.GLOWSTONE_DUST);
+        ItemStack ability = new ItemStack(Material.STRING);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Burst Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Tornado Ability");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -80,13 +100,13 @@ public class NinjaKit extends Kit {
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
-            if (player.getInventory().getItemInHand().getType() == Material.GLOWSTONE_DUST) {
+            if (player.getInventory().getItemInHand().getType() == Material.STRING) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
-                    if (!burst.tryUse(player)) {
+                    if (!tornado.tryUse(player)) {
                         return;
                     }
-                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Burst" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.EPSILON);
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Tornado" + ChatColor.GOLD + " Ability!");
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.SHAMAN);
                 }
             }
         }
