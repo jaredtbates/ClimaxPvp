@@ -28,7 +28,7 @@ public class TimeLordKit extends Kit {
     private Ability warpback = new Ability(1, 10, TimeUnit.SECONDS);
 
     public TimeLordKit() {
-        super("Time Lord", new ItemStack(Material.WATCH), "Travel back in time at will with Time Lord!", ChatColor.GOLD);
+        super("Time Lord", new ItemStack(Material.WATCH), "Travel back in time at will with Time Lord!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
