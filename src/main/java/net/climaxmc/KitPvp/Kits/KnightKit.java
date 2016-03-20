@@ -28,33 +28,20 @@ public class KnightKit extends Kit {
     private Ability heal = new Ability(1, 10, TimeUnit.SECONDS);
 
     public KnightKit() {
-        super("Knight", new ItemStack(Material.GOLDEN_APPLE), "Use your shield to protect you in battle!", ChatColor.GRAY);
+        super("Knight", new ItemStack(Material.SHIELD), "Use your shield to protect you in battle!", ChatColor.GRAY);
     }
 
     protected void wear(Player player) {
-        ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 3);
-        LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
-        helmmeta.setColor(Color.MAROON);
-        helm.setItemMeta(helmmeta);
-        player.getInventory().setHelmet(helm);
-        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
+        ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
-        chestmeta.setColor(Color.MAROON);
-        chest.setItemMeta(chestmeta);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chest);
-        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
-        player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.BLAZE_ROD);
-        ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal Ability");
-        ability.setItemMeta(abilitymeta);
-        player.getInventory().addItem(ability);
-        addSoup(player.getInventory(), 2, 35);
+        player.getInventory().setItemInOffHand(new ItemStack(Material.SHIELD));
+        addSoup(player.getInventory(), 1, 35);
     }
 
     protected void wearNoSoup(Player player) {
@@ -62,43 +49,14 @@ public class KnightKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
-        ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 3);
-        LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
-        helmmeta.setColor(Color.MAROON);
-        helm.setItemMeta(helmmeta);
-        player.getInventory().setHelmet(helm);
-        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
+        ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
-        chestmeta.setColor(Color.MAROON);
-        chest.setItemMeta(chestmeta);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chest);
-        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
-        player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.BLAZE_ROD);
-        ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal Ability");
-        ability.setItemMeta(abilitymeta);
-        player.getInventory().addItem(ability);
-    }
-
-    @EventHandler
-    public void onInteract(PlayerInteractEvent event) {
-        final Player player = event.getPlayer();
-        if (KitManager.isPlayerInKit(player, this)) {
-            if (player.getInventory().getItemInHand().getType() == Material.BLAZE_ROD) {
-                if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
-                    if (!heal.tryUse(player)) {
-                        return;
-                    }
-                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Heal" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.ZOMBIE);
-                }
-            }
-        }
+        player.getInventory().setItemInOffHand(new ItemStack(Material.SHIELD));
     }
 }
