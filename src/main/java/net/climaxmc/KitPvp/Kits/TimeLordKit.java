@@ -44,6 +44,7 @@ public class TimeLordKit extends Kit {
         player.getInventory().setChestplate(chest);
         ItemStack legs = new ItemStack(Material.GOLD_LEGGINGS);
         legs.addEnchantment(Enchantment.DURABILITY, 2);
+        player.getInventory().addItem(legs);
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         boots.addEnchantment(Enchantment.DURABILITY, 3);
@@ -79,6 +80,7 @@ public class TimeLordKit extends Kit {
         player.getInventory().setChestplate(chest);
         ItemStack legs = new ItemStack(Material.GOLD_LEGGINGS);
         legs.addEnchantment(Enchantment.DURABILITY, 2);
+        player.getInventory().addItem(legs);
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         boots.addEnchantment(Enchantment.DURABILITY, 3);
