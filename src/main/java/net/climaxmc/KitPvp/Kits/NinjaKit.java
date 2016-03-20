@@ -57,27 +57,21 @@ public class NinjaKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-        ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 3);
-        LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
-        helmmeta.setColor(Color.MAROON);
-        helm.setItemMeta(helmmeta);
+        ItemStack helm = new ItemStack(Material.GOLD_HELMET);
+        helm.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setHelmet(helm);
-        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
-        chest.addEnchantment(Enchantment.DURABILITY, 3);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
-        chestmeta.setColor(Color.MAROON);
-        chest.setItemMeta(chestmeta);
+        ItemStack chest = new ItemStack(Material.CHAINMAIL_CHESTPLATE);
         player.getInventory().setChestplate(chest);
-        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
-        player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
+        player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
+        ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
+        boots.addEnchantment(Enchantment.DURABILITY, 2);
+        player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.BLAZE_ROD);
+        ItemStack ability = new ItemStack(Material.GLOWSTONE_DUST);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Agility Ability");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
