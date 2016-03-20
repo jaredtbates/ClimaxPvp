@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp.Kits;
 
+import me.xericker.disguiseabilities.DisguiseAbilities;
 import net.climaxmc.Administration.Commands.CheckCommand;
 import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
@@ -23,10 +24,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class AssassinKit extends Kit {
-    private Ability cloak = new Ability(1, 15, TimeUnit.SECONDS);
+    private Ability shadowstep = new Ability(1, 15, TimeUnit.SECONDS);
+    private Ability warpback = new Ability(1, 9, TimeUnit.SECONDS);
 
     public AssassinKit() {
-        super("Assassin", new ItemStack(Material.GHAST_TEAR), "Use your Cloak Ability to take out opponents with stealth!", ChatColor.GOLD);
+        super("Assassin", new ItemStack(Material.GHAST_TEAR), "Use your abilities to take down your foes with great stealth and agility!", ChatColor.GOLD);
     }
 
     protected void wear(Player player) {
@@ -38,11 +40,16 @@ public class AssassinKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
-        ItemStack cloak = new ItemStack(Material.GHAST_TEAR);
-        ItemMeta cloakmeta = cloak.getItemMeta();
-        cloakmeta.setDisplayName(ChatColor.AQUA + "Cloak Ability");
-        cloak.setItemMeta(cloakmeta);
-        player.getInventory().addItem(cloak);
+        ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+        ItemMeta abilitymeta = ability.getItemMeta();
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Shadow-Step Ability");
+        ability.setItemMeta(abilitymeta);
+        player.getInventory().addItem(ability);
+        ItemStack abilitytwo = new ItemStack(Material.WATCH);
+        ItemMeta abilitytwometa = abilitytwo.getItemMeta();
+        abilitytwometa.setDisplayName(ChatColor.AQUA + "Warp-Back Ability");
+        abilitytwo.setItemMeta(abilitytwometa);
+        player.getInventory().addItem(abilitytwo);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
@@ -57,7 +64,7 @@ public class AssassinKit extends Kit {
         bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
-        addSoup(player.getInventory(), 2, 35);
+        addSoup(player.getInventory(), 3, 35);
     }
 
     protected void wearNoSoup(Player player) {
@@ -70,11 +77,16 @@ public class AssassinKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
-        ItemStack cloak = new ItemStack(Material.GHAST_TEAR);
-        ItemMeta cloakmeta = cloak.getItemMeta();
-        cloakmeta.setDisplayName(ChatColor.AQUA + "Cloak Ability");
-        cloak.setItemMeta(cloakmeta);
-        player.getInventory().addItem(cloak);
+        ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+        ItemMeta abilitymeta = ability.getItemMeta();
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Shadow-Step Ability");
+        ability.setItemMeta(abilitymeta);
+        player.getInventory().addItem(ability);
+        ItemStack abilitytwo = new ItemStack(Material.WATCH);
+        ItemMeta abilitytwometa = abilitytwo.getItemMeta();
+        abilitytwometa.setDisplayName(ChatColor.AQUA + "Warp-Back Ability");
+        abilitytwo.setItemMeta(abilitytwometa);
+        player.getInventory().addItem(abilitytwo);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
@@ -89,9 +101,6 @@ public class AssassinKit extends Kit {
         bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
     }
 
     @EventHandler
@@ -100,10 +109,13 @@ public class AssassinKit extends Kit {
         if (KitManager.isPlayerInKit(player, this)) {
             if (player.getInventory().getItemInHand().getType() == Material.GHAST_TEAR) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
-                    if (!cloak.tryUse(player)) {
+                    if (!shadowstep.tryUse(player)) {
                         return;
                     }
-                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Assassin" + ChatColor.GOLD + " Ability!");
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Shadow-Step" + ChatColor.GOLD + " Ability!");
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.VOID_CRAWLER);
+
+                    /*player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Assassin" + ChatColor.GOLD + " Ability!");
                     for (Entity entity : player.getNearbyEntities(9, 9, 9)) {
                         if (entity instanceof Player) {
                             Player players = (Player) entity;
@@ -150,9 +162,16 @@ public class AssassinKit extends Kit {
                                     boots.setItemMeta(bootsmeta);
                                     player.getInventory().setBoots(boots);
                                 }
-                            }, 140);
-                        }
+                            }, 140);*/
+                }
+            }
+            if (player.getInventory().getItemInHand().getType() == Material.WATCH) {
+                if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
+                    if (!shadowstep.tryUse(player)) {
+                        return;
                     }
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Warp-Back" + ChatColor.GOLD + " Ability!");
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.TIME_LORD);
                 }
             }
         }

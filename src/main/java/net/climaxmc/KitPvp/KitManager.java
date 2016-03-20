@@ -62,7 +62,7 @@ public class KitManager implements Listener {
         kits.add(new LazerKit());
 
         // Gold Kits
-        kits.add(new RangerKit());
+        kits.add(new EmberKit());
         kits.add(new AssassinKit());
         kits.add(new IronGolemKit());
         kits.add(new KangarooKit());

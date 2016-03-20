@@ -25,7 +25,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class EmberKit extends Kit {
-    private Ability globeofdeath = new Ability(1, 10, TimeUnit.SECONDS);
+    private Ability globeofdeath = new Ability(1, 17, TimeUnit.SECONDS);
 
     public EmberKit() {
         super("Ember", new ItemStack(Material.SPECKLED_MELON), "Use your Globe of Death to murder everyone!", ChatColor.GOLD);
