@@ -36,7 +36,7 @@ public class KitManager implements Listener {
         // Gray Kits
         kits.add(new PvpKit());
         kits.add(new HeavyKit());
-        kits.add(new ArcherKit());
+        kits.add(new HealerKit());
         kits.add(new FishermanKit());
         kits.add(new StrafeKit());
 
