@@ -44,7 +44,7 @@ public class KitManager implements Listener {
         kits.add(new EndermanKit());
         kits.add(new SanicKit());
         kits.add(new BoulderKit());
-        kits.add(new SoldierKit());
+        kits.add(new NinjaKit());
         kits.add(new PirateKit());
 
         // Green Kits
