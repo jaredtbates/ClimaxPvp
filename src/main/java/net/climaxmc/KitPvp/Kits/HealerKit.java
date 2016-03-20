@@ -1,18 +1,31 @@
 package net.climaxmc.KitPvp.Kits;
 
 import me.xericker.disguiseabilities.DisguiseAbilities;
+import net.climaxmc.Administration.Commands.CheckCommand;
+import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.KitPvp.Kit;
+import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.Ability;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.concurrent.TimeUnit;
+
 public class HealerKit extends Kit {
+    private Ability heal = new Ability(1, 10, TimeUnit.SECONDS);
+
     public HealerKit() {
         super("Healer", new ItemStack(Material.GOLDEN_APPLE), "This kit gives you the ability to heal yourself!", ChatColor.GRAY);
     }
@@ -28,7 +41,8 @@ public class HealerKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        addSoup(player.getInventory(), 1, 35);
+        player.getInventory().addItem(new ItemStack(Material.BLAZE_ROD));
+        addSoup(player.getInventory(), 2, 35);
         DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.ZOMBIE);
     }
 
@@ -47,9 +61,22 @@ public class HealerKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
-        DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.ZOMBIE);
+        player.getInventory().addItem(new ItemStack(Material.BLAZE_ROD));
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent event) {
+        final Player player = event.getPlayer();
+        if (KitManager.isPlayerInKit(player, this)) {
+            if (player.getInventory().getItemInHand().getType() == Material.BLAZE_ROD) {
+                if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
+                    if (!heal.tryUse(player)) {
+                        return;
+                    }
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Heal" + ChatColor.GOLD + " Ability!");
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.ZOMBIE);
+                }
+            }
+        }
     }
 }
