@@ -14,7 +14,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class HealerKit extends Kit {
     public HealerKit() {
-        super("Pvp", new ItemStack(Material.GOLDEN_APPLE), "This kit gives you the ability to heal yourself!", ChatColor.GRAY);
+        super("Healer", new ItemStack(Material.GOLDEN_APPLE), "This kit gives you the ability to heal yourself!", ChatColor.GRAY);
     }
 
     protected void wear(Player player) {
