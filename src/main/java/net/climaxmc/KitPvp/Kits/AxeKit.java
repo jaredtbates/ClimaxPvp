@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class AxeKit extends Kit {
     public AxeKit() {
-        super("Axe", new ItemStack(Material.DIAMOND_SWORD), "A Standard Axe Kit, Iron Armor and Diamond Axe.", ChatColor.GRAY);
+        super("Axe", new ItemStack(Material.DIAMOND_AXE), "A Standard Axe Kit, Iron Armor and Diamond Axe.", ChatColor.GRAY);
     }
 
     protected void wear(Player player) {
