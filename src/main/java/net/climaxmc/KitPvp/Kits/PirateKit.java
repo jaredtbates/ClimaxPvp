@@ -25,7 +25,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class PirateKit extends Kit {
-    private Ability heal = new Ability(1, 10, TimeUnit.SECONDS);
+    private Ability heal = new Ability(1, 5, TimeUnit.SECONDS);
 
     public PirateKit() {
         super("Pirate", new ItemStack(Material.GOLD_AXE), "Shoot yer cannon balls ye matey, Argh!", ChatColor.BLUE);
