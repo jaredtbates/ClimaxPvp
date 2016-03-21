@@ -36,6 +36,7 @@ public class AssassinKit extends Kit {
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.GHAST_TEAR);
@@ -44,7 +45,7 @@ public class AssassinKit extends Kit {
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
+        helm.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.BLACK);
         helm.setItemMeta(helmmeta);
@@ -52,7 +53,7 @@ public class AssassinKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
+        boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
@@ -67,6 +68,7 @@ public class AssassinKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.GHAST_TEAR);
@@ -75,7 +77,7 @@ public class AssassinKit extends Kit {
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
+        helm.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.BLACK);
         helm.setItemMeta(helmmeta);
@@ -83,7 +85,7 @@ public class AssassinKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
+        boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
