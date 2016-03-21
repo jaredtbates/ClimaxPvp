@@ -1,8 +1,10 @@
 package net.climaxmc.KitPvp.Kits;
 
+import me.xericker.disguiseabilities.DisguiseAbilities;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.Utils.Ability;
 import net.climaxmc.KitPvp.Utils.Particles.TNTParticle;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -13,18 +15,24 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.util.concurrent.TimeUnit;
+
 public class BomberKit extends Kit {
+    private Ability explode = new Ability(1, 13, TimeUnit.SECONDS);
+
     public BomberKit() {
-        super("Bomber", new ItemStack(Material.TNT), "Throw your bombs at people to explode them!", ChatColor.GOLD);
+        super("Bomber", new ItemStack(Material.TNT), "Explode in people's faces :D!", ChatColor.GOLD);
     }
 
     protected void wear(Player player) {
@@ -51,34 +59,19 @@ public class BomberKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
+        ItemStack ability = new ItemStack(Material.TNT);
+        ItemMeta abilitymeta = ability.getItemMeta();
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Explode Ability");
+        ability.setItemMeta(abilitymeta);
+        player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (!KitManager.isPlayerInKit(player, BomberKit.class)) {
-                    cancel();
-                    return;
-                }
-
-                ItemStack itemStack = player.getInventory().getItem(1);
-                if (itemStack != null && itemStack.getType().equals(Material.TNT)) {
-                    if (itemStack.getAmount() >= 3) {
-                        return;
-                    }
-                    itemStack.setAmount(itemStack.getAmount() + 1);
-                } else {
-                    player.getInventory().setItem(1, new ItemStack(Material.TNT));
-                }
-                player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 1);
-            }
-        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 120);
     }
 
     protected void wearNoSoup(Player player) {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
@@ -99,32 +92,31 @@ public class BomberKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (!KitManager.isPlayerInKit(player, BomberKit.class)) {
-                    cancel();
-                    return;
-                }
-
-                ItemStack itemStack = player.getInventory().getItem(1);
-                if (itemStack != null) {
-                    if (itemStack.getAmount() >= 3) {
-                        return;
-                    }
-                    itemStack.setAmount(itemStack.getAmount() + 1);
-                } else {
-                    player.getInventory().setItem(1, new ItemStack(Material.TNT));
-                }
-                player.playSound(player.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1, 1);
-            }
-        }.runTaskTimer(ClimaxPvp.getInstance(), 20, 120);
+        ItemStack ability = new ItemStack(Material.TNT);
+        ItemMeta abilitymeta = ability.getItemMeta();
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Explode Ability");
+        ability.setItemMeta(abilitymeta);
+        player.getInventory().addItem(ability);
     }
 
     @EventHandler
+    public void onInteract(PlayerInteractEvent event) {
+        final Player player = event.getPlayer();
+        if (KitManager.isPlayerInKit(player, this)) {
+            if (player.getInventory().getItemInHand().getType() == Material.TNT) {
+                if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
+                    if (!explode.tryUse(player)) {
+                        return;
+                    }
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Explode" + ChatColor.GOLD + " Ability!");
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.CREEPER);
+                }
+            }
+        }
+    }
+
+
+    /*@EventHandler
     public void onPlayerClickDropTNT(PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
@@ -136,7 +128,7 @@ public class BomberKit extends Kit {
     }
 
     private void spawnTNT(Player player) {
-        player.playSound(player.getLocation(), Sound.ENTITY_TNT_PRIMED, 1, 1);
+        //player.playSound(player.getLocation(), Sound.FUSE, 1, 1);
         ItemStack tntInInv = player.getItemInHand();
         tntInInv.setAmount(tntInInv.getAmount() - 1);
         player.getInventory().setItem(player.getInventory().getHeldItemSlot(), tntInInv);
@@ -177,5 +169,5 @@ public class BomberKit extends Kit {
 
         ent.setFallDistance(0.0F);
         ent.setVelocity(vec);
-    }
+    }*/
 }

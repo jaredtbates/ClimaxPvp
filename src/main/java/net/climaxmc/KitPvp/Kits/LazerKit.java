@@ -24,35 +24,30 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.concurrent.TimeUnit;
 
-public class HealerKit extends Kit {
-    private Ability heal = new Ability(1, 10, TimeUnit.SECONDS);
+public class LazerKit extends Kit {
+    private Ability beam = new Ability(1, 7, TimeUnit.SECONDS);
 
-    public HealerKit() {
-        super("Healer", new ItemStack(Material.GOLDEN_APPLE), "This kit gives you the ability to heal yourself!", ChatColor.GRAY);
+    public LazerKit() {
+        super("Lazer", new ItemStack(Material.PRISMARINE_SHARD), "Pew pew!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
-        helmmeta.setColor(Color.MAROON);
+        helmmeta.setColor(Color.AQUA);
         helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
-        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
-        chest.addEnchantment(Enchantment.DURABILITY, 3);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
-        chestmeta.setColor(Color.MAROON);
-        chest.setItemMeta(chestmeta);
+        ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.BLAZE_ROD);
+        ItemStack ability = new ItemStack(Material.PRISMARINE_SHARD);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Beam Ability");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
@@ -66,24 +61,19 @@ public class HealerKit extends Kit {
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
-        helmmeta.setColor(Color.MAROON);
+        helmmeta.setColor(Color.AQUA);
         helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
-        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
-        chest.addEnchantment(Enchantment.DURABILITY, 3);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
-        chestmeta.setColor(Color.MAROON);
-        chest.setItemMeta(chestmeta);
+        ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.BLAZE_ROD);
+        ItemStack ability = new ItemStack(Material.PRISMARINE_SHARD);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Beam Ability");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -92,13 +82,13 @@ public class HealerKit extends Kit {
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
-            if (player.getInventory().getItemInHand().getType() == Material.BLAZE_ROD) {
+            if (player.getInventory().getItemInHand().getType() == Material.PRISMARINE_SHARD) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
-                    if (!heal.tryUse(player)) {
+                    if (!beam.tryUse(player)) {
                         return;
                     }
-                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Heal" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.ZOMBIE);
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Beam" + ChatColor.GOLD + " Ability!");
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.ARCANIST);
                 }
             }
         }

@@ -161,6 +161,9 @@ public class PlayerJoinListener implements Listener {
                 attachment.setPermission("minecraft.command.tp", true);
                 attachment.setPermission("bukkit.command.teleport", true);
             }
+            if (playerData.hasRank(Rank.DEFAULT)) {
+                attachment.setPermission("noattackcooldown.use", true);
+            }
         }
 
         attachment.setPermission("bukkit.command.tps", true);

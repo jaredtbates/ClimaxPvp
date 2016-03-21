@@ -35,37 +35,37 @@ public class KitManager implements Listener {
     public KitManager(ClimaxPvp plugin) {
         // Gray Kits
         kits.add(new PvpKit());
-        kits.add(new HeavyKit());
+        kits.add(new KnightKit());
+        kits.add(new AxeKit());
         kits.add(new HealerKit());
-        kits.add(new FishermanKit());
         kits.add(new StrafeKit());
 
         // Blue Kits
         kits.add(new EndermanKit());
         kits.add(new SanicKit());
-        kits.add(new RabbitKit());
-        kits.add(new SoldierKit());
-        kits.add(new PrecisionKit());
+        kits.add(new BoulderKit());
+        kits.add(new NinjaKit());
+        kits.add(new PirateKit());
 
         // Green Kits
         kits.add(new ThorKit());
-        kits.add(new AnvilKit());
+        kits.add(new MagnetKit());
         kits.add(new SnailKit());
         kits.add(new GhastKit());
-        kits.add(new ChemistKit());
+        kits.add(new VortexKit());
 
         // Red Kits
-        kits.add(new BlazeKit());
+        kits.add(new TimeLordKit());
         kits.add(new WitherKit(plugin));
-        kits.add(new RageKit());
+        kits.add(new DragonKit());
         kits.add(new ViperKit());
-        kits.add(new VikingKit());
+        kits.add(new LazerKit());
 
         // Gold Kits
-        kits.add(new RangerKit());
+        kits.add(new EmberKit());
         kits.add(new AssassinKit());
         kits.add(new IronGolemKit());
-        kits.add(new KangarooKit());
+        kits.add(new PhoenixKit());
         kits.add(new BomberKit());
 
         for (Kit kit : kits) {

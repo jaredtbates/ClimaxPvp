@@ -24,35 +24,43 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.concurrent.TimeUnit;
 
-public class HealerKit extends Kit {
-    private Ability heal = new Ability(1, 10, TimeUnit.SECONDS);
+public class EmberKit extends Kit {
+    private Ability globeofdeath = new Ability(1, 17, TimeUnit.SECONDS);
 
-    public HealerKit() {
-        super("Healer", new ItemStack(Material.GOLDEN_APPLE), "This kit gives you the ability to heal yourself!", ChatColor.GRAY);
+    public EmberKit() {
+        super("Ember", new ItemStack(Material.SPECKLED_MELON), "Use your Globe of Death to murder everyone!", ChatColor.GOLD);
     }
 
     protected void wear(Player player) {
-        ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 3);
-        LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
-        helmmeta.setColor(Color.MAROON);
-        helm.setItemMeta(helmmeta);
+        ItemStack helm = new ItemStack(Material.IRON_HELMET);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);
         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
-        chestmeta.setColor(Color.MAROON);
+        chestmeta.setColor(Color.ORANGE);
         chest.setItemMeta(chestmeta);
         player.getInventory().setChestplate(chest);
-        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
-        player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
+        ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
+        legs.addEnchantment(Enchantment.DURABILITY, 3);
+        legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        LeatherArmorMeta legsmeta = (LeatherArmorMeta) legs.getItemMeta();
+        legsmeta.setColor(Color.ORANGE);
+        legs.setItemMeta(legsmeta);
+        player.getInventory().setLeggings(legs);
+        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
+        boots.addEnchantment(Enchantment.DURABILITY, 3);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
+        bootsmeta.setColor(Color.ORANGE);
+        boots.setItemMeta(bootsmeta);
+        player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.BLAZE_ROD);
+        ItemStack ability = new ItemStack(Material.SPECKLED_MELON);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Globe of Death Ability");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
@@ -63,27 +71,35 @@ public class HealerKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
-        ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 3);
-        LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
-        helmmeta.setColor(Color.MAROON);
-        helm.setItemMeta(helmmeta);
+        ItemStack helm = new ItemStack(Material.IRON_HELMET);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);
         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
-        chestmeta.setColor(Color.MAROON);
+        chestmeta.setColor(Color.ORANGE);
         chest.setItemMeta(chestmeta);
         player.getInventory().setChestplate(chest);
-        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
-        player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
+        ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
+        legs.addEnchantment(Enchantment.DURABILITY, 3);
+        legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        LeatherArmorMeta legsmeta = (LeatherArmorMeta) legs.getItemMeta();
+        legsmeta.setColor(Color.ORANGE);
+        legs.setItemMeta(legsmeta);
+        player.getInventory().setLeggings(legs);
+        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
+        boots.addEnchantment(Enchantment.DURABILITY, 3);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
+        bootsmeta.setColor(Color.ORANGE);
+        boots.setItemMeta(bootsmeta);
+        player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.BLAZE_ROD);
+        ItemStack ability = new ItemStack(Material.SPECKLED_MELON);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Globe of Death Ability");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -92,13 +108,13 @@ public class HealerKit extends Kit {
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
-            if (player.getInventory().getItemInHand().getType() == Material.BLAZE_ROD) {
+            if (player.getInventory().getItemInHand().getType() == Material.SPECKLED_MELON) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
-                    if (!heal.tryUse(player)) {
+                    if (!globeofdeath.tryUse(player)) {
                         return;
                     }
-                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Heal" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.ZOMBIE);
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Globe of Death" + ChatColor.GOLD + " Ability!");
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.PIGMAN);
                 }
             }
         }

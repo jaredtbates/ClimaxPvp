@@ -22,10 +22,9 @@ public class SnailKit extends Kit {
 
     protected void wear(Player player) {
         ItemStack sword = new ItemStack(Material.IRON_AXE);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
-        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        helmet.addEnchantment(Enchantment.DURABILITY, 2);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
         meta.setColor(Color.SILVER);
         helmet.setItemMeta(meta);
@@ -40,12 +39,11 @@ public class SnailKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
         ItemStack sword = new ItemStack(Material.IRON_AXE);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
-        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        helmet.addEnchantment(Enchantment.DURABILITY, 2);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
         meta.setColor(Color.SILVER);
         helmet.setItemMeta(meta);
@@ -53,9 +51,6 @@ public class SnailKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

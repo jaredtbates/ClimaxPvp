@@ -9,17 +9,16 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class PvpKit extends Kit {
-    public PvpKit() {
-        super("Pvp", new ItemStack(Material.DIAMOND_SWORD), "A Standard Pvp Kit, Iron Armor and Diamond Sword.", ChatColor.GRAY);
+public class AxeKit extends Kit {
+    public AxeKit() {
+        super("Axe", new ItemStack(Material.DIAMOND_AXE), "A Standard Axe Kit, Iron Armor and Diamond Axe.", ChatColor.GRAY);
     }
 
     protected void wear(Player player) {
-        player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack sword = new ItemStack(Material.GOLD_AXE);
         player.getInventory().addItem(sword);
         addSoup(player.getInventory(), 1, 35);
     }
@@ -29,11 +28,10 @@ public class PvpKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
-        player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack sword = new ItemStack(Material.GOLD_AXE);
         player.getInventory().addItem(sword);
     }
 }

@@ -24,35 +24,40 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.concurrent.TimeUnit;
 
-public class HealerKit extends Kit {
-    private Ability heal = new Ability(1, 10, TimeUnit.SECONDS);
+public class TimeLordKit extends Kit {
+    private Ability warpback = new Ability(1, 10, TimeUnit.SECONDS);
 
-    public HealerKit() {
-        super("Healer", new ItemStack(Material.GOLDEN_APPLE), "This kit gives you the ability to heal yourself!", ChatColor.GRAY);
+    public TimeLordKit() {
+        super("Time Lord", new ItemStack(Material.WATCH), "Travel back in time at will with Time Lord!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
-        helmmeta.setColor(Color.MAROON);
+        helmmeta.setColor(Color.YELLOW);
         helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
-        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
+        ItemStack chest = new ItemStack(Material.DIAMOND_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
-        chestmeta.setColor(Color.MAROON);
-        chest.setItemMeta(chestmeta);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chest);
-        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
-        player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
+        ItemStack legs = new ItemStack(Material.GOLD_LEGGINGS);
+        legs.addEnchantment(Enchantment.DURABILITY, 2);
+        player.getInventory().setLeggings(legs);
+        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        boots.addEnchantment(Enchantment.DURABILITY, 3);
+        LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
+        bootsmeta.setColor(Color.YELLOW);
+        boots.setItemMeta(bootsmeta);
+        player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.BLAZE_ROD);
+        ItemStack ability = new ItemStack(Material.WATCH);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Warp-Back Ability");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
@@ -66,24 +71,29 @@ public class HealerKit extends Kit {
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
-        helmmeta.setColor(Color.MAROON);
+        helmmeta.setColor(Color.YELLOW);
         helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
-        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
+        ItemStack chest = new ItemStack(Material.DIAMOND_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
-        chestmeta.setColor(Color.MAROON);
-        chest.setItemMeta(chestmeta);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chest);
-        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
-        player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
+        ItemStack legs = new ItemStack(Material.GOLD_LEGGINGS);
+        legs.addEnchantment(Enchantment.DURABILITY, 2);
+        player.getInventory().setLeggings(legs);
+        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        boots.addEnchantment(Enchantment.DURABILITY, 3);
+        LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
+        bootsmeta.setColor(Color.YELLOW);
+        boots.setItemMeta(bootsmeta);
+        player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.BLAZE_ROD);
+        ItemStack ability = new ItemStack(Material.WATCH);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Warp-Back Ability");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -92,13 +102,13 @@ public class HealerKit extends Kit {
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
-            if (player.getInventory().getItemInHand().getType() == Material.BLAZE_ROD) {
+            if (player.getInventory().getItemInHand().getType() == Material.WATCH) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
-                    if (!heal.tryUse(player)) {
+                    if (!warpback.tryUse(player)) {
                         return;
                     }
-                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Heal" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.ZOMBIE);
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Warp-Back" + ChatColor.GOLD + " Ability!");
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.TIME_LORD);
                 }
             }
         }

@@ -1,11 +1,13 @@
 package net.climaxmc.KitPvp.Kits;
 
+import me.xericker.disguiseabilities.DisguiseAbilities;
 import net.climaxmc.Administration.Commands.CheckCommand;
 import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.Ability;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,19 +16,24 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-public class WitherKit extends Kit {
+import java.util.concurrent.TimeUnit;
 
+public class WitherKit extends Kit {
+    private Ability witherblast = new Ability(1, 4, TimeUnit.SECONDS);
     private ClimaxPvp plugin;
 
     public WitherKit(ClimaxPvp plugin) {
-        super("Wither", new ItemStack(Material.SKULL_ITEM, 1, (byte) 1), "Shoot your WitherBow to Launch your Wither Head!", ChatColor.RED);
+        super("Wither", new ItemStack(Material.SKULL_ITEM, 1, (byte) 1), "Launch wither skulls at people to murder them!", ChatColor.RED);
         this.plugin = plugin;
     }
 
@@ -34,7 +41,6 @@ public class WitherKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        player.getInventory().addItem(new ItemStack(Material.BOW));
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
         helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         player.getInventory().setHelmet(helmet);
@@ -46,19 +52,22 @@ public class WitherKit extends Kit {
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         player.getInventory().setBoots(boots);
+        ItemStack ability = new ItemStack(Material.SKULL_ITEM, 1, (byte) 1);
+        ItemMeta abilitymeta = ability.getItemMeta();
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Wither Blast Ability");
+        ability.setItemMeta(abilitymeta);
+        player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 34);
-        player.getInventory().setItem(17, new ItemStack(Material.ARROW, 64));
     }
 
     protected void wearNoSoup(Player player) {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        player.getInventory().addItem(new ItemStack(Material.BOW));
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
         helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         player.getInventory().setHelmet(helmet);
@@ -70,61 +79,24 @@ public class WitherKit extends Kit {
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         player.getInventory().setBoots(boots);
-        player.getInventory().setItem(17, new ItemStack(Material.ARROW, 64));
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
+        ItemStack ability = new ItemStack(Material.SKULL_ITEM, 1, (byte) 1);
+        ItemMeta abilitymeta = ability.getItemMeta();
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Wither Blast Ability");
+        ability.setItemMeta(abilitymeta);
+        player.getInventory().addItem(ability);
     }
 
     @EventHandler
-    public void onBowShoot(EntityShootBowEvent event) {
-        if (event.getEntity() instanceof Player) {
-            Player player = (Player) event.getEntity();
-            if (KitManager.isPlayerInKit(player, this)) {
-                event.setCancelled(true);
-                player.launchProjectile(WitherSkull.class).setVelocity(event.getProjectile().getVelocity());
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 1));
-            }
-        }
-    }
-
-    @EventHandler
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (event.getEntity() instanceof Player) {
-            Player target = (Player) event.getEntity();
-            if (event.getDamager() instanceof WitherSkull) {
-                event.setCancelled(true);
-                if (!VanishCommand.getVanished().contains(target.getUniqueId())
-                        && !CheckCommand.getChecking().contains(target.getUniqueId())
-                        && (KitPvp.currentTeams.get(event.getDamager().getName()) != target.getName()
-                        && KitPvp.currentTeams.get(target.getName()) != event.getDamager().getName())) {
-                    target.damage(5);
-                    Vector vector = target.getEyeLocation().getDirection();
-                    vector.multiply(-0.5F);
-                    vector.setY(-0.2);
-                    target.setVelocity(vector);
-                }
-                Location location = target.getLocation();
-            }
-        }
-    }
-
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPvp(EntityDamageByEntityEvent event) {
-        if (event.isCancelled()) {
-            return;
-        }
-
-        if (event.getDamager() instanceof Player) {
-            Player player = (Player) event.getDamager();
-            if (event.getEntity() instanceof Player) {
-                Player damaged = (Player) event.getEntity();
-                if (KitManager.isPlayerInKit(player, this)) {
-                    if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
-                        if (!VanishCommand.getVanished().contains(damaged.getUniqueId()) && !CheckCommand.getChecking().contains(damaged.getUniqueId())) {
-                            damaged.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 80, 1));
-                        }
+    public void onInteract(PlayerInteractEvent event) {
+        final Player player = event.getPlayer();
+        if (KitManager.isPlayerInKit(player, this)) {
+            if (player.getInventory().getItemInHand().getType() == Material.SKULL_ITEM) {
+                if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
+                    if (!witherblast.tryUse(player)) {
+                        return;
                     }
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Wither Blast" + ChatColor.GOLD + " Ability!");
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.DREADLORD);
                 }
             }
         }
