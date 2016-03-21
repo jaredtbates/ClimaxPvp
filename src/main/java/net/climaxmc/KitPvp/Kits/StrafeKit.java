@@ -32,7 +32,6 @@ public class StrafeKit extends Kit {
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         addSoup(player.getInventory(), 1, 35);
@@ -57,7 +56,6 @@ public class StrafeKit extends Kit {
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
     }
