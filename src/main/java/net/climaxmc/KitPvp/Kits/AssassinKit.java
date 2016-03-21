@@ -36,7 +36,6 @@ public class AssassinKit extends Kit {
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack sword = new ItemStack(Material.STONE_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.GHAST_TEAR);
@@ -68,7 +67,6 @@ public class AssassinKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack sword = new ItemStack(Material.STONE_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.GHAST_TEAR);
