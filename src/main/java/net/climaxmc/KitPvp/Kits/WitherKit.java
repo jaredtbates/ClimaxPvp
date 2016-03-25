@@ -96,7 +96,10 @@ public class WitherKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Wither Blast" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.DREADLORD);
+                    WitherSkull ws = (WitherSkull) player.launchProjectile(WitherSkull.class);
+                    ws.setVelocity(player.getLocation().getDirection());
+                    ws.setIsIncendiary(true);
+                    ws.setYield(5.0F);
                 }
             }
         }
