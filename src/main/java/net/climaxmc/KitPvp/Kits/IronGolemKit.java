@@ -21,7 +21,7 @@ import org.bukkit.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 public class IronGolemKit extends Kit {
-    private Ability Throw = new Ability(1, 5, TimeUnit.SECONDS);
+    private Ability Throw = new Ability(1, 3, TimeUnit.SECONDS);
 
     public IronGolemKit() {
         super("Iron Golem", new ItemStack(Material.RED_ROSE), "Punch people with your Rose to launch them in the air!", ChatColor.GOLD);
@@ -64,9 +64,6 @@ public class IronGolemKit extends Kit {
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setBoots(boots);
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
