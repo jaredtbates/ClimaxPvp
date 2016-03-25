@@ -42,7 +42,7 @@ public class ViperKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);

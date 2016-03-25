@@ -58,7 +58,7 @@ public class VikingKit extends Kit {
         /*for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         ItemStack axe = new ItemStack(Material.DIAMOND_AXE);
         axe.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
         ItemMeta axemeta = axe.getItemMeta();

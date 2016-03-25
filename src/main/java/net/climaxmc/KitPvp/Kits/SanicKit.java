@@ -31,7 +31,7 @@ public class SanicKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         player.getInventory().addItem(sword);
         ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);

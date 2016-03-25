@@ -41,7 +41,8 @@ public class StrafeKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
         player.getInventory().clear();
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
         helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
@@ -57,6 +58,5 @@ public class StrafeKit extends Kit {
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         player.getInventory().addItem(sword);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
     }
 }

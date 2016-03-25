@@ -25,13 +25,14 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class KnightKit extends Kit {
-    private Ability heal = new Ability(1, 10, TimeUnit.SECONDS);
+    private Ability ironpunch = new Ability(1, 12, TimeUnit.SECONDS);
 
     public KnightKit() {
         super("Knight", new ItemStack(Material.IRON_INGOT), "Use your shield to protect you in battle!", ChatColor.GRAY);
     }
 
     protected void wear(Player player) {
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chest);
@@ -39,7 +40,11 @@ public class KnightKit extends Kit {
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         player.getInventory().addItem(sword);
-        player.getInventory().setItemInOffHand(new ItemStack(Material.SHIELD));
+        ItemStack ability = new ItemStack(Material.IRON_INGOT);
+        ItemMeta abilitymeta = ability.getItemMeta();
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Iron Punch");
+        ability.setItemMeta(abilitymeta);
+        player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 1, 35);
     }
 
@@ -47,7 +52,8 @@ public class KnightKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chest);
@@ -55,6 +61,26 @@ public class KnightKit extends Kit {
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         player.getInventory().addItem(sword);
-        player.getInventory().setItemInOffHand(new ItemStack(Material.SHIELD));
+        ItemStack ability = new ItemStack(Material.IRON_INGOT);
+        ItemMeta abilitymeta = ability.getItemMeta();
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Iron Punch");
+        ability.setItemMeta(abilitymeta);
+        player.getInventory().addItem(ability);
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent event) {
+        final Player player = event.getPlayer();
+        if (KitManager.isPlayerInKit(player, this)) {
+            if (player.getInventory().getItemInHand().getType() == Material.IRON_INGOT) {
+                if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
+                    if (!ironpunch.tryUse(player)) {
+                        return;
+                    }
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Iron Punch" + ChatColor.GOLD + " Ability!");
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.GOLEM);
+                }
+            }
+        }
     }
 }
