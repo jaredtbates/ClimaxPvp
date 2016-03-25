@@ -44,8 +44,7 @@ public class WitherKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
-        helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
+        ItemStack helmet = new ItemStack(Material.IRON_HELMET);
         player.getInventory().setHelmet(helmet);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);
@@ -61,9 +60,8 @@ public class WitherKit extends Kit {
         legsmeta.setColor(Color.BLACK);
         legs.setItemMeta(legsmeta);
         player.getInventory().setLeggings(legs);
-        ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
+        ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
-        boots.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         player.getInventory().setBoots(boots);
         ItemStack ability = new ItemStack(Material.SKULL_ITEM, 1, (byte) 1);
         ItemMeta abilitymeta = ability.getItemMeta();
@@ -81,8 +79,7 @@ public class WitherKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
-        helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
+        ItemStack helmet = new ItemStack(Material.IRON_HELMET);
         player.getInventory().setHelmet(helmet);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);
@@ -98,9 +95,8 @@ public class WitherKit extends Kit {
         legsmeta.setColor(Color.BLACK);
         legs.setItemMeta(legsmeta);
         player.getInventory().setLeggings(legs);
-        ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
+        ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
-        boots.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         player.getInventory().setBoots(boots);
         ItemStack ability = new ItemStack(Material.SKULL_ITEM, 1, (byte) 1);
         ItemMeta abilitymeta = ability.getItemMeta();
