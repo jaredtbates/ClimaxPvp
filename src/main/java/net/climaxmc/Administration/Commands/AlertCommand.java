@@ -38,7 +38,7 @@ public class AlertCommand implements CommandExecutor {
             String message = StringUtils.join(args, ' ', 0, args.length);
 
             for (Player players : plugin.getServer().getOnlinePlayers()) {
-                //players.playSound(players.getLocation(), Sound.NOTE_PIANO, 2, 1.5F);
+                players.playSound(players.getLocation(), Sound.NOTE_PIANO, 2, 1.5F);
             }
 
             plugin.getServer().broadcastMessage(" ");

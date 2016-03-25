@@ -22,7 +22,7 @@ public class TeamMessages {
         //sender.playSound(sender.getLocation(), Sound.ITEM_PICKUP, 2F, 0.3F);
         sender.sendMessage(WHITE + "     \u00AB" + GREEN + " Your request to team has been sent to " + YELLOW + target.getName() + WHITE + " \u00BB");
 
-        //target.playSound(target.getLocation(), Sound.ITEM_PICKUP, 2F, 0.3F);
+        target.playSound(target.getLocation(), Sound.ITEM_PICKUP, 2F, 0.3F);
         target.sendMessage(" ");
         target.sendMessage(GOLD + "     \u00AB" + WHITE + " ========================================" + GOLD + " \u00BB");
         target.sendMessage(" ");
@@ -41,7 +41,7 @@ public class TeamMessages {
         //sender.playSound(sender.getLocation(), Sound.VILLAGER_YES, 1, 1F);
         sender.sendMessage(GREEN + "     \u00AB " + AQUA + target.getName() + YELLOW + " has " + GREEN + "accepted " + YELLOW + "your request to team!" + GREEN + " \u00BB");
 
-        //target.playSound(target.getLocation(), Sound.VILLAGER_YES, 1, 1F);
+        target.playSound(target.getLocation(), Sound.VILLAGER_YES, 1, 1F);
         target.sendMessage(GREEN + "     \u00AB " + YELLOW + "You have " + GREEN + "accepted " + AQUA + sender.getName() + YELLOW + "'s request to team!" + GREEN + " \u00BB");
     }
 
@@ -49,7 +49,7 @@ public class TeamMessages {
         //sender.playSound(sender.getLocation(), Sound.VILLAGER_NO, 1, 0.75F);
         sender.sendMessage(RED + "     \u00AB " + AQUA + target.getName() + YELLOW + " has " + RED + "declined " + YELLOW + "your request to team!" + RED + " \u00BB");
 
-        //target.playSound(target.getLocation(), Sound.VILLAGER_NO, 1, 0.75F);
+        target.playSound(target.getLocation(), Sound.VILLAGER_NO, 1, 0.75F);
         target.sendMessage(RED + "     \u00AB " + YELLOW + "You have " + RED + "declined " + AQUA + sender.getName() + YELLOW + "'s request to team!" + RED + " \u00BB");
     }
 }

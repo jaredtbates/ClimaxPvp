@@ -36,7 +36,7 @@ public class PlayerQuitListener implements Listener {
         if (plugin.getServer().getOnlinePlayers().size() < 7) {
             plugin.getServer().getOnlinePlayers().stream().filter(players -> KitPvp.currentTeams.containsKey(players.getName())
                     || KitPvp.currentTeams.containsValue(players.getName())).forEach(players -> {
-                //players.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                players.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                 players.sendMessage(ChatColor.RED + "Since there are less than 7 players online, your team has been suspended!");
                 players.sendMessage(ChatColor.GRAY + "It will resume once there are 7 players online again.");
             });

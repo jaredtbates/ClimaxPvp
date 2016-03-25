@@ -79,41 +79,41 @@ public class InventoryClickListener implements Listener {
                 if (clickedItem.getType().equals(Material.MAP)) {
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #1")) {
                         plugin.getChallengesFiles().setStarted(player, Challenge.Daily1);
-                        //player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
+                        player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
                         player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #1");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #2")) {
                         plugin.getChallengesFiles().setStarted(player, Challenge.Daily2);
-                        //player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
+                        player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
                         player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #2");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #3")) {
                         plugin.getChallengesFiles().setStarted(player, Challenge.Daily3);
-                        //player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
+                        player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
                         player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #3");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Daily Challenge #4")) {
                         plugin.getChallengesFiles().setStarted(player, Challenge.Daily4);
-                        //player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
+                        player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
                         player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Daily Challenge #4");
                     }
                     if (clickedItem.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Weekly Challenge #1")) {
                         plugin.getChallengesFiles().setStarted(player, Challenge.Weekly1);
-                        //player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
+                        player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         player.closeInventory();
                         player.sendMessage(ChatColor.YELLOW + "You've started " + ChatColor.AQUA + "Weekly Challenge #1");
                     }
                     if (clickedItem.getEnchantments() != null) {
-                       //player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                       player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                     }
                 }
 
                 if (clickedItem.getType().equals(Material.PAPER)) {
-                    //player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                    player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                     long cooldown = plugin.getChallengesFiles().getChallenge(clickedItem.getItemMeta().getDisplayName()).getCooldownTime()
                             - ((System.currentTimeMillis() / 1000)
                             - (plugin.getChallengesFiles().getCompletedTime(player,
@@ -194,7 +194,7 @@ public class InventoryClickListener implements Listener {
                         }
                         if (message == null) {
                             player.closeInventory();
-                            //player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                             player.sendMessage(ChatColor.RED + "You tried to report a player without selecting any report options!" +
                                     " Try selecting report options next time!");
                         } else {

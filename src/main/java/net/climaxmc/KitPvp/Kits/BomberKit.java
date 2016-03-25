@@ -128,7 +128,7 @@ public class BomberKit extends Kit {
     }
 
     private void spawnTNT(Player player) {
-        //player.playSound(player.getLocation(), Sound.FUSE, 1, 1);
+        player.playSound(player.getLocation(), Sound.FUSE, 1, 1);
         ItemStack tntInInv = player.getItemInHand();
         tntInInv.setAmount(tntInInv.getAmount() - 1);
         player.getInventory().setItem(player.getInventory().getHeldItemSlot(), tntInInv);
