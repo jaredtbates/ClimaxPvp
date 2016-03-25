@@ -107,7 +107,8 @@ public class GhastKit extends Kit {
                             && !CheckCommand.getChecking().contains(target.getUniqueId())
                             && (KitPvp.currentTeams.get(target.getName()) != ((Player) f.getShooter()).getName()
                             && KitPvp.currentTeams.get(((Player) f.getShooter()).getName()) != target.getName())) {
-                        event.setDamage(23);
+                        event.setCancelled(true);
+                        target.damage(23);
                     }
                     target.setVelocity(target.getVelocity().setY(1));
                 }

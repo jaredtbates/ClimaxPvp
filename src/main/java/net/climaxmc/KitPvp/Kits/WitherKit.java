@@ -12,6 +12,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
@@ -103,5 +104,19 @@ public class WitherKit extends Kit {
                 }
             }
         }
+    }
+    @EventHandler
+    public void onDamage(EntityDamageByEntityEvent event) {
+        if (event.getEntityType() == EntityType.PLAYER) {
+            Player player = (Player) event.getEntity();
+            if (KitManager.isPlayerInKit(player, this)) {
+                if (event.getDamager().getType() == EntityType.WITHER_SKULL) {
+                    event.setCancelled(true);
+                    player.damage(23);
+                    player.setVelocity(player.getVelocity().setY(2));
+                }
+            }
+        }
+
     }
 }
