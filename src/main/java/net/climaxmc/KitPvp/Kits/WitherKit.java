@@ -112,7 +112,7 @@ public class WitherKit extends Kit {
             if (KitManager.isPlayerInKit(player, this)) {
                 if (event.getDamager().getType() == EntityType.WITHER_SKULL) {
                     event.setCancelled(true);
-                    player.damage(23);
+                    player.damage(5);
                     player.setVelocity(player.getVelocity().setY(2));
                 }
             }
