@@ -149,7 +149,7 @@ public class PlayerJoinListener implements Listener {
 
         PermissionAttachment attachment = player.addAttachment(plugin);
 
-        if (playerData != null ) {
+        if (playerData != null) {
             if (playerData.hasRank(Rank.HELPER)) {
                 attachment.setPermission("AAC.admin", true);
                 attachment.setPermission("AAC.notify", true);
@@ -161,12 +161,11 @@ public class PlayerJoinListener implements Listener {
                 attachment.setPermission("minecraft.command.tp", true);
                 attachment.setPermission("bukkit.command.teleport", true);
             }
-            if (playerData.hasRank(Rank.DEFAULT)) {
-                attachment.setPermission("noattackcooldown.use", true);
-            }
         }
 
         attachment.setPermission("bukkit.command.tps", true);
+        attachment.setPermission("noattackcooldown.use", true);
+        attachment.setPermission("-bukkit.command.plugins", true);
 
         String joinMOTD = plugin.getConfig().getString("JoinMOTD");
         if (joinMOTD != null) {
