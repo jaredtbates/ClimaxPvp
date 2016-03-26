@@ -34,17 +34,12 @@ public class KnightKit extends Kit {
     protected void wear(Player player) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.IRON_INGOT);
-        ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Iron Punch");
-        ability.setItemMeta(abilitymeta);
-        player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 1, 35);
     }
 
@@ -55,32 +50,11 @@ public class KnightKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.IRON_INGOT);
-        ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Iron Punch");
-        ability.setItemMeta(abilitymeta);
-        player.getInventory().addItem(ability);
-    }
-
-    @EventHandler
-    public void onInteract(PlayerInteractEvent event) {
-        final Player player = event.getPlayer();
-        if (KitManager.isPlayerInKit(player, this)) {
-            if (player.getInventory().getItemInHand().getType() == Material.IRON_INGOT) {
-                if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
-                    if (!ironpunch.tryUse(player)) {
-                        return;
-                    }
-                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Iron Punch" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.GOLEM);
-                }
-            }
-        }
     }
 }
