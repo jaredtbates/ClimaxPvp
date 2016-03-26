@@ -153,6 +153,7 @@ public class PlayerJoinListener implements Listener {
         attachment.setPermission("noattackcooldown.use", true);
         if (!player.isOp()) {
             attachment.setPermission("bukkit.command.plugins", false);
+            attachment.setPermission("bukkit.command.version", false);
         }
 
         if (playerData != null) {
