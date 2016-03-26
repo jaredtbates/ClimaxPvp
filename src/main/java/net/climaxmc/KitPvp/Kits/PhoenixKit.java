@@ -33,6 +33,7 @@ public class PhoenixKit extends Kit {
 
     protected void wear(Player player) {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         ItemStack blazePowder = new ItemStack(Material.MAGMA_CREAM);
         ItemMeta blazeMeta = blazePowder.getItemMeta();
@@ -46,8 +47,14 @@ public class PhoenixKit extends Kit {
         helmMeta.setColor(Color.RED);
         helm.setItemMeta(helmMeta);
         player.getInventory().setHelmet(helm);
-        player.getInventory().setChestplate(new ItemStack(Material.GOLD_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
+        ItemStack chest = new ItemStack(Material.GOLD_CHESTPLATE);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        chest.addEnchantment(Enchantment.DURABILITY, 2);
+        player.getInventory().setChestplate(chest);
+        ItemStack legs = new ItemStack(Material.GOLD_LEGGINGS);
+        legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        legs.addEnchantment(Enchantment.DURABILITY, 2);
+        player.getInventory().setLeggings(legs);
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 1);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
@@ -64,6 +71,7 @@ public class PhoenixKit extends Kit {
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         ItemStack blazePowder = new ItemStack(Material.MAGMA_CREAM);
         ItemMeta blazeMeta = blazePowder.getItemMeta();
@@ -77,8 +85,14 @@ public class PhoenixKit extends Kit {
         helmMeta.setColor(Color.RED);
         helm.setItemMeta(helmMeta);
         player.getInventory().setHelmet(helm);
-        player.getInventory().setChestplate(new ItemStack(Material.GOLD_CHESTPLATE));
-        player.getInventory().setLeggings(new ItemStack(Material.GOLD_LEGGINGS));
+        ItemStack chest = new ItemStack(Material.GOLD_CHESTPLATE);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        chest.addEnchantment(Enchantment.DURABILITY, 2);
+        player.getInventory().setChestplate(chest);
+        ItemStack legs = new ItemStack(Material.GOLD_LEGGINGS);
+        legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        legs.addEnchantment(Enchantment.DURABILITY, 2);
+        player.getInventory().setLeggings(legs);
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 1);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
