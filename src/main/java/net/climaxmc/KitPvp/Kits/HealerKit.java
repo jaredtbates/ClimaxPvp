@@ -40,7 +40,7 @@ public class HealerKit extends Kit {
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
         chestmeta.setColor(Color.MAROON);
         chest.setItemMeta(chestmeta);
@@ -70,7 +70,7 @@ public class HealerKit extends Kit {
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
         chestmeta.setColor(Color.MAROON);
         chest.setItemMeta(chestmeta);
