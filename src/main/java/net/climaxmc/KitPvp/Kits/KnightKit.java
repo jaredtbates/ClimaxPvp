@@ -25,21 +25,21 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class KnightKit extends Kit {
-    private Ability heal = new Ability(1, 10, TimeUnit.SECONDS);
+    private Ability ironpunch = new Ability(1, 12, TimeUnit.SECONDS);
 
     public KnightKit() {
-        super("Knight", new ItemStack(Material.IRON_INGOT), "Use your shield to protect you in battle!", ChatColor.GRAY);
+        super("Knight", new ItemStack(Material.IRON_INGOT), "Use your Iron Punch to murderize people!", ChatColor.GRAY);
     }
 
     protected void wear(Player player) {
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        player.getInventory().setItemInOffHand(new ItemStack(Material.SHIELD));
         addSoup(player.getInventory(), 1, 35);
     }
 
@@ -47,14 +47,14 @@ public class KnightKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        player.getInventory().setItemInOffHand(new ItemStack(Material.SHIELD));
     }
 }

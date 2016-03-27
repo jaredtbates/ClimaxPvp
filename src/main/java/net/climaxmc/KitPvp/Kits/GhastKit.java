@@ -57,7 +57,7 @@ public class GhastKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 0));
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
@@ -88,7 +88,7 @@ public class GhastKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Fireball" + ChatColor.GOLD + " Ability!");
                     Fireball fireball = event.getPlayer().launchProjectile(Fireball.class);
-                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GHAST_SHOOT, 1, 1);
+                    player.getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 1);
                     fireball.setIsIncendiary(false);
                     player.setVelocity(player.getVelocity().setY(0.4));
                 }
@@ -107,7 +107,8 @@ public class GhastKit extends Kit {
                             && !CheckCommand.getChecking().contains(target.getUniqueId())
                             && (KitPvp.currentTeams.get(target.getName()) != ((Player) f.getShooter()).getName()
                             && KitPvp.currentTeams.get(((Player) f.getShooter()).getName()) != target.getName())) {
-                        event.setDamage(23);
+                        event.setCancelled(true);
+                        target.damage(7);
                     }
                     target.setVelocity(target.getVelocity().setY(1));
                 }

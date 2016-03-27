@@ -50,6 +50,7 @@ public class BoulderKit extends Kit {
         player.getInventory().setLeggings(legs);
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.CLAY_BALL);
         ItemMeta abilitymeta = ability.getItemMeta();
@@ -63,7 +64,7 @@ public class BoulderKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         ItemStack helm = new ItemStack(Material.IRON_HELMET);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
@@ -82,6 +83,7 @@ public class BoulderKit extends Kit {
         player.getInventory().setLeggings(legs);
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.CLAY_BALL);
         ItemMeta abilitymeta = ability.getItemMeta();

@@ -59,7 +59,7 @@ public class RageKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         ItemStack sword = new ItemStack(Material.WOOD_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
@@ -98,7 +98,7 @@ public class RageKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Rage" + ChatColor.GOLD + " Ability!");
-                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GHAST_SCREAM, 3, 1);
+                    player.getWorld().playSound(player.getLocation(), Sound.GHAST_SCREAM, 3, 1);
                     player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 1));
                     player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 80, 0));
                     player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 100, 0));

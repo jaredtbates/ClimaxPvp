@@ -55,7 +55,7 @@ public class FreezeCommand implements CommandExecutor, Listener {
                 Bukkit.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + "All players have been frozen by " + player.getName() + "!");
                 for (Player p : Bukkit.getOnlinePlayers()) {
                     PlayerData pData = plugin.getPlayerData(p);
-                    //p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
+                    p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                     if (!pData.hasRank(Rank.MODERATOR)) {
                         p.setWalkSpeed(0F);
                     }
@@ -69,7 +69,7 @@ public class FreezeCommand implements CommandExecutor, Listener {
                         plugin.respawn(p);
                         p.setWalkSpeed(0.2F);
                     }
-                    //p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
+                    p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                 }
                 return true;
             }
@@ -85,20 +85,20 @@ public class FreezeCommand implements CommandExecutor, Listener {
                 target.setWalkSpeed(0.2F);
                 plugin.respawn(target);
                 target.sendMessage(ChatColor.RED + "Your movement has been re-enabled!");
-                target.playSound(target.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 2);
+                target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
 
                 player.sendMessage(ChatColor.GREEN + "You unfroze " + target.getName());
-                player.playSound(target.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 2);
+                player.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
             } else {
                 frozenPlayers.add(target);
                 target.setWalkSpeed(0F);
                 target.sendMessage(ChatColor.RED + "You have been frozen by " + player.getName() + "!");
                 target.sendMessage(ChatColor.RED + "You will automatically be unfrozen in 5 minutes.");
-                target.playSound(target.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 2);
+                target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
 
                 player.sendMessage(ChatColor.GREEN + "You have successfully frozen " + target.getName() + "!");
                 player.sendMessage(ChatColor.RED + "They will automatically be unfrozen in 5 minutes.");
-                player.playSound(target.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 2);
+                player.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
 
 
                 plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
@@ -109,7 +109,7 @@ public class FreezeCommand implements CommandExecutor, Listener {
                             target.setWalkSpeed(0.2F);
                             plugin.respawn(target);
                             target.sendMessage(ChatColor.RED + "Your movement has been automatically re-enabled!");
-                            target.playSound(target.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 2);
+                            target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                         }
                     }
                 }, 6000L);

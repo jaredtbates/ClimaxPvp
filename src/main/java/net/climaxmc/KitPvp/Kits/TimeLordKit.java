@@ -42,8 +42,12 @@ public class TimeLordKit extends Kit {
         chest.addEnchantment(Enchantment.DURABILITY, 3);
         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chest);
-        ItemStack legs = new ItemStack(Material.GOLD_LEGGINGS);
-        legs.addEnchantment(Enchantment.DURABILITY, 2);
+        ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
+        legs.addEnchantment(Enchantment.DURABILITY, 3);
+        legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        LeatherArmorMeta legsmeta = (LeatherArmorMeta) legs.getItemMeta();
+        legsmeta.setColor(Color.AQUA);
+        legs.setItemMeta(legsmeta);
         player.getInventory().setLeggings(legs);
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
@@ -67,7 +71,7 @@ public class TimeLordKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
@@ -78,8 +82,12 @@ public class TimeLordKit extends Kit {
         chest.addEnchantment(Enchantment.DURABILITY, 3);
         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chest);
-        ItemStack legs = new ItemStack(Material.GOLD_LEGGINGS);
-        legs.addEnchantment(Enchantment.DURABILITY, 2);
+        ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
+        legs.addEnchantment(Enchantment.DURABILITY, 3);
+        legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        LeatherArmorMeta legsmeta = (LeatherArmorMeta) legs.getItemMeta();
+        legsmeta.setColor(Color.AQUA);
+        legs.setItemMeta(legsmeta);
         player.getInventory().setLeggings(legs);
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);

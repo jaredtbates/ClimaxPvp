@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class StrafeKit extends Kit {
     public StrafeKit() {
-        super("Strafe", new ItemStack(Material.IRON_SWORD), "It's in the name! Speed II Ftw!", ChatColor.GRAY);
+        super("Strafe", new ItemStack(Material.IRON_SWORD), "It's in the name! Speed Ftw!", ChatColor.GRAY);
     }
 
     protected void wear(Player player) {
@@ -28,11 +28,9 @@ public class StrafeKit extends Kit {
         leggings.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         addSoup(player.getInventory(), 1, 35);
@@ -42,7 +40,8 @@ public class StrafeKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         player.getInventory().clear();
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
         helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
@@ -53,12 +52,9 @@ public class StrafeKit extends Kit {
         leggings.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
     }
 }

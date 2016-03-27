@@ -136,7 +136,7 @@ public class PlayerJoinListener implements Listener {
             ChatCommands.cmdspies.remove(player.getUniqueId());
         }
 
-        if (FreezeCommand.frozen == true || FreezeCommand.frozenPlayers.contains(player)) {
+        if (FreezeCommand.frozen || FreezeCommand.frozenPlayers.contains(player)) {
             player.setWalkSpeed(0F);
         } else {
             player.setWalkSpeed(0.2F);
@@ -149,24 +149,28 @@ public class PlayerJoinListener implements Listener {
 
         PermissionAttachment attachment = player.addAttachment(plugin);
 
-        if (playerData != null ) {
+        attachment.setPermission("bukkit.command.tps", true);
+        attachment.setPermission("noattackcooldown.use", true);
+        if (!player.isOp()) {
+            attachment.setPermission("bukkit.command.plugins", false);
+            attachment.setPermission("bukkit.command.version", false);
+        }
+
+        if (playerData != null) {
             if (playerData.hasRank(Rank.HELPER)) {
                 attachment.setPermission("AAC.admin", true);
                 attachment.setPermission("AAC.notify", true);
                 attachment.setPermission("AAC.verbose", true);
-                attachment.setPermission("-AAC.bypass", true);
+                if (!player.isOp()) {
+                    attachment.setPermission("AAC.bypass", false);
+                }
             }
 
             if (playerData.hasRank(Rank.MODERATOR)) {
                 attachment.setPermission("minecraft.command.tp", true);
                 attachment.setPermission("bukkit.command.teleport", true);
             }
-            if (playerData.hasRank(Rank.DEFAULT)) {
-                attachment.setPermission("noattackcooldown.use", true);
-            }
         }
-
-        attachment.setPermission("bukkit.command.tps", true);
 
         String joinMOTD = plugin.getConfig().getString("JoinMOTD");
         if (joinMOTD != null) {

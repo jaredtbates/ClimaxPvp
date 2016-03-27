@@ -29,7 +29,7 @@ public class ThorKit extends Kit {
     private Ability lightning = new Ability(1, 7, TimeUnit.SECONDS);
 
     public ThorKit() {
-        super("Thor", new ItemStack(Material.IRON_AXE), "Punch a player with your Axe to Strike Lightning!", ChatColor.GREEN);
+        super("Thor", new ItemStack(Material.IRON_AXE), "Use your Axe to Strike Lightning!", ChatColor.GREEN);
     }
 
     protected void wear(Player player) {
@@ -54,7 +54,7 @@ public class ThorKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.GOLD_AXE);

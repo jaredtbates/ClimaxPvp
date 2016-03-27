@@ -9,9 +9,11 @@ import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.Ability;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
@@ -22,6 +24,7 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
@@ -41,16 +44,24 @@ public class WitherKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
-        helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
+        ItemStack helmet = new ItemStack(Material.IRON_HELMET);
         player.getInventory().setHelmet(helmet);
-        ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        player.getInventory().setChestplate(chestplate);
-        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
-        ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
+        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
+        chest.addEnchantment(Enchantment.DURABILITY, 3);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
+        chestmeta.setColor(Color.BLACK);
+        chest.setItemMeta(chestmeta);
+        player.getInventory().setChestplate(chest);
+        ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
+        legs.addEnchantment(Enchantment.DURABILITY, 3);
+        legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        LeatherArmorMeta legsmeta = (LeatherArmorMeta) legs.getItemMeta();
+        legsmeta.setColor(Color.BLACK);
+        legs.setItemMeta(legsmeta);
+        player.getInventory().setLeggings(legs);
+        ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
-        boots.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         player.getInventory().setBoots(boots);
         ItemStack ability = new ItemStack(Material.SKULL_ITEM, 1, (byte) 1);
         ItemMeta abilitymeta = ability.getItemMeta();
@@ -64,20 +75,28 @@ public class WitherKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
-        helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
+        ItemStack helmet = new ItemStack(Material.IRON_HELMET);
         player.getInventory().setHelmet(helmet);
-        ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        player.getInventory().setChestplate(chestplate);
-        player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
-        ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
+        ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
+        chest.addEnchantment(Enchantment.DURABILITY, 3);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
+        chestmeta.setColor(Color.BLACK);
+        chest.setItemMeta(chestmeta);
+        player.getInventory().setChestplate(chest);
+        ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
+        legs.addEnchantment(Enchantment.DURABILITY, 3);
+        legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        LeatherArmorMeta legsmeta = (LeatherArmorMeta) legs.getItemMeta();
+        legsmeta.setColor(Color.BLACK);
+        legs.setItemMeta(legsmeta);
+        player.getInventory().setLeggings(legs);
+        ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
-        boots.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         player.getInventory().setBoots(boots);
         ItemStack ability = new ItemStack(Material.SKULL_ITEM, 1, (byte) 1);
         ItemMeta abilitymeta = ability.getItemMeta();
@@ -96,9 +115,26 @@ public class WitherKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Wither Blast" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.DREADLORD);
+                    WitherSkull ws = (WitherSkull) player.launchProjectile(WitherSkull.class);
+                    ws.setVelocity(player.getLocation().getDirection());
+                    ws.setIsIncendiary(true);
+                    ws.setYield(5.0F);
                 }
             }
         }
+    }
+    @EventHandler
+    public void onDamage(EntityDamageByEntityEvent event) {
+        if (event.getEntityType() == EntityType.PLAYER) {
+            Player player = (Player) event.getEntity();
+            if (KitManager.isPlayerInKit(player, this)) {
+                if (event.getDamager().getType() == EntityType.WITHER_SKULL) {
+                    event.setCancelled(true);
+                    player.damage(3);
+                    player.setVelocity(player.getVelocity().setY(1.3));
+                }
+            }
+        }
+
     }
 }

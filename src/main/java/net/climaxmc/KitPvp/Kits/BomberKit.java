@@ -71,7 +71,7 @@ public class BomberKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
@@ -128,7 +128,7 @@ public class BomberKit extends Kit {
     }
 
     private void spawnTNT(Player player) {
-        //player.playSound(player.getLocation(), Sound.FUSE, 1, 1);
+        player.playSound(player.getLocation(), Sound.FUSE, 1, 1);
         ItemStack tntInInv = player.getItemInHand();
         tntInInv.setAmount(tntInInv.getAmount() - 1);
         player.getInventory().setItem(player.getInventory().getHeldItemSlot(), tntInInv);

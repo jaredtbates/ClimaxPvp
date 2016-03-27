@@ -53,6 +53,7 @@ public class VortexKit extends Kit {
         boots.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setBoots(new ItemStack(boots));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.STRING);
         ItemMeta abilitymeta = ability.getItemMeta();
@@ -66,7 +67,7 @@ public class VortexKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         ItemStack helm = new ItemStack(Material.GOLD_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setHelmet(helm);
@@ -88,6 +89,7 @@ public class VortexKit extends Kit {
         boots.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setBoots(new ItemStack(boots));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.STRING);
         ItemMeta abilitymeta = ability.getItemMeta();
