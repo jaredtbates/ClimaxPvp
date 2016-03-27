@@ -64,7 +64,7 @@ public class BoulderKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         ItemStack helm = new ItemStack(Material.IRON_HELMET);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);

@@ -55,7 +55,7 @@ public class NinjaKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         ItemStack helm = new ItemStack(Material.GOLD_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setHelmet(helm);

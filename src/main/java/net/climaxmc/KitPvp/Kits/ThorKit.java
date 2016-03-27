@@ -54,7 +54,7 @@ public class ThorKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.GOLD_AXE);
