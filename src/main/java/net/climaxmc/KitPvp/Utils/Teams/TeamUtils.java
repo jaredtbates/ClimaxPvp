@@ -1,8 +1,15 @@
 package net.climaxmc.KitPvp.Utils.Teams;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.wrappers.EnumWrappers;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class TeamUtils {
     private ClimaxPvp plugin;
@@ -32,11 +39,11 @@ public class TeamUtils {
         removePendingRequest(target);
     }
 
-    public static void removeTeam(Player player) {
+    public static void removeTeam(Player player, Player target) {
         if (KitPvp.currentTeams.isEmpty() || !KitPvp.currentTeams.containsKey(player.getName()) || KitPvp.currentTeams == null) {
             return;
         } else {
-            KitPvp.currentTeams.remove(player.getName());
+            KitPvp.currentTeams.remove(target.getName());
         }
     }
 
@@ -52,4 +59,5 @@ public class TeamUtils {
     public Player getRequester(Player target) {
         return plugin.getServer().getPlayer(KitPvp.pendingTeams.get(target.getName()));
     }
+
 }

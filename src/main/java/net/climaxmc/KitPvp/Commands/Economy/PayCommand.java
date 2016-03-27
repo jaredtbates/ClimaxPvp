@@ -25,14 +25,14 @@ public class PayCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length != 2) {
-            sender.sendMessage(ChatColor.RED + "/pay <player> <amount>");
+            sender.sendMessage(ChatColor.RED + " /pay <player> <amount>");
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null) {
-            player.sendMessage(ChatColor.RED + "That player is not online!");
+            player.sendMessage(ChatColor.RED + " That player is not online!");
             return true;
         }
 
@@ -41,23 +41,23 @@ public class PayCommand implements CommandExecutor {
         try {
             amount = Math.abs(Integer.parseInt(args[1]));
         } catch (NumberFormatException e) {
-            sender.sendMessage(ChatColor.RED + "/pay <player> <amount>");
+            sender.sendMessage(ChatColor.RED + " /pay <player> <amount>");
             return true;
         }
 
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (amount > playerData.getBalance()) {
-            player.sendMessage(ChatColor.RED + "You do not have that much money!");
+            player.sendMessage(ChatColor.RED + " You do not have that much money!");
             return true;
         }
 
         playerData.withdrawBalance(amount);
-        player.sendMessage(ChatColor.GREEN + "You have sent " + target.getName() + " $" + amount + ".");
+        player.sendMessage(ChatColor.GREEN + " You have sent " + target.getName() + " $" + amount + ".");
 
         PlayerData targetData = plugin.getPlayerData(target);
         targetData.depositBalance(amount);
-        target.sendMessage(ChatColor.GREEN + "You have received $" + amount + " from " + player.getName() + ".");
+        target.sendMessage(ChatColor.GREEN + " You have received $" + amount + " from " + player.getName() + ".");
 
         return true;
     }

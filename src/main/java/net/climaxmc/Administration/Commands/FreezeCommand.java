@@ -144,6 +144,9 @@ public class FreezeCommand implements CommandExecutor, Listener {
         } else if (frozenPlayers.contains(damaged)) {
             damager.sendMessage(ChatColor.RED + "That player was frozen by a Staff Member. You are unable to attack them.");
             event.setCancelled(true);
+        } else if (frozenPlayers.contains(damager)) {
+            damager.sendMessage(ChatColor.RED + "You are unable to attack since you are frozen.");
+            event.setCancelled(true);
         }
     }
 

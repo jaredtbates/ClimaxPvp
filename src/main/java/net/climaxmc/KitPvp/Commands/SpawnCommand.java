@@ -24,7 +24,7 @@ public class SpawnCommand implements CommandExecutor {
 
         plugin.respawn(player);
         plugin.getCurrentWarps().remove(player.getUniqueId());
-        player.sendMessage(ChatColor.GREEN + "You have been teleported to spawn!");
+        player.sendMessage(ChatColor.GREEN + " You have been teleported to spawn!");
 
         return true;
     }

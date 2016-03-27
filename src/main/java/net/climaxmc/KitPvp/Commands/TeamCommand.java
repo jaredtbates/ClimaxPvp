@@ -75,17 +75,19 @@ public class TeamCommand implements CommandExecutor {
                             }
                         }
                         if (teammate != null) {
-                            //teammate.playSound(teammate.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
+                            teammate.playSound(teammate.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
                             teammate.sendMessage(ChatColor.RED + " " + player.getName() + " has left the team. Therefore, the team has been disbanded!");
                             KitPvp.currentTeams.remove(teammate.getName());
+                            KitPvp.currentTeams.remove(player.getName());
                         }
                         player.playSound(player.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
                         player.sendMessage(ChatColor.RED + " You have left the team. Therefore, the team has been disbanded!");
+                        KitPvp.currentTeams.remove(teammate.getName());
                         KitPvp.currentTeams.remove(player.getName());
                     } else if (KitPvp.currentTeams.values().contains(player.getName())) {
                         KitPvp.currentTeams.keySet().stream().filter(key -> KitPvp.currentTeams.get(key).equalsIgnoreCase(player.getName())).forEach(key -> {
                             Player teammate = Bukkit.getServer().getPlayer(KitPvp.currentTeams.get(key));
-                            //teammate.playSound(teammate.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
+                            teammate.playSound(teammate.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
                             player.playSound(player.getLocation(), Sound.CHEST_CLOSE, 0.5F, 1F);
                             teammate.sendMessage(ChatColor.RED + " " + player.getName() + " has left the team. Therefore, the team has been disbanded!");
                             player.sendMessage(ChatColor.RED + " You have left the team. Therefore, the team has been disbanded!");

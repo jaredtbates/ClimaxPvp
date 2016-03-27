@@ -26,19 +26,19 @@ public class InventoryCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (!playerData.hasRank(Rank.HELPER)) {
-            player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
+            player.sendMessage(ChatColor.RED + " You do not have permission to execute that command!");
             return true;
         }
 
         if (args.length != 1) {
-            player.sendMessage(ChatColor.RED + "/" + label + " <player>");
+            player.sendMessage(ChatColor.RED + " /" + label + " <player>");
             return true;
         }
 
         Player target = plugin.getServer().getPlayer(args[0]);
 
         if (target == null) {
-            player.sendMessage(ChatColor.RED + "That player is not online!");
+            player.sendMessage(ChatColor.RED + " That player is not online!");
             return true;
         }
 

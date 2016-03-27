@@ -30,19 +30,19 @@ public class MuteCommand implements CommandExecutor {
 
         if (command.getName().equalsIgnoreCase("mute")) {
             if (!playerData.hasRank(Rank.HELPER)) {
-                player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
+                player.sendMessage(ChatColor.RED + " You do not have permission to execute that command!");
                 return true;
             }
 
             if (args.length < 2) {
-                player.sendMessage(ChatColor.RED + "/mute <player> <reason>");
+                player.sendMessage(ChatColor.RED + " /mute <player> <reason>");
                 return true;
             }
 
             PlayerData targetData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(args[0]));
 
             if (targetData == null) {
-                player.sendMessage(ChatColor.RED + "That player hasn't ever joined!");
+                player.sendMessage(ChatColor.RED + " That player hasn't ever joined!");
                 return true;
             }
 
@@ -56,12 +56,12 @@ public class MuteCommand implements CommandExecutor {
             targetData.addPunishment(new Punishment(targetData.getUuid(), Punishment.PunishType.MUTE, System.currentTimeMillis(), -1, playerData.getUuid(), reason));
             plugin.getServer().getOnlinePlayers().stream().filter(staff ->
                     plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
-                    staff.sendMessage(ChatColor.RED + player.getName() + " permanently muted "
+                    staff.sendMessage(" " + ChatColor.RED + player.getName() + " permanently muted "
                             + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for " + finalReason));
 
             Player target = Bukkit.getPlayer(targetData.getUuid());
             if (target != null) {
-                target.sendMessage(ChatColor.RED + "You were permanently muted by " + player.getName() + " for " + reason + "\n"
+                target.sendMessage(ChatColor.RED + " You were permanently muted by " + player.getName() + " for " + reason + "\n"
                         + "Appeal on climaxmc.net/forum if you believe that this is an error!");
             }
         }

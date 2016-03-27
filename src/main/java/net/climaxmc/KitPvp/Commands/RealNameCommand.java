@@ -24,12 +24,12 @@ public class RealNameCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length != 1) {
-            player.sendMessage(ChatColor.RED + "/realname [nickname]");
+            player.sendMessage(ChatColor.RED + " /realname [nickname]");
             return true;
         }
 
         plugin.getServer().getOnlinePlayers().stream().filter(players -> StringUtils.containsIgnoreCase(players.getDisplayName(), args[0]))
-                .forEach(players -> player.sendMessage(players.getDisplayName() + ChatColor.RESET + "'s real name is " + players.getName() + "."));
+                .forEach(players -> player.sendMessage(" " + players.getDisplayName() + ChatColor.RESET + "'s real name is " + players.getName() + "."));
 
         return true;
     }
