@@ -20,7 +20,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class EndermanKit extends Kit {
-	private Ability teleport = new Ability(1, 8, TimeUnit.SECONDS);
+	private Ability teleport = new Ability(1, 14, TimeUnit.SECONDS);
 	
     public EndermanKit() {
         super("Enderman", new ItemStack(Material.EYE_OF_ENDER), "Teleport to people, like an enderman!", ChatColor.BLUE);
