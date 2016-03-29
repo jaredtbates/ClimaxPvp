@@ -24,7 +24,7 @@ public class RealNameCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length != 1) {
-            player.sendMessage(ChatColor.RED + " /realname [nickname]");
+            player.sendMessage(ChatColor.RED + "/realname [nickname]");
             return true;
         }
 

@@ -28,12 +28,12 @@ public class SoupCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 150) {
-            player.sendMessage(ChatColor.RED + " You are at NoSoup!");
+            player.sendMessage(ChatColor.RED + "You are at NoSoup!");
             return true;
         }
 
         if (playerData.getBalance() < 50) {
-            player.sendMessage(ChatColor.RED + " You do not have enough money to get more soup!");
+            player.sendMessage(ChatColor.RED + "You do not have enough money to get more soup!");
             return true;
         }
 
@@ -43,7 +43,7 @@ public class SoupCommand implements CommandExecutor {
         Kit.addSoup(soupInventory, 0, 53);
         player.openInventory(soupInventory);
 
-        player.sendMessage(ChatColor.GREEN + " You opened a soup inventory for $50!");
+        player.sendMessage(ChatColor.GREEN + "You opened a soup inventory for $50!");
 
         return true;
     }

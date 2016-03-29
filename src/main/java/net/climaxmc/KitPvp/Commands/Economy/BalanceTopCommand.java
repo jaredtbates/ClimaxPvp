@@ -36,7 +36,7 @@ public class BalanceTopCommand implements CommandExecutor {
                 topBalances.put(UUID.fromString(set.getString("uuid")), set.getInt("balance"));
             }
         } catch (SQLException e) {
-            player.sendMessage(ChatColor.RED + " Error getting top balances!");
+            player.sendMessage(ChatColor.RED + "Error getting top balances!");
         }
 
         player.sendMessage(ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "=======" + ChatColor.AQUA + " Top 10 Balances " + ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "=======");
@@ -46,7 +46,7 @@ public class BalanceTopCommand implements CommandExecutor {
         for (UUID uuid : topBalances.keySet()) {
             int balance = topBalances.get(uuid);
             if (balance != 0) {
-                player.sendMessage(ChatColor.GREEN + " " + ++i + ". " + plugin.getServer().getOfflinePlayer(uuid).getName() + ChatColor.BLUE + " - " + ChatColor.GREEN + "$" + balance);
+                player.sendMessage(ChatColor.GREEN + "" + ++i + ". " + plugin.getServer().getOfflinePlayer(uuid).getName() + ChatColor.BLUE + " - " + ChatColor.GREEN + "$" + balance);
             }
         }
 

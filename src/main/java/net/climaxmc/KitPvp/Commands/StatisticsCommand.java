@@ -34,22 +34,22 @@ public class StatisticsCommand implements CommandExecutor {
             target = plugin.getServer().getPlayer(args[0]);
 
             if (target == null) {
-                player.sendMessage(ChatColor.RED + " That player is not online!");
+                player.sendMessage(ChatColor.RED + "That player is not online!");
                 return true;
             }
 
             data = plugin.getPlayerData(target);
         } else {
-            player.sendMessage(ChatColor.RED + " /" + label + " [player]");
+            player.sendMessage(ChatColor.RED + "/" + label + " [player]");
             return true;
         }
 
         player.sendMessage(ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "=======" + ChatColor.AQUA + " " + target.getName() + "'s statistics " + ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "=======");
-        player.sendMessage(ChatColor.GREEN + " Rank: " + ChatColor.RED + WordUtils.capitalizeFully(data.getRank().toString()));
-        player.sendMessage(ChatColor.GREEN + " Balance: " + ChatColor.RED + "$" + data.getBalance());
-        player.sendMessage(ChatColor.GREEN + " Kills: " + ChatColor.RED + data.getKills());
-        player.sendMessage(ChatColor.GREEN + " Deaths: " + ChatColor.RED + data.getDeaths());
-        player.sendMessage(ChatColor.GREEN + " KDR: " + ChatColor.RED + getRatio(data));
+        player.sendMessage(ChatColor.GREEN + "Rank: " + ChatColor.RED + WordUtils.capitalizeFully(data.getRank().toString()));
+        player.sendMessage(ChatColor.GREEN + "Balance: " + ChatColor.RED + "$" + data.getBalance());
+        player.sendMessage(ChatColor.GREEN + "Kills: " + ChatColor.RED + data.getKills());
+        player.sendMessage(ChatColor.GREEN + "Deaths: " + ChatColor.RED + data.getDeaths());
+        player.sendMessage(ChatColor.GREEN + "KDR: " + ChatColor.RED + getRatio(data));
 
         return true;
     }

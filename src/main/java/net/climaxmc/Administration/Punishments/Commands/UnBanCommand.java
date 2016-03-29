@@ -26,7 +26,7 @@ public class UnBanCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
             if (args.length != 1) {
-                System.out.print(ChatColor.RED + " /unban <player>");
+                System.out.print(ChatColor.RED + "/unban <player>");
                 return true;
             }
 
@@ -34,7 +34,7 @@ public class UnBanCommand implements CommandExecutor {
             PlayerData targetData = plugin.getPlayerData(target);
 
             if (targetData == null) {
-                System.out.print(ChatColor.RED + " That player is not online or doesn't exist!");
+                System.out.print(ChatColor.RED + "That player is not online or doesn't exist!");
                 return true;
             }
 
@@ -45,7 +45,7 @@ public class UnBanCommand implements CommandExecutor {
                         .filter(punishment -> punishment.getType().equals(Punishment.PunishType.BAN))
                         .forEach(remove::add);
                 if (remove.size() == 0) {
-                    System.out.print(ChatColor.RED + " That player is not banned!");
+                    System.out.print(ChatColor.RED + "That player is not banned!");
                     return true;
                 } else {
                     remove.forEach(targetData::removePunishment);
@@ -57,19 +57,19 @@ public class UnBanCommand implements CommandExecutor {
                     plugin.getSlackBans().call(new SlackMessage(">>>*" + target.getName() + "* _was unbanned by the console._"));
                 }
             } else {
-                System.out.print(ChatColor.RED + " That player is not banned!");
+                System.out.print(ChatColor.RED + "That player is not banned!");
             }
         } else {
             Player player = (Player) sender;
             PlayerData playerData = plugin.getPlayerData(player);
 
             if (!playerData.hasRank(Rank.MODERATOR)) {
-                player.sendMessage(ChatColor.RED + " You do not have permission to execute that command!");
+                player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
                 return true;
             }
 
             if (args.length != 1) {
-                player.sendMessage(ChatColor.RED + " /unban <player>");
+                player.sendMessage(ChatColor.RED + "/unban <player>");
                 return true;
             }
 
@@ -77,7 +77,7 @@ public class UnBanCommand implements CommandExecutor {
             PlayerData targetData = plugin.getMySQL().getPlayerData(target.getUniqueId());
 
             if (targetData == null) {
-                player.sendMessage(ChatColor.RED + " That player is not online or doesn't exist!");
+                player.sendMessage(ChatColor.RED + "That player is not online or doesn't exist!");
                 return true;
             }
 
@@ -88,7 +88,7 @@ public class UnBanCommand implements CommandExecutor {
                         .filter(punishment -> punishment.getType().equals(Punishment.PunishType.BAN))
                         .forEach(remove::add);
                 if (remove.size() == 0) {
-                    player.sendMessage(ChatColor.RED + " That player is not banned!");
+                    player.sendMessage(ChatColor.RED + "That player is not banned!");
                 } else {
                     remove.forEach(targetData::removePunishment);
                     plugin.getServer().getOnlinePlayers().stream().filter(staff ->
@@ -100,7 +100,7 @@ public class UnBanCommand implements CommandExecutor {
                             "* _unbanned_ *" + target.getName() + "*"));
                 }
             } else {
-                player.sendMessage(ChatColor.RED + " That player is not banned!");
+                player.sendMessage(ChatColor.RED + "That player is not banned!");
             }
         }
         return true;

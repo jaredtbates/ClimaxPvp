@@ -30,18 +30,18 @@ public class BalanceCommand implements CommandExecutor {
             target = plugin.getServer().getPlayer(args[0]);
 
             if (target == null) {
-                player.sendMessage(ChatColor.RED + " That player is not online!");
+                player.sendMessage(ChatColor.RED + "That player is not online!");
                 return true;
             }
         } else {
-            player.sendMessage(ChatColor.RED + " /bal [player]");
+            player.sendMessage(ChatColor.RED + "/bal [player]");
             return true;
         }
 
 
         PlayerData playerData = plugin.getPlayerData(target);
-        player.sendMessage(ChatColor.GREEN + " Balance: " + ChatColor.RED + "$" + playerData.getBalance());
-        player.sendMessage(ChatColor.GREEN + " Levels: " + ChatColor.RED + playerData.getKills());
+        player.sendMessage(ChatColor.GREEN + "Balance: " + ChatColor.RED + "$" + playerData.getBalance());
+        player.sendMessage(ChatColor.GREEN + "Levels: " + ChatColor.RED + playerData.getKills());
 
         return true;
     }

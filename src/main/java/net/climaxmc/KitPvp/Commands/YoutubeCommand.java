@@ -26,26 +26,26 @@ public class YoutubeCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (!(playerData.getRank().equals(Rank.YOUTUBE) || playerData.getRank().equals(Rank.TWITCH) || playerData.hasRank(Rank.ADMINISTRATOR))) {
-            player.sendMessage(ChatColor.RED + " You do not have permission to execute that command!");
+            player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
             return true;
         }
 
         if (args.length != 1) {
-            player.sendMessage(ChatColor.RED + " /" + label + " <on/off>");
+            player.sendMessage(ChatColor.RED + "/" + label + " <on/off>");
             return true;
         }
 
         switch (args[0]) {
             case "on":
                 playerData.addData("Admin Mode", true);
-                player.sendMessage(ChatColor.GREEN + " YouTube/Twitch access to all kits has been enabled!");
+                player.sendMessage(ChatColor.GREEN + "YouTube/Twitch access to all kits has been enabled!");
                 break;
             case "off":
                 playerData.removeData("Admin Mode");
-                player.sendMessage(ChatColor.GREEN + " YouTube/Twitch access to all kits has been " + ChatColor.RED + "disabled" + ChatColor.GREEN + "!");
+                player.sendMessage(ChatColor.GREEN + "YouTube/Twitch access to all kits has been " + ChatColor.RED + "disabled" + ChatColor.GREEN + "!");
                 break;
             default:
-                player.sendMessage(ChatColor.RED + " /" + label + " <on/off>");
+                player.sendMessage(ChatColor.RED + "/" + label + " <on/off>");
                 break;
         }
 

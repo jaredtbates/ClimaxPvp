@@ -28,8 +28,8 @@ public class StaffReqCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.RED + " /" + label + " <message>");
-            player.sendMessage(ChatColor.RED + " Sends a message to offline Staff Members if you need help. Please don't spam!");
+            player.sendMessage(ChatColor.RED + "/" + label + " <message>");
+            player.sendMessage(ChatColor.RED + "Sends a message to offline Staff Members if you need help. Please don't spam!");
             return true;
         }
 
@@ -37,7 +37,7 @@ public class StaffReqCommand implements CommandExecutor {
 
         plugin.getSlackStaffHelp().call(new SlackMessage(">>>*" + player.getName() + ":* _" + message + "_"));
 
-        player.sendMessage(ChatColor.GREEN + " Your message has been sent! A staff member has been notified of your request and should be able to help you shortly!");
+        player.sendMessage(ChatColor.GREEN + "Your message has been sent! A staff member has been notified of your request and should be able to help you shortly!");
         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
 
         return false;

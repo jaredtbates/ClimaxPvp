@@ -17,7 +17,7 @@ public class PeiCommand implements CommandExecutor {
 
         Player player = (Player) sender;
         player.getInventory().addItem(new I(Material.PUMPKIN_PIE).name(ChatColor.GOLD + "Pei"));
-        player.sendMessage(ChatColor.GREEN + " You have received a Pei!");
+        player.sendMessage(ChatColor.GREEN + "You have received a Pei!");
 
         return true;
     }

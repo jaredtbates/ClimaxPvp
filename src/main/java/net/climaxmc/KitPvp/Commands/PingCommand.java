@@ -30,7 +30,7 @@ public class PingCommand implements CommandExecutor {
             target = plugin.getServer().getPlayer(args[0]);
 
             if (target == null) {
-                player.sendMessage(ChatColor.RED + " That player is not online!");
+                player.sendMessage(ChatColor.RED + "That player is not online!");
                 return true;
             }
         } else if (args.length > 2) {
@@ -43,14 +43,14 @@ public class PingCommand implements CommandExecutor {
             Object nmsPlayer = Class.forName("org.bukkit.craftbukkit." + nmsVersion + ".entity.CraftPlayer").cast(player).getClass().getMethod("getHandle").invoke(target);
             ping = nmsPlayer.getClass().getField("ping").getInt(nmsPlayer);
         } catch (Exception e) {
-            plugin.getLogger().severe(" Could not get ping of player!");
+            plugin.getLogger().severe("Could not get ping of player!");
             e.printStackTrace();
         }
 
         if (player == target) {
             player.sendMessage(ChatColor.GREEN + " Your ping is " + ChatColor.GOLD + ping + "ms" + ChatColor.GREEN + ".");
         } else {
-            player.sendMessage(" " + ChatColor.GREEN + target.getName() + "'s ping is " + ChatColor.GOLD + ping + "ms" + ChatColor.GREEN + ".");
+            player.sendMessage("" + ChatColor.GREEN + target.getName() + "'s ping is " + ChatColor.GOLD + ping + "ms" + ChatColor.GREEN + ".");
         }
 
         return true;

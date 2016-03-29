@@ -22,20 +22,20 @@ public class EconomyCommand implements CommandExecutor {
             Player player = (Player) sender;
             PlayerData playerData = plugin.getPlayerData(player);
             if (!playerData.hasRank(Rank.ADMINISTRATOR) && !player.isOp()) {
-                player.sendMessage(ChatColor.RED + " You do not have permission to execute that command!");
+                player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
                 return true;
             }
         }
 
         if (args.length <= 1 || args.length >= 4) {
-            sender.sendMessage(ChatColor.RED + " /" + label + " <give|take|set|reset> <player> <amount>");
+            sender.sendMessage(ChatColor.RED + "/" + label + " <give|take|set|reset> <player> <amount>");
             return true;
         }
 
         Player target = plugin.getServer().getPlayer(args[1]);
 
         if (target == null) {
-            sender.sendMessage(ChatColor.RED + " That player is not online!");
+            sender.sendMessage(ChatColor.RED + "That player is not online!");
             return true;
         }
 
@@ -45,41 +45,41 @@ public class EconomyCommand implements CommandExecutor {
 
         if (args[0].equals("reset")) {
             targetData.setBalance(amount);
-            sender.sendMessage(ChatColor.GREEN + " You set " + target.getName() + "'s balance to $" + targetData.getBalance() + ".");
-            target.sendMessage(ChatColor.GREEN + " Your balance was set to $" + targetData.getBalance() + ".");
+            sender.sendMessage(ChatColor.GREEN + "You set " + target.getName() + "'s balance to $" + targetData.getBalance() + ".");
+            target.sendMessage(ChatColor.GREEN + "Your balance was set to $" + targetData.getBalance() + ".");
             return true;
         }
 
         if (args.length != 3) {
-            sender.sendMessage(ChatColor.RED + " /" + label + " <give|take|set|reset> <player> <amount>");
+            sender.sendMessage(ChatColor.RED + "/" + label + " <give|take|set|reset> <player> <amount>");
             return true;
         }
 
         try {
             amount = Integer.parseInt(args[2]);
         } catch (NumberFormatException e) {
-            sender.sendMessage(ChatColor.RED + " /" + label + " <give|take|set|reset> <player> <amount>");
+            sender.sendMessage(ChatColor.RED + "/" + label + " <give|take|set|reset> <player> <amount>");
             return true;
         }
 
         switch (args[0]) {
             case "give":
                 targetData.depositBalance(amount);
-                sender.sendMessage(ChatColor.GREEN + " $" + amount + " added to " + target.getName() + "'s account. New balance: $" + targetData.getBalance() + ".");
-                target.sendMessage(ChatColor.GREEN + " $" + amount + " has been added to your account.");
+                sender.sendMessage(ChatColor.GREEN + "$" + amount + " added to " + target.getName() + "'s account. New balance: $" + targetData.getBalance() + ".");
+                target.sendMessage(ChatColor.GREEN + "$" + amount + " has been added to your account.");
                 break;
             case "take":
                 targetData.withdrawBalance(amount);
-                sender.sendMessage(ChatColor.GREEN + " $" + amount + " taken from " + target.getName() + "'s account. New balance: $" + targetData.getBalance() + ".");
-                target.sendMessage(ChatColor.GREEN + " $" + amount + " has been taken from your account.");
+                sender.sendMessage(ChatColor.GREEN + "$" + amount + " taken from " + target.getName() + "'s account. New balance: $" + targetData.getBalance() + ".");
+                target.sendMessage(ChatColor.GREEN + "$" + amount + " has been taken from your account.");
                 break;
             case "set":
                 targetData.setBalance(amount);
-                sender.sendMessage(ChatColor.GREEN + " You set " + target.getName() + "'s balance to $" + targetData.getBalance() + ".");
-                target.sendMessage(ChatColor.GREEN + " Your balance was set to $" + targetData.getBalance() + ".");
+                sender.sendMessage(ChatColor.GREEN + "You set " + target.getName() + "'s balance to $" + targetData.getBalance() + ".");
+                target.sendMessage(ChatColor.GREEN + "Your balance was set to $" + targetData.getBalance() + ".");
                 break;
             default:
-                sender.sendMessage(ChatColor.RED + " /" + label + " <give|take|set|reset> <player> <amount>");
+                sender.sendMessage(ChatColor.RED + "/" + label + " <give|take|set|reset> <player> <amount>");
                 break;
         }
 

@@ -117,7 +117,7 @@ public class PlayerJoinListener implements Listener {
             if (playerData.hasRank(Rank.OWNER)) {
                 if (!player.isOp()) {
                     player.setOp(true);
-                    player.sendMessage(ChatColor.BOLD + " You were opped because you had been previously deopped.");
+                    player.sendMessage(ChatColor.BOLD + "You were opped because you had been previously deopped.");
                 }
             }
         } else {
@@ -127,7 +127,7 @@ public class PlayerJoinListener implements Listener {
         int playersOnline = plugin.getServer().getOnlinePlayers().size();
 
         if (playersOnline > plugin.getConfig().getInt("HighestPlayerCount")) {
-            plugin.getServer().broadcastMessage(ChatColor.GREEN + "" + ChatColor.BOLD + " We have reached a new high player count of " + playersOnline + "!");
+            plugin.getServer().broadcastMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "We have reached a new high player count of " + playersOnline + "!");
             plugin.getConfig().set("HighestPlayerCount", playersOnline);
             plugin.saveConfig();
         }
@@ -174,7 +174,7 @@ public class PlayerJoinListener implements Listener {
 
         String joinMOTD = plugin.getConfig().getString("JoinMOTD");
         if (joinMOTD != null) {
-            player.sendMessage(" " + ChatColor.translateAlternateColorCodes('&', joinMOTD));
+            player.sendMessage("" + ChatColor.translateAlternateColorCodes('&', joinMOTD));
         }
     }
 }

@@ -53,22 +53,22 @@ public class VanishCommand implements CommandExecutor, Listener {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (!(playerData.hasRank(Rank.MODERATOR))) {
-            player.sendMessage(ChatColor.RED + " You do not have permission to execute that command!");
+            player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
             return true;
         }
 
         if (!vanished.contains(player.getUniqueId())) {
-            player.sendMessage(ChatColor.GREEN + " You are now vanished.");
+            player.sendMessage(ChatColor.GREEN + "You are now vanished.");
             player.setAllowFlight(true);
             player.setFlying(true);
             plugin.getServer().getOnlinePlayers().stream().forEach(target -> target.hidePlayer(player));
             player.setPlayerListName(null);
             vanished.add(player.getUniqueId());
         } else {
-            player.sendMessage(ChatColor.RED + " You are no longer vanished.");
+            player.sendMessage(ChatColor.RED + "You are no longer vanished.");
             plugin.respawn(player);
             plugin.getServer().getOnlinePlayers().stream().forEach(target -> target.showPlayer(player));
-            plugin.getServer().broadcastMessage(ChatColor.DARK_AQUA + " Join" + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
+            plugin.getServer().broadcastMessage(ChatColor.DARK_AQUA + "Join" + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
             player.setPlayerListName(playerData.getLevelColor() + player.getName());
             vanished.remove(player.getUniqueId());
         }
@@ -86,8 +86,8 @@ public class VanishCommand implements CommandExecutor, Listener {
         Player damager = (Player) event.getDamager();
 
         if (vanished.contains(damaged.getUniqueId())) {
-            damaged.sendMessage(ChatColor.RED + " You are being attacked while vanished.");
-            damaged.sendMessage(ChatColor.RED + " The only reason why this would occur is if you used /spawn before turning off vanish with /v.");
+            damaged.sendMessage(ChatColor.RED + "You are being attacked while vanished.");
+            damaged.sendMessage(ChatColor.RED + "The only reason why this would occur is if you used /spawn before turning off vanish with /v.");
             damaged.performCommand("/v");
         }
 

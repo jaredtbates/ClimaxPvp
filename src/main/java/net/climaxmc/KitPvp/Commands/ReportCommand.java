@@ -33,19 +33,19 @@ public class ReportCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length < 1) {
-            player.sendMessage(ChatColor.RED + " /report <player>");
+            player.sendMessage(ChatColor.RED + "/report <player>");
             return true;
         }
 
         if (args.length > 1) {
-            player.sendMessage(ChatColor.RED + " /report <player>");
+            player.sendMessage(ChatColor.RED + "/report <player>");
             return true;
         }
 
         Player reported = plugin.getServer().getPlayerExact(args[0]);
 
         if (reported == null) {
-            player.sendMessage(ChatColor.RED + " That player is not online!");
+            player.sendMessage(ChatColor.RED + "That player is not online!");
             return true;
         }
 
@@ -56,7 +56,7 @@ public class ReportCommand implements CommandExecutor {
             reportGUI.openInventory(player, reported);
         } else {
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-            player.sendMessage(ChatColor.RED + " You must wait " + ChatColor.YELLOW
+            player.sendMessage(ChatColor.RED + "You must wait " + ChatColor.YELLOW
                     + cooldown.get(player.getUniqueId()) + " seconds " + ChatColor.RED + "before you report another player!");
             return false;
         }

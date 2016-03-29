@@ -30,14 +30,14 @@ public class AsyncPlayerChatListener implements Listener {
             event.setCancelled(true);
             plugin.getServer().getOnlinePlayers().stream().filter(players ->
                     plugin.getPlayerData(players).hasRank(Rank.HELPER))
-                    .forEach(players -> players.sendMessage(ChatColor.YELLOW + " " + ChatColor.BOLD + "[STAFF] "
+                    .forEach(players -> players.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "[STAFF] "
                             + ChatColor.RED + player.getName() + ": " + event.getMessage()));
             return;
         }
 
         if (VanishCommand.getVanished().contains(player.getUniqueId())) {
             event.setCancelled(true);
-            player.sendMessage(ChatColor.RED + " You cannot chat while vanished!");
+            player.sendMessage(ChatColor.RED + "You cannot chat while vanished!");
             return;
         }
 
@@ -47,15 +47,15 @@ public class AsyncPlayerChatListener implements Listener {
             PlayerData punisherData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()));
             if (System.currentTimeMillis() <= (punishment.getTime() + punishment.getExpiration())) {
                 event.setCancelled(true);
-                player.sendMessage(ChatColor.RED + " You were temporarily muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
+                player.sendMessage(ChatColor.RED + "You were temporarily muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
                         + " for " + punishment.getReason() + ".\n"
-                        + " You have " + Time.toString(punishment.getTime() + punishment.getExpiration() - System.currentTimeMillis()) + " left in your mute.\n"
-                        + " Appeal on climaxmc.net/forum if you believe that this is an error!");
+                        + "You have " + Time.toString(punishment.getTime() + punishment.getExpiration() - System.currentTimeMillis()) + " left in your mute.\n"
+                        + "Appeal on climaxmc.net/forum if you believe that this is an error!");
             } else if (punishment.getExpiration() == -1) {
                 event.setCancelled(true);
-                player.sendMessage(ChatColor.RED + " You were permanently muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
+                player.sendMessage(ChatColor.RED + "You were permanently muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
                         + " for " + punishment.getReason() + ".\n"
-                        + " Appeal on climaxmc.net/forum if you believe that this is an error!");
+                        + "Appeal on climaxmc.net/forum if you believe that this is an error!");
             }
         });
 

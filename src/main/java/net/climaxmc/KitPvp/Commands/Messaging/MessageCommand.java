@@ -34,28 +34,28 @@ public class MessageCommand implements CommandExecutor {
         for (Punishment punishment : playerData.getPunishments().stream().filter(punishment1 -> punishment1.getType().equals(Punishment.PunishType.MUTE)).collect(Collectors.toSet())) {
             PlayerData punisherData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(punishment.getPunisherUUID()));
             if (System.currentTimeMillis() <= (punishment.getTime() + punishment.getExpiration())) {
-                player.sendMessage(ChatColor.RED + " You were temporarily muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
+                player.sendMessage(ChatColor.RED + "You were temporarily muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
                         + " for " + punishment.getReason() + ".\n"
-                        + " You have " + Time.toString(punishment.getTime() + punishment.getExpiration() - System.currentTimeMillis()) + " left in your mute.\n"
-                        + " Appeal on forum.climaxmc.net if you believe that this is in error!");
+                        + "You have " + Time.toString(punishment.getTime() + punishment.getExpiration() - System.currentTimeMillis()) + " left in your mute.\n"
+                        + "Appeal on forum.climaxmc.net if you believe that this is in error!");
                 return true;
             } else if (punishment.getExpiration() == -1) {
-                player.sendMessage(ChatColor.RED + " You were permanently muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
+                player.sendMessage(ChatColor.RED + "You were permanently muted by " + plugin.getServer().getOfflinePlayer(punisherData.getUuid()).getName()
                         + " for " + punishment.getReason() + ".\n"
-                        + " Appeal on forum.climaxmc.net if you believe that this is in error!");
+                        + "Appeal on forum.climaxmc.net if you believe that this is in error!");
                 return true;
             }
         }
 
         if (args.length <= 1) {
-            player.sendMessage(ChatColor.RED + " /" + label + " <player> <message>");
+            player.sendMessage(ChatColor.RED + "/" + label + " <player> <message>");
             return true;
         }
 
         Player target = plugin.getServer().getPlayer(args[0]);
 
         if (target == null || VanishCommand.getVanished().contains(target.getUniqueId())) {
-            player.sendMessage(ChatColor.RED + " That player is not online!");
+            player.sendMessage(ChatColor.RED + "That player is not online!");
             return true;
         }
 
@@ -64,13 +64,13 @@ public class MessageCommand implements CommandExecutor {
 
         String message = StringUtils.join(args, ' ', 1, args.length);
 
-        player.sendMessage(ChatColor.DARK_AQUA + "  You" + ChatColor.RED + " \u00BB " + ChatColor.AQUA + "" + ChatColor.BOLD + target.getName() + ChatColor.WHITE + ": " + ChatColor.AQUA + message.trim());
-        target.sendMessage(ChatColor.AQUA + " " + ChatColor.BOLD + player.getName() + ChatColor.DARK_AQUA + "" + ChatColor.RED + " \u00BB " + ChatColor.DARK_AQUA + "You" + ChatColor.WHITE + ": " + ChatColor.AQUA + message);
+        player.sendMessage(ChatColor.DARK_AQUA + "You" + ChatColor.RED + " \u00BB " + ChatColor.AQUA + "" + ChatColor.BOLD + target.getName() + ChatColor.WHITE + ": " + ChatColor.AQUA + message.trim());
+        target.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + player.getName() + ChatColor.DARK_AQUA + "" + ChatColor.RED + " \u00BB " + ChatColor.DARK_AQUA + "You" + ChatColor.WHITE + ": " + ChatColor.AQUA + message);
 
         if (target.getUniqueId().toString().equals("99fa296e-7397-40bd-abbe-e4ca50b1427c")) {
-            player.sendMessage(ChatColor.GOLD + " Jared is often AFK due to plugin development. Please be patient for a reply.");
+            player.sendMessage(ChatColor.GOLD + "Jared is often AFK due to plugin development. Please be patient for a reply.");
         } else if (target.getUniqueId().toString().equals("66ca47bf-14ae-405b-9ff5-ef4bb98035eb")) {
-            player.sendMessage(ChatColor.RED + " Gamer is often AFK due to plugin development. If he's AFK, he'll get back to you when he can!");
+            player.sendMessage(ChatColor.RED + "Gamer is often AFK due to plugin development. If he's AFK, he'll get back to you when he can!");
         }
 
         player.playSound(player.getLocation(), Sound.NOTE_PIANO, 2, 2);

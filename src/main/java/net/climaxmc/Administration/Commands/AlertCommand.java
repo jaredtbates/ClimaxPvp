@@ -26,12 +26,12 @@ public class AlertCommand implements CommandExecutor {
             PlayerData playerData = plugin.getPlayerData(player);
 
             if (!playerData.hasRank(Rank.ADMINISTRATOR)) {
-                player.sendMessage(ChatColor.RED + " You do not have permission to execute that command!");
+                player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
                 return true;
             }
 
             if (args.length == 0) {
-                player.sendMessage(ChatColor.RED + " /alert <message>");
+                player.sendMessage(ChatColor.RED + "/alert <message>");
                 return true;
             }
 
@@ -42,7 +42,7 @@ public class AlertCommand implements CommandExecutor {
             }
 
             plugin.getServer().broadcastMessage(" ");
-            plugin.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + " [ALERT] " + ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', message));
+            plugin.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + "[ALERT] " + ChatColor.WHITE + ChatColor.translateAlternateColorCodes('&', message));
             plugin.getServer().broadcastMessage(" ");
 
         }

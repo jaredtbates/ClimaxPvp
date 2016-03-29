@@ -25,7 +25,7 @@ public class DonateCommand implements CommandExecutor {
 
         Player player = (Player) sender;
         player.spigot().sendMessage(
-                new ComponentBuilder(" Donate at donate.climaxmc.net for ranks and perks!")
+                new ComponentBuilder("Donate at donate.climaxmc.net for ranks and perks!")
                         .color(ChatColor.GREEN)
                         .bold(true)
                         .event(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://donate.climaxmc.net"))

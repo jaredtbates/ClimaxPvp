@@ -35,19 +35,19 @@ public class BanCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (!playerData.hasRank(Rank.MODERATOR)) {
-            player.sendMessage(ChatColor.RED + " You do not have permission to execute that command!");
+            player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
             return true;
         }
 
         if (args.length < 2) {
-            player.sendMessage(ChatColor.RED + " /ban <player> <reason>");
+            player.sendMessage(ChatColor.RED + "/ban <player> <reason>");
             return true;
         }
 
         PlayerData targetData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(args[0]));
 
         if (targetData == null) {
-            player.sendMessage(ChatColor.RED + " That player hasn't ever joined!");
+            player.sendMessage(ChatColor.RED + "That player hasn't ever joined!");
             return true;
         }
 
@@ -57,7 +57,7 @@ public class BanCommand implements CommandExecutor {
                 .filter(punishment -> punishment.getType().equals(Punishment.PunishType.BAN))
                 .forEach(remove::add);
         if (remove.size() != 0) {
-            player.sendMessage(ChatColor.RED + " That player is already banned!");
+            player.sendMessage(ChatColor.RED + "That player is already banned!");
             return true;
         } else {
             String reason = "";
@@ -75,7 +75,7 @@ public class BanCommand implements CommandExecutor {
             if (target != null) {
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->
                         plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
-                        staff.sendMessage(" " + ChatColor.RED + player.getName() + " permanently banned "
+                        staff.sendMessage("" + ChatColor.RED + player.getName() + " permanently banned "
                                 + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for " + finalReason));
 
                 target.getPlayer().kickPlayer(ChatColor.RED + "You were permanently banned by " + player.getName() + " for " + reason + "\n"

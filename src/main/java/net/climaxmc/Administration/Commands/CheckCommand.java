@@ -39,12 +39,12 @@ public class CheckCommand implements CommandExecutor, Listener {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (!playerData.hasRank(Rank.HELPER)) {
-            player.sendMessage(ChatColor.RED + " You do not have permission to execute that command!");
+            player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
             return true;
         }
 
         if (!checking.contains(player.getUniqueId())) {
-            player.sendMessage(ChatColor.GREEN + " You are now checking a player.");
+            player.sendMessage(ChatColor.GREEN + "You are now checking a player.");
             player.setAllowFlight(true);
             player.setFlying(true);
             player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false, false));
@@ -56,11 +56,11 @@ public class CheckCommand implements CommandExecutor, Listener {
                 if (target != null) {
                     player.teleport(target);
                 } else {
-                    player.sendMessage(ChatColor.RED + " That player is not online!");
+                    player.sendMessage(ChatColor.RED + "That player is not online!");
                 }
             }
         } else {
-            player.sendMessage(ChatColor.RED + " You are no longer checking a player.");
+            player.sendMessage(ChatColor.RED + "You are no longer checking a player.");
             plugin.respawn(player);
             player.removePotionEffect(PotionEffectType.INVISIBILITY);
             checking.remove(player.getUniqueId());
@@ -92,7 +92,7 @@ public class CheckCommand implements CommandExecutor, Listener {
         Player damager = (Player) event.getDamager();
 
         if (checking.contains(damaged.getUniqueId())) {
-            damaged.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + " You are being attacked by " + damager.getName() + "!");
+            damaged.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "You are being attacked by " + damager.getName() + "!");
             event.setCancelled(true);
         }
 
