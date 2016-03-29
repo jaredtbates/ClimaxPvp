@@ -54,7 +54,7 @@ public class VortexKit extends Kit {
         boots.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setBoots(new ItemStack(boots));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.STRING);
         ItemMeta abilitymeta = ability.getItemMeta();
@@ -91,7 +91,7 @@ public class VortexKit extends Kit {
         boots.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setBoots(new ItemStack(boots));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.STRING);
         ItemMeta abilitymeta = ability.getItemMeta();

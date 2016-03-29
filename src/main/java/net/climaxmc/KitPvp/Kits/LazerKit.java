@@ -28,7 +28,7 @@ public class LazerKit extends Kit {
     private Ability beam = new Ability(1, 9, TimeUnit.SECONDS);
 
     public LazerKit() {
-        super("Lazer", new ItemStack(Material.PRISMARINE_SHARD), "Pew pew!", ChatColor.RED);
+        super("Lazer", new ItemStack(Material.INK_SACK, 1, (byte) 6), "Pew pew!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
@@ -47,7 +47,7 @@ public class LazerKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.PRISMARINE_SHARD);
+        ItemStack ability = new ItemStack(Material.INK_SACK, 1, (byte) 6);
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Beam Ability");
         ability.setItemMeta(abilitymeta);
@@ -72,7 +72,7 @@ public class LazerKit extends Kit {
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack sword = new ItemStack(Material.INK_SACK, 1, (byte) 6);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.PRISMARINE_SHARD);

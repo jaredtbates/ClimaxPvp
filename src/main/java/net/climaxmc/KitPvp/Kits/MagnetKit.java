@@ -35,7 +35,7 @@ public class MagnetKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
-        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.RED);
         helm.setItemMeta(helmmeta);
@@ -52,7 +52,7 @@ public class MagnetKit extends Kit {
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.SUGAR);
         ItemMeta abilitymeta = ability.getItemMeta();
@@ -70,7 +70,7 @@ public class MagnetKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
-        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.RED);
         helm.setItemMeta(helmmeta);
@@ -87,7 +87,7 @@ public class MagnetKit extends Kit {
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.SUGAR);
         ItemMeta abilitymeta = ability.getItemMeta();

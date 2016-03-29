@@ -36,6 +36,7 @@ public class NinjaKit extends Kit {
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.CHAINMAIL_CHESTPLATE);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
@@ -61,6 +62,7 @@ public class NinjaKit extends Kit {
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.CHAINMAIL_CHESTPLATE);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS));
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);

@@ -51,7 +51,7 @@ public class BoulderKit extends Kit {
         player.getInventory().setLeggings(legs);
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.CLAY_BALL);
         ItemMeta abilitymeta = ability.getItemMeta();
@@ -85,7 +85,7 @@ public class BoulderKit extends Kit {
         player.getInventory().setLeggings(legs);
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.CLAY_BALL);
         ItemMeta abilitymeta = ability.getItemMeta();
