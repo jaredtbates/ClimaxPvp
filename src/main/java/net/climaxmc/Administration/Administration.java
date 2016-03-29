@@ -41,7 +41,7 @@ public class Administration {
         plugin.getCommand("freeze").setExecutor(new FreezeCommand(plugin));
 
         // Start runnables
-        plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new SpawnAutoBroadcastRunnable(plugin), 0, 20 * plugin.getConfig().getInt("SpawnAutoBroadcast.Time"));
+        /*plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new SpawnAutoBroadcastRunnable(plugin), 0, 20 * plugin.getConfig().getInt("SpawnAutoBroadcast.Time"));*/
         plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new ChatAutoBroadcastRunnable(plugin), 0, 20 * plugin.getConfig().getInt("ChatAutoBroadcast.Time"));
     }
 }
