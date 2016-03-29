@@ -64,8 +64,8 @@ public class MessageCommand implements CommandExecutor {
 
         String message = StringUtils.join(args, ' ', 1, args.length);
 
-        player.sendMessage(ChatColor.DARK_AQUA + " You" + ChatColor.RED + " \u00BB " + ChatColor.AQUA + "" + ChatColor.BOLD + target.getName() + ChatColor.WHITE + ": " + ChatColor.AQUA + message.trim());
-        target.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + player.getName() + ChatColor.DARK_AQUA + "" + ChatColor.RED + " \u00BB " + ChatColor.DARK_AQUA + "You" + ChatColor.WHITE + ": " + ChatColor.AQUA + message);
+        player.sendMessage(ChatColor.DARK_AQUA + "  You" + ChatColor.RED + " \u00BB " + ChatColor.AQUA + "" + ChatColor.BOLD + target.getName() + ChatColor.WHITE + ": " + ChatColor.AQUA + message.trim());
+        target.sendMessage(ChatColor.AQUA + " " + ChatColor.BOLD + player.getName() + ChatColor.DARK_AQUA + "" + ChatColor.RED + " \u00BB " + ChatColor.DARK_AQUA + "You" + ChatColor.WHITE + ": " + ChatColor.AQUA + message);
 
         if (target.getUniqueId().toString().equals("99fa296e-7397-40bd-abbe-e4ca50b1427c")) {
             player.sendMessage(ChatColor.GOLD + " Jared is often AFK due to plugin development. Please be patient for a reply.");
