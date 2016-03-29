@@ -56,7 +56,7 @@ public class TimeLordKit extends Kit {
         bootsmeta.setColor(Color.YELLOW);
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.WATCH);
@@ -96,7 +96,7 @@ public class TimeLordKit extends Kit {
         bootsmeta.setColor(Color.YELLOW);
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.WATCH);

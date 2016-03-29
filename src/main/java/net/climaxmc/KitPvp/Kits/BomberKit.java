@@ -56,7 +56,7 @@ public class BomberKit extends Kit {
         leggings.setItemMeta(legmeta);
         player.getInventory().setLeggings(leggings);
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.TNT);
@@ -89,7 +89,7 @@ public class BomberKit extends Kit {
         leggings.setItemMeta(legmeta);
         player.getInventory().setLeggings(leggings);
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.TNT);

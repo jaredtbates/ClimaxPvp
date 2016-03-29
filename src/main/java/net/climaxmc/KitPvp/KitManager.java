@@ -50,9 +50,9 @@ public class KitManager implements Listener {
         // Green Kits
         kits.add(new ThorKit());
         kits.add(new MagnetKit());
-        kits.add(new StrafeKit());
         kits.add(new GhastKit());
         kits.add(new VortexKit());
+        kits.add(new StrafeKit());
 
         // Red Kits
         kits.add(new TimeLordKit());

@@ -48,6 +48,7 @@ public class HealerKit extends Kit {
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.BLAZE_ROD);
         ItemMeta abilitymeta = ability.getItemMeta();
@@ -78,6 +79,7 @@ public class HealerKit extends Kit {
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.BLAZE_ROD);
         ItemMeta abilitymeta = ability.getItemMeta();
