@@ -25,13 +25,14 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class LazerKit extends Kit {
-    private Ability beam = new Ability(1, 7, TimeUnit.SECONDS);
+    private Ability beam = new Ability(1, 9, TimeUnit.SECONDS);
 
     public LazerKit() {
         super("Lazer", new ItemStack(Material.PRISMARINE_SHARD), "Pew pew!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
@@ -59,6 +60,7 @@ public class LazerKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
