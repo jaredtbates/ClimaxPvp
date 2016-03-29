@@ -38,7 +38,7 @@ public class KitManager implements Listener {
         kits.add(new KnightKit());
         kits.add(new AxeKit());
         kits.add(new HealerKit());
-        kits.add(new StrafeKit());
+        kits.add(new SnailKit());
 
         // Blue Kits
         kits.add(new EndermanKit());
@@ -50,7 +50,7 @@ public class KitManager implements Listener {
         // Green Kits
         kits.add(new ThorKit());
         kits.add(new MagnetKit());
-        kits.add(new SnailKit());
+        kits.add(new StrafeKit());
         kits.add(new GhastKit());
         kits.add(new VortexKit());
 
