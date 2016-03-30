@@ -86,7 +86,7 @@ public class ReportGUI implements Listener {
         inv.setItem(32, new I(Material.WOOL).name(ChatColor.RED + "" + ChatColor.BOLD + "CANCEL REPORT")
                 .durability(14));
 
-        setWool(inv, target, ReportCommand.reportBuilders.get(player.getUniqueId()));
+        setWool(inv, target, ReportCommand.getReportBuilders().get(player.getUniqueId()));
 
         player.openInventory(inv);
 
@@ -163,19 +163,19 @@ public class ReportGUI implements Listener {
 
         player.playSound(player.getLocation(), Sound.SUCCESSFUL_HIT, 1, 1);
 
-        ReportCommand.cooldown.put(player.getUniqueId(), 60);
-        ReportCommand.reportBuilders.remove(player.getUniqueId());
-        ReportCommand.reportArray.remove(player.getUniqueId());
+        ReportCommand.getCooldown().put(player.getUniqueId(), 60);
+        ReportCommand.getReportBuilders().remove(player.getUniqueId());
+        ReportCommand.getReportArray().remove(player.getUniqueId());
 
         BukkitRunnable runnable = new BukkitRunnable() {
             @Override
             public void run() {
-                if (ReportCommand.cooldown.get(player.getUniqueId()) >= 0) {
-                    ReportCommand.cooldown.replace(player.getUniqueId(), ReportCommand.cooldown.get(player.getUniqueId()) - 1);
+                if (ReportCommand.getCooldown().get(player.getUniqueId()) >= 0) {
+                    ReportCommand.getCooldown().replace(player.getUniqueId(), ReportCommand.getCooldown().get(player.getUniqueId()) - 1);
                 }
 
-                if (ReportCommand.cooldown.get(player.getUniqueId()) == 0) {
-                    ReportCommand.cooldown.remove(player.getUniqueId());
+                if (ReportCommand.getCooldown().get(player.getUniqueId()) == 0) {
+                    ReportCommand.getCooldown().remove(player.getUniqueId());
                     player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1, 1.5F);
                     player.sendMessage(ChatColor.GREEN + "You are now able to report another player!");
                     this.cancel();

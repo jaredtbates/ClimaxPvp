@@ -23,13 +23,13 @@ public class InventoryCloseListener implements Listener {
         Player player = (Player) event.getPlayer();
         Inventory inventory = event.getInventory();
         if (inventory.getName().equals("Climax Reports")) {
-            if (ReportCommand.reportBuilders.containsKey(player.getUniqueId())) {
-                ReportCommand.reportBuilders.remove(player.getUniqueId());
+            if (ReportCommand.getReportBuilders().containsKey(player.getUniqueId())) {
+                ReportCommand.getReportBuilders().remove(player.getUniqueId());
             } else {
                 return;
             }
-            if (ReportCommand.reportArray.containsKey(player.getUniqueId())) {
-                ReportCommand.reportArray.remove(player.getUniqueId());
+            if (ReportCommand.getReportArray().containsKey(player.getUniqueId())) {
+                ReportCommand.getReportArray().remove(player.getUniqueId());
             } else {
                 return;
             }

@@ -151,12 +151,12 @@ public class InventoryClickListener implements Listener {
                 String targetName = inventory.getName().replace("Climax Reports: ", "");
                 Player target = plugin.getServer().getPlayerExact(targetName);
                 int slot = event.getSlot();
-                String message = ReportCommand.reportBuilders.get(player.getUniqueId());
-                ArrayList<String> rm = ReportCommand.reportArray.get(player.getUniqueId());
+                String message = ReportCommand.getReportBuilders().get(player.getUniqueId());
+                ArrayList<String> rm = ReportCommand.getReportArray().get(player.getUniqueId());
 
                 if (item.getType().equals(Material.BOOK)) {
                     rm.add(item.getItemMeta().getDisplayName().replace(ChatColor.RED + "", ""));
-                    int size = ReportCommand.reportArray.get(player.getUniqueId()).size();
+                    int size = ReportCommand.getReportArray().get(player.getUniqueId()).size();
                     for (int i = 0; i <= size - 1; i++) {
                         if (message != null) {
                             message = message + ", " + rm.get(i);
@@ -170,7 +170,7 @@ public class InventoryClickListener implements Listener {
                 if (item.getType().equals(Material.ENCHANTED_BOOK)) {
                     rm.remove(item.getItemMeta().getDisplayName().replace(ChatColor.GREEN + "", ""));
                     message = null;
-                    int size = ReportCommand.reportArray.get(player.getUniqueId()).size();
+                    int size = ReportCommand.getReportArray().get(player.getUniqueId()).size();
                     for (int i = 0; i <= size - 1; i++) {
                         if (message != null) {
                             message = message + ", " + rm.get(i);
@@ -184,7 +184,7 @@ public class InventoryClickListener implements Listener {
                 if (item.getType().equals(Material.WOOL)) {
                     if (item.getDurability() == 5) {
                         message = null;
-                        int size = ReportCommand.reportArray.get(player.getUniqueId()).size();
+                        int size = ReportCommand.getReportArray().get(player.getUniqueId()).size();
                         for (int i = 0; i <= size - 1; i++) {
                             if (message != null) {
                                 message = message + ", " + rm.get(i);

@@ -25,12 +25,12 @@ public class PlayerQuitListener implements Listener {
             KitPvp.killStreak.remove(player.getUniqueId());
         }
 
-        if (ReportCommand.reportBuilders.containsKey(player.getUniqueId())) {
-            ReportCommand.reportBuilders.remove(player.getUniqueId());
+        if (ReportCommand.getReportBuilders().containsKey(player.getUniqueId())) {
+            ReportCommand.getReportBuilders().remove(player.getUniqueId());
         }
 
-        if (ReportCommand.reportArray.containsKey(player.getUniqueId())) {
-            ReportCommand.reportArray.remove(player.getUniqueId());
+        if (ReportCommand.getReportArray().containsKey(player.getUniqueId())) {
+            ReportCommand.getReportArray().remove(player.getUniqueId());
         }
 
         if (plugin.getServer().getOnlinePlayers().size() < 7) {

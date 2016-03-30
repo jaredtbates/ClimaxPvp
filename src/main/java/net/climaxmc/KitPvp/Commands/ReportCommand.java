@@ -1,5 +1,7 @@
 package net.climaxmc.KitPvp.Commands;
 
+import lombok.Getter;
+import lombok.Setter;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Menus.ReportGUI;
 import net.md_5.bungee.api.ChatColor;
@@ -16,9 +18,12 @@ import java.util.UUID;
 public class ReportCommand implements CommandExecutor {
     private ClimaxPvp plugin;
 
-    public static HashMap<UUID, Integer> cooldown = new HashMap<>();
-    public static HashMap<UUID, String> reportBuilders = new HashMap<>();
-    public static HashMap<UUID, ArrayList<String>> reportArray = new HashMap<>();
+    @Getter
+    private static HashMap<UUID, Integer> cooldown = new HashMap<>();
+    @Getter
+    private static HashMap<UUID, String> reportBuilders = new HashMap<>();
+    @Getter
+    private static HashMap<UUID, ArrayList<String>> reportArray = new HashMap<>();
 
     public ReportCommand(ClimaxPvp plugin) {
         this.plugin = plugin;
