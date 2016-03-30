@@ -18,26 +18,6 @@ public class TextComponentMessages {
         return spaces;
     }
 
-    public TextComponent duelAcceptButton() {
-        TextComponent message = new TextComponent("[ACCEPT]");
-        message.setBold(true);
-        message.setColor(ChatColor.GREEN);
-        message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/duel accept"));
-        message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY
-                + "Click to" + ChatColor.GREEN + " accept " + ChatColor.GRAY + "the request!").create()));
-        return message;
-    }
-
-    public TextComponent duelDenyButton() {
-        TextComponent message = new TextComponent("[DENY]");
-        message.setBold(true);
-        message.setColor(ChatColor.RED);
-        message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/duel deny"));
-        message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY
-                + "Click to" + ChatColor.RED + " deny " + ChatColor.GRAY + "the request!").create()));
-        return message;
-    }
-
     public TextComponent teamAcceptButton() {
         TextComponent message = new TextComponent("[ACCEPT]");
         message.setBold(true);

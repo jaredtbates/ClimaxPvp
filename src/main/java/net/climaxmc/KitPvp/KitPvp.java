@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp;
 
+import lombok.Getter;
 import net.climaxmc.Administration.Commands.CheckCommand;
 import net.climaxmc.Administration.Commands.FreezeCommand;
 import net.climaxmc.ClimaxPvp;
@@ -19,6 +20,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,6 +31,8 @@ public class KitPvp {
     public static Map<UUID, Integer> killStreak = new HashMap<>();
     public static Map<String, String> pendingTeams = new HashMap<>();
     public static Map<String, String> currentTeams = new ConcurrentHashMap<>();
+    @Getter
+    private static HashSet<UUID> afk = new HashSet<>();
 
     public KitPvp(ClimaxPvp plugin) {
         // Initialize kits
@@ -81,6 +85,7 @@ public class KitPvp {
         plugin.getCommand("pei").setExecutor(new PeiCommand());
         plugin.getCommand("team").setExecutor(new TeamCommand(plugin));
         plugin.getCommand("staffreq").setExecutor(new StaffReqCommand(plugin));
+        plugin.getCommand("afk").setExecutor(new AFKCommand(plugin));
 
     }
 }

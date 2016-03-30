@@ -112,3 +112,5 @@ commands:
   staffreq:
     description: Sends a message to offline Staff Members
     aliases: [staffhelp, shelp, sreq]
+  afk:
+    description: Makes a player AFK (away from keyboard)

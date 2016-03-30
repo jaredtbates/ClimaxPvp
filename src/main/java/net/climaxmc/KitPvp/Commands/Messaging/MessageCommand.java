@@ -4,6 +4,7 @@ import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.common.database.PlayerData;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.StringUtils;
@@ -63,6 +64,10 @@ public class MessageCommand implements CommandExecutor {
         plugin.getMessagers().put(target.getUniqueId(), player.getUniqueId());
 
         String message = StringUtils.join(args, ' ', 1, args.length);
+
+        if (KitPvp.getAfk().contains(target.getUniqueId())) {
+            player.sendMessage(ChatColor.AQUA + target.getName() + " is AFK, so they might not see your message");
+        }
 
         player.sendMessage(ChatColor.DARK_AQUA + "You" + ChatColor.RED + " \u00BB " + ChatColor.AQUA + "" + ChatColor.BOLD + target.getName() + ChatColor.WHITE + ": " + ChatColor.AQUA + message.trim());
         target.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + player.getName() + ChatColor.DARK_AQUA + "" + ChatColor.RED + " \u00BB " + ChatColor.DARK_AQUA + "You" + ChatColor.WHITE + ": " + ChatColor.AQUA + message);

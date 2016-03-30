@@ -1,6 +1,8 @@
 package net.climaxmc.Administration.Listeners;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.KitPvp;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -10,6 +12,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.util.Vector;
 
 public class SpawnProtectListeners implements Listener {
     private ClimaxPvp plugin;
@@ -99,6 +103,22 @@ public class SpawnProtectListeners implements Listener {
                 || location.distance(plugin.getWarpLocation("Fair")) <= 4)
                 && !player.getGameMode().equals(GameMode.CREATIVE)) {
             event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerMove(PlayerMoveEvent event) {
+        Player player = event.getPlayer();
+        Location location = player.getLocation();
+
+        if (!KitPvp.getAfk().contains(player.getUniqueId())) {
+            return;
+        }
+
+        if (location.distance(location.getWorld().getSpawnLocation()) >= 15) {
+            plugin.respawn(player);
+            player.sendMessage(ChatColor.RED + "You are AFK, so you are not able to leave the spawn!");
+            player.sendMessage(ChatColor.YELLOW + "If you wish to leave, use " + ChatColor.GREEN + "/afk");
         }
     }
 }

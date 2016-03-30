@@ -1,5 +1,6 @@
 package net.climaxmc.Administration.Listeners;
 
+import lombok.Getter;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.ChatColor;
@@ -19,7 +20,8 @@ import java.util.UUID;
 
 public class CombatLogListeners implements Listener {
     private ClimaxPvp plugin;
-    private HashMap<UUID, Integer> tagged = new HashMap<>();
+    @Getter
+    private static HashMap<UUID, Integer> tagged = new HashMap<>();
     private HashMap<UUID, Long> logged = new HashMap<>();
 
     public CombatLogListeners(ClimaxPvp plugin) {
