@@ -114,3 +114,5 @@ commands:
     aliases: [staffhelp, shelp, sreq]
   afk:
     description: Makes a player AFK (away from keyboard)
+  options:
+    description: Opens the options menu for a player

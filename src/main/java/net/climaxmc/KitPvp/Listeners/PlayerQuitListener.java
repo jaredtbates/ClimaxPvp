@@ -64,4 +64,5 @@ public class PlayerQuitListener implements Listener {
 
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> plugin.savePlayerData(plugin.getPlayerData(player)));
     }
+
 }

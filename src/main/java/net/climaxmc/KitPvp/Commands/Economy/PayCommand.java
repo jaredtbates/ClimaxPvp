@@ -52,6 +52,11 @@ public class PayCommand implements CommandExecutor {
             return true;
         }
 
+        if (amount == 0) {
+            player.sendMessage(ChatColor.RED + "What's the point in giving someone $0?");
+            return true;
+        }
+
         playerData.withdrawBalance(amount);
         player.sendMessage(ChatColor.GREEN + "You have sent " + target.getName() + " $" + amount + ".");
 

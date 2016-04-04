@@ -4,9 +4,15 @@ import net.climaxmc.Administration.Commands.ChatCommands;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
+import net.climaxmc.KitPvp.Utils.TextComponentMessages;
 import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.Rank;
 import net.climaxmc.common.donations.trails.ParticleEffect;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -54,13 +60,30 @@ public class PlayerDeathListener implements Listener {
             return;
         }
 
+        TextComponentMessages tcm = new TextComponentMessages(plugin);
+        TextComponent killerTCM = new TextComponent(killer.getName());
+        killerTCM.setColor(ChatColor.AQUA);
+        killerTCM.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, tcm.playerStats(killer)));
+        killerTCM.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/options " + killer.getName()));
+
+        TextComponent killedTCM = new TextComponent(player.getName());
+        killedTCM.setColor(ChatColor.RED);
+        killedTCM.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, tcm.playerStats(player)));
+        killedTCM.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/options " + player.getName()));
+
+        BaseComponent baseComponent = killedTCM;
+        baseComponent.addExtra(ChatColor.GRAY + " was killed by ");
+        baseComponent.addExtra(killerTCM);
+
         if (ChatCommands.chatSilenced) {
             event.setDeathMessage(null);
         } else {
             if (plugin.getServer().getOnlinePlayers().size() >= 15) {
                 event.setDeathMessage(null);
             } else {
-                event.setDeathMessage("" + ChatColor.RED + player.getName() + ChatColor.GRAY + " was killed by " + ChatColor.AQUA + killer.getName());
+                //event.setDeathMessage("" + ChatColor.RED + player.getName() + ChatColor.GRAY + " was killed by " + ChatColor.AQUA + killer.getName());
+                event.setDeathMessage(null);
+                plugin.getServer().spigot().broadcast(baseComponent);
             }
         }
 
@@ -77,6 +100,22 @@ public class PlayerDeathListener implements Listener {
         PlayerData killerData = plugin.getPlayerData(killer);
         killerData.addKills(1);
         killer.sendMessage(ChatColor.GREEN + "You killed " + ChatColor.RED + player.getName());
+
+        String rankTag = "";
+        if (playerData.hasRank(Rank.NINJA)) {
+            rankTag = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "[" + playerData.getRank().getColor()
+                    + ChatColor.BOLD + playerData.getRank().getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "] ";
+        }
+        if (killerData.getKills() == 150) {
+            player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
+        } else if (killerData.getKills() == 500) {
+            player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
+        } else if (killerData.getKills() == 1000) {
+            player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
+        } else if (killerData.getKills() == 1500) {
+            player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
+        }
+
         /*if(playerData.getKills() == 1) {
             playerData.addAchievement(Achievement.FIRST_KILL);
             killer.sendMessage("You got the achievement: Fresh from the Pile");

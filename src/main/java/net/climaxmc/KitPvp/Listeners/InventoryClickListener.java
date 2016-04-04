@@ -2,11 +2,15 @@ package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Commands.ReportCommand;
+import net.climaxmc.KitPvp.Commands.TeamCommand;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Kits.BomberKit;
 import net.climaxmc.KitPvp.Menus.ReportGUI;
 import net.climaxmc.KitPvp.Utils.Challenges.Challenge;
+import net.climaxmc.KitPvp.Utils.Teams.TeamMessages;
+import net.climaxmc.KitPvp.Utils.Teams.TeamUtils;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -195,7 +199,7 @@ public class InventoryClickListener implements Listener {
                         if (message == null) {
                             player.closeInventory();
                             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                            player.sendMessage(ChatColor.RED + " You tried to report a player without selecting any report options!" +
+                            player.sendMessage(ChatColor.RED + "You tried to report a player without selecting any report options!" +
                                     " Try selecting report options next time!");
                         } else {
                             reportGUI.report(player, target, message);
@@ -204,9 +208,41 @@ public class InventoryClickListener implements Listener {
                     }
                     if (item.getDurability() == 14) {
                         player.closeInventory();
-                        player.sendMessage(ChatColor.RED + " Report cancelled.");
+                        player.sendMessage(ChatColor.RED + "Report cancelled.");
                     }
                 }
+                event.setCancelled(true);
+            }
+
+            if (event.getClickedInventory().getName().contains("Options")) {
+                Player target = plugin.getServer().getPlayerExact(event.getClickedInventory().getName().substring(12));
+                if (event.getCurrentItem().getType().equals(Material.BARRIER)) {
+                    ReportGUI reportGUI = new ReportGUI(plugin);
+                    if (target == player) {
+                        player.sendMessage(ChatColor.RED + "You can't report yourself! Unless you have something to tell us.... *gives suspicious look*");
+                        player.closeInventory();
+                        return;
+                    }
+                    ReportCommand.getReportBuilders().put(player.getUniqueId(), null);
+                    ReportCommand.getReportArray().put(player.getUniqueId(), new ArrayList<>());
+                    reportGUI.openInventory(player, target);
+                }
+
+                if (event.getCurrentItem().getType().equals(Material.FEATHER)) {
+                    player.closeInventory();
+                    player.sendMessage(ChatColor.GRAY + "Use " + ChatColor.RED + "/msg " + target.getName() + " <message> " + ChatColor.GRAY + "to send your message!");
+                }
+
+                if (event.getCurrentItem().getType().equals(Material.DIAMOND_SWORD)) {
+                    player.closeInventory();
+                    if (target == player) {
+                        player.sendMessage(ChatColor.RED + "You can't team with yourself!");
+                        return;
+                    }
+                    TeamMessages teamMessages = new TeamMessages(plugin);
+                    teamMessages.sendRequestMessage(player, target);
+                }
+
                 event.setCancelled(true);
             }
 

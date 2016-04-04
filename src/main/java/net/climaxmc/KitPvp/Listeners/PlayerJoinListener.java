@@ -5,9 +5,12 @@ import net.climaxmc.Administration.Commands.FreezeCommand;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Utils.TextComponentMessages;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -112,7 +115,13 @@ public class PlayerJoinListener implements Listener {
             }
 
             player.setDisplayName(playerData.getNickname());
-            player.setPlayerListName(playerData.getLevelColor() + player.getName());
+            String rankTag = "";
+
+            if (playerData.hasRank(Rank.NINJA)) {
+                rankTag = org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "[" + playerData.getRank().getColor()
+                        + org.bukkit.ChatColor.BOLD + playerData.getRank().getPrefix() + org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "] ";
+            }
+            player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
 
             if (playerData.hasRank(Rank.OWNER)) {
                 if (!player.isOp()) {
