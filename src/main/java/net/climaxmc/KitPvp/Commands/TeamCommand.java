@@ -33,7 +33,7 @@ public class TeamCommand implements CommandExecutor {
             player.sendMessage(ChatColor.RED + "Incorrect Usage! Try this: /team <[player]/accept/deny/leave>");
         } else {
             if (args[0].equalsIgnoreCase("accept")) {
-                if (plugin.getServer().getOnlinePlayers().size() > 7) {
+                if (plugin.getServer().getOnlinePlayers().size() >= 7) {
                     if (teamUtils.hasPendingRequest(player)) {
                         Player requester = teamUtils.getRequester(player);
                         teamMessages.sendAcceptMessage(player, requester);
@@ -48,7 +48,7 @@ public class TeamCommand implements CommandExecutor {
                     player.sendMessage(ChatColor.RED + "Since there are less than 7 players online, you can't team!");
                 }
             } else if (args[0].equalsIgnoreCase("deny")) {
-                if (plugin.getServer().getOnlinePlayers().size() > 7) {
+                if (plugin.getServer().getOnlinePlayers().size() >= 7) {
                     if (teamUtils.hasPendingRequest(player)) {
                         Player requester = teamUtils.getRequester(player);
                         teamMessages.sendDeclineMessage(player, requester);
@@ -96,7 +96,7 @@ public class TeamCommand implements CommandExecutor {
                     }
                 }
             } else {
-                if (plugin.getServer().getOnlinePlayers().size() > 7) {
+                if (plugin.getServer().getOnlinePlayers().size() >= 7) {
                     Player target = Bukkit.getServer().getPlayerExact(args[0]);
                     if (!Bukkit.getServer().getOnlinePlayers().contains(target)) {
                         player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
@@ -115,7 +115,7 @@ public class TeamCommand implements CommandExecutor {
                             player.sendMessage(ChatColor.RED + "You already have a pending request to team with another player!");
                             return false;
                         } else if (teamUtils.isTeaming(target)) {
-                           // player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                             player.sendMessage(ChatColor.RED + "That player is already on a team!");
                             return false;
                         } else {

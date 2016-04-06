@@ -33,6 +33,13 @@ public class OptionsCommand implements CommandExecutor {
         }
 
         Player target = plugin.getServer().getPlayerExact(args[0]);
+
+        if (target == null) {
+            player.sendMessage(org.bukkit.ChatColor.RED + "That player is not online!");
+            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+            return true;
+        }
+
         OptionsMenu optionsMenu = new OptionsMenu(plugin);
         optionsMenu.openInventory(player, target);
 

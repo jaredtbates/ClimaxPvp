@@ -96,30 +96,28 @@ public class TempBanCommand implements CommandExecutor {
 
             targetData.addPunishment(new Punishment(targetData.getUuid(), Punishment.PunishType.BAN, System.currentTimeMillis(), time, playerData.getUuid(), reason));
             OfflinePlayer offlinePlayer = plugin.getServer().getOfflinePlayer(targetData.getUuid());
-
-            OfflinePlayer target = Bukkit.getPlayer(targetData.getUuid());
+            Player target = Bukkit.getPlayer(targetData.getUuid());
             if (target != null) {
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->
                         plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
-                        staff.sendMessage("" + ChatColor.RED + player.getName() + " temporarily banned "
+                        staff.sendMessage(ChatColor.RED + player.getName() + " temporarily banned "
                                 + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for "
                                 + Time.toString(finalTime) + " for " + finalReason));
 
                 target.getPlayer().kickPlayer(ChatColor.RED + "You were temporarily banned by " + player.getName() + " for " + Time.toString(time) + " for " + reason + "\n"
                         + "Appeal on forum.climaxmc.net if you believe that this is in error!");
             } else {
-                target = plugin.getServer().getOfflinePlayer(args[0]);
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->
                         plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
                         staff.sendMessage("" + ChatColor.RED + player.getName() + " temporarily banned "
                                 + ChatColor.GRAY + offlinePlayer.getName() + ChatColor.RED + " for "
                                 + Time.toString(finalTime) + " for " + finalReason));
-                player.sendMessage(ChatColor.GREEN + " Offline player " + ChatColor.GOLD + target.getName()
+                player.sendMessage(ChatColor.GREEN + "Offline player " + ChatColor.GOLD + target.getName()
                         + ChatColor.GREEN + " successfully banned.");
             }
 
             plugin.getSlackBans().call(new SlackMessage(">>>*" + player.getName() +
-                    "* _temporarily banned_ *" + target.getName() + "* _for *" + Time.toString(finalTime) + "* for:_ " + reason));
+                    "* _temporarily banned_ *" + offlinePlayer.getName() + "* _for *" + Time.toString(finalTime) + "* for:_ " + reason));
         }
         return true;
     }

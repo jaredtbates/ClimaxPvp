@@ -13,7 +13,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.util.Vector;
 
 public class SpawnProtectListeners implements Listener {
     private ClimaxPvp plugin;
@@ -111,14 +110,12 @@ public class SpawnProtectListeners implements Listener {
         Player player = event.getPlayer();
         Location location = player.getLocation();
 
-        if (!KitPvp.getAfk().contains(player.getUniqueId())) {
-            return;
-        }
-
-        if (location.distance(location.getWorld().getSpawnLocation()) >= 15) {
-            plugin.respawn(player);
-            player.sendMessage(ChatColor.RED + "You are AFK, so you are not able to leave the spawn!");
-            player.sendMessage(ChatColor.YELLOW + "If you wish to leave, use " + ChatColor.GREEN + "/afk");
+        if (KitPvp.getAfk().contains(player.getUniqueId())) {
+            if (location.distance(location.getWorld().getSpawnLocation()) >= 15) {
+                plugin.respawn(player);
+                player.sendMessage(ChatColor.RED + "You are AFK, so you are not able to leave the spawn!");
+                player.sendMessage(ChatColor.YELLOW + "If you wish to leave, use " + ChatColor.GREEN + "/afk");
+            }
         }
     }
 }

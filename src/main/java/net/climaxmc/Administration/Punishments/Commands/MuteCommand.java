@@ -7,6 +7,7 @@ import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -40,6 +41,8 @@ public class MuteCommand implements CommandExecutor {
             }
 
             PlayerData targetData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(args[0]));
+            OfflinePlayer offlinePlayer = plugin.getServer().getOfflinePlayer(targetData.getUuid());
+            Player target = Bukkit.getPlayer(targetData.getUuid());
 
             if (targetData == null) {
                 player.sendMessage(ChatColor.RED + "That player hasn't ever joined!");
@@ -54,15 +57,21 @@ public class MuteCommand implements CommandExecutor {
 
             final String finalReason = reason;
             targetData.addPunishment(new Punishment(targetData.getUuid(), Punishment.PunishType.MUTE, System.currentTimeMillis(), -1, playerData.getUuid(), reason));
+
+            if (target != null) {
             plugin.getServer().getOnlinePlayers().stream().filter(staff ->
                     plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
                     staff.sendMessage("" + ChatColor.RED + player.getName() + " permanently muted "
                             + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for " + finalReason));
-
-            Player target = Bukkit.getPlayer(targetData.getUuid());
-            if (target != null) {
                 target.sendMessage(ChatColor.RED + "You were permanently muted by " + player.getName() + " for " + reason + "\n"
                         + "Appeal on climaxmc.net/forum if you believe that this is an error!");
+            } else {
+                plugin.getServer().getOnlinePlayers().stream().filter(staff ->
+                        plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
+                        staff.sendMessage("" + ChatColor.RED + player.getName() + " permanently muted "
+                                + ChatColor.GRAY + offlinePlayer.getName() + ChatColor.RED + " for " + finalReason));
+                player.sendMessage(ChatColor.GREEN + "Offline player " + ChatColor.GOLD + offlinePlayer.getName()
+                        + ChatColor.GREEN + " successfully muted.");
             }
         }
 
