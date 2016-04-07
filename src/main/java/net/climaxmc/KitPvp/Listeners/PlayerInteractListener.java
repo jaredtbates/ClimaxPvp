@@ -48,6 +48,7 @@ public class PlayerInteractListener implements Listener {
             event.setCancelled(true);
         }
 
+
         if (player.getItemInHand().getType() == Material.MUSHROOM_SOUP && player.getHealth() < 20.0D) {
             if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                 player.getInventory().getItemInHand().setType(Material.BOWL);
@@ -135,6 +136,14 @@ public class PlayerInteractListener implements Listener {
                 if (KitManager.getPreviousKit().containsKey(player.getUniqueId())) {
                     KitManager.getPreviousKit().get(player.getUniqueId()).wearCheckLevel(player);
                 }
+
+                if (event.getClickedBlock().getType().equals(Material.DIODE_BLOCK_OFF) || event.getClickedBlock().getType().equals(Material.DIODE_BLOCK_ON)) {
+                    event.setCancelled(true);
+                }
+            }
+        } else {
+            if (event.getClickedBlock().getType().equals(Material.DIODE_BLOCK_OFF) || event.getClickedBlock().getType().equals(Material.DIODE_BLOCK_ON)) {
+                event.setCancelled(true);
             }
         }
     }
