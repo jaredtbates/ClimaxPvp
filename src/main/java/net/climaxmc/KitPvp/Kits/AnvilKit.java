@@ -77,7 +77,7 @@ public class AnvilKit extends Kit {
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
-            if (player.getInventory().getItemInHand().getType() == Material.BLAZE_ROD) {
+            if (player.getInventory().getItemInHand().getType() == Material.ANVIL) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
                     if (!ironpunch.tryUse(player)) {
                         return;
