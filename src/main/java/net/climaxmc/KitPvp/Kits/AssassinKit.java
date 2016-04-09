@@ -102,7 +102,7 @@ public class AssassinKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Shadow-Step" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.VOID_CRAWLER);
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.SHADOW_STEP);
 
                     /*player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Assassin" + ChatColor.GOLD + " Ability!");
                     for (Entity entity : player.getNearbyEntities(9, 9, 9)) {

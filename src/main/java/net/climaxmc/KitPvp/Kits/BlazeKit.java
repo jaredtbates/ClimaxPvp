@@ -94,7 +94,7 @@ public class BlazeKit extends Kit {
         player.getInventory().addItem(rod);
     }
 
-    @EventHandler
+    /*@EventHandler
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
@@ -121,5 +121,5 @@ public class BlazeKit extends Kit {
                 }
             }
         }
-    }
+    }*/
 }

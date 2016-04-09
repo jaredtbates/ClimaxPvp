@@ -79,7 +79,7 @@ public class EndermanKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Teleport" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.ENDERMAN);
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.TELEPORT);
     			}
     		}
         }

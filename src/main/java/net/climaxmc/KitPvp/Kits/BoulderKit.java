@@ -104,7 +104,7 @@ public class BoulderKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Boulder Toss" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.BULK);
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.BOULDER_TOSS);
                 }
             }
         }

@@ -58,7 +58,7 @@ public class FishermanKit extends Kit {
         player.getInventory().addItem(rod);*/
     }
 
-    @EventHandler
+    /*@EventHandler
     public void onPlayerFish(PlayerFishEvent event) {
         Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
@@ -71,5 +71,5 @@ public class FishermanKit extends Kit {
                 }
             }
         }
-    }
+    }*/
 }

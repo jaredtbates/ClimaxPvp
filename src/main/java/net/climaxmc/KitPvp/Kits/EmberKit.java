@@ -116,7 +116,7 @@ public class EmberKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Globe of Death" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.PIGMAN);
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.BURNING_SOUL);
                 }
             }
         }

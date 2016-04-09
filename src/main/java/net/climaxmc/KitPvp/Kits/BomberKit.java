@@ -109,7 +109,7 @@ public class BomberKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Explode" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.CREEPER);
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.DETONATE);
                 }
             }
         }

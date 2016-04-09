@@ -92,7 +92,7 @@ public class LazerKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Beam" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.ARCANIST);
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.BEAM);
                 }
             }
         }

@@ -102,7 +102,7 @@ public class DragonKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Flame Breath" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.FIRE_DRAGON);
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.FLAME_BREATH);
                 }
             }
         }
