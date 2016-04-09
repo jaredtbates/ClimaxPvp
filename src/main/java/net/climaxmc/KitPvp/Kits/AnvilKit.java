@@ -1,35 +1,51 @@
 package net.climaxmc.KitPvp.Kits;
 
+import me.xericker.disguiseabilities.DisguiseAbilities;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.Utils.Ability;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
+import java.util.concurrent.TimeUnit;
+
 public class AnvilKit extends Kit {
+    private Ability ironpunch = new Ability(1, 10, TimeUnit.SECONDS);
+
     public AnvilKit() {
-        super("Anvil", new ItemStack(Material.ANVIL), "You take, nor deal knockback!", ChatColor.GREEN);
+        super("Anvil", new ItemStack(Material.ANVIL), "Use your Iron Punch to take out enemeis!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
-        player.getInventory().addItem(new ItemStack(Material.DIAMOND_SWORD));
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.CHAINMAIL_HELMET);
         helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setHelmet(helmet);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setBoots(boots);
+        ItemStack ability = new ItemStack(Material.ANVIL);
+        ItemMeta abilitymeta = ability.getItemMeta();
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Iron Punch Ability");
+        ability.setItemMeta(abilitymeta);
+        player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 1, 35);
     }
 
@@ -38,28 +54,36 @@ public class AnvilKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-        player.getInventory().addItem(new ItemStack(Material.DIAMOND_SWORD));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.CHAINMAIL_HELMET);
         helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setHelmet(helmet);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setBoots(boots);
+        ItemStack ability = new ItemStack(Material.ANVIL);
+        ItemMeta abilitymeta = ability.getItemMeta();
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Iron Punch Ability");
+        ability.setItemMeta(abilitymeta);
+        player.getInventory().addItem(ability);
     }
 
     @EventHandler
-    public void onEntityDamage(EntityDamageByEntityEvent event) {
-        if (event.getDamager() instanceof Player) {
-            Player player = (Player) event.getDamager();
-            if (event.getEntity() instanceof Player) {
-                Player target = (Player) event.getEntity();
-                if (KitManager.isPlayerInKit(player, this) || KitManager.isPlayerInKit(target, this)) {
-                    Bukkit.getScheduler().runTask(ClimaxPvp.getInstance(), () -> {
-                        player.setVelocity(new Vector());
-                        target.setVelocity(new Vector());
-                    });
+    public void onInteract(PlayerInteractEvent event) {
+        final Player player = event.getPlayer();
+        if (KitManager.isPlayerInKit(player, this)) {
+            if (player.getInventory().getItemInHand().getType() == Material.BLAZE_ROD) {
+                if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
+                    if (!ironpunch.tryUse(player)) {
+                        return;
+                    }
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Iron Punch" + ChatColor.GOLD + " Ability!");
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.IRON_PUNCH);
                 }
             }
         }

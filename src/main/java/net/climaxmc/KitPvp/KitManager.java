@@ -55,7 +55,7 @@ public class KitManager implements Listener {
         kits.add(new StrafeKit());
 
         // Red Kits
-        kits.add(new TimeLordKit());
+        kits.add(new AnvilKit());
         kits.add(new WitherKit(plugin));
         kits.add(new DragonKit());
         kits.add(new ViperKit());
