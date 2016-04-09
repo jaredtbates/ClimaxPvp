@@ -106,7 +106,7 @@ public class MagnetKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Pull" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.WARPER);
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.MAGNETIC_IMPULSE);
                 }
             }
         }

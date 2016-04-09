@@ -100,7 +100,7 @@ public class HealerKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Heal" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.ZOMBIE);
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.HEAL);
                 }
             }
         }

@@ -83,7 +83,7 @@ public class ThorKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Lightning Strike" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.HEROBRINE);
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.WRATH);
                 }
             }
         }

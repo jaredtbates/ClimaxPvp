@@ -110,7 +110,7 @@ public class VortexKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Tornado" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.SHAMAN);
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.TORNADO);
                 }
             }
         }

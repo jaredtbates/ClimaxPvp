@@ -88,7 +88,7 @@ public class NinjaKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Burst" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.EPSILON);
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.ELECTRO_SHOCK);
                 }
             }
         }

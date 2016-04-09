@@ -92,7 +92,7 @@ public class PirateKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Cannon" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.PIRATE);
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.CANNON_FIRE);
                 }
             }
         }

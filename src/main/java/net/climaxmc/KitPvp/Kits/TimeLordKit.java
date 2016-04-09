@@ -118,7 +118,7 @@ public class TimeLordKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Warp-Back" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.TIME_LORD);
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.WARP_BACK);
                 }
             }
         }

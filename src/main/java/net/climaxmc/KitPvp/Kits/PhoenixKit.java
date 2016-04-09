@@ -114,7 +114,7 @@ public class PhoenixKit extends Kit {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Flame Rush" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.ClassType.MAGMA_CUBE);
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.FLAME_DASH);
                 }
             }
         }
