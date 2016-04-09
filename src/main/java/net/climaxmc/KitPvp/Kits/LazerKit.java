@@ -86,7 +86,7 @@ public class LazerKit extends Kit {
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
-            if (player.getInventory().getItemInHand().getType() == Material.PRISMARINE_SHARD) {
+            if (player.getInventory().getItemInHand().getType() == Material.INK_SACK) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
                     if (!beam.tryUse(player)) {
                         return;
