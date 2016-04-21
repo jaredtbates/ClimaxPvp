@@ -66,7 +66,7 @@ public class SnailKit extends Kit {
             if (event.getEntity() instanceof Player) {
                 Player damaged = (Player) event.getEntity();
                 if (KitManager.isPlayerInKit(player, this)) {
-                    if (player.getInventory().getItemInHand().getType() == Material.IRON_AXE) {
+                    if (player.getInventory().getItemInHand().getType() == Material.DIAMOND_AXE) {
                         damaged.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 120, 1));
                     }
                 }

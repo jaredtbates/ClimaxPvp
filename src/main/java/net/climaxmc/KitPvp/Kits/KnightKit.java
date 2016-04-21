@@ -28,7 +28,7 @@ public class KnightKit extends Kit {
     private Ability ironpunch = new Ability(1, 12, TimeUnit.SECONDS);
 
     public KnightKit() {
-        super("Knight", new ItemStack(Material.IRON_INGOT), "Use your Iron Punch to murderize people!", ChatColor.GRAY);
+        super("Knight", new ItemStack(Material.IRON_INGOT), "Less armor, but slightly more speed!", ChatColor.GRAY);
     }
 
     protected void wear(Player player) {
