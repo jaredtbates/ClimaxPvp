@@ -25,7 +25,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class MagnetKit extends Kit {
-    private Ability pull = new Ability(1, 4, TimeUnit.SECONDS);
+    private Ability pull = new Ability(1, 6, TimeUnit.SECONDS);
 
     public MagnetKit() {
         super("Magnet", new ItemStack(Material.SUGAR), "Pull your foes to you, so you can rek them!", ChatColor.GREEN);
