@@ -21,7 +21,7 @@ import org.bukkit.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 public class IronGolemKit extends Kit {
-    private Ability Throw = new Ability(1, 3, TimeUnit.SECONDS);
+    private Ability Throw = new Ability(1, 4, TimeUnit.SECONDS);
 
     public IronGolemKit() {
         super("Iron Golem", new ItemStack(Material.RED_ROSE), "Punch people with your Rose to launch them in the air!", ChatColor.GOLD);
@@ -34,10 +34,10 @@ public class IronGolemKit extends Kit {
         player.getInventory().addItem(sword);
         player.getInventory().addItem(new ItemStack(Material.RED_ROSE));
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setChestplate(chestplate);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS);
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
@@ -56,10 +56,10 @@ public class IronGolemKit extends Kit {
         player.getInventory().addItem(sword);
         player.getInventory().addItem(new ItemStack(Material.RED_ROSE));
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setChestplate(chestplate);
         ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS);
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
