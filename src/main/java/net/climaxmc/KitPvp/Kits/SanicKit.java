@@ -39,6 +39,6 @@ public class SanicKit extends Kit {
         ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 6);
         player.getInventory().setBoots(boots);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
     }
 }
