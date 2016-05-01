@@ -83,7 +83,7 @@ public class KitPvp {
         plugin.getCommand("baltop").setExecutor(new BalanceTopCommand(plugin));
         plugin.getCommand("youtube").setExecutor(new YoutubeCommand(plugin));
         plugin.getCommand("pei").setExecutor(new PeiCommand());
-        plugin.getCommand("team").setExecutor(new TeamCommand(plugin));
+        /*plugin.getCommand("team").setExecutor(new TeamCommand(plugin));*/
         plugin.getCommand("staffreq").setExecutor(new StaffReqCommand(plugin));
         plugin.getCommand("afk").setExecutor(new AFKCommand(plugin));
         plugin.getCommand("options").setExecutor(new OptionsCommand(plugin));
