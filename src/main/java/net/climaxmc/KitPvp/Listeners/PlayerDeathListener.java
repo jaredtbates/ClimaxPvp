@@ -71,8 +71,15 @@ public class PlayerDeathListener implements Listener {
         killedTCM.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, tcm.playerStats(player)));
         killedTCM.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/options " + player.getName()));
 
-        BaseComponent baseComponent = killedTCM;
-        baseComponent.addExtra(ChatColor.GRAY + " was killed by ");
+        TextComponent wkb = new TextComponent(" was killed by ");
+        wkb.setColor(ChatColor.GRAY);
+        wkb.setHoverEvent(null);
+
+        TextComponent tc = new TextComponent("");
+
+        BaseComponent baseComponent = tc;
+        baseComponent.addExtra(killedTCM);
+        baseComponent.addExtra(wkb);
         baseComponent.addExtra(killerTCM);
 
         if (ChatCommands.chatSilenced) {

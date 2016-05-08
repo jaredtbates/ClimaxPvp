@@ -10,7 +10,7 @@ import net.climaxmc.KitPvp.Utils.Challenges.Challenge;
 import net.climaxmc.KitPvp.Utils.Teams.TeamMessages;
 import net.climaxmc.KitPvp.Utils.Teams.TeamUtils;
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.*;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -230,7 +230,13 @@ public class InventoryClickListener implements Listener {
 
                 if (event.getCurrentItem().getType().equals(Material.FEATHER)) {
                     player.closeInventory();
-                    player.sendMessage(ChatColor.GRAY + "Use " + ChatColor.RED + "/msg " + target.getName() + " <message> " + ChatColor.GRAY + "to send your message!");
+                    TextComponent component = new TextComponent("Click here to message " + target.getName() + "!");
+                    BaseComponent baseComponent = component;
+                    component.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/msg " + target.getName() + " "));
+                    component.setColor(ChatColor.AQUA);
+                    component.setBold(true);
+                    component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.GRAY + "/msg " + target.getName() + " <message>").create()));
+                    player.spigot().sendMessage(baseComponent);
                 }
 
                 if (event.getCurrentItem().getType().equals(Material.DIAMOND_SWORD)) {
