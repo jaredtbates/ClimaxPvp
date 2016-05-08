@@ -36,7 +36,7 @@ public class SpawnProtectListeners implements Listener {
         if ((damagerLocation.distance(damager.getWorld().getSpawnLocation()) <= 16 || (damagedLocation.distance(damaged.getWorld().getSpawnLocation()) <= 16))
                 || (damagerLocation.distance(plugin.getWarpLocation("Soup")) <= 12 || (damagedLocation.distance(plugin.getWarpLocation("Soup")) <= 12))
                 || (damagerLocation.distance(plugin.getWarpLocation("Fair")) <= 4 || (damagedLocation.distance(plugin.getWarpLocation("Fair")) <= 4))) {
-            event.setCancelled(true);
+            /*event.setCancelled(true);*/
         }
     }
 
@@ -52,7 +52,7 @@ public class SpawnProtectListeners implements Listener {
         if (location.distance(location.getWorld().getSpawnLocation()) <= 16
                 || location.distance(plugin.getWarpLocation("Soup")) <= 12
                 || location.distance(plugin.getWarpLocation("Fair")) <= 4) {
-            event.setCancelled(true);
+            /*event.setCancelled(true);*/
         }
     }
 
@@ -64,7 +64,7 @@ public class SpawnProtectListeners implements Listener {
         if (location.distance(location.getWorld().getSpawnLocation()) <= 16
                 || location.distance(plugin.getWarpLocation("Soup")) <= 12
                 || location.distance(plugin.getWarpLocation("Fair")) <= 4) {
-            event.setCancelled(true);
+            /*event.setCancelled(true);*/
         }
     }
 
@@ -76,7 +76,7 @@ public class SpawnProtectListeners implements Listener {
         if (location.distance(location.getWorld().getSpawnLocation()) <= 16
                 || location.distance(plugin.getWarpLocation("Soup")) <= 12
                 || location.distance(plugin.getWarpLocation("Fair")) <= 4) {
-            entity.remove();
+            /*entity.remove();*/
         }
     }
 
@@ -88,7 +88,7 @@ public class SpawnProtectListeners implements Listener {
         if (location.distance(location.getWorld().getSpawnLocation()) <= 16
                 || location.distance(plugin.getWarpLocation("Soup")) <= 12
                 || location.distance(plugin.getWarpLocation("Fair")) <= 4) {
-            event.setCancelled(true);
+            /*event.setCancelled(true);*/
         }
     }
 
@@ -101,7 +101,7 @@ public class SpawnProtectListeners implements Listener {
                 || location.distance(plugin.getWarpLocation("Soup")) <= 12
                 || location.distance(plugin.getWarpLocation("Fair")) <= 4)
                 && !player.getGameMode().equals(GameMode.CREATIVE)) {
-            event.setCancelled(true);
+            /*event.setCancelled(true);*/
         }
     }
 
