@@ -35,7 +35,7 @@ public class KitManager implements Listener {
     public KitManager(ClimaxPvp plugin) {
         // Gray Kits
         kits.add(new PvpKit());
-        kits.add(new KnightKit());
+        kits.add(new ArcherKit());
         kits.add(new AxeKit());
         kits.add(new HealerKit());
         kits.add(new SnailKit());
