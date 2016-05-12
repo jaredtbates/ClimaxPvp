@@ -68,7 +68,7 @@ public class ViperKit extends Kit {
             if (event.getEntity() instanceof Player) {
                 Player target = (Player) event.getEntity();
                 if (KitManager.isPlayerInKit(player, this)) {
-                    if (player.getInventory().getItemInHand().getType() == Material.DIAMOND_SWORD) {
+                    if (player.getInventory().getItemInHand().getType() == Material.STONE_SWORD) {
                         if (!VanishCommand.getVanished().contains(target.getUniqueId())
                                 && !CheckCommand.getChecking().contains(target.getUniqueId())
                                 && (KitPvp.currentTeams.get(player.getName()) != target.getName()
