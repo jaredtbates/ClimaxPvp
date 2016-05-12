@@ -53,7 +53,7 @@ public class VortexKit extends Kit {
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setBoots(new ItemStack(boots));
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.STRING);
@@ -69,6 +69,7 @@ public class VortexKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
         ItemStack helm = new ItemStack(Material.GOLD_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setHelmet(helm);
@@ -89,7 +90,7 @@ public class VortexKit extends Kit {
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setBoots(new ItemStack(boots));
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.STRING);

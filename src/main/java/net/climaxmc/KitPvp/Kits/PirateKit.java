@@ -44,7 +44,7 @@ public class PirateKit extends Kit {
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.GOLD_AXE);
@@ -60,6 +60,7 @@ public class PirateKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
         ItemStack helm = new ItemStack(Material.IRON_HELMET);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
@@ -71,7 +72,7 @@ public class PirateKit extends Kit {
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.GOLD_AXE);

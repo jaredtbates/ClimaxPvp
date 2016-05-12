@@ -51,7 +51,7 @@ public class MagnetKit extends Kit {
         bootsmeta.setColor(Color.BLUE);
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.SUGAR);
@@ -67,6 +67,7 @@ public class MagnetKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
@@ -85,7 +86,7 @@ public class MagnetKit extends Kit {
         bootsmeta.setColor(Color.BLUE);
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.SUGAR);

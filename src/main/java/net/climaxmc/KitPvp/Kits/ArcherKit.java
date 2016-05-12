@@ -46,7 +46,7 @@ public class ArcherKit extends Kit {
         boots.addEnchantment(Enchantment.PROTECTION_FALL, 4);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setBoots(boots);
-        ItemStack sword = new ItemStack(Material.WOOD_SWORD);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
@@ -64,6 +64,7 @@ public class ArcherKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         LeatherArmorMeta helmetMeta = (LeatherArmorMeta) helmet.getItemMeta();
         helmetMeta.setColor(Color.WHITE);
@@ -89,7 +90,7 @@ public class ArcherKit extends Kit {
         boots.addEnchantment(Enchantment.PROTECTION_FALL, 4);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setBoots(boots);
-        ItemStack sword = new ItemStack(Material.WOOD_SWORD);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);

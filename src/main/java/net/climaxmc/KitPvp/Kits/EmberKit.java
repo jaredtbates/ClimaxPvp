@@ -33,7 +33,7 @@ public class EmberKit extends Kit {
 
     protected void wear(Player player) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
-        ItemStack helm = new ItemStack(Material.IRON_HELMET);
+        ItemStack helm = new ItemStack(Material.DIAMOND_HELMET);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);
@@ -72,7 +72,8 @@ public class EmberKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
-        ItemStack helm = new ItemStack(Material.IRON_HELMET);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
+        ItemStack helm = new ItemStack(Material.DIAMOND_HELMET);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);

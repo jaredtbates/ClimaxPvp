@@ -24,7 +24,7 @@ public class ViperKit extends Kit {
     }
 
     protected void wear(Player player) {
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
@@ -43,7 +43,8 @@ public class ViperKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
@@ -68,7 +69,7 @@ public class ViperKit extends Kit {
             if (event.getEntity() instanceof Player) {
                 Player target = (Player) event.getEntity();
                 if (KitManager.isPlayerInKit(player, this)) {
-                    if (player.getInventory().getItemInHand().getType() == Material.STONE_SWORD) {
+                    if (player.getInventory().getItemInHand().getType() == Material.DIAMOND_SWORD) {
                         if (!VanishCommand.getVanished().contains(target.getUniqueId())
                                 && !CheckCommand.getChecking().contains(target.getUniqueId())
                                 && (KitPvp.currentTeams.get(player.getName()) != target.getName()

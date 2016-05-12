@@ -19,7 +19,7 @@ public class AxeKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.GOLD_AXE);
+        ItemStack sword = new ItemStack(Material.IRON_AXE);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
         addSoup(player.getInventory(), 1, 35);
@@ -29,12 +29,12 @@ public class AxeKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.GOLD_AXE);
+        ItemStack sword = new ItemStack(Material.IRON_AXE);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
     }

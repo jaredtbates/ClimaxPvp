@@ -35,7 +35,7 @@ public class EndermanKit extends Kit {
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
         player.getInventory().setBoots(boots);
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.EYE_OF_ENDER);
@@ -51,6 +51,7 @@ public class EndermanKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
@@ -58,7 +59,7 @@ public class EndermanKit extends Kit {
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 10);
         player.getInventory().setBoots(boots);
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.EYE_OF_ENDER);

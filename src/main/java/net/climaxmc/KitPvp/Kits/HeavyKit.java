@@ -19,7 +19,7 @@ public class HeavyKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DURABILITY, 2);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
@@ -33,11 +33,12 @@ public class HeavyKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DURABILITY, 2);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);

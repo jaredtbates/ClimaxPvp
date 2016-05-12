@@ -56,7 +56,7 @@ public class BomberKit extends Kit {
         leggings.setItemMeta(legmeta);
         player.getInventory().setLeggings(leggings);
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.TNT);
@@ -72,6 +72,7 @@ public class BomberKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
         chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
@@ -88,7 +89,7 @@ public class BomberKit extends Kit {
         leggings.setItemMeta(legmeta);
         player.getInventory().setLeggings(leggings);
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.TNT);

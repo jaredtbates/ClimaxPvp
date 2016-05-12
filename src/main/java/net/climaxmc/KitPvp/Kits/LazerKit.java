@@ -44,7 +44,7 @@ public class LazerKit extends Kit {
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.INK_SACK, 1, (byte) 6);
@@ -60,6 +60,7 @@ public class LazerKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
@@ -71,7 +72,7 @@ public class LazerKit extends Kit {
         player.getInventory().setChestplate(chest);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.INK_SACK, 1, (byte) 6);
