@@ -34,7 +34,7 @@ public class LazerKit extends Kit {
     protected void wear(Player player) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 3);
+        helm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.AQUA);
         helm.setItemMeta(helmmeta);
@@ -62,7 +62,7 @@ public class LazerKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 3);
+        helm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.AQUA);
         helm.setItemMeta(helmmeta);
