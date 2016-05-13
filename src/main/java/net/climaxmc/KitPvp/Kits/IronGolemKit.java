@@ -54,6 +54,9 @@ public class IronGolemKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         sword.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().addItem(sword);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
         player.getInventory().addItem(new ItemStack(Material.RED_ROSE));
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
         chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
@@ -64,9 +67,6 @@ public class IronGolemKit extends Kit {
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setBoots(boots);
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
