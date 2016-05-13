@@ -67,6 +67,9 @@ public class EndermanKit extends Kit {
         abilitymeta.setDisplayName(ChatColor.AQUA + "Teleport Ability");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
     }
     
     @EventHandler

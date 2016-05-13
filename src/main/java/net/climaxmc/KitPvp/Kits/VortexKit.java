@@ -98,6 +98,9 @@ public class VortexKit extends Kit {
         abilitymeta.setDisplayName(ChatColor.AQUA + "Tornado Ability");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
     }
 
     @EventHandler

@@ -102,6 +102,9 @@ public class PhoenixKit extends Kit {
         bootsMeta.setColor(Color.RED);
         boots.setItemMeta(bootsMeta);
         player.getInventory().setBoots(boots);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
     }
 
     @EventHandler
