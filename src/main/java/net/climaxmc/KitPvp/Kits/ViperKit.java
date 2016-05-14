@@ -28,7 +28,7 @@ public class ViperKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
-        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
         meta.setColor(Color.LIME);
         helmet.setItemMeta(meta);
@@ -49,7 +49,7 @@ public class ViperKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
-        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
         meta.setColor(Color.LIME);
         helmet.setItemMeta(meta);
