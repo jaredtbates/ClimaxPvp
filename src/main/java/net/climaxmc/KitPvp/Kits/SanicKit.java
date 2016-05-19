@@ -54,10 +54,12 @@ public class SanicKit extends Kit {
         if(KitManager.isPlayerInKit(player, this)){
             if(player.isSneaking()){
                 player.removePotionEffect(PotionEffectType.REGENERATION);
+                player.removePotionEffect(PotionEffectType.BLINDNESS);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
             }else{
                 player.removePotionEffect(PotionEffectType.REGENERATION);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 0));
             }
         }
     }
