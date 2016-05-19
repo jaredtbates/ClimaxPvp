@@ -70,9 +70,11 @@ public class StrafeKit extends Kit {
     public void onPlayerSneak(PlayerToggleSneakEvent event){
         final Player player = event.getPlayer();
         if(KitManager.isPlayerInKit(player, this)){
-            if(player.isSneaking() && player.isBlocking()){
+            if(player.isSneaking()){
+                player.removePotionEffect(PotionEffectType.REGENERATION);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
             }else{
+                player.removePotionEffect(PotionEffectType.REGENERATION);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
             }
         }
