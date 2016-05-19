@@ -16,6 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
@@ -118,6 +119,17 @@ public class GhastKit extends Kit {
                     }
                     target.setVelocity(target.getVelocity().setY(1));
                 }
+            }
+        }
+    }
+    @EventHandler
+    public void onPlayerSneak(PlayerToggleSneakEvent event){
+        final Player player = event.getPlayer();
+        if(KitManager.isPlayerInKit(player, this)){
+            if(player.isSneaking() && player.isBlocking()){
+                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+            }else{
+                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
             }
         }
     }

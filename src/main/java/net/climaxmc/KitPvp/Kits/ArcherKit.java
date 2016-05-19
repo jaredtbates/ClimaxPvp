@@ -1,11 +1,14 @@
 package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
+import net.climaxmc.KitPvp.KitManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
@@ -104,5 +107,16 @@ public class ArcherKit extends Kit {
         bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
         player.getInventory().addItem(bow);
         player.getInventory().addItem(new ItemStack(Material.ARROW, 1));
+    }
+    @EventHandler
+    public void onPlayerSneak(PlayerToggleSneakEvent event){
+        final Player player = event.getPlayer();
+        if(KitManager.isPlayerInKit(player, this)){
+            if(player.isSneaking() && player.isBlocking()){
+                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+            }else{
+                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
+            }
+        }
     }
 }

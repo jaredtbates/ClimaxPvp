@@ -1,10 +1,13 @@
 package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.KitPvp.Kit;
+import net.climaxmc.KitPvp.KitManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -48,5 +51,16 @@ public class HeavyKit extends Kit {
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
+    }
+    @EventHandler
+    public void onPlayerSneak(PlayerToggleSneakEvent event){
+        final Player player = event.getPlayer();
+        if(KitManager.isPlayerInKit(player, this)){
+            if(player.isSneaking() && player.isBlocking()){
+                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+            }else{
+                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
+            }
+        }
     }
 }

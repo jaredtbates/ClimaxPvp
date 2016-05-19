@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
@@ -74,6 +75,17 @@ public class SnailKit extends Kit {
                         damaged.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 120, 1));
                     }
                 }
+            }
+        }
+    }
+    @EventHandler
+    public void onPlayerSneak(PlayerToggleSneakEvent event){
+        final Player player = event.getPlayer();
+        if(KitManager.isPlayerInKit(player, this)){
+            if(player.isSneaking() && player.isBlocking()){
+                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+            }else{
+                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
             }
         }
     }
