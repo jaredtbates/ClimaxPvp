@@ -3,10 +3,12 @@ package net.climaxmc.KitPvp.Kits;
 import java.util.concurrent.TimeUnit;
 
 import me.xericker.disguiseabilities.DisguiseAbilities;
+import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.Ability;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -98,9 +100,11 @@ public class EndermanKit extends Kit {
                 player.removePotionEffect(PotionEffectType.BLINDNESS);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
             }else{
-                player.removePotionEffect(PotionEffectType.REGENERATION);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 0));
+                Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
+                    player.removePotionEffect(PotionEffectType.REGENERATION);
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 0));
+                }, 20);
             }
         }
     }
