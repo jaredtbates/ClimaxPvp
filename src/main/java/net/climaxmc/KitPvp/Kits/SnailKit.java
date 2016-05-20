@@ -25,7 +25,7 @@ public class SnailKit extends Kit {
 
     protected void wear(Player player) {
         ItemStack sword = new ItemStack(Material.DIAMOND_AXE);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         helmet.addEnchantment(Enchantment.DURABILITY, 2);
@@ -46,7 +46,7 @@ public class SnailKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
         ItemStack sword = new ItemStack(Material.DIAMOND_AXE);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         helmet.addEnchantment(Enchantment.DURABILITY, 2);
@@ -87,6 +87,7 @@ public class SnailKit extends Kit {
             if(player.isSneaking()){
                 player.removePotionEffect(PotionEffectType.REGENERATION);
                 player.removePotionEffect(PotionEffectType.BLINDNESS);
+                player.removePotionEffect(PotionEffectType.WEAKNESS);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
             }else{
                 Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
@@ -95,6 +96,7 @@ public class SnailKit extends Kit {
                             player.removePotionEffect(PotionEffectType.REGENERATION);
                             player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
                             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 0));
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 10));
                         }
                     }
                 }, 20);
