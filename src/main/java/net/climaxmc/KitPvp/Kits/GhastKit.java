@@ -12,6 +12,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -144,6 +145,20 @@ public class GhastKit extends Kit {
                         }
                     }
                 }, 20);
+            }
+        }
+    }
+    @EventHandler
+    public void onIfSneakingDamage(EntityDamageByEntityEvent event) {
+        if (event.getEntityType() == EntityType.PLAYER) {
+            Player player = (Player) event.getEntity();
+            if (KitManager.isPlayerInKit(player, this)) {
+                if(player.isSneaking()){
+                    player.removePotionEffect(PotionEffectType.REGENERATION);
+                    player.removePotionEffect(PotionEffectType.BLINDNESS);
+                    player.removePotionEffect(PotionEffectType.WEAKNESS);
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
+                }
             }
         }
     }

@@ -11,6 +11,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -76,6 +77,12 @@ public class ViperKit extends Kit {
             if (event.getEntity() instanceof Player) {
                 Player target = (Player) event.getEntity();
                 if (KitManager.isPlayerInKit(player, this)) {
+                    if(player.isSneaking()){
+                        player.removePotionEffect(PotionEffectType.REGENERATION);
+                        player.removePotionEffect(PotionEffectType.BLINDNESS);
+                        player.removePotionEffect(PotionEffectType.WEAKNESS);
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
+                    }
                     if (player.getInventory().getItemInHand().getType() == Material.DIAMOND_SWORD) {
                         if (!VanishCommand.getVanished().contains(target.getUniqueId())
                                 && !CheckCommand.getChecking().contains(target.getUniqueId())

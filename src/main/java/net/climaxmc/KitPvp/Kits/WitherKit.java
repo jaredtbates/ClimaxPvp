@@ -133,6 +133,14 @@ public class WitherKit extends Kit {
         if (event.getEntityType() == EntityType.PLAYER) {
             Player player = (Player) event.getEntity();
             if (KitManager.isPlayerInKit(player, this)) {
+                if (KitManager.isPlayerInKit(player, this)) {
+                    if(player.isSneaking()){
+                        player.removePotionEffect(PotionEffectType.REGENERATION);
+                        player.removePotionEffect(PotionEffectType.BLINDNESS);
+                        player.removePotionEffect(PotionEffectType.WEAKNESS);
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
+                    }
+                }
                 if (event.getDamager().getType() == EntityType.WITHER_SKULL) {
                     event.setCancelled(true);
                     player.setVelocity(player.getVelocity().setY(0.7));
