@@ -122,9 +122,13 @@ public class HealerKit extends Kit {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
             }else{
                 Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
-                    player.removePotionEffect(PotionEffectType.REGENERATION);
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 0));
+                    if(KitManager.isPlayerInKit(player, this)) {
+                        if (player.isSneaking()) {
+                            player.removePotionEffect(PotionEffectType.REGENERATION);
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 0));
+                        }
+                    }
                 }, 20);
             }
         }
