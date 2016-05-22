@@ -31,7 +31,7 @@ public class StrafeKit extends Kit {
         player.getInventory().setHelmet(helmet);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS);
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         leggings.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
@@ -57,7 +57,7 @@ public class StrafeKit extends Kit {
         player.getInventory().setHelmet(helmet);
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         ItemStack leggings = new ItemStack(Material.GOLD_LEGGINGS);
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         leggings.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
