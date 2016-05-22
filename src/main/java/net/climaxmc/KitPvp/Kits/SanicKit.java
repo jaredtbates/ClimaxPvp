@@ -48,9 +48,6 @@ public class SanicKit extends Kit {
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         player.getInventory().setBoots(boots);
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
     }
     @EventHandler
     public void onPlayerSneak(PlayerToggleSneakEvent event){

@@ -90,9 +90,6 @@ public class BlazeKit extends Kit {
         bootsMeta.setColor(Color.YELLOW);
         boots.setItemMeta(bootsMeta);
         player.getInventory().setBoots(boots);
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
     }
 
     /*@EventHandler

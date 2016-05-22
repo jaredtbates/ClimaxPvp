@@ -81,9 +81,6 @@ public class LazerKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
         ItemStack ability = new ItemStack(Material.INK_SACK, 1, (byte) 6);
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Beam Ability");
