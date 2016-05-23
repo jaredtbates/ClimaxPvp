@@ -127,39 +127,4 @@ public class EmberKit extends Kit {
             }
         }
     }
-    @EventHandler
-    public void onPlayerSneak(PlayerToggleSneakEvent event){
-        final Player player = event.getPlayer();
-        if(KitManager.isPlayerInKit(player, this)){
-            if(player.isSneaking()){
-                player.removePotionEffect(PotionEffectType.REGENERATION);
-                player.removePotionEffect(PotionEffectType.WEAKNESS);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
-            }else{
-                Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
-                    if(KitManager.isPlayerInKit(player, this)) {
-                        if (player.isSneaking()) {
-                            player.removePotionEffect(PotionEffectType.REGENERATION);
-                            player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
-                            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 10));
-                        }
-                    }
-                }, 20);
-            }
-        }
-    }
-    @EventHandler
-    public void onIfSneakingDamage(EntityDamageByEntityEvent event) {
-        if (event.getEntityType() == EntityType.PLAYER) {
-            Player player = (Player) event.getEntity();
-            if (KitManager.isPlayerInKit(player, this)) {
-                if(player.isSneaking()){
-                    player.removePotionEffect(PotionEffectType.REGENERATION);
-                    player.removePotionEffect(PotionEffectType.BLINDNESS);
-                    player.removePotionEffect(PotionEffectType.WEAKNESS);
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
-                }
-            }
-        }
-    }
 }
