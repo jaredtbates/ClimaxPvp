@@ -28,7 +28,7 @@ public class ViperKit extends Kit {
     }
 
     protected void wear(Player player) {
-        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
@@ -49,7 +49,7 @@ public class ViperKit extends Kit {
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
-        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
@@ -80,7 +80,7 @@ public class ViperKit extends Kit {
                         player.removePotionEffect(PotionEffectType.WEAKNESS);
                         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
                     }
-                    if (player.getInventory().getItemInHand().getType() == Material.DIAMOND_SWORD) {
+                    if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
                         if (!VanishCommand.getVanished().contains(target.getUniqueId())
                                 && !CheckCommand.getChecking().contains(target.getUniqueId())
                                 && (KitPvp.currentTeams.get(player.getName()) != target.getName()
@@ -98,7 +98,6 @@ public class ViperKit extends Kit {
         if(KitManager.isPlayerInKit(player, this)){
             if(player.isSneaking()){
                 player.removePotionEffect(PotionEffectType.REGENERATION);
-                player.removePotionEffect(PotionEffectType.BLINDNESS);
                 player.removePotionEffect(PotionEffectType.WEAKNESS);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
             }else{
@@ -107,11 +106,24 @@ public class ViperKit extends Kit {
                         if (player.isSneaking()) {
                             player.removePotionEffect(PotionEffectType.REGENERATION);
                             player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
-                            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 0));
                             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 10));
                         }
                     }
                 }, 20);
+            }
+        }
+    }
+    @EventHandler
+    public void onIfSneakingDamage(EntityDamageByEntityEvent event) {
+        if (event.getEntityType() == EntityType.PLAYER) {
+            Player player = (Player) event.getEntity();
+            if (KitManager.isPlayerInKit(player, this)) {
+                if(player.isSneaking()){
+                    player.removePotionEffect(PotionEffectType.REGENERATION);
+                    player.removePotionEffect(PotionEffectType.BLINDNESS);
+                    player.removePotionEffect(PotionEffectType.WEAKNESS);
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
+                }
             }
         }
     }

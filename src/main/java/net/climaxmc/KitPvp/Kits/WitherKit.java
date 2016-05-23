@@ -146,21 +146,19 @@ public class WitherKit extends Kit {
         }
     }
     @EventHandler
-    public void onPlayerSneak(PlayerToggleSneakEvent event){
+    public void onPlayerSneak(PlayerToggleSneakEvent event) {
         final Player player = event.getPlayer();
-        if(KitManager.isPlayerInKit(player, this)){
-            if(player.isSneaking()){
+        if (KitManager.isPlayerInKit(player, this)) {
+            if (player.isSneaking()) {
                 player.removePotionEffect(PotionEffectType.REGENERATION);
-                player.removePotionEffect(PotionEffectType.BLINDNESS);
                 player.removePotionEffect(PotionEffectType.WEAKNESS);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
-            }else{
+            } else {
                 Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), () -> {
-                    if(KitManager.isPlayerInKit(player, this)) {
+                    if (KitManager.isPlayerInKit(player, this)) {
                         if (player.isSneaking()) {
                             player.removePotionEffect(PotionEffectType.REGENERATION);
                             player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
-                            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 0));
                             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 10));
                         }
                     }

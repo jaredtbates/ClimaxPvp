@@ -115,7 +115,6 @@ public class ArcherKit extends Kit {
         if(KitManager.isPlayerInKit(player, this)){
             if(player.isSneaking()){
                 player.removePotionEffect(PotionEffectType.REGENERATION);
-                player.removePotionEffect(PotionEffectType.BLINDNESS);
                 player.removePotionEffect(PotionEffectType.WEAKNESS);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
             }else{
@@ -124,7 +123,6 @@ public class ArcherKit extends Kit {
                         if (player.isSneaking()) {
                             player.removePotionEffect(PotionEffectType.REGENERATION);
                             player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
-                            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 0));
                             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 10));
                         }
                     }
