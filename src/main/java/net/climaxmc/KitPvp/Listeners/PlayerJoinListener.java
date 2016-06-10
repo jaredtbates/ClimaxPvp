@@ -160,6 +160,7 @@ public class PlayerJoinListener implements Listener {
 
         attachment.setPermission("bukkit.command.tps", true);
         attachment.setPermission("noattackcooldown.use", true);
+        attachment.setPermission("pp.use", true);
         if (!player.isOp()) {
             attachment.setPermission("bukkit.command.plugins", false);
             attachment.setPermission("bukkit.command.version", false);
