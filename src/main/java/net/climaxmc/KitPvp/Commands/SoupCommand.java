@@ -27,7 +27,7 @@ public class SoupCommand implements CommandExecutor {
         Player player = (Player) sender;
         PlayerData playerData = plugin.getPlayerData(player);
 
-        if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 150) {
+        if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 350) {
             player.sendMessage(ChatColor.RED + "You are at NoSoup!");
             return true;
         }
