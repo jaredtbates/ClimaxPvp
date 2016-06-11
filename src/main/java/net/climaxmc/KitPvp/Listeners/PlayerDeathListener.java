@@ -144,7 +144,7 @@ public class PlayerDeathListener implements Listener {
             }
         }*/
 
-        if (killer.getLocation().distance(player.getWorld().getSpawnLocation()) <= 100) {
+        if (killer.getLocation().distance(player.getWorld().getSpawnLocation()) <= 350) {
             killer.setHealth(20);
         }
 
