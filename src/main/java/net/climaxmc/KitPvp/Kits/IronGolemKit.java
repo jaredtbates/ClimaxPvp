@@ -44,7 +44,7 @@ public class IronGolemKit extends Kit {
         leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 2, 35);
     }
@@ -67,7 +67,7 @@ public class IronGolemKit extends Kit {
         leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setBoots(boots);
     }
 

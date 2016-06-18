@@ -47,7 +47,7 @@ public class DragonKit extends Kit {
         blazePowder.setItemMeta(blazeMeta);
         player.getInventory().addItem(blazePowder);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 1);
+        helm.addEnchantment(Enchantment.DURABILITY, 3);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta helmMeta = (LeatherArmorMeta) helm.getItemMeta();
         helmMeta.setColor(Color.YELLOW);
@@ -56,7 +56,7 @@ public class DragonKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addEnchantment(Enchantment.DURABILITY, 1);
+        boots.addEnchantment(Enchantment.DURABILITY, 3);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta bootsMeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsMeta.setColor(Color.YELLOW);
@@ -81,7 +81,7 @@ public class DragonKit extends Kit {
         blazePowder.setItemMeta(blazeMeta);
         player.getInventory().addItem(blazePowder);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 1);
+        helm.addEnchantment(Enchantment.DURABILITY, 3);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta helmMeta = (LeatherArmorMeta) helm.getItemMeta();
         helmMeta.setColor(Color.YELLOW);
@@ -90,7 +90,7 @@ public class DragonKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        boots.addEnchantment(Enchantment.DURABILITY, 1);
+        boots.addEnchantment(Enchantment.DURABILITY, 3);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta bootsMeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsMeta.setColor(Color.YELLOW);
