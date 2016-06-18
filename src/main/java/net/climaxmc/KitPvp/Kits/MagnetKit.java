@@ -40,7 +40,7 @@ public class MagnetKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
-        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.RED);
         helm.setItemMeta(helmmeta);
@@ -51,7 +51,7 @@ public class MagnetKit extends Kit {
         player.getInventory().setLeggings(legs);
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 2);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLUE);
         boots.setItemMeta(bootsmeta);
@@ -76,7 +76,7 @@ public class MagnetKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
-        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.RED);
         helm.setItemMeta(helmmeta);
@@ -87,7 +87,7 @@ public class MagnetKit extends Kit {
         player.getInventory().setLeggings(legs);
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 2);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLUE);
         boots.setItemMeta(bootsmeta);

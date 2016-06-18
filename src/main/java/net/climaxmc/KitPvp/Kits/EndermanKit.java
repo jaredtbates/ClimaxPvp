@@ -37,7 +37,6 @@ public class EndermanKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 4);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
@@ -62,7 +61,6 @@ public class EndermanKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 4);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
