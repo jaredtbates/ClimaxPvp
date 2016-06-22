@@ -172,17 +172,21 @@ public class PlayerJoinListener implements Listener {
                 attachment.setPermission("AAC.admin", true);
                 attachment.setPermission("AAC.notify", true);
                 attachment.setPermission("AAC.verbose", true);
-                attachment.setPermission("bm.command.bminfo", true);
-                attachment.setPermission("bm.command.bminfo.alts", true);
-                attachment.setPermission("bm.command.bminfo.ipstats", true);
-                attachment.setPermission("bm.command.bminfo.others", true);
-                attachment.setPermission("bm.command.bminfo.playerstats", true);
-                attachment.setPermission("bm.command.kick", true);
-                attachment.setPermission("bm.command.mute", true);
-                attachment.setPermission("bm.command.muteall", true);
-                attachment.setPermission("bm.command.tempmute", true);
-                attachment.setPermission("bm.command.warn", true);
-                attachment.setPermission("bm.command.warn.offline", true);
+                attachment.setPermission("litebans.banlist", true);
+                attachment.setPermission("litebans.checkban", true);
+                attachment.setPermission("litebans.clearchat", true);
+                attachment.setPermission("litebans.history", true);
+                attachment.setPermission("litebans.kick", true);
+                attachment.setPermission("litebans.mute", true);
+                attachment.setPermission("litebans.notify", true);
+                attachment.setPermission("litebans.override", true);
+                attachment.setPermission("litebans.tempmute", true);
+                attachment.setPermission("litebans.togglechat", true);
+                attachment.setPermission("litebans.unmute", true);
+                attachment.setPermission("litebans.unwarn", true);
+                attachment.setPermission("litebans.warn", true);
+                attachment.setPermission("litebans.warnings", true);
+                attachment.setPermission("litebans.notify.dupeip_join", false);
                 if (!player.isOp()) {
                     attachment.setPermission("AAC.bypass", false);
                 }
@@ -191,21 +195,12 @@ public class PlayerJoinListener implements Listener {
             if (playerData.hasRank(Rank.MODERATOR)) {
                 attachment.setPermission("minecraft.command.tp", true);
                 attachment.setPermission("bukkit.command.teleport", true);
-                attachment.setPermission("bm.command.alts", true);
-                attachment.setPermission("bm.command.ban", true);
-                attachment.setPermission("bm.command.ban.offline", true);
-                attachment.setPermission("bm.command.banall", true);
-                attachment.setPermission("bm.command.banip", true);
-                attachment.setPermission("bm.command.banipall", true);
-                attachment.setPermission("bm.command.tempban", true);
-                attachment.setPermission("bm.command.tempbanall", true);
-                attachment.setPermission("bm.command.tempmuteall", true);
-                attachment.setPermission("bm.command.unban", true);
-                attachment.setPermission("bm.command.unbanall", true);
-                attachment.setPermission("bm.command.unbanip", true);
-                attachment.setPermission("bm.command.unbanipall", true);
-                attachment.setPermission("bm.command.unmute", true);
-                attachment.setPermission("bm.command.unmuteall", true);
+                attachment.setPermission("litebans.ban", true);
+                attachment.setPermission("litebans.dupeip", true);
+                attachment.setPermission("litebans.ipban", true);
+                attachment.setPermission("litebans.tempban", true);
+                attachment.setPermission("litebans.unban", true);
+                attachment.setPermission("litebans.notify.dupeip_join", true);
             }
         }
 
