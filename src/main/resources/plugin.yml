@@ -72,20 +72,6 @@ commands:
     description: Sets the rank of a player
   pei:
     description: Receive a Pei!
-  ban:
-    description: Ban a player
-  tempban:
-    description: Temporarily ban a player
-  unban:
-    description: Unban a player
-  mute:
-    description: Mute a player
-  tempmute:
-    description: Temporarily mute a player
-  unmute:
-    description: Unmute a player
-  kick:
-    description: Kick a player
   donate:
     description: View donation link
     aliases: [buy, shop]
