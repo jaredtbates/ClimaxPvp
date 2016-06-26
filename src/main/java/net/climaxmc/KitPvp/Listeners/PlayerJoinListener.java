@@ -201,6 +201,7 @@ public class PlayerJoinListener implements Listener {
                 attachment.setPermission("litebans.ipban", true);
                 attachment.setPermission("litebans.tempban", true);
                 attachment.setPermission("litebans.unban", true);
+                attachment.setPermission("litebans.unlimited", true);
                 attachment.setPermission("litebans.notify.dupeip_join", true);
             }
         }
