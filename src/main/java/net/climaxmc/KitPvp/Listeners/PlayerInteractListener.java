@@ -49,7 +49,7 @@ public class PlayerInteractListener implements Listener {
         }
 
         if (player.getItemInHand().getType() == Material.MUSHROOM_SOUP && player.getHealth() < 20.0D) {
-            if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
                 player.getInventory().getItemInHand().setType(Material.BOWL);
                 player.setHealth(player.getHealth() >= 13.0D ? 20.0D : player.getHealth() + 7.0D);
             }

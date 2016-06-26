@@ -187,6 +187,7 @@ public class PlayerJoinListener implements Listener {
                 attachment.setPermission("litebans.warn", true);
                 attachment.setPermission("litebans.warnings", true);
                 attachment.setPermission("litebans.notify.dupeip_join", false);
+                attachment.setPermission("reflex.notify", true);
                 if (!player.isOp()) {
                     attachment.setPermission("AAC.bypass", false);
                 }
