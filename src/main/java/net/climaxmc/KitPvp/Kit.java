@@ -132,7 +132,7 @@ public abstract class Kit implements Listener, CommandExecutor {
                 player.getInventory().clear();
                 player.getInventory().setArmorContents(null);
 
-                if (player.getLocation().distance(player.getWorld().getSpawnLocation()) < 200) {
+                if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 350) {
                     wearNoSoup(player);
                     return;
                 }
