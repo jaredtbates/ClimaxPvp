@@ -51,9 +51,6 @@ public class ChemistKit extends Kit {
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         player.getInventory().addItem(sword);
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
         ItemStack harm = new ItemStack(Material.POTION, 23);
         Potion harmpot = new Potion(PotionType.INSTANT_DAMAGE, 1);
         harmpot.setSplash(true);

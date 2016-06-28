@@ -43,9 +43,6 @@ public class GhastKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
         player.getInventory().addItem(sword);
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
         ItemStack hoe = new ItemStack(Material.GOLD_HOE);
         ItemMeta hoeMeta = hoe.getItemMeta();
         hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher");
@@ -72,6 +69,9 @@ public class GhastKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
         player.getInventory().addItem(sword);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
         ItemStack hoe = new ItemStack(Material.GOLD_HOE);
         ItemMeta hoeMeta = hoe.getItemMeta();
         hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher");
