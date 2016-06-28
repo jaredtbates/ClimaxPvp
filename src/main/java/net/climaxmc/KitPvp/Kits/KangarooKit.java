@@ -31,6 +31,9 @@ public class KangarooKit extends Kit {
         ItemStack sword = new ItemStack(Material.STONE_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
         chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);

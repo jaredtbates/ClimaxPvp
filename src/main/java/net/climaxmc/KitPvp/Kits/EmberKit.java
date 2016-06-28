@@ -64,6 +64,9 @@ public class EmberKit extends Kit {
         ItemStack sword = new ItemStack(Material.STONE_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
         ItemStack ability = new ItemStack(Material.SPECKLED_MELON);
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Globe of Death Ability");

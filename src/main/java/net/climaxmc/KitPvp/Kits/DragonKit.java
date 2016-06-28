@@ -41,6 +41,9 @@ public class DragonKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
         ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
         ItemMeta blazeMeta = blazePowder.getItemMeta();
         blazeMeta.setDisplayName(ChatColor.AQUA + "Flame Breath Ability");

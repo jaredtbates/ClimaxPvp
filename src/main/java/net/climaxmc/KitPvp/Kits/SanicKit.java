@@ -28,6 +28,9 @@ public class SanicKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
         ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         player.getInventory().setBoots(boots);

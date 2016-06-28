@@ -32,6 +32,9 @@ public class RageKit extends Kit {
         }
         ItemStack sword = new ItemStack(Material.STONE_SWORD);
         player.getInventory().addItem(sword);
+        ItemStack rod = new ItemStack(Material.FISHING_ROD);
+        rod.addEnchantment(Enchantment.DURABILITY, 3);
+        player.getInventory().addItem(rod);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
