@@ -13,6 +13,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class EntityDamageByEntityListener implements Listener {
     private ClimaxPvp plugin;
 
@@ -24,6 +27,7 @@ public class EntityDamageByEntityListener implements Listener {
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (event.getEntityType().equals(EntityType.PLAYER)) {
             Player target = (Player) event.getEntity();
+
             Player player = null;
 
             if (event.getEntityType().equals(EntityType.PLAYER) && event.getDamager().getType().equals(EntityType.PLAYER)) {

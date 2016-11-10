@@ -11,15 +11,24 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntitySpawnEvent;
+import org.bukkit.event.entity.PotionSplashEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionType;
 
 import java.util.ArrayList;
 
@@ -32,6 +41,13 @@ public class PlayerInteractListener implements Listener {
 
     public PlayerInteractListener(ClimaxPvp plugin) {
         this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onEntitySpawn (ProjectileLaunchEvent event) {
+        if (event.getEntity().getType() == EntityType.SPLASH_POTION) {
+            event.getEntity().setVelocity(event.getEntity().getVelocity().multiply(0.88));
+        }
     }
 
     @EventHandler(priority = EventPriority.LOW)
@@ -136,6 +152,7 @@ public class PlayerInteractListener implements Listener {
                     KitManager.getPreviousKit().get(player.getUniqueId()).wearCheckLevel(player);
                 }
             }
+
         }
     }
 }

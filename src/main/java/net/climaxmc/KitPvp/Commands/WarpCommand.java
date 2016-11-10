@@ -31,7 +31,7 @@ public class WarpCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (args.length == 0) {
-            player.sendMessage(ChatColor.GREEN + "Available warps: " + ChatColor.AQUA + plugin.getWarpsConfig().getKeys(false).stream().collect(Collectors.joining(", ")));
+            player.sendMessage("§f» §6Available warps: " + ChatColor.GRAY + plugin.getWarpsConfig().getKeys(false).stream().collect(Collectors.joining(", ")));
             return true;
         }
 
@@ -86,7 +86,7 @@ public class WarpCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.GREEN + " Warp " + warpDeleteSection.getName() + " deleted!");
                 break;
             default:
-                player.sendMessage(ChatColor.GREEN + "You have been warped to " + args[0] + ".");
+                player.sendMessage("§7You have been warped to §6" + args[0] + ".");
                 plugin.warp(args[0], player);
                 if (args[0].equalsIgnoreCase("nosoup")) {
                     player.setFoodLevel(17);

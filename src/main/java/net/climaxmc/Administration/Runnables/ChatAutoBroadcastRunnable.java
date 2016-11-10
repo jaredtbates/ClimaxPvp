@@ -19,9 +19,11 @@ public class ChatAutoBroadcastRunnable implements Runnable {
         }
 
         if (ChatCommands.chatSilenced == false) {
+            plugin.getServer().broadcastMessage(" §f§l[§7=§8------------------§7=§f§l[*]§7=§8------------------§7=§f§l]");
             plugin.getServer().broadcastMessage(" ");
             plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("ChatAutoBroadcast.Messages").get(amount++)));
             plugin.getServer().broadcastMessage(" ");
+            plugin.getServer().broadcastMessage(" §f§l[§7=§8-------------------§7==§8-------------------§7=§f§l]");
         }
     }
 }

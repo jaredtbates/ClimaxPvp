@@ -16,7 +16,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -24,12 +28,12 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import java.util.concurrent.TimeUnit;
 
 public class BomberKit extends Kit {
-    private Ability explode = new Ability(1, 13, TimeUnit.SECONDS);
 
     public BomberKit() {
         super("Bomber", new ItemStack(Material.TNT), "Explode in people's faces :D!", ChatColor.GOLD);
@@ -72,8 +76,7 @@ public class BomberKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
         chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
@@ -96,14 +99,10 @@ public class BomberKit extends Kit {
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
-        ItemStack ability = new ItemStack(Material.TNT);
-        ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Explode Ability");
-        ability.setItemMeta(abilitymeta);
-        player.getInventory().addItem(ability);
+        giveTNT(player);
     }
 
-    @EventHandler
+    /*@EventHandler
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
@@ -117,18 +116,41 @@ public class BomberKit extends Kit {
                 }
             }
         }
-    }
+    }*/
 
 
-    /*@EventHandler
+    @EventHandler
     public void onPlayerClickDropTNT(PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
         if (!KitManager.isPlayerInKit(player, this) || event.getItem() == null || !event.getItem().getType().equals(Material.TNT)) {
             return;
         }
+        if (player.getInventory().getItemInHand().getType() == Material.TNT) {
+            if (event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.LEFT_CLICK_AIR) {
+                spawnTNT(player);
+            }
+        }
+    }
 
-        spawnTNT(player);
+    public int taskID = 0;
+
+    public void giveTNT(Player player) {
+        taskID = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(ClimaxPvp.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                if (player.getInventory().contains(Material.TNT, 2) || !KitManager.isPlayerInKit(player, BomberKit.this)) {
+                    return;
+                } else {
+                    ItemStack ability = new ItemStack(Material.TNT);
+                    ItemMeta abilitymeta = ability.getItemMeta();
+                    abilitymeta.setDisplayName(ChatColor.AQUA + "Throwing TNT");
+                    ability.setItemMeta(abilitymeta);
+                    player.getInventory().addItem(ability);
+                    player.updateInventory();
+                }
+            }
+        }, 0L, 20L * 7L );
     }
 
     private void spawnTNT(Player player) {
@@ -136,6 +158,7 @@ public class BomberKit extends Kit {
         ItemStack tntInInv = player.getItemInHand();
         tntInInv.setAmount(tntInInv.getAmount() - 1);
         player.getInventory().setItem(player.getInventory().getHeldItemSlot(), tntInInv);
+        player.updateInventory();
         TNTPrimed tnt = player.getWorld().spawn(player.getEyeLocation().add(player.getLocation().getDirection()), TNTPrimed.class);
         tnt.setFuseTicks(17);
         velocity(tnt, player.getLocation().getDirection().multiply(2), 0.5, false, 0.0, 0.1, 10.0, false);
@@ -146,7 +169,16 @@ public class BomberKit extends Kit {
     @EventHandler
     public void onExplosion(EntityExplodeEvent event) {
         event.setCancelled(true); // This should fix the bomber issue! It should also enable damage from tnt!
-        event.getLocation().getWorld().createExplosion(event.getLocation().getX(), event.getLocation().getY(), event.getLocation().getZ(), 4, false, false);
+
+    }
+
+    @EventHandler
+    public void onExplosionPrime(ExplosionPrimeEvent event) {
+        Entity entity = event.getEntity();
+        if (entity instanceof TNTPrimed) {
+            event.setCancelled(true);
+            event.getEntity().getLocation().getWorld().createExplosion(event.getEntity().getLocation().getX(), event.getEntity().getLocation().getY(), event.getEntity().getLocation().getZ(), 2, false, false);
+        }
     }
 
     private void velocity(Entity ent, Vector vec, double str, boolean ySet, double yBase, double yAdd, double yMax, boolean groundBoost) {
@@ -173,5 +205,5 @@ public class BomberKit extends Kit {
 
         ent.setFallDistance(0.0F);
         ent.setVelocity(vec);
-    }*/
+    }
 }
