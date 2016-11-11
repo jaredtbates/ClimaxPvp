@@ -12,9 +12,12 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.util.Vector;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.json.XMLTokener.entity;
 
 public class EntityDamageByEntityListener implements Listener {
     private ClimaxPvp plugin;
@@ -46,11 +49,13 @@ public class EntityDamageByEntityListener implements Listener {
             }
         }
     }
-    @EventHandler
+
+    @EventHandler (priority = EventPriority.HIGH)
     public void onDamage(EntityDamageByEntityEvent event) {
         if (event.getEntityType().equals(EntityType.PLAYER)) {
             Player target = (Player) event.getEntity();
-            target.setVelocity(target.getVelocity().multiply(2));
+            Vector unitVector = target.getLocation().toVector().subtract(event.getDamager().getLocation().toVector().setY(target.getVelocity().getY())).normalize();
+            target.setVelocity(unitVector.multiply(0.45));
         }
     }
 }
