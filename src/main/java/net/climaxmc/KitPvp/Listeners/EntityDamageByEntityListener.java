@@ -49,13 +49,12 @@ public class EntityDamageByEntityListener implements Listener {
             }
         }
     }
-
-    @EventHandler (priority = EventPriority.HIGH)
+    /*@EventHandler (priority = EventPriority.HIGH)
     public void onDamage(EntityDamageByEntityEvent event) {
         if (event.getEntityType().equals(EntityType.PLAYER)) {
             Player target = (Player) event.getEntity();
             Vector unitVector = target.getLocation().toVector().subtract(event.getDamager().getLocation().toVector().setY(target.getVelocity().getY())).normalize();
             target.setVelocity(unitVector.multiply(0.45));
         }
-    }
+    }*/
 }
