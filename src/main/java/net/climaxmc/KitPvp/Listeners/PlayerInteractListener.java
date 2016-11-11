@@ -43,13 +43,6 @@ public class PlayerInteractListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
-    public void onEntitySpawn (ProjectileLaunchEvent event) {
-        if (event.getEntity().getType() == EntityType.SPLASH_POTION) {
-            event.getEntity().setVelocity(event.getEntity().getVelocity().multiply(0.88));
-        }
-    }
-
     @EventHandler(priority = EventPriority.LOW)
     public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();

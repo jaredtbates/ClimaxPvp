@@ -60,6 +60,7 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new ChallengesMenu(), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ReportGUI(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new InventoryCloseListener(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new ProjectileLaunchListener(plugin), plugin);
         //plugin.getServer().getPluginManager().registerEvents(new HackListeners(plugin), plugin);
 
         // Register commands

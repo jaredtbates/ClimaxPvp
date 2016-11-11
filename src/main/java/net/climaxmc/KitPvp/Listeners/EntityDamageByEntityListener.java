@@ -27,7 +27,6 @@ public class EntityDamageByEntityListener implements Listener {
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (event.getEntityType().equals(EntityType.PLAYER)) {
             Player target = (Player) event.getEntity();
-
             Player player = null;
 
             if (event.getEntityType().equals(EntityType.PLAYER) && event.getDamager().getType().equals(EntityType.PLAYER)) {
@@ -45,6 +44,13 @@ public class EntityDamageByEntityListener implements Listener {
                     && KitPvp.currentTeams.get(target.getName()).equals(player.getName())))) {
                 event.setCancelled(true);
             }
+        }
+    }
+    @EventHandler
+    public void onDamage(EntityDamageByEntityEvent event) {
+        if (event.getEntityType().equals(EntityType.PLAYER)) {
+            Player target = (Player) event.getEntity();
+            target.setVelocity(target.getVelocity().multiply(2));
         }
     }
 }
