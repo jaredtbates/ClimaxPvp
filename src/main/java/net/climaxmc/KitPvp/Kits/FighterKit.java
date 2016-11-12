@@ -10,11 +10,15 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class FighterKit extends Kit {
+
+    public int expTask;
+
     public FighterKit() {
         super("Fighter", new ItemStack(Material.DIAMOND_SWORD), "magic", ChatColor.GRAY);
     }
@@ -42,7 +46,7 @@ public class FighterKit extends Kit {
         if (player.getLevel() == 1 && player.getExp() == 0F) {
             return;
         } else {
-            Bukkit.getScheduler().scheduleSyncRepeatingTask(ClimaxPvp.getInstance(), () -> player.setExp(player.getExp() - 0.5F), 0, 20 * 15);
+            expTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(ClimaxPvp.getInstance(), () -> player.setExp(player.getExp() - 0.5F), 0, 20 * 15);
         }
     }
 
@@ -64,19 +68,21 @@ public class FighterKit extends Kit {
     }
 
     @EventHandler
-    public void onDeath (EntityDamageByEntityEvent event) {
-        if (event.getEntity().getType().equals(EntityType.PLAYER) && event.getDamager().getType().equals(EntityType.PLAYER)) {
-            Player target = (Player) event.getEntity();
-            Player player = (Player) event.getDamager();
-            if (target.getHealth() == 0 && player.getHealth() != 0) {
-                if (player.getExp() != 1F) {
-                    player.setExp(player.getExp() + 0.5F);
-                }
-                if (player.getExp() == 1F && player.getLevel() != 4) {
-                    player.setLevel(player.getLevel() + 1);
-                    player.setExp(0F);
-                }
+    public void onDeath (PlayerDeathEvent event) {
+        Player player = event.getEntity();
+        Player killer = player.getKiller();
+        if (player.getHealth() == 0 && killer.getHealth() != 0) {
+            if (killer.getExp() != 1F) {
+                killer.setExp(killer.getExp() + 0.5F);
             }
+            if (killer.getExp() == 1F && killer.getLevel() != 4) {
+                killer.setLevel(killer.getLevel() + 1);
+                killer.setExp(0F);
+            }
+        } else if (killer.getHealth() == 0) {
+            Bukkit.getScheduler().cancelTask(expTask);
+            player.setExp(0F);
+            player.setLevel(0);
         }
     }
 }

@@ -2,9 +2,11 @@ package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.Administration.Commands.ChatCommands;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Utils.TextComponentMessages;
+import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import net.climaxmc.common.donations.trails.ParticleEffect;
@@ -13,13 +15,30 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.scoreboard.Team;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerDeathListener implements Listener {
     private ClimaxPvp plugin;
@@ -29,99 +48,123 @@ public class PlayerDeathListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerDeath(PlayerDeathEvent event) {
-        Player player = event.getEntity();
+    public void onPlayerDeath(EntityDamageEvent event) {
+        if (!(event.getEntity().getType().equals(EntityType.PLAYER))){
+            return;
+        }
+        Player player = (Player) event.getEntity();
         Player killer = player.getKiller();
 
-        Location location = player.getLocation();
+        if (player.getHealth() - event.getDamage() <= 0) {
 
-        BukkitTask task = plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, () -> new ParticleEffect(new ParticleEffect.ParticleData(ParticleEffect.ParticleType.LAVA, 1, 2, 1)).sendToLocation(location), 1, 1);
-        plugin.getServer().getScheduler().runTaskLater(plugin, task::cancel, 10);
+            Location location = player.getLocation();
 
-        plugin.getServer().getScheduler().runTask(plugin, () -> {
-            plugin.respawn(player);
-            if (plugin.getCurrentWarps().containsKey(player.getUniqueId())) {
-                player.teleport(plugin.getCurrentWarps().get(player.getUniqueId()));
-                if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
-                    new PvpKit().wearCheckLevel(player);
+            BukkitTask task = plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, () -> new ParticleEffect(new ParticleEffect.ParticleData(ParticleEffect.ParticleType.LAVA, 1, 2, 1)).sendToLocation(location), 1, 1);
+            plugin.getServer().getScheduler().runTaskLater(plugin, task::cancel, 10);
+
+            plugin.getServer().getScheduler().runTask(plugin, () -> {
+                event.setCancelled(true);
+                player.setHealth(20);
+                player.setGameMode(GameMode.CREATIVE);
+                for(Player players : Bukkit.getServer().getOnlinePlayers()){
+                    players.hidePlayer(player);
+                }
+                for (PotionEffect effect : player.getActivePotionEffects()) {
+                    player.removePotionEffect(effect.getType());
+                }
+                player.setAllowFlight(true);
+                player.setFlying(true);
+                player.setVelocity(player.getVelocity().setY(1.5));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 21, 0));
+                player.getInventory().clear();
+                player.getInventory().setArmorContents(null);
+
+                ClimaxPvp.deadPeoples.add(player);
+
+                player.getInventory().setItem(8, new I(Material.BOOK).name("§6§lRespawn"));
+
+                if (plugin.getCurrentWarps().containsKey(player.getUniqueId())) {
+                    player.teleport(plugin.getCurrentWarps().get(player.getUniqueId()));
+                    if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
+                        new PvpKit().wearCheckLevel(player);
+                    }
+                }
+            });
+
+            PlayerData playerData = plugin.getPlayerData(player);
+            playerData.addDeaths(1);
+
+            if (killer == null) {
+                if (plugin.getServer().getOnlinePlayers().size() >= 15) {
+                    return;
+                } else {
+                    Bukkit.broadcastMessage("" + ChatColor.RED + player.getName() + ChatColor.GRAY + " died");
+                }
+                return;
+            }
+
+            TextComponentMessages tcm = new TextComponentMessages(plugin);
+            TextComponent killerTCM = new TextComponent(killer.getName());
+            killerTCM.setColor(ChatColor.AQUA);
+            killerTCM.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, tcm.playerStats(killer)));
+            killerTCM.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/options " + killer.getName()));
+
+            TextComponent killedTCM = new TextComponent(player.getName());
+            killedTCM.setColor(ChatColor.RED);
+            killedTCM.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, tcm.playerStats(player)));
+            killedTCM.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/options " + player.getName()));
+
+            TextComponent wkb = new TextComponent(" was killed by ");
+            wkb.setColor(ChatColor.GRAY);
+            wkb.setHoverEvent(null);
+
+            TextComponent tc = new TextComponent("");
+
+            BaseComponent baseComponent = tc;
+            baseComponent.addExtra(killedTCM);
+            baseComponent.addExtra(wkb);
+            baseComponent.addExtra(killerTCM);
+
+            if (ChatCommands.chatSilenced) {
+                return;
+            } else {
+                if (plugin.getServer().getOnlinePlayers().size() >= 15) {
+                    return;
+                } else {
+                    //event.setDeathMessage("" + ChatColor.RED + player.getName() + ChatColor.GRAY + " was killed by " + ChatColor.AQUA + killer.getName());
+                    plugin.getServer().spigot().broadcast(baseComponent);
                 }
             }
-        });
 
-        PlayerData playerData = plugin.getPlayerData(player);
-        playerData.addDeaths(1);
-
-        if (killer == null) {
-            if (plugin.getServer().getOnlinePlayers().size() >= 15) {
-                event.setDeathMessage(null);
+            if (killer.getHealth() % 2 == 0) {
+                player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.YELLOW + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + " hearts" + ChatColor.YELLOW + " left");
             } else {
-                event.setDeathMessage("" + ChatColor.RED + player.getName() + ChatColor.GRAY + " died");
+                player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.YELLOW + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + ".5 hearts" + ChatColor.YELLOW + " left");
             }
-            return;
-        }
 
-        TextComponentMessages tcm = new TextComponentMessages(plugin);
-        TextComponent killerTCM = new TextComponent(killer.getName());
-        killerTCM.setColor(ChatColor.AQUA);
-        killerTCM.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, tcm.playerStats(killer)));
-        killerTCM.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/options " + killer.getName()));
-
-        TextComponent killedTCM = new TextComponent(player.getName());
-        killedTCM.setColor(ChatColor.RED);
-        killedTCM.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, tcm.playerStats(player)));
-        killedTCM.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/options " + player.getName()));
-
-        TextComponent wkb = new TextComponent(" was killed by ");
-        wkb.setColor(ChatColor.GRAY);
-        wkb.setHoverEvent(null);
-
-        TextComponent tc = new TextComponent("");
-
-        BaseComponent baseComponent = tc;
-        baseComponent.addExtra(killedTCM);
-        baseComponent.addExtra(wkb);
-        baseComponent.addExtra(killerTCM);
-
-        if (ChatCommands.chatSilenced) {
-            event.setDeathMessage(null);
-        } else {
-            if (plugin.getServer().getOnlinePlayers().size() >= 15) {
-                event.setDeathMessage(null);
-            } else {
-                //event.setDeathMessage("" + ChatColor.RED + player.getName() + ChatColor.GRAY + " was killed by " + ChatColor.AQUA + killer.getName());
-                event.setDeathMessage(null);
-                plugin.getServer().spigot().broadcast(baseComponent);
+            if (killer.getName().equals(player.getName())) {
+                return;
             }
-        }
 
-        if (killer.getHealth() % 2 == 0) {
-            player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.YELLOW + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + " hearts" + ChatColor.YELLOW + " left");
-        } else {
-            player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.YELLOW + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + ".5 hearts" + ChatColor.YELLOW + " left");
-        }
+            PlayerData killerData = plugin.getPlayerData(killer);
+            killerData.addKills(1);
+            killer.sendMessage(ChatColor.GREEN + "You killed " + ChatColor.RED + player.getName());
 
-        if (killer.getName().equals(player.getName())) {
-            return;
-        }
-
-        PlayerData killerData = plugin.getPlayerData(killer);
-        killerData.addKills(1);
-        killer.sendMessage(ChatColor.GREEN + "You killed " + ChatColor.RED + player.getName());
-
-        String rankTag = "";
-        if (playerData.hasRank(Rank.NINJA)) {
-            rankTag = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "[" + playerData.getRank().getColor()
-                    + ChatColor.BOLD + playerData.getRank().getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "] ";
-        }
-        if (killerData.getKills() == 150) {
-            player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
-        } else if (killerData.getKills() == 500) {
-            player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
-        } else if (killerData.getKills() == 1000) {
-            player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
-        } else if (killerData.getKills() == 1500) {
-            player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
-        }
+            String rankTag = "";
+            if (playerData.hasRank(Rank.NINJA)) {
+                rankTag = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "[" + playerData.getRank().getColor()
+                        + ChatColor.BOLD + playerData.getRank().getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "] ";
+            }
+            if (killerData.getKills() == 150) {
+                player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
+            } else if (killerData.getKills() == 500) {
+                player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
+            } else if (killerData.getKills() == 1000) {
+                player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
+            } else if (killerData.getKills() == 1500) {
+                player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
+            }
 
         /*if(playerData.getKills() == 1) {
             playerData.addAchievement(Achievement.FIRST_KILL);
@@ -144,35 +187,65 @@ public class PlayerDeathListener implements Listener {
             }
         }*/
 
-        if (killer.getLocation().distance(player.getWorld().getSpawnLocation()) <= 350) {
-            killer.setHealth(20);
-        }
+            if (killer.getLocation().distance(player.getWorld().getSpawnLocation()) <= 350) {
+                killer.setHealth(20);
+            }
 
-        if (KitPvp.killStreak.containsKey(killer.getUniqueId())) {
-            KitPvp.killStreak.put(killer.getUniqueId(), KitPvp.killStreak.get(killer.getUniqueId()) + 1);
-            int killerAmount = KitPvp.killStreak.get(killer.getUniqueId());
-            if (killerAmount % 5 == 0) {
-                plugin.getServer().broadcastMessage("" + ChatColor.GREEN + killer.getName() + ChatColor.GRAY + " has reached a KillStreak of " + ChatColor.RED + killerAmount + ChatColor.GRAY + "!");
-                killerAmount = killerAmount * 2 + 10;
-                killerData.depositBalance(killerAmount);
-                killer.sendMessage("" + plugin.getPrefix() + ChatColor.GREEN + "You have gained " + ChatColor.GOLD + "$" + killerAmount + ChatColor.GREEN + "!");
+            if (KitPvp.killStreak.containsKey(killer.getUniqueId())) {
+                KitPvp.killStreak.put(killer.getUniqueId(), KitPvp.killStreak.get(killer.getUniqueId()) + 1);
+                int killerAmount = KitPvp.killStreak.get(killer.getUniqueId());
+                if (killerAmount % 5 == 0) {
+                    plugin.getServer().broadcastMessage("" + ChatColor.GREEN + killer.getName() + ChatColor.GRAY + " has reached a KillStreak of " + ChatColor.RED + killerAmount + ChatColor.GRAY + "!");
+                    killerAmount = killerAmount * 2 + 10;
+                    killerData.depositBalance(killerAmount);
+                    killer.sendMessage("" + plugin.getPrefix() + ChatColor.GREEN + "You have gained " + ChatColor.GOLD + "$" + killerAmount + ChatColor.GREEN + "!");
+                } else {
+                    killerData.depositBalance(10);
+                    killer.sendMessage("" + plugin.getPrefix() + ChatColor.GREEN + "You have gained " + ChatColor.GOLD + "$10" + ChatColor.GREEN + "!");
+                    killer.sendMessage("" + plugin.getPrefix() + ChatColor.GREEN + "You have reached a KillStreak of " + ChatColor.GOLD + killerAmount + ChatColor.GREEN + "!");
+                }
             } else {
+                KitPvp.killStreak.put(killer.getUniqueId(), 1);
                 killerData.depositBalance(10);
                 killer.sendMessage("" + plugin.getPrefix() + ChatColor.GREEN + "You have gained " + ChatColor.GOLD + "$10" + ChatColor.GREEN + "!");
-                killer.sendMessage("" + plugin.getPrefix() + ChatColor.GREEN + "You have reached a KillStreak of " + ChatColor.GOLD + killerAmount + ChatColor.GREEN + "!");
+                killer.sendMessage("" + plugin.getPrefix() + ChatColor.GREEN + "You have reached a KillStreak of " + ChatColor.GOLD + KitPvp.killStreak.get(killer.getUniqueId()) + ChatColor.GREEN + "!");
             }
-        } else {
-            KitPvp.killStreak.put(killer.getUniqueId(), 1);
-            killerData.depositBalance(10);
-            killer.sendMessage("" + plugin.getPrefix() + ChatColor.GREEN + "You have gained " + ChatColor.GOLD + "$10" + ChatColor.GREEN + "!");
-            killer.sendMessage("" + plugin.getPrefix() + ChatColor.GREEN + "You have reached a KillStreak of " + ChatColor.GOLD + KitPvp.killStreak.get(killer.getUniqueId()) + ChatColor.GREEN + "!");
-        }
 
-        if (KitPvp.killStreak.containsKey(player.getUniqueId())) {
-            if (KitPvp.killStreak.get(player.getUniqueId()) >= 10) {
-                plugin.getServer().broadcastMessage("" + ChatColor.GREEN + killer.getName() + ChatColor.GRAY + " destroyed " + ChatColor.RED + player.getName() + "'s " + ChatColor.GOLD + "KillStreak of " + ChatColor.GREEN + KitPvp.killStreak.get(player.getUniqueId()) + "!");
+            if (KitPvp.killStreak.containsKey(player.getUniqueId())) {
+                if (KitPvp.killStreak.get(player.getUniqueId()) >= 10) {
+                    plugin.getServer().broadcastMessage("" + ChatColor.GREEN + killer.getName() + ChatColor.GRAY + " destroyed " + ChatColor.RED + player.getName() + "'s " + ChatColor.GOLD + "KillStreak of " + ChatColor.GREEN + KitPvp.killStreak.get(player.getUniqueId()) + "!");
+                }
+                KitPvp.killStreak.remove(player.getUniqueId());
             }
-            KitPvp.killStreak.remove(player.getUniqueId());
+        }
+    }
+    @EventHandler
+    public void onDeath (PlayerDeathEvent event) {
+        event.setDeathMessage(null);
+    }
+    @EventHandler
+    public void onInteract (PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        if (player.getItemInHand().getType().equals(Material.BOOK)) {
+            if (player.getGameMode().equals(GameMode.CREATIVE) && ClimaxPvp.deadPeoples.contains(player)) {
+                ClimaxPvp.deadPeoples.remove(player);
+                plugin.respawn(player);
+                player.setAllowFlight(false);
+                player.setFlying(false);
+                for(Player players : Bukkit.getServer().getOnlinePlayers()){
+                    players.showPlayer(player);
+                }
+            }
+        }
+    }
+    @EventHandler
+    public void onEntityDamage (EntityDamageByEntityEvent event) {
+        if (event.getEntity().getType().equals(EntityType.PLAYER) && event.getDamager().getType().equals(EntityType.PLAYER)) {
+            Player player = (Player) event.getEntity();
+            Player damager = (Player) event.getDamager();
+            if (damager.getGameMode().equals(GameMode.CREATIVE) && ClimaxPvp.deadPeoples.contains(damager)) {
+                event.setCancelled(true);
+            }
         }
     }
 }

@@ -67,6 +67,8 @@ public class ClimaxPvp extends JavaPlugin {
     @Getter
     private SlackApi slackDonations = null;
 
+    public static List<Player> deadPeoples = new ArrayList<>();
+
     @Override
     public void onEnable() {
         // Initialize Instance

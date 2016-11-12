@@ -5,6 +5,7 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.I;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -34,6 +35,12 @@ public class PlayerRespawnListener implements Listener {
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
         event.setRespawnLocation(event.getPlayer().getWorld().getSpawnLocation());
+
+        for(Player players : Bukkit.getServer().getOnlinePlayers()){
+            players.showPlayer(player);
+        }
+
+        ClimaxPvp.deadPeoples.remove(player);
 
         player.setGameMode(GameMode.SURVIVAL);
         player.getInventory().clear();
