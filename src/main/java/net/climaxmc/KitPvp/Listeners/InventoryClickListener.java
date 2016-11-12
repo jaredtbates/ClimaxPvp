@@ -5,6 +5,7 @@ import net.climaxmc.KitPvp.Commands.ReportCommand;
 import net.climaxmc.KitPvp.Commands.TeamCommand;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Kits.BomberKit;
+import net.climaxmc.KitPvp.Kits.FighterKit;
 import net.climaxmc.KitPvp.Menus.ReportGUI;
 import net.climaxmc.KitPvp.Utils.Challenges.Challenge;
 import net.climaxmc.KitPvp.Utils.Teams.TeamMessages;
@@ -254,6 +255,13 @@ public class InventoryClickListener implements Listener {
 
         } else {
             event.setCancelled(false);
+        }
+        if (event.getClickedInventory().getName().contains("Class Selector")) {
+            if (event.getCurrentItem().getType().equals(Material.DIAMOND_SWORD)) {
+                FighterKit kit = new FighterKit();
+                kit.wear(player);
+            }
+            event.setCancelled(true);
         }
     }
 }

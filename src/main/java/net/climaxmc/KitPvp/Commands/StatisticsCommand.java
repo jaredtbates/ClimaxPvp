@@ -44,12 +44,12 @@ public class StatisticsCommand implements CommandExecutor {
             return true;
         }
 
-        player.sendMessage(ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "=======" + ChatColor.AQUA + " " + target.getName() + "'s statistics " + ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "=======");
-        player.sendMessage(ChatColor.GREEN + "Rank: " + ChatColor.RED + WordUtils.capitalizeFully(data.getRank().toString()));
-        player.sendMessage(ChatColor.GREEN + "Balance: " + ChatColor.RED + "$" + data.getBalance());
-        player.sendMessage(ChatColor.GREEN + "Kills: " + ChatColor.RED + data.getKills());
-        player.sendMessage(ChatColor.GREEN + "Deaths: " + ChatColor.RED + data.getDeaths());
-        player.sendMessage(ChatColor.GREEN + "KDR: " + ChatColor.RED + getRatio(data));
+        player.sendMessage("§f» §b" + target.getName() + "'s statistics §f«");
+        player.sendMessage("§7Rank: §c" + WordUtils.capitalizeFully(data.getRank().toString()));
+        player.sendMessage("§7Balance: §c" + "$" + data.getBalance());
+        player.sendMessage("§7Kills: §c" + data.getKills());
+        player.sendMessage("§7Deaths: §c" + data.getDeaths());
+        player.sendMessage("§7KDR: §c" + getRatio(data));
 
         return true;
     }

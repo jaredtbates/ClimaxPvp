@@ -20,7 +20,7 @@ public class ProjectileLaunchListener implements Listener{
     @EventHandler
     public void onEntitySpawn (ProjectileLaunchEvent event) {
         if (event.getEntity().getType() == EntityType.SPLASH_POTION) {
-            event.getEntity().setVelocity(event.getEntity().getVelocity().multiply(0.87));
+            event.getEntity().setVelocity(event.getEntity().getVelocity().multiply(1.087));
         }
     }
 }

@@ -65,7 +65,7 @@ public class PlayerInteractListener implements Listener {
         }
 
         if (item != null) {
-            if (item.getType().equals(Material.NETHER_STAR)) {
+            if (item.getType().equals(Material.NETHER_STAR) && player.getLocation().distance(plugin.getWarpLocation("upgrade")) > 100) {
                 Inventory kitSelectorInventory = Bukkit.createInventory(null, 54, ChatColor.RED + "" + ChatColor.BOLD + "Kit Selector");
 
                 ItemStack goldKits = new I(Material.STAINED_CLAY).durability(1).name(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kits").lore("Level 1500");
@@ -145,7 +145,43 @@ public class PlayerInteractListener implements Listener {
                     KitManager.getPreviousKit().get(player.getUniqueId()).wearCheckLevel(player);
                 }
             }
+        }
+        assert item != null;
+        if (item.getType().equals(Material.NETHER_STAR)) {
+            if ((player.getLocation().distance(plugin.getWarpLocation("upgrade")) <= 100)) {
+                Inventory upgradeInventory = Bukkit.createInventory(null, 54, "Class Selector");
 
+                upgradeInventory.setItem(10, new I(Material.STAINED_GLASS_PANE).durability(0).name(" "));
+                upgradeInventory.setItem(12, new I(Material.STAINED_GLASS_PANE).durability(0).name(" "));
+                upgradeInventory.setItem(14, new I(Material.STAINED_GLASS_PANE).durability(0).name(" "));
+                upgradeInventory.setItem(16, new I(Material.STAINED_GLASS_PANE).durability(0).name(" "));
+                upgradeInventory.setItem(31, new I(Material.STAINED_GLASS_PANE).durability(0).name(" "));
+                upgradeInventory.setItem(37, new I(Material.STAINED_GLASS_PANE).durability(0).name(" "));
+                upgradeInventory.setItem(39, new I(Material.STAINED_GLASS_PANE).durability(0).name(" "));
+                upgradeInventory.setItem(41, new I(Material.STAINED_GLASS_PANE).durability(0).name(" "));
+                upgradeInventory.setItem(43, new I(Material.STAINED_GLASS_PANE).durability(0).name(" "));
+
+                upgradeInventory.setItem(2, new I(Material.STAINED_GLASS_PANE).durability(7).name(" "));
+                upgradeInventory.setItem(6, new I(Material.STAINED_GLASS_PANE).durability(7).name(" "));
+                upgradeInventory.setItem(20, new I(Material.STAINED_GLASS_PANE).durability(7).name(" "));
+                upgradeInventory.setItem(24, new I(Material.STAINED_GLASS_PANE).durability(7).name(" "));
+                upgradeInventory.setItem(29, new I(Material.STAINED_GLASS_PANE).durability(7).name(" "));
+                upgradeInventory.setItem(33, new I(Material.STAINED_GLASS_PANE).durability(7).name(" "));
+                upgradeInventory.setItem(47, new I(Material.STAINED_GLASS_PANE).durability(7).name(" "));
+                upgradeInventory.setItem(51, new I(Material.STAINED_GLASS_PANE).durability(7).name(" "));
+
+                ItemStack fighter = new I(Material.DIAMOND_SWORD).name("§c§lFighter").lore("§7Fighters use hand-to-hand combat and ")
+                        .lore("§7light but durable armor to ")
+                        .lore("§7defeat their opponents.")
+                        .lore(" ")
+                        .lore("§eUpgrades §6(Tier 1 §e- §6Tier 4):")
+                        .lore("§cArmor: §7Full Chain §f- §7Full Iron")
+                        .lore("§cSword: §7Iron §f- §7Diamond")
+                        .lore("§cAbilities: §7None §f- §73");
+                upgradeInventory.setItem(11, fighter);
+
+                player.openInventory(upgradeInventory);
+            }
         }
     }
 }
