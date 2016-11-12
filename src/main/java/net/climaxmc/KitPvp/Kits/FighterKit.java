@@ -10,6 +10,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -68,10 +69,14 @@ public class FighterKit extends Kit {
     }
 
     @EventHandler
-    public void onDeath (PlayerDeathEvent event) {
-        Player player = event.getEntity();
+    public void onEntityDamage(EntityDamageEvent event) {
+        if (!(event.getEntity().getType().equals(EntityType.PLAYER))){
+            return;
+        }
+        Player player = (Player) event.getEntity();
         Player killer = player.getKiller();
-        if (player.getHealth() == 0 && killer.getHealth() != 0) {
+
+        if (player.getHealth() - event.getDamage() <= 0) {
             if (killer.getExp() != 1F) {
                 killer.setExp(killer.getExp() + 0.5F);
             }
@@ -79,7 +84,6 @@ public class FighterKit extends Kit {
                 killer.setLevel(killer.getLevel() + 1);
                 killer.setExp(0F);
             }
-        } else if (killer.getHealth() == 0) {
             Bukkit.getScheduler().cancelTask(expTask);
             player.setExp(0F);
             player.setLevel(0);
