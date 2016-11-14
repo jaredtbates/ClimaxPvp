@@ -20,5 +20,8 @@ public class BlockBreakListener implements Listener {
         if (!player.getGameMode().equals(GameMode.CREATIVE)) {
             event.setCancelled(true);
         }
+        if (ClimaxPvp.deadPeoples.contains(player)) {
+            event.setCancelled(true);
+        }
     }
 }

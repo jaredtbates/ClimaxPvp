@@ -4,6 +4,7 @@ import net.climaxmc.Administration.Commands.ChatCommands;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Kits.FighterKit;
 import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Utils.TextComponentMessages;
 import net.climaxmc.KitPvp.Utils.I;
@@ -82,15 +83,13 @@ public class PlayerDeathListener implements Listener {
 
                 ClimaxPvp.deadPeoples.add(player);
 
-                player.getInventory().setItem(8, new I(Material.BOOK).name("§6§lRespawn"));
-
-                if (plugin.getCurrentWarps().containsKey(player.getUniqueId())) {
-                    player.teleport(plugin.getCurrentWarps().get(player.getUniqueId()));
-                    if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
-                        new PvpKit().wearCheckLevel(player);
-                    }
-                }
+                player.getInventory().setItem(4, new I(Material.BOOK).name("§6§lRespawn"));
             });
+
+            if (ClimaxPvp.inFighterKit.contains(player)) {
+                ClimaxPvp.inFighterKit.remove(player);
+                Bukkit.broadcastMessage("urmom");
+            }
 
             PlayerData playerData = plugin.getPlayerData(player);
             playerData.addDeaths(1);
@@ -223,13 +222,18 @@ public class PlayerDeathListener implements Listener {
     public void onDeath (PlayerDeathEvent event) {
         event.setDeathMessage(null);
     }
+
     @EventHandler
     public void onInteract (PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (player.getItemInHand().getType().equals(Material.BOOK)) {
             if (player.getGameMode().equals(GameMode.CREATIVE) && ClimaxPvp.deadPeoples.contains(player)) {
                 ClimaxPvp.deadPeoples.remove(player);
+
                 plugin.respawn(player);
+                if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
+                    new PvpKit().wearCheckLevel(player);
+                }
                 player.setAllowFlight(false);
                 player.setFlying(false);
                 for(Player players : Bukkit.getServer().getOnlinePlayers()){

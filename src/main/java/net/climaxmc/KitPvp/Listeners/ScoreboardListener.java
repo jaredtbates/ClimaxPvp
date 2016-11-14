@@ -41,21 +41,21 @@ public class ScoreboardListener implements Listener {
         objective.setDisplayName("  §f> §6§lClimax§c§lPvP §f<  ");
         if (playerData != null) {
             objective.getScore("§f-]§7§m---------§f[-").setScore(13);
-            objective.getScore("§f» §aBalance").setScore(12);
+            objective.getScore("§f» §aBalance:").setScore(12);
             String balance = "$" + new Double(playerData.getBalance()).intValue();
             objective.getScore(balance).setScore(11);
             balances.put(player.getUniqueId(), new Double(playerData.getBalance()).intValue());
             objective.getScore(" ").setScore(10);
-            objective.getScore("§f» §cKills").setScore(9);
+            objective.getScore("§f» §cKills:").setScore(9);
             objective.getScore(Integer.toString(plugin.getPlayerData(player).getKills())).setScore(8);
             kills.put(player.getUniqueId(), playerData.getKills());
             objective.getScore("  ").setScore(7);
-            objective.getScore("§f» §cDeaths").setScore(6);
+            objective.getScore("§f» §cDeaths:").setScore(6);
             deaths.put(player.getUniqueId(), playerData.getDeaths());
             objective.getScore(Integer.toString(plugin.getPlayerData(player).getDeaths())).setScore(5);
             objective.getScore("   ").setScore(4);
         }
-        objective.getScore("§f» §eWebsite").setScore(3);
+        objective.getScore("§f» §eWebsite:").setScore(3);
         objective.getScore("climaxmc.net").setScore(2);
         objective.getScore("§f-]§f§7§m---------§f[-").setScore(1);
         /*Objective healthObjective = board.registerNewObjective("showhealth", "health");
@@ -81,7 +81,7 @@ public class ScoreboardListener implements Listener {
             Objective objective = board.getObjective("Player Data");
             objective.setDisplayName("  §f> §6§lClimax§c§lPvP §f<  ");
             objective.getScore("§f-]§7§m---------§f[-").setScore(13);
-            objective.getScore("§f» §aBalance").setScore(12);
+            objective.getScore("§f» §aBalance:").setScore(12);
             if (balances.containsKey(player.getUniqueId())) {
                 board.resetScores("$" + balances.get(player.getUniqueId()));
                 String balance = "$" + new Double(playerData.getBalance()).intValue();
@@ -89,21 +89,21 @@ public class ScoreboardListener implements Listener {
             }
             balances.put(player.getUniqueId(), new Double(playerData.getBalance()).intValue());
             objective.getScore(" ").setScore(10);
-            objective.getScore("§f» §cKills").setScore(9);
+            objective.getScore("§f» §cKills:").setScore(9);
             if (kills.containsKey(player.getUniqueId())) {
                 board.resetScores(Integer.toString(kills.get(player.getUniqueId())));
                 objective.getScore(Integer.toString(plugin.getPlayerData(player).getKills())).setScore(8);
             }
             kills.put(player.getUniqueId(), playerData.getKills());
             objective.getScore("  ").setScore(7);
-            objective.getScore("§f» §cDeaths").setScore(6);
+            objective.getScore("§f» §cDeaths:").setScore(6);
             if (deaths.containsKey(player.getUniqueId())) {
                 board.resetScores(Integer.toString(deaths.get(player.getUniqueId())));
                 objective.getScore(Integer.toString(plugin.getPlayerData(player).getDeaths())).setScore(5);
             }
             deaths.put(player.getUniqueId(), playerData.getDeaths());
             objective.getScore("   ").setScore(4);
-            objective.getScore("§f» §eWebsite").setScore(3);
+            objective.getScore("§f» §eWebsite:").setScore(3);
             objective.getScore("climaxmc.net").setScore(2);
             objective.getScore("§f-]§f§7§m---------§f[-").setScore(1);
         }

@@ -14,6 +14,7 @@ import net.climaxmc.common.database.MySQL;
 import net.climaxmc.common.database.PlayerData;
 import net.gpedro.integrations.slack.SlackApi;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
@@ -22,6 +23,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,7 +69,9 @@ public class ClimaxPvp extends JavaPlugin {
     @Getter
     private SlackApi slackDonations = null;
 
-    public static List<Player> deadPeoples = new ArrayList<>();
+    public static ArrayList<Player> deadPeoples = new ArrayList<>();
+
+    public static ArrayList<Player> inFighterKit = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -195,7 +199,15 @@ public class ClimaxPvp extends JavaPlugin {
      */
     public void respawn(Player player, Location location) {
         player.spigot().respawn();
-        player.teleport(location);
+        if (player.getGameMode().equals(GameMode.CREATIVE)) {
+            if (ClimaxPvp.getInstance().getCurrentWarps().containsKey(player.getUniqueId())) {
+                player.teleport(ClimaxPvp.getInstance().getCurrentWarps().get(player.getUniqueId()));
+            } else {
+                player.teleport(location);
+            }
+        } else {
+            player.teleport(location);
+        }
         getServer().getPluginManager().callEvent(new PlayerRespawnEvent(player, location, false));
     }
 

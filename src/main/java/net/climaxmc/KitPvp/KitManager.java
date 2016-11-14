@@ -33,6 +33,7 @@ public class KitManager implements Listener {
     private static boolean allKitsEnabled = false;
 
     public KitManager(ClimaxPvp plugin) {
+
         // Gray Kits
         kits.add(new PvpKit());
         kits.add(new ArcherKit());
@@ -73,6 +74,8 @@ public class KitManager implements Listener {
             getCommandMap().register(plugin.getConfig().getName(), getCommand(kit.getName().replaceAll("\\s+", ""), plugin));
             plugin.getCommand(kit.getName().replaceAll("\\s+", "")).setExecutor(kit);
         }
+
+        plugin.getServer().getPluginManager().registerEvents(new FighterKit(), plugin);
     }
 
     public static boolean isPlayerInKit(Player player) {

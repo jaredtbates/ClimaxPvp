@@ -12,6 +12,7 @@ import net.climaxmc.KitPvp.Commands.*;
 import net.climaxmc.KitPvp.Commands.Messaging.MessageCommand;
 import net.climaxmc.KitPvp.Commands.Messaging.ReplyCommand;
 import net.climaxmc.Administration.Commands.StaffChatCommand;
+import net.climaxmc.KitPvp.Kits.FighterKit;
 import net.climaxmc.KitPvp.Listeners.*;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
 import net.climaxmc.KitPvp.Menus.ReportGUI;

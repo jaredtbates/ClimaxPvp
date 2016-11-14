@@ -39,13 +39,13 @@ public class InventoryClickListener implements Listener {
         final Player player = (Player) event.getWhoClicked();
 
         if (!player.getGameMode().equals(GameMode.CREATIVE)) {
-            if (event.getSlotType() == null || event.getCurrentItem() == null
-                    || event.getCurrentItem().getType() == null) {
+            if (event.getSlotType() == null || event.getCurrentItem() == null || event.getCurrentItem().getType() == null) {
                 return;
             }
-            if (inventory == player.getInventory()) {
+
+            /*if (inventory == player.getInventory()) {
                 event.setCancelled(true);
-            }
+            }*/
 
             for (ItemStack itemStack : player.getInventory().getArmorContents()) {
                 if (itemStack == null) {
@@ -254,7 +254,11 @@ public class InventoryClickListener implements Listener {
             }
 
         } else {
-            event.setCancelled(false);
+            if (ClimaxPvp.deadPeoples.contains(player)) {
+                event.setCancelled(true);
+            } else {
+                event.setCancelled(false);
+            }
         }
         if (event.getClickedInventory().getName().contains("Class Selector")) {
             if (event.getCurrentItem().getType().equals(Material.DIAMOND_SWORD)) {
