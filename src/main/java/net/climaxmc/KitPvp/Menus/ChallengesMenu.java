@@ -21,7 +21,7 @@ public class ChallengesMenu implements Listener {
         }
 
         if (item != null) {
-            if (item.getType().equals(Material.DIAMOND)) {
+            if (item.getType().equals(Material.DIAMOND) && item.getItemMeta().getDisplayName().equals(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenges")) {
 
                 p.sendMessage(ChatColor.RED + "Challenges are being fixed at the moment!");
                 p.playSound(p.getLocation(), Sound.CAT_MEOW, 1, 1);

@@ -80,13 +80,13 @@ public class PlayerInteractListener implements Listener {
                 kitSelectorInventory.setItem(44, grayGlass);
                 kitSelectorInventory.setItem(53, grayGlass);
 
-                ItemStack goldKits = new I(Material.STAINED_CLAY).durability(1).name(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kits").lore("Level 2000");
-                kitSelectorInventory.setItem(1, goldKits);
-                kitSelectorInventory.setItem(7, goldKits);
+                ItemStack purpleKits = new I(Material.STAINED_CLAY).durability(11).name(ChatColor.DARK_PURPLE + "" + "Purple Kits").lore("Level 2000");
+                kitSelectorInventory.setItem(1, purpleKits);
+                kitSelectorInventory.setItem(7, purpleKits);
 
-                ItemStack purpleKits = new I(Material.STAINED_CLAY).durability(11).name(ChatColor.DARK_PURPLE + "" + "Purple Kits").lore("Level 1500");
-                kitSelectorInventory.setItem(10, purpleKits);
-                kitSelectorInventory.setItem(16, purpleKits);
+                ItemStack goldKits = new I(Material.STAINED_CLAY).durability(1).name(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kits").lore("Level 1500");
+                kitSelectorInventory.setItem(10, goldKits);
+                kitSelectorInventory.setItem(16, goldKits);
 
                 ItemStack redKits = new I(Material.STAINED_CLAY).durability(14).name(ChatColor.RED + "Red Kits").lore("Level 1000");
                 kitSelectorInventory.setItem(19, redKits);
@@ -104,14 +104,14 @@ public class PlayerInteractListener implements Listener {
                 kitSelectorInventory.setItem(46, grayKits);
                 kitSelectorInventory.setItem(52, grayKits);
 
-                ItemStack goldKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(1).name(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kit").lore(ChatColor.GOLD + "" + ChatColor.ITALIC + "Unlocked at Level 1500");
+                ItemStack purpleKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(10).name(ChatColor.DARK_PURPLE + "" + "Purple Kit").lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Unlocked at Level 2000");
                 for (int i = 2; i < 7; i++) {
-                    kitSelectorInventory.setItem(i, goldKitsGlass);
+                    kitSelectorInventory.setItem(i, purpleKitsGlass);
                 }
 
-                ItemStack purpleKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(10).name(ChatColor.DARK_PURPLE + "" + "Purple Kit").lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Unlocked at Level 1500");
+                ItemStack goldKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(1).name(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kit").lore(ChatColor.GOLD + "" + ChatColor.ITALIC + "Unlocked at Level 1500");
                 for (int i = 11; i < 16; i++) {
-                    kitSelectorInventory.setItem(i, purpleKitsGlass);
+                    kitSelectorInventory.setItem(i, goldKitsGlass);
                 }
 
                 ItemStack redKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(14).name(ChatColor.RED + "Red Kit").lore(ChatColor.RED + "" + ChatColor.ITALIC + "Unlocked at Level 1000");
@@ -134,7 +134,7 @@ public class PlayerInteractListener implements Listener {
                     kitSelectorInventory.setItem(i, grayKitsGlass);
                 }
 
-                int goldSlot = 1, purpleSlot = 10, redSlot = 19, limeSlot = 28, blueSlot = 37, graySlot = 46;
+                int purpleSlot = 1, goldSlot = 10, redSlot = 19, limeSlot = 28, blueSlot = 37, graySlot = 46;
 
                 for (Kit kit : KitManager.getKits()) {
                     if ((playerData.hasData("Admin Mode")
@@ -144,10 +144,10 @@ public class PlayerInteractListener implements Listener {
                             || (playerData.hasRank(Rank.MASTER) && kit.getColor().equals(ChatColor.GOLD)))
                                 && !playerData.hasRank(Rank.TRUSTED)))
                             || KitManager.isAllKitsEnabled()) {
-                        if (kit.getColor().equals(ChatColor.GOLD)) {
-                            kitSelectorInventory.setItem(++goldSlot, kit.getItem());
-                        } else if (kit.getColor().equals(ChatColor.DARK_PURPLE)) {
+                        if (kit.getColor().equals(ChatColor.DARK_PURPLE)) {
                             kitSelectorInventory.setItem(++purpleSlot, kit.getItem());
+                        } else if (kit.getColor().equals(ChatColor.GOLD)) {
+                            kitSelectorInventory.setItem(++goldSlot, kit.getItem());
                         } else if (kit.getColor().equals(ChatColor.RED)) {
                             kitSelectorInventory.setItem(++redSlot, kit.getItem());
                         } else if (kit.getColor().equals(ChatColor.GREEN)) {

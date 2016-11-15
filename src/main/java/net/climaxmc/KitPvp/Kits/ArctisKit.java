@@ -26,11 +26,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.concurrent.TimeUnit;
 
 public class ArctisKit extends Kit {
-    private Ability absolutezero = new Ability(1, 10, TimeUnit.SECONDS);
+    private Ability absolutezero = new Ability(1, 15, TimeUnit.SECONDS);
+
+    private int i;
 
     public ArctisKit() {
         super("Arctis", new ItemStack(Material.DIAMOND), "Summon a vortex of wind reaching temperatures of Absolute Zero", ChatColor.DARK_PURPLE);
@@ -94,7 +97,7 @@ public class ArctisKit extends Kit {
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.DIAMOND);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Absolute Zero");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Absolute Zero §f» §8[§6" + "15" + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -104,12 +107,26 @@ public class ArctisKit extends Kit {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
             if (player.getInventory().getItemInHand().getType() == Material.DIAMOND) {
-                if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
-                    if (!absolutezero.tryUse(player)) {
-                        return;
-                    }
-                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.DARK_PURPLE + "Absolute Zero" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.ABSOLUTE_ZERO);
+                if (!absolutezero.tryUse(player)) {
+                    return;
+                }
+                player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.DARK_PURPLE + "Absolute Zero" + ChatColor.GOLD + " Ability!");
+                DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.ABSOLUTE_ZERO);
+
+                Ability.Status status = absolutezero.getStatus(player);
+                for (i = 1; i <= 16; ++i) {
+                    Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                        @Override
+                        public void run() {
+                            if (KitManager.isPlayerInKit(player, ArctisKit.this)) {
+                                ItemStack ability = new ItemStack(Material.DIAMOND);
+                                ItemMeta abilitymeta = ability.getItemMeta();
+                                abilitymeta.setDisplayName(ChatColor.AQUA + "Absolute Zero §f» §8[§6" + status.getRemainingTime(TimeUnit.SECONDS) + "§8]");
+                                ability.setItemMeta(abilitymeta);
+                                player.getInventory().setItem(1, ability);
+                            }
+                        }
+                    }, i * 20);
                 }
             }
         }
