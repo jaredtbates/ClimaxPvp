@@ -4,13 +4,11 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Inventories.TrailsInventory;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -68,52 +66,75 @@ public class PlayerInteractListener implements Listener {
             if (item.getType().equals(Material.NETHER_STAR) && player.getLocation().distance(plugin.getWarpLocation("upgrade")) > 100) {
                 Inventory kitSelectorInventory = Bukkit.createInventory(null, 54, ChatColor.RED + "" + ChatColor.BOLD + "Kit Selector");
 
-                ItemStack goldKits = new I(Material.STAINED_CLAY).durability(1).name(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kits").lore("Level 1500");
+                ItemStack grayGlass = new I(Material.STAINED_GLASS_PANE).durability(15).name(" ");
+                kitSelectorInventory.setItem(0, grayGlass);
+                kitSelectorInventory.setItem(9, grayGlass);
+                kitSelectorInventory.setItem(18, grayGlass);
+                kitSelectorInventory.setItem(27, grayGlass);
+                kitSelectorInventory.setItem(36, grayGlass);
+                kitSelectorInventory.setItem(45, grayGlass);
+                kitSelectorInventory.setItem(8, grayGlass);
+                kitSelectorInventory.setItem(17, grayGlass);
+                kitSelectorInventory.setItem(26, grayGlass);
+                kitSelectorInventory.setItem(35, grayGlass);
+                kitSelectorInventory.setItem(44, grayGlass);
+                kitSelectorInventory.setItem(53, grayGlass);
+
+                ItemStack goldKits = new I(Material.STAINED_CLAY).durability(1).name(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kits").lore("Level 2000");
                 kitSelectorInventory.setItem(1, goldKits);
                 kitSelectorInventory.setItem(7, goldKits);
 
+                ItemStack purpleKits = new I(Material.STAINED_CLAY).durability(11).name(ChatColor.DARK_PURPLE + "" + "Purple Kits").lore("Level 1500");
+                kitSelectorInventory.setItem(10, purpleKits);
+                kitSelectorInventory.setItem(16, purpleKits);
+
                 ItemStack redKits = new I(Material.STAINED_CLAY).durability(14).name(ChatColor.RED + "Red Kits").lore("Level 1000");
-                kitSelectorInventory.setItem(10, redKits);
-                kitSelectorInventory.setItem(16, redKits);
+                kitSelectorInventory.setItem(19, redKits);
+                kitSelectorInventory.setItem(25, redKits);
 
                 ItemStack greenKits = new I(Material.STAINED_CLAY).durability(5).name(ChatColor.GREEN + "Green Kits").lore("Level 500");
-                kitSelectorInventory.setItem(19, greenKits);
-                kitSelectorInventory.setItem(25, greenKits);
+                kitSelectorInventory.setItem(28, greenKits);
+                kitSelectorInventory.setItem(34, greenKits);
 
                 ItemStack blueKits = new I(Material.STAINED_CLAY).durability(3).name(ChatColor.BLUE + "Blue Kits").lore("Level 150");
-                kitSelectorInventory.setItem(28, blueKits);
-                kitSelectorInventory.setItem(34, blueKits);
+                kitSelectorInventory.setItem(37, blueKits);
+                kitSelectorInventory.setItem(43, blueKits);
 
                 ItemStack grayKits = new I(Material.STAINED_CLAY).durability(7).name(ChatColor.GRAY + "Gray Kits");
-                kitSelectorInventory.setItem(37, grayKits);
-                kitSelectorInventory.setItem(43, grayKits);
+                kitSelectorInventory.setItem(46, grayKits);
+                kitSelectorInventory.setItem(52, grayKits);
 
                 ItemStack goldKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(1).name(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kit").lore(ChatColor.GOLD + "" + ChatColor.ITALIC + "Unlocked at Level 1500");
                 for (int i = 2; i < 7; i++) {
                     kitSelectorInventory.setItem(i, goldKitsGlass);
                 }
 
-                ItemStack redKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(14).name(ChatColor.RED + "Red Kit").lore(ChatColor.RED + "" + ChatColor.ITALIC + "Unlocked at Level 1000");
+                ItemStack purpleKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(10).name(ChatColor.DARK_PURPLE + "" + "Purple Kit").lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Unlocked at Level 1500");
                 for (int i = 11; i < 16; i++) {
+                    kitSelectorInventory.setItem(i, purpleKitsGlass);
+                }
+
+                ItemStack redKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(14).name(ChatColor.RED + "Red Kit").lore(ChatColor.RED + "" + ChatColor.ITALIC + "Unlocked at Level 1000");
+                for (int i = 20; i < 25; i++) {
                     kitSelectorInventory.setItem(i, redKitsGlass);
                 }
 
                 ItemStack greenKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(5).name(ChatColor.GREEN + "Green Kit").lore(ChatColor.GREEN + "" + ChatColor.ITALIC + "Unlocked at Level 500");
-                for (int i = 20; i < 25; i++) {
+                for (int i = 29; i < 34; i++) {
                     kitSelectorInventory.setItem(i, greenKitsGlass);
                 }
 
                 ItemStack blueKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(3).name(ChatColor.BLUE + "Blue Kit").lore(ChatColor.BLUE + "" + ChatColor.ITALIC + "Unlocked at Level 150");
-                for (int i = 29; i < 34; i++) {
+                for (int i = 38; i < 43; i++) {
                     kitSelectorInventory.setItem(i, blueKitsGlass);
                 }
 
                 ItemStack grayKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(7).name(ChatColor.GRAY + "Gray Kit").lore(ChatColor.GRAY + "" + ChatColor.ITALIC + "Unlocked at Level 0");
-                for (int i = 38; i < 42; i++) {
+                for (int i = 47; i < 52; i++) {
                     kitSelectorInventory.setItem(i, grayKitsGlass);
                 }
 
-                int goldSlot = 1, redSlot = 10, limeSlot = 19, blueSlot = 28, graySlot = 37;
+                int goldSlot = 1, purpleSlot = 10, redSlot = 19, limeSlot = 28, blueSlot = 37, graySlot = 46;
 
                 for (Kit kit : KitManager.getKits()) {
                     if ((playerData.hasData("Admin Mode")
@@ -125,6 +146,8 @@ public class PlayerInteractListener implements Listener {
                             || KitManager.isAllKitsEnabled()) {
                         if (kit.getColor().equals(ChatColor.GOLD)) {
                             kitSelectorInventory.setItem(++goldSlot, kit.getItem());
+                        } else if (kit.getColor().equals(ChatColor.DARK_PURPLE)) {
+                            kitSelectorInventory.setItem(++purpleSlot, kit.getItem());
                         } else if (kit.getColor().equals(ChatColor.RED)) {
                             kitSelectorInventory.setItem(++redSlot, kit.getItem());
                         } else if (kit.getColor().equals(ChatColor.GREEN)) {
@@ -182,6 +205,28 @@ public class PlayerInteractListener implements Listener {
 
                     player.openInventory(upgradeInventory);
                 }
+            }
+        }
+        if (player.getItemInHand().getType().equals(Material.BOOK)) {
+            if (player.getGameMode().equals(GameMode.CREATIVE) && ClimaxPvp.deadPeoples.contains(player)) {
+                ClimaxPvp.deadPeoples.remove(player);
+
+                plugin.respawn(player);
+
+                if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
+                    new PvpKit().wearCheckLevel(player);
+                }
+                player.setAllowFlight(false);
+                player.setFlying(false);
+                for(Player players : Bukkit.getServer().getOnlinePlayers()){
+                    players.showPlayer(player);
+                }
+                Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                    @Override
+                    public void run() {
+                        player.playSound(player.getLocation(), Sound.NOTE_STICKS, 1, 1);
+                    }
+                }, 1);
             }
         }
     }

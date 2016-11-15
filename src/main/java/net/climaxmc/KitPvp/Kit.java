@@ -51,7 +51,7 @@ public abstract class Kit implements Listener, CommandExecutor {
      */
     public Kit(String name, ItemStack item, ChatColor color) {
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(color + "Kit " + name);
+        meta.setDisplayName(color + "" + name);
         item.setItemMeta(meta);
         this.name = name;
         this.item = item;
@@ -71,7 +71,7 @@ public abstract class Kit implements Listener, CommandExecutor {
         ArrayList<String> lores = new ArrayList<>();
         lores.add(lore);
         meta.setLore(lores);
-        meta.setDisplayName(color + "Kit " + name);
+        meta.setDisplayName(color + "" + name);
         item.setItemMeta(meta);
         this.name = name;
         this.item = item;

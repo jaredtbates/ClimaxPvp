@@ -88,7 +88,6 @@ public class PlayerDeathListener implements Listener {
 
             if (ClimaxPvp.inFighterKit.contains(player)) {
                 ClimaxPvp.inFighterKit.remove(player);
-                Bukkit.broadcastMessage("urmom");
             }
 
             PlayerData playerData = plugin.getPlayerData(player);
@@ -226,21 +225,6 @@ public class PlayerDeathListener implements Listener {
     @EventHandler
     public void onInteract (PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (player.getItemInHand().getType().equals(Material.BOOK)) {
-            if (player.getGameMode().equals(GameMode.CREATIVE) && ClimaxPvp.deadPeoples.contains(player)) {
-                ClimaxPvp.deadPeoples.remove(player);
-
-                plugin.respawn(player);
-                if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
-                    new PvpKit().wearCheckLevel(player);
-                }
-                player.setAllowFlight(false);
-                player.setFlying(false);
-                for(Player players : Bukkit.getServer().getOnlinePlayers()){
-                    players.showPlayer(player);
-                }
-            }
-        }
     }
     @EventHandler
     public void onEntityDamage (EntityDamageByEntityEvent event) {

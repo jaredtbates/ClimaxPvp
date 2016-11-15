@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kits.*;
+import net.climaxmc.KitPvp.Kits.ArctisKit;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
@@ -61,6 +62,9 @@ public class KitManager implements Listener {
         kits.add(new DragonKit());
         kits.add(new ViperKit());
         kits.add(new LazerKit());
+
+        // Purple Kits
+        kits.add(new ArctisKit());
 
         // Gold Kits
         kits.add(new EmberKit());

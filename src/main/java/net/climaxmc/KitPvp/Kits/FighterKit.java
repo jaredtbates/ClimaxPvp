@@ -61,17 +61,13 @@ public class FighterKit extends Kit {
             @Override
             public void run() {
                 if (ClimaxPvp.inFighterKit.contains(killer)) {
-                    Bukkit.broadcastMessage("why");
                     if (killer.getLevel() == 1 && killer.getExp() == 0.5F) {
                         killer.setExp(killer.getExp() - 0.5F);
-                        Bukkit.broadcastMessage("debug1");
                     } else if (killer.getLevel() >= 2 && killer.getExp() == 0) {
                         killer.setLevel(killer.getLevel() - 1);
                         killer.setExp(0.5F);
-                        Bukkit.broadcastMessage("quue");
                     } else if (killer.getLevel() >= 2 && killer.getExp() == 0.5) {
                         killer.setExp(0F);
-                        Bukkit.broadcastMessage("final que");
                     }
                     if (killer.getLevel() == 1 && (killer.getExp() == 0F || killer.getExp() == 0.5F)) {
                         wear1(killer);
@@ -97,9 +93,7 @@ public class FighterKit extends Kit {
         }
         Player player = (Player) event.getEntity();
         Player killer = player.getKiller();
-        Bukkit.broadcastMessage("halp");
         if (ClimaxPvp.inFighterKit.contains(killer)) {
-            Bukkit.broadcastMessage("help me");
             if (player.getHealth() - event.getDamage() <= 0) {
                 if (killer.getExp() != 1F) {
                     killer.setExp(killer.getExp() + 0.5F);
@@ -125,7 +119,6 @@ public class FighterKit extends Kit {
     public void onTeleport (PlayerTeleportEvent event) {
         Player player = event.getPlayer();
         if (player.getLocation().distance(ClimaxPvp.getInstance().getWarpLocation("Upgrade")) >= 100) {
-            Bukkit.broadcastMessage("debug0");
             ClimaxPvp.inFighterKit.remove(player);
         }
     }
