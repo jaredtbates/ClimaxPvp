@@ -30,6 +30,8 @@ public class AnvilKit extends Kit {
         super("Anvil", new ItemStack(Material.ANVIL), "Use your Iron Punch to take out enemeis!", ChatColor.RED);
     }
 
+    private int i;
+
     protected void wear(Player player) {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
@@ -74,7 +76,7 @@ public class AnvilKit extends Kit {
         player.getInventory().setBoots(boots);
         ItemStack ability = new ItemStack(Material.ANVIL);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Iron Punch Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Iron Punch Ability §f» §8[§6" + "10" + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -90,6 +92,22 @@ public class AnvilKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Iron Punch" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.IRON_PUNCH);
+
+                    Ability.Status status = ironpunch.getStatus(player);
+                    for (i = 1; i <= 10; ++i) {
+                        Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                            @Override
+                            public void run() {
+                                if (KitManager.isPlayerInKit(player, AnvilKit.this)) {
+                                    ItemStack ability = new ItemStack(Material.ANVIL);
+                                    ItemMeta abilitymeta = ability.getItemMeta();
+                                    abilitymeta.setDisplayName(ChatColor.AQUA + "Iron Punch §f» §8[§6" + status.getRemainingTime(TimeUnit.SECONDS) + "§8]");
+                                    ability.setItemMeta(abilitymeta);
+                                    player.getInventory().setItem(1, ability);
+                                }
+                            }
+                        }, i * 20);
+                    }
                 }
             }
         }

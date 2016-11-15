@@ -63,15 +63,15 @@ public class KitManager implements Listener {
         kits.add(new ViperKit());
         kits.add(new LazerKit());
 
-        // Purple Kits
-        kits.add(new ArctisKit());
-
         // Gold Kits
         kits.add(new EmberKit());
         kits.add(new AssassinKit());
         kits.add(new IronGolemKit());
         kits.add(new PhoenixKit());
         kits.add(new BomberKit());
+
+        // Purple Kits
+        kits.add(new ArctisKit());
 
         for (Kit kit : kits) {
             plugin.getServer().getPluginManager().registerEvents(kit, plugin);

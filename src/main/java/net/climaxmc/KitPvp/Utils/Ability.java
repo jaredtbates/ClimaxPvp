@@ -81,7 +81,6 @@ public class Ability {
 
         // Check cooldown
         if (!status.isExpired()) {
-            player.sendMessage(ChatColor.GRAY + "You cannot do this for " + ChatColor.GREEN + status.getRemainingTime(TimeUnit.SECONDS) + ChatColor.GRAY + " seconds.");
             return false;
         }
 

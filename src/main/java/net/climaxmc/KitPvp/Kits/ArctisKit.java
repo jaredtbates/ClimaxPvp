@@ -63,7 +63,7 @@ public class ArctisKit extends Kit {
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.DIAMOND);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Absolute Zero");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Absolute Zero §f» §8[§6" + "15" + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
@@ -114,7 +114,7 @@ public class ArctisKit extends Kit {
                 DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.ABSOLUTE_ZERO);
 
                 Ability.Status status = absolutezero.getStatus(player);
-                for (i = 1; i <= 16; ++i) {
+                for (i = 1; i <= 15; ++i) {
                     Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
                         @Override
                         public void run() {
