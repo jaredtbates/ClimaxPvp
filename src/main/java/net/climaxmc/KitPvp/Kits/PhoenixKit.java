@@ -31,8 +31,8 @@ import java.util.concurrent.TimeUnit;
 
 public class PhoenixKit extends Kit {
 
-    private final int cooldown = 10, abilitySlot = 2;
-    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+    private final int cooldown = 10;
+    private ItemStack ability = new ItemStack(Material.MAGMA_CREAM);
 
     private Ability flamebreath = new Ability("Flame Rush", 1, cooldown, TimeUnit.SECONDS);
 
@@ -45,11 +45,12 @@ public class PhoenixKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack blazePowder = new ItemStack(Material.MAGMA_CREAM);
-        ItemMeta blazeMeta = blazePowder.getItemMeta();
-        blazeMeta.setDisplayName(ChatColor.AQUA + "Flame Rush Ability");
-        blazePowder.setItemMeta(blazeMeta);
-        player.getInventory().addItem(blazePowder);
+
+        ItemMeta blazeMeta = ability.getItemMeta();
+        blazeMeta.setDisplayName(ChatColor.AQUA + "Flame Rush §f» §8[§6" + cooldown + "§8]");
+        ability.setItemMeta(blazeMeta);
+        player.getInventory().addItem(ability);
+
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 1);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
@@ -87,11 +88,12 @@ public class PhoenixKit extends Kit {
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
-        ItemStack blazePowder = new ItemStack(Material.MAGMA_CREAM);
-        ItemMeta blazeMeta = blazePowder.getItemMeta();
-        blazeMeta.setDisplayName(ChatColor.AQUA + "Flame Rush Ability");
-        blazePowder.setItemMeta(blazeMeta);
-        player.getInventory().addItem(blazePowder);
+
+        ItemMeta blazeMeta = ability.getItemMeta();
+        blazeMeta.setDisplayName(ChatColor.AQUA + "Flame Rush §f» §8[§6" + cooldown + "§8]");
+        ability.setItemMeta(blazeMeta);
+        player.getInventory().addItem(ability);
+
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 1);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
@@ -128,7 +130,7 @@ public class PhoenixKit extends Kit {
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Flame Rush" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.FLAME_DASH);
 
-                    flamebreath.startCooldown(player, this, cooldown, abilitySlot, ability);
+                    flamebreath.startCooldown(player, this, cooldown, ability);
                 }
             }
         }

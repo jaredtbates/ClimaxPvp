@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AnvilKit extends Kit {
 
-    private final int cooldown = 10, abilitySlot = 2;
+    private final int cooldown = 10;
     private ItemStack ability = new ItemStack(Material.ANVIL);
 
     private Ability ironpunch = new Ability("Iron Punch", 1, cooldown, TimeUnit.SECONDS);
@@ -50,12 +50,12 @@ public class AnvilKit extends Kit {
         boots.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().setBoots(boots);
 
+        addSoup(player.getInventory(), 1, 35);
+
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Iron Punch §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
-        player.getInventory().setItem(abilitySlot, ability);
-
-        addSoup(player.getInventory(), 1, 35);
+        player.getInventory().addItem(ability);
     }
 
     protected void wearNoSoup(Player player) {
@@ -98,7 +98,7 @@ public class AnvilKit extends Kit {
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Iron Punch" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.IRON_PUNCH);
 
-                    ironpunch.startCooldown(player, this, cooldown, abilitySlot, ability);
+                    ironpunch.startCooldown(player, this, cooldown, ability);
                 }
             }
         }

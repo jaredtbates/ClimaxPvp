@@ -216,13 +216,15 @@ public class Ability {
         }
     }
 
-    public void startCooldown(Player player, Kit kit, int cooldown, int abilitySlot, ItemStack ability) {
+    public void startCooldown(Player player, Kit kit, int cooldown, ItemStack ability) {
+        int abilitySlot = player.getInventory().getHeldItemSlot();
         Ability.Status status = getStatus(player);
-        for (int i = 1; i <= cooldown; ++i) {
+        for (int i = 1; i <= (cooldown - 1); ++i) {
             Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
                 @Override
                 public void run() {
                     if (KitManager.isPlayerInKit(player, kit.getClass())) {
+                        ItemStack ability = new I(Material.INK_SACK).durability(8);
                         ItemMeta abilitymeta = ability.getItemMeta();
                         abilitymeta.setDisplayName(org.bukkit.ChatColor.AQUA + abilityName + " §f» §8[§6" + status.getRemainingTime(TimeUnit.SECONDS) + "§8]");
                         ability.setItemMeta(abilitymeta);
@@ -239,6 +241,6 @@ public class Ability {
                 ability.setItemMeta(abilitymeta);
                 player.getInventory().setItem(abilitySlot, ability);
             }
-        }, cooldown * 20);
+        }, cooldown  * 20);
     }
 }

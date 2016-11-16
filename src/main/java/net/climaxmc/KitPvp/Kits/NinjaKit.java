@@ -31,10 +31,10 @@ import java.util.concurrent.TimeUnit;
 
 public class NinjaKit extends Kit {
 
-    private final int cooldown = 10, abilitySlot = 2;
-    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+    private final int cooldown = 10;
+    private ItemStack ability = new ItemStack(Material.GLOWSTONE_DUST);
 
-    private Ability burst = new Ability("Agility", 1, cooldown, TimeUnit.SECONDS);
+    private Ability burst = new Ability("Burst", 1, cooldown, TimeUnit.SECONDS);
 
     public NinjaKit() {
         super("Ninja", new ItemStack(Material.GOLD_HELMET), "Move and strike with the speed of a Ninja!", ChatColor.BLUE);
@@ -54,9 +54,9 @@ public class NinjaKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.GLOWSTONE_DUST);
+
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Agility Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Burst §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
@@ -83,9 +83,9 @@ public class NinjaKit extends Kit {
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
-        ItemStack ability = new ItemStack(Material.GLOWSTONE_DUST);
+
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Burst Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Burst §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -102,7 +102,7 @@ public class NinjaKit extends Kit {
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Burst" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.ELECTRO_SHOCK);
 
-                    burst.startCooldown(player, this, cooldown, abilitySlot, ability);
+                    burst.startCooldown(player, this, cooldown, ability);
                 }
             }
         }

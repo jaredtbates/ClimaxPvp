@@ -32,8 +32,8 @@ import java.util.concurrent.TimeUnit;
 
 public class WitherKit extends Kit {
 
-    private final int cooldown = 4, abilitySlot = 2;
-    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+    private final int cooldown = 4;
+    private ItemStack ability = new ItemStack(Material.SKULL_ITEM, 1, (byte) 1);
 
     private Ability witherblast = new Ability("Wither Blast", 1, cooldown, TimeUnit.SECONDS);
 
@@ -68,11 +68,12 @@ public class WitherKit extends Kit {
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
         player.getInventory().setBoots(boots);
-        ItemStack ability = new ItemStack(Material.SKULL_ITEM, 1, (byte) 1);
+
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Wither Blast Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Wither Blast §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
+
         addSoup(player.getInventory(), 2, 34);
     }
 
@@ -107,9 +108,9 @@ public class WitherKit extends Kit {
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
         player.getInventory().setBoots(boots);
-        ItemStack ability = new ItemStack(Material.SKULL_ITEM, 1, (byte) 1);
+
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Wither Blast Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Wither Blast §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -129,7 +130,7 @@ public class WitherKit extends Kit {
                     ws.setIsIncendiary(true);
                     ws.setYield(5.0F);
 
-                    witherblast.startCooldown(player, this, cooldown, abilitySlot, ability);
+                    witherblast.startCooldown(player, this, cooldown, ability);
                 }
             }
         }

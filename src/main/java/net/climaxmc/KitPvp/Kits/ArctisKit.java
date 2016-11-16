@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -21,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ArctisKit extends Kit {
 
-    private final int cooldown = 15, abilitySlot = 2;
+    private final int cooldown = 15;
     private ItemStack ability = new ItemStack(Material.DIAMOND);
 
     private Ability absolutezero = new Ability("Absolute Zero", 1, cooldown, TimeUnit.SECONDS);
@@ -53,13 +54,12 @@ public class ArctisKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
 
+        addSoup(player.getInventory(), 2, 35);
 
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Absolute Zero §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
-        player.getInventory().setItem(abilitySlot, ability);
-
-        addSoup(player.getInventory(), 2, 35);
+        player.getInventory().addItem(ability);
     }
 
     protected void wearNoSoup(Player player) {
@@ -95,7 +95,7 @@ public class ArctisKit extends Kit {
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Absolute Zero §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
-        player.getInventory().setItem(abilitySlot, ability);
+        player.getInventory().addItem(ability);
     }
 
     @EventHandler
@@ -103,13 +103,15 @@ public class ArctisKit extends Kit {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
             if (player.getInventory().getItemInHand().getType() == Material.DIAMOND) {
-                if (!absolutezero.tryUse(player)) {
-                    return;
-                }
-                player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.DARK_PURPLE + "Absolute Zero" + ChatColor.GOLD + " Ability!");
-                DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.ABSOLUTE_ZERO);
+                if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
+                    if (!absolutezero.tryUse(player)) {
+                        return;
+                    }
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.DARK_PURPLE + "Absolute Zero" + ChatColor.GOLD + " Ability!");
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.ABSOLUTE_ZERO);
 
-                absolutezero.startCooldown(player, this, cooldown, abilitySlot, ability);
+                    absolutezero.startCooldown(player, this, cooldown, ability);
+                }
             }
         }
     }

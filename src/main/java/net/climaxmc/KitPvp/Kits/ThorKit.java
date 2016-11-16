@@ -30,8 +30,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ThorKit extends Kit {
 
-    private final int cooldown = 7, abilitySlot = 2;
-    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+    private final int cooldown = 7;
+    private ItemStack ability = new ItemStack(Material.GOLD_AXE);
 
     private Ability lightning = new Ability("Lightning Strike", 1, cooldown, TimeUnit.SECONDS);
 
@@ -43,11 +43,12 @@ public class ThorKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.GOLD_AXE);
+
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Lightning Strike Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Lightning Strike §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
+
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setHelmet(helm);
@@ -69,11 +70,12 @@ public class ThorKit extends Kit {
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
-        ItemStack ability = new ItemStack(Material.GOLD_AXE);
+
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Lightning Strike Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Lightning Strike §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
+
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setHelmet(helm);
@@ -95,7 +97,7 @@ public class ThorKit extends Kit {
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Lightning Strike" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.WRATH);
 
-                    lightning.startCooldown(player, this, cooldown, abilitySlot, ability);
+                    lightning.startCooldown(player, this, cooldown, ability);
                 }
             }
         }

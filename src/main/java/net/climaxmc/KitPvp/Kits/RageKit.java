@@ -21,8 +21,8 @@ import java.util.concurrent.TimeUnit;
 
 public class RageKit extends Kit {
 
-    private final int cooldown = 12, abilitySlot = 2;
-    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+    private final int cooldown = 12;
+    private ItemStack ability = new ItemStack(Material.MAGMA_CREAM);
 
     private Ability rage = new Ability("Rage", 1, cooldown, TimeUnit.SECONDS);
 
@@ -52,11 +52,12 @@ public class RageKit extends Kit {
         bootsmeta.setColor(Color.BLUE);
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
-        ItemStack magmacream = new ItemStack(Material.MAGMA_CREAM);
-        ItemMeta magmameta = magmacream.getItemMeta();
-        magmameta.setDisplayName(ChatColor.AQUA + "Rage Ability");
-        magmacream.setItemMeta(magmameta);
-        player.getInventory().addItem(magmacream);
+
+        ItemMeta magmameta = ability.getItemMeta();
+        magmameta.setDisplayName(ChatColor.AQUA + "Rage §f» §8[§6" + cooldown + "§8]");
+        ability.setItemMeta(magmameta);
+        player.getInventory().addItem(ability);
+
         addSoup(player.getInventory(), 2, 35);
     }
 
@@ -83,11 +84,12 @@ public class RageKit extends Kit {
         bootsmeta.setColor(Color.BLUE);
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
-        ItemStack magmacream = new ItemStack(Material.MAGMA_CREAM);
-        ItemMeta magmameta = magmacream.getItemMeta();
-        magmameta.setDisplayName(ChatColor.AQUA + "Rage Ability");
-        magmacream.setItemMeta(magmameta);
-        player.getInventory().addItem(magmacream);
+
+        ItemMeta magmameta = ability.getItemMeta();
+        magmameta.setDisplayName(ChatColor.AQUA + "Rage §f» §8[§6" + cooldown + "§8]");
+        ability.setItemMeta(magmameta);
+        player.getInventory().addItem(ability);
+
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
@@ -145,7 +147,7 @@ public class RageKit extends Kit {
                         }
                     }, 100);
 
-                    rage.startCooldown(player, this, cooldown, abilitySlot, ability);
+                    rage.startCooldown(player, this, cooldown, ability);
                 }
             }
         }

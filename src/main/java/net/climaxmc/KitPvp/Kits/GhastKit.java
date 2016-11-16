@@ -29,8 +29,8 @@ import java.util.concurrent.TimeUnit;
 
 public class GhastKit extends Kit {
 
-    private final int cooldown = 2, abilitySlot = 2;
-    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+    private final int cooldown = 2;
+    private ItemStack ability = new ItemStack(Material.GOLD_HOE);
 
     private Ability fireball = new Ability("Fireball Launcher", 1, cooldown, TimeUnit.SECONDS);
 
@@ -47,11 +47,12 @@ public class GhastKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
         player.getInventory().addItem(sword);
-        ItemStack hoe = new ItemStack(Material.GOLD_HOE);
-        ItemMeta hoeMeta = hoe.getItemMeta();
+
+        ItemMeta hoeMeta = ability.getItemMeta();
         hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher §f» §8[§6" + cooldown + "§8]");
-        hoe.setItemMeta(hoeMeta);
-        player.getInventory().addItem(hoe);
+        ability.setItemMeta(hoeMeta);
+        player.getInventory().addItem(ability);
+
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.GOLD_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
@@ -75,11 +76,12 @@ public class GhastKit extends Kit {
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
-        ItemStack hoe = new ItemStack(Material.GOLD_HOE);
-        ItemMeta hoeMeta = hoe.getItemMeta();
+
+        ItemMeta hoeMeta = ability.getItemMeta();
         hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher §f» §8[§6" + cooldown + "§8]");
-        hoe.setItemMeta(hoeMeta);
-        player.getInventory().addItem(hoe);
+        ability.setItemMeta(hoeMeta);
+        player.getInventory().addItem(ability);
+
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.GOLD_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
@@ -126,7 +128,7 @@ public class GhastKit extends Kit {
                     }
                     target.setVelocity(target.getVelocity().setY(1));
 
-                    fireball.startCooldown(player, this, cooldown, abilitySlot, ability);
+                    fireball.startCooldown(player, this, cooldown, ability);
                 }
             }
         }

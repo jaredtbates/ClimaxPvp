@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AssassinKit extends Kit {
 
-    private final int cooldown = 15, abilitySlot = 2;
+    private final int cooldown = 15;
     private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
 
     private Ability shadowstep = new Ability("Shadow-Step", 1, cooldown, TimeUnit.SECONDS);
@@ -47,6 +47,8 @@ public class AssassinKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
+
+        addSoup(player.getInventory(), 3, 35);
 
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Shadow-Step §f» §8[§6" + cooldown + "§8]");
@@ -67,7 +69,6 @@ public class AssassinKit extends Kit {
         bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
-        addSoup(player.getInventory(), 3, 35);
     }
 
     protected void wearNoSoup(Player player) {
@@ -116,7 +117,7 @@ public class AssassinKit extends Kit {
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Shadow-Step" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.SHADOW_STEP);
 
-                    shadowstep.startCooldown(player, this, cooldown, abilitySlot, ability);
+                    shadowstep.startCooldown(player, this, cooldown, ability);
 
                     /*player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Assassin" + ChatColor.GOLD + " Ability!");
                     for (Entity entity : player.getNearbyEntities(9, 9, 9)) {

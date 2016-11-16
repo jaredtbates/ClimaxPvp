@@ -26,8 +26,8 @@ import org.bukkit.potion.PotionEffectType;
 
 public class EndermanKit extends Kit {
 
-    private final int cooldown = 10, abilitySlot = 2;
-    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+    private final int cooldown = 10;
+    private ItemStack ability = new ItemStack(Material.EYE_OF_ENDER);
 
 	private Ability teleport = new Ability("Teleport", 1, cooldown, TimeUnit.SECONDS);
 	
@@ -46,11 +46,12 @@ public class EndermanKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.EYE_OF_ENDER);
+
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Teleport §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
+
         addSoup(player.getInventory(), 2, 35);
     }
 
@@ -72,7 +73,7 @@ public class EndermanKit extends Kit {
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
-        ItemStack ability = new ItemStack(Material.EYE_OF_ENDER);
+
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Teleport §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
@@ -91,7 +92,7 @@ public class EndermanKit extends Kit {
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Teleport" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.TELEPORT);
 
-                    teleport.startCooldown(player, this, cooldown, abilitySlot, ability);
+                    teleport.startCooldown(player, this, cooldown, ability);
     			}
     		}
         }

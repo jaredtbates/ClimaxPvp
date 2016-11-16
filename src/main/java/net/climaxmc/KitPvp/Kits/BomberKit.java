@@ -63,12 +63,12 @@ public class BomberKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
+
         ItemStack ability = new ItemStack(Material.TNT);
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Explode Ability");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
-        addSoup(player.getInventory(), 2, 35);
     }
 
     protected void wearNoSoup(Player player) {

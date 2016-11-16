@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 public class BlazeKit extends Kit {
 
     private final int cooldown = 15, abilitySlot = 2;
-    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+    private ItemStack ability = new ItemStack(Material.BLAZE_POWDER);
 
     private Ability blaze = new Ability("Blaze", 1, 15, TimeUnit.SECONDS);
 
@@ -40,11 +40,14 @@ public class BlazeKit extends Kit {
         ItemStack sword = new ItemStack(Material.STONE_SWORD);
         player.getInventory().addItem(sword);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-        ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
-        ItemMeta blazeMeta = blazePowder.getItemMeta();
-        blazeMeta.setDisplayName(ChatColor.AQUA + "Blaze Ability");
-        blazePowder.setItemMeta(blazeMeta);
-        player.getInventory().addItem(blazePowder);
+
+        addSoup(player.getInventory(), 2, 35);
+
+        ItemMeta blazeMeta = ability.getItemMeta();
+        blazeMeta.setDisplayName(ChatColor.AQUA + "Blaze §f» §8[§6" + cooldown + "§8]");
+        ability.setItemMeta(blazeMeta);
+        player.getInventory().addItem(ability);
+
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 1);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
@@ -61,7 +64,6 @@ public class BlazeKit extends Kit {
         bootsMeta.setColor(Color.YELLOW);
         boots.setItemMeta(bootsMeta);
         player.getInventory().setBoots(boots);
-        addSoup(player.getInventory(), 2, 35);
     }
 
     protected void wearNoSoup(Player player) {
@@ -76,11 +78,12 @@ public class BlazeKit extends Kit {
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-        ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
-        ItemMeta blazeMeta = blazePowder.getItemMeta();
-        blazeMeta.setDisplayName(ChatColor.AQUA + "Blaze Ability");
-        blazePowder.setItemMeta(blazeMeta);
-        player.getInventory().addItem(blazePowder);
+
+        ItemMeta blazeMeta = ability.getItemMeta();
+        blazeMeta.setDisplayName(ChatColor.AQUA + "Blaze §f» §8[§6" + cooldown + "§8]");
+        ability.setItemMeta(blazeMeta);
+        player.getInventory().addItem(ability);
+
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 2);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);

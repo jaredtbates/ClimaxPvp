@@ -31,8 +31,8 @@ import java.util.concurrent.TimeUnit;
 
 public class HealerKit extends Kit {
 
-    private final int cooldown = 10, abilitySlot = 2;
-    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+    private final int cooldown = 10;
+    private ItemStack ability = new ItemStack(Material.BLAZE_ROD);
 
     private Ability heal = new Ability("Heal", 1, cooldown, TimeUnit.SECONDS);
 
@@ -60,11 +60,12 @@ public class HealerKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.BLAZE_ROD);
+
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Heal §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
+
         addSoup(player.getInventory(), 2, 35);
     }
 
@@ -95,7 +96,7 @@ public class HealerKit extends Kit {
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
-        ItemStack ability = new ItemStack(Material.BLAZE_ROD);
+
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Heal §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
@@ -114,7 +115,7 @@ public class HealerKit extends Kit {
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Heal" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.HEAL);
 
-                    heal.startCooldown(player, this, cooldown, abilitySlot, ability);
+                    heal.startCooldown(player, this, cooldown, ability);
                 }
             }
         }

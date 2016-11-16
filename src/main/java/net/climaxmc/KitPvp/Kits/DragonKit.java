@@ -31,8 +31,8 @@ import java.util.concurrent.TimeUnit;
 
 public class DragonKit extends Kit {
 
-    private final int cooldown = 10, abilitySlot = 2;
-    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+    private final int cooldown = 10;
+    private ItemStack ability = new ItemStack(Material.BLAZE_POWDER);
 
     private Ability flamebreath = new Ability("Flame Breath", 1, cooldown, TimeUnit.SECONDS);
 
@@ -47,11 +47,14 @@ public class DragonKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
-        ItemMeta blazeMeta = blazePowder.getItemMeta();
+
+        addSoup(player.getInventory(), 2, 35);
+
+        ItemMeta blazeMeta = ability.getItemMeta();
         blazeMeta.setDisplayName(ChatColor.AQUA + "Flame Breath §f» §8[§6" + cooldown + "§8]");
-        blazePowder.setItemMeta(blazeMeta);
-        player.getInventory().addItem(blazePowder);
+        ability.setItemMeta(blazeMeta);
+        player.getInventory().addItem(ability);
+
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 3);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
@@ -68,7 +71,6 @@ public class DragonKit extends Kit {
         bootsMeta.setColor(Color.YELLOW);
         boots.setItemMeta(bootsMeta);
         player.getInventory().setBoots(boots);
-        addSoup(player.getInventory(), 2, 35);
     }
 
     protected void wearNoSoup(Player player) {
@@ -83,11 +85,12 @@ public class DragonKit extends Kit {
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
-        ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
-        ItemMeta blazeMeta = blazePowder.getItemMeta();
+
+        ItemMeta blazeMeta = ability.getItemMeta();
         blazeMeta.setDisplayName(ChatColor.AQUA + "Flame Breath §f» §8[§6" + cooldown + "§8]");
-        blazePowder.setItemMeta(blazeMeta);
-        player.getInventory().addItem(blazePowder);
+        ability.setItemMeta(blazeMeta);
+        player.getInventory().addItem(ability);
+
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 3);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
@@ -118,7 +121,7 @@ public class DragonKit extends Kit {
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Flame Breath" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.FLAME_BREATH);
 
-                    flamebreath.startCooldown(player, this, cooldown, abilitySlot, ability);
+                    flamebreath.startCooldown(player, this, cooldown, ability);
                 }
             }
         }

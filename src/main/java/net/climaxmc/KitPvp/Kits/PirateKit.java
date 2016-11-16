@@ -31,8 +31,8 @@ import java.util.concurrent.TimeUnit;
 
 public class PirateKit extends Kit {
 
-    private final int cooldown = 5, abilitySlot = 2;
-    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+    private final int cooldown = 5;
+    private ItemStack ability = new ItemStack(Material.GOLD_AXE);
 
     private Ability cannon = new Ability("Cannon", 1, cooldown, TimeUnit.SECONDS);
 
@@ -56,11 +56,12 @@ public class PirateKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.GOLD_AXE);
+
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Cannon Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Cannon §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
+
         addSoup(player.getInventory(), 2, 35);
     }
 
@@ -87,9 +88,9 @@ public class PirateKit extends Kit {
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
-        ItemStack ability = new ItemStack(Material.GOLD_AXE);
+
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Cannon Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Cannon §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -106,7 +107,7 @@ public class PirateKit extends Kit {
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Cannon" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.CANNON_FIRE);
 
-                    cannon.startCooldown(player, this, cooldown, abilitySlot, ability);
+                    cannon.startCooldown(player, this, cooldown, ability);
                 }
             }
         }

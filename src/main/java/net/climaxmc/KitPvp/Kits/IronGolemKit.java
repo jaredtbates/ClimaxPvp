@@ -27,8 +27,8 @@ import java.util.concurrent.TimeUnit;
 
 public class IronGolemKit extends Kit {
 
-    private final int cooldown = 4, abilitySlot = 2;
-    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+    private final int cooldown = 4;
+    private ItemStack ability = new ItemStack(Material.RED_ROSE);
 
     private Ability Throw = new Ability("Throw", 1, cooldown, TimeUnit.SECONDS);
 
@@ -50,11 +50,12 @@ public class IronGolemKit extends Kit {
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setBoots(boots);
-        ItemStack ability = new ItemStack(Material.RED_ROSE);
+
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Throw §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
+
         addSoup(player.getInventory(), 2, 35);
     }
 
@@ -79,7 +80,7 @@ public class IronGolemKit extends Kit {
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setBoots(boots);
-        ItemStack ability = new ItemStack(Material.RED_ROSE);
+
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Throw §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
@@ -108,7 +109,7 @@ public class IronGolemKit extends Kit {
                                 && KitPvp.currentTeams.get(target.getName()) != player.getName())) {
                             target.setVelocity(new Vector(0, 1.3, 0));
 
-                            Throw.startCooldown(player, this, cooldown, abilitySlot, ability);
+                            Throw.startCooldown(player, this, cooldown, ability);
                         }
                     }
                 }
