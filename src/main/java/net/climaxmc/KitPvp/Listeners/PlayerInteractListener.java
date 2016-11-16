@@ -80,23 +80,23 @@ public class PlayerInteractListener implements Listener {
                 kitSelectorInventory.setItem(44, grayGlass);
                 kitSelectorInventory.setItem(53, grayGlass);
 
-                ItemStack purpleKits = new I(Material.STAINED_CLAY).durability(11).name(ChatColor.DARK_PURPLE + "" + "Purple Kits").lore("Level 2000");
+                ItemStack purpleKits = new I(Material.STAINED_CLAY).durability(11).name(ChatColor.DARK_PURPLE + "Purple Kits").lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Level 2000");
                 kitSelectorInventory.setItem(1, purpleKits);
                 kitSelectorInventory.setItem(7, purpleKits);
 
-                ItemStack goldKits = new I(Material.STAINED_CLAY).durability(1).name(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kits").lore("Level 1500");
+                ItemStack goldKits = new I(Material.STAINED_CLAY).durability(1).name(ChatColor.GOLD + "Gold Kits").lore(ChatColor.GOLD + "" + ChatColor.ITALIC + "Level 1500");
                 kitSelectorInventory.setItem(10, goldKits);
                 kitSelectorInventory.setItem(16, goldKits);
 
-                ItemStack redKits = new I(Material.STAINED_CLAY).durability(14).name(ChatColor.RED + "Red Kits").lore("Level 1000");
+                ItemStack redKits = new I(Material.STAINED_CLAY).durability(14).name(ChatColor.RED + "Red Kits").lore(ChatColor.RED + "" + ChatColor.ITALIC + "Level 1000");
                 kitSelectorInventory.setItem(19, redKits);
                 kitSelectorInventory.setItem(25, redKits);
 
-                ItemStack greenKits = new I(Material.STAINED_CLAY).durability(5).name(ChatColor.GREEN + "Green Kits").lore("Level 500");
+                ItemStack greenKits = new I(Material.STAINED_CLAY).durability(5).name(ChatColor.GREEN + "Green Kits").lore(ChatColor.GREEN + "" + ChatColor.ITALIC + "Level 500");
                 kitSelectorInventory.setItem(28, greenKits);
                 kitSelectorInventory.setItem(34, greenKits);
 
-                ItemStack blueKits = new I(Material.STAINED_CLAY).durability(3).name(ChatColor.BLUE + "Blue Kits").lore("Level 150");
+                ItemStack blueKits = new I(Material.STAINED_CLAY).durability(3).name(ChatColor.BLUE + "Blue Kits").lore(ChatColor.BLUE + "" + ChatColor.ITALIC + "Level 150");
                 kitSelectorInventory.setItem(37, blueKits);
                 kitSelectorInventory.setItem(43, blueKits);
 
@@ -104,12 +104,12 @@ public class PlayerInteractListener implements Listener {
                 kitSelectorInventory.setItem(46, grayKits);
                 kitSelectorInventory.setItem(52, grayKits);
 
-                ItemStack purpleKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(10).name(ChatColor.DARK_PURPLE + "" + "Purple Kit").lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Unlocked at Level 2000");
+                ItemStack purpleKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(10).name(ChatColor.DARK_PURPLE + "Purple Kit").lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Unlocked at Level 2000");
                 for (int i = 2; i < 7; i++) {
                     kitSelectorInventory.setItem(i, purpleKitsGlass);
                 }
 
-                ItemStack goldKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(1).name(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold Kit").lore(ChatColor.GOLD + "" + ChatColor.ITALIC + "Unlocked at Level 1500");
+                ItemStack goldKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(1).name(ChatColor.GOLD + "Gold Kit").lore(ChatColor.GOLD + "" + ChatColor.ITALIC + "Unlocked at Level 1500");
                 for (int i = 11; i < 16; i++) {
                     kitSelectorInventory.setItem(i, goldKitsGlass);
                 }

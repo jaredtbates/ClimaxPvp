@@ -1,7 +1,10 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Listeners.ScoreboardListener;
 import net.climaxmc.KitPvp.Utils.I;
+import net.climaxmc.common.database.PlayerData;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -14,6 +17,12 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class SuicideCommand implements CommandExecutor {
+    private ClimaxPvp plugin;
+
+    public SuicideCommand(ClimaxPvp plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -43,6 +52,11 @@ public class SuicideCommand implements CommandExecutor {
 
             player.getInventory().setItem(4, new I(Material.BOOK).name("§6§lRespawn"));
         });
+
+        PlayerData playerData = plugin.getPlayerData(player);
+        playerData.addDeaths(1);
+
+        Bukkit.broadcastMessage("" + ChatColor.RED + player.getName() + ChatColor.GRAY + " died");
 
         return true;
     }

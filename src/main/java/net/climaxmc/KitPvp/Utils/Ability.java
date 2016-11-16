@@ -236,10 +236,12 @@ public class Ability {
         Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
             @Override
             public void run() {
-                ItemMeta abilitymeta = ability.getItemMeta();
-                abilitymeta.setDisplayName(org.bukkit.ChatColor.AQUA + abilityName + " §f» §8[§6" + cooldown + "§8]");
-                ability.setItemMeta(abilitymeta);
-                player.getInventory().setItem(abilitySlot, ability);
+                if (KitManager.isPlayerInKit(player, kit.getClass())) {
+                    ItemMeta abilitymeta = ability.getItemMeta();
+                    abilitymeta.setDisplayName(org.bukkit.ChatColor.AQUA + abilityName + " §f» §8[§6" + cooldown + "§8]");
+                    ability.setItemMeta(abilitymeta);
+                    player.getInventory().setItem(abilitySlot, ability);
+                }
             }
         }, cooldown  * 20);
     }

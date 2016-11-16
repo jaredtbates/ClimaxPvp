@@ -72,7 +72,7 @@ public class KitPvp {
         plugin.getCommand("pay").setExecutor(new PayCommand(plugin));
         plugin.getCommand("statistics").setExecutor(new StatisticsCommand(plugin));
         plugin.getCommand("warp").setExecutor(new WarpCommand(plugin));
-        plugin.getCommand("suicide").setExecutor(new SuicideCommand());
+        plugin.getCommand("suicide").setExecutor(new SuicideCommand(plugin));
         plugin.getCommand("help").setExecutor(new HelpCommand(plugin));
         plugin.getCommand("rules").setExecutor(new RulesCommand(plugin));
         plugin.getCommand("message").setExecutor(new MessageCommand(plugin));
