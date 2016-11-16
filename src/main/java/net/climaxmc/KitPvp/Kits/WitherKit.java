@@ -31,7 +31,12 @@ import org.bukkit.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 public class WitherKit extends Kit {
-    private Ability witherblast = new Ability(1, 4, TimeUnit.SECONDS);
+
+    private final int cooldown = 4, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability witherblast = new Ability("Wither Blast", 1, cooldown, TimeUnit.SECONDS);
+
     private ClimaxPvp plugin;
 
     public WitherKit(ClimaxPvp plugin) {
@@ -123,6 +128,8 @@ public class WitherKit extends Kit {
                     ws.setVelocity(player.getLocation().getDirection());
                     ws.setIsIncendiary(true);
                     ws.setYield(5.0F);
+
+                    witherblast.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

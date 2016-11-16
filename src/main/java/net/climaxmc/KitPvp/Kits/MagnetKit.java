@@ -30,7 +30,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class MagnetKit extends Kit {
-    private Ability pull = new Ability(1, 6, TimeUnit.SECONDS);
+
+    private final int cooldown = 6, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability pull = new Ability("Pull", 1, cooldown, TimeUnit.SECONDS);
 
     public MagnetKit() {
         super("Magnet", new ItemStack(Material.SUGAR), "Pull your foes to you, so you can rek them!", ChatColor.GREEN);
@@ -61,7 +65,7 @@ public class MagnetKit extends Kit {
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.SUGAR);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Pull");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Pull §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
@@ -99,7 +103,7 @@ public class MagnetKit extends Kit {
         player.getInventory().addItem(rod);
         ItemStack ability = new ItemStack(Material.SUGAR);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Pull");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Pull §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -115,6 +119,8 @@ public class MagnetKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Pull" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.MAGNETIC_IMPULSE);
+
+                    pull.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

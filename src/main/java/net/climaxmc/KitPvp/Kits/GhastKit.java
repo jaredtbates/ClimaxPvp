@@ -28,7 +28,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class GhastKit extends Kit {
-    private Ability fireball = new Ability(1, 2, TimeUnit.SECONDS);
+
+    private final int cooldown = 2, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability fireball = new Ability("Fireball Launcher", 1, cooldown, TimeUnit.SECONDS);
 
     public GhastKit() {
         super("Ghast", new ItemStack(Material.FIREBALL), "Set the world on Fire with the Ghast Kit!", ChatColor.GREEN);
@@ -45,7 +49,7 @@ public class GhastKit extends Kit {
         player.getInventory().addItem(sword);
         ItemStack hoe = new ItemStack(Material.GOLD_HOE);
         ItemMeta hoeMeta = hoe.getItemMeta();
-        hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher");
+        hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher §f» §8[§6" + cooldown + "§8]");
         hoe.setItemMeta(hoeMeta);
         player.getInventory().addItem(hoe);
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
@@ -73,7 +77,7 @@ public class GhastKit extends Kit {
         player.getInventory().addItem(rod);
         ItemStack hoe = new ItemStack(Material.GOLD_HOE);
         ItemMeta hoeMeta = hoe.getItemMeta();
-        hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher");
+        hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher §f» §8[§6" + cooldown + "§8]");
         hoe.setItemMeta(hoeMeta);
         player.getInventory().addItem(hoe);
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
@@ -112,6 +116,7 @@ public class GhastKit extends Kit {
             if (event.getDamager() instanceof Fireball) {
                 Fireball f = (Fireball) event.getDamager();
                 if (f.getShooter() instanceof Player) {
+                    Player player = (Player) f.getShooter();
                     if (!VanishCommand.getVanished().contains(target.getUniqueId())
                             && !CheckCommand.getChecking().contains(target.getUniqueId())
                             && (KitPvp.currentTeams.get(target.getName()) != ((Player) f.getShooter()).getName()
@@ -120,6 +125,8 @@ public class GhastKit extends Kit {
                         target.damage(7);
                     }
                     target.setVelocity(target.getVelocity().setY(1));
+
+                    fireball.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

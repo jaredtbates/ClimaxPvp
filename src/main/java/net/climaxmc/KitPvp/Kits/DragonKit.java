@@ -30,7 +30,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class DragonKit extends Kit {
-    private Ability flamebreath = new Ability(1, 10, TimeUnit.SECONDS);
+
+    private final int cooldown = 10, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability flamebreath = new Ability("Flame Breath", 1, cooldown, TimeUnit.SECONDS);
 
     public DragonKit() {
         super("Dragon", new ItemStack(Material.MAGMA_CREAM), "Use your firey blaze breath to murder your foes!", ChatColor.RED);
@@ -45,7 +49,7 @@ public class DragonKit extends Kit {
         player.getInventory().addItem(sword);
         ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
         ItemMeta blazeMeta = blazePowder.getItemMeta();
-        blazeMeta.setDisplayName(ChatColor.AQUA + "Flame Breath §f» §8[§6" + "10" + "§8]");
+        blazeMeta.setDisplayName(ChatColor.AQUA + "Flame Breath §f» §8[§6" + cooldown + "§8]");
         blazePowder.setItemMeta(blazeMeta);
         player.getInventory().addItem(blazePowder);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
@@ -81,7 +85,7 @@ public class DragonKit extends Kit {
         player.getInventory().addItem(rod);
         ItemStack blazePowder = new ItemStack(Material.BLAZE_POWDER);
         ItemMeta blazeMeta = blazePowder.getItemMeta();
-        blazeMeta.setDisplayName(ChatColor.AQUA + "Flame Breath §f» §8[§6" + "10" + "§8]");
+        blazeMeta.setDisplayName(ChatColor.AQUA + "Flame Breath §f» §8[§6" + cooldown + "§8]");
         blazePowder.setItemMeta(blazeMeta);
         player.getInventory().addItem(blazePowder);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
@@ -114,21 +118,7 @@ public class DragonKit extends Kit {
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Flame Breath" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.FLAME_BREATH);
 
-                    Ability.Status status = flamebreath.getStatus(player);
-                    for (i = 1; i <= 10; ++i) {
-                        Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
-                            @Override
-                            public void run() {
-                                if (KitManager.isPlayerInKit(player, DragonKit.this)) {
-                                    ItemStack ability = new ItemStack(Material.DIAMOND);
-                                    ItemMeta abilitymeta = ability.getItemMeta();
-                                    abilitymeta.setDisplayName(ChatColor.AQUA + "Flame Breath §f» §8[§6" + status.getRemainingTime(TimeUnit.SECONDS) + "§8]");
-                                    ability.setItemMeta(abilitymeta);
-                                    player.getInventory().setItem(1, ability);
-                                }
-                            }
-                        }, i * 20);
-                    }
+                    flamebreath.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

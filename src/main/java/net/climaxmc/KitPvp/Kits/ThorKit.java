@@ -29,7 +29,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class ThorKit extends Kit {
-    private Ability lightning = new Ability(1, 7, TimeUnit.SECONDS);
+
+    private final int cooldown = 7, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability lightning = new Ability("Lightning Strike", 1, cooldown, TimeUnit.SECONDS);
 
     public ThorKit() {
         super("Thor", new ItemStack(Material.IRON_AXE), "Use your Axe to Strike Lightning!", ChatColor.GREEN);
@@ -90,6 +94,8 @@ public class ThorKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Lightning Strike" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.WRATH);
+
+                    lightning.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

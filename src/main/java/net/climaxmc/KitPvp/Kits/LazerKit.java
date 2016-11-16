@@ -30,7 +30,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class LazerKit extends Kit {
-    private Ability beam = new Ability(1, 9, TimeUnit.SECONDS);
+
+    private final int cooldown = 9, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability beam = new Ability("Beam", 1, cooldown, TimeUnit.SECONDS);
 
     public LazerKit() {
         super("Lazer", new ItemStack(Material.INK_SACK, 1, (byte) 6), "Pew pew!", ChatColor.RED);
@@ -54,7 +58,7 @@ public class LazerKit extends Kit {
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.INK_SACK, 1, (byte) 6);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Beam Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Beam §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
@@ -85,7 +89,7 @@ public class LazerKit extends Kit {
         player.getInventory().addItem(rod);
         ItemStack ability = new ItemStack(Material.INK_SACK, 1, (byte) 6);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Beam Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Beam §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -101,6 +105,8 @@ public class LazerKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Beam" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.BEAM);
+
+                    beam.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

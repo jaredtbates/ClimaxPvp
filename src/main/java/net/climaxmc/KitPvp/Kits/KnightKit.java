@@ -28,7 +28,6 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class KnightKit extends Kit {
-    private Ability ironpunch = new Ability(1, 12, TimeUnit.SECONDS);
 
     public KnightKit() {
         super("Knight", new ItemStack(Material.IRON_INGOT), "Less armor, but slightly more speed!", ChatColor.GRAY);

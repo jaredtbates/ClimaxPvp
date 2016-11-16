@@ -1,18 +1,27 @@
 package net.climaxmc.KitPvp.Utils;
 
+import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Kit;
+import net.climaxmc.KitPvp.KitManager;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class Ability {
+    private final String abilityName;
     private final int defaultCharges;
     private final long defaultDelay;
     private Map<String, Status> playerStatus = new HashMap<String, Status>();
 
-    public Ability(int defaultCharges, int defaultDelay, TimeUnit unit) {
+    public Ability(String abilityName, int defaultCharges, int defaultDelay, TimeUnit unit) {
+        this.abilityName = abilityName;
         this.defaultCharges = defaultCharges;
         this.defaultDelay = TimeUnit.MILLISECONDS.convert(defaultDelay, unit);
     }
@@ -205,5 +214,31 @@ public class Ability {
         public long getRemainingTime(TimeUnit unit) {
             return unit.convert(cooldown - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
         }
+    }
+
+    public void startCooldown(Player player, Kit kit, int cooldown, int abilitySlot, ItemStack ability) {
+        Ability.Status status = getStatus(player);
+        for (int i = 1; i <= cooldown; ++i) {
+            Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                @Override
+                public void run() {
+                    if (KitManager.isPlayerInKit(player, kit.getClass())) {
+                        ItemMeta abilitymeta = ability.getItemMeta();
+                        abilitymeta.setDisplayName(org.bukkit.ChatColor.AQUA + abilityName + " §f» §8[§6" + status.getRemainingTime(TimeUnit.SECONDS) + "§8]");
+                        ability.setItemMeta(abilitymeta);
+                        player.getInventory().setItem(abilitySlot, ability);
+                    }
+                }
+            }, i * 20);
+        }
+        Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                ItemMeta abilitymeta = ability.getItemMeta();
+                abilitymeta.setDisplayName(org.bukkit.ChatColor.AQUA + abilityName + " §f» §8[§6" + cooldown + "§8]");
+                ability.setItemMeta(abilitymeta);
+                player.getInventory().setItem(abilitySlot, ability);
+            }
+        }, cooldown * 20);
     }
 }

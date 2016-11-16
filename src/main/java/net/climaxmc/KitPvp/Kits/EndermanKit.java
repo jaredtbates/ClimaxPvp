@@ -25,7 +25,11 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class EndermanKit extends Kit {
-	private Ability teleport = new Ability(1, 14, TimeUnit.SECONDS);
+
+    private final int cooldown = 10, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+	private Ability teleport = new Ability("Teleport", 1, cooldown, TimeUnit.SECONDS);
 	
     public EndermanKit() {
         super("Enderman", new ItemStack(Material.EYE_OF_ENDER), "Teleport to people, like an enderman!", ChatColor.BLUE);
@@ -44,7 +48,7 @@ public class EndermanKit extends Kit {
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.EYE_OF_ENDER);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Teleport Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Teleport §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
@@ -70,7 +74,7 @@ public class EndermanKit extends Kit {
         player.getInventory().addItem(rod);
         ItemStack ability = new ItemStack(Material.EYE_OF_ENDER);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Teleport Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Teleport §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -86,6 +90,8 @@ public class EndermanKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Teleport" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.TELEPORT);
+
+                    teleport.startCooldown(player, this, cooldown, abilitySlot, ability);
     			}
     		}
         }

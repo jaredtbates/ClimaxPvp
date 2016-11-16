@@ -30,7 +30,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class BoulderKit extends Kit {
-    private Ability bouldertoss = new Ability(1, 10, TimeUnit.SECONDS);
+
+    private final int cooldown = 9, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability bouldertoss = new Ability("Boulder Toss", 1, cooldown, TimeUnit.SECONDS);
 
     public BoulderKit() {
         super("Boulder", new ItemStack(Material.CLAY_BALL), "Throw giant rocks at people to kill them!", ChatColor.BLUE);
@@ -62,7 +66,7 @@ public class BoulderKit extends Kit {
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.CLAY_BALL);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Boulder Toss §f» §8[§6" + "10" + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Boulder Toss §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
@@ -99,7 +103,7 @@ public class BoulderKit extends Kit {
         player.getInventory().addItem(rod);
         ItemStack ability = new ItemStack(Material.CLAY_BALL);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Boulder Toss §f» §8[§6" + "10" + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Boulder Toss §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -116,21 +120,7 @@ public class BoulderKit extends Kit {
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Boulder Toss" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.BOULDER_TOSS);
 
-                    Ability.Status status = bouldertoss.getStatus(player);
-                    for (i = 1; i <= 10; ++i) {
-                        Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
-                            @Override
-                            public void run() {
-                                if (KitManager.isPlayerInKit(player, BoulderKit.this)) {
-                                    ItemStack ability = new ItemStack(Material.DIAMOND);
-                                    ItemMeta abilitymeta = ability.getItemMeta();
-                                    abilitymeta.setDisplayName(ChatColor.AQUA + "Boulder Toss §f» §8[§6" + status.getRemainingTime(TimeUnit.SECONDS) + "§8]");
-                                    ability.setItemMeta(abilitymeta);
-                                    player.getInventory().setItem(1, ability);
-                                }
-                            }
-                        }, i * 20);
-                    }
+                    bouldertoss.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

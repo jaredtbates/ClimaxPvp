@@ -30,7 +30,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class HealerKit extends Kit {
-    private Ability heal = new Ability(1, 10, TimeUnit.SECONDS);
+
+    private final int cooldown = 10, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability heal = new Ability("Heal", 1, cooldown, TimeUnit.SECONDS);
 
     public HealerKit() {
         super("Healer", new ItemStack(Material.GOLDEN_APPLE), "This kit gives you the ability to heal yourself!", ChatColor.GRAY);
@@ -58,7 +62,7 @@ public class HealerKit extends Kit {
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.BLAZE_ROD);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
@@ -93,7 +97,7 @@ public class HealerKit extends Kit {
         player.getInventory().addItem(rod);
         ItemStack ability = new ItemStack(Material.BLAZE_ROD);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -109,6 +113,8 @@ public class HealerKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Heal" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.HEAL);
+
+                    heal.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

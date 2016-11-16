@@ -30,7 +30,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class NinjaKit extends Kit {
-    private Ability burst = new Ability(1, 10, TimeUnit.SECONDS);
+
+    private final int cooldown = 10, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability burst = new Ability("Agility", 1, cooldown, TimeUnit.SECONDS);
 
     public NinjaKit() {
         super("Ninja", new ItemStack(Material.GOLD_HELMET), "Move and strike with the speed of a Ninja!", ChatColor.BLUE);
@@ -97,6 +101,8 @@ public class NinjaKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Burst" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.ELECTRO_SHOCK);
+
+                    burst.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

@@ -20,7 +20,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class RageKit extends Kit {
-    private Ability rage = new Ability(1, 12, TimeUnit.SECONDS);
+
+    private final int cooldown = 12, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability rage = new Ability("Rage", 1, cooldown, TimeUnit.SECONDS);
 
     public RageKit() {
         super("Rage", new ItemStack(Material.MAGMA_CREAM), "Use your Rage Ability to take down Enemies!", ChatColor.RED);
@@ -140,6 +144,8 @@ public class RageKit extends Kit {
                             player.getInventory().setBoots(boots2);
                         }
                     }, 100);
+
+                    rage.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

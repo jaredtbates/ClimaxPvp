@@ -30,7 +30,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class VortexKit extends Kit {
-    private Ability tornado = new Ability(1, 15, TimeUnit.SECONDS);
+
+    private final int cooldown = 15, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability tornado = new Ability("Tornado", 1, cooldown, TimeUnit.SECONDS);
 
     public VortexKit() {
         super("Vortex", new ItemStack(Material.STRING), "Summon great tornadoes to consume your foes!", ChatColor.GREEN);
@@ -119,6 +123,8 @@ public class VortexKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Tornado" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.TORNADO);
+
+                    tornado.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

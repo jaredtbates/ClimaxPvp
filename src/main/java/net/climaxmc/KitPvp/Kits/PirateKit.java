@@ -30,7 +30,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class PirateKit extends Kit {
-    private Ability heal = new Ability(1, 5, TimeUnit.SECONDS);
+
+    private final int cooldown = 5, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability cannon = new Ability("Cannon", 1, cooldown, TimeUnit.SECONDS);
 
     public PirateKit() {
         super("Pirate", new ItemStack(Material.GOLD_AXE), "Shoot yer cannon balls ye matey, Argh!", ChatColor.BLUE);
@@ -96,11 +100,13 @@ public class PirateKit extends Kit {
         if (KitManager.isPlayerInKit(player, this)) {
             if (player.getInventory().getItemInHand().getType() == Material.GOLD_AXE) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
-                    if (!heal.tryUse(player)) {
+                    if (!cannon.tryUse(player)) {
                         return;
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Cannon" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.CANNON_FIRE);
+
+                    cannon.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

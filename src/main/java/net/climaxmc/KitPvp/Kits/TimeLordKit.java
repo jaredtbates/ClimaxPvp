@@ -28,7 +28,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class TimeLordKit extends Kit {
-    private Ability warpback = new Ability(1, 10, TimeUnit.SECONDS);
+
+    private final int cooldown = 10, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability warpback = new Ability("Warp-Back", 1, cooldown, TimeUnit.SECONDS);
 
     public TimeLordKit() {
         super("Time Lord", new ItemStack(Material.WATCH), "Travel back in time at will with Time Lord!", ChatColor.RED);
@@ -125,6 +129,8 @@ public class TimeLordKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Warp-Back" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.WARP_BACK);
+
+                    warpback.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

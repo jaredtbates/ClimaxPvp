@@ -30,7 +30,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class EmberKit extends Kit {
-    private Ability globeofdeath = new Ability(1, 15, TimeUnit.SECONDS);
+
+    private final int cooldown = 15, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability globeofdeath = new Ability("Globe of Death", 1, cooldown, TimeUnit.SECONDS);
 
     public EmberKit() {
         super("Ember", new ItemStack(Material.SPECKLED_MELON), "Use your Globe of Death to murder everyone!", ChatColor.GOLD);
@@ -68,7 +72,7 @@ public class EmberKit extends Kit {
         player.getInventory().addItem(sword);
         ItemStack ability = new ItemStack(Material.SPECKLED_MELON);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Globe of Death §f» §8[§6" + "15" + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Globe of Death §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
@@ -111,7 +115,7 @@ public class EmberKit extends Kit {
         player.getInventory().addItem(rod);
         ItemStack ability = new ItemStack(Material.SPECKLED_MELON);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Globe of Death §f» §8[§6" + "15" + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Globe of Death §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -128,21 +132,7 @@ public class EmberKit extends Kit {
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Globe of Death" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.BURNING_SOUL);
 
-                    Ability.Status status = globeofdeath.getStatus(player);
-                    for (i = 1; i <= 15; ++i) {
-                        Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
-                            @Override
-                            public void run() {
-                                if (KitManager.isPlayerInKit(player, EmberKit.this)) {
-                                    ItemStack ability = new ItemStack(Material.SPECKLED_MELON);
-                                    ItemMeta abilitymeta = ability.getItemMeta();
-                                    abilitymeta.setDisplayName(ChatColor.AQUA + "Globe of Death §f» §8[§6" + status.getRemainingTime(TimeUnit.SECONDS) + "§8]");
-                                    ability.setItemMeta(abilitymeta);
-                                    player.getInventory().setItem(1, ability);
-                                }
-                            }
-                        }, i * 20);
-                    }
+                    globeofdeath.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

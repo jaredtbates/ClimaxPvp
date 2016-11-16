@@ -30,7 +30,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class PhoenixKit extends Kit {
-    private Ability flamebreath = new Ability(1, 10, TimeUnit.SECONDS);
+
+    private final int cooldown = 10, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability flamebreath = new Ability("Flame Rush", 1, cooldown, TimeUnit.SECONDS);
 
     public PhoenixKit() {
         super("Phoenix", new ItemStack(Material.BLAZE_POWDER), "Rush towards your foe with great speed to take them out!", ChatColor.GOLD);
@@ -123,6 +127,8 @@ public class PhoenixKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Flame Rush" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.FLAME_DASH);
+
+                    flamebreath.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

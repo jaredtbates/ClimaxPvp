@@ -24,7 +24,11 @@ import org.bukkit.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 public class AnvilKit extends Kit {
-    private Ability ironpunch = new Ability(1, 10, TimeUnit.SECONDS);
+
+    private final int cooldown = 10, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.ANVIL);
+
+    private Ability ironpunch = new Ability("Iron Punch", 1, cooldown, TimeUnit.SECONDS);
 
     public AnvilKit() {
         super("Anvil", new ItemStack(Material.ANVIL), "Use your Iron Punch to take out enemeis!", ChatColor.RED);
@@ -45,11 +49,12 @@ public class AnvilKit extends Kit {
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         boots.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().setBoots(boots);
-        ItemStack ability = new ItemStack(Material.ANVIL);
+
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Iron Punch Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Iron Punch §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
-        player.getInventory().addItem(ability);
+        player.getInventory().setItem(abilitySlot, ability);
+
         addSoup(player.getInventory(), 1, 35);
     }
 
@@ -74,9 +79,9 @@ public class AnvilKit extends Kit {
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         boots.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().setBoots(boots);
-        ItemStack ability = new ItemStack(Material.ANVIL);
+
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Iron Punch Ability §f» §8[§6" + "10" + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Iron Punch §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -93,21 +98,7 @@ public class AnvilKit extends Kit {
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Iron Punch" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.IRON_PUNCH);
 
-                    Ability.Status status = ironpunch.getStatus(player);
-                    for (i = 1; i <= 10; ++i) {
-                        Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
-                            @Override
-                            public void run() {
-                                if (KitManager.isPlayerInKit(player, AnvilKit.this)) {
-                                    ItemStack ability = new ItemStack(Material.ANVIL);
-                                    ItemMeta abilitymeta = ability.getItemMeta();
-                                    abilitymeta.setDisplayName(ChatColor.AQUA + "Iron Punch §f» §8[§6" + status.getRemainingTime(TimeUnit.SECONDS) + "§8]");
-                                    ability.setItemMeta(abilitymeta);
-                                    player.getInventory().setItem(1, ability);
-                                }
-                            }
-                        }, i * 20);
-                    }
+                    ironpunch.startCooldown(player, this, cooldown, abilitySlot, ability);
                 }
             }
         }

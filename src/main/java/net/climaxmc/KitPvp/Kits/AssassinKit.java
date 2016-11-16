@@ -27,7 +27,11 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.concurrent.TimeUnit;
 
 public class AssassinKit extends Kit {
-    private Ability shadowstep = new Ability(1, 15, TimeUnit.SECONDS);
+
+    private final int cooldown = 15, abilitySlot = 2;
+    private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
+    private Ability shadowstep = new Ability("Shadow-Step", 1, cooldown, TimeUnit.SECONDS);
 
     public AssassinKit() {
         super("Assassin", new ItemStack(Material.GHAST_TEAR), "Use your Shadow-Step to rek foes, easily.", ChatColor.GOLD);
@@ -43,11 +47,12 @@ public class AssassinKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
-        ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Shadow-Step §f» §8[§6" + "15" + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Shadow-Step §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
+
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
@@ -77,11 +82,12 @@ public class AssassinKit extends Kit {
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
-        ItemStack ability = new ItemStack(Material.GHAST_TEAR);
+
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Shadow-Step §f» §8[§6" + "15" + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Shadow-Step §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
+
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
@@ -110,21 +116,7 @@ public class AssassinKit extends Kit {
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Shadow-Step" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.SHADOW_STEP);
 
-                    Ability.Status status = shadowstep.getStatus(player);
-                    for (i = 1; i <= 15; ++i) {
-                        Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
-                            @Override
-                            public void run() {
-                                if (KitManager.isPlayerInKit(player, AssassinKit.this)) {
-                                    ItemStack ability = new ItemStack(Material.GHAST_TEAR);
-                                    ItemMeta abilitymeta = ability.getItemMeta();
-                                    abilitymeta.setDisplayName(ChatColor.AQUA + "Shadow-Step §f» §8[§6" + status.getRemainingTime(TimeUnit.SECONDS) + "§8]");
-                                    ability.setItemMeta(abilitymeta);
-                                    player.getInventory().setItem(1, ability);
-                                }
-                            }
-                        }, i * 20);
-                    }
+                    shadowstep.startCooldown(player, this, cooldown, abilitySlot, ability);
 
                     /*player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Assassin" + ChatColor.GOLD + " Ability!");
                     for (Entity entity : player.getNearbyEntities(9, 9, 9)) {
