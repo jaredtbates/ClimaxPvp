@@ -223,6 +223,9 @@ public class Ability {
             Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
                 @Override
                 public void run() {
+                    if (ClimaxPvp.deadPeoples.contains(player)) {
+                        return;
+                    }
                     if (KitManager.isPlayerInKit(player, kit.getClass())) {
                         ItemStack ability = new I(Material.INK_SACK).durability(8);
                         ItemMeta abilitymeta = ability.getItemMeta();
@@ -236,6 +239,9 @@ public class Ability {
         Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
             @Override
             public void run() {
+                if (ClimaxPvp.deadPeoples.contains(player)) {
+                    return;
+                }
                 if (KitManager.isPlayerInKit(player, kit.getClass())) {
                     ItemMeta abilitymeta = ability.getItemMeta();
                     abilitymeta.setDisplayName(org.bukkit.ChatColor.AQUA + abilityName + " §f» §8[§6" + cooldown + "§8]");
