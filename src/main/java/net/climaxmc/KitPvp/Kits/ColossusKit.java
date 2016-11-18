@@ -31,13 +31,13 @@ import java.util.concurrent.TimeUnit;
 
 public class ColossusKit extends Kit {
 
-    private final int cooldown = 10;
-    private ItemStack ability = new ItemStack(Material.NETHER_BRICK);
+    private final int cooldown = 12;
+    private ItemStack ability = new ItemStack(Material.NETHER_BRICK_ITEM);
 
     private Ability slam = new Ability("Slam", 1, cooldown, TimeUnit.SECONDS);
 
     public ColossusKit() {
-        super("Colossus", new ItemStack(Material.NETHER_BRICK), "COME ON AND SLAM, AND WELCOME TO THE JAM", ChatColor.DARK_PURPLE);
+        super("Colossus", new ItemStack(Material.NETHER_BRICK_ITEM), "COME ON AND SLAM, AND WELCOME TO THE JAM", ChatColor.DARK_PURPLE);
     }
 
     protected void wear(Player player) {
@@ -109,7 +109,7 @@ public class ColossusKit extends Kit {
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
-            if (player.getInventory().getItemInHand().getType() == Material.BLAZE_ROD) {
+            if (player.getInventory().getItemInHand().getType() == Material.NETHER_BRICK_ITEM) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
                     if (!slam.tryUse(player)) {
                         return;
