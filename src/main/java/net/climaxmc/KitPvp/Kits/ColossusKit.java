@@ -42,6 +42,7 @@ public class ColossusKit extends Kit {
 
     protected void wear(Player player) {
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         helm.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.MAROON);
@@ -51,6 +52,7 @@ public class ColossusKit extends Kit {
         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chest);
         ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
+        legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         legs.addEnchantment(Enchantment.DURABILITY, 2);
         LeatherArmorMeta legsmeta = (LeatherArmorMeta) legs.getItemMeta();
         legsmeta.setColor(Color.MAROON);
