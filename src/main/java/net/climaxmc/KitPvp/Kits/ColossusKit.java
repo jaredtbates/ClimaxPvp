@@ -42,7 +42,7 @@ public class ColossusKit extends Kit {
 
     protected void wear(Player player) {
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         helm.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.MAROON);
@@ -59,7 +59,7 @@ public class ColossusKit extends Kit {
         legs.setItemMeta(legsmeta);
         player.getInventory().setLeggings(legs);
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
 
@@ -78,6 +78,7 @@ public class ColossusKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
 
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         helm.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.MAROON);
@@ -87,13 +88,14 @@ public class ColossusKit extends Kit {
         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chest);
         ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
+        legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         legs.addEnchantment(Enchantment.DURABILITY, 2);
         LeatherArmorMeta legsmeta = (LeatherArmorMeta) legs.getItemMeta();
         legsmeta.setColor(Color.MAROON);
         legs.setItemMeta(legsmeta);
         player.getInventory().setLeggings(legs);
         player.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
-        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
 
