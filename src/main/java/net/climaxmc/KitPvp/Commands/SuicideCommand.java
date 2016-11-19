@@ -68,6 +68,12 @@ public class SuicideCommand implements CommandExecutor {
             });
         }
 
+        PlayerData playerData = plugin.getPlayerData(player);
+        playerData.addDeaths(1);
+
+        ScoreboardListener scoreboardListener = new ScoreboardListener(plugin);
+        scoreboardListener.updateScoreboards();
+
         Bukkit.broadcastMessage("" + ChatColor.RED + player.getName() + ChatColor.GRAY + " died");
 
         return true;

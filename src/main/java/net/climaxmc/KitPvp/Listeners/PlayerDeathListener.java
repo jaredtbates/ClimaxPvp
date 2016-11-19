@@ -155,9 +155,9 @@ public class PlayerDeathListener implements Listener {
             }
 
             if (killer.getHealth() % 2 == 0) {
-                player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.YELLOW + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + " hearts" + ChatColor.YELLOW + " left");
+                player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.GRAY + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + " hearts" + ChatColor.GRAY + " left");
             } else {
-                player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.YELLOW + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + ".5 hearts" + ChatColor.YELLOW + " left");
+                player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.GRAY + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + ".5 hearts" + ChatColor.GRAY + " left");
             }
 
             if (killer.getName().equals(player.getName())) {
@@ -166,7 +166,7 @@ public class PlayerDeathListener implements Listener {
 
             PlayerData killerData = plugin.getPlayerData(killer);
             killerData.addKills(1);
-            killer.sendMessage(ChatColor.GREEN + "You killed " + ChatColor.RED + player.getName());
+            killer.sendMessage("§f» §7You killed " + ChatColor.RED + player.getName());
 
             String rankTag = "";
             if (playerData.hasRank(Rank.NINJA)) {
@@ -212,25 +212,25 @@ public class PlayerDeathListener implements Listener {
                 KitPvp.killStreak.put(killer.getUniqueId(), KitPvp.killStreak.get(killer.getUniqueId()) + 1);
                 int killerAmount = KitPvp.killStreak.get(killer.getUniqueId());
                 if (killerAmount % 5 == 0) {
-                    plugin.getServer().broadcastMessage("" + ChatColor.GREEN + killer.getName() + ChatColor.GRAY + " has reached a KillStreak of " + ChatColor.RED + killerAmount + ChatColor.GRAY + "!");
+                    plugin.getServer().broadcastMessage("" + ChatColor.GREEN + killer.getName() + ChatColor.GRAY + " has reached a killstreak of " + ChatColor.RED + killerAmount + ChatColor.GRAY + "!");
                     killerAmount = killerAmount * 2 + 10;
                     killerData.depositBalance(killerAmount);
-                    killer.sendMessage("" + plugin.getPrefix() + ChatColor.GREEN + "You have gained " + ChatColor.GOLD + "$" + killerAmount + ChatColor.GREEN + "!");
+                    killer.sendMessage(" §7You have gained §b$" + killerAmount + "!");
                 } else {
                     killerData.depositBalance(10);
-                    killer.sendMessage("" + plugin.getPrefix() + ChatColor.GREEN + "You have gained " + ChatColor.GOLD + "$10" + ChatColor.GREEN + "!");
-                    killer.sendMessage("" + plugin.getPrefix() + ChatColor.GREEN + "You have reached a KillStreak of " + ChatColor.GOLD + killerAmount + ChatColor.GREEN + "!");
+                    killer.sendMessage(" §7You have gained §b$10!");
+                    killer.sendMessage(" §7You have reached a killstreak of §b" + KitPvp.killStreak.get(killer.getUniqueId()) + "!");
                 }
             } else {
                 KitPvp.killStreak.put(killer.getUniqueId(), 1);
                 killerData.depositBalance(10);
-                killer.sendMessage("" + plugin.getPrefix() + ChatColor.GREEN + "You have gained " + ChatColor.GOLD + "$10" + ChatColor.GREEN + "!");
-                killer.sendMessage("" + plugin.getPrefix() + ChatColor.GREEN + "You have reached a KillStreak of " + ChatColor.GOLD + KitPvp.killStreak.get(killer.getUniqueId()) + ChatColor.GREEN + "!");
+                killer.sendMessage(" §7You have gained §b$10!");
+                killer.sendMessage(" §7You have reached a killstreak of §b" + KitPvp.killStreak.get(killer.getUniqueId()) + "!");
             }
 
             if (KitPvp.killStreak.containsKey(player.getUniqueId())) {
                 if (KitPvp.killStreak.get(player.getUniqueId()) >= 10) {
-                    plugin.getServer().broadcastMessage("" + ChatColor.GREEN + killer.getName() + ChatColor.GRAY + " destroyed " + ChatColor.RED + player.getName() + "'s " + ChatColor.GOLD + "KillStreak of " + ChatColor.GREEN + KitPvp.killStreak.get(player.getUniqueId()) + "!");
+                    plugin.getServer().broadcastMessage("§f» §7" + killer.getName() + " destroyed " + ChatColor.RED + player.getName() + "'s " + ChatColor.GOLD + "killstreak of " + ChatColor.GREEN + KitPvp.killStreak.get(player.getUniqueId()) + "!");
                 }
                 KitPvp.killStreak.remove(player.getUniqueId());
             }

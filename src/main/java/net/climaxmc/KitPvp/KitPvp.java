@@ -72,7 +72,7 @@ public class KitPvp {
         plugin.getCommand("pay").setExecutor(new PayCommand(plugin));
         plugin.getCommand("statistics").setExecutor(new StatisticsCommand(plugin));
         plugin.getCommand("warp").setExecutor(new WarpCommand(plugin));
-        plugin.getCommand("suicide").setExecutor(new SuicideCommand(plugin));
+        //plugin.getCommand("suicide").setExecutor(new SuicideCommand(plugin));
         plugin.getCommand("help").setExecutor(new HelpCommand(plugin));
         plugin.getCommand("rules").setExecutor(new RulesCommand(plugin));
         plugin.getCommand("message").setExecutor(new MessageCommand(plugin));
@@ -86,9 +86,9 @@ public class KitPvp {
         plugin.getCommand("youtube").setExecutor(new YoutubeCommand(plugin));
         plugin.getCommand("pei").setExecutor(new PeiCommand());
         /*plugin.getCommand("team").setExecutor(new TeamCommand(plugin));*/
-        plugin.getCommand("staffreq").setExecutor(new StaffReqCommand(plugin));
-        plugin.getCommand("afk").setExecutor(new AFKCommand(plugin));
-        plugin.getCommand("options").setExecutor(new OptionsCommand(plugin));
+        //plugin.getCommand("staffreq").setExecutor(new StaffReqCommand(plugin));
+        //plugin.getCommand("afk").setExecutor(new AFKCommand(plugin));
+        //plugin.getCommand("options").setExecutor(new OptionsCommand(plugin));
 
     }
 }
