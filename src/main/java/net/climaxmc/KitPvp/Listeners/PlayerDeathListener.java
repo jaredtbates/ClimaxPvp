@@ -6,6 +6,7 @@ import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.FighterKit;
 import net.climaxmc.KitPvp.Kits.PvpKit;
+import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.KitPvp.Utils.TextComponentMessages;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.common.database.PlayerData;
@@ -34,6 +35,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
@@ -63,28 +65,42 @@ public class PlayerDeathListener implements Listener {
             BukkitTask task = plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, () -> new ParticleEffect(new ParticleEffect.ParticleData(ParticleEffect.ParticleType.LAVA, 1, 2, 1)).sendToLocation(location), 1, 1);
             plugin.getServer().getScheduler().runTaskLater(plugin, task::cancel, 10);
 
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
-                event.setCancelled(true);
-                player.setHealth(20);
-                player.setGameMode(GameMode.CREATIVE);
-                for(Player players : Bukkit.getServer().getOnlinePlayers()){
-                    players.hidePlayer(player);
-                }
-                for (PotionEffect effect : player.getActivePotionEffects()) {
-                    player.removePotionEffect(effect.getType());
-                }
-                player.setAllowFlight(true);
-                player.setFlying(true);
-                player.setVelocity(player.getVelocity().setY(1.5));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 21, 0));
-                player.getInventory().clear();
-                player.getInventory().setArmorContents(null);
+            SettingsFiles settingsFiles = new SettingsFiles();
+            if (settingsFiles.getRespawnValue(player) == true) {
+                plugin.getServer().getScheduler().runTask(plugin, () -> {
+                    event.setCancelled(true);
+                    player.setHealth(20);
 
-                ClimaxPvp.deadPeoples.add(player);
+                    plugin.respawn(player);
 
-                player.getInventory().setItem(4, new I(Material.BOOK).name("§6§lRespawn"));
-            });
+                    if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
+                        new PvpKit().wearCheckLevel(player);
+                    }
+                });
+            } else {
+                plugin.getServer().getScheduler().runTask(plugin, () -> {
+                    event.setCancelled(true);
+                    player.setHealth(20);
+                    player.setGameMode(GameMode.CREATIVE);
+                    for(Player players : Bukkit.getServer().getOnlinePlayers()){
+                        players.hidePlayer(player);
+                    }
+                    for (PotionEffect effect : player.getActivePotionEffects()) {
+                        player.removePotionEffect(effect.getType());
+                    }
+                    player.setAllowFlight(true);
+                    player.setFlying(true);
+                    player.setVelocity(player.getVelocity().setY(1.5));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 21, 0));
+                    player.getInventory().clear();
+                    player.getInventory().setArmorContents(null);
+
+                    ClimaxPvp.deadPeoples.add(player);
+
+                    player.getInventory().setItem(4, new I(Material.BOOK).name("§6§lRespawn"));
+                });
+            }
 
             if (ClimaxPvp.inFighterKit.contains(player)) {
                 ClimaxPvp.inFighterKit.remove(player);
@@ -92,6 +108,9 @@ public class PlayerDeathListener implements Listener {
 
             PlayerData playerData = plugin.getPlayerData(player);
             playerData.addDeaths(1);
+
+            ScoreboardListener scoreboardListener = new ScoreboardListener(plugin);
+            scoreboardListener.updateScoreboards();
 
             if (killer == null) {
                 if (plugin.getServer().getOnlinePlayers().size() >= 15) {

@@ -5,6 +5,7 @@ import net.climaxmc.Donations.Inventories.TrailsInventory;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Kits.PvpKit;
+import net.climaxmc.KitPvp.Menus.SettingsMenu;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
@@ -227,6 +228,12 @@ public class PlayerInteractListener implements Listener {
                         player.playSound(player.getLocation(), Sound.NOTE_STICKS, 1, 1);
                     }
                 }, 1);
+            }
+        }
+        if (player.getItemInHand().getType().equals(Material.WATCH)) {
+            if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "Settings")) {
+                SettingsMenu settingsMenu = new SettingsMenu(plugin);
+                settingsMenu.openInventory(player);
             }
         }
     }

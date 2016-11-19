@@ -72,13 +72,12 @@ public class PlayerRespawnListener implements Listener {
                     .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Equip your previous kit."));
         }
 
-        player.getInventory().setItem(7, new I(Material.DIAMOND)
-                .name(ChatColor.YELLOW + "" + ChatColor.BOLD + "Challenges")
-                .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "View your challenges,")
-                .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "start new ones, and receive rewards!"));
+        player.getInventory().setItem(7, new I(Material.WATCH)
+                .name(ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "Settings")
+                .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Customize your experience here at Climax!"));
 
         player.getInventory().setItem(8, new I(Material.SEEDS)
-                .name(ChatColor.GREEN + "" + ChatColor.BOLD + "Trail Selector")
+                .name(ChatColor.AQUA + "" + ChatColor.BOLD + "Trail Selector")
                 .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Select a cool looking trail!"));
 
         /*ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);

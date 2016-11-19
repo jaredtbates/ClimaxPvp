@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp.Menus;
 
+import net.climaxmc.ClimaxPvp;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;

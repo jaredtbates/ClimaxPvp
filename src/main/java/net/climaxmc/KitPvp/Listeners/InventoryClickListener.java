@@ -7,7 +7,9 @@ import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Kits.BomberKit;
 import net.climaxmc.KitPvp.Kits.FighterKit;
 import net.climaxmc.KitPvp.Menus.ReportGUI;
+import net.climaxmc.KitPvp.Menus.SettingsMenu;
 import net.climaxmc.KitPvp.Utils.Challenges.Challenge;
+import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.KitPvp.Utils.Teams.TeamMessages;
 import net.climaxmc.KitPvp.Utils.Teams.TeamUtils;
 import net.md_5.bungee.api.ChatColor;
@@ -43,9 +45,9 @@ public class InventoryClickListener implements Listener {
                 return;
             }
 
-            /*if (inventory == player.getInventory()) {
-                event.setCancelled(true);
-            }*/
+            if (inventory == player.getInventory()) {
+                event.setCancelled(false);
+            }
 
             for (ItemStack itemStack : player.getInventory().getArmorContents()) {
                 if (itemStack == null) {
@@ -264,6 +266,24 @@ public class InventoryClickListener implements Listener {
             if (event.getCurrentItem().getType().equals(Material.DIAMOND_SWORD)) {
                 FighterKit kit = new FighterKit();
                 kit.wear(player);
+            }
+            event.setCancelled(true);
+        }
+        if (event.getClickedInventory().getName().contains("Settings")) {
+            if (event.getCurrentItem().getType().equals(Material.REDSTONE)) {
+                SettingsFiles settingsFiles = new SettingsFiles();
+                SettingsMenu settingsMenu = new SettingsMenu(plugin);
+                if (settingsFiles.getRespawnValue(player) == true) {
+                    settingsFiles.setRespawnFalse(player);
+                    player.closeInventory();
+                    player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
+                    player.sendMessage("§f» §7You have set Insta-Respawn to: §cFalse");
+                } else {
+                    settingsFiles.setRespawnTrue(player);
+                    player.closeInventory();
+                    player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
+                    player.sendMessage("§f» §7You have set Insta-Respawn to: §aTrue");
+                }
             }
             event.setCancelled(true);
         }
