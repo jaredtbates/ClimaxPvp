@@ -10,7 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class TrailsInventory {
     public TrailsInventory(Player player) {
-        Inventory inventory = Bukkit.createInventory(null, 18, "§bTrail Settings");
+        Inventory inventory = Bukkit.createInventory(null, 18, "§8§lTrail Settings");
 
         for (Trail trail : Trail.values()) {
             addTrail(inventory, trail);

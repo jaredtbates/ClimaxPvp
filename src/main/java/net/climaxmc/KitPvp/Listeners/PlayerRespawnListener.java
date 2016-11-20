@@ -61,7 +61,7 @@ public class PlayerRespawnListener implements Listener {
         }
 
         player.getInventory().setItem(0, new I(Material.NETHER_STAR)
-                .name(ChatColor.GREEN + "" + ChatColor.BOLD + "Kit Selector")
+                .name(ChatColor.GREEN + "Kit Selector")
                 .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Select from a variety")
                 .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "of different kits!"));
 
@@ -73,11 +73,11 @@ public class PlayerRespawnListener implements Listener {
         }
 
         player.getInventory().setItem(7, new I(Material.WATCH)
-                .name(ChatColor.GOLD + "" + ChatColor.BOLD + "Settings")
+                .name(ChatColor.GOLD + "Settings")
                 .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Customize your experience here at Climax!"));
 
         player.getInventory().setItem(8, new I(Material.SEEDS)
-                .name(ChatColor.AQUA + "" + ChatColor.BOLD + "Trail Selector")
+                .name(ChatColor.AQUA + "Trail Selector")
                 .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Select a cool looking trail!"));
 
         /*ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);

@@ -71,7 +71,7 @@ public class InventoryClickListener implements Listener {
 
             if (event.getCurrentItem() != null && event.getCurrentItem().getItemMeta() != null
                     && event.getCurrentItem().getItemMeta().getDisplayName() != null) {
-                if (inventory.getName().equals(ChatColor.RED + "" + ChatColor.BOLD + "Kit Selector")) {
+                if (inventory.getName().equals(ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "Kit Selector")) {
                     KitManager.getKits().stream().filter(kit -> event.getCurrentItem().getItemMeta().getDisplayName()
                             .equals(kit.getItem().getItemMeta().getDisplayName())).forEach(kit -> {
                         kit.wearCheckLevel(player);

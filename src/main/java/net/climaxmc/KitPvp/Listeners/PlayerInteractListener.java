@@ -65,7 +65,7 @@ public class PlayerInteractListener implements Listener {
 
         if (item != null) {
             if (item.getType().equals(Material.NETHER_STAR) && player.getLocation().distance(plugin.getWarpLocation("upgrade")) > 100) {
-                Inventory kitSelectorInventory = Bukkit.createInventory(null, 54, ChatColor.RED + "" + ChatColor.BOLD + "Kit Selector");
+                Inventory kitSelectorInventory = Bukkit.createInventory(null, 54, ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "Kit Selector");
 
                 ItemStack grayGlass = new I(Material.STAINED_GLASS_PANE).durability(15).name(" ");
                 kitSelectorInventory.setItem(0, grayGlass);
@@ -231,7 +231,7 @@ public class PlayerInteractListener implements Listener {
             }
         }
         if (player.getItemInHand().getType().equals(Material.WATCH)) {
-            if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "" + ChatColor.BOLD + "Settings")) {
+            if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Settings")) {
                 SettingsMenu settingsMenu = new SettingsMenu(plugin);
                 settingsMenu.openInventory(player);
             }
