@@ -39,16 +39,19 @@ public class BalanceTopCommand implements CommandExecutor {
             player.sendMessage(ChatColor.RED + "Error getting top balances!");
         }
 
-        player.sendMessage(ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "=======" + ChatColor.AQUA + " Top 10 Balances " + ChatColor.GOLD + "" + ChatColor.STRIKETHROUGH + "=======");
+        player.sendMessage(" §f[§7=§8§m---§7=§f] " + ChatColor.AQUA + "Top 10 Balances" + " §f[§7=§8§m---§7=§f]");
 
         int i = 0;
 
         for (UUID uuid : topBalances.keySet()) {
             int balance = topBalances.get(uuid);
             if (balance != 0) {
-                player.sendMessage(ChatColor.GREEN + "" + ++i + ". " + plugin.getServer().getOfflinePlayer(uuid).getName() + ChatColor.BLUE + " - " + ChatColor.GREEN + "$" + balance);
+                player.sendMessage(ChatColor.GRAY + " " + ++i + ". " + ChatColor.GREEN + plugin.getServer().getOfflinePlayer(uuid).getName()
+                        + ChatColor.WHITE + " - " + ChatColor.GREEN + "$" + balance);
             }
         }
+
+        player.sendMessage(" §f[§7=§8§m--------§7=§f]§f§m----§f[§7=§8§m---------§7=§f]");
 
         return true;
     }

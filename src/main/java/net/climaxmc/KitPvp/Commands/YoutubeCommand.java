@@ -31,7 +31,7 @@ public class YoutubeCommand implements CommandExecutor {
         }
 
         if (args.length != 1) {
-            player.sendMessage(ChatColor.RED + "/" + label + " <on/off>");
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "/" + label + " <on/off>");
             return true;
         }
 

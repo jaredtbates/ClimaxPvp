@@ -66,10 +66,9 @@ public class PlayerDeathListener implements Listener {
             plugin.getServer().getScheduler().runTaskLater(plugin, task::cancel, 10);
 
             SettingsFiles settingsFiles = new SettingsFiles();
-            if (settingsFiles.getRespawnValue(player) == true) {
+            if (settingsFiles.getRespawnValue(player)) {
                 plugin.getServer().getScheduler().runTask(plugin, () -> {
                     event.setCancelled(true);
-                    player.setHealth(20);
 
                     plugin.respawn(player);
 

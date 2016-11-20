@@ -26,7 +26,7 @@ public class HelpCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (args.length == 1 && args[0].equals("staff") && playerData.hasRank(Rank.HELPER)) {
-            player.sendMessage(ChatColor.RED + " /punish" + ChatColor.GRAY + " - Punish a player with warn/kick/tempmute" + (playerData.hasRank(Rank.MODERATOR) ? "/mute/tempban/ban" : ""));
+            //player.sendMessage(ChatColor.RED + " /punish" + ChatColor.GRAY + " - Punish a player with warn/kick/tempmute" + (playerData.hasRank(Rank.MODERATOR) ? "/mute/tempban/ban" : ""));
             player.sendMessage(ChatColor.RED + " /inventory" + ChatColor.GRAY + " - Check if a player is autosouping");
             player.sendMessage(ChatColor.RED + " /check" + ChatColor.GRAY + " - Check if a player is hacking");
 

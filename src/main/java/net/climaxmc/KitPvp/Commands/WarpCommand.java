@@ -86,7 +86,7 @@ public class WarpCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.GREEN + " Warp " + warpDeleteSection.getName() + " deleted!");
                 break;
             default:
-                player.sendMessage("§7You have been warped to §6" + args[0] + ".");
+                player.sendMessage("§7You have been warped to §6" + args[0]);
                 plugin.warp(args[0], player);
                 if (args[0].equalsIgnoreCase("nosoup")) {
                     player.setFoodLevel(17);

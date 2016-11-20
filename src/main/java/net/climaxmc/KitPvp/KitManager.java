@@ -73,6 +73,7 @@ public class KitManager implements Listener {
         // Purple Kits
         kits.add(new ArctisKit());
         kits.add(new ColossusKit());
+        kits.add(new VoidKit());
 
         for (Kit kit : kits) {
             plugin.getServer().getPluginManager().registerEvents(kit, plugin);

@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.common.database.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -25,7 +26,6 @@ public class RepairCommand implements CommandExecutor {
         Player player = (Player) sender;
         PlayerData playerData = plugin.getPlayerData(player);
         if (playerData.getBalance() >= 20) {
-            playerData.withdrawBalance(20);
             for (ItemStack item : player.getInventory().getContents()) {
                 if (item != null) {
                     item.setDurability((short) -100);
@@ -36,9 +36,14 @@ public class RepairCommand implements CommandExecutor {
                     item.setDurability((short) -100);
                 }
             }
-            player.sendMessage(ChatColor.GREEN + "You repaired your inventory for $20!");
+            if (!KitManager.isPlayerInKit(player)) {
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Why would you need to repair? You're not in a kit!");
+                return true;
+            }
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You repaired your inventory for" + ChatColor.GREEN + "$20!");
+            playerData.withdrawBalance(20);
         } else {
-            player.sendMessage(ChatColor.RED + "You do not have enough money to repair your inventory!");
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You do not have enough money to repair your inventory!");
         }
 
         return true;

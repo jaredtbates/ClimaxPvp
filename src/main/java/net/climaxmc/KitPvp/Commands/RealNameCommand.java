@@ -29,7 +29,7 @@ public class RealNameCommand implements CommandExecutor {
         }
 
         plugin.getServer().getOnlinePlayers().stream().filter(players -> StringUtils.containsIgnoreCase(players.getDisplayName(), args[0]))
-                .forEach(players -> player.sendMessage(" " + players.getDisplayName() + ChatColor.RESET + "'s real name is " + players.getName() + "."));
+                .forEach(players -> player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + players.getDisplayName() + ChatColor.GRAY + "'s real name is " + ChatColor.YELLOW + players.getName() + "."));
 
         return true;
     }

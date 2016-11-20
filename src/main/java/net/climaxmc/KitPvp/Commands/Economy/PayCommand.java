@@ -25,7 +25,7 @@ public class PayCommand implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length != 2) {
-            sender.sendMessage(ChatColor.RED + "/pay <player> <amount>");
+            sender.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "/pay <player> <amount>");
             return true;
         }
 
@@ -41,7 +41,7 @@ public class PayCommand implements CommandExecutor {
         try {
             amount = Math.abs(Integer.parseInt(args[1]));
         } catch (NumberFormatException e) {
-            sender.sendMessage(ChatColor.RED + "/pay <player> <amount>");
+            sender.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "/pay <player> <amount>");
             return true;
         }
 
@@ -58,11 +58,11 @@ public class PayCommand implements CommandExecutor {
         }
 
         playerData.withdrawBalance(amount);
-        player.sendMessage(ChatColor.GREEN + "You have sent " + target.getName() + " $" + amount + ".");
+        player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You have sent " + ChatColor.GREEN + target.getName() + " $" + amount + ".");
 
         PlayerData targetData = plugin.getPlayerData(target);
         targetData.depositBalance(amount);
-        target.sendMessage(ChatColor.GREEN + "You have received $" + amount + " from " + player.getName() + ".");
+        target.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You have received " + ChatColor.GREEN + "$" + amount + ChatColor.GRAY + " from " + ChatColor.GREEN + player.getName() + ".");
 
         return true;
     }

@@ -26,7 +26,7 @@ public class BalanceCommand implements CommandExecutor {
 
         if (args.length == 0) {
             PlayerData playerData = plugin.getPlayerData(player);
-            player.sendMessage(ChatColor.WHITE + "\u00BB" + ChatColor.GRAY + "Balance: " + ChatColor.GREEN + "$" + playerData.getBalance());
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Balance: " + ChatColor.GREEN + "$" + playerData.getBalance());
         } else if (args.length == 1) {
             target = plugin.getServer().getPlayer(args[0]);
             if (target == null) {
@@ -34,8 +34,8 @@ public class BalanceCommand implements CommandExecutor {
                 return true;
             } else {
                 PlayerData targetData = plugin.getPlayerData(target);
-                player.sendMessage(ChatColor.WHITE + "\u00BB" + ChatColor.GRAY + "Balance of "
-                        + ChatColor.GOLD + target.getName() + ChatColor.GREEN + "$" + targetData.getBalance());
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GOLD + target.getName()
+                        + "'s " + ChatColor.GRAY + "balance: " + ChatColor.GREEN + "$" + targetData.getBalance());
             }
         } else {
             player.sendMessage(ChatColor.RED + "/bal [player]");

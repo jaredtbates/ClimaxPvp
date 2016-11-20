@@ -44,7 +44,7 @@ public class StatisticsCommand implements CommandExecutor {
             return true;
         }
 
-        player.sendMessage("§f» §b" + target.getName() + "'s statistics §f«");
+        player.sendMessage(ChatColor.WHITE + "\u00BB" + "§b" + target.getName() + "'s statistics " + ChatColor.WHITE + "\u00AB");
         player.sendMessage("§7Rank: §c" + WordUtils.capitalizeFully(data.getRank().toString()));
         player.sendMessage("§7Balance: §c" + "$" + data.getBalance());
         player.sendMessage("§7Kills: §c" + data.getKills());

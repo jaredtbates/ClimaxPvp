@@ -22,7 +22,7 @@ public class SettingsMenu implements Listener {
     }
 
     public void openInventory(Player player) {
-        Inventory inv = plugin.getServer().createInventory(null, 27, "§3Settings");
+        Inventory inv = plugin.getServer().createInventory(null, 27, "§6Settings");
 
         SettingsFiles settingsFiles = new SettingsFiles();
 

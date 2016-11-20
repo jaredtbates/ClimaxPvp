@@ -20,15 +20,15 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.concurrent.TimeUnit;
 
-public class ArctisKit extends Kit {
+public class VoidKit extends Kit {
 
-    private final int cooldown = 15;
-    private ItemStack ability = new ItemStack(Material.DIAMOND);
+    private final int cooldown = 20;
+    private ItemStack ability = new ItemStack(Material.COAL_BLOCK);
 
-    private Ability absolutezero = new Ability("Absolute Zero", 1, cooldown, TimeUnit.SECONDS);
+    private Ability antimatter = new Ability("AntiMatter Rain", 1, cooldown, TimeUnit.SECONDS);
 
-    public ArctisKit() {
-        super("Arctis", new ItemStack(Material.DIAMOND), "Summon a vortex of wind reaching temperatures of Absolute Zero", ChatColor.DARK_PURPLE);
+    public VoidKit() {
+        super("Void", new ItemStack(Material.COAL_BLOCK), "Pour down your AntiMatter rain to kill people", ChatColor.DARK_PURPLE);
     }
 
     protected void wear(Player player) {
@@ -37,7 +37,7 @@ public class ArctisKit extends Kit {
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
-        helmmeta.setColor(Color.WHITE);
+        helmmeta.setColor(Color.BLACK);
         helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
@@ -48,19 +48,19 @@ public class ArctisKit extends Kit {
         player.getInventory().setLeggings(legs);
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 3);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
-        bootsmeta.setColor(Color.AQUA);
+        bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
 
         addSoup(player.getInventory(), 2, 35);
 
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Absolute Zero §f» §8[§6" + cooldown + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "AntiMatter Rain §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -75,7 +75,7 @@ public class ArctisKit extends Kit {
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
-        helmmeta.setColor(Color.WHITE);
+        helmmeta.setColor(Color.BLACK);
         helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
@@ -86,12 +86,12 @@ public class ArctisKit extends Kit {
         player.getInventory().setLeggings(legs);
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 3);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
-        bootsmeta.setColor(Color.AQUA);
+        bootsmeta.setColor(Color.BLACK);
         boots.setItemMeta(bootsmeta);
         player.getInventory().setBoots(boots);
-        ItemStack sword = new ItemStack(Material.IRON_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
 
@@ -100,7 +100,7 @@ public class ArctisKit extends Kit {
         player.getInventory().addItem(rod);
 
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Absolute Zero §f» §8[§6" + cooldown + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "AntiMatter Rain §f» §8[§6" + cooldown + "§8]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -109,15 +109,15 @@ public class ArctisKit extends Kit {
     public void onInteract(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
-            if (player.getInventory().getItemInHand().getType() == Material.DIAMOND) {
+            if (player.getInventory().getItemInHand().getType() == Material.COAL_BLOCK) {
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
-                    if (!absolutezero.tryUse(player)) {
+                    if (!antimatter.tryUse(player)) {
                         return;
                     }
-                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.DARK_PURPLE + "Absolute Zero" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.ABSOLUTE_ZERO);
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.DARK_PURPLE + "AntiMatter Rain" + ChatColor.GOLD + " Ability!");
+                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.METEOR_SHOWER);
 
-                    absolutezero.startCooldown(player, this, cooldown, ability);
+                    antimatter.startCooldown(player, this, cooldown, ability);
                 }
             }
         }
