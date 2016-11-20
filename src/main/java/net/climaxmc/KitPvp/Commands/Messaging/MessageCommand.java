@@ -5,6 +5,7 @@ import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.database.PlayerData;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.StringUtils;
@@ -60,6 +61,12 @@ public class MessageCommand implements CommandExecutor {
             return true;
         }
 
+        SettingsFiles settingsFiles = new SettingsFiles();
+        if (settingsFiles.getReceiveMsgValue(target) == false) {
+            player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "ERROR! " + ChatColor.WHITE + "\u00BB " + ChatColor.YELLOW + target.getName() + ChatColor.RED + " has receiving msgs disabled!");
+            return true;
+        }
+
         plugin.getMessagers().put(player.getUniqueId(), target.getUniqueId());
         plugin.getMessagers().put(target.getUniqueId(), player.getUniqueId());
 
@@ -72,11 +79,11 @@ public class MessageCommand implements CommandExecutor {
         player.sendMessage(ChatColor.DARK_AQUA + "You" + ChatColor.RED + " \u00BB " + ChatColor.AQUA + "" + ChatColor.BOLD + target.getName() + ChatColor.WHITE + ": " + ChatColor.AQUA + message.trim());
         target.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + player.getName() + ChatColor.DARK_AQUA + "" + ChatColor.RED + " \u00BB " + ChatColor.DARK_AQUA + "You" + ChatColor.WHITE + ": " + ChatColor.AQUA + message);
 
-        if (target.getUniqueId().toString().equals("99fa296e-7397-40bd-abbe-e4ca50b1427c")) {
+        /*if (target.getUniqueId().toString().equals("99fa296e-7397-40bd-abbe-e4ca50b1427c")) {
             player.sendMessage(ChatColor.GOLD + "Jared is often AFK due to plugin development. Please be patient for a reply.");
         } else if (target.getUniqueId().toString().equals("66ca47bf-14ae-405b-9ff5-ef4bb98035eb")) {
             player.sendMessage(ChatColor.RED + "Gamer is often AFK due to plugin development. If he's AFK, he'll get back to you when he can!");
-        }
+        }*/
 
         player.playSound(player.getLocation(), Sound.NOTE_PIANO, 2, 2);
         target.playSound(target.getLocation(), Sound.NOTE_PIANO, 2, 2);

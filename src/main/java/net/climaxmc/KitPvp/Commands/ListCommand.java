@@ -19,7 +19,7 @@ public class ListCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        String players = "Online players (%d): ";
+        String players = ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Online players (%d): ";
 
         int amount = 0;
 
@@ -35,7 +35,9 @@ public class ListCommand implements CommandExecutor {
             if (playerData.getRank() == Rank.DEFAULT) {
                 players += (playerData.getLevelColor() + player.getDisplayName() + ChatColor.RESET + ", ");
             } else {
-                players += (ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "{" + playerData.getRank().getColor() + "" + ChatColor.BOLD + "" + playerData.getRank().getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "} " + playerData.getLevelColor() + player.getDisplayName() + ChatColor.RESET + ", ");
+                players += (ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "[" + playerData.getRank().getColor() + "" + ChatColor.BOLD
+                        + "" + playerData.getRank().getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "] " + playerData.getLevelColor()
+                        + player.getDisplayName() + ChatColor.GRAY + ", " + ChatColor.RESET);
             }
         }
 

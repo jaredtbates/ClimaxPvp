@@ -270,20 +270,13 @@ public class InventoryClickListener implements Listener {
             event.setCancelled(true);
         }
         if (event.getClickedInventory().getName().contains("Settings")) {
+            SettingsFiles settingsFiles = new SettingsFiles();
+            SettingsMenu settingsMenu = new SettingsMenu(plugin);
             if (event.getCurrentItem().getType().equals(Material.REDSTONE)) {
-                SettingsFiles settingsFiles = new SettingsFiles();
-                SettingsMenu settingsMenu = new SettingsMenu(plugin);
-                if (settingsFiles.getRespawnValue(player) == true) {
-                    settingsFiles.setRespawnFalse(player);
-                    player.closeInventory();
-                    player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
-                    player.sendMessage("§f» §7You have set Insta-Respawn to: §cFalse");
-                } else {
-                    settingsFiles.setRespawnTrue(player);
-                    player.closeInventory();
-                    player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
-                    player.sendMessage("§f» §7You have set Insta-Respawn to: §aTrue");
-                }
+                settingsFiles.toggleRespawnValue(player);
+            }
+            if (event.getCurrentItem().getType().equals(Material.BOOK)) {
+                settingsFiles.toggleReceiveMsg(player);
             }
             event.setCancelled(true);
         }

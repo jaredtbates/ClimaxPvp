@@ -27,9 +27,15 @@ public class SettingsMenu implements Listener {
         SettingsFiles settingsFiles = new SettingsFiles();
 
         if (settingsFiles.getRespawnValue(player) == true) {
-            inv.setItem(13, new I(Material.REDSTONE).name(ChatColor.AQUA + "Toggle Insta-Respawn").lore("§7Currently: §a§lTrue"));
+            inv.setItem(12, new I(Material.REDSTONE).name(ChatColor.AQUA + "Toggle Insta-Respawn").lore("§7Currently: §a§lTrue"));
         } else {
-            inv.setItem(13, new I(Material.REDSTONE).name(ChatColor.AQUA + "Toggle Insta-Respawn").lore("§7Currently: §c§lFalse"));
+            inv.setItem(12, new I(Material.REDSTONE).name(ChatColor.AQUA + "Toggle Insta-Respawn").lore("§7Currently: §c§lFalse"));
+        }
+
+        if (settingsFiles.getReceiveMsgValue(player) == true) {
+            inv.setItem(14, new I(Material.BOOK).name(ChatColor.AQUA + "Toggle Receiving Msgs").lore("§7Currently: §a§lTrue"));
+        } else {
+            inv.setItem(14, new I(Material.BOOK).name(ChatColor.AQUA + "Toggle Receiving Msgs").lore("§7Currently: §c§lFalse"));
         }
 
         player.openInventory(inv);

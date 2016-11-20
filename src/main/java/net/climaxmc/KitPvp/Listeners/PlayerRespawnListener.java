@@ -73,7 +73,7 @@ public class PlayerRespawnListener implements Listener {
         }
 
         player.getInventory().setItem(7, new I(Material.WATCH)
-                .name(ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "Settings")
+                .name(ChatColor.GOLD + "" + ChatColor.BOLD + "Settings")
                 .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Customize your experience here at Climax!"));
 
         player.getInventory().setItem(8, new I(Material.SEEDS)

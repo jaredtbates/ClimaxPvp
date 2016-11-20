@@ -231,7 +231,7 @@ public class PlayerInteractListener implements Listener {
             }
         }
         if (player.getItemInHand().getType().equals(Material.WATCH)) {
-            if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.DARK_AQUA + "" + ChatColor.BOLD + "Settings")) {
+            if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "" + ChatColor.BOLD + "Settings")) {
                 SettingsMenu settingsMenu = new SettingsMenu(plugin);
                 settingsMenu.openInventory(player);
             }
