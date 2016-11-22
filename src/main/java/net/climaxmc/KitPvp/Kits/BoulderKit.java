@@ -8,6 +8,7 @@ import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.Ability;
+import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -99,9 +100,12 @@ public class BoulderKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
+        SettingsFiles settingsFiles = new SettingsFiles();
+        if (!settingsFiles.getSpawnSoupValue(player)) {
+            ItemStack rod = new ItemStack(Material.FISHING_ROD);
+            rod.addEnchantment(Enchantment.DURABILITY, 3);
+            player.getInventory().addItem(rod);
+        }
 
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Boulder Toss §f» §8[§6" + cooldown + "§8]");

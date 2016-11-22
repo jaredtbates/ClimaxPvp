@@ -4,9 +4,11 @@ import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.database.PlayerData;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -56,6 +58,12 @@ public class ReplyCommand implements CommandExecutor {
 
         if (target == null) {
             player.sendMessage(ChatColor.RED + "The player that you previously messaged is no longer online.");
+            return true;
+        }
+
+        SettingsFiles settingsFiles = new SettingsFiles();
+        if (settingsFiles.getReceiveMsgValue(target) == false) {
+            player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "ERROR! " + ChatColor.WHITE + "\u00BB " + ChatColor.YELLOW + target.getName() + ChatColor.RED + " has receiving msgs disabled!");
             return true;
         }
 

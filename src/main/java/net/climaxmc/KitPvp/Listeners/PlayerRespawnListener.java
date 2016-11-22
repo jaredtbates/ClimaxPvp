@@ -5,6 +5,7 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.I;
+import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -70,6 +71,17 @@ public class PlayerRespawnListener implements Listener {
             player.getInventory().setItem(1, new I(Material.REDSTONE)
                     .name(ChatColor.GREEN + "Previous Kit: " + kit.getColor() + kit.getName())
                     .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Equip your previous kit."));
+        }
+
+        SettingsFiles settingsFiles = new SettingsFiles();
+        if (settingsFiles.getSpawnSoupValue(player)) {
+            player.getInventory().setItem(6, new I(Material.MUSHROOM_SOUP)
+                    .name(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup")
+                    .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Set your preferred healing type!"));
+        } else {
+            player.getInventory().setItem(6, new I(Material.FISHING_ROD)
+                    .name(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Regen")
+                    .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Set your preferred healing type!"));
         }
 
         player.getInventory().setItem(7, new I(Material.WATCH)

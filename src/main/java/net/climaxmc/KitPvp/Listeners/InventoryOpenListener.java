@@ -3,6 +3,10 @@ package net.climaxmc.KitPvp.Listeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.Ability;
+import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Dispenser;
 import org.bukkit.block.DoubleChest;
@@ -10,6 +14,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.concurrent.TimeUnit;
 
 public class InventoryOpenListener implements Listener {
     private ClimaxPvp plugin;
@@ -18,13 +25,41 @@ public class InventoryOpenListener implements Listener {
         this.plugin = plugin;
     }
 
+    Ability getSoup = new Ability("get le soup", 1, 30, TimeUnit.SECONDS);
+
     @EventHandler
     public void onInventoryOpenEvent(InventoryOpenEvent event) {
         Player player = (Player) event.getPlayer();
+        SettingsFiles settingsFiles = new SettingsFiles();
         if (event.getInventory().getHolder() instanceof Chest /*|| event.getInventory().getHolder() instanceof DoubleChest*/) {
-            event.setCancelled(true);
-            Kit.addSoup(KitPvp.soupInventory, 0, 53);
-            player.openInventory(KitPvp.soupInventory);
+            if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 350) {
+                event.setCancelled(true);
+                if (settingsFiles.getSpawnSoupValue(player)) {
+                    if (!getSoup.tryUse(player)) {
+                        player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Cooldown time remaining: " + ChatColor.YELLOW + getSoup.getStatus(player).getRemainingTime(TimeUnit.SECONDS));
+                        return;
+                    } else {
+                        for (ItemStack item : player.getInventory().getContents()) {
+                            if (item != null) {
+                                if (item.getType() == Material.MUSHROOM_SOUP || item.getType() == Material.BOWL) {
+                                    player.getInventory().removeItem(item);
+                                }
+                            }
+                        }
+                        for (int i = 0; i < 5; i++) {
+                            player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
+                        }
+
+                        player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Your soup has been refilled!");
+                    }
+                } else {
+                    player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You are not in Soup mode!");
+                }
+            } else {
+                event.setCancelled(true);
+                Kit.addSoup(KitPvp.soupInventory, 0, 53);
+                player.openInventory(KitPvp.soupInventory);
+            }
         }
 
         if (event.getInventory().getHolder() instanceof Dispenser) {

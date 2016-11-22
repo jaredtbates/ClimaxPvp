@@ -3,6 +3,7 @@ package net.climaxmc.KitPvp.Kits;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -96,9 +97,12 @@ public class ArcherKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
+        SettingsFiles settingsFiles = new SettingsFiles();
+        if (!settingsFiles.getSpawnSoupValue(player)) {
+            ItemStack rod = new ItemStack(Material.FISHING_ROD);
+            rod.addEnchantment(Enchantment.DURABILITY, 3);
+            player.getInventory().addItem(rod);
+        }
         ItemStack bow = new ItemStack(Material.BOW);
         bow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
         bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);

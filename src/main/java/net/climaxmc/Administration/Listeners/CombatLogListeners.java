@@ -13,6 +13,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
@@ -127,8 +128,8 @@ public class CombatLogListeners implements Listener {
     }
 
     @EventHandler
-    public void onPlayerRespawn(PlayerDeathEvent event) {
-        Player player = event.getEntity();
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
+        Player player = event.getPlayer();
 
         if (tagged.containsKey(player.getUniqueId())) {
             plugin.getServer().getScheduler().cancelTask(tagged.get(player.getUniqueId()));

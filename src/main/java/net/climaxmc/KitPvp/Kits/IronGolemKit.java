@@ -7,6 +7,7 @@ import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.Ability;
+import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -68,9 +69,12 @@ public class IronGolemKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         sword.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().addItem(sword);
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
+        SettingsFiles settingsFiles = new SettingsFiles();
+        if (!settingsFiles.getSpawnSoupValue(player)) {
+            ItemStack rod = new ItemStack(Material.FISHING_ROD);
+            rod.addEnchantment(Enchantment.DURABILITY, 3);
+            player.getInventory().addItem(rod);
+        }
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);
         chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setChestplate(chestplate);

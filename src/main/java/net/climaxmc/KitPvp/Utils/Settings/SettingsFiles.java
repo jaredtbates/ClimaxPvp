@@ -1,11 +1,15 @@
 package net.climaxmc.KitPvp.Utils.Settings;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Utils.I;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,8 +35,8 @@ public class SettingsFiles {
     }
 
     private void set(String path, Object object) {
-        config.set(path, object);
         Bukkit.getScheduler().runTaskAsynchronously(ClimaxPvp.getInstance(), () -> {
+            config.set(path, object);
             try {
                 config.save(file);
             } catch (IOException e) {
@@ -80,5 +84,31 @@ public class SettingsFiles {
             set(player.getUniqueId() + ".receiveMsging", true);
         }
         return (boolean) config.get(player.getUniqueId() + ".receiveMsging");
+    }
+
+    public void toggleSpawnSoup(Player player) {
+        if ((boolean) config.get(player.getUniqueId() + ".respawnSoup") == false) {
+            set(player.getUniqueId() + ".respawnSoup", true);
+            player.getInventory().setItemInHand(new I(Material.MUSHROOM_SOUP)
+                    .name(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup")
+                    .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Set your preferred healing type!"));
+            //player.closeInventory();
+            player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
+            //player.sendMessage("§f» §7Mode set §7to: §eSoup");
+        } else {
+            set(player.getUniqueId() + ".respawnSoup", false);
+            player.getInventory().setItemInHand(new I(Material.FISHING_ROD)
+                    .name(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Regen")
+                    .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Set your preferred healing type!"));
+            //player.closeInventory();
+            player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
+            //player.sendMessage("§f» §7Mode set §7to: §eRod/Regen");
+        }
+    }
+    public boolean getSpawnSoupValue(Player player) {
+        if (config.get(player.getUniqueId() + ".respawnSoup") == null) {
+            set(player.getUniqueId() + ".respawnSoup", false);
+        }
+        return (boolean) config.get(player.getUniqueId() + ".respawnSoup");
     }
 }

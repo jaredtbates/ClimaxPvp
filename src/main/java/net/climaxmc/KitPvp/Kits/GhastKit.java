@@ -7,6 +7,7 @@ import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.Ability;
+import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -73,9 +74,12 @@ public class GhastKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
         player.getInventory().addItem(sword);
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
+        SettingsFiles settingsFiles = new SettingsFiles();
+        if (!settingsFiles.getSpawnSoupValue(player)) {
+            ItemStack rod = new ItemStack(Material.FISHING_ROD);
+            rod.addEnchantment(Enchantment.DURABILITY, 3);
+            player.getInventory().addItem(rod);
+        }
 
         ItemMeta hoeMeta = ability.getItemMeta();
         hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher §f» §8[§6" + cooldown + "§8]");

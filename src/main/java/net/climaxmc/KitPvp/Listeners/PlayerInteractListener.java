@@ -7,6 +7,7 @@ import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Menus.SettingsMenu;
 import net.climaxmc.KitPvp.Utils.I;
+import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import org.bukkit.*;
@@ -208,32 +209,44 @@ public class PlayerInteractListener implements Listener {
                 }
             }
         }
-        if (player.getItemInHand().getType().equals(Material.BOOK)) {
-            if (player.getGameMode().equals(GameMode.CREATIVE) && ClimaxPvp.deadPeoples.contains(player)) {
-                ClimaxPvp.deadPeoples.remove(player);
+        if (item != null && player.getItemInHand().getItemMeta().getDisplayName() != null) {
+            if (player.getItemInHand().getType().equals(Material.BOOK)) {
+                if (player.getGameMode().equals(GameMode.CREATIVE) && ClimaxPvp.deadPeoples.contains(player)) {
+                    ClimaxPvp.deadPeoples.remove(player);
 
-                plugin.respawn(player);
+                    plugin.respawn(player);
 
-                if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
-                    new PvpKit().wearCheckLevel(player);
-                }
-                player.setAllowFlight(false);
-                player.setFlying(false);
-                for(Player players : Bukkit.getServer().getOnlinePlayers()){
-                    players.showPlayer(player);
-                }
-                Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
-                    @Override
-                    public void run() {
-                        player.playSound(player.getLocation(), Sound.NOTE_STICKS, 1, 1);
+                    if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
+                        new PvpKit().wearCheckLevel(player);
                     }
-                }, 1);
+                    player.setAllowFlight(false);
+                    player.setFlying(false);
+                    for(Player players : Bukkit.getServer().getOnlinePlayers()){
+                        players.showPlayer(player);
+                    }
+                    Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                        @Override
+                        public void run() {
+                            player.playSound(player.getLocation(), Sound.NOTE_STICKS, 1, 1);
+                        }
+                    }, 1);
+                }
             }
-        }
-        if (player.getItemInHand().getType().equals(Material.WATCH)) {
-            if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Settings")) {
-                SettingsMenu settingsMenu = new SettingsMenu(plugin);
-                settingsMenu.openInventory(player);
+            if (player.getItemInHand().getType().equals(Material.WATCH)) {
+                if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "Settings")) {
+                    SettingsMenu settingsMenu = new SettingsMenu(plugin);
+                    settingsMenu.openInventory(player);
+                }
+            }
+            if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup")) {
+                SettingsFiles settingsFiles = new SettingsFiles();
+                settingsFiles.toggleSpawnSoup(player);
+                event.setCancelled(true);
+            }
+            if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Regen")) {
+                SettingsFiles settingsFiles = new SettingsFiles();
+                settingsFiles.toggleSpawnSoup(player);
+                event.setCancelled(true);
             }
         }
     }

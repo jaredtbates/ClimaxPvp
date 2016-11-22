@@ -66,6 +66,20 @@ public class PlayerDeathListener implements Listener {
             plugin.getServer().getScheduler().runTaskLater(plugin, task::cancel, 10);
 
             SettingsFiles settingsFiles = new SettingsFiles();
+
+            if (settingsFiles.getSpawnSoupValue(killer)) {
+                for (ItemStack item : killer.getInventory().getContents()) {
+                    if (item != null) {
+                        if (item.getType() == Material.MUSHROOM_SOUP || item.getType() == Material.BOWL || item.getType() == Material.FISHING_ROD) {
+                            killer.getInventory().removeItem(item);
+                        }
+                    }
+                }
+                for (int i = 0; i < 5; i++) {
+                    killer.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
+                }
+            }
+
             if (settingsFiles.getRespawnValue(player)) {
                 plugin.getServer().getScheduler().runTask(plugin, () -> {
                     event.setCancelled(true);
@@ -212,19 +226,19 @@ public class PlayerDeathListener implements Listener {
                 int killerAmount = KitPvp.killStreak.get(killer.getUniqueId());
                 if (killerAmount % 5 == 0) {
                     plugin.getServer().broadcastMessage("" + ChatColor.GREEN + killer.getName() + ChatColor.GRAY + " has reached a killstreak of " + ChatColor.RED + killerAmount + ChatColor.GRAY + "!");
-                    killerAmount = killerAmount * 2 + 10;
+                    killerAmount = killerAmount * 2 + 20;
                     killerData.depositBalance(killerAmount);
-                    killer.sendMessage(" §7You have gained §b$" + killerAmount + "!");
+                    killer.sendMessage("   §7You have gained §b$" + killerAmount + "!");
                 } else {
                     killerData.depositBalance(10);
-                    killer.sendMessage(" §7You have gained §b$10!");
-                    killer.sendMessage(" §7You have reached a killstreak of §b" + KitPvp.killStreak.get(killer.getUniqueId()) + "!");
+                    killer.sendMessage("   §7You have gained §b$10!");
+                    killer.sendMessage("   §7You have reached a killstreak of §b" + KitPvp.killStreak.get(killer.getUniqueId()));
                 }
             } else {
                 KitPvp.killStreak.put(killer.getUniqueId(), 1);
                 killerData.depositBalance(10);
-                killer.sendMessage(" §7You have gained §b$10!");
-                killer.sendMessage(" §7You have reached a killstreak of §b" + KitPvp.killStreak.get(killer.getUniqueId()) + "!");
+                killer.sendMessage("   §7You have gained §b$10!");
+                killer.sendMessage("   §7You have reached a killstreak of §b" + KitPvp.killStreak.get(killer.getUniqueId()));
             }
 
             if (KitPvp.killStreak.containsKey(player.getUniqueId())) {

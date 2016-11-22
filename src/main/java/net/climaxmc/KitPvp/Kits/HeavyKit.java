@@ -3,6 +3,7 @@ package net.climaxmc.KitPvp.Kits;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -46,9 +47,12 @@ public class HeavyKit extends Kit {
         sword.addEnchantment(Enchantment.DURABILITY, 2);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
-        ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
-        player.getInventory().addItem(rod);
+        SettingsFiles settingsFiles = new SettingsFiles();
+        if (!settingsFiles.getSpawnSoupValue(player)) {
+            ItemStack rod = new ItemStack(Material.FISHING_ROD);
+            rod.addEnchantment(Enchantment.DURABILITY, 3);
+            player.getInventory().addItem(rod);
+        }
         player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 2));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, 1));
     }

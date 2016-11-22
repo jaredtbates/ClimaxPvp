@@ -1,6 +1,4 @@
 package net.climaxmc.KitPvp.Menus;
-/* Created by GamerBah on 4/3/2016 */
-
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Utils.Challenges.ChallengesFiles;

@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp;
 
 import lombok.Data;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import org.bukkit.ChatColor;
@@ -9,12 +10,14 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 
@@ -134,6 +137,25 @@ public abstract class Kit implements Listener, CommandExecutor {
 
                 if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 350) {
                     wearNoSoup(player);
+
+                    SettingsFiles settingsFiles = new SettingsFiles();
+                    if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 16) {
+                        if (settingsFiles.getSpawnSoupValue(player)) {
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0));
+                            for (ItemStack item : player.getInventory().getContents()) {
+                                if (item != null) {
+                                    if (item.getType() == Material.MUSHROOM_SOUP || item.getType() == Material.BOWL || item.getType() == Material.FISHING_ROD) {
+                                        player.getInventory().removeItem(item);
+                                    }
+                                }
+                            }
+                            for (int i = 0; i < 5; i++) {
+                                player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
+                            }
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 3));
+                            player.removePotionEffect(PotionEffectType.REGENERATION);
+                        }
+                    }
                     return;
                 }
 
