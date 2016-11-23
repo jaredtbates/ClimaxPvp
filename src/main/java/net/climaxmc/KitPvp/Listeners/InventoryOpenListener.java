@@ -15,6 +15,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.concurrent.TimeUnit;
 
@@ -35,13 +37,14 @@ public class InventoryOpenListener implements Listener {
             if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 350) {
                 event.setCancelled(true);
                 if (settingsFiles.getSpawnSoupValue(player)) {
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
                     if (!getSoup.tryUse(player)) {
                         player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Cooldown time remaining: " + ChatColor.YELLOW + getSoup.getStatus(player).getRemainingTime(TimeUnit.SECONDS));
                         return;
                     } else {
                         for (ItemStack item : player.getInventory().getContents()) {
                             if (item != null) {
-                                if (item.getType() == Material.MUSHROOM_SOUP || item.getType() == Material.BOWL) {
+                                if (item.getType() == Material.MUSHROOM_SOUP || item.getType() == Material.BOWL || item.getType() == Material.FISHING_ROD) {
                                     player.getInventory().removeItem(item);
                                 }
                             }
@@ -49,6 +52,8 @@ public class InventoryOpenListener implements Listener {
                         for (int i = 0; i < 5; i++) {
                             player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
                         }
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 3));
+                        player.removePotionEffect(PotionEffectType.REGENERATION);
 
                         player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Your soup has been refilled!");
                     }

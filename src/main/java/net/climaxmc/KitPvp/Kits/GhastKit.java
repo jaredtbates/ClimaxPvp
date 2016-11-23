@@ -70,6 +70,7 @@ public class GhastKit extends Kit {
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 0));
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        regenResistance(player);
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
@@ -127,8 +128,12 @@ public class GhastKit extends Kit {
                             && !CheckCommand.getChecking().contains(target.getUniqueId())
                             && (KitPvp.currentTeams.get(target.getName()) != ((Player) f.getShooter()).getName()
                             && KitPvp.currentTeams.get(((Player) f.getShooter()).getName()) != target.getName())) {
-                        event.setCancelled(true);
-                        target.damage(7);
+                        if (event.isCancelled()) {
+                            return;
+                        } else {
+                            event.setCancelled(true);
+                            target.damage(7);
+                        }
                     }
                     target.setVelocity(target.getVelocity().setY(1));
 

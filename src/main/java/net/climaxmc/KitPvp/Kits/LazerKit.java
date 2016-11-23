@@ -72,6 +72,7 @@ public class LazerKit extends Kit {
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        regenResistance(player);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();

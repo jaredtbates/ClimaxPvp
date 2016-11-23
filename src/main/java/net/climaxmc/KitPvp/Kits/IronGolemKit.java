@@ -65,6 +65,7 @@ public class IronGolemKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+        regenResistance(player);
         ItemStack sword = new ItemStack(Material.GOLD_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         sword.addEnchantment(Enchantment.DURABILITY, 2);

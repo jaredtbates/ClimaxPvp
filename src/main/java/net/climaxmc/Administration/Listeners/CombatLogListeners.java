@@ -1,6 +1,7 @@
 package net.climaxmc.Administration.Listeners;
 
 import lombok.Getter;
+import me.xericker.disguiseabilities.other.WorldGuard;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.ChatColor;
@@ -31,13 +32,14 @@ public class CombatLogListeners implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamage(EntityDamageByEntityEvent event) {
-        if (event.isCancelled()) {
-            return;
-        }
 
         if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
             Player damager = (Player) event.getDamager();
             Player damaged = (Player) event.getEntity();
+
+            if (WorldGuard.isWithinProtectedRegion(damaged.getLocation()) || WorldGuard.isWithinProtectedRegion(damager.getLocation())) {
+                return;
+            }
 
            if (KitPvp.currentTeams.containsKey(damaged.getName()) || KitPvp.currentTeams.containsKey(damager.getName())) {
                 if (KitPvp.currentTeams.get(damaged.getName()) == damager.getName()

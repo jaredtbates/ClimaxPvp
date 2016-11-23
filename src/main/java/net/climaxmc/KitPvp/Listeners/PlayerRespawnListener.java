@@ -52,6 +52,9 @@ public class PlayerRespawnListener implements Listener {
         player.setFlying(false);
         player.setAllowFlight(false);
         player.setFlySpeed(0.1F);
+        player.setExp(0F);
+        player.setLevel(0);
+
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }

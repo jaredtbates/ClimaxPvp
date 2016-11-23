@@ -62,12 +62,12 @@ public class InventoryClickListener implements Listener {
                 event.setCancelled(true);
             }*/
 
-            if ((KitManager.isPlayerInKit(player, BomberKit.class)
+            /*if ((KitManager.isPlayerInKit(player, BomberKit.class)
                     && event.getAction().equals(InventoryAction.HOTBAR_SWAP))
                     || event.getCursor().getType().equals(Material.TNT)
                     || event.getCurrentItem().getType().equals(Material.TNT)) {
                 event.setCancelled(true);
-            }
+            }*/
 
             if (event.getCurrentItem() != null && event.getCurrentItem().getItemMeta() != null
                     && event.getCurrentItem().getItemMeta().getDisplayName() != null) {

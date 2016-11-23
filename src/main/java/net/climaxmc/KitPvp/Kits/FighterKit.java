@@ -78,6 +78,7 @@ public class FighterKit extends Kit {
                     }
                 } else {
                     Bukkit.getScheduler().cancelTask(expTask);
+                    return;
                 }
             }
         }, 300L, 300L);
@@ -95,8 +96,11 @@ public class FighterKit extends Kit {
         Player killer = player.getKiller();
         if (ClimaxPvp.inFighterKit.contains(killer)) {
             if (player.getHealth() - event.getDamage() <= 0) {
-                if (killer.getExp() != 1F) {
-                    killer.setExp(killer.getExp() + 0.5F);
+                if (killer.getExp() != 1F && killer.getExp() != 0.5F) {
+                    while (killer.getExp() < 0.5F) {
+                        killer.setExp(killer.getExp() + 0.01F);
+                    }
+                    killer.setExp(0.5F);
                 }
                 if (killer.getExp() == 1F && killer.getLevel() != 4) {
                     killer.setLevel(killer.getLevel() + 1);

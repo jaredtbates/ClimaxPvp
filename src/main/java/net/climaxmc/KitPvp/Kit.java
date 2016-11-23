@@ -115,6 +115,7 @@ public abstract class Kit implements Listener, CommandExecutor {
      * @param player Player to wear kit
      */
     public void wearCheckLevel(Player player) {
+
         PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
         if (!KitManager.isPlayerInKit(player) || (playerData.hasRank(Rank.MASTER) && player.getLocation().distance(player.getWorld().getSpawnLocation()) < 200)) {
             if ((playerData.getLevelColor().contains(String.valueOf(color.getChar()))
@@ -134,6 +135,7 @@ public abstract class Kit implements Listener, CommandExecutor {
 
                 player.getInventory().clear();
                 player.getInventory().setArmorContents(null);
+
 
                 if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 350) {
                     wearNoSoup(player);
@@ -176,5 +178,9 @@ public abstract class Kit implements Listener, CommandExecutor {
             }
         }
         return false;
+    }
+
+    public void regenResistance(Player player) {
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0));
     }
 }

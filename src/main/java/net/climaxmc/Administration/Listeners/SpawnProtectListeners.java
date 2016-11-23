@@ -105,7 +105,7 @@ public class SpawnProtectListeners implements Listener {
         }
     }
 
-    @EventHandler
+    /*@EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         Location location = player.getLocation();
@@ -117,5 +117,5 @@ public class SpawnProtectListeners implements Listener {
                 player.sendMessage(ChatColor.YELLOW + "If you wish to leave, use " + ChatColor.GREEN + "/afk");
             }
         }
-    }
+    }*/
 }

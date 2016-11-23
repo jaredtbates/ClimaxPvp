@@ -58,7 +58,7 @@ public class PlayerDeathListener implements Listener {
         Player player = (Player) event.getEntity();
         Player killer = player.getKiller();
 
-        if (player.getHealth() - event.getDamage() <= 0) {
+        if (player.getHealth() - event.getFinalDamage() <= 0) {
 
             Location location = player.getLocation();
 
@@ -67,17 +67,20 @@ public class PlayerDeathListener implements Listener {
 
             SettingsFiles settingsFiles = new SettingsFiles();
 
-            if (settingsFiles.getSpawnSoupValue(killer)) {
-                for (ItemStack item : killer.getInventory().getContents()) {
+            if (settingsFiles.getSpawnSoupValue(player)) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
+                for (ItemStack item : player.getInventory().getContents()) {
                     if (item != null) {
                         if (item.getType() == Material.MUSHROOM_SOUP || item.getType() == Material.BOWL || item.getType() == Material.FISHING_ROD) {
-                            killer.getInventory().removeItem(item);
+                            player.getInventory().removeItem(item);
                         }
                     }
                 }
                 for (int i = 0; i < 5; i++) {
-                    killer.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
+                    player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
                 }
+                player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 3));
+                player.removePotionEffect(PotionEffectType.REGENERATION);
             }
 
             if (settingsFiles.getRespawnValue(player)) {

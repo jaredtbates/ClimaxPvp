@@ -53,6 +53,7 @@ public class KnightKit extends Kit {
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
+        regenResistance(player);
         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         player.getInventory().setChestplate(chest);

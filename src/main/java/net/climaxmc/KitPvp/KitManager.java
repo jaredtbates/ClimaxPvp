@@ -75,6 +75,7 @@ public class KitManager implements Listener {
         kits.add(new ColossusKit());
         kits.add(new VoidKit());
         kits.add(new ZephyrKit());
+        kits.add(new RangerKit());
 
         for (Kit kit : kits) {
             plugin.getServer().getPluginManager().registerEvents(kit, plugin);
