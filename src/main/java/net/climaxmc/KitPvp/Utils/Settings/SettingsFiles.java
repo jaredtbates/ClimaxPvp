@@ -1,7 +1,10 @@
 package net.climaxmc.KitPvp.Utils.Settings;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.Donations.Listeners.InventoryClickListener;
 import net.climaxmc.KitPvp.Utils.I;
+import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.donations.trails.Trail;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -13,6 +16,9 @@ import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by Joshua on 11/19/2016.
@@ -21,6 +27,10 @@ public class SettingsFiles {
 
     private File file;
     private FileConfiguration config;
+
+    private HashMap<UUID, Trail> inTrail = new HashMap<>();
+
+    public boolean passedTrailsChecks = false;
 
     public SettingsFiles() {
         this.file = new File(ClimaxPvp.getInstance().getDataFolder() + File.separator + "settings.yml");
@@ -47,7 +57,7 @@ public class SettingsFiles {
 
 
     public void toggleRespawnValue(Player player) {
-        if ((boolean) config.get(player.getUniqueId() + ".instaRespawn") == false) {
+        if (!(boolean) config.get(player.getUniqueId() + ".instaRespawn")) {
             set(player.getUniqueId() + ".instaRespawn", true);
             player.closeInventory();
             player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
@@ -67,7 +77,7 @@ public class SettingsFiles {
     }
 
     public void toggleReceiveMsg(Player player) {
-        if ((boolean) config.get(player.getUniqueId() + ".receiveMsging") == false) {
+        if (!(boolean) config.get(player.getUniqueId() + ".receiveMsging")) {
             set(player.getUniqueId() + ".receiveMsging", true);
             player.closeInventory();
             player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
@@ -87,7 +97,7 @@ public class SettingsFiles {
     }
 
     public void toggleSpawnSoup(Player player) {
-        if ((boolean) config.get(player.getUniqueId() + ".respawnSoup") == false) {
+        if (!(boolean) config.get(player.getUniqueId() + ".respawnSoup")) {
             set(player.getUniqueId() + ".respawnSoup", true);
             player.getInventory().setItemInHand(new I(Material.MUSHROOM_SOUP)
                     .name(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup")
@@ -111,4 +121,137 @@ public class SettingsFiles {
         }
         return (boolean) config.get(player.getUniqueId() + ".respawnSoup");
     }
+
+    public void removeTrails(Player player) {
+        for (Trail trail : Trail.values()) {
+            if (inTrail.containsKey(player.getUniqueId()) && inTrail.containsValue(trail)) {
+                inTrail.remove(player.getUniqueId(), trail);
+            }
+        }
+        if ((boolean) config.get(player.getUniqueId() + ".hasTrail")) {
+            set(player.getUniqueId() + ".Clouds", false);
+            set(player.getUniqueId() + ".Flame", false);
+            set(player.getUniqueId() + ".Rain", false);
+            set(player.getUniqueId() + ".Mystic", false);
+            set(player.getUniqueId() + ".Ender", false);
+            set(player.getUniqueId() + ".Hypnotic", false);
+            set(player.getUniqueId() + ".Love", false);
+            set(player.getUniqueId() + ".Notes", false);
+            set(player.getUniqueId() + ".Slime", false);
+            set(player.getUniqueId() + ".hasTrail", false);
+        } else {
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You don't have any trails selected!");
+        }
+    }
+    public void setTrail(Player player, String name, Trail trail) {
+        if ((boolean) config.get(player.getUniqueId() + ".unlockedTrails." + name)) {
+            if (!(inTrail.containsKey(player.getUniqueId()) && inTrail.containsValue(trail))) {
+                set(player.getUniqueId() + "." + name, true);
+                set(player.getUniqueId() + ".hasTrail", true);
+
+            } else {
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You already have "+ ChatColor.YELLOW + name + ChatColor.GRAY + " selected!");
+                passedTrailsChecks = false;
+            }
+        } else {
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You must unlock this trail to use it!");
+        }
+    }
+    public void tryUnlockTrail(Player player, String name, Trail trail, int cost) {
+        PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
+        if (!(boolean) config.get(player.getUniqueId() + ".unlockedTrails." + name)) {
+            if (cost <= playerData.getBalance()) {
+                set(player.getUniqueId() + ".unlockedTrails." + name, true);
+                playerData.withdrawBalance(cost);
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You've unlocked the " + ChatColor.YELLOW + name + ChatColor.GRAY + " trail! For " + ChatColor.GREEN + "$" + cost);
+            } else {
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "Insufficient funds!");
+            }
+        } else {
+            setTrail(player, name, trail);
+        }
+    }
+    public boolean isTrailUnlocked(Player player, String name) {
+        if (config.get(player.getUniqueId() + ".unlockedTrails." + name) == null) {
+            set(player.getUniqueId() + ".unlockedTrails." + name, false);
+            return false;
+        } else if ((boolean) config.get(player.getUniqueId() + ".unlockedTrails." + name)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*public void setClouds(Player player) {
+        if (!(boolean) config.get(player.getUniqueId() + ".Clouds")) {
+            config.set(player.getUniqueId() + ".Clouds", true);
+            config.set(player.getUniqueId() + ".hasTrail", true);
+        } else {
+            player.sendMessage(ChatColor.WHITE + "\uBB00 " + ChatColor.GRAY + "You already have this trail selected!");
+        }
+    }
+    public void setFlame(Player player) {
+        if (!(boolean) config.get(player.getUniqueId() + ".Flame")) {
+            config.set(player.getUniqueId() + ".Flame", true);
+            config.set(player.getUniqueId() + ".hasTrail", true);
+        } else {
+            player.sendMessage(ChatColor.WHITE + "\uBB00 " + ChatColor.GRAY + "You already have this trail selected!");
+        }
+    }
+    public void setRain(Player player) {
+        if (!(boolean) config.get(player.getUniqueId() + ".Rain")) {
+            config.set(player.getUniqueId() + ".Rain", true);
+            config.set(player.getUniqueId() + ".hasTrail", true);
+        } else {
+            player.sendMessage(ChatColor.WHITE + "\uBB00 " + ChatColor.GRAY + "You already have this trail selected!");
+        }
+    }
+    public void setMystic(Player player) {
+        if (!(boolean) config.get(player.getUniqueId() + ".Mystic")) {
+            config.set(player.getUniqueId() + ".Mystic", true);
+            config.set(player.getUniqueId() + ".hasTrail", true);
+        } else {
+            player.sendMessage(ChatColor.WHITE + "\uBB00 " + ChatColor.GRAY + "You already have this trail selected!");
+        }
+    }
+    public void setEnder(Player player) {
+        if (!(boolean) config.get(player.getUniqueId() + ".Ender")) {
+            config.set(player.getUniqueId() + ".Ender", true);
+            config.set(player.getUniqueId() + ".hasTrail", true);
+        } else {
+            player.sendMessage(ChatColor.WHITE + "\uBB00 " + ChatColor.GRAY + "You already have this trail selected!");
+        }
+    }
+    public void setHypnotic(Player player) {
+        if (!(boolean) config.get(player.getUniqueId() + ".Hypnotic")) {
+            config.set(player.getUniqueId() + ".Hypnotic", true);
+            config.set(player.getUniqueId() + ".hasTrail", true);
+        } else {
+            player.sendMessage(ChatColor.WHITE + "\uBB00 " + ChatColor.GRAY + "You already have this trail selected!");
+        }
+    }
+    public void setLove(Player player) {
+        if (!(boolean) config.get(player.getUniqueId() + ".Love")) {
+            config.set(player.getUniqueId() + ".Love", true);
+            config.set(player.getUniqueId() + ".hasTrail", true);
+        } else {
+            player.sendMessage(ChatColor.WHITE + "\uBB00 " + ChatColor.GRAY + "You already have this trail selected!");
+        }
+    }
+    public void setNotes(Player player) {
+        if (!(boolean) config.get(player.getUniqueId() + ".Notes")) {
+            config.set(player.getUniqueId() + ".Notes", true);
+            config.set(player.getUniqueId() + ".hasTrail", true);
+        } else {
+            player.sendMessage(ChatColor.WHITE + "\uBB00 " + ChatColor.GRAY + "You already have this trail selected!");
+        }
+    }
+    public void setSlime(Player player) {
+        if (!(boolean) config.get(player.getUniqueId() + ".Slime")) {
+            config.set(player.getUniqueId() + ".Slime", true);
+            config.set(player.getUniqueId() + ".hasTrail", true);
+        } else {
+            player.sendMessage(ChatColor.WHITE + "\uBB00 " + ChatColor.GRAY + "You already have this trail selected!");
+        }
+    }*/
 }

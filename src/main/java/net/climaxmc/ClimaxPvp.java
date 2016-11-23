@@ -12,6 +12,7 @@ import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Utils.Challenges.ChallengesFiles;
 import net.climaxmc.common.database.MySQL;
 import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.donations.trails.Trail;
 import net.gpedro.integrations.slack.SlackApi;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -292,3 +293,7 @@ public class ClimaxPvp extends JavaPlugin {
         }
     }
 }
+
+//name: ${project.artifactId}
+//main: ${project.groupId}.${project.artifactId}
+//        version: ${project.version}
