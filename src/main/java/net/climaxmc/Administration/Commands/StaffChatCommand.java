@@ -34,7 +34,7 @@ public class StaffChatCommand implements CommandExecutor {
         Player player = (Player) sender;
         PlayerData playerData = plugin.getPlayerData(player);
 
-        if (!playerData.hasRank(Rank.HELPER)) {
+        if (!playerData.hasRank(Rank.TRIAL_MODERATOR)) {
             player.sendMessage(ChatColor.RED + "You do not have permission to execute this command!");
         } else {
             if (args.length == 0) {
@@ -51,7 +51,7 @@ public class StaffChatCommand implements CommandExecutor {
                 String message = StringUtils.join(args, ' ', 0, args.length);
 
                 plugin.getServer().getOnlinePlayers().stream().filter(players ->
-                        plugin.getPlayerData(players).hasRank(Rank.HELPER))
+                        plugin.getPlayerData(players).hasRank(Rank.TRIAL_MODERATOR))
                         .forEach(players -> players.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "[STAFF] "
                                 + ChatColor.RED + player.getName() + ": " + message));
             }

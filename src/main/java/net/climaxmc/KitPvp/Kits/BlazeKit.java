@@ -123,7 +123,7 @@ public class BlazeKit extends Kit {
                             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 0));
                             player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 100, 0));
                             player.getWorld().playSound(player.getLocation(), Sound.BLAZE_BREATH, 2, 2);
-                            if (!VanishCommand.getVanished().contains(players.getUniqueId())
+                            if (!KitPvp.getVanished().contains(players.getUniqueId())
                                     && !CheckCommand.getChecking().contains(players.getUniqueId())
                                     && (KitPvp.currentTeams.get(player.getName()) != players.getName()
                                     && KitPvp.currentTeams.get(players.getName()) != player.getName())) {

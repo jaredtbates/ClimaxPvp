@@ -124,8 +124,8 @@ public class GhastKit extends Kit {
                 Fireball f = (Fireball) event.getDamager();
                 if (f.getShooter() instanceof Player) {
                     Player player = (Player) f.getShooter();
-                    if (!VanishCommand.getVanished().contains(target.getUniqueId())
-                            && !CheckCommand.getChecking().contains(target.getUniqueId())
+                    if (!KitPvp.getVanished().contains(target.getUniqueId())
+                            && !KitPvp.getChecking().contains(target.getUniqueId())
                             && (KitPvp.currentTeams.get(target.getName()) != ((Player) f.getShooter()).getName()
                             && KitPvp.currentTeams.get(((Player) f.getShooter()).getName()) != target.getName())) {
                         if (event.isCancelled()) {

@@ -2,9 +2,11 @@ package net.climaxmc.Donations.Listeners;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Donations;
+import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.donations.trails.ParticleEffect;
 import net.climaxmc.common.donations.trails.Trail;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -30,11 +32,15 @@ public class PlayerMoveListener implements Listener {
         Player player = event.getPlayer();
         SettingsFiles settingsFiles = new SettingsFiles();
         for (Trail trail : Trail.values()) {
-            //if () {
-                Location location = player.getLocation();
-                location.setY(location.getY() + trail.getYOffset());
-                new ParticleEffect(instance.getTrailsEnabled().get(player.getUniqueId()).getData()).sendToLocation(location);
-            //}
+            if (KitPvp.inTrail.get(player.getUniqueId()) != null) {
+                if (KitPvp.inTrail.containsKey(player.getUniqueId())) {
+                    if (KitPvp.inTrail.get(player.getUniqueId()).equals(trail)) {
+                        Location location = player.getLocation();
+                        location.setY(location.getY() + trail.getYOffset());
+                        new ParticleEffect(KitPvp.inTrail.get(player.getUniqueId()).getData()).sendToLocation(location);
+                    }
+                }
+            }
         }
 
         if (player.getGameMode().equals(GameMode.SPECTATOR)) {

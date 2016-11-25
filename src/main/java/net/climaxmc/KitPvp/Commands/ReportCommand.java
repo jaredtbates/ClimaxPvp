@@ -55,7 +55,7 @@ public class ReportCommand implements CommandExecutor {
         }
 
         if (reported == player) {
-            player.sendMessage(ChatColor.RED + "You can't report yourself! Unless you have something to tell us.... *gives suspicious look*");
+            player.sendMessage(ChatColor.RED + "You can't report yourself! Unless you have something to tell us... *gives suspicious look*");
             return true;
         }
 

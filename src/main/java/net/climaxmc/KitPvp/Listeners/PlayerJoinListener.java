@@ -5,6 +5,8 @@ import net.climaxmc.Administration.Commands.FreezeCommand;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.KitPvp.Utils.TextComponentMessages;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
@@ -141,7 +143,7 @@ public class PlayerJoinListener implements Listener {
             plugin.saveConfig();
         }
 
-        if (ChatCommands.cmdspies.contains(player.getUniqueId()) && !playerData.hasRank(Rank.HELPER)) {
+        if (ChatCommands.cmdspies.contains(player.getUniqueId()) && !playerData.hasRank(Rank.TRIAL_MODERATOR)) {
             ChatCommands.cmdspies.remove(player.getUniqueId());
         }
 
@@ -168,7 +170,7 @@ public class PlayerJoinListener implements Listener {
         }
 
         if (playerData != null) {
-            if (playerData.hasRank(Rank.HELPER)) {
+            if (playerData.hasRank(Rank.TRIAL_MODERATOR)) {
                 attachment.setPermission("AAC.admin", true);
                 attachment.setPermission("AAC.notify", true);
                 attachment.setPermission("AAC.verbose", true);
@@ -181,6 +183,7 @@ public class PlayerJoinListener implements Listener {
                 attachment.setPermission("litebans.notify", true);
                 attachment.setPermission("litebans.override", true);
                 attachment.setPermission("litebans.tempmute", true);
+                attachment.setPermission("litebans.tempban", true);
                 attachment.setPermission("litebans.togglechat", true);
                 attachment.setPermission("litebans.unmute", true);
                 attachment.setPermission("litebans.unwarn", true);
@@ -199,7 +202,6 @@ public class PlayerJoinListener implements Listener {
                 attachment.setPermission("litebans.ban", true);
                 attachment.setPermission("litebans.dupeip", true);
                 attachment.setPermission("litebans.ipban", true);
-                attachment.setPermission("litebans.tempban", true);
                 attachment.setPermission("litebans.unban", true);
                 attachment.setPermission("litebans.unlimited", true);
                 attachment.setPermission("litebans.notify.dupeip_join", true);
@@ -209,6 +211,12 @@ public class PlayerJoinListener implements Listener {
         String joinMOTD = plugin.getConfig().getString("JoinMOTD");
         if (joinMOTD != null) {
             player.sendMessage("" + ChatColor.translateAlternateColorCodes('&', joinMOTD));
+        }
+
+        // Settings global chat hashmap update
+        SettingsFiles settingsFiles = new SettingsFiles();
+        if (!settingsFiles.getGlobalChatValue(player)) {
+            KitPvp.globalChatDisabled.add(player.getUniqueId());
         }
     }
 }

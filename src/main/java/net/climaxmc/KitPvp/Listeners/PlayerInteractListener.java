@@ -209,7 +209,7 @@ public class PlayerInteractListener implements Listener {
                 }
             }
         }
-        if (item != null && player.getItemInHand().getItemMeta().getDisplayName() != null) {
+        if (item != null && !player.getItemInHand().getItemMeta().getDisplayName().equals(null)) {
             if (player.getItemInHand().getType().equals(Material.BOOK)) {
                 if (player.getGameMode().equals(GameMode.CREATIVE) && ClimaxPvp.deadPeoples.contains(player)) {
                     ClimaxPvp.deadPeoples.remove(player);

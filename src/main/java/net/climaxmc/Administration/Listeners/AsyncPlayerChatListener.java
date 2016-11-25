@@ -6,9 +6,12 @@ import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Kit;
+import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -29,13 +32,13 @@ public class AsyncPlayerChatListener implements Listener {
         if (StaffChatCommand.getToggled().contains(player.getUniqueId())) {
             event.setCancelled(true);
             plugin.getServer().getOnlinePlayers().stream().filter(players ->
-                    plugin.getPlayerData(players).hasRank(Rank.HELPER))
+                    plugin.getPlayerData(players).hasRank(Rank.TRIAL_MODERATOR))
                     .forEach(players -> players.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "[STAFF] "
                             + ChatColor.RED + player.getName() + ": " + event.getMessage()));
             return;
         }
 
-        if (VanishCommand.getVanished().contains(player.getUniqueId())) {
+        if (KitPvp.getVanished().contains(player.getUniqueId())) {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "You cannot chat while vanished!");
             return;
@@ -61,6 +64,25 @@ public class AsyncPlayerChatListener implements Listener {
 
         Rank rank = playerData.getRank();
 
+        for (Player recipients : Bukkit.getOnlinePlayers()) {
+            if (KitPvp.globalChatDisabled.contains(recipients.getUniqueId())) {
+                event.getRecipients().remove(recipients);
+                if (playerData.hasRank(Rank.NINJA)) {
+                    event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
+                    ChatColor color = rank.getColor();
+                    event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + " [" + (color == null ? "" : color) + ChatColor.BOLD + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]" + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                    //event.setFormat(level + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "{" + (color == null ? "" : color) + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
+                } else {
+                    event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                }
+            }
+        }
+
+        if (KitPvp.globalChatDisabled.contains(player.getUniqueId())) {
+            event.setCancelled(true);
+            player.sendMessage("§f» §7Global Chat is currently off, you can toggle it in §6Settings!");
+        }
+
         if (playerData.hasRank(Rank.NINJA)) {
             event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
             ChatColor color = rank.getColor();
@@ -75,7 +97,7 @@ public class AsyncPlayerChatListener implements Listener {
             player.sendMessage(ChatColor.RED + "We are not currently accepting staff applications.");
         }*/
 
-        if (ChatCommands.chatSilenced && !playerData.hasRank(Rank.HELPER)) {
+        if (ChatCommands.chatSilenced && !playerData.hasRank(Rank.TRIAL_MODERATOR)) {
             event.setCancelled(true);
         }
     }

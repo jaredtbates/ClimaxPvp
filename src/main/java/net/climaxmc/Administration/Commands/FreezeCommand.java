@@ -2,6 +2,7 @@ package net.climaxmc.Administration.Commands;
 /* Created by GamerBah on 3/6/2016 */
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import org.bukkit.Bukkit;
@@ -75,7 +76,7 @@ public class FreezeCommand implements CommandExecutor, Listener {
             }
         } else {
             Player target = plugin.getServer().getPlayer(args[0]);
-            if (target == null || VanishCommand.getVanished().contains(target.getUniqueId())) {
+            if (target == null || KitPvp.getVanished().contains(target.getUniqueId())) {
                 player.sendMessage(ChatColor.RED + "That player is not online!");
                 return true;
             }

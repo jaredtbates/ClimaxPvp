@@ -74,7 +74,7 @@ public class BanCommand implements CommandExecutor {
 
             if (target != null) {
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->
-                        plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
+                        plugin.getPlayerData(staff).hasRank(Rank.TRIAL_MODERATOR)).forEach(staff ->
                         staff.sendMessage("" + ChatColor.RED + player.getName() + " permanently banned "
                                 + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for " + finalReason));
 
@@ -83,7 +83,7 @@ public class BanCommand implements CommandExecutor {
             } else {
                 target = plugin.getServer().getOfflinePlayer(args[0]);
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->
-                        plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
+                        plugin.getPlayerData(staff).hasRank(Rank.TRIAL_MODERATOR)).forEach(staff ->
                         staff.sendMessage(ChatColor.RED + player.getName() + " permanently banned "
                                 + ChatColor.GRAY + offlinePlayer.getName() + ChatColor.RED + " for " + finalReason));
                 player.sendMessage(ChatColor.GREEN + " Offline player " + ChatColor.GOLD + target.getName()

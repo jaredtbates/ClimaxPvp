@@ -278,6 +278,9 @@ public class InventoryClickListener implements Listener {
             if (event.getCurrentItem().getType().equals(Material.BOOK)) {
                 settingsFiles.toggleReceiveMsg(player);
             }
+            if (event.getCurrentItem().getType().equals(Material.PAPER)) {
+                settingsFiles.toggleGlobalChat(player);
+            }
             event.setCancelled(true);
         }
     }

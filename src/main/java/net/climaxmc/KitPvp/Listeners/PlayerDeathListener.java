@@ -76,10 +76,10 @@ public class PlayerDeathListener implements Listener {
                         }
                     }
                 }
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < 6; i++) {
                     player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
                 }
-                player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 3));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 2));
                 player.removePotionEffect(PotionEffectType.REGENERATION);
             }
 
@@ -96,8 +96,8 @@ public class PlayerDeathListener implements Listener {
             } else {
                 plugin.getServer().getScheduler().runTask(plugin, () -> {
                     event.setCancelled(true);
-                    player.setHealth(20);
                     player.setGameMode(GameMode.CREATIVE);
+                    player.setHealth(20);
                     for(Player players : Bukkit.getServer().getOnlinePlayers()){
                         players.hidePlayer(player);
                     }
@@ -174,6 +174,20 @@ public class PlayerDeathListener implements Listener {
                 player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.GRAY + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + " hearts" + ChatColor.GRAY + " left");
             } else {
                 player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.GRAY + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + ".5 hearts" + ChatColor.GRAY + " left");
+            }
+            if (settingsFiles.getSpawnSoupValue(killer)) {
+                ItemStack[] inv = killer.getInventory().getContents();
+                int total = 0;
+                int soup = 0;
+                for(int i = 0; i < inv.length; i++){
+                    if(inv[i] != null){
+                        if(inv[i].getType() == Material.MUSHROOM_SOUP){
+                            soup = soup + inv[i].getAmount();
+                            player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.GRAY + " had " + ChatColor.RED + total + "soups" + ChatColor.GRAY + " left");
+                        }
+                        total = total + 1;
+                    }
+                }
             }
 
             if (killer.getName().equals(player.getName())) {

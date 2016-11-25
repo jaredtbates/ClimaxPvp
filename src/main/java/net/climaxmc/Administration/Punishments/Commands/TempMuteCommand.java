@@ -30,7 +30,7 @@ public class TempMuteCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (command.getName().equalsIgnoreCase("tempmute")) {
-            if (!playerData.hasRank(Rank.HELPER)) {
+            if (!playerData.hasRank(Rank.TRIAL_MODERATOR)) {
                 player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
                 return true;
             }
@@ -84,7 +84,7 @@ public class TempMuteCommand implements CommandExecutor {
 
             if (target != null) {
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->
-                        plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
+                        plugin.getPlayerData(staff).hasRank(Rank.TRIAL_MODERATOR)).forEach(staff ->
                         staff.sendMessage("" + ChatColor.RED + player.getName() + " temporarily muted "
                                 + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED
                                 + " for " + Time.toString(finalTime) + " for " + finalReason));
@@ -92,7 +92,7 @@ public class TempMuteCommand implements CommandExecutor {
                         + "Appeal on climaxmc.net/forum if you believe that this is an error!");
             } else {
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->
-                        plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
+                        plugin.getPlayerData(staff).hasRank(Rank.TRIAL_MODERATOR)).forEach(staff ->
                         staff.sendMessage("" + ChatColor.RED + player.getName() + " temporarily muted "
                                 + ChatColor.GRAY + offlinePlayer.getName() + ChatColor.RED
                                 + " for " + Time.toString(finalTime) + " for " + finalReason));

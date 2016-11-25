@@ -128,7 +128,7 @@ public class AssassinKit extends Kit {
                     for (Entity entity : player.getNearbyEntities(9, 9, 9)) {
                         if (entity instanceof Player) {
                             Player players = (Player) entity;
-                            if (!VanishCommand.getVanished().contains(players.getUniqueId())
+                            if (!KitPvp.getVanished().contains(players.getUniqueId())
                                     && !CheckCommand.getChecking().contains(players.getUniqueId())
                                     && (KitPvp.currentTeams.get(player.getName()) != players.getName()
                                     && KitPvp.currentTeams.get(players.getName()) != player.getName())) {

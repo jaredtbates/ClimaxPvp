@@ -66,7 +66,7 @@ public class FishermanKit extends Kit {
         Player player = event.getPlayer();
         if (KitManager.isPlayerInKit(player, this)) {
             if (event.getCaught() instanceof Player) {
-                if (!VanishCommand.getVanished().contains(event.getCaught().getUniqueId())
+                if (!KitPvp.getVanished().contains(event.getCaught().getUniqueId())
                         && !CheckCommand.getChecking().contains(event.getCaught().getUniqueId())
                         && (KitPvp.currentTeams.get(player.getName()) != event.getCaught().getName()
                         && KitPvp.currentTeams.get(event.getCaught().getName()) != player.getName())) {

@@ -30,7 +30,7 @@ public class MuteCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (command.getName().equalsIgnoreCase("mute")) {
-            if (!playerData.hasRank(Rank.HELPER)) {
+            if (!playerData.hasRank(Rank.TRIAL_MODERATOR)) {
                 player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
                 return true;
             }
@@ -60,14 +60,14 @@ public class MuteCommand implements CommandExecutor {
 
             if (target != null) {
             plugin.getServer().getOnlinePlayers().stream().filter(staff ->
-                    plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
+                    plugin.getPlayerData(staff).hasRank(Rank.TRIAL_MODERATOR)).forEach(staff ->
                     staff.sendMessage("" + ChatColor.RED + player.getName() + " permanently muted "
                             + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for " + finalReason));
                 target.sendMessage(ChatColor.RED + "You were permanently muted by " + player.getName() + " for " + reason + "\n"
                         + "Appeal on climaxmc.net/forum if you believe that this is an error!");
             } else {
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->
-                        plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
+                        plugin.getPlayerData(staff).hasRank(Rank.TRIAL_MODERATOR)).forEach(staff ->
                         staff.sendMessage("" + ChatColor.RED + player.getName() + " permanently muted "
                                 + ChatColor.GRAY + offlinePlayer.getName() + ChatColor.RED + " for " + finalReason));
                 player.sendMessage(ChatColor.GREEN + "Offline player " + ChatColor.GOLD + offlinePlayer.getName()

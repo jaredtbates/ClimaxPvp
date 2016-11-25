@@ -2,8 +2,10 @@ package net.climaxmc.Administration.Commands;
 
 import lombok.Getter;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,8 +23,7 @@ import java.util.HashSet;
 import java.util.UUID;
 
 public class CheckCommand implements CommandExecutor, Listener {
-    @Getter
-    private static HashSet<UUID> checking = new HashSet<>();
+
     private ClimaxPvp plugin;
 
     public CheckCommand(ClimaxPvp plugin) {
@@ -38,19 +39,19 @@ public class CheckCommand implements CommandExecutor, Listener {
         Player player = (Player) sender;
         PlayerData playerData = plugin.getPlayerData(player);
 
-        if (!playerData.hasRank(Rank.HELPER)) {
+        if (!playerData.hasRank(Rank.TRIAL_MODERATOR)) {
             player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
             return true;
         }
 
-        if (!checking.contains(player.getUniqueId())) {
-            player.sendMessage(ChatColor.GREEN + "You are now checking a player.");
+        if (!KitPvp.getChecking().contains(player.getUniqueId())) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false, false));
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You are now checking a player.");
             player.setAllowFlight(true);
             player.setFlying(true);
-            player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false, false));
             player.getInventory().clear();
             player.getInventory().setArmorContents(null);
-            checking.add(player.getUniqueId());
+            KitPvp.getChecking().add(player.getUniqueId());
             if (args.length == 1) {
                 Player target = plugin.getServer().getPlayer(args[0]);
                 if (target != null) {
@@ -60,10 +61,10 @@ public class CheckCommand implements CommandExecutor, Listener {
                 }
             }
         } else {
-            player.sendMessage(ChatColor.RED + "You are no longer checking a player.");
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You are no longer checking a player.");
             plugin.respawn(player);
             player.removePotionEffect(PotionEffectType.INVISIBILITY);
-            checking.remove(player.getUniqueId());
+            KitPvp.getChecking().remove(player.getUniqueId());
         }
 
         return true;
@@ -77,10 +78,12 @@ public class CheckCommand implements CommandExecutor, Listener {
 
         Player player = (Player) event.getEntity();
 
-        if (checking.contains(player.getUniqueId())) {
+        if (KitPvp.getChecking().contains(player.getUniqueId())) {
             event.setCancelled(true);
         }
     }
+
+    int count = 0;
 
     @EventHandler
     public void onPlayerHurtEntity(EntityDamageByEntityEvent event) {
@@ -91,13 +94,25 @@ public class CheckCommand implements CommandExecutor, Listener {
         Player damaged = (Player) event.getEntity();
         Player damager = (Player) event.getDamager();
 
-        if (checking.contains(damaged.getUniqueId())) {
-            damaged.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "You are being attacked by " + damager.getName() + "!");
+        if (KitPvp.getChecking().contains(damaged.getUniqueId())) {
+            if (count == 0) {
+                clicksPerSecond(damager, damaged);
+            }
+            count++;
             event.setCancelled(true);
         }
 
-        if (checking.contains(damager.getUniqueId())) {
+        if (KitPvp.getChecking().contains(damager.getUniqueId())) {
             event.setCancelled(true);
         }
+    }
+    public void clicksPerSecond(Player damager, Player damaged) {
+        Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+            @Override
+            public void run() {
+                damaged.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "You are being attacked by " + damager.getName() + " at " + count + " CPS!");
+                count = 0;
+            }
+        }, 20L);
     }
 }

@@ -56,7 +56,7 @@ public class MessageCommand implements CommandExecutor {
 
         Player target = plugin.getServer().getPlayer(args[0]);
 
-        if (target == null || VanishCommand.getVanished().contains(target.getUniqueId())) {
+        if (target == null || KitPvp.getVanished().contains(target.getUniqueId())) {
             player.sendMessage(ChatColor.RED + "That player is not online!");
             return true;
         }

@@ -30,7 +30,6 @@ public class InventoryClickListener implements Listener {
         Player player = (Player) event.getWhoClicked();
         if (inventory.getName().contains("Trail Settings")) {
             event.setCancelled(true);
-            player.closeInventory();
 
             SettingsFiles settingsFiles = new SettingsFiles();
 
@@ -41,6 +40,7 @@ public class InventoryClickListener implements Listener {
                         settingsFiles.tryUnlockTrail(player, trail.getName(), trail, (int) trail.getCost());
                     } else {
                         settingsFiles.setTrail(player, trail.getName(), trail);
+                        player.closeInventory();
                     }
 
                     /*PlayerData playerData = plugin.getPlayerData(player);
@@ -60,8 +60,9 @@ public class InventoryClickListener implements Listener {
                 }
             }
             if (event.getCurrentItem().getType().equals(Material.STAINED_GLASS_PANE)) {
-                if (event.getCurrentItem().getItemMeta().getDisplayName().equals("Remove Trail")){
+                if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Remove")){
                     settingsFiles.removeTrails(player);
+                    player.closeInventory();
                 }
             }
         }

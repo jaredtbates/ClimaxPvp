@@ -44,7 +44,7 @@ public class HackListeners implements Listener {
     }
 
     private void sendWarning(Player hacker, String hack) {
-        plugin.getServer().getOnlinePlayers().stream().filter(player -> plugin.getPlayerData(player).hasRank(Rank.HELPER)).forEach(staff -> {
+        plugin.getServer().getOnlinePlayers().stream().filter(player -> plugin.getPlayerData(player).hasRank(Rank.TRIAL_MODERATOR)).forEach(staff -> {
             if (TimeUnit.SECONDS.convert(System.nanoTime() - HackUtils.lastNotification(hacker), TimeUnit.NANOSECONDS) > 1L) {
                 TextComponent message = new TextComponent(ChatColor.DARK_PURPLE + hacker.getName() + ChatColor.DARK_GRAY + " tried to " + ChatColor.DARK_PURPLE + hack);
                     /*message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/hd tp " + hacker.getName()));

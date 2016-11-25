@@ -84,8 +84,8 @@ public class ViperKit extends Kit {
                         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 0));
                     }
                     if (player.getInventory().getItemInHand().getType() == Material.IRON_SWORD) {
-                        if (!VanishCommand.getVanished().contains(target.getUniqueId())
-                                && !CheckCommand.getChecking().contains(target.getUniqueId())
+                        if (!KitPvp.getVanished().contains(target.getUniqueId())
+                                && !KitPvp.getChecking().contains(target.getUniqueId())
                                 && (KitPvp.currentTeams.get(player.getName()) != target.getName()
                                 && KitPvp.currentTeams.get(target.getName()) != player.getName())) {
                             target.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 120, 1));

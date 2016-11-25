@@ -72,7 +72,7 @@ public class ChatCommands implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("cmdspy")) {
-            if (!playerData.hasRank(Rank.HELPER)) {
+            if (!playerData.hasRank(Rank.TRIAL_MODERATOR)) {
                 player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
                 return true;
             } else {

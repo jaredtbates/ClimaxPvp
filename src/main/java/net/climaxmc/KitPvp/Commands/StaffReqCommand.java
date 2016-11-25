@@ -53,7 +53,7 @@ public class StaffReqCommand implements CommandExecutor {
             }
         }
 
-        if (playerData.hasRank(Rank.HELPER)) {
+        if (playerData.hasRank(Rank.TRIAL_MODERATOR)) {
             player.sendMessage(ChatColor.RED + "You need help from a Staff member? You are a Staff member, silly! Use Slack! xD");
             return true;
         }

@@ -50,7 +50,7 @@ public class UnBanCommand implements CommandExecutor {
                 } else {
                     remove.forEach(targetData::removePunishment);
                     plugin.getServer().getOnlinePlayers().stream().filter(staff ->
-                            plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
+                            plugin.getPlayerData(staff).hasRank(Rank.TRIAL_MODERATOR)).forEach(staff ->
                             staff.sendMessage(ChatColor.RED
                                     + plugin.getServer().getOfflinePlayer(" " + targetData.getUuid()).getName() + " was unbanned by the console."));
 
@@ -92,7 +92,7 @@ public class UnBanCommand implements CommandExecutor {
                 } else {
                     remove.forEach(targetData::removePunishment);
                     plugin.getServer().getOnlinePlayers().stream().filter(staff ->
-                            plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
+                            plugin.getPlayerData(staff).hasRank(Rank.TRIAL_MODERATOR)).forEach(staff ->
                             staff.sendMessage(ChatColor.RED + player.getName() + " unbanned "
                                     + plugin.getServer().getOfflinePlayer(targetData.getUuid()).getName() + "."));
 

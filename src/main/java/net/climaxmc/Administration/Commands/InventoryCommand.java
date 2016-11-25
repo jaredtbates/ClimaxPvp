@@ -25,7 +25,7 @@ public class InventoryCommand implements CommandExecutor {
         Player player = (Player) sender;
         PlayerData playerData = plugin.getPlayerData(player);
 
-        if (!playerData.hasRank(Rank.HELPER)) {
+        if (!playerData.hasRank(Rank.TRIAL_MODERATOR)) {
             player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
             return true;
         }

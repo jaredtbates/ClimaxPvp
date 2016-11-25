@@ -4,6 +4,7 @@ import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import org.bukkit.Bukkit;
@@ -59,7 +60,7 @@ public class PlayerRespawnListener implements Listener {
             player.removePotionEffect(effect.getType());
         }
 
-        if (VanishCommand.getVanished().contains(player.getUniqueId())) {
+        if (KitPvp.getVanished().contains(player.getUniqueId())) {
             player.setAllowFlight(true);
             player.setFlying(true);
         }

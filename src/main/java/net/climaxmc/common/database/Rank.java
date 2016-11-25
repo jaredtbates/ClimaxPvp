@@ -8,13 +8,14 @@ import net.md_5.bungee.api.ChatColor;
 @AllArgsConstructor
 public enum Rank {
     OWNER("Owner", ChatColor.RED, Integer.MAX_VALUE),
-    MANAGER("Manager", ChatColor.RED, 150),
+    MANAGER("Manager", ChatColor.AQUA, 150),
     DEVELOPER("Dev", ChatColor.GOLD, 120),
     ADMINISTRATOR("Admin", ChatColor.RED, 100),
+    SENIOR_MODERATOR("Sr. Mod", ChatColor.DARK_PURPLE, 80),
     MODERATOR("Mod", ChatColor.DARK_PURPLE, 80),
     HEAD_BUILDER("Builder", ChatColor.YELLOW, 70),
     JR_DEVELOPER("Jr. Dev", ChatColor.GOLD, 60),
-    HELPER("Helper", ChatColor.GREEN, 50),
+    TRIAL_MODERATOR("T-Mod", ChatColor.AQUA, 80),
     BUILDER("Builder", ChatColor.YELLOW, 40),
     TWITCH(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Twi" + ChatColor.WHITE + "" + ChatColor.BOLD + "tch", ChatColor.DARK_PURPLE, 30),
     YOUTUBE(ChatColor.RED + "" + ChatColor.BOLD + "You" + ChatColor.WHITE + "" + ChatColor.BOLD + "Tube", ChatColor.RED, 30),

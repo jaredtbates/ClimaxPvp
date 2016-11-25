@@ -29,7 +29,7 @@ public class UnMuteCommand implements CommandExecutor {
         Player player = (Player) sender;
         PlayerData playerData = plugin.getPlayerData(player);
 
-        if (!playerData.hasRank(Rank.HELPER)) {
+        if (!playerData.hasRank(Rank.TRIAL_MODERATOR)) {
             player.sendMessage(ChatColor.RED + "You do not have permission to execute this command!");
             return true;
         }
@@ -57,7 +57,7 @@ public class UnMuteCommand implements CommandExecutor {
                 return true;
             }
             remove.forEach(targetData::removePunishment);
-            plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName() + " unmuted " + plugin.getServer().getOfflinePlayer(targetData.getUuid()).getName() + "."));
+            plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff).hasRank(Rank.TRIAL_MODERATOR)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName() + " unmuted " + plugin.getServer().getOfflinePlayer(targetData.getUuid()).getName() + "."));
         } else {
             player.sendMessage(ChatColor.RED + "That player is not muted!");
         }

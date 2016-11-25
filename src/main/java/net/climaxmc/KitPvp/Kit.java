@@ -151,10 +151,10 @@ public abstract class Kit implements Listener, CommandExecutor {
                                     }
                                 }
                             }
-                            for (int i = 0; i < 5; i++) {
+                            for (int i = 0; i < 6; i++) {
                                 player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
                             }
-                            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 3));
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 2));
                             player.removePotionEffect(PotionEffectType.REGENERATION);
                         }
                     }

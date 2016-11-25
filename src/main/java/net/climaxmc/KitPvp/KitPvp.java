@@ -16,14 +16,13 @@ import net.climaxmc.KitPvp.Kits.FighterKit;
 import net.climaxmc.KitPvp.Listeners.*;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
 import net.climaxmc.KitPvp.Menus.ReportGUI;
+import net.climaxmc.common.donations.trails.Trail;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class KitPvp {
@@ -32,8 +31,14 @@ public class KitPvp {
     public static Map<UUID, Integer> killStreak = new HashMap<>();
     public static Map<String, String> pendingTeams = new HashMap<>();
     public static Map<String, String> currentTeams = new ConcurrentHashMap<>();
+    public static HashMap<UUID, Trail> inTrail = new HashMap<>();
+    public static ArrayList<UUID> globalChatDisabled = new ArrayList<>();
     @Getter
     private static HashSet<UUID> afk = new HashSet<>();
+    @Getter
+    private static HashSet<UUID> vanished = new HashSet<>();
+    @Getter
+    private static HashSet<UUID> checking = new HashSet<>();
 
     public KitPvp(ClimaxPvp plugin) {
         // Initialize kits

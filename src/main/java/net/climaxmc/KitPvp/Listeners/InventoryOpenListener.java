@@ -27,7 +27,7 @@ public class InventoryOpenListener implements Listener {
         this.plugin = plugin;
     }
 
-    Ability getSoup = new Ability("get le soup", 1, 30, TimeUnit.SECONDS);
+    Ability getSoup = new Ability("get le soup", 1, 22, TimeUnit.SECONDS);
 
     @EventHandler
     public void onInventoryOpenEvent(InventoryOpenEvent event) {
@@ -49,10 +49,10 @@ public class InventoryOpenListener implements Listener {
                                 }
                             }
                         }
-                        for (int i = 0; i < 5; i++) {
+                        for (int i = 0; i < 6; i++) {
                             player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
                         }
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 3));
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 2));
                         player.removePotionEffect(PotionEffectType.REGENERATION);
 
                         player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Your soup has been refilled!");

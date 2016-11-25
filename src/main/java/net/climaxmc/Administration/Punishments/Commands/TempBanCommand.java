@@ -99,7 +99,7 @@ public class TempBanCommand implements CommandExecutor {
             Player target = Bukkit.getPlayer(targetData.getUuid());
             if (target != null) {
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->
-                        plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
+                        plugin.getPlayerData(staff).hasRank(Rank.TRIAL_MODERATOR)).forEach(staff ->
                         staff.sendMessage(ChatColor.RED + player.getName() + " temporarily banned "
                                 + ChatColor.GRAY + plugin.getServer().getPlayer(targetData.getUuid()).getName() + ChatColor.RED + " for "
                                 + Time.toString(finalTime) + " for " + finalReason));
@@ -108,7 +108,7 @@ public class TempBanCommand implements CommandExecutor {
                         + "Appeal on forum.climaxmc.net if you believe that this is in error!");
             } else {
                 plugin.getServer().getOnlinePlayers().stream().filter(staff ->
-                        plugin.getPlayerData(staff).hasRank(Rank.HELPER)).forEach(staff ->
+                        plugin.getPlayerData(staff).hasRank(Rank.TRIAL_MODERATOR)).forEach(staff ->
                         staff.sendMessage("" + ChatColor.RED + player.getName() + " temporarily banned "
                                 + ChatColor.GRAY + offlinePlayer.getName() + ChatColor.RED + " for "
                                 + Time.toString(finalTime) + " for " + finalReason));

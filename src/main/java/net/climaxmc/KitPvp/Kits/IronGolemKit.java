@@ -108,8 +108,8 @@ public class IronGolemKit extends Kit {
                         if (!Throw.tryUse(player)) {
                             return;
                         }
-                        if (!VanishCommand.getVanished().contains(target.getUniqueId())
-                                && !CheckCommand.getChecking().contains(target.getUniqueId())
+                        if (!KitPvp.getVanished().contains(target.getUniqueId())
+                                && !KitPvp.getChecking().contains(target.getUniqueId())
                                 && (KitPvp.currentTeams.get(player.getName()) != target.getName()
                                 && KitPvp.currentTeams.get(target.getName()) != player.getName())) {
                             target.setVelocity(new Vector(0, 1.3, 0));

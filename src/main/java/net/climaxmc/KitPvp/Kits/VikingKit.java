@@ -103,8 +103,8 @@ public class VikingKit extends Kit {
                     player.getNearbyEntities(3.3, 3.3, 3.3).stream().filter(entity -> entity instanceof Player).filter(entity -> !(entity == event.getDamager())).forEach(entity -> {
                         Player players = (Player) entity;
                         event.setCancelled(true);
-                        if (!VanishCommand.getVanished().contains(players.getUniqueId())
-                                && !CheckCommand.getChecking().contains(players.getUniqueId())
+                        if (!KitPvp.getVanished().contains(players.getUniqueId())
+                                && !KitPvp.getChecking().contains(players.getUniqueId())
                                 && (KitPvp.currentTeams.get(player.getName()) != players.getName()
                                 && KitPvp.currentTeams.get(players.getName()) != player.getName())) {
                             players.damage(4);

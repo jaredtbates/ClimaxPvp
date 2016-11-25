@@ -153,11 +153,11 @@ public class ReportGUI implements Listener {
                 + ChatColor.DARK_AQUA + target.getName() + ChatColor.GREEN + "!");
 
         plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff)
-                .hasRank(Rank.HELPER)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName()
+                .hasRank(Rank.TRIAL_MODERATOR)).forEach(staff -> staff.sendMessage(ChatColor.RED + player.getName()
                 + " has reported " + ChatColor.BOLD + target.getName() + ChatColor.RED + " for: " + message + "!"));
 
         plugin.getServer().getOnlinePlayers().stream().filter(staff -> plugin.getPlayerData(staff)
-                .hasRank(Rank.HELPER)).forEach(staff -> staff.playSound(staff.getLocation(), Sound.NOTE_PIANO, 2, 2));
+                .hasRank(Rank.TRIAL_MODERATOR)).forEach(staff -> staff.playSound(staff.getLocation(), Sound.NOTE_PIANO, 2, 2));
 
         plugin.getSlackReports().call(new SlackMessage(">>>*" + player.getName() + "* _has reported_ *" + target.getName() + "* _for:_ " + message));
 

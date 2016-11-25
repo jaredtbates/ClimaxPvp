@@ -26,7 +26,7 @@ public class RankCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             PlayerData playerData = plugin.getPlayerData(player);
-            if (!playerData.hasRank(Rank.OWNER)) {
+            if (!(playerData.hasRank(Rank.OWNER) || playerData.hasRank(Rank.MANAGER))) {
                 player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
                 return true;
             }

@@ -24,16 +24,22 @@ public class SettingsMenu implements Listener {
 
         SettingsFiles settingsFiles = new SettingsFiles();
 
-        if (settingsFiles.getRespawnValue(player) == true) {
-            inv.setItem(12, new I(Material.REDSTONE).name(ChatColor.AQUA + "Toggle Insta-Respawn").lore("§7Currently: §a§lTrue"));
+        if (settingsFiles.getRespawnValue(player)) {
+            inv.setItem(11, new I(Material.REDSTONE).name(ChatColor.AQUA + "Toggle Insta-Respawn").lore("§7Currently: §a§lTrue"));
         } else {
-            inv.setItem(12, new I(Material.REDSTONE).name(ChatColor.AQUA + "Toggle Insta-Respawn").lore("§7Currently: §c§lFalse"));
+            inv.setItem(11, new I(Material.REDSTONE).name(ChatColor.AQUA + "Toggle Insta-Respawn").lore("§7Currently: §c§lFalse"));
         }
 
-        if (settingsFiles.getReceiveMsgValue(player) == true) {
-            inv.setItem(14, new I(Material.BOOK).name(ChatColor.AQUA + "Toggle Receiving Msgs").lore("§7Currently: §a§lTrue"));
+        if (settingsFiles.getReceiveMsgValue(player)) {
+            inv.setItem(13, new I(Material.BOOK).name(ChatColor.AQUA + "Toggle Receiving Msgs").lore("§7Currently: §a§lTrue"));
         } else {
-            inv.setItem(14, new I(Material.BOOK).name(ChatColor.AQUA + "Toggle Receiving Msgs").lore("§7Currently: §c§lFalse"));
+            inv.setItem(13, new I(Material.BOOK).name(ChatColor.AQUA + "Toggle Receiving Msgs").lore("§7Currently: §c§lFalse"));
+        }
+
+        if (settingsFiles.getGlobalChatValue(player)) {
+            inv.setItem(15, new I(Material.PAPER).name(ChatColor.AQUA + "Toggle Global Chat").lore("§7Currently: §a§lTrue"));
+        } else {
+            inv.setItem(15, new I(Material.PAPER).name(ChatColor.AQUA + "Toggle Global Chat").lore("§7Currently: §c§lFalse"));
         }
 
         player.openInventory(inv);

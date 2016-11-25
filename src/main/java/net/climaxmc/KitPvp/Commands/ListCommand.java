@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import org.bukkit.ChatColor;
@@ -26,7 +27,7 @@ public class ListCommand implements CommandExecutor {
         for (Player player : plugin.getServer().getOnlinePlayers()) {
             PlayerData playerData = plugin.getPlayerData(player);
 
-            if (VanishCommand.getVanished().contains(player.getUniqueId())) {
+            if (KitPvp.getVanished().contains(player.getUniqueId())) {
                 continue;
             }
 
