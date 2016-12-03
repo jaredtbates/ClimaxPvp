@@ -65,7 +65,7 @@ public class PlayerInteractListener implements Listener {
         }
 
         if (item != null) {
-            if (item.getType().equals(Material.NETHER_STAR) && player.getLocation().distance(plugin.getWarpLocation("upgrade")) > 100) {
+            if (item.getType().equals(Material.NETHER_STAR)) {
                 Inventory kitSelectorInventory = Bukkit.createInventory(null, 54, ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "Kit Selector");
 
                 ItemStack grayGlass = new I(Material.STAINED_GLASS_PANE).durability(15).name(" ");
@@ -173,7 +173,7 @@ public class PlayerInteractListener implements Listener {
         }
         if (item != null) {
             if (item.getType().equals(Material.NETHER_STAR)) {
-                if ((player.getLocation().distance(plugin.getWarpLocation("upgrade")) <= 100)) {
+                if ((plugin.getWarpLocation("upgrade") != null && player.getLocation().distance(plugin.getWarpLocation("upgrade")) <= 100)) {
                     Inventory upgradeInventory = Bukkit.createInventory(null, 54, "Class Selector");
 
                     upgradeInventory.setItem(10, new I(Material.STAINED_GLASS_PANE).durability(0).name(" "));
@@ -209,21 +209,16 @@ public class PlayerInteractListener implements Listener {
                 }
             }
         }
-        if (item != null && !player.getItemInHand().getItemMeta().getDisplayName().equals(null)) {
+        if (item != null && player.getItemInHand().getItemMeta().getDisplayName() != null) {
             if (player.getItemInHand().getType().equals(Material.BOOK)) {
                 if (player.getGameMode().equals(GameMode.CREATIVE) && ClimaxPvp.deadPeoples.contains(player)) {
-                    ClimaxPvp.deadPeoples.remove(player);
 
                     plugin.respawn(player);
 
                     if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
                         new PvpKit().wearCheckLevel(player);
                     }
-                    player.setAllowFlight(false);
-                    player.setFlying(false);
-                    for(Player players : Bukkit.getServer().getOnlinePlayers()){
-                        players.showPlayer(player);
-                    }
+
                     Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
                         @Override
                         public void run() {
@@ -238,15 +233,31 @@ public class PlayerInteractListener implements Listener {
                     settingsMenu.openInventory(player);
                 }
             }
-            if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup")) {
-                SettingsFiles settingsFiles = new SettingsFiles();
-                settingsFiles.toggleSpawnSoup(player);
-                event.setCancelled(true);
+            if (player.getItemInHand().getType().equals(Material.FISHING_ROD)) {
+                if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Regen")) {
+                    if (event.getAction() == Action.RIGHT_CLICK_AIR) {
+                        event.setCancelled(true);
+                        return;
+                    }
+                    player.getInventory().setItemInHand(new I(Material.MUSHROOM_SOUP)
+                            .name(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup")
+                            .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Set your preferred healing type!"));
+                    event.setCancelled(true);
+                    SettingsFiles settingsFiles = new SettingsFiles();
+                    settingsFiles.toggleSpawnSoup(player);
+                    return;
+                }
             }
-            if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Regen")) {
-                SettingsFiles settingsFiles = new SettingsFiles();
-                settingsFiles.toggleSpawnSoup(player);
-                event.setCancelled(true);
+            if (player.getItemInHand().getType().equals(Material.MUSHROOM_SOUP)) {
+                if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup")) {
+                    player.getInventory().setItemInHand(new I(Material.FISHING_ROD)
+                            .name(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Regen")
+                            .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Set your preferred healing type!"));
+                    event.setCancelled(true);
+                    SettingsFiles settingsFiles = new SettingsFiles();
+                    settingsFiles.toggleSpawnSoup(player);
+                    return;
+                }
             }
         }
     }

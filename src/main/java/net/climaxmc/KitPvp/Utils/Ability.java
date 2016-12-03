@@ -223,7 +223,7 @@ public class Ability {
             Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
                 @Override
                 public void run() {
-                    if (ClimaxPvp.deadPeoples.contains(player)) {
+                    if (ClimaxPvp.deadPeoples.contains(player) || ClimaxPvp.deadPeoples.contains(player.getUniqueId())) {
                         return;
                     }
                     if (KitManager.isPlayerInKit(player, kit.getClass())) {

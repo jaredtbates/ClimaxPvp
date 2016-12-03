@@ -40,6 +40,9 @@ public class CombatLogListeners implements Listener {
             if (WorldGuard.isWithinProtectedRegion(damaged.getLocation()) || WorldGuard.isWithinProtectedRegion(damager.getLocation())) {
                 return;
             }
+            if (ClimaxPvp.deadPeoples.contains(damager) || ClimaxPvp.isSpectating.contains(damager.getUniqueId())) {
+                return;
+            }
 
            if (KitPvp.currentTeams.containsKey(damaged.getName()) || KitPvp.currentTeams.containsKey(damager.getName())) {
                 if (KitPvp.currentTeams.get(damaged.getName()) == damager.getName()

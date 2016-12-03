@@ -23,5 +23,8 @@ public class BlockPlaceListener implements Listener {
         if (ClimaxPvp.deadPeoples.contains(player)) {
             event.setCancelled(true);
         }
+        if (ClimaxPvp.isSpectating.contains(player.getUniqueId())) {
+            event.setCancelled(true);
+        }
     }
 }

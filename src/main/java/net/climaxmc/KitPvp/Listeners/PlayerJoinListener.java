@@ -10,10 +10,13 @@ import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.KitPvp.Utils.TextComponentMessages;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
+import net.climaxmc.common.donations.trails.Trail;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,6 +27,8 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -35,8 +40,24 @@ import java.util.concurrent.TimeUnit;
 public class PlayerJoinListener implements Listener {
     private ClimaxPvp plugin;
 
+    private File file;
+    private FileConfiguration config;
+
     public PlayerJoinListener(ClimaxPvp plugin) {
+        this.file = new File(ClimaxPvp.getInstance().getDataFolder() + File.separator + "settings.yml");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        this.config = YamlConfiguration.loadConfiguration(file);
         this.plugin = plugin;
+    }
+
+    private void set(String path, Object object) {
+        config.set(path, object);
     }
 
     @EventHandler
@@ -122,8 +143,13 @@ public class PlayerJoinListener implements Listener {
             if (playerData.hasRank(Rank.NINJA)) {
                 rankTag = org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "[" + playerData.getRank().getColor()
                         + org.bukkit.ChatColor.BOLD + playerData.getRank().getPrefix() + org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "] ";
+                player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + ChatColor.BOLD + player.getName());
             }
-            player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
+            if (playerData.getRank().getColor() != null) {
+                player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + player.getName());
+            } else {
+                player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + player.getName());
+            }
 
             if (playerData.hasRank(Rank.OWNER)) {
                 if (!player.isOp()) {
@@ -215,8 +241,20 @@ public class PlayerJoinListener implements Listener {
 
         // Settings global chat hashmap update
         SettingsFiles settingsFiles = new SettingsFiles();
-        if (!settingsFiles.getGlobalChatValue(player)) {
-            KitPvp.globalChatDisabled.add(player.getUniqueId());
-        }
+        Bukkit.getScheduler().runTaskAsynchronously(ClimaxPvp.getInstance(), () -> {
+            if (!settingsFiles.getGlobalChatValue(player)) {
+                KitPvp.globalChatDisabled.add(player.getUniqueId());
+            }
+
+            if (config.get(player.getUniqueId() + ".receiveMsging") == null) {
+                set(player.getUniqueId() + ".receiveMsging", true);
+                settingsFiles.saveConfig();
+            }
+            if (config.get(player.getUniqueId() + ".globalChat") == null) {
+                set(player.getUniqueId() + ".globalChat", true);
+                settingsFiles.saveConfig();
+            }
+            settingsFiles.saveConfig();
+        });
     }
 }

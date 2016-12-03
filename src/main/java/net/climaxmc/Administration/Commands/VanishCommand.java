@@ -6,10 +6,13 @@ import com.google.common.io.ByteStreams;
 import lombok.Getter;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,8 +21,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.*;
 
@@ -72,11 +78,11 @@ public class VanishCommand implements CommandExecutor, Listener {
         Player damaged = (Player) event.getEntity();
         Player damager = (Player) event.getDamager();
 
-        if (KitPvp.getVanished().contains(damaged.getUniqueId())) {
+        /*if (KitPvp.getVanished().contains(damaged.getUniqueId())) {
             damaged.sendMessage(ChatColor.RED + "You are being attacked while vanished.");
             damaged.sendMessage(ChatColor.RED + "The only reason why this would occur is if you used /spawn before turning off vanish with /v.");
             damaged.performCommand("/v");
-        }
+        }*/
 
         if (KitPvp.getVanished().contains(damager.getUniqueId())) {
             event.setCancelled(true);
@@ -107,12 +113,14 @@ public class VanishCommand implements CommandExecutor, Listener {
 
     public void toggleVanish(Player player, PlayerData playerData) {
         if (!KitPvp.getVanished().contains(player.getUniqueId())) {
+            player.setPlayerListName(null);
             player.setGameMode(GameMode.CREATIVE);
             player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You are now vanished.");
             player.setAllowFlight(true);
             player.setFlying(true);
             plugin.getServer().getOnlinePlayers().stream().forEach(target -> target.hidePlayer(player));
-            player.setPlayerListName(null);
+            player.getInventory().clear();
+            player.getInventory().setItem(4, new I(Material.INK_SACK).durability(8).name(ChatColor.AQUA + "Check Mode"));
             KitPvp.getVanished().add(player.getUniqueId());
         } else {
             player.setGameMode(GameMode.SURVIVAL);
@@ -126,11 +134,44 @@ public class VanishCommand implements CommandExecutor, Listener {
             if (playerData.hasRank(Rank.NINJA)) {
                 rankTag = org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "[" + playerData.getRank().getColor()
                         + org.bukkit.ChatColor.BOLD + playerData.getRank().getPrefix() + org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "] ";
+                player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + ChatColor.BOLD + player.getName());
             }
-            player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
+            if (playerData.getRank().getColor() != null) {
+                player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + player.getName());
+            } else {
+                player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + player.getName());
+            }
 
             KitPvp.getVanished().remove(player.getUniqueId());
+            KitPvp.getChecking().remove(player.getUniqueId());
             plugin.respawn(player);
+        }
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        if (KitPvp.getVanished().contains(player.getUniqueId())) {
+            if (event.getItem().getItemMeta().getDisplayName().contains("Check Mode")) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false, false));
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You are now checking a player.");
+                player.setGameMode(GameMode.SURVIVAL);
+                player.setAllowFlight(true);
+                player.setFlying(true);
+                player.getInventory().setArmorContents(null);
+                KitPvp.getChecking().add(player.getUniqueId());
+                player.getInventory().setItem(4, new I(Material.INK_SACK).durability(10).name(ChatColor.AQUA + "Normal Mode"));
+                return;
+            }
+            if (event.getItem().getItemMeta().getDisplayName().contains("Normal Mode")) {
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You are no longer checking a player.");
+                player.getInventory().setItem(4, new I(Material.INK_SACK).durability(8).name(ChatColor.AQUA + "Check Mode"));
+                player.removePotionEffect(PotionEffectType.INVISIBILITY);
+                player.setGameMode(GameMode.CREATIVE);
+                plugin.getServer().getOnlinePlayers().stream().forEach(target -> target.hidePlayer(player));
+                KitPvp.getChecking().remove(player.getUniqueId());
+                return;
+            }
         }
     }
 }

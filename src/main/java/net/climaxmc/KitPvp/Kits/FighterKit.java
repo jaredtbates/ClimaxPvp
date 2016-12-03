@@ -122,7 +122,7 @@ public class FighterKit extends Kit {
     @EventHandler
     public void onTeleport (PlayerTeleportEvent event) {
         Player player = event.getPlayer();
-        if (player.getLocation().distance(ClimaxPvp.getInstance().getWarpLocation("Upgrade")) >= 100) {
+        if (ClimaxPvp.getInstance().getWarpLocation("upgrade") != null && player.getLocation().distance(ClimaxPvp.getInstance().getWarpLocation("Upgrade")) >= 100) {
             ClimaxPvp.inFighterKit.remove(player);
         }
     }

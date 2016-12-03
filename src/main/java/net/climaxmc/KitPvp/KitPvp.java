@@ -1,8 +1,7 @@
 package net.climaxmc.KitPvp;
 
 import lombok.Getter;
-import net.climaxmc.Administration.Commands.CheckCommand;
-import net.climaxmc.Administration.Commands.FreezeCommand;
+import net.climaxmc.Administration.Commands.*;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Commands.Economy.BalanceCommand;
 import net.climaxmc.KitPvp.Commands.Economy.BalanceTopCommand;
@@ -11,11 +10,11 @@ import net.climaxmc.KitPvp.Commands.Economy.PayCommand;
 import net.climaxmc.KitPvp.Commands.*;
 import net.climaxmc.KitPvp.Commands.Messaging.MessageCommand;
 import net.climaxmc.KitPvp.Commands.Messaging.ReplyCommand;
-import net.climaxmc.Administration.Commands.StaffChatCommand;
 import net.climaxmc.KitPvp.Kits.FighterKit;
 import net.climaxmc.KitPvp.Listeners.*;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
 import net.climaxmc.KitPvp.Menus.ReportGUI;
+import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.donations.trails.Trail;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -90,6 +89,9 @@ public class KitPvp {
         plugin.getCommand("baltop").setExecutor(new BalanceTopCommand(plugin));
         plugin.getCommand("youtube").setExecutor(new YoutubeCommand(plugin));
         plugin.getCommand("pei").setExecutor(new PeiCommand());
+        plugin.getCommand("staffalert").setExecutor(new StaffAlertCommand(plugin));
+        plugin.getCommand("duel").setExecutor(new DuelCommand(plugin));
+        plugin.getCommand("unlocktrail").setExecutor(new UnlockTrailCommand(plugin));
         /*plugin.getCommand("team").setExecutor(new TeamCommand(plugin));*/
         //plugin.getCommand("staffreq").setExecutor(new StaffReqCommand(plugin));
         //plugin.getCommand("afk").setExecutor(new AFKCommand(plugin));

@@ -63,7 +63,7 @@ public class ChatCommands implements CommandExecutor {
                     }
                 } else {
                     chatSilenced = false;
-                    Bukkit.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + "All chat has been re-enabled!");
+                    Bukkit.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + "Chat has been re-enabled by " + player.getName() + "!");
                     for (Player p : Bukkit.getOnlinePlayers()) {
                         p.playSound(p.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
                     }

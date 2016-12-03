@@ -30,7 +30,6 @@ public class PlayerMoveListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        SettingsFiles settingsFiles = new SettingsFiles();
         for (Trail trail : Trail.values()) {
             if (KitPvp.inTrail.get(player.getUniqueId()) != null) {
                 if (KitPvp.inTrail.containsKey(player.getUniqueId())) {

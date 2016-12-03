@@ -2,9 +2,11 @@ package net.climaxmc.Administration.Listeners;
 
 import net.climaxmc.Administration.Commands.ChatCommands;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,6 +32,40 @@ public class PlayerCommandPreprocessListener implements Listener {
                 || StringUtils.startsWithIgnoreCase(event.getMessage(), "/spigot:")) {
             event.setCancelled(true);
             return;
+        }
+
+        if (ClimaxPvp.inDuel.contains(player)) {
+            if (StringUtils.startsWithIgnoreCase(event.getMessage(), "/kill")) {
+                return;
+            } else {
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You cannot do commands in a duel!");
+                event.setCancelled(true);
+            }
+        }
+
+        if (KitPvp.getVanished().contains(player.getUniqueId())) {
+            if (StringUtils.startsWithIgnoreCase(event.getMessage(), "/spawn")
+                    || StringUtils.startsWithIgnoreCase(event.getMessage(), "/warp")) {
+                event.setCancelled(true);
+                player.sendMessage(ChatColor.RED + "You may not go to spawn or warp while vanished! (/vanish)");
+                return;
+            }
+        }
+        if (ClimaxPvp.isSpectating.contains(player.getUniqueId())) {
+            if (!(StringUtils.startsWithIgnoreCase(event.getMessage(), "/spec")
+                    || StringUtils.startsWithIgnoreCase(event.getMessage(), "/spectate"))) {
+                event.setCancelled(true);
+                player.sendMessage(ChatColor.RED + "You may only to /spec while spectating!");
+                return;
+            }
+        }
+        if (ClimaxPvp.deadPeoples.contains(player)) {
+            if (!(StringUtils.startsWithIgnoreCase(event.getMessage(), "/spawn")
+                    || StringUtils.startsWithIgnoreCase(event.getMessage(), "/warp"))) {
+                event.setCancelled(true);
+                player.sendMessage(ChatColor.RED + "You may only do /spawn or /warp while dead!");
+                return;
+            }
         }
 
         plugin.getServer().getOnlinePlayers().stream().filter(players ->

@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp.Listeners;
 
+import com.comphenix.protocol.PacketType;
 import net.climaxmc.Administration.Commands.ChatCommands;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
@@ -61,7 +62,6 @@ public class PlayerDeathListener implements Listener {
         if (player.getHealth() - event.getFinalDamage() <= 0) {
 
             Location location = player.getLocation();
-
             BukkitTask task = plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, () -> new ParticleEffect(new ParticleEffect.ParticleData(ParticleEffect.ParticleType.LAVA, 1, 2, 1)).sendToLocation(location), 1, 1);
             plugin.getServer().getScheduler().runTaskLater(plugin, task::cancel, 10);
 
@@ -183,10 +183,14 @@ public class PlayerDeathListener implements Listener {
                     if(inv[i] != null){
                         if(inv[i].getType() == Material.MUSHROOM_SOUP){
                             soup = soup + inv[i].getAmount();
-                            player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.GRAY + " had " + ChatColor.RED + total + "soups" + ChatColor.GRAY + " left");
                         }
                         total = total + 1;
                     }
+                }
+                if (total == 1) {
+                    player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.GRAY + " had " + ChatColor.RED + total + " soup" + ChatColor.GRAY + " left");
+                } else {
+                    player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.GRAY + " had " + ChatColor.RED + total + " soups" + ChatColor.GRAY + " left");
                 }
             }
 
@@ -204,13 +208,41 @@ public class PlayerDeathListener implements Listener {
                         + ChatColor.BOLD + playerData.getRank().getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "] ";
             }
             if (killerData.getKills() == 150) {
-                player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
+                if (playerData.hasRank(Rank.NINJA)) {
+                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + ChatColor.BOLD + player.getName());
+                }
+                if (playerData.getRank().getColor() != null) {
+                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + player.getName());
+                } else {
+                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + player.getName());
+                }
             } else if (killerData.getKills() == 500) {
-                player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
+                if (playerData.hasRank(Rank.NINJA)) {
+                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + ChatColor.BOLD + player.getName());
+                }
+                if (playerData.getRank().getColor() != null) {
+                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + player.getName());
+                } else {
+                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + player.getName());
+                }
             } else if (killerData.getKills() == 1000) {
-                player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
+                if (playerData.hasRank(Rank.NINJA)) {
+                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + ChatColor.BOLD + player.getName());
+                }
+                if (playerData.getRank().getColor() != null) {
+                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + player.getName());
+                } else {
+                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + player.getName());
+                }
             } else if (killerData.getKills() == 1500) {
-                player.setPlayerListName(rankTag + playerData.getLevelColor() + player.getName());
+                if (playerData.hasRank(Rank.NINJA)) {
+                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + ChatColor.BOLD + player.getName());
+                }
+                if (playerData.getRank().getColor() != null) {
+                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + player.getName());
+                } else {
+                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + player.getName());
+                }
             }
 
         /*if(playerData.getKills() == 1) {
@@ -264,10 +296,56 @@ public class PlayerDeathListener implements Listener {
                 }
                 KitPvp.killStreak.remove(player.getUniqueId());
             }
+
+            if (ClimaxPvp.inDuel.contains(player)) {
+                if (ClimaxPvp.isDueling.containsKey(player)) {
+                    Player opponent = ClimaxPvp.isDueling.get(player);
+                    player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.YELLOW + "The match has ended! Winner: " + ChatColor.GOLD + opponent.getDisplayName());
+                    opponent.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.YELLOW + "The match has ended! Winner: " + ChatColor.GOLD + opponent.getDisplayName());
+
+                    Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            plugin.respawn(player);
+                        }
+                    }, 20L * 3);
+                    Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            plugin.respawn(opponent);
+                        }
+                    }, 20L * 3);
+
+                    ClimaxPvp.inDuel.remove(player);
+                    ClimaxPvp.inDuel.remove(opponent);
+                } else {
+                    Player opponent = ClimaxPvp.isDuelingReverse.get(player);
+                    player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.YELLOW + "The match has ended! Winner: " + ChatColor.GOLD + opponent.getDisplayName());
+                    opponent.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.YELLOW + "The match has ended! Winner: " + ChatColor.GOLD + opponent.getDisplayName());
+
+                    Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            plugin.respawn(player);
+                        }
+                    }, 20L * 3);
+                    Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                        @Override
+                        public void run() {
+                            plugin.respawn(opponent);
+                        }
+                    }, 20L * 3);
+
+                    ClimaxPvp.inDuel.remove(player);
+                    ClimaxPvp.inDuel.remove(opponent);
+                }
+            }
         }
     }
     @EventHandler
     public void onDeath (PlayerDeathEvent event) {
+        event.getEntity().setLastDamage(0);
+        event.getEntity().setHealth(20);
         event.setDeathMessage(null);
     }
 
@@ -280,9 +358,6 @@ public class PlayerDeathListener implements Listener {
         if (event.getEntity().getType().equals(EntityType.PLAYER) && event.getDamager().getType().equals(EntityType.PLAYER)) {
             Player player = (Player) event.getEntity();
             Player damager = (Player) event.getDamager();
-            if (damager.getGameMode().equals(GameMode.CREATIVE) && ClimaxPvp.deadPeoples.contains(damager)) {
-                event.setCancelled(true);
-            }
         }
     }
 }

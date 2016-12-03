@@ -34,7 +34,7 @@ public class AsyncPlayerChatListener implements Listener {
             plugin.getServer().getOnlinePlayers().stream().filter(players ->
                     plugin.getPlayerData(players).hasRank(Rank.TRIAL_MODERATOR))
                     .forEach(players -> players.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "[STAFF] "
-                            + ChatColor.RED + player.getName() + ": " + event.getMessage()));
+                            + ChatColor.RED + player.getName() + ": " + ChatColor.WHITE + event.getMessage()));
             return;
         }
 
@@ -80,7 +80,7 @@ public class AsyncPlayerChatListener implements Listener {
 
         if (KitPvp.globalChatDisabled.contains(player.getUniqueId())) {
             event.setCancelled(true);
-            player.sendMessage("§f» §7Global Chat is currently off, you can toggle it in §6Settings!");
+            player.sendMessage("§f» §7Your Global Chat is currently off, you can toggle it in §6Settings!");
         }
 
         if (playerData.hasRank(Rank.NINJA)) {

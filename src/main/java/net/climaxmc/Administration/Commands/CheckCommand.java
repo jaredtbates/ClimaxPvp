@@ -7,6 +7,7 @@ import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -47,6 +48,7 @@ public class CheckCommand implements CommandExecutor, Listener {
         if (!KitPvp.getChecking().contains(player.getUniqueId())) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false, false));
             player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You are now checking a player.");
+            player.setGameMode(GameMode.SURVIVAL);
             player.setAllowFlight(true);
             player.setFlying(true);
             player.getInventory().clear();

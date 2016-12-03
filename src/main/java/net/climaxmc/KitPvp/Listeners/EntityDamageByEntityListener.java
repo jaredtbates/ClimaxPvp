@@ -4,6 +4,7 @@ import me.xericker.disguiseabilities.other.WorldGuard;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
+import org.bukkit.GameMode;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Dispenser;
 import org.bukkit.block.DoubleChest;
@@ -41,6 +42,13 @@ public class EntityDamageByEntityListener implements Listener {
                 if (projectile.getShooter() instanceof Player) {
                     player = (Player) projectile.getShooter();
                 }
+            }
+
+            if (target.getGameMode().equals(GameMode.CREATIVE) && ClimaxPvp.deadPeoples.contains(target)) {
+                event.setCancelled(true);
+            }
+            if (ClimaxPvp.isSpectating.contains(player.getUniqueId())) {
+                event.setCancelled(true);
             }
 
             if (player != null && ((KitPvp.currentTeams.containsKey(player.getName())

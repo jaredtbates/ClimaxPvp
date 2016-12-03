@@ -42,17 +42,33 @@ public class TrailsInventory {
         ItemStack particle = new ItemStack(trail.getMaterial());
         ItemMeta particleMeta = particle.getItemMeta();
         if (!settingsFiles.isTrailUnlocked(player, trail.getName())) {
-            particleMeta.setDisplayName(ChatColor.RED + trail.getName());
-            ArrayList<String> lores = new ArrayList<>();
-            lores.add("§cNot unlocked!");
-            lores.add("§7Shift-Click to unlock: §a$" + cost);
-            particleMeta.setLore(lores);
+            if (trail.getName().equals("Snow")) {
+                particleMeta.setDisplayName(ChatColor.RED + trail.getName());
+                ArrayList<String> lores = new ArrayList<>();
+                lores.add("§cNot unlocked!");
+                lores.add("§6Exclusive! Purchase Beta to unlock!");
+                particleMeta.setLore(lores);
+            } else {
+                particleMeta.setDisplayName(ChatColor.RED + trail.getName());
+                ArrayList<String> lores = new ArrayList<>();
+                lores.add("§cNot unlocked!");
+                lores.add("§7Shift-Click to unlock: §a$" + cost);
+                particleMeta.setLore(lores);
+            }
         } else {
-            particleMeta.setDisplayName(ChatColor.GREEN + trail.getName());
-            ArrayList<String> lores = new ArrayList<>();
-            lores.add("§aUnlocked!");
-            lores.add("§7Original Cost: $" + cost);
-            particleMeta.setLore(lores);
+            if (trail.getName().equals("Snow")) {
+                particleMeta.setDisplayName(ChatColor.GREEN + trail.getName());
+                ArrayList<String> lores = new ArrayList<>();
+                lores.add("§aUnlocked!");
+                lores.add("§6Exclusive! Welcome Beta member!");
+                particleMeta.setLore(lores);
+            } else {
+                particleMeta.setDisplayName(ChatColor.GREEN + trail.getName());
+                ArrayList<String> lores = new ArrayList<>();
+                lores.add("§aUnlocked!");
+                lores.add("§7Original Cost: $" + cost);
+                particleMeta.setLore(lores);
+            }
         }
         particle.setItemMeta(particleMeta);
         inventory.setItem(startSlot++, particle);

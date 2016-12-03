@@ -44,6 +44,7 @@ public class PlayerRespawnListener implements Listener {
 
         ClimaxPvp.deadPeoples.remove(player);
 
+
         player.setGameMode(GameMode.SURVIVAL);
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);

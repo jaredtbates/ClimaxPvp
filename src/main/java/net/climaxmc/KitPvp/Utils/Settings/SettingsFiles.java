@@ -14,6 +14,8 @@ import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
@@ -45,33 +47,43 @@ public class SettingsFiles {
     }
 
     private void set(String path, Object object) {
-        Bukkit.getScheduler().runTaskAsynchronously(ClimaxPvp.getInstance(), () -> {
+        //Bukkit.getScheduler().runTaskAsynchronously(ClimaxPvp.getInstance(), () -> {
             config.set(path, object);
-            try {
-                config.save(file);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        //});
     }
 
+    public void saveConfig() {
+        try {
+            config.save(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void toggleRespawnValue(Player player) {
-        if (!(boolean) config.get(player.getUniqueId() + ".instaRespawn")) {
-            set(player.getUniqueId() + ".instaRespawn", true);
-            player.closeInventory();
-            player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
-            player.sendMessage("§f» §7You have set §eInsta-Respawn §7to: §aTrue");
-        } else {
+        if (config.get(player.getUniqueId() + ".instaRespawn") == null) {
             set(player.getUniqueId() + ".instaRespawn", false);
-            player.closeInventory();
-            player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
-            player.sendMessage("§f» §7You have set §eInsta-Respawn §7to: §cFalse");
+            saveConfig();
+        } else {
+            if (!(boolean) config.get(player.getUniqueId() + ".instaRespawn")) {
+                set(player.getUniqueId() + ".instaRespawn", true);
+                saveConfig();
+                player.closeInventory();
+                player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
+                player.sendMessage("§f» §7You have set §eInsta-Respawn §7to: §aTrue");
+            } else {
+                set(player.getUniqueId() + ".instaRespawn", false);
+                saveConfig();
+                player.closeInventory();
+                player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
+                player.sendMessage("§f» §7You have set §eInsta-Respawn §7to: §cFalse");
+            }
         }
     }
     public boolean getRespawnValue(Player player) {
         if (config.get(player.getUniqueId() + ".instaRespawn") == null) {
             set(player.getUniqueId() + ".instaRespawn", false);
+            saveConfig();
         } else {
             return (boolean) config.get(player.getUniqueId() + ".instaRespawn");
         }
@@ -79,21 +91,29 @@ public class SettingsFiles {
     }
 
     public void toggleReceiveMsg(Player player) {
-        if (!(boolean) config.get(player.getUniqueId() + ".receiveMsging")) {
+        if (config.get(player.getUniqueId() + ".receiveMsging") == null) {
             set(player.getUniqueId() + ".receiveMsging", true);
-            player.closeInventory();
-            player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
-            player.sendMessage("§f» §7You have set §eReceiving Msgs §7to: §aTrue");
+            saveConfig();
         } else {
-            set(player.getUniqueId() + ".receiveMsging", false);
-            player.closeInventory();
-            player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
-            player.sendMessage("§f» §7You have set §eReceiving Msgs §7to: §cFalse");
+            if (!(boolean) config.get(player.getUniqueId() + ".receiveMsging")) {
+                set(player.getUniqueId() + ".receiveMsging", true);
+                saveConfig();
+                player.closeInventory();
+                player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
+                player.sendMessage("§f» §7You have set §eReceiving Msgs §7to: §aTrue");
+            } else {
+                set(player.getUniqueId() + ".receiveMsging", false);
+                saveConfig();
+                player.closeInventory();
+                player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
+                player.sendMessage("§f» §7You have set §eReceiving Msgs §7to: §cFalse");
+            }
         }
     }
     public boolean getReceiveMsgValue(Player player) {
         if (config.get(player.getUniqueId() + ".receiveMsging") == null) {
             set(player.getUniqueId() + ".receiveMsging", true);
+            saveConfig();
         } else {
             return (boolean) config.get(player.getUniqueId() + ".receiveMsging");
         }
@@ -101,24 +121,33 @@ public class SettingsFiles {
     }
 
     public void toggleGlobalChat(Player player) {
-        if (!(boolean) config.get(player.getUniqueId() + ".globalChat")) {
+        if (config.get(player.getUniqueId() + ".globalChat") == null) {
             set(player.getUniqueId() + ".globalChat", true);
-            player.closeInventory();
-            player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
-            player.sendMessage("§f» §7You have set §eGlobal Chat §7to: §aTrue");
+            saveConfig();
             KitPvp.globalChatDisabled.remove(player.getUniqueId());
         } else {
-            set(player.getUniqueId() + ".globalChat", false);
-            player.closeInventory();
-            player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
-            player.sendMessage("§f» §7You have set §eGlobal Chat §7to: §cFalse");
-            KitPvp.globalChatDisabled.add(player.getUniqueId());
+            if (!(boolean) config.get(player.getUniqueId() + ".globalChat")) {
+                set(player.getUniqueId() + ".globalChat", true);
+                saveConfig();
+                player.closeInventory();
+                player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
+                player.sendMessage("§f» §7You have set §eGlobal Chat §7to: §aTrue");
+                KitPvp.globalChatDisabled.remove(player.getUniqueId());
+            } else {
+                set(player.getUniqueId() + ".globalChat", false);
+                saveConfig();
+                player.closeInventory();
+                player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
+                player.sendMessage("§f» §7You have set §eGlobal Chat §7to: §cFalse");
+                KitPvp.globalChatDisabled.add(player.getUniqueId());
+            }
         }
     }
     public boolean getGlobalChatValue(Player player) {
         if (config.get(player.getUniqueId() + ".globalChat") == null) {
             set(player.getUniqueId() + ".globalChat", true);
-            KitPvp.globalChatDisabled.add(player.getUniqueId());
+            saveConfig();
+            KitPvp.globalChatDisabled.remove(player.getUniqueId());
         } else {
             return (boolean) config.get(player.getUniqueId() + ".globalChat");
         }
@@ -128,20 +157,17 @@ public class SettingsFiles {
     public void toggleSpawnSoup(Player player) {
         if (config.get(player.getUniqueId() + ".respawnSoup") == null) {
             set(player.getUniqueId() + ".respawnSoup", false);
+            saveConfig();
         } else {
             if (!(boolean) config.get(player.getUniqueId() + ".respawnSoup")) {
                 set(player.getUniqueId() + ".respawnSoup", true);
-                player.getInventory().setItemInHand(new I(Material.MUSHROOM_SOUP)
-                        .name(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup")
-                        .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Set your preferred healing type!"));
+                saveConfig();
                 //player.closeInventory();
                 player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
                 //player.sendMessage("§f» §7Mode set §7to: §eSoup");
-            } else {
+            } else if ((boolean) config.get(player.getUniqueId() + ".respawnSoup")) {
                 set(player.getUniqueId() + ".respawnSoup", false);
-                player.getInventory().setItemInHand(new I(Material.FISHING_ROD)
-                        .name(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Regen")
-                        .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Set your preferred healing type!"));
+                saveConfig();
                 //player.closeInventory();
                 player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
                 //player.sendMessage("§f» §7Mode set §7to: §eRod/Regen");
@@ -151,6 +177,7 @@ public class SettingsFiles {
     public boolean getSpawnSoupValue(Player player) {
         if (config.get(player.getUniqueId() + ".respawnSoup") == null) {
             set(player.getUniqueId() + ".respawnSoup", false);
+            saveConfig();
         } else {
             return (boolean) config.get(player.getUniqueId() + ".respawnSoup");
         }
@@ -168,40 +195,48 @@ public class SettingsFiles {
         }
     }
     public void setTrail(Player player, String name, Trail trail) {
-        if ((boolean) config.get(player.getUniqueId() + ".unlockedTrails." + name)) {
+        if (config.get(player.getUniqueId() + ".unlockedTrails." + name) == null) {
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You must unlock this trail to use it!");
+        } else {
             KitPvp.inTrail.put(player.getUniqueId(), trail);
             player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You have selected the " + ChatColor.YELLOW + name + ChatColor.GRAY + " trail!");
-        } else {
-            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You must unlock this trail to use it!");
         }
     }
     public void tryUnlockTrail(Player player, String name, Trail trail, int cost) {
         PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
         if (config.get(player.getUniqueId() + ".unlockedTrails." + name) == null) {
-            set(player.getUniqueId() + ".unlockedTrails." + name, false);
-        } else  {
-            if (!(boolean) config.get(player.getUniqueId() + ".unlockedTrails." + name)) {
-                if (cost <= playerData.getBalance()) {
-                    set(player.getUniqueId() + ".unlockedTrails." + name, true);
-                    playerData.withdrawBalance(cost);
-                    player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You've unlocked the " + ChatColor.YELLOW + name + ChatColor.GRAY + " trail! For " + ChatColor.GREEN + "$" + cost);
-                } else {
-                    player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "Insufficient funds!");
-                }
-            } else {
-                setTrail(player, name, trail);
+            if (name.equals("Snow")) {
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "Beta Member Exclusive! Purchase @ donate.climaxmc.net");
+                return;
             }
+            if (cost <= playerData.getBalance()) {
+                set(player.getUniqueId() + ".unlockedTrails." + name, true);
+                saveConfig();
+                playerData.withdrawBalance(cost);
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You've unlocked the " + ChatColor.YELLOW + name + ChatColor.GRAY + " trail! For " + ChatColor.GREEN + "$" + cost);
+            } else {
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "Insufficient funds!");
+            }
+        } else {
+            setTrail(player, name, trail);
         }
+    }
+    public void forceUnlockTrail(Player player, String name) {
+        set(player.getUniqueId() + ".unlockedTrails." + name, true);
+        saveConfig();
     }
     public boolean isTrailUnlocked(Player player, String name) {
         if (config.get(player.getUniqueId() + ".unlockedTrails." + name) == null) {
-            set(player.getUniqueId() + ".unlockedTrails." + name, false);
             return false;
-        } else if ((boolean) config.get(player.getUniqueId() + ".unlockedTrails." + name)) {
-            return true;
         } else {
-            return false;
+            return true;
         }
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        Bukkit.broadcastMessage("yas");
     }
 
     /*public void setClouds(Player player) {

@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Commands.DuelCommand;
 import net.climaxmc.KitPvp.Commands.ReportCommand;
 import net.climaxmc.KitPvp.Commands.TeamCommand;
 import net.climaxmc.KitPvp.KitManager;
@@ -9,14 +10,17 @@ import net.climaxmc.KitPvp.Kits.FighterKit;
 import net.climaxmc.KitPvp.Menus.ReportGUI;
 import net.climaxmc.KitPvp.Menus.SettingsMenu;
 import net.climaxmc.KitPvp.Utils.Challenges.Challenge;
+import net.climaxmc.KitPvp.Utils.Duels.DuelUtils;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.KitPvp.Utils.Teams.TeamMessages;
 import net.climaxmc.KitPvp.Utils.Teams.TeamUtils;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.*;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -45,18 +49,13 @@ public class InventoryClickListener implements Listener {
                 return;
             }
 
-            if (inventory == player.getInventory()) {
-                event.setCancelled(false);
-            }
-
-            for (ItemStack itemStack : player.getInventory().getArmorContents()) {
-                if (itemStack == null) {
+            /*for (ItemStack itemStack : player.getInventory().getArmorContents()) {
+                if (itemStack.getType().equals(Material.AIR)) {
+                    event.setCancelled(false);
+                } else if (event.getCurrentItem().equals(itemStack)) {
                     event.setCancelled(true);
                 }
-                if (event.getCurrentItem().equals(itemStack)) {
-                    event.setCancelled(true);
-                }
-            }
+            }*/
 
             /*if (event.getClickedInventory().equals(player.getInventory()) && !event.getCurrentItem().getType().equals(Material.MUSHROOM_SOUP)) {
                 event.setCancelled(true);
@@ -214,7 +213,6 @@ public class InventoryClickListener implements Listener {
                         player.sendMessage(ChatColor.RED + "Report cancelled.");
                     }
                 }
-                event.setCancelled(true);
             }
 
             if (event.getClickedInventory().getName().contains("Options")) {
@@ -271,7 +269,6 @@ public class InventoryClickListener implements Listener {
         }
         if (event.getClickedInventory().getName().contains("Settings")) {
             SettingsFiles settingsFiles = new SettingsFiles();
-            SettingsMenu settingsMenu = new SettingsMenu(plugin);
             if (event.getCurrentItem().getType().equals(Material.REDSTONE)) {
                 settingsFiles.toggleRespawnValue(player);
             }
@@ -282,6 +279,27 @@ public class InventoryClickListener implements Listener {
                 settingsFiles.toggleGlobalChat(player);
             }
             event.setCancelled(true);
+        }
+        if (event.getClickedInventory().getName().contains("Duel Selector")) {
+            DuelUtils duelUtils = new DuelUtils(plugin);
+            if (event.getCurrentItem().getType().equals(Material.POTION) && event.getCurrentItem().getItemMeta().getDisplayName().contains("NoDebuff")) {
+                Player target = ClimaxPvp.duelRequest.get(player);
+                duelUtils.sendRequest(player, target, "NoDebuff");
+                event.setCancelled(true);
+                player.closeInventory();
+
+                ClimaxPvp.duelsKit.put(player, "NoDebuff");
+                ClimaxPvp.duelsKit.put(target, "NoDebuff");
+            }
+            if (event.getCurrentItem().getType().equals(Material.GOLDEN_APPLE) && event.getCurrentItem().getItemMeta().getDisplayName().contains("Gapple")) {
+                Player target = ClimaxPvp.duelRequest.get(player);
+                duelUtils.sendRequest(player, target, "Gapple");
+                event.setCancelled(true);
+                player.closeInventory();
+
+                ClimaxPvp.duelsKit.put(player, "Gapple");
+                ClimaxPvp.duelsKit.put(target, "Gapple");
+            }
         }
     }
 }

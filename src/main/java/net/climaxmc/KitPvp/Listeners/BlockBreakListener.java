@@ -1,6 +1,8 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.Donations.Commands.SpectateCommand;
+import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,6 +23,9 @@ public class BlockBreakListener implements Listener {
             event.setCancelled(true);
         }
         if (ClimaxPvp.deadPeoples.contains(player)) {
+            event.setCancelled(true);
+        }
+        if (ClimaxPvp.isSpectating.contains(player.getUniqueId())) {
             event.setCancelled(true);
         }
     }

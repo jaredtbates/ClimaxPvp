@@ -3,6 +3,7 @@ package net.climaxmc.KitPvp.Listeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Commands.ReportCommand;
 import net.climaxmc.KitPvp.KitPvp;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -23,6 +24,50 @@ public class PlayerQuitListener implements Listener {
 
         if (KitPvp.killStreak.containsKey(player.getUniqueId())) {
             KitPvp.killStreak.remove(player.getUniqueId());
+        }
+
+        if (ClimaxPvp.inDuel.contains(player)) {
+            if (ClimaxPvp.isDueling.containsKey(player)) {
+                Player opponent = ClimaxPvp.isDueling.get(player);
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.YELLOW + "Your opponent has left the game! Winner: " + ChatColor.GOLD + opponent.getDisplayName());
+                opponent.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.YELLOW + "Your opponent has left the game! Winner: " + ChatColor.GOLD + opponent.getDisplayName());
+
+                Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        plugin.respawn(player);
+                    }
+                }, 20L * 3);
+                Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        plugin.respawn(opponent);
+                    }
+                }, 20L * 3);
+
+                ClimaxPvp.inDuel.remove(player);
+                ClimaxPvp.inDuel.remove(opponent);
+            } else {
+                Player opponent = ClimaxPvp.isDuelingReverse.get(player);
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.YELLOW + "Your opponent has left the game! Winner: " + ChatColor.GOLD + opponent.getDisplayName());
+                opponent.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.YELLOW + "Your opponent has left the game! Winner: " + ChatColor.GOLD + opponent.getDisplayName());
+
+                Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        plugin.respawn(player);
+                    }
+                }, 20L * 3);
+                Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                    @Override
+                    public void run() {
+                        plugin.respawn(opponent);
+                    }
+                }, 20L * 3);
+
+                ClimaxPvp.inDuel.remove(player);
+                ClimaxPvp.inDuel.remove(opponent);
+            }
         }
 
         if (ReportCommand.getReportBuilders().containsKey(player.getUniqueId())) {
