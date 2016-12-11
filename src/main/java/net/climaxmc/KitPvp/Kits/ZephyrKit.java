@@ -44,7 +44,7 @@ public class ZephyrKit extends Kit {
         helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(IRON_CHESTPLATE);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setChestplate(chest);
         ItemStack legs = new ItemStack(LEATHER_LEGGINGS);
         legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
@@ -83,7 +83,7 @@ public class ZephyrKit extends Kit {
         helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(IRON_CHESTPLATE);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         player.getInventory().setChestplate(chest);
         ItemStack legs = new ItemStack(LEATHER_LEGGINGS);
         legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);

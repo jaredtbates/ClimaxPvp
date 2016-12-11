@@ -5,7 +5,9 @@ import net.climaxmc.Donations.Inventories.TrailsInventory;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Kits.PvpKit;
+import net.climaxmc.KitPvp.Menus.CosmeticsMenu;
 import net.climaxmc.KitPvp.Menus.SettingsMenu;
+import net.climaxmc.KitPvp.Menus.TitlesMenu;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.database.PlayerData;
@@ -163,8 +165,9 @@ public class PlayerInteractListener implements Listener {
                 }
                 player.openInventory(kitSelectorInventory);
 
-            } else if (item.getType().equals(Material.SEEDS)) {
-                new TrailsInventory(player);
+            } else if (item.getType().equals(Material.BOOK) && item.getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Cosmetics")) {
+                CosmeticsMenu cosmeticsMenu = new CosmeticsMenu(plugin);
+                cosmeticsMenu.openInventory(player);
             } else if (item.getType().equals(Material.REDSTONE)) {
                 if (KitManager.getPreviousKit().containsKey(player.getUniqueId())) {
                     KitManager.getPreviousKit().get(player.getUniqueId()).wearCheckLevel(player);

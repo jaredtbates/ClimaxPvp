@@ -8,6 +8,7 @@ import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.Titles.TitleFiles;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import net.md_5.bungee.api.ChatColor;
@@ -70,10 +71,54 @@ public class AsyncPlayerChatListener implements Listener {
                 if (playerData.hasRank(Rank.NINJA)) {
                     event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
                     ChatColor color = rank.getColor();
-                    event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + " [" + (color == null ? "" : color) + ChatColor.BOLD + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]" + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
-                    //event.setFormat(level + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "{" + (color == null ? "" : color) + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
+
+                    if (ClimaxPvp.inTitle.containsKey(player)) {
+                        String title = ClimaxPvp.inTitle.get(player);
+                        if (playerData.getRank().equals(Rank.BETA)) {
+                            event.setFormat(ChatColor.GOLD + "\u2737 " + playerData.getLevelColor() + playerData.getKills()
+                                    + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + " [" + (color == null ? "" : color)
+                                    + ChatColor.BOLD + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]"
+                                    + " " + title + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                        } else {
+                            event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + ChatColor.DARK_GRAY
+                                    + "" + ChatColor.BOLD + " [" + (color == null ? "" : color) + ChatColor.BOLD
+                                    + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]"
+                                    + " " + title + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                        }
+                        //event.setFormat(level + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "{" + (color == null ? "" : color) + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
+                    } else {
+                        if (playerData.getRank().equals(Rank.BETA)) {
+                            event.setFormat(ChatColor.GOLD + "\u2737 " + playerData.getLevelColor() + playerData.getKills()
+                                    + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + " [" + (color == null ? "" : color)
+                                    + ChatColor.BOLD + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]"
+                                    + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                        } else {
+                            event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + ChatColor.DARK_GRAY
+                                    + "" + ChatColor.BOLD + " [" + (color == null ? "" : color) + ChatColor.BOLD
+                                    + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]" + playerData.getLevelColor()
+                                    + "%s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                        }
+                        //event.setFormat(level + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "{" + (color == null ? "" : color) + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
+                    }
                 } else {
-                    event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                    if (ClimaxPvp.inTitle.containsKey(player)) {
+                        String title = ClimaxPvp.inTitle.get(player);
+                        if (playerData.getRank().equals(Rank.BETA)) {
+                            event.setFormat(ChatColor.GOLD + "\u2737 " + playerData.getLevelColor() + playerData.getKills()
+                                    + " " + title + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                        } else {
+                            event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + " "
+                                    + title + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                        }
+                    } else {
+                        if (playerData.getRank().equals(Rank.BETA)) {
+                            event.setFormat(ChatColor.GOLD + "\u2737 " + playerData.getLevelColor() + playerData.getKills()
+                                    + " " + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                        } else {
+                            event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + " "
+                                    + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                        }
+                    }
                 }
             }
         }
@@ -86,10 +131,49 @@ public class AsyncPlayerChatListener implements Listener {
         if (playerData.hasRank(Rank.NINJA)) {
             event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
             ChatColor color = rank.getColor();
-            event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + " [" + (color == null ? "" : color) + ChatColor.BOLD + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]" + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
-            //event.setFormat(level + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "{" + (color == null ? "" : color) + "" + ChatColor.BOLD + "" + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
+            if (ClimaxPvp.inTitle.containsKey(player)) {
+                String title = ClimaxPvp.inTitle.get(player);
+                if (playerData.getRank().equals(Rank.BETA)) {
+                    event.setFormat(ChatColor.GOLD + "\u2737 " + playerData.getLevelColor() + playerData.getKills() + ChatColor.DARK_GRAY + ""
+                            + ChatColor.BOLD + " [" + (color == null ? "" : color) + ChatColor.BOLD + rank.getPrefix() + ChatColor.DARK_GRAY
+                            + "" + ChatColor.BOLD + "]" + " " + title + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                } else {
+                    event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + " ["
+                            + (color == null ? "" : color) + ChatColor.BOLD + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]"
+                            + " " + title + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                }
+                //event.setFormat(level + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "{" + (color == null ? "" : color) + "" + ChatColor.BOLD + ""
+                // + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
+            } else {
+                if (playerData.getRank().equals(Rank.BETA)) {
+                    event.setFormat(ChatColor.GOLD + "\u2737 " + playerData.getLevelColor() + playerData.getKills() + ChatColor.DARK_GRAY + ""
+                            + ChatColor.BOLD + " [" + (color == null ? "" : color) + ChatColor.BOLD + rank.getPrefix() + ChatColor.DARK_GRAY
+                            + "" + ChatColor.BOLD + "]" + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                } else {
+                    event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + " ["
+                            + (color == null ? "" : color) + ChatColor.BOLD + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "]"
+                            + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                }
+                //event.setFormat(level + ChatColor.DARK_GRAY + " " + ChatColor.BOLD + "{" + (color == null ? "" : color) + "" + ChatColor.BOLD + ""
+                // + rank.getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "}" + playerData.getLevelColor() + " %s" + ChatColor.RESET + ": %s");
+            }
         } else {
-            event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+            if (ClimaxPvp.inTitle.containsKey(player)) {
+                String title = ClimaxPvp.inTitle.get(player);
+                if (playerData.getRank().equals(Rank.BETA)) {
+                    event.setFormat(ChatColor.GOLD + "\u2737 " + playerData.getLevelColor() + playerData.getKills()
+                            + " " + title + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                } else {
+                    event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + " " + title + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                }
+            } else {
+                if (playerData.getRank().equals(Rank.BETA)) {
+                    event.setFormat(ChatColor.GOLD + "\u2737 " + playerData.getLevelColor() + playerData.getKills()
+                            + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                } else {
+                    event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
+                }
+            }
         }
 
         /*if (StringUtils.containsIgnoreCase(event.getMessage(), "apply") && StringUtils.containsIgnoreCase(event.getMessage(), "staff")) {

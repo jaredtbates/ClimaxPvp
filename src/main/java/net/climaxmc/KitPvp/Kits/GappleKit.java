@@ -13,12 +13,9 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.concurrent.TimeUnit;
 
-public class GappleKit{
+public class GappleKit {
 
-    private Ability enderpearl = new Ability("enderpearl", 1, 10, TimeUnit.SECONDS);
-
-    public GappleKit() {
-    }
+    public GappleKit() {}
 
     public void wear(Player player) {
         for (PotionEffect effect : player.getActivePotionEffects()) {

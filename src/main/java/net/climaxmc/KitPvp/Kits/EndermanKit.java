@@ -27,7 +27,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class EndermanKit extends Kit {
 
-    private final int cooldown = 10;
+    private final int cooldown = 7;
     private ItemStack ability = new ItemStack(Material.EYE_OF_ENDER);
 
 	private Ability teleport = new Ability("Teleport", 1, cooldown, TimeUnit.SECONDS);
@@ -42,9 +42,9 @@ public class EndermanKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
-        boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 4);
+        boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
         player.getInventory().setBoots(boots);
-        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
 
@@ -67,9 +67,9 @@ public class EndermanKit extends Kit {
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.CHAINMAIL_BOOTS);
-        boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 4);
+        boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
         player.getInventory().setBoots(boots);
-        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         SettingsFiles settingsFiles = new SettingsFiles();

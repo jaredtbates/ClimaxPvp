@@ -37,6 +37,20 @@ public class PlayerMoveListener implements Listener {
                         Location location = player.getLocation();
                         location.setY(location.getY() + trail.getYOffset());
                         new ParticleEffect(KitPvp.inTrail.get(player.getUniqueId()).getData()).sendToLocation(location);
+                        /*final int taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable(){
+                            @Override
+                            public void run() {
+                                if (KitPvp.inTrail.get(player.getUniqueId()) != null) {
+                                    if (KitPvp.inTrail.containsKey(player.getUniqueId())) {
+                                        if (KitPvp.inTrail.get(player.getUniqueId()).equals(trail)) {
+                                            Location location = player.getLocation();
+                                            location.setY(location.getY() + trail.getYOffset());
+                                            new ParticleEffect(KitPvp.inTrail.get(player.getUniqueId()).getData()).sendToLocation(location);
+                                        }
+                                    }
+                                }
+                            }
+                        }, 0L, 5L);*/
                     }
                 }
             }

@@ -6,6 +6,7 @@ import net.climaxmc.Donations.Listeners.InventoryClickListener;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.GappleKit;
 import net.climaxmc.KitPvp.Kits.NoDebuffKit;
+import net.climaxmc.KitPvp.Kits.SoupKit;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.donations.trails.Trail;
@@ -78,10 +79,8 @@ public class DuelFiles {
             points++;
         }
         int randomArena = (int)(Math.random() * points + 1);
-        if (ClimaxPvp.currentPlayerArena.containsKey(player)) {
-            while (ClimaxPvp.currentPlayerArena.get(player) == randomArena) {
-                randomArena = (int)(Math.random() * points + 1);
-            }
+        while (ClimaxPvp.currentArenas.contains(randomArena)) {
+            randomArena = (int)(Math.random() * points + 1);
         }
         Location point1 = new Location(player.getWorld(),
                 config.getDouble("arenas." + randomArena + ".point1.x"),
@@ -99,26 +98,40 @@ public class DuelFiles {
         target.teleport(point2);
 
         NoDebuffKit noDebuffKit = new NoDebuffKit();
-        if (ClimaxPvp.duelsKit.containsKey(target)) {
-            if (ClimaxPvp.duelsKit.get(target).equals("NoDebuff")) {
+        if (ClimaxPvp.duelsKit.containsKey(player)) {
+            if (ClimaxPvp.duelsKit.get(player).equals("NoDebuff")) {
                 noDebuffKit.wear(player);
                 noDebuffKit.wear(target);
             }
         }
         GappleKit gappleKit = new GappleKit();
-        if (ClimaxPvp.duelsKit.containsKey(target)) {
-            if (ClimaxPvp.duelsKit.get(target).equals("Gapple")) {
+        if (ClimaxPvp.duelsKit.containsKey(player)) {
+            if (ClimaxPvp.duelsKit.get(player).equals("Gapple")) {
                 gappleKit.wear(player);
                 gappleKit.wear(target);
             }
         }
+        SoupKit soupKit = new SoupKit();
+        if (ClimaxPvp.duelsKit.containsKey(player)) {
+            if (ClimaxPvp.duelsKit.get(player).equals("Soup")) {
+                soupKit.wear(player);
+                soupKit.wear(target);
+            }
+        }
 
-        ClimaxPvp.currentPlayerArena.put(player, randomArena);
+        player.setFoodLevel(20);
+        player.setFireTicks(0);
+        player.setHealth(20);
+        target.setFoodLevel(20);
+        target.setFireTicks(0);
+        target.setHealth(20);
+
+        ClimaxPvp.currentArenas.add(randomArena);
         ClimaxPvp.inDuel.add(player);
         ClimaxPvp.inDuel.add(target);
         ClimaxPvp.isDueling.put(player, target);
         ClimaxPvp.isDuelingReverse.put(target, player);
         ClimaxPvp.duelRequestReverse.remove(player);
-        ClimaxPvp.duelRequest.remove(target);
+        ClimaxPvp.initialRequest.remove(target);
     }
 }

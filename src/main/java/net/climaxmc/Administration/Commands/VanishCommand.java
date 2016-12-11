@@ -1,5 +1,13 @@
 package net.climaxmc.Administration.Commands;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.comphenix.protocol.events.PacketEvent;
+import com.comphenix.protocol.reflect.accessors.Accessors;
+import com.comphenix.protocol.reflect.accessors.FieldAccessor;
+import com.comphenix.protocol.utility.MinecraftReflection;
+import com.comphenix.protocol.wrappers.WrappedServerPing;
 import com.google.common.collect.Iterables;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -24,6 +32,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.server.ServerListPingEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -122,6 +132,7 @@ public class VanishCommand implements CommandExecutor, Listener {
             player.getInventory().clear();
             player.getInventory().setItem(4, new I(Material.INK_SACK).durability(8).name(ChatColor.AQUA + "Check Mode"));
             KitPvp.getVanished().add(player.getUniqueId());
+            ClimaxPvp.isVanished.add(player);
         } else {
             player.setGameMode(GameMode.SURVIVAL);
             player.setAllowFlight(false);
@@ -144,6 +155,7 @@ public class VanishCommand implements CommandExecutor, Listener {
 
             KitPvp.getVanished().remove(player.getUniqueId());
             KitPvp.getChecking().remove(player.getUniqueId());
+            ClimaxPvp.isVanished.remove(player);
             plugin.respawn(player);
         }
     }

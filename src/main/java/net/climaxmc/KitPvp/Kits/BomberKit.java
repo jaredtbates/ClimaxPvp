@@ -67,9 +67,10 @@ public class BomberKit extends Kit {
 
         ItemStack ability = new ItemStack(Material.TNT);
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Explode Ability");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Throwing TNT");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
+        player.updateInventory();
     }
 
     protected void wearNoSoup(Player player) {
@@ -104,7 +105,12 @@ public class BomberKit extends Kit {
             rod.addEnchantment(Enchantment.DURABILITY, 3);
             player.getInventory().addItem(rod);
         }
-        giveTNT(player);
+        ItemStack ability = new ItemStack(Material.TNT);
+        ItemMeta abilitymeta = ability.getItemMeta();
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Throwing TNT");
+        ability.setItemMeta(abilitymeta);
+        player.getInventory().addItem(ability);
+        player.updateInventory();
     }
 
     /*@EventHandler
@@ -134,6 +140,23 @@ public class BomberKit extends Kit {
         if (player.getInventory().getItemInHand().getType() == Material.TNT) {
             if (event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.LEFT_CLICK_AIR) {
                 spawnTNT(player);
+                //for (int i = 0; i <= 2; i++) {
+                    Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                        @Override
+                        public void run() {
+                            if (player.getInventory().contains(Material.TNT, 2) || !KitManager.isPlayerInKit(player, BomberKit.this)) {
+                                return;
+                            } else {
+                                ItemStack ability = new ItemStack(Material.TNT);
+                                ItemMeta abilitymeta = ability.getItemMeta();
+                                abilitymeta.setDisplayName(ChatColor.AQUA + "Throwing TNT");
+                                ability.setItemMeta(abilitymeta);
+                                player.getInventory().addItem(ability);
+                                player.updateInventory();
+                            }
+                        }
+                    }, 20L * 5);
+                //}
             }
         }
     }
@@ -144,16 +167,7 @@ public class BomberKit extends Kit {
         taskID = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(ClimaxPvp.getInstance(), new Runnable() {
             @Override
             public void run() {
-                if (player.getInventory().contains(Material.TNT, 2) || !KitManager.isPlayerInKit(player, BomberKit.this)) {
-                    return;
-                } else {
-                    ItemStack ability = new ItemStack(Material.TNT);
-                    ItemMeta abilitymeta = ability.getItemMeta();
-                    abilitymeta.setDisplayName(ChatColor.AQUA + "Throwing TNT");
-                    ability.setItemMeta(abilitymeta);
-                    player.getInventory().addItem(ability);
-                    player.updateInventory();
-                }
+
             }
         }, 0L, 20L * 7L );
     }

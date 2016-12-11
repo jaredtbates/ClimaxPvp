@@ -36,10 +36,10 @@ public class RepairCommand implements CommandExecutor {
                     item.setDurability((short) -100);
                 }
             }
-            if (!KitManager.isPlayerInKit(player)) {
+            /*if (!KitManager.isPlayerInKit(player)) {
                 player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Why would you need to repair? You're not in a kit!");
                 return true;
-            }
+            }*/
             player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You repaired your inventory for" + ChatColor.GREEN + "$20!");
             playerData.withdrawBalance(20);
         } else {

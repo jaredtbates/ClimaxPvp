@@ -117,6 +117,10 @@ public abstract class Kit implements Listener, CommandExecutor {
     public void wearCheckLevel(Player player) {
 
         PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
+        if (player.getLocation().distance(ClimaxPvp.getInstance().getWarpLocation("Duel")) <= 50) {
+            player.sendMessage(ChatColor.RED + "You cannot select a kit here!");
+            return;
+        }
         if (!KitManager.isPlayerInKit(player) || (playerData.hasRank(Rank.MASTER) && player.getLocation().distance(player.getWorld().getSpawnLocation()) < 200)) {
             if ((playerData.getLevelColor().contains(String.valueOf(color.getChar()))
                     || playerData.getTemporaryPlayerData().containsKey("Admin Mode")
@@ -141,7 +145,7 @@ public abstract class Kit implements Listener, CommandExecutor {
                     wearNoSoup(player);
 
                     SettingsFiles settingsFiles = new SettingsFiles();
-                    if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 16) {
+                    //if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 16) {
                         if (settingsFiles.getSpawnSoupValue(player)) {
                             player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0));
                             for (ItemStack item : player.getInventory().getContents()) {
@@ -157,13 +161,13 @@ public abstract class Kit implements Listener, CommandExecutor {
                             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 1));
                             player.removePotionEffect(PotionEffectType.REGENERATION);
                         }
-                    }
+                    //}
                     return;
                 }
 
                 wear(player);
             } else {
-                player.sendMessage(ChatColor.RED + "You must have level " + color + color.name().toLowerCase() + ChatColor.RED + "!");
+                player.sendMessage(ChatColor.RED + "You must have level " + color + color.name().toUpperCase() + ChatColor.RED + "!");
             }
         } else {
             player.sendMessage(ChatColor.RED + "You have not died yet!");

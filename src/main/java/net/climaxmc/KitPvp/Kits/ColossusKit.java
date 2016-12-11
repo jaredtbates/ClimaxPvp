@@ -49,7 +49,7 @@ public class ColossusKit extends Kit {
         helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setChestplate(chest);
         ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
         legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
@@ -85,7 +85,7 @@ public class ColossusKit extends Kit {
         helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.IRON_CHESTPLATE);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setChestplate(chest);
         ItemStack legs = new ItemStack(Material.LEATHER_LEGGINGS);
         legs.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);

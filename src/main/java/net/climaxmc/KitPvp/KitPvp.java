@@ -3,6 +3,7 @@ package net.climaxmc.KitPvp;
 import lombok.Getter;
 import net.climaxmc.Administration.Commands.*;
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.Donations.Commands.CosmeticsCommand;
 import net.climaxmc.KitPvp.Commands.Economy.BalanceCommand;
 import net.climaxmc.KitPvp.Commands.Economy.BalanceTopCommand;
 import net.climaxmc.KitPvp.Commands.Economy.EconomyCommand;
@@ -76,7 +77,7 @@ public class KitPvp {
         plugin.getCommand("pay").setExecutor(new PayCommand(plugin));
         plugin.getCommand("statistics").setExecutor(new StatisticsCommand(plugin));
         plugin.getCommand("warp").setExecutor(new WarpCommand(plugin));
-        //plugin.getCommand("suicide").setExecutor(new SuicideCommand(plugin));
+        plugin.getCommand("suicide").setExecutor(new SuicideCommand(plugin));
         plugin.getCommand("help").setExecutor(new HelpCommand(plugin));
         plugin.getCommand("rules").setExecutor(new RulesCommand(plugin));
         plugin.getCommand("message").setExecutor(new MessageCommand(plugin));
@@ -92,6 +93,10 @@ public class KitPvp {
         plugin.getCommand("staffalert").setExecutor(new StaffAlertCommand(plugin));
         plugin.getCommand("duel").setExecutor(new DuelCommand(plugin));
         plugin.getCommand("unlocktrail").setExecutor(new UnlockTrailCommand(plugin));
+        plugin.getCommand("usetoken").setExecutor(new UseTokenCommand(plugin));
+        plugin.getCommand("settokens").setExecutor(new SetTokensCommand(plugin));
+        plugin.getCommand("donatebroadcast").setExecutor(new DonateBroadcastCommand(plugin));
+        plugin.getCommand("cosmetics").setExecutor(new CosmeticsCommand(plugin));
         /*plugin.getCommand("team").setExecutor(new TeamCommand(plugin));*/
         //plugin.getCommand("staffreq").setExecutor(new StaffReqCommand(plugin));
         //plugin.getCommand("afk").setExecutor(new AFKCommand(plugin));

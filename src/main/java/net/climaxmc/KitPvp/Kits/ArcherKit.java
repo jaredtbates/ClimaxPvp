@@ -39,14 +39,14 @@ public class ArcherKit extends Kit {
         LeatherArmorMeta chestplateMeta = (LeatherArmorMeta) chestplate.getItemMeta();
         chestplateMeta.setColor(Color.WHITE);
         chestplate.setItemMeta(chestplateMeta);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         chestplate.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setChestplate(chestplate);
         ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS);
         LeatherArmorMeta leggingsMeta = (LeatherArmorMeta) leggings.getItemMeta();
         leggingsMeta.setColor(Color.WHITE);
         leggings.setItemMeta(leggingsMeta);
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         leggings.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
@@ -57,7 +57,7 @@ public class ArcherKit extends Kit {
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
         ItemStack bow = new ItemStack(Material.BOW);
-        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
+        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
         bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
         player.getInventory().addItem(bow);
         addSoup(player.getInventory(), 2, 34);
@@ -81,14 +81,14 @@ public class ArcherKit extends Kit {
         LeatherArmorMeta chestplateMeta = (LeatherArmorMeta) chestplate.getItemMeta();
         chestplateMeta.setColor(Color.WHITE);
         chestplate.setItemMeta(chestplateMeta);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         chestplate.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setChestplate(chestplate);
         ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS);
         LeatherArmorMeta leggingsMeta = (LeatherArmorMeta) leggings.getItemMeta();
         leggingsMeta.setColor(Color.WHITE);
         leggings.setItemMeta(leggingsMeta);
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         leggings.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.IRON_BOOTS);
@@ -105,7 +105,7 @@ public class ArcherKit extends Kit {
             player.getInventory().addItem(rod);
         }
         ItemStack bow = new ItemStack(Material.BOW);
-        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
+        bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
         bow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
         player.getInventory().addItem(bow);
         player.getInventory().addItem(new ItemStack(Material.ARROW, 1));

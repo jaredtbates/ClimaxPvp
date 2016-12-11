@@ -84,6 +84,7 @@ public class KitManager implements Listener {
         }
 
         plugin.getServer().getPluginManager().registerEvents(new FighterKit(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new NoDebuffKit(), plugin);
     }
 
     public static boolean isPlayerInKit(Player player) {

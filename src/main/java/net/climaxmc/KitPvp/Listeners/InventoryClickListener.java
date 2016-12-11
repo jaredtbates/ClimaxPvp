@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.Donations.Inventories.TrailsInventory;
 import net.climaxmc.KitPvp.Commands.DuelCommand;
 import net.climaxmc.KitPvp.Commands.ReportCommand;
 import net.climaxmc.KitPvp.Commands.TeamCommand;
@@ -9,11 +10,15 @@ import net.climaxmc.KitPvp.Kits.BomberKit;
 import net.climaxmc.KitPvp.Kits.FighterKit;
 import net.climaxmc.KitPvp.Menus.ReportGUI;
 import net.climaxmc.KitPvp.Menus.SettingsMenu;
+import net.climaxmc.KitPvp.Menus.TitlesMenu;
 import net.climaxmc.KitPvp.Utils.Challenges.Challenge;
 import net.climaxmc.KitPvp.Utils.Duels.DuelUtils;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.KitPvp.Utils.Teams.TeamMessages;
 import net.climaxmc.KitPvp.Utils.Teams.TeamUtils;
+import net.climaxmc.KitPvp.Utils.Titles.TitleFiles;
+import net.climaxmc.common.donations.trails.Trail;
+import net.climaxmc.common.titles.Title;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.Bukkit;
@@ -25,6 +30,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
@@ -283,7 +289,7 @@ public class InventoryClickListener implements Listener {
         if (event.getClickedInventory().getName().contains("Duel Selector")) {
             DuelUtils duelUtils = new DuelUtils(plugin);
             if (event.getCurrentItem().getType().equals(Material.POTION) && event.getCurrentItem().getItemMeta().getDisplayName().contains("NoDebuff")) {
-                Player target = ClimaxPvp.duelRequest.get(player);
+                Player target = ClimaxPvp.initialRequest.get(player);
                 duelUtils.sendRequest(player, target, "NoDebuff");
                 event.setCancelled(true);
                 player.closeInventory();
@@ -292,7 +298,7 @@ public class InventoryClickListener implements Listener {
                 ClimaxPvp.duelsKit.put(target, "NoDebuff");
             }
             if (event.getCurrentItem().getType().equals(Material.GOLDEN_APPLE) && event.getCurrentItem().getItemMeta().getDisplayName().contains("Gapple")) {
-                Player target = ClimaxPvp.duelRequest.get(player);
+                Player target = ClimaxPvp.initialRequest.get(player);
                 duelUtils.sendRequest(player, target, "Gapple");
                 event.setCancelled(true);
                 player.closeInventory();
@@ -300,6 +306,45 @@ public class InventoryClickListener implements Listener {
                 ClimaxPvp.duelsKit.put(player, "Gapple");
                 ClimaxPvp.duelsKit.put(target, "Gapple");
             }
+            if (event.getCurrentItem().getType().equals(Material.MUSHROOM_SOUP) && event.getCurrentItem().getItemMeta().getDisplayName().contains("Soup")) {
+                Player target = ClimaxPvp.initialRequest.get(player);
+                duelUtils.sendRequest(player, target, "Soup");
+                event.setCancelled(true);
+                player.closeInventory();
+
+                ClimaxPvp.duelsKit.put(player, "Soup");
+                ClimaxPvp.duelsKit.put(target, "Soup");
+            }
+        }
+        if (event.getClickedInventory().getName().contains("Cosmetics")) {
+            if (event.getCurrentItem().getType().equals(Material.GHAST_TEAR)) {
+                new TrailsInventory(player);
+            } else if (event.getCurrentItem().getType().equals(Material.NAME_TAG)) {
+                TitlesMenu titlesMenu = new TitlesMenu(plugin);
+                titlesMenu.openInventory(player);
+            }
+            event.setCancelled(true);
+        }
+        if (event.getClickedInventory().getName().contains("Titles")) {
+            if (!event.getCurrentItem().getType().equals(Material.STAINED_GLASS_PANE)) {
+                for (Title titles : Title.values()) {
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().contains(titles.getName())) {
+                        TitleFiles titleFiles = new TitleFiles();
+                        if (event.getClick() == ClickType.SHIFT_LEFT || event.getClick() == ClickType.SHIFT_RIGHT) {
+                            titleFiles.tryUnlockTitle(player, titles, (int) titles.getCost());
+                            player.closeInventory();
+                        } else {
+                            titleFiles.setTitle(player, titles);
+                            player.closeInventory();
+                        }
+                    }
+                }
+            } else if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Remove")) {
+                TitleFiles titleFiles = new TitleFiles();
+                titleFiles.removeTitle(player);
+                player.closeInventory();
+            }
+            event.setCancelled(true);
         }
     }
 }

@@ -233,10 +233,22 @@ public class SettingsFiles {
         }
     }
 
+    public void setWhitelistTokens(UUID uuid, Boolean x) {
+        set(uuid + ".tokens", x);
+        saveConfig();
+    }
+    public boolean getWhitelistTokens(UUID uuid) {
+        if (config.get(uuid + ".tokens") == null) {
+            set(uuid + ".tokens", false);
+            return false;
+        } else {
+            return (boolean) config.get(uuid + ".tokens");
+        }
+    }
+
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        Bukkit.broadcastMessage("yas");
     }
 
     /*public void setClouds(Player player) {

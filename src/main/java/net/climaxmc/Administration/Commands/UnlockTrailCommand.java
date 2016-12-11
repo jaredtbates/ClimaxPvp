@@ -42,17 +42,12 @@ public class UnlockTrailCommand implements CommandExecutor {
 
         Player target = plugin.getServer().getPlayerExact(args[0]);
 
-        if (target != null) {
-            if (args.length == 2) {
-                SettingsFiles settingsFiles = new SettingsFiles();
-                settingsFiles.forceUnlockTrail(target, args[1]);
-            } else {
-                sender.sendMessage(ChatColor.RED + "/unlocktrail <player> <trail name (caps matter)>");
-            }
+        if (args.length == 2) {
+            SettingsFiles settingsFiles = new SettingsFiles();
+            settingsFiles.forceUnlockTrail(target, args[1]);
         } else {
-            sender.sendMessage(ChatColor.RED + "That player is not online!");
+            sender.sendMessage(ChatColor.RED + "/unlocktrail <player> <trail name (caps matter)>");
         }
-
         return true;
     }
 }

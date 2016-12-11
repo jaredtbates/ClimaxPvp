@@ -34,7 +34,7 @@ public class DuelCommand implements CommandExecutor {
         }
         player = (Player) sender;
 
-        if (args.length == 0 || args.length > 3) {
+        /*if (args.length == 0 || args.length > 3) {
             player.sendMessage(ChatColor.RED + "/duel <player>");
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
             return true;
@@ -47,11 +47,11 @@ public class DuelCommand implements CommandExecutor {
                 /*DuelUtils duelUtils = new DuelUtils(plugin);
                 duelUtils.acceptRequest(player);
                 return true;*/
-                if (args.length == 1) {
-                    player.sendMessage(ChatColor.RED + "/duel accept <player>");
+                /*if (args.length > 3) {
+                    player.sendMessage(ChatColor.RED + "/duel accept <player> <kit>");
                     return true;
                 }
-                if (args.length == 2) {
+                if (args.length == 3) {
                     target = plugin.getServer().getPlayerExact(args[1]);
                     if (target == null) {
                         player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You have not received a request from that player!");
@@ -62,42 +62,51 @@ public class DuelCommand implements CommandExecutor {
                         return true;
                     }
                 }
-            }
-            PlayerData playerData = plugin.getPlayerData(player);
-            if (playerData.hasRank(Rank.ADMINISTRATOR)) {
-                if (args[0].contains("set")) {
-                    if (args.length == 1) {
-                        player.sendMessage(ChatColor.RED + "/duel set <arena number> <1 or 2> (Must both be numbers)");
-                        return true;
-                    } else if (args.length == 2) {
-                        player.sendMessage(ChatColor.RED + "/duel set <arena number> <1 or 2> (Must both be numbers)");
-                        return true;
-                    }
-                    if (args.length == 3) {
-                        String arenaName = args[1];
-                        DuelFiles duelFiles = new DuelFiles();
-                        if (args[2].equals("1")) {
-                            duelFiles.setArenaPoint1(player, arenaName);
-                        } else if (args[2].equals("2")) {
-                            duelFiles.setArenaPoint2(player, arenaName);
-                        } else {
-                            player.sendMessage(ChatColor.RED + "The last argument must be either point 1 or 2!");
-                        }
-                    }
-                    return true;
-                }
-            } else {
-                player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
+            }*/
+        PlayerData playerData = plugin.getPlayerData(player);
+        if (playerData.hasRank(Rank.ADMINISTRATOR)) {
+            if (args.length == 0 || args.length > 3) {
+                player.sendMessage(ChatColor.RED + "/duel set <arena number> <1 or 2> (Must both be numbers)");
+                player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                 return true;
             }
-
-            player.sendMessage(org.bukkit.ChatColor.RED + "That player is not online!");
+            if (args[0].contains("set")) {
+                if (args.length == 1) {
+                    player.sendMessage(ChatColor.RED + "/duel set <arena number> <1 or 2> (Must both be numbers)");
+                    player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                    return true;
+                } else if (args.length == 2) {
+                    player.sendMessage(ChatColor.RED + "/duel set <arena number> <1 or 2> (Must both be numbers)");
+                    player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                    return true;
+                }
+                if (args.length == 3) {
+                    String arenaNumber = args[1];
+                    DuelFiles duelFiles = new DuelFiles();
+                    if (args[2].equals("1")) {
+                        duelFiles.setArenaPoint1(player, arenaNumber);
+                        player.sendMessage(ChatColor.GRAY + "Set point 1 for arena " + arenaNumber);
+                    } else if (args[2].equals("2")) {
+                        duelFiles.setArenaPoint2(player, arenaNumber);
+                        player.sendMessage(ChatColor.GRAY + "Set point 2 for arena " + arenaNumber);
+                    } else {
+                        player.sendMessage(ChatColor.RED + "The last argument must be either point 1 or 2!");
+                    }
+                }
+                return true;
+            }
+        } else {
+            player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
             return true;
         }
 
-        if (ClimaxPvp.hasRequest.containsKey(player)) {
-            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You have already sent a duel request to " + ChatColor.GOLD + ClimaxPvp.duelRequest.get(player).getDisplayName());
+            /*player.sendMessage(org.bukkit.ChatColor.RED + "That player is not online!");
+            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+            return true;*/
+
+        /*if (ClimaxPvp.hasRequest.containsKey(player)) {
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You have already sent a duel request to this player!");
             return true;
         } else {
             if (ClimaxPvp.inDuel.contains(target)) {
@@ -110,21 +119,20 @@ public class DuelCommand implements CommandExecutor {
                     DuelUtils duelUtils = new DuelUtils(plugin);
                     duelUtils.openInventory(player);
 
-                    ClimaxPvp.duelRequest.put(player, target);
+                    ClimaxPvp.initialRequest.put(player, target);
                     ClimaxPvp.duelRequestReverse.put(target, player);
 
                     Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                         @Override
                         public void run() {
-                            ClimaxPvp.duelRequest.remove(player);
+                            ClimaxPvp.initialRequest.remove(player);
                             ClimaxPvp.duelRequestReverse.remove(target);
                             ClimaxPvp.duelsKit.remove(player);
                         }
                     }, 20L * 15);
                 }
             }
-        }
-
+        }*/
         return false;
     }
 }

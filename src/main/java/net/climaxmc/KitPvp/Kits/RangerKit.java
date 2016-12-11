@@ -54,7 +54,7 @@ public class RangerKit extends Kit {
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.WOOD_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
 
@@ -68,9 +68,11 @@ public class RangerKit extends Kit {
         bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
         player.getInventory().addItem(bow);
 
-        addSoup(player.getInventory(), 2, 34);
+        ItemStack ability = new ItemStack(Material.ARROW);
+        player.getInventory().addItem(ability);
+        player.updateInventory();
 
-        giveArrows(player);
+        addSoup(player.getInventory(), 2, 34);
     }
 
     protected void wearNoSoup(Player player) {
@@ -105,7 +107,7 @@ public class RangerKit extends Kit {
         boots.addEnchantment(Enchantment.PROTECTION_FALL, 4);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.WOOD_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         sword.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(sword);
 
@@ -123,12 +125,15 @@ public class RangerKit extends Kit {
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
 
-        giveArrows(player);
+        ItemStack ability = new ItemStack(Material.ARROW);
+        player.getInventory().addItem(ability);
+        player.updateInventory();
     }
 
     public int taskID = 0;
 
     public void giveArrows(Player player) {
+        Bukkit.getServer().getScheduler().cancelTask(taskID);
         taskID = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(ClimaxPvp.getInstance(), new Runnable() {
             @Override
             public void run() {
@@ -156,12 +161,29 @@ public class RangerKit extends Kit {
         }
 
         if (player.isSneaking()) {
+            Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                @Override
+                public void run() {
+                    ItemStack ability = new ItemStack(Material.ARROW);
+                    player.getInventory().addItem(ability);
+                    player.updateInventory();
+                }
+            }, 10L);
             return;
         }
 
         double vel = event.getProjectile().getVelocity().length() * (0.1D + 0.1D * 2.25);
         // Knock player back
         velocity(player, player.getLocation().getDirection().multiply(-1), vel, false, 0.0D, 0.2D, 0.5D, true);
+
+        Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                ItemStack ability = new ItemStack(Material.ARROW);
+                player.getInventory().addItem(ability);
+                player.updateInventory();
+            }
+        }, 10L);
     }
 
     private void velocity(Entity ent, Vector vec, double str, boolean ySet, double yBase, double yAdd, double yMax, boolean groundBoost) {

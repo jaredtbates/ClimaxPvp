@@ -10,10 +10,12 @@ import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Utils.Challenges.ChallengesFiles;
+import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.database.MySQL;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.donations.trails.Trail;
+import net.climaxmc.common.titles.Title;
 import net.gpedro.integrations.slack.SlackApi;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
@@ -70,15 +72,20 @@ public class ClimaxPvp extends JavaPlugin {
 
     public static ArrayList<UUID> isSpectating = new ArrayList<>();
 
+    public static ArrayList<Player> isVanished = new ArrayList<>();
+
     //public static ArrayList<Integer> activeDuelArenas = new ArrayList<>();
     public static ArrayList<Player> inDuel = new ArrayList<>();
     public static HashMap<Player, Player> isDueling = new HashMap<>();
     public static HashMap<Player, Player> isDuelingReverse = new HashMap<>();
     public static HashMap<Player, String> duelsKit = new HashMap<>();
-    public static HashMap<Player, Player> duelRequest = new HashMap<>();
+    public static HashMap<Player, Player> initialRequest = new HashMap<>();
     public static HashMap<Player, Player> duelRequestReverse = new HashMap<>();
     public static HashMap<Player, Player> hasRequest = new HashMap<>();
     public static HashMap<Player, Integer> currentPlayerArena = new HashMap<>();
+    public static ArrayList<Integer> currentArenas = new ArrayList<>();
+
+    public static HashMap<Player, String> inTitle = new HashMap<>();
 
     public static ArrayList<Player> deadPeoples = new ArrayList<>();
 
@@ -300,6 +307,10 @@ public class ClimaxPvp extends JavaPlugin {
 
         if (warp.equalsIgnoreCase("Fair")) {
             new PvpKit().wearCheckLevel(player);
+        }
+        if (warp.equalsIgnoreCase("Duel")) {
+            player.getInventory().clear();
+            player.getInventory().addItem(new I(Material.DIAMOND_AXE).name(ChatColor.WHITE + "Duel Axe " + ChatColor.AQUA + "(Punch a player!)"));
         }
     }
 }

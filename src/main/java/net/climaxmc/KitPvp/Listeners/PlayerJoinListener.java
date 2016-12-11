@@ -190,6 +190,7 @@ public class PlayerJoinListener implements Listener {
         attachment.setPermission("noattackcooldown.use", true);
         attachment.setPermission("pp.use", true);
         attachment.setPermission("poll.command.vote", true);
+        attachment.setPermission("portals.use", true);
         if (!player.isOp()) {
             attachment.setPermission("bukkit.command.plugins", false);
             attachment.setPermission("bukkit.command.version", false);
@@ -217,6 +218,7 @@ public class PlayerJoinListener implements Listener {
                 attachment.setPermission("litebans.warnings", true);
                 attachment.setPermission("litebans.notify.dupeip_join", false);
                 attachment.setPermission("reflex.notify", true);
+                attachment.setPermission("phoenix.notification", true);
                 if (!player.isOp()) {
                     attachment.setPermission("AAC.bypass", false);
                 }
@@ -231,6 +233,10 @@ public class PlayerJoinListener implements Listener {
                 attachment.setPermission("litebans.unban", true);
                 attachment.setPermission("litebans.unlimited", true);
                 attachment.setPermission("litebans.notify.dupeip_join", true);
+            }
+
+            if (playerData.hasRank(Rank.ADMINISTRATOR)) {
+                attachment.setPermission("phoenix.command", true);
             }
         }
 

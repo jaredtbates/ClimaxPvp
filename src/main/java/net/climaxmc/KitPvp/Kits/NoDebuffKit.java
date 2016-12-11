@@ -19,11 +19,12 @@ import org.bukkit.potion.PotionEffect;
 
 import java.util.concurrent.TimeUnit;
 
-public class NoDebuffKit{
+public class NoDebuffKit extends Kit {
 
-    private Ability enderpearl = new Ability("enderpearl", 1, 10, TimeUnit.SECONDS);
+    private Ability enderpearl = new Ability("enderpearl", 1, 15, TimeUnit.SECONDS);
 
     public NoDebuffKit() {
+        super("NoDebuff", new ItemStack(Material.DIAMOND_SWORD), "magic2", ChatColor.GRAY);
     }
 
     public void wear(Player player) {
@@ -68,19 +69,18 @@ public class NoDebuffKit{
     protected void wearNoSoup(Player player) {}
 
     @EventHandler
-    public void playerInteract(ProjectileLaunchEvent event) {
-        Bukkit.broadcastMessage("debug1");
-        if (event.getEntity().getShooter() instanceof Player) {
-            Bukkit.broadcastMessage("debug2");
-            Player player = (Player) event.getEntity().getShooter();
-            if (event.getEntityType().equals(EntityType.ENDER_PEARL)) {
-                Bukkit.broadcastMessage("debug3");
+    public void playerInteract(PlayerInteractEvent event) {
+        if (event.getPlayer().getType().equals(EntityType.PLAYER)) {
+            Player player = event.getPlayer();
+            if (player.getInventory().getItemInHand().getType().equals(Material.ENDER_PEARL)) {
                 if (!enderpearl.tryUse(player)) {
                     event.setCancelled(true);
                     player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You can't use this for "
-                            + ChatColor.GOLD + enderpearl.getStatus(player).getRemainingTime(TimeUnit.SECONDS) + 1
+                            + ChatColor.GOLD + (enderpearl.getStatus(player).getRemainingTime(TimeUnit.SECONDS) + 1)
                             + ChatColor.GRAY + " more seconds!");
+                    return;
                 }
+                enderpearl.tryUse(player);
             }
         }
     }

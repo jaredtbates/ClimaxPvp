@@ -3,6 +3,7 @@ package net.climaxmc.KitPvp.Kits;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -40,7 +41,6 @@ public class StrafeKit extends Kit {
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
         addSoup(player.getInventory(), 1, 35);
     }
 
@@ -48,7 +48,6 @@ public class StrafeKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         regenResistance(player);
         player.getInventory().clear();
@@ -70,5 +69,16 @@ public class StrafeKit extends Kit {
         rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
 
+    }
+
+    @EventHandler
+    public void onEntityDamage(EntityDamageByEntityEvent event) {
+        if (event.getDamager().getType().equals(EntityType.PLAYER)) {
+            Player player = (Player) event.getDamager();
+            if (KitManager.isPlayerInKit(player, this)) {
+                player.removePotionEffect(PotionEffectType.SPEED);
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50, 1));
+            }
+        }
     }
 }

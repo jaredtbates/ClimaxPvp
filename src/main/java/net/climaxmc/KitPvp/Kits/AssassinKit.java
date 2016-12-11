@@ -57,7 +57,7 @@ public class AssassinKit extends Kit {
         player.getInventory().addItem(ability);
 
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
+        helm.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.BLACK);
         helm.setItemMeta(helmmeta);
@@ -95,7 +95,7 @@ public class AssassinKit extends Kit {
         player.getInventory().addItem(ability);
 
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
+        helm.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.BLACK);
         helm.setItemMeta(helmmeta);

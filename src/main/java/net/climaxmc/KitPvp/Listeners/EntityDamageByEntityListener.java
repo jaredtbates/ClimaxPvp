@@ -4,7 +4,11 @@ import me.xericker.disguiseabilities.other.WorldGuard;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.Duels.DuelUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Dispenser;
 import org.bukkit.block.DoubleChest;
@@ -47,8 +51,16 @@ public class EntityDamageByEntityListener implements Listener {
             if (target.getGameMode().equals(GameMode.CREATIVE) && ClimaxPvp.deadPeoples.contains(target)) {
                 event.setCancelled(true);
             }
-            if (ClimaxPvp.isSpectating.contains(player.getUniqueId())) {
-                event.setCancelled(true);
+            if (ClimaxPvp.isSpectating != null) {
+                if (ClimaxPvp.isSpectating.contains(player.getUniqueId())) {
+                    event.setCancelled(true);
+                }
+            }
+
+            if (ClimaxPvp.deadPeoples != null) {
+                if (ClimaxPvp.deadPeoples.contains(player)) {
+                    event.setCancelled(true);
+                }
             }
 
             if (player != null && ((KitPvp.currentTeams.containsKey(player.getName())
@@ -60,11 +72,60 @@ public class EntityDamageByEntityListener implements Listener {
         }
     }
 
+    @EventHandler
+    public void EntityDamageByEntity(EntityDamageByEntityEvent event) {
+        if (!event.getDamager().getType().equals(EntityType.PLAYER) || !event.getEntity().getType().equals(EntityType.PLAYER)) {
+            return;
+        }
+        Player player = (Player) event.getDamager();
+        Player target = (Player) event.getEntity();
+        if (player.getItemInHand().getType().equals(Material.DIAMOND_AXE)) {
+            if (player.getItemInHand().getItemMeta().getDisplayName() != null && player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.WHITE + "Duel Axe " + ChatColor.AQUA + "(Punch a player!)")) {
+                if (ClimaxPvp.hasRequest.containsKey(target) && ClimaxPvp.hasRequest.get(target).equals(player)) {
+                    DuelUtils duelUtils = new DuelUtils(plugin);
+                    duelUtils.acceptRequest(target);
+                    event.setCancelled(true);
+                    return;
+                }
+                if (ClimaxPvp.hasRequest.containsKey(player)) {
+                    player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You have already sent a duel request to this player!");
+                    event.setCancelled(true);
+                    return;
+                } else {
+                    if (ClimaxPvp.inDuel.contains(target)) {
+                        player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "That player is already in a duel!");
+                        event.setCancelled(true);
+                        return;
+                    } else {
+                        DuelUtils duelUtils = new DuelUtils(plugin);
+                        duelUtils.openInventory(player);
+                        event.setCancelled(true);
+
+                        ClimaxPvp.initialRequest.put(player, target);
+                        ClimaxPvp.duelRequestReverse.put(target, player);
+                         Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                             @Override
+                             public void run() {
+                                 ClimaxPvp.initialRequest.remove(player);
+                                 ClimaxPvp.duelRequestReverse.remove(target);
+                                 ClimaxPvp.duelsKit.remove(player);
+                             }
+                         }, 20L * 15);
+                    }
+                }
+            }
+        }
+    }
+
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDamage(EntityDamageEvent event) {
         if (event.getEntityType().equals(EntityType.PLAYER)) {
+            Player player = (Player) event.getEntity();
             if (WorldGuard.isWithinProtectedRegion(event.getEntity().getLocation())) {
                 //event.setCancelled(true);
+            }
+            if (player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50) {
+                event.setCancelled(true);
             }
         }
     }

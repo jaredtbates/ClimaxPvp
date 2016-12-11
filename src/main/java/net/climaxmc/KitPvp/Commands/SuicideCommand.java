@@ -33,40 +33,7 @@ public class SuicideCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        SettingsFiles settingsFiles = new SettingsFiles();
-        if (settingsFiles.getRespawnValue(player) == true) {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
-                player.setHealth(20);
-
-                plugin.respawn(player);
-
-                if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
-                    new PvpKit().wearCheckLevel(player);
-                }
-            });
-        } else {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
-                player.setHealth(20);
-                player.setGameMode(GameMode.CREATIVE);
-                for(Player players : Bukkit.getServer().getOnlinePlayers()){
-                    players.hidePlayer(player);
-                }
-                for (PotionEffect effect : player.getActivePotionEffects()) {
-                    player.removePotionEffect(effect.getType());
-                }
-                player.setAllowFlight(true);
-                player.setFlying(true);
-                player.setVelocity(player.getVelocity().setY(1.5));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 21, 0));
-                player.getInventory().clear();
-                player.getInventory().setArmorContents(null);
-
-                ClimaxPvp.deadPeoples.add(player);
-
-                player.getInventory().setItem(4, new I(Material.BOOK).name("§6§lRespawn"));
-            });
-        }
+        player.damage(1000);
 
         PlayerData playerData = plugin.getPlayerData(player);
         playerData.addDeaths(1);

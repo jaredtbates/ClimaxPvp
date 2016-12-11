@@ -93,9 +93,15 @@ public class PlayerRespawnListener implements Listener {
                 .name(ChatColor.GOLD + "Settings")
                 .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Customize your experience here at Climax!"));
 
-        player.getInventory().setItem(8, new I(Material.SEEDS)
-                .name(ChatColor.AQUA + "Trail Selector")
-                .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Select a cool looking trail!"));
+        player.getInventory().setItem(8, new I(Material.BOOK)
+                .name(ChatColor.AQUA + "Cosmetics")
+                .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Select from a variety of awesome cosmetics!"));
+
+
+        if (player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50) {
+            player.getInventory().clear();
+            player.getInventory().addItem(new I(Material.DIAMOND_AXE).name(org.bukkit.ChatColor.WHITE + "Duel Axe " + org.bukkit.ChatColor.AQUA + "(Punch a player!)"));
+        }
 
         /*ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
         SkullMeta meta = (SkullMeta) head.getItemMeta();
