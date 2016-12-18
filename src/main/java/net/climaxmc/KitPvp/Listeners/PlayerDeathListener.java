@@ -106,7 +106,7 @@ public class PlayerDeathListener implements Listener {
                 }
                 player.setAllowFlight(true);
                 player.setFlying(true);
-                player.setVelocity(player.getVelocity().setY(0.5));
+                player.setVelocity(player.getVelocity().setY(1.2));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 21, 0));
                 player.getInventory().clear();
@@ -184,7 +184,7 @@ public class PlayerDeathListener implements Listener {
         } else {
             player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.GRAY + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + ".5 hearts" + ChatColor.GRAY + " left");
         }
-        if (settingsFiles.getSpawnSoupValue(killer)) {
+        if (killer.getInventory().contains(Material.MUSHROOM_SOUP)) {
             ItemStack[] inv = killer.getInventory().getContents();
             int soup = 0;
             for(int i = 0; i < inv.length; i++){
@@ -198,6 +198,22 @@ public class PlayerDeathListener implements Listener {
                 player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.GRAY + " had " + ChatColor.RED + soup + " soup" + ChatColor.GRAY + " left");
             } else {
                 player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.GRAY + " had " + ChatColor.RED + soup + " soups" + ChatColor.GRAY + " left");
+            }
+        }
+        if (killer.getInventory().contains(Material.POTION)) {
+            ItemStack[] inv = killer.getInventory().getContents();
+            int soup = 0;
+            for(int i = 0; i < inv.length; i++){
+                if(inv[i] != null){
+                    if(inv[i].getType() == Material.POTION){
+                        soup = soup + inv[i].getAmount();
+                    }
+                }
+            }
+            if (soup == 1) {
+                player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.GRAY + " had " + ChatColor.AQUA + soup + " potion" + ChatColor.GRAY + " left");
+            } else {
+                player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.GRAY + " had " + ChatColor.AQUA + soup + " potions" + ChatColor.GRAY + " left");
             }
         }
 
@@ -313,6 +329,9 @@ public class PlayerDeathListener implements Listener {
                     public void run() {
                         if (!(player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
                             plugin.respawn(player, ClimaxPvp.getInstance().getWarpLocation("Duel"));
+                            for (Player allPlayers : Bukkit.getOnlinePlayers()) {
+                                allPlayers.showPlayer(player);
+                            }
                         }
                     }
                 }, 20L * 3);
@@ -321,6 +340,9 @@ public class PlayerDeathListener implements Listener {
                     public void run() {
                         if (!(opponent.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
                             plugin.respawn(opponent, ClimaxPvp.getInstance().getWarpLocation("Duel"));
+                            for (Player allPlayers : Bukkit.getOnlinePlayers()) {
+                                allPlayers.showPlayer(opponent);
+                            }
                         }
                     }
                 }, 20L * 3);
@@ -337,6 +359,9 @@ public class PlayerDeathListener implements Listener {
                     public void run() {
                         if (!(player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
                             plugin.respawn(player, ClimaxPvp.getInstance().getWarpLocation("Duel"));
+                            for (Player allPlayers : Bukkit.getOnlinePlayers()) {
+                                allPlayers.showPlayer(player);
+                            }
                         }
                     }
                 }, 20L * 3);
@@ -345,6 +370,9 @@ public class PlayerDeathListener implements Listener {
                     public void run() {
                         if (!(opponent.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
                             plugin.respawn(opponent, ClimaxPvp.getInstance().getWarpLocation("Duel"));
+                            for (Player allPlayers : Bukkit.getOnlinePlayers()) {
+                                allPlayers.showPlayer(opponent);
+                            }
                         }
                     }
                 }, 20L * 3);

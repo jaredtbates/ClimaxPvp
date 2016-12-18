@@ -264,4 +264,15 @@ public class PlayerInteractListener implements Listener {
             }
         }
     }
+    @EventHandler
+    public void interactEvent(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        if (player.getItemInHand().getType().equals(Material.FISHING_ROD)) {
+            if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+                short currentDurability = player.getItemInHand().getDurability();
+                int newDurability = currentDurability - 3;
+                player.getItemInHand().setDurability((short) newDurability);
+            }
+        }
+    }
 }

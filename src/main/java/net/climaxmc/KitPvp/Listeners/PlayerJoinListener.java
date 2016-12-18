@@ -126,7 +126,7 @@ public class PlayerJoinListener implements Listener {
         Player player = event.getPlayer();
         PlayerData playerData = plugin.getPlayerData(player);
 
-        event.setJoinMessage((player.hasPlayedBefore() ? ChatColor.DARK_AQUA : ChatColor.GOLD) + " Join" + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
+        event.setJoinMessage((player.hasPlayedBefore() ? ChatColor.DARK_AQUA : ChatColor.GOLD) + "Join" + ChatColor.DARK_GRAY + "\u00BB " + player.getName());
 
         plugin.respawn(player);
 
@@ -164,7 +164,7 @@ public class PlayerJoinListener implements Listener {
         int playersOnline = plugin.getServer().getOnlinePlayers().size();
 
         if (playersOnline > plugin.getConfig().getInt("HighestPlayerCount")) {
-            plugin.getServer().broadcastMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "We have reached a new high player count of " + playersOnline + "!");
+            plugin.getServer().broadcastMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "We have reached a new high player count of " + playersOnline + "!");
             plugin.getConfig().set("HighestPlayerCount", playersOnline);
             plugin.saveConfig();
         }

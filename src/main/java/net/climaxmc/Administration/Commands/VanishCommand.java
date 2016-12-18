@@ -141,7 +141,6 @@ public class VanishCommand implements CommandExecutor, Listener {
             plugin.getServer().getOnlinePlayers().stream().forEach(target -> target.showPlayer(player));
             plugin.getServer().broadcastMessage(ChatColor.DARK_AQUA + "Join" + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
             String rankTag = "";
-
             if (playerData.hasRank(Rank.NINJA)) {
                 rankTag = org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "[" + playerData.getRank().getColor()
                         + org.bukkit.ChatColor.BOLD + playerData.getRank().getPrefix() + org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "] ";

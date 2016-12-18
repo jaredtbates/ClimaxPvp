@@ -24,6 +24,14 @@ public class SettingsMenu implements Listener {
 
         SettingsFiles settingsFiles = new SettingsFiles();
 
+        for (int slot = 0; slot <= 9; slot++) {
+            inv.setItem(slot, new I(Material.STAINED_GLASS_PANE).durability(15).name(" "));
+        }
+
+        for (int slot = 17; slot <= 26; slot++) {
+            inv.setItem(slot, new I(Material.STAINED_GLASS_PANE).durability(15).name(" "));
+        }
+
         if (settingsFiles.getRespawnValue(player)) {
             inv.setItem(11, new I(Material.REDSTONE).name(ChatColor.AQUA + "Toggle Insta-Respawn").lore("§7Currently: §a§lTrue"));
         } else {

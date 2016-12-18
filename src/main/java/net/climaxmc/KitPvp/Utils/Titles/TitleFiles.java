@@ -6,6 +6,7 @@ import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.donations.trails.Trail;
 import net.climaxmc.common.titles.Title;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -53,6 +54,7 @@ public class TitleFiles {
                 playerData.withdrawBalance(cost);
                 player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You've unlocked the " + ChatColor.YELLOW + title.getTitle() + ChatColor.GRAY + " title! For " + ChatColor.GREEN + "$" + cost);
             } else {
+                player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                 player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "Insufficient funds!");
             }
         } else {

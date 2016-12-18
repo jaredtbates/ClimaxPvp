@@ -23,6 +23,14 @@ public class CosmeticsMenu implements Listener {
     public void openInventory(Player player) {
         Inventory inv = plugin.getServer().createInventory(null, 27, "§8§lCosmetics");
 
+        for (int slot = 0; slot <= 9; slot++) {
+            inv.setItem(slot, new I(Material.STAINED_GLASS_PANE).durability(15).name(" "));
+        }
+
+        for (int slot = 17; slot <= 26; slot++) {
+            inv.setItem(slot, new I(Material.STAINED_GLASS_PANE).durability(15).name(" "));
+        }
+
         inv.setItem(11, new I(Material.GHAST_TEAR).name("§aTrails"));
 
         inv.setItem(13, new I(Material.NAME_TAG).name("§5Titles"));

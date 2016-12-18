@@ -7,8 +7,10 @@ import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.GappleKit;
 import net.climaxmc.KitPvp.Kits.NoDebuffKit;
 import net.climaxmc.KitPvp.Kits.SoupKit;
+import net.climaxmc.KitPvp.Utils.EntityHider;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.Rank;
 import net.climaxmc.common.donations.trails.Trail;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -74,21 +76,19 @@ public class DuelFiles {
         saveConfig();
     }
     public void teleport(Player player, Player target) {
-        int points = 0;
+        int numberOfArenas = 0;
         for (String arenas : config.getConfigurationSection("arenas").getKeys(false)) {
-            points++;
+            numberOfArenas++;
         }
-        int randomArena = (int)(Math.random() * points + 1);
-        while (ClimaxPvp.currentArenas.contains(randomArena)) {
-            randomArena = (int)(Math.random() * points + 1);
-        }
-        Location point1 = new Location(player.getWorld(),
+        int failsafe = 0;
+        int randomArena = (int)(Math.random() * numberOfArenas + 1);
+        Location point1 = new Location(Bukkit.getServer().getWorld((String) config.get("arenas." + randomArena + ".point1.world")),
                 config.getDouble("arenas." + randomArena + ".point1.x"),
                 config.getDouble("arenas." + randomArena + ".point1.y"),
                 config.getDouble("arenas." + randomArena + ".point1.z"),
                 (float) config.getDouble("arenas." + randomArena + ".point1.yaw"),
                 (float) config.getDouble("arenas." + randomArena + ".point1.pitch"));
-        Location point2 = new Location(player.getWorld(),
+        Location point2 = new Location(Bukkit.getServer().getWorld((String) config.get("arenas." + randomArena + ".point2.world")),
                 config.getDouble("arenas." + randomArena + ".point2.x"),
                 config.getDouble("arenas." + randomArena + ".point2.y"),
                 config.getDouble("arenas." + randomArena + ".point2.z"),
@@ -96,6 +96,25 @@ public class DuelFiles {
                 (float) config.getDouble("arenas." + randomArena + ".point2.pitch"));
         player.teleport(point1);
         target.teleport(point2);
+
+        for (Player allPlayers : Bukkit.getOnlinePlayers()) {
+            if (allPlayers != target && allPlayers != player) {
+                allPlayers.hidePlayer(player);
+                allPlayers.hidePlayer(target);
+                String rankTag = "";
+                PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
+                if (playerData.hasRank(Rank.NINJA)) {
+                    rankTag = org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "[" + playerData.getRank().getColor()
+                            + org.bukkit.ChatColor.BOLD + playerData.getRank().getPrefix() + org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "] ";
+                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + ChatColor.BOLD + player.getName());
+                }
+                if (playerData.getRank().getColor() != null) {
+                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + player.getName());
+                } else {
+                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + player.getName());
+                }
+            }
+        }
 
         NoDebuffKit noDebuffKit = new NoDebuffKit();
         if (ClimaxPvp.duelsKit.containsKey(player)) {

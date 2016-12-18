@@ -16,7 +16,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-
 public class DuelCommand implements CommandExecutor {
     private ClimaxPvp plugin;
 

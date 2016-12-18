@@ -54,7 +54,7 @@ public class PhoenixKit extends Kit {
 
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 1);
-        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta helmMeta = (LeatherArmorMeta) helm.getItemMeta();
         helmMeta.setColor(Color.RED);
         helm.setItemMeta(helmMeta);
@@ -69,7 +69,7 @@ public class PhoenixKit extends Kit {
         player.getInventory().setLeggings(legs);
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 1);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta bootsMeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsMeta.setColor(Color.RED);
         boots.setItemMeta(bootsMeta);
@@ -101,7 +101,7 @@ public class PhoenixKit extends Kit {
 
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
         helm.addEnchantment(Enchantment.DURABILITY, 1);
-        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta helmMeta = (LeatherArmorMeta) helm.getItemMeta();
         helmMeta.setColor(Color.RED);
         helm.setItemMeta(helmMeta);
@@ -116,7 +116,7 @@ public class PhoenixKit extends Kit {
         player.getInventory().setLeggings(legs);
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 1);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta bootsMeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsMeta.setColor(Color.RED);
         boots.setItemMeta(bootsMeta);

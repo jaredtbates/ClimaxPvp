@@ -8,11 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 
-/**
- * Created by Joshua on 11/9/2016.
- * This class is for better/more smooth potion throwing. It works well :D
- */
-public class ProjectileLaunchListener implements Listener{
+public class ProjectileLaunchListener implements Listener {
     private ClimaxPvp plugin;
 
     public ProjectileLaunchListener(ClimaxPvp plugin) {
