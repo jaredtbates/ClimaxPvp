@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Utils.Titles;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffect;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.donations.trails.Trail;
 import net.climaxmc.common.titles.Title;
@@ -73,6 +74,8 @@ public class TitleFiles {
             player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You must unlock this title to use it!");
         } else {
             ClimaxPvp.inTitle.put(player, title.getTitle());
+            TitleFiles titleFiles = new TitleFiles();
+            titleFiles.setCurrentTitle(player, title);
             player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You have selected " + ChatColor.YELLOW + title.getTitle());
         }
     }
@@ -83,5 +86,16 @@ public class TitleFiles {
         } else {
             player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You don't have any titles selected!");
         }
+    }
+    public void setCurrentTitle(Player player, Title title) {
+        config.set(player.getUniqueId() + ".currentTitle", title.getName());
+        saveConfig();
+    }
+    public void removeCurrentTitle(Player player) {
+        config.set(player.getUniqueId() + ".currentTitle", null);
+        saveConfig();
+    }
+    public String getCurrentTitle(Player player) {
+        return (String) config.get(player.getUniqueId() + ".currentTitle");
     }
 }

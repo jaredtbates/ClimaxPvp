@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Utils.Titles;
+package net.climaxmc.KitPvp.Utils.DeathEffects;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
@@ -97,7 +97,15 @@ public class DeathEffectFiles {
         config.set(player.getUniqueId() + ".currentEffect", effect.getName());
         saveConfig();
     }
+    public void removeCurrentEffect(Player player) {
+        config.set(player.getUniqueId() + ".currentEffect", null);
+        saveConfig();
+    }
     public String getCurrentEffect(Player player) {
         return (String) config.get(player.getUniqueId() + ".currentEffect");
+    }
+    public void forceUnlockEffect(Player player, String name) {
+        set(player.getUniqueId() + ".unlockedEffects." + name, true);
+        saveConfig();
     }
 }

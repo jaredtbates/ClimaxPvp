@@ -7,26 +7,26 @@ import net.md_5.bungee.api.ChatColor;
 @Getter
 @AllArgsConstructor
 public enum Rank {
-    OWNER("Owner", ChatColor.RED, Integer.MAX_VALUE),
-    MANAGER("Manager", ChatColor.AQUA, 150),
-    DEVELOPER("Dev", ChatColor.GOLD, 120),
-    ADMINISTRATOR("Admin", ChatColor.RED, 100),
-    SENIOR_MODERATOR("Sr. Mod", ChatColor.DARK_PURPLE, 80),
-    MODERATOR("Mod", ChatColor.DARK_PURPLE, 80),
-    HEAD_BUILDER("Head-Builder", ChatColor.DARK_PURPLE, 70),
-    JR_DEVELOPER("Jr. Dev", ChatColor.GOLD, 60),
-    TRIAL_MODERATOR("T-Mod", ChatColor.LIGHT_PURPLE, 80),
-    BUILDER("Builder", ChatColor.YELLOW, 40),
-    TWITCH(ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Twi" + ChatColor.WHITE + "" + ChatColor.BOLD + "tch", ChatColor.DARK_PURPLE, 30),
-    YOUTUBE(ChatColor.RED + "" + ChatColor.BOLD + "You" + ChatColor.WHITE + "" + ChatColor.BOLD + "Tube", ChatColor.RED, 30),
-    TRUSTED("Friend", ChatColor.DARK_AQUA, 20),
-    MASTER("Master", ChatColor.DARK_RED, 4),
-    TITAN("Titan", ChatColor.GOLD, 3),
-    NINJA("Ninja", ChatColor.AQUA, 2),
-    BETA("Beta", ChatColor.GOLD, 1),
+    OWNER("§8§l[§4§o§lOwner§8§l]", "§4§o", Integer.MAX_VALUE),
+    MANAGER("§8§l[§b§lManager§8§l]", "§b", 150),
+    DEVELOPER("§8§l[§6§lDev§8§l]", "§6", 120),
+    ADMINISTRATOR("§8§l[§c§lAdmin§8§l]", "§c", 100),
+    SENIOR_MODERATOR("§8§l[§5§o§lSr. Mod§8§l]", "§5§o", 80),
+    MODERATOR("§8§l[§5§lMod§8§l]", "§5", 80),
+    HEAD_BUILDER("§8§l[§5§lHead-Builder§8§l]", "§5", 70),
+    JR_DEVELOPER("§8§l[§6§lJr. Dev§8§l]", "§6", 60),
+    TRIAL_MODERATOR("§8§l[§d§lT-Mod§8§l]", "§d", 80),
+    BUILDER("§8§l[§e§lBuilder§8§l]", "§e", 40),
+    TWITCH("§8§l[" + ChatColor.DARK_PURPLE + "" + ChatColor.BOLD + "Twi" + ChatColor.WHITE + "" + ChatColor.BOLD + "tch" + "§8§l]", "§5", 30),
+    YOUTUBE("§8§l[" + ChatColor.RED + "" + ChatColor.BOLD + "You" + ChatColor.WHITE + "" + ChatColor.BOLD + "Tube" + "§8§l]", "§c", 30),
+    TRUSTED("§8§l[§3§lFriend§8§l]", "§3", 20),
+    MASTER("§8§l[§4§lMaster§8§l]", "§4", 4),
+    TITAN("§8§l[§6§lTitan§8§l]", "§6", 3),
+    NINJA("§8§[§b§lNinja§8§l]", "§b", 2),
+    BETA("", "§6", 1),
     DEFAULT(null, null, 0);
 
     private String prefix;
-    private ChatColor color;
+    private String color;
     private int permissionLevel;
 }

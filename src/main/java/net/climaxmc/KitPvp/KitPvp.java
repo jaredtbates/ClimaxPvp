@@ -105,6 +105,7 @@ public class KitPvp {
         plugin.getCommand("donatebroadcast").setExecutor(new DonateBroadcastCommand(plugin));
         plugin.getCommand("cosmetics").setExecutor(new CosmeticsCommand(plugin));
         plugin.getCommand("tournament").setExecutor(new TournamentCommands(plugin));
+        plugin.getCommand("unlockdeatheffect").setExecutor(new UnlockDeathEffectCommand(plugin));
         /*plugin.getCommand("team").setExecutor(new TeamCommand(plugin));*/
         //plugin.getCommand("staffreq").setExecutor(new StaffReqCommand(plugin));
         //plugin.getCommand("afk").setExecutor(new AFKCommand(plugin));

@@ -342,6 +342,7 @@ public class InventoryClickListener implements Listener {
             } else if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Remove")) {
                 TitleFiles titleFiles = new TitleFiles();
                 titleFiles.removeTitle(player);
+                titleFiles.removeCurrentTitle(player);
                 player.closeInventory();
             }
             event.setCancelled(true);

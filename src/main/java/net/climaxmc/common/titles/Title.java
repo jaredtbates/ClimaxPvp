@@ -20,7 +20,13 @@ public enum Title {
     LUCKY("Lucky","§8§l[§a☘§f§lLucky§a☘§8§l]",Material.NAME_TAG, 1000, 20),
     ERROR("Error","§8§l[§c§l⚠§4§lError§c§l⚠§8§l]",Material.NAME_TAG, 1300, 21),
     FROSTY("Frosty","§8§l[§f❄§b§lFrosty§f❄§8§l]",Material.NAME_TAG, 1000, 22),
-    CAKE("Cake","§8§l[§f§lC§6§la§f§lk§6§le§8§l]",Material.NAME_TAG, 500, 23);
+    CAKE("Cake","§8§l[§f§lC§6§la§f§lk§6§le§8§l]",Material.NAME_TAG, 500, 23),
+    WIZARD("Wizard","§8§l[§f§l⚡§5§lWizard§f§l⚡§8§l]",Material.NAME_TAG, 1000, 24),
+    TRYHARD("Tryhard","§8§l[§b✔§a§lTryhard§8§l]",Material.NAME_TAG, 1000, 25),
+    SCRUB("Scrub","§8§l[§6§lScrub§8§l]",Material.NAME_TAG, 1000, 26),
+    EZ("eZ","§8§l[§f§l…§b§leZ§8§l]",Material.NAME_TAG, 1000, 27),
+    SPOOKY("Spooky","§8§l[§f§lSp§8§loo§f§lky§8§l]",Material.NAME_TAG, 1000, 28),
+    THIEF("Thief","§8§l[§f➴§7§lThief§f➶§8§l]",Material.NAME_TAG, 1000, 29);
 
     private String name;
     private String title;

@@ -6,11 +6,15 @@ import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffect;
+import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffectFiles;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.KitPvp.Utils.TextComponentMessages;
+import net.climaxmc.KitPvp.Utils.Titles.TitleFiles;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import net.climaxmc.common.donations.trails.Trail;
+import net.climaxmc.common.titles.Title;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -125,6 +129,16 @@ public class PlayerJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         PlayerData playerData = plugin.getPlayerData(player);
+
+        TitleFiles titleFiles = new TitleFiles();
+        if (titleFiles.getCurrentTitle(player) != null) {
+            for (Title title : Title.values()) {
+                if (title.getName().equals(titleFiles.getCurrentTitle(player))) {
+                    ClimaxPvp.inTitle.put(player, title.getTitle());
+                    titleFiles.setCurrentTitle(player, title);
+                }
+            }
+        }
 
         event.setJoinMessage((player.hasPlayedBefore() ? ChatColor.DARK_AQUA : ChatColor.GOLD) + "Join" + ChatColor.DARK_GRAY + "\u00BB " + player.getName());
 

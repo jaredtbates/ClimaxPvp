@@ -3,7 +3,7 @@ package net.climaxmc.KitPvp.Menus;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffect;
 import net.climaxmc.KitPvp.Utils.I;
-import net.climaxmc.KitPvp.Utils.Titles.DeathEffectFiles;
+import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffectFiles;
 import net.climaxmc.common.donations.trails.Trail;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

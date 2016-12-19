@@ -3,7 +3,7 @@ package net.climaxmc.KitPvp.Utils.DeathEffects;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Menus.DeathEffectsMenu;
-import net.climaxmc.KitPvp.Utils.Titles.DeathEffectFiles;
+import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffectFiles;
 import net.climaxmc.common.donations.trails.ParticleEffect;
 import net.climaxmc.common.donations.trails.Trail;
 import net.md_5.bungee.api.ChatColor;
@@ -80,7 +80,7 @@ public class DeathEffectEvents implements Listener {
                     if (event.getCurrentItem().getType().equals(Material.STAINED_GLASS_PANE)) {
                         if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Remove")) {
                             deathEffectFiles.removeEffect(player);
-                            deathEffectFiles.setCurrentEffect(player, null);
+                            deathEffectFiles.removeCurrentEffect(player);
                             player.closeInventory();
                         }
                     }
