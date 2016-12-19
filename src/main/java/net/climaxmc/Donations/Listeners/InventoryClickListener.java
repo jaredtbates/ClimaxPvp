@@ -3,6 +3,7 @@ package net.climaxmc.Donations.Listeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Donations;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Menus.DeathEffectsMenu;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
@@ -91,7 +92,7 @@ public class InventoryClickListener implements Listener {
                 }
             }
             if (event.getCurrentItem().getType().equals(Material.STAINED_GLASS_PANE)) {
-                if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Remove")){
+                if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Remove")) {
                     settingsFiles.removeTrails(player);
                     player.closeInventory();
                 }

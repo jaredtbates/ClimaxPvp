@@ -66,10 +66,10 @@ public class TournamentEvents implements Listener {
     @EventHandler
     public void onCommandPreprocess(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
-        if (event.getMessage().toLowerCase().startsWith("/tourney")) {
+        /*if (event.getMessage().toLowerCase().startsWith("/tourney")) {
             player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "Tournaments are currently disabled!");
             event.setCancelled(true);
-        }
+        }*/
         if (ClimaxPvp.inTourney.contains(player)) {
             if (!event.getMessage().contains("tourney")) {
                 player.sendMessage(ChatColor.RED + "You can only do /tourney while in a tournament! Do /tourney leave to leave!");

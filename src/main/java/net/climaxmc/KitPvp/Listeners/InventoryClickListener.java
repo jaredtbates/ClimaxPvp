@@ -55,7 +55,7 @@ public class InventoryClickListener implements Listener {
                 return;
             }
 
-            /*for (ItemStack itemStack : player.getInventory().getArmorContents()) {
+            /*for (ItemStack itemStack : player.getInvejntory().getArmorContents()) {
                 if (itemStack.getType().equals(Material.AIR)) {
                     event.setCancelled(false);
                 } else if (event.getCurrentItem().equals(itemStack)) {

@@ -57,16 +57,18 @@ public class TournamentUtils {
         Bukkit.broadcastMessage(ChatColor.GRAY + "Do " + ChatColor.AQUA + "" + ChatColor.BOLD + "/tourney join" + ChatColor.GRAY + " to join!");
         taskid = ClimaxPvp.getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(ClimaxPvp.getInstance(), new Runnable() {
             public void run() {
+                Bukkit.broadcastMessage("debug0");
+                final int taskid2 = taskid;
                 countdown--;
                 if (countdown <= 0) {
-                    if (ClimaxPvp.inTourney.size() < 4) {
+                    if (ClimaxPvp.inTourney.size() < 3) {
                         endTourney();
-                        Bukkit.getServer().getScheduler().cancelTask(taskid);
+                        Bukkit.getServer().getScheduler().cancelTask(taskid2);
                         countdown = countdownOriginal;
                         return;
                     } else {
                         startTourney();
-                        Bukkit.getServer().getScheduler().cancelTask(taskid);
+                        Bukkit.getServer().getScheduler().cancelTask(taskid2);
                         countdown = countdownOriginal;
                     }
                 }
@@ -122,7 +124,9 @@ public class TournamentUtils {
             } else if (ClimaxPvp.playerPoint.get(i) != null && ClimaxPvp.playerPoint.get(i + 1) == null) {
                 Player player = ClimaxPvp.playerPoint.get(i);
                 player.sendMessage("You don't appear to have an opponent so... you automatically win!");
+                ClimaxPvp.tourneyWinners.add(player);
                 player.teleport(tournamentFiles.getWinPoint());
+                ClimaxPvp.playerPoint.remove(i, ClimaxPvp.playerPoint.get(i));
                 for (PotionEffect effect : player.getActivePotionEffects()) {
                     player.removePotionEffect(effect.getType());
                 }
@@ -295,10 +299,11 @@ public class TournamentUtils {
         matchCountdown = 3;
         taskid2 = ClimaxPvp.getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(ClimaxPvp.getInstance(), new Runnable() {
             public void run() {
+                final int taskid3 = taskid2;
                 matchCountdown--;
                 if (matchCountdown <= 0) {
                     startNextMatch();
-                    Bukkit.getServer().getScheduler().cancelTask(taskid2);
+                    Bukkit.getServer().getScheduler().cancelTask(taskid3);
                     matchCountdown = 5;
                 }
                 for (Player players : ClimaxPvp.inTourney) {
@@ -310,6 +315,8 @@ public class TournamentUtils {
     public boolean areSlotsEmpty() {
         for (int i = 1; i <= 10; i++) {
             if (ClimaxPvp.playerPoint.get(i) != null && ClimaxPvp.playerPoint.get(i + 1) != null) {
+                return false;
+            } else if (ClimaxPvp.playerPoint.get(i) != null && ClimaxPvp.playerPoint.get(i + 1) == null) {
                 return false;
             }
         }

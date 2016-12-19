@@ -196,6 +196,10 @@ public class SettingsFiles {
     }
     public void setTrail(Player player, String name, Trail trail) {
         if (config.get(player.getUniqueId() + ".unlockedTrails." + name) == null) {
+            if (name.equals("Snow")) {
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "Beta Member Exclusive! Purchase @ donate.climaxmc.net");
+                return;
+            }
             player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You must unlock this trail to use it!");
         } else {
             KitPvp.inTrail.put(player.getUniqueId(), trail);

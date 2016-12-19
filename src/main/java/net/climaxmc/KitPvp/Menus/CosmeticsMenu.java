@@ -35,6 +35,8 @@ public class CosmeticsMenu implements Listener {
 
         inv.setItem(13, new I(Material.NAME_TAG).name("§5Titles"));
 
+        inv.setItem(15, new I(Material.BLAZE_POWDER).name("§cDeath Effects"));
+
         player.openInventory(inv);
     }
 }

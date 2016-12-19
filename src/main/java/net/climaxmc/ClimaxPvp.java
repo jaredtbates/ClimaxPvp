@@ -10,6 +10,7 @@ import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Utils.Challenges.ChallengesFiles;
+import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffect;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.database.MySQL;
@@ -95,6 +96,10 @@ public class ClimaxPvp extends JavaPlugin {
     public static int tourneyPrize;
 
     public static HashMap<Player, String> inTitle = new HashMap<>();
+
+    public static HashMap<Player, String> inEffect = new HashMap<>();
+
+    public static Map<UUID, DeathEffect> playerDeathEffect = new HashMap<>();
 
     public static ArrayList<Player> deadPeoples = new ArrayList<>();
 

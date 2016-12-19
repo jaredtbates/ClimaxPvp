@@ -58,10 +58,13 @@ public class PlayerDeathListener implements Listener {
         }
         Player player = (Player) event.getEntity();
         Player killer = player.getKiller();
-
-        Location location = player.getLocation();
-        BukkitTask task = plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, () -> new ParticleEffect(new ParticleEffect.ParticleData(ParticleEffect.ParticleType.LAVA, 1, 2, 1)).sendToLocation(location), 1, 1);
-        plugin.getServer().getScheduler().runTaskLater(plugin, task::cancel, 10);
+        if (ClimaxPvp.playerDeathEffect.containsKey(player.getUniqueId())) {
+            Location location = player.getLocation();
+            location.setY(player.getLocation().getY() + 1);
+            BukkitTask task = plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, () ->
+                    new ParticleEffect(ClimaxPvp.playerDeathEffect.get(player.getUniqueId()).getData()).sendToLocation(location), 2, 1);
+            plugin.getServer().getScheduler().runTaskLater(plugin, task::cancel, 10);
+        }
 
         SettingsFiles settingsFiles = new SettingsFiles();
 
