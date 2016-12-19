@@ -4,6 +4,7 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,7 +30,7 @@ public class TournamentCommands implements CommandExecutor {
 
         if (args.length == 0) {
             player.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "Tourney Commands:");
-            player.sendMessage(ChatColor.GRAY + "/tourney host <kit name> <prize amt ($)> // Hosts a tournament with your money");
+            player.sendMessage(ChatColor.GRAY + "/tourney host <prize amt ($)> // Hosts a tournament with your money");
             player.sendMessage(ChatColor.GRAY + "/tourney join // Joins the current tournament");
             player.sendMessage(ChatColor.GRAY + "/tourney leave // Leaves the current tournament");
             player.sendMessage(ChatColor.GRAY + "/tourney spec // Spectates a running tournament");
@@ -39,15 +40,16 @@ public class TournamentCommands implements CommandExecutor {
         target = plugin.getServer().getPlayerExact(args[0]);
 
         if (args[0].contains("host")) {
-            if (args.length == 3) {
-                if (isInteger(args[2]) && Integer.parseInt(args[2]) >= 300) {
-                    tournamentUtils.createTourney(player, args[1], Integer.parseInt(args[2]));
+            if (args.length == 2) {
+                if (isInteger(args[1]) && Integer.parseInt(args[1]) >= 300) {
+                    tournamentUtils.createTourney(player, Integer.parseInt(args[1]));
                 } else {
-                    player.sendMessage(ChatColor.RED + "You must enter a prize amount above 300!");
+                    player.sendMessage(ChatColor.RED + "You must enter a prize amount of $300 or more!");
+                    player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                 }
             } else {
                 player.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "Tourney Commands:");
-                player.sendMessage(ChatColor.GRAY + "/tourney host <kit name> <prize amt ($)> // Hosts a tournament with your money");
+                player.sendMessage(ChatColor.GRAY + "/tourney host <prize amt ($)> // Hosts a tournament with your money");
                 player.sendMessage(ChatColor.GRAY + "/tourney join // Joins the current tournament");
                 player.sendMessage(ChatColor.GRAY + "/tourney leave // Leaves the current tournament");
                 player.sendMessage(ChatColor.GRAY + "/tourney spec // Spectates a running tournament");
@@ -62,7 +64,7 @@ public class TournamentCommands implements CommandExecutor {
                 }
             } else {
                 player.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "Tourney Commands:");
-                player.sendMessage(ChatColor.GRAY + "/tourney host <kit name> <prize amt ($)> // Hosts a tournament with your money");
+                player.sendMessage(ChatColor.GRAY + "/tourney host <prize amt ($)> // Hosts a tournament with your money");
                 player.sendMessage(ChatColor.GRAY + "/tourney join // Joins the current tournament");
                 player.sendMessage(ChatColor.GRAY + "/tourney leave // Leaves the current tournament");
                 player.sendMessage(ChatColor.GRAY + "/tourney spec // Spectates a running tournament");
@@ -81,7 +83,7 @@ public class TournamentCommands implements CommandExecutor {
                 }
             } else {
                 player.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "Tourney Commands:");
-                player.sendMessage(ChatColor.GRAY + "/tourney host <kit name> <prize amt ($)> // Hosts a tournament with your money");
+                player.sendMessage(ChatColor.GRAY + "/tourney host <prize amt ($)> // Hosts a tournament with your money");
                 player.sendMessage(ChatColor.GRAY + "/tourney join // Joins the current tournament");
                 player.sendMessage(ChatColor.GRAY + "/tourney leave // Leaves the current tournament");
                 player.sendMessage(ChatColor.GRAY + "/tourney spec // Spectates a running tournament");
@@ -96,7 +98,7 @@ public class TournamentCommands implements CommandExecutor {
                 }
             } else {
                 player.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "Tourney Commands:");
-                player.sendMessage(ChatColor.GRAY + "/tourney host <kit name> <prize amt ($)> // Hosts a tournament with your money");
+                player.sendMessage(ChatColor.GRAY + "/tourney host <prize amt ($)> // Hosts a tournament with your money");
                 player.sendMessage(ChatColor.GRAY + "/tourney join // Joins the current tournament");
                 player.sendMessage(ChatColor.GRAY + "/tourney leave // Leaves the current tournament");
                 player.sendMessage(ChatColor.GRAY + "/tourney spec // Spectates a running tournament");

@@ -4,11 +4,14 @@ package net.climaxmc.KitPvp.Utils.Tournaments;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.KitPvp.Kits.PvpKit;
+import net.climaxmc.KitPvp.Kits.PvpKit2;
 import net.climaxmc.common.database.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
 
 import java.util.Iterator;
 
@@ -26,20 +29,18 @@ public class TournamentUtils {
 
     private int taskid;
     private int taskid2;
-    private int countdown = 15;
+    private int countdown = 25;
+    private int countdownOriginal = 25;
+    private int matchCountdown = 5;
 
     TournamentFiles tournamentFiles = new TournamentFiles();
 
-    public void createTourney(Player player, String kit, int prize) {
-        this.host = player;
-        this.kit = kit;
-        this.prize = prize;
-        ClimaxPvp.isTourneyHosted = true;
+    public void createTourney(Player player, int prize) {
         if (ClimaxPvp.isTourneyRunning) {
             player.sendMessage(ChatColor.RED + "A tournament is already running!");
             return;
         }
-        PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(host);
+        PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
         if (playerData.getBalance() >=  prize) {
             playerData.withdrawBalance(prize);
         } else {
@@ -47,31 +48,27 @@ public class TournamentUtils {
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
             return;
         }
-        for (Kit kits : KitManager.getKits()) {
-            if (kits.getItem().getItemMeta().getDisplayName().contains(kit)) {
-                break;
-            } else {
-                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "Invalid kit name!");
-                player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-                return;
-            }
-        }
+        this.host = player;
+        this.prize = prize;
+        ClimaxPvp.tourneyPrize = prize;
+        ClimaxPvp.isTourneyHosted = true;
         Bukkit.broadcastMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GOLD + player.getName() + ChatColor.GRAY + " is hosting "
-                + ChatColor.GOLD + "Tourney" + ChatColor.GRAY + " for " + ChatColor.GREEN + "$" + prize + ChatColor.GRAY
-                + " With kit: " + ChatColor.GOLD + kit.toUpperCase() + "!");
+                + ChatColor.GOLD + "Tourney" + ChatColor.GRAY + " for " + ChatColor.GREEN + "$" + prize + "!");
         Bukkit.broadcastMessage(ChatColor.GRAY + "Do " + ChatColor.AQUA + "" + ChatColor.BOLD + "/tourney join" + ChatColor.GRAY + " to join!");
         taskid = ClimaxPvp.getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(ClimaxPvp.getInstance(), new Runnable() {
             public void run() {
                 countdown--;
                 if (countdown <= 0) {
-                    //if (ClimaxPvp.inTourney.size() != 10) {
-                        //endTourney();
-                        //Bukkit.getServer().getScheduler().cancelTask(taskid);
-                        //return;
-                    //} else {
-                        startTourney(player, kit, prize);
+                    if (ClimaxPvp.inTourney.size() < 4) {
+                        endTourney();
                         Bukkit.getServer().getScheduler().cancelTask(taskid);
-                    //}
+                        countdown = countdownOriginal;
+                        return;
+                    } else {
+                        startTourney();
+                        Bukkit.getServer().getScheduler().cancelTask(taskid);
+                        countdown = countdownOriginal;
+                    }
                 }
                 for (Player players : ClimaxPvp.inTourney) {
                     players.setLevel(countdown);
@@ -84,7 +81,7 @@ public class TournamentUtils {
         },0L, 20L);
     }
 
-    public void startTourney(Player host, String kit, int prize) {
+    public void startTourney() {
         ClimaxPvp.isTourneyRunning = true;
         int point = 0;
         for (Player players : ClimaxPvp.inTourney) {
@@ -110,12 +107,9 @@ public class TournamentUtils {
                 player1.teleport(tournamentFiles.getDuelPoint(1));
                 player2.teleport(tournamentFiles.getDuelPoint(2));
 
-                for (Kit kits : KitManager.getKits()) {
-                    if (kits.getItem().getItemMeta().getDisplayName().contains(kit)) {
-                        kits.wearCheckLevel(player1);
-                        kits.wearCheckLevel(player2);
-                    }
-                }
+                PvpKit2 pvpKit2 = new PvpKit2();
+                pvpKit2.wear(player1);
+                pvpKit2.wear(player2);
 
                 ClimaxPvp.playerPoint.remove(i, ClimaxPvp.playerPoint.get(i));
                 ClimaxPvp.playerPoint.remove(i + 1, ClimaxPvp.playerPoint.get(i + 1));
@@ -126,103 +120,130 @@ public class TournamentUtils {
                 }
                 break;
             } else if (ClimaxPvp.playerPoint.get(i) != null && ClimaxPvp.playerPoint.get(i + 1) == null) {
-                ClimaxPvp.playerPoint.get(i).sendMessage("You don't appear to have an opponent so... you automatically win!");
-                ClimaxPvp.playerPoint.get(i).teleport(tournamentFiles.getWinPoint());
+                Player player = ClimaxPvp.playerPoint.get(i);
+                player.sendMessage("You don't appear to have an opponent so... you automatically win!");
+                player.teleport(tournamentFiles.getWinPoint());
+                for (PotionEffect effect : player.getActivePotionEffects()) {
+                    player.removePotionEffect(effect.getType());
+                }
+                player.getInventory().clear();
                 startNextMatchTimer();
             } else if (i >= 10) {
-                int count = 0;
-                for (Player winner : ClimaxPvp.tourneyWinners) {
-                    count++;
-                    if (count == 1) {
-                        winner.teleport(tournamentFiles.getDuelPoint(1));
-                        ClimaxPvp.tourneyWinners.remove(winner);
-                    } else if (count == 2) {
-                        winner.teleport(tournamentFiles.getDuelPoint(2));
-                        ClimaxPvp.tourneyWinners.remove(winner);
+                ClimaxPvp.getInstance().getServer().getScheduler().cancelTask(taskid2);
+                if (ClimaxPvp.tourneyWinners != null && ClimaxPvp.tourneyWinners.size() > 0) {
+                    Player winner = ClimaxPvp.tourneyWinners.get(0);
+                    winner.teleport(tournamentFiles.getDuelPoint(1));
+                    Player winner2 = ClimaxPvp.tourneyWinners.get(1);
+                    winner2.teleport(tournamentFiles.getDuelPoint(2));
+
+                    PvpKit2 pvpKit2 = new PvpKit2();
+                    pvpKit2.wear(winner);
+                    pvpKit2.wear(winner2);
+
+                    for (Player players : ClimaxPvp.inTourney) {
+                        players.sendMessage(ChatColor.GRAY + "Match: " + ChatColor.GOLD + winner.getName() + ChatColor.GRAY + " vs " + ChatColor.GOLD + winner2.getName());
+                        players.playSound(players.getLocation(), Sound.NOTE_PIANO, 1, 2);
                     }
+
+                    ClimaxPvp.tourneyWinners.remove(winner);
+                    ClimaxPvp.tourneyWinners.remove(winner2);
                 }
             }
         }
     }
     public void endTourney() {
         if (countdown == 0) {
-            Bukkit.broadcastMessage(ChatColor.WHITE + "The tournament has ended! Not enough players!");
+            Bukkit.broadcastMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "The tournament has ended! Not enough players (Needs at least 4)");
         }
         ClimaxPvp.isTourneyRunning = false;
         ClimaxPvp.isTourneyHosted = false;
-        for (Player players : Bukkit.getOnlinePlayers()) {
-            if (ClimaxPvp.inTourney.contains(players)) {
-                ClimaxPvp.inTourney.remove(players);
-                ClimaxPvp.getInstance().respawn(players);
+        Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+            public void run() {
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    if (ClimaxPvp.inTourney.contains(players)) {
+                        ClimaxPvp.inTourney.remove(players);
+                        ClimaxPvp.getInstance().respawn(players);
+                    }
+                }
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    if (ClimaxPvp.tourneySpectators.contains(players)) {
+                        ClimaxPvp.tourneySpectators.remove(players);
+                        ClimaxPvp.getInstance().respawn(players);
+                    }
+                }
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    if (ClimaxPvp.tourneyWinners.contains(players)) {
+                        ClimaxPvp.tourneyWinners.remove(players);
+                    }
+                }
             }
-        }
-        for (Player players : Bukkit.getOnlinePlayers()) {
-            if (ClimaxPvp.tourneySpectators.contains(players)) {
-                ClimaxPvp.tourneySpectators.remove(players);
-                ClimaxPvp.getInstance().respawn(players);
-            }
-        }
-        for (Player players : Bukkit.getOnlinePlayers()) {
-            if (ClimaxPvp.tourneyWinners.contains(players)) {
-                ClimaxPvp.tourneyWinners.remove(players);
-            }
-        }
-        countdown = 15;
+        }, 20L * 3);
+        countdown = countdownOriginal;
         host.sendMessage(ChatColor.GRAY + "You have been given your money back.");
         PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(host);
-        playerData.depositBalance(prize);
+        playerData.depositBalance(ClimaxPvp.tourneyPrize);
     }
     public void endTourney(Player winner) {
-        Bukkit.broadcastMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "The tournament has ended! Winner:" + ChatColor.GOLD + winner.getName());
+        Bukkit.broadcastMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "The tournament has ended! Winner: " + ChatColor.GOLD + winner.getName());
         ClimaxPvp.isTourneyRunning = false;
         ClimaxPvp.isTourneyHosted = false;
-        for (Player players : Bukkit.getOnlinePlayers()) {
-            if (ClimaxPvp.inTourney.contains(players)) {
-                ClimaxPvp.inTourney.remove(players);
-                ClimaxPvp.getInstance().respawn(players);
+        Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+            public void run() {
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    if (ClimaxPvp.inTourney.contains(players)) {
+                        ClimaxPvp.inTourney.remove(players);
+                        ClimaxPvp.getInstance().respawn(players);
+                    }
+                }
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    if (ClimaxPvp.tourneySpectators.contains(players)) {
+                        ClimaxPvp.tourneySpectators.remove(players);
+                        ClimaxPvp.getInstance().respawn(players);
+                    }
+                }
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    if (ClimaxPvp.tourneyWinners.contains(players)) {
+                        ClimaxPvp.tourneyWinners.remove(players);
+                    }
+                }
             }
-        }
-        for (Player players : Bukkit.getOnlinePlayers()) {
-            if (ClimaxPvp.tourneySpectators.contains(players)) {
-                ClimaxPvp.tourneySpectators.remove(players);
-                ClimaxPvp.getInstance().respawn(players);
-            }
-        }
-        for (Player players : Bukkit.getOnlinePlayers()) {
-            if (ClimaxPvp.tourneyWinners.contains(players)) {
-                ClimaxPvp.tourneyWinners.remove(players);
-            }
-        }
-        winner.sendMessage(ChatColor.GRAY + "You have received $" + this.prize + " for winning!");
+        }, 20L * 5);
+        countdown = countdownOriginal;
+        winner.sendMessage(ChatColor.GRAY + "You have received " + ChatColor.GREEN + "$" + ClimaxPvp.tourneyPrize + ChatColor.GRAY + " for winning!");
+        winner.playSound(winner.getLocation(), Sound.LEVEL_UP, 1, 1);
         PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(winner);
-        playerData.depositBalance(this.prize);
+        playerData.depositBalance(ClimaxPvp.tourneyPrize);
     }
     public void cancelTourney(Player player) {
         if (ClimaxPvp.isTourneyHosted) {
             Bukkit.broadcastMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "The tournament has been cancelled by " + ChatColor.GOLD + player.getName());
             ClimaxPvp.isTourneyRunning = false;
             ClimaxPvp.isTourneyHosted = false;
-            for (Player players : Bukkit.getOnlinePlayers()) {
-                if (ClimaxPvp.inTourney.contains(players)) {
-                    ClimaxPvp.inTourney.remove(players);
-                    ClimaxPvp.getInstance().respawn(players);
+            Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                public void run() {
+                    for (Player players : Bukkit.getOnlinePlayers()) {
+                        if (ClimaxPvp.inTourney.contains(players)) {
+                            ClimaxPvp.inTourney.remove(players);
+                            ClimaxPvp.getInstance().respawn(players);
+                        }
+                    }
+                    for (Player players : Bukkit.getOnlinePlayers()) {
+                        if (ClimaxPvp.tourneySpectators.contains(players)) {
+                            ClimaxPvp.tourneySpectators.remove(players);
+                            ClimaxPvp.getInstance().respawn(players);
+                        }
+                    }
+                    for (Player players : Bukkit.getOnlinePlayers()) {
+                        if (ClimaxPvp.tourneyWinners.contains(players)) {
+                            ClimaxPvp.tourneyWinners.remove(players);
+                        }
+                    }
                 }
-            }
-            for (Player players : Bukkit.getOnlinePlayers()) {
-                if (ClimaxPvp.tourneySpectators.contains(players)) {
-                    ClimaxPvp.tourneySpectators.remove(players);
-                    ClimaxPvp.getInstance().respawn(players);
-                }
-            }
-            for (Player players : Bukkit.getOnlinePlayers()) {
-                if (ClimaxPvp.tourneyWinners.contains(players)) {
-                    ClimaxPvp.tourneyWinners.remove(players);
-                }
-            }
-            countdown = 15;
+            }, 20L * 3);
+            countdown = countdownOriginal;
             host.sendMessage(ChatColor.GRAY + "You have been given your money back.");
             PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(host);
-            playerData.depositBalance(prize);
+            playerData.depositBalance(ClimaxPvp.tourneyPrize);
         } else {
             player.sendMessage(ChatColor.RED + "There is no tournament currently running!");
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
@@ -271,22 +292,27 @@ public class TournamentUtils {
         }
     }
     public void startNextMatchTimer() {
-        countdown = 5;
+        matchCountdown = 3;
         taskid2 = ClimaxPvp.getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(ClimaxPvp.getInstance(), new Runnable() {
             public void run() {
-                countdown--;
-                if (countdown <= 0) {
+                matchCountdown--;
+                if (matchCountdown <= 0) {
                     startNextMatch();
                     Bukkit.getServer().getScheduler().cancelTask(taskid2);
+                    matchCountdown = 5;
                 }
                 for (Player players : ClimaxPvp.inTourney) {
-                    players.setLevel(countdown);
-                    if (countdown <= 3 && countdown != 0) {
-                        players.sendMessage(ChatColor.GRAY + "Matches will start in " + ChatColor.WHITE + countdown + ChatColor.GRAY + " seconds!");
-                        players.playSound(players.getLocation(), Sound.NOTE_PIANO, 1, 1);
-                    }
+                    players.setLevel(matchCountdown);
                 }
             }
         },0L, 20L);
+    }
+    public boolean areSlotsEmpty() {
+        for (int i = 1; i <= 10; i++) {
+            if (ClimaxPvp.playerPoint.get(i) != null && ClimaxPvp.playerPoint.get(i + 1) != null) {
+                return false;
+            }
+        }
+        return true;
     }
 }

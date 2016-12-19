@@ -129,8 +129,12 @@ public class CombatLogListeners implements Listener {
         if (tagged.containsKey(player.getUniqueId()) && (event.getMessage().toLowerCase().startsWith("/spawn")
                 || event.getMessage().toLowerCase().startsWith("/warp")
                 || event.getMessage().toLowerCase().startsWith("/spec")
-                || event.getMessage().toLowerCase().startsWith("/climaxpvp:"))) {
-            player.sendMessage(ChatColor.RED + " You cannot run that command during combat!");
+                || event.getMessage().toLowerCase().startsWith("/climaxpvp:")
+                || event.getMessage().toLowerCase().startsWith("/tourney")
+                || event.getMessage().toLowerCase().startsWith("/tournament")
+                || event.getMessage().toLowerCase().startsWith("/repair")
+                || event.getMessage().toLowerCase().startsWith("/soup"))) {
+            player.sendMessage(ChatColor.RED + "You cannot run that command during combat!");
             event.setCancelled(true);
         }
     }

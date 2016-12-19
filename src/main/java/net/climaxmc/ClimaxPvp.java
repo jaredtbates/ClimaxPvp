@@ -92,6 +92,7 @@ public class ClimaxPvp extends JavaPlugin {
     public static HashMap<Integer, Player> playerPoint = new HashMap<>();
     public static boolean isTourneyRunning = false;
     public static boolean isTourneyHosted = false;
+    public static int tourneyPrize;
 
     public static HashMap<Player, String> inTitle = new HashMap<>();
 

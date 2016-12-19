@@ -81,10 +81,12 @@ public class PlayerDeathListener implements Listener {
             player.removePotionEffect(PotionEffectType.REGENERATION);
         }
 
-        if (settingsFiles.getRespawnValue(player)) {
+        if (settingsFiles.getRespawnValue(player) || (ClimaxPvp.isTourneyHosted && ClimaxPvp.inTourney.contains(player))) {
             plugin.getServer().getScheduler().runTask(plugin, () -> {
 
-                plugin.respawn(player);
+                if (!ClimaxPvp.isTourneyHosted && !ClimaxPvp.inTourney.contains(player)) {
+                    plugin.respawn(player);
+                }
 
                 if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
                     new PvpKit().wearCheckLevel(player);

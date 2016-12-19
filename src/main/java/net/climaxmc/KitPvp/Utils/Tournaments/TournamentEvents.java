@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.potion.PotionEffect;
 
 public class TournamentEvents implements Listener {
     private ClimaxPvp plugin;
@@ -28,17 +29,25 @@ public class TournamentEvents implements Listener {
         if (ClimaxPvp.inTourney.contains(player)) {
 
             ClimaxPvp.inTourney.remove(player);
-            player.teleport(tournamentFiles.getDeathPoint());
+            Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                public void run() {
+                    ClimaxPvp.getInstance().respawn(player, tournamentFiles.getDeathPoint());
+                    player.getInventory().clear();
+                }
+            }, 5L);
 
-            if (ClimaxPvp.tourneyWinners.size() < 2) {
+            if (ClimaxPvp.tourneyWinners.size() < 1 && tournamentUtils.areSlotsEmpty()) {
                 tournamentUtils.endTourney(killer);
                 return;
             }
 
             ClimaxPvp.tourneyWinners.add(killer);
             killer.teleport(tournamentFiles.getWinPoint());
-
-            Bukkit.broadcastMessage(Integer.toString(ClimaxPvp.tourneyWinners.size()));
+            for (PotionEffect effect : killer.getActivePotionEffects()) {
+                killer.removePotionEffect(effect.getType());
+            }
+            killer.getInventory().clear();
+            killer.getInventory().setArmorContents(null);
 
             tournamentUtils.startNextMatchTimer();
         }
@@ -57,10 +66,10 @@ public class TournamentEvents implements Listener {
     @EventHandler
     public void onCommandPreprocess(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
-        /*if (event.getMessage().contains("tourney")) {
+        if (event.getMessage().toLowerCase().startsWith("/tourney")) {
             player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "Tournaments are currently disabled!");
             event.setCancelled(true);
-        }*/
+        }
         if (ClimaxPvp.inTourney.contains(player)) {
             if (!event.getMessage().contains("tourney")) {
                 player.sendMessage(ChatColor.RED + "You can only do /tourney while in a tournament! Do /tourney leave to leave!");
