@@ -55,7 +55,6 @@ public class PrecisionKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         player.getInventory().addItem(sword);
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
         player.getInventory().setHelmet(new ItemStack(Material.GOLD_HELMET));
         player.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));

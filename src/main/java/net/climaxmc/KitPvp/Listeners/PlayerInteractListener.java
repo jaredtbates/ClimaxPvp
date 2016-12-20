@@ -269,9 +269,22 @@ public class PlayerInteractListener implements Listener {
         Player player = event.getPlayer();
         if (player.getItemInHand().getType().equals(Material.FISHING_ROD)) {
             if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-                short currentDurability = player.getItemInHand().getDurability();
-                int newDurability = currentDurability - 3;
-                player.getItemInHand().setDurability((short) newDurability);
+                if (player.getItemInHand().getDurability() < player.getItemInHand().getType().getMaxDurability() - 8) {
+                    int rodSlot = player.getInventory().getHeldItemSlot();
+                    short currentDurability = player.getItemInHand().getDurability();
+                    int newDurability = currentDurability + 5;
+                    player.getItemInHand().setDurability((short) newDurability);
+                    Bukkit.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
+                        public void run() {
+                            short currentDurability = player.getInventory().getItem(rodSlot).getDurability();
+                            int newDurability = currentDurability - 6;
+                            player.getInventory().getItem(rodSlot).setDurability((short) newDurability);
+                        }
+                    }, 20L * 9);
+                } else {
+                    event.setCancelled(true);
+                    player.sendMessage(ChatColor.RED + "Your rod is too damaged to use! Wait a few seconds!");
+                }
             }
         }
     }

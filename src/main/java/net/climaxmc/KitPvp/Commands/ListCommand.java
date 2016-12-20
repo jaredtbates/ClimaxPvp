@@ -36,8 +36,8 @@ public class ListCommand implements CommandExecutor {
             if (playerData.getRank() == Rank.DEFAULT) {
                 players += (playerData.getLevelColor() + player.getDisplayName() + ChatColor.RESET + ", ");
             } else {
-                players += (ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "[" + playerData.getRank().getColor() + "" + ChatColor.BOLD
-                        + "" + playerData.getRank().getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "] " + playerData.getLevelColor()
+                players += (playerData.getRank().getColor()
+                        + "" + playerData.getRank().getPrefix() + " " + playerData.getLevelColor()
                         + player.getDisplayName() + ChatColor.GRAY + ", " + ChatColor.RESET);
             }
         }

@@ -99,7 +99,6 @@ public class HealerKit extends Kit {
         SettingsFiles settingsFiles = new SettingsFiles();
         if (!settingsFiles.getSpawnSoupValue(player)) {
             ItemStack rod = new ItemStack(Material.FISHING_ROD);
-            rod.addEnchantment(Enchantment.DURABILITY, 3);
             player.getInventory().addItem(rod);
         }
 

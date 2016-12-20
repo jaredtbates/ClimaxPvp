@@ -86,7 +86,6 @@ public class KangarooKit extends Kit {
         firework.setItemMeta(fwmeta);
         player.getInventory().addItem(firework);
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
     }
 

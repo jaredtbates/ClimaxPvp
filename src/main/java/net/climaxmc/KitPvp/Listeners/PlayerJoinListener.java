@@ -160,9 +160,9 @@ public class PlayerJoinListener implements Listener {
                 player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + ChatColor.BOLD + player.getName());
             }
             if (playerData.getRank().getColor() != null) {
-                player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + player.getName());
+                player.setPlayerListName(playerData.getLevelColor() + playerData.getRank().getColor() + player.getName());
             } else {
-                player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + player.getName());
+                player.setPlayerListName(playerData.getLevelColor() + player.getName());
             }
 
             if (playerData.hasRank(Rank.OWNER)) {

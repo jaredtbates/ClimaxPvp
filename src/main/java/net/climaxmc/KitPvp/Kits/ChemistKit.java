@@ -114,7 +114,6 @@ public class ChemistKit extends Kit {
         spdpot.apply(speed);
         player.getInventory().addItem(speed);
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
     }
 }

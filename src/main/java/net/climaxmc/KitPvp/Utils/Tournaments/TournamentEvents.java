@@ -43,6 +43,8 @@ public class TournamentEvents implements Listener {
 
             ClimaxPvp.tourneyWinners.add(killer);
             killer.teleport(tournamentFiles.getWinPoint());
+            killer.setHealth(20);
+            killer.setFireTicks(0);
             for (PotionEffect effect : killer.getActivePotionEffects()) {
                 killer.removePotionEffect(effect.getType());
             }

@@ -73,7 +73,6 @@ public class IronGolemKit extends Kit {
         SettingsFiles settingsFiles = new SettingsFiles();
         if (!settingsFiles.getSpawnSoupValue(player)) {
             ItemStack rod = new ItemStack(Material.FISHING_ROD);
-            rod.addEnchantment(Enchantment.DURABILITY, 3);
             player.getInventory().addItem(rod);
         }
         ItemStack chestplate = new ItemStack(Material.IRON_CHESTPLATE);

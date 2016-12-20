@@ -39,12 +39,19 @@ public class TournamentCommands implements CommandExecutor {
 
         target = plugin.getServer().getPlayerExact(args[0]);
 
+        PlayerData playerData = plugin.getPlayerData(player);
+
         if (args[0].contains("host")) {
+            if (!playerData.hasRank(Rank.BETA)) {
+                player.sendMessage(ChatColor.RED + "Donate for a rank to host a tournament @ donate.climaxmc.net!");
+                player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                return true;
+            }
             if (args.length == 2) {
-                if (isInteger(args[1]) && Integer.parseInt(args[1]) >= 300) {
+                if (isInteger(args[1]) && Integer.parseInt(args[1]) >= 100) {
                     tournamentUtils.createTourney(player, Integer.parseInt(args[1]));
                 } else {
-                    player.sendMessage(ChatColor.RED + "You must enter a prize amount of $300 or more!");
+                    player.sendMessage(ChatColor.RED + "You must enter a prize amount of $100 or more!");
                     player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                 }
             } else {
@@ -105,7 +112,6 @@ public class TournamentCommands implements CommandExecutor {
             }
         }
 
-        PlayerData playerData = plugin.getPlayerData(player);
         if (playerData.hasRank(Rank.MODERATOR)) {
             if (args[0].contains("admin")) {
                 if (args.length == 2) {

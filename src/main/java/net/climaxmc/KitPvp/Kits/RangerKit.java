@@ -122,7 +122,6 @@ public class RangerKit extends Kit {
         player.getInventory().addItem(bow);
 
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
 
         ItemStack ability = new ItemStack(Material.ARROW);

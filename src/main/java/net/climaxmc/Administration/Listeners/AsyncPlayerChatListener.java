@@ -110,7 +110,7 @@ public class AsyncPlayerChatListener implements Listener {
                             event.setFormat(ChatColor.GOLD + "\u2737 " + playerData.getLevelColor() + playerData.getKills()
                                     + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
                         } else {
-                            event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + " "
+                            event.setFormat(playerData.getLevelColor() + "" + playerData.getKills()
                                     + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
                         }
                     }
@@ -165,7 +165,7 @@ public class AsyncPlayerChatListener implements Listener {
                     event.setFormat(ChatColor.GOLD + "\u2737 " + playerData.getLevelColor() + playerData.getKills()
                             + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
                 } else {
-                    event.setFormat(playerData.getLevelColor() + "" + playerData.getKills() + " "
+                    event.setFormat(playerData.getLevelColor() + "" + playerData.getKills()
                             + playerData.getLevelColor() + " %s" + ChatColor.RESET + " \u00BB " + ChatColor.WHITE + "%s");
                 }
             }

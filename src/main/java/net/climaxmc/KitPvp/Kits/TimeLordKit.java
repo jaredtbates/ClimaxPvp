@@ -110,7 +110,6 @@ public class TimeLordKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
-        rod.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().addItem(rod);
 
         ItemMeta abilitymeta = ability.getItemMeta();

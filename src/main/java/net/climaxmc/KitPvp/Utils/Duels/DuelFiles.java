@@ -102,18 +102,19 @@ public class DuelFiles {
                 allPlayers.hidePlayer(player);
                 allPlayers.hidePlayer(target);
                 String rankTag = "";
-                PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
-                if (playerData.hasRank(Rank.NINJA)) {
-                    rankTag = org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "[" + playerData.getRank().getColor()
-                            + org.bukkit.ChatColor.BOLD + playerData.getRank().getPrefix() + org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "] ";
-                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + ChatColor.BOLD + player.getName());
-                }
-                if (playerData.getRank().getColor() != null) {
-                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + player.getName());
-                } else {
-                    player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + player.getName());
-                }
             }
+        }
+        PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
+        if (playerData.getRank().getColor() != null) {
+            player.setPlayerListName(playerData.getLevelColor() + playerData.getRank().getColor() + player.getName());
+        } else {
+            player.setPlayerListName(playerData.getLevelColor() + player.getName());
+        }
+        PlayerData targetData = ClimaxPvp.getInstance().getPlayerData(player);
+        if (targetData.getRank().getColor() != null) {
+            target.setPlayerListName(targetData.getLevelColor() + targetData.getRank().getColor() + target.getName());
+        } else {
+            target.setPlayerListName(targetData.getLevelColor() + target.getName());
         }
 
         NoDebuffKit noDebuffKit = new NoDebuffKit();
