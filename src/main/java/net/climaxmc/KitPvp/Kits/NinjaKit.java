@@ -57,7 +57,7 @@ public class NinjaKit extends Kit {
         player.getInventory().addItem(sword);
 
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Burst §f» §8[§6" + cooldown + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Burst \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
         addSoup(player.getInventory(), 2, 35);
@@ -89,7 +89,7 @@ public class NinjaKit extends Kit {
         }
 
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Burst §f» §8[§6" + cooldown + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Burst \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }

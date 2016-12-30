@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class TrailsInventory {
     public TrailsInventory(Player player) {
-        Inventory inventory = Bukkit.createInventory(null, 27, "§8§lTrail Settings");
+        Inventory inventory = Bukkit.createInventory(null, 27, "\u00A78\u00A7lTrail Settings");
 
         for (int slot = 0; slot <= 9; slot++) {
             inventory.setItem(slot, new I(Material.STAINED_GLASS_PANE).durability(15).name(" "));
@@ -45,28 +45,28 @@ public class TrailsInventory {
             if (trail.getName().equals("Snow")) {
                 particleMeta.setDisplayName(ChatColor.RED + trail.getName());
                 ArrayList<String> lores = new ArrayList<>();
-                lores.add("§cNot unlocked!");
-                lores.add("§6Exclusive! Purchase Beta to unlock!");
+                lores.add("\u00A7cNot unlocked!");
+                lores.add("\u00A76Exclusive! Purchase Beta to unlock!");
                 particleMeta.setLore(lores);
             } else {
                 particleMeta.setDisplayName(ChatColor.RED + trail.getName());
                 ArrayList<String> lores = new ArrayList<>();
-                lores.add("§cNot unlocked!");
-                lores.add("§7Shift-Click to unlock: §a$" + cost);
+                lores.add("\u00A7cNot unlocked!");
+                lores.add("\u00A77Shift-Click to unlock: \u00A7a$" + cost);
                 particleMeta.setLore(lores);
             }
         } else {
             if (trail.getName().equals("Snow")) {
                 particleMeta.setDisplayName(ChatColor.GREEN + trail.getName());
                 ArrayList<String> lores = new ArrayList<>();
-                lores.add("§aUnlocked!");
-                lores.add("§6Exclusive! Welcome Beta member!");
+                lores.add("\u00A7aUnlocked!");
+                lores.add("\u00A76Exclusive! Welcome Beta member!");
                 particleMeta.setLore(lores);
             } else {
                 particleMeta.setDisplayName(ChatColor.GREEN + trail.getName());
                 ArrayList<String> lores = new ArrayList<>();
-                lores.add("§aUnlocked!");
-                lores.add("§7Original Cost: $" + cost);
+                lores.add("\u00A7aUnlocked!");
+                lores.add("\u00A77Original Cost: $" + cost);
                 particleMeta.setLore(lores);
             }
         }

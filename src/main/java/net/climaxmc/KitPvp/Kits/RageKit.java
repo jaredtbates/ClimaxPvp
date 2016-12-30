@@ -54,7 +54,7 @@ public class RageKit extends Kit {
         player.getInventory().setBoots(boots);
 
         ItemMeta magmameta = ability.getItemMeta();
-        magmameta.setDisplayName(ChatColor.AQUA + "Rage §f» §8[§6" + cooldown + "§8]");
+        magmameta.setDisplayName(ChatColor.AQUA + "Rage \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(magmameta);
         player.getInventory().addItem(ability);
 
@@ -86,7 +86,7 @@ public class RageKit extends Kit {
         player.getInventory().setBoots(boots);
 
         ItemMeta magmameta = ability.getItemMeta();
-        magmameta.setDisplayName(ChatColor.AQUA + "Rage §f» §8[§6" + cooldown + "§8]");
+        magmameta.setDisplayName(ChatColor.AQUA + "Rage \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(magmameta);
         player.getInventory().addItem(ability);
 

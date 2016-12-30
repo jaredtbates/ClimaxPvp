@@ -95,6 +95,17 @@ public class ClimaxPvp extends JavaPlugin {
     public static boolean isTourneyHosted = false;
     public static int tourneyPrize;
 
+    public static ArrayList<Player> inTag = new ArrayList<>();
+    public static ArrayList<Player> inTagLobby = new ArrayList<>();
+    public static ArrayList<Player> tagSpectators = new ArrayList<>();
+    public static ArrayList<Player> tagWinners = new ArrayList<>();
+    public static ArrayList<Integer> tagDeathsSorted = new ArrayList<>();
+    public static HashMap<Player, Integer> tagPlayerDeaths = new HashMap<>();
+    public static boolean isTagRunning = false;
+    public static boolean isTagHosted = false;
+    public static int tagPrize;
+    public static Player isIt;
+
     public static HashMap<Player, String> inTitle = new HashMap<>();
 
     public static HashMap<Player, String> inEffect = new HashMap<>();

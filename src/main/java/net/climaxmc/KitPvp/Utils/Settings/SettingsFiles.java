@@ -70,13 +70,13 @@ public class SettingsFiles {
                 saveConfig();
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
-                player.sendMessage("§f» §7You have set §eInsta-Respawn §7to: §aTrue");
+                player.sendMessage("\u00A7f» \u00A77You have set \u00A7eInsta-Respawn \u00A77to: \u00A7aTrue");
             } else {
                 set(player.getUniqueId() + ".instaRespawn", false);
                 saveConfig();
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
-                player.sendMessage("§f» §7You have set §eInsta-Respawn §7to: §cFalse");
+                player.sendMessage("\u00A7f» \u00A77You have set \u00A7eInsta-Respawn \u00A77to: \u00A7cFalse");
             }
         }
     }
@@ -100,13 +100,13 @@ public class SettingsFiles {
                 saveConfig();
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
-                player.sendMessage("§f» §7You have set §eReceiving Msgs §7to: §aTrue");
+                player.sendMessage("\u00A7f» \u00A77You have set \u00A7eReceiving Msgs \u00A77to: \u00A7aTrue");
             } else {
                 set(player.getUniqueId() + ".receiveMsging", false);
                 saveConfig();
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
-                player.sendMessage("§f» §7You have set §eReceiving Msgs §7to: §cFalse");
+                player.sendMessage("\u00A7f» \u00A77You have set \u00A7eReceiving Msgs \u00A77to: \u00A7cFalse");
             }
         }
     }
@@ -131,14 +131,14 @@ public class SettingsFiles {
                 saveConfig();
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
-                player.sendMessage("§f» §7You have set §eGlobal Chat §7to: §aTrue");
+                player.sendMessage("\u00A7f» \u00A77You have set \u00A7eGlobal Chat \u00A77to: \u00A7aTrue");
                 KitPvp.globalChatDisabled.remove(player.getUniqueId());
             } else {
                 set(player.getUniqueId() + ".globalChat", false);
                 saveConfig();
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
-                player.sendMessage("§f» §7You have set §eGlobal Chat §7to: §cFalse");
+                player.sendMessage("\u00A7f» \u00A77You have set \u00A7eGlobal Chat \u00A77to: \u00A7cFalse");
                 KitPvp.globalChatDisabled.add(player.getUniqueId());
             }
         }
@@ -164,13 +164,13 @@ public class SettingsFiles {
                 saveConfig();
                 //player.closeInventory();
                 player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
-                //player.sendMessage("§f» §7Mode set §7to: §eSoup");
+                //player.sendMessage("\u00A7f» \u00A77Mode set \u00A77to: \u00A7eSoup");
             } else if ((boolean) config.get(player.getUniqueId() + ".respawnSoup")) {
                 set(player.getUniqueId() + ".respawnSoup", false);
                 saveConfig();
                 //player.closeInventory();
                 player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
-                //player.sendMessage("§f» §7Mode set §7to: §eRod/Regen");
+                //player.sendMessage("\u00A7f» \u00A77Mode set \u00A77to: \u00A7eRod/Regen");
             }
         }
     }

@@ -229,7 +229,7 @@ public class Ability {
                     if (KitManager.isPlayerInKit(player, kit.getClass())) {
                         ItemStack ability = new I(Material.INK_SACK).durability(8);
                         ItemMeta abilitymeta = ability.getItemMeta();
-                        abilitymeta.setDisplayName(org.bukkit.ChatColor.AQUA + abilityName + " §f» §8[§6" + status.getRemainingTime(TimeUnit.SECONDS) + "§8]");
+                        abilitymeta.setDisplayName(org.bukkit.ChatColor.AQUA + abilityName + " \u00A7f» \u00A78[\u00A76" + status.getRemainingTime(TimeUnit.SECONDS) + "\u00A78]");
                         ability.setItemMeta(abilitymeta);
                         player.getInventory().setItem(abilitySlot, ability);
                     }
@@ -244,7 +244,7 @@ public class Ability {
                 }
                 if (KitManager.isPlayerInKit(player, kit.getClass())) {
                     ItemMeta abilitymeta = ability.getItemMeta();
-                    abilitymeta.setDisplayName(org.bukkit.ChatColor.AQUA + abilityName + " §f» §8[§6" + cooldown + "§8]");
+                    abilitymeta.setDisplayName(org.bukkit.ChatColor.AQUA + abilityName + " \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
                     ability.setItemMeta(abilitymeta);
                     player.getInventory().setItem(abilitySlot, ability);
                 }

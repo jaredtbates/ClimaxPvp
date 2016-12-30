@@ -26,7 +26,7 @@ public class NicknameCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (!playerData.hasRank(Rank.TITAN)) {
-            player.sendMessage(ChatColor.RED + "Please donate for Master at donate.climaxmc.net for access to this perk!");
+            player.sendMessage(ChatColor.RED + "Please donate at donate.climaxmc.net for access to nickname!");
             return true;
         }
 

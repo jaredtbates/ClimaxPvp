@@ -39,7 +39,7 @@ public class DeathEffectEvents implements Listener {
                 return;
             }
             if (event.getCurrentItem() != null && event.getCurrentItem().getItemMeta() != null && event.getCurrentItem().getItemMeta().getDisplayName() != null) {
-                if (inventory.getName().equals("§8§lDeath Effects")) {
+                if (inventory.getName().equals("\u00A78\u00A7lDeath Effects")) {
                     event.setCancelled(true);
 
                     DeathEffectFiles deathEffectFiles = new DeathEffectFiles();
@@ -85,7 +85,7 @@ public class DeathEffectEvents implements Listener {
                         }
                     }
                 }
-                if (inventory.getName().contains("§8§lCosmetics")) {
+                if (inventory.getName().contains("\u00A78\u00A7lCosmetics")) {
                     if (event.getCurrentItem() != null) {
                         if (event.getCurrentItem().getType().equals(Material.BLAZE_POWDER)) {
                             DeathEffectsMenu deathEffectsMenu = new DeathEffectsMenu(ClimaxPvp.getInstance());

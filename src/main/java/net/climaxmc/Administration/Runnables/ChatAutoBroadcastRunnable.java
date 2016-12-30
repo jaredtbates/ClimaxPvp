@@ -19,11 +19,11 @@ public class ChatAutoBroadcastRunnable implements Runnable {
         }
 
         if (ChatCommands.chatSilenced == false) {
-            plugin.getServer().broadcastMessage(" §f§l[§7=§8§m------------------§7=§f§l[*]§7=§8§m------------------§7=§f§l]");
+            plugin.getServer().broadcastMessage(" \u00A7f\u00A7l[\u00A77=\u00A78\u00A7m------------------\u00A77=\u00A7f\u00A7l[*]\u00A77=\u00A78\u00A7m------------------\u00A77=\u00A7f\u00A7l]");
             plugin.getServer().broadcastMessage(" ");
             plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getStringList("ChatAutoBroadcast.Messages").get(amount++)));
             plugin.getServer().broadcastMessage(" ");
-            plugin.getServer().broadcastMessage(" §f§l[§7=§8§m-----------------§7=§7§l]§f§m---§7§l[§7=§8§m-----------------§7=§f§l]");
+            plugin.getServer().broadcastMessage(" \u00A7f\u00A7l[\u00A77=\u00A78\u00A7m-----------------\u00A77=\u00A77\u00A7l]\u00A7f\u00A7m---\u00A77\u00A7l[\u00A77=\u00A78\u00A7m-----------------\u00A77=\u00A7f\u00A7l]");
         }
     }
 }

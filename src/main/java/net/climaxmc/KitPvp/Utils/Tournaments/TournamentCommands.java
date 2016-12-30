@@ -48,10 +48,10 @@ public class TournamentCommands implements CommandExecutor {
                 return true;
             }
             if (args.length == 2) {
-                if (isInteger(args[1]) && Integer.parseInt(args[1]) >= 100) {
+                if (isInteger(args[1]) && Integer.parseInt(args[1]) >= 50) {
                     tournamentUtils.createTourney(player, Integer.parseInt(args[1]));
                 } else {
-                    player.sendMessage(ChatColor.RED + "You must enter a prize amount of $100 or more!");
+                    player.sendMessage(ChatColor.RED + "You must enter a prize amount of $50 or more!");
                     player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                 }
             } else {
@@ -120,17 +120,21 @@ public class TournamentCommands implements CommandExecutor {
                     }
                     if (args[1].contains("setwinpoint")) {
                         tournamentFiles.setWinPoint(player);
+                        player.sendMessage("Successfully set the win point!");
                     }
                     if (args[1].contains("setdeathpoint")) {
                         tournamentFiles.setDeathPoint(player);
+                        player.sendMessage("Successfully set the death point!");
                     }
                     if (args[1].contains("setlobby")) {
                         tournamentFiles.setLobbyPoint(player);
+                        player.sendMessage("Successfully set the lobby point!");
                     }
                 } else if (args.length == 3) {
                     if (args[1].contains("setpoint")) {
                         if (isInteger(args[2]) && Integer.parseInt(args[2]) >= 1 && Integer.parseInt(args[2]) <= 10) {
                             tournamentFiles.setArenaPoint(player, args[2]);
+                            player.sendMessage("Successfully set the arena point " + args[2] + "!");
                         } else {
                             player.sendMessage(ChatColor.RED + "That is not a number between 1 and 10!");
                         }
@@ -138,6 +142,7 @@ public class TournamentCommands implements CommandExecutor {
                     if (args[1].contains("setduelpoint")) {
                         if (isInteger(args[2]) && Integer.parseInt(args[2]) >= 1 && Integer.parseInt(args[2]) <= 2) {
                             tournamentFiles.setDuelPoint(player, args[2]);
+                            player.sendMessage("Successfully set the duel point " + args[2] + "!");
                         } else {
                             player.sendMessage(ChatColor.RED + "Number must be between 1 and 2!");
                         }

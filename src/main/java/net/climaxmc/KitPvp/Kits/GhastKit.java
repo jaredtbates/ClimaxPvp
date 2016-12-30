@@ -50,7 +50,7 @@ public class GhastKit extends Kit {
         player.getInventory().addItem(sword);
 
         ItemMeta hoeMeta = ability.getItemMeta();
-        hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher §f» §8[§6" + cooldown + "§8]");
+        hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(hoeMeta);
         player.getInventory().addItem(ability);
 
@@ -82,7 +82,7 @@ public class GhastKit extends Kit {
         }
 
         ItemMeta hoeMeta = ability.getItemMeta();
-        hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher §f» §8[§6" + cooldown + "§8]");
+        hoeMeta.setDisplayName(ChatColor.RED + "Fireball Launcher \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(hoeMeta);
         player.getInventory().addItem(ability);
 
@@ -110,6 +110,8 @@ public class GhastKit extends Kit {
                     player.getWorld().playSound(player.getLocation(), Sound.GHAST_FIREBALL, 1, 1);
                     fireball.setIsIncendiary(false);
                     player.setVelocity(player.getVelocity().setY(0.4));
+
+                    this.fireball.startCooldown(player, this, cooldown, ability);
                 }
             }
         }
@@ -135,8 +137,6 @@ public class GhastKit extends Kit {
                         }
                     }
                     target.setVelocity(target.getVelocity().setY(1));
-
-                    fireball.startCooldown(player, this, cooldown, ability);
                 }
             }
         }

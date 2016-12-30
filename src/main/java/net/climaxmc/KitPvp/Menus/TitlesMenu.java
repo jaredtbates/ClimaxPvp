@@ -22,7 +22,7 @@ public class TitlesMenu implements Listener {
     }
 
     public void openInventory(Player player) {
-        Inventory inv = plugin.getServer().createInventory(null, 54, "§8§lTitles");
+        Inventory inv = plugin.getServer().createInventory(null, 54, "\u00A78\u00A7lTitles");
 
         for (int i = 0; i <= 9; i++) {
             inv.setItem(i, new I(Material.STAINED_GLASS_PANE).name(" ").durability(15));
@@ -32,7 +32,7 @@ public class TitlesMenu implements Listener {
         for (int i = 44; i <= 48; i++) {
             inv.setItem(i, new I(Material.STAINED_GLASS_PANE).name(" ").durability(15));
         }
-        inv.setItem(49, new I(Material.STAINED_GLASS_PANE).name("§cRemove Title").durability(14));
+        inv.setItem(49, new I(Material.STAINED_GLASS_PANE).name("\u00A7cRemove Title").durability(14));
         for (int i = 50; i <= 53; i++) {
             inv.setItem(i, new I(Material.STAINED_GLASS_PANE).name(" ").durability(15));
         }
@@ -41,9 +41,9 @@ public class TitlesMenu implements Listener {
         for (Title title : Title.values()) {
             TitleFiles titleFiles = new TitleFiles();
             if (titleFiles.isTitleUnlocked(player, title)) {
-                inv.setItem(title.getSlot(), new I(title.getMaterial()).name(title.getTitle()).lore("§aUnlocked!").lore("§7Original Cost: $" + title.getCost()));
+                inv.setItem(title.getSlot(), new I(title.getMaterial()).name(title.getTitle()).lore("\u00A7aUnlocked!").lore("\u00A77Original Cost: $" + title.getCost()));
             } else {
-                inv.setItem(title.getSlot(), new I(title.getMaterial()).name(title.getTitle()).lore("§cNot unlocked!").lore("§7Shift-Click to unlock: §c$" + title.getCost()));
+                inv.setItem(title.getSlot(), new I(title.getMaterial()).name(title.getTitle()).lore("\u00A7cNot unlocked!").lore("\u00A77Shift-Click to unlock: \u00A7c$" + title.getCost()));
             }
         }
 

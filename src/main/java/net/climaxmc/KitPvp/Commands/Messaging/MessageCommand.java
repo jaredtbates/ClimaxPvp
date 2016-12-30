@@ -7,6 +7,7 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.Rank;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Sound;
@@ -62,7 +63,7 @@ public class MessageCommand implements CommandExecutor {
         }
 
         SettingsFiles settingsFiles = new SettingsFiles();
-        if (settingsFiles.getReceiveMsgValue(target) == false) {
+        if (settingsFiles.getReceiveMsgValue(target) == false && !playerData.hasRank(Rank.TRIAL_MODERATOR)) {
             player.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "ERROR! " + ChatColor.WHITE + "\u00BB " + ChatColor.YELLOW + target.getName() + ChatColor.RED + " has receiving msgs disabled!");
             return true;
         }

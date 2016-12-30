@@ -39,7 +39,7 @@ public class BalanceTopCommand implements CommandExecutor {
             player.sendMessage(ChatColor.RED + "Error getting top balances!");
         }
 
-        player.sendMessage(" §f[§7=§8§m---§7=§f] " + ChatColor.AQUA + "Top 10 Balances" + " §f[§7=§8§m---§7=§f]");
+        player.sendMessage(" \u00A7f[\u00A77=\u00A78\u00A7m---\u00A77=\u00A7f] " + ChatColor.AQUA + "Top 10 Balances" + " \u00A7f[\u00A77=\u00A78\u00A7m---\u00A77=\u00A7f]");
 
         int i = 0;
 
@@ -51,7 +51,7 @@ public class BalanceTopCommand implements CommandExecutor {
             }
         }
 
-        player.sendMessage(" §f[§7=§8§m--------§7=§f]§f§m----§f[§7=§8§m---------§7=§f]");
+        player.sendMessage(" \u00A7f[\u00A77=\u00A78\u00A7m--------\u00A77=\u00A7f]\u00A7f\u00A7m----\u00A7f[\u00A77=\u00A78\u00A7m---------\u00A77=\u00A7f]");
 
         return true;
     }

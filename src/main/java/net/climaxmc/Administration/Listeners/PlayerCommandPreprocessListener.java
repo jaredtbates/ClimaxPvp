@@ -35,7 +35,10 @@ public class PlayerCommandPreprocessListener implements Listener {
         }
 
         if (ClimaxPvp.inDuel.contains(player)) {
-            if (StringUtils.startsWithIgnoreCase(event.getMessage(), "/kill")) {
+            if (StringUtils.startsWithIgnoreCase(event.getMessage(), "/kill") ||
+                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/ping") ||
+                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/msg") ||
+                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/r")) {
                 return;
             } else {
                 player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You cannot do commands in a duel!");
@@ -52,16 +55,22 @@ public class PlayerCommandPreprocessListener implements Listener {
             }
         }
         if (ClimaxPvp.isSpectating.contains(player.getUniqueId())) {
-            if (!(StringUtils.startsWithIgnoreCase(event.getMessage(), "/spec")
-                    || StringUtils.startsWithIgnoreCase(event.getMessage(), "/spectate"))) {
+            if (!(StringUtils.startsWithIgnoreCase(event.getMessage(), "/spec") ||
+                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/spectate")) ||
+                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/ping") ||
+                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/msg") ||
+                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/r")) {
                 event.setCancelled(true);
                 player.sendMessage(ChatColor.RED + "You may only to /spec while spectating!");
                 return;
             }
         }
         if (ClimaxPvp.deadPeoples.contains(player)) {
-            if (!(StringUtils.startsWithIgnoreCase(event.getMessage(), "/spawn")
-                    || StringUtils.startsWithIgnoreCase(event.getMessage(), "/warp"))) {
+            if (!(StringUtils.startsWithIgnoreCase(event.getMessage(), "/spawn") ||
+                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/warp")) ||
+                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/ping") ||
+                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/msg") ||
+                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/r")) {
                 event.setCancelled(true);
                 player.sendMessage(ChatColor.RED + "You may only do /spawn or /warp while dead!");
                 return;

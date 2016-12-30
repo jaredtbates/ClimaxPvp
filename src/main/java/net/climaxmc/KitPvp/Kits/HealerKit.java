@@ -63,7 +63,7 @@ public class HealerKit extends Kit {
         player.getInventory().addItem(sword);
 
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal §f» §8[§6" + cooldown + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
 
@@ -103,7 +103,7 @@ public class HealerKit extends Kit {
         }
 
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal §f» §8[§6" + cooldown + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Heal \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }

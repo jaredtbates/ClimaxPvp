@@ -69,7 +69,7 @@ public class BoulderKit extends Kit {
         addSoup(player.getInventory(), 2, 35);
 
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Boulder Toss §f» §8[§6" + cooldown + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Boulder Toss \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }
@@ -108,7 +108,7 @@ public class BoulderKit extends Kit {
         }
 
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Boulder Toss §f» §8[§6" + cooldown + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Boulder Toss \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }

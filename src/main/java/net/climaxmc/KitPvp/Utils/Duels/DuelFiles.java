@@ -97,24 +97,13 @@ public class DuelFiles {
         player.teleport(point1);
         target.teleport(point2);
 
+        EntityHider entityHider = new EntityHider(ClimaxPvp.getInstance(), EntityHider.Policy.BLACKLIST);
+
         for (Player allPlayers : Bukkit.getOnlinePlayers()) {
             if (allPlayers != target && allPlayers != player) {
-                allPlayers.hidePlayer(player);
-                allPlayers.hidePlayer(target);
-                String rankTag = "";
+                entityHider.hideEntity(allPlayers, player);
+                entityHider.hideEntity(allPlayers, target);
             }
-        }
-        PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
-        if (playerData.getRank().getColor() != null) {
-            player.setPlayerListName(playerData.getLevelColor() + playerData.getRank().getColor() + player.getName());
-        } else {
-            player.setPlayerListName(playerData.getLevelColor() + player.getName());
-        }
-        PlayerData targetData = ClimaxPvp.getInstance().getPlayerData(player);
-        if (targetData.getRank().getColor() != null) {
-            target.setPlayerListName(targetData.getLevelColor() + targetData.getRank().getColor() + target.getName());
-        } else {
-            target.setPlayerListName(targetData.getLevelColor() + target.getName());
         }
 
         NoDebuffKit noDebuffKit = new NoDebuffKit();

@@ -53,7 +53,7 @@ public class IronGolemKit extends Kit {
         player.getInventory().setBoots(boots);
 
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Throw §f» §8[§6" + cooldown + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Throw \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
 
@@ -86,7 +86,7 @@ public class IronGolemKit extends Kit {
         player.getInventory().setBoots(boots);
 
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Throw §f» §8[§6" + cooldown + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Throw \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }

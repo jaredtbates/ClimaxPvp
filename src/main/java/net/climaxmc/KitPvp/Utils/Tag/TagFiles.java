@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Utils.Tournaments;
+package net.climaxmc.KitPvp.Utils.Tag;
 
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.*;
@@ -8,13 +8,13 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
-public class TournamentFiles {
+public class TagFiles {
 
     private File file;
     private FileConfiguration config;
 
-    public TournamentFiles() {
-        this.file = new File(ClimaxPvp.getInstance().getDataFolder() + File.separator + "tournaments.yml");
+    public TagFiles() {
+        this.file = new File(ClimaxPvp.getInstance().getDataFolder() + File.separator + "tag.yml");
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -26,9 +26,7 @@ public class TournamentFiles {
     }
 
     private void set(String path, Object object) {
-        //Bukkit.getScheduler().runTaskAsynchronously(ClimaxPvp.getInstance(), () -> {
         config.set(path, object);
-        //});
     }
 
     public void saveConfig() {
@@ -37,27 +35,6 @@ public class TournamentFiles {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void setDuelPoint(Player player, String pointNumber) {
-        set("arena.duelPoint." + pointNumber + ".world", player.getWorld().getName());
-        set("arena.duelPoint." + pointNumber + ".x", player.getLocation().getX() + 0.5);
-        set("arena.duelPoint." + pointNumber + ".y", player.getLocation().getY() + 0.5);
-        set("arena.duelPoint." + pointNumber + ".z", player.getLocation().getZ() + 0.5);
-        set("arena.duelPoint." + pointNumber + ".yaw", player.getLocation().getYaw());
-        set("arena.duelPoint." + pointNumber + ".pitch", player.getLocation().getPitch());
-        saveConfig();
-    }
-    public Location getDuelPoint(int pointNumber) {
-        Location point = new Location(
-                Bukkit.getServer().getWorld((String) config.get("arena.duelPoint." + pointNumber + ".world")),
-                config.getDouble("arena.duelPoint." + pointNumber + ".x"),
-                config.getDouble("arena.duelPoint." + pointNumber + ".y"),
-                config.getDouble("arena.duelPoint." + pointNumber + ".z"),
-                (float) config.getDouble("arena.duelPoint." + pointNumber + ".yaw"),
-                (float) config.getDouble("arena.duelPoint." + pointNumber + ".pitch")
-        );
-        return point;
     }
 
     public void setArenaPoint(Player player, String pointNumber) {
@@ -102,23 +79,23 @@ public class TournamentFiles {
         return point;
     }
 
-    public void setDeathPoint(Player player) {
-        set("arena.deathPoint.world", player.getWorld().getName());
-        set("arena.deathPoint.x", player.getLocation().getX() + 0.5);
-        set("arena.deathPoint.y", player.getLocation().getY() + 0.5);
-        set("arena.deathPoint.z", player.getLocation().getZ() + 0.5);
-        set("arena.deathPoint.yaw", player.getLocation().getYaw());
-        set("arena.deathPoint.pitch", player.getLocation().getPitch());
+    public void setLosePoint(Player player) {
+        set("arena.losePoint.world", player.getWorld().getName());
+        set("arena.losePoint.x", player.getLocation().getX() + 0.5);
+        set("arena.losePoint.y", player.getLocation().getY() + 0.5);
+        set("arena.losePoint.z", player.getLocation().getZ() + 0.5);
+        set("arena.losePoint.yaw", player.getLocation().getYaw());
+        set("arena.losePoint.pitch", player.getLocation().getPitch());
         saveConfig();
     }
-    public Location getDeathPoint() {
+    public Location getLosePoint() {
         Location point = new Location(
-                Bukkit.getServer().getWorld((String) config.get("arena.deathPoint.world")),
-                config.getDouble("arena.deathPoint.x"),
-                config.getDouble("arena.deathPoint.y"),
-                config.getDouble("arena.deathPoint.z"),
-                (float) config.getDouble("arena.deathPoint.yaw"),
-                (float) config.getDouble("arena.deathPoint.pitch")
+                Bukkit.getServer().getWorld((String) config.get("arena.losePoint.world")),
+                config.getDouble("arena.losePoint.x"),
+                config.getDouble("arena.losePoint.y"),
+                config.getDouble("arena.losePoint.z"),
+                (float) config.getDouble("arena.losePoint.yaw"),
+                (float) config.getDouble("arena.losePoint.pitch")
         );
         return point;
     }
@@ -133,7 +110,7 @@ public class TournamentFiles {
     }
     public Location getLobbyPoint() {
         Location point = new Location(
-                Bukkit.getServer().getWorld((String) config.get("arena.lobbyPoint.world")),
+                Bukkit.getServer().getWorld(config.get("arena.lobbyPoint.world").toString()),
                 config.getDouble("arena.lobbyPoint.x"),
                 config.getDouble("arena.lobbyPoint.y"),
                 config.getDouble("arena.lobbyPoint.z"),

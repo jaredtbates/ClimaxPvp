@@ -63,7 +63,7 @@ public class TournamentUtils {
                 final int taskid2 = taskid;
                 countdown--;
                 if (countdown <= 0) {
-                    if (ClimaxPvp.inTourney.size() < 3) {
+                    if (ClimaxPvp.inTourney.size() < 4) {
                         endTourney();
                         Bukkit.getServer().getScheduler().cancelTask(taskid2);
                         countdown = countdownOriginal;
@@ -184,6 +184,11 @@ public class TournamentUtils {
                         ClimaxPvp.tourneyWinners.remove(players);
                     }
                 }
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    if (ClimaxPvp.inTourneyLobby.contains(players)) {
+                        ClimaxPvp.inTourneyLobby.remove(players);
+                    }
+                }
             }
         }, 20L * 3);
         countdown = countdownOriginal;
@@ -215,6 +220,11 @@ public class TournamentUtils {
                         ClimaxPvp.tourneyWinners.remove(players);
                     }
                 }
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    if (ClimaxPvp.inTourneyLobby.contains(players)) {
+                        ClimaxPvp.inTourneyLobby.remove(players);
+                    }
+                }
             }
         }, 20L * 5);
         countdown = countdownOriginal;
@@ -244,6 +254,11 @@ public class TournamentUtils {
                 for (Player players : Bukkit.getOnlinePlayers()) {
                     if (ClimaxPvp.tourneyWinners.contains(players)) {
                         ClimaxPvp.tourneyWinners.remove(players);
+                    }
+                }
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    if (ClimaxPvp.inTourneyLobby.contains(players)) {
+                        ClimaxPvp.inTourneyLobby.remove(players);
                     }
                 }
             }

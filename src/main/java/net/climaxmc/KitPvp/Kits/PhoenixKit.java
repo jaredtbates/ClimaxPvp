@@ -48,7 +48,7 @@ public class PhoenixKit extends Kit {
         player.getInventory().addItem(sword);
 
         ItemMeta blazeMeta = ability.getItemMeta();
-        blazeMeta.setDisplayName(ChatColor.AQUA + "Flame Rush §f» §8[§6" + cooldown + "§8]");
+        blazeMeta.setDisplayName(ChatColor.AQUA + "Flame Rush \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(blazeMeta);
         player.getInventory().addItem(ability);
 
@@ -94,7 +94,7 @@ public class PhoenixKit extends Kit {
         }
 
         ItemMeta blazeMeta = ability.getItemMeta();
-        blazeMeta.setDisplayName(ChatColor.AQUA + "Flame Rush §f» §8[§6" + cooldown + "§8]");
+        blazeMeta.setDisplayName(ChatColor.AQUA + "Flame Rush \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(blazeMeta);
         player.getInventory().addItem(ability);
 

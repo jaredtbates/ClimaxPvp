@@ -73,7 +73,7 @@ public class TournamentEvents implements Listener {
             event.setCancelled(true);
         }*/
         if (ClimaxPvp.inTourney.contains(player)) {
-            if (!event.getMessage().contains("tourney")) {
+            if (!event.getMessage().toLowerCase().startsWith("/tourney")) {
                 player.sendMessage(ChatColor.RED + "You can only do /tourney while in a tournament! Do /tourney leave to leave!");
                 player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                 event.setCancelled(true);

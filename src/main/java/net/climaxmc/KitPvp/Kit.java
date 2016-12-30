@@ -121,12 +121,12 @@ public abstract class Kit implements Listener, CommandExecutor {
             player.sendMessage(ChatColor.RED + "You cannot select a kit here!");
             return;
         }
-        if (!KitManager.isPlayerInKit(player) || (playerData.hasRank(Rank.MASTER) && player.getLocation().distance(player.getWorld().getSpawnLocation()) < 200)) {
+        if (!KitManager.isPlayerInKit(player)) {
             if ((playerData.getLevelColor().contains(String.valueOf(color.getChar()))
                     || playerData.getTemporaryPlayerData().containsKey("Admin Mode")
                     || (((playerData.hasRank(Rank.NINJA) && (color.equals(ChatColor.BLUE) || color.equals(ChatColor.GREEN)))
-                    || (playerData.hasRank(Rank.TITAN) && color.equals(ChatColor.RED))
-                    || (playerData.hasRank(Rank.MASTER) && color.equals(ChatColor.GOLD)))
+                    || (playerData.hasRank(Rank.MASTER) && color.equals(ChatColor.RED))
+                    || (playerData.hasRank(Rank.TITAN) && color.equals(ChatColor.GOLD)))
                         && !playerData.hasRank(Rank.TRUSTED)))
                     || KitManager.isAllKitsEnabled()) {
                 KitManager.getPlayersInKits().put(player.getUniqueId(), this);
@@ -185,6 +185,7 @@ public abstract class Kit implements Listener, CommandExecutor {
     }
 
     public void regenResistance(Player player) {
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0));
     }
 }

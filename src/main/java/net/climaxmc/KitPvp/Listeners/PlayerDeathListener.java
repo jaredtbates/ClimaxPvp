@@ -69,6 +69,9 @@ public class PlayerDeathListener implements Listener {
         SettingsFiles settingsFiles = new SettingsFiles();
 
         if (settingsFiles.getSpawnSoupValue(player)) {
+            if (ClimaxPvp.inTag.contains(player)) {
+                return;
+            }
             player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
             for (ItemStack item : player.getInventory().getContents()) {
                 if (item != null) {
@@ -84,43 +87,45 @@ public class PlayerDeathListener implements Listener {
             player.removePotionEffect(PotionEffectType.REGENERATION);
         }
 
-        if (settingsFiles.getRespawnValue(player) || (ClimaxPvp.isTourneyHosted && ClimaxPvp.inTourney.contains(player))) {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
+        if (!ClimaxPvp.inTag.contains(player)) {
+            if (settingsFiles.getRespawnValue(player) || (ClimaxPvp.isTourneyHosted && ClimaxPvp.inTourney.contains(player))) {
+                plugin.getServer().getScheduler().runTask(plugin, () -> {
 
-                if (!ClimaxPvp.isTourneyHosted && !ClimaxPvp.inTourney.contains(player)) {
-                    plugin.respawn(player);
-                }
+                    if (!ClimaxPvp.isTourneyHosted && !ClimaxPvp.inTourney.contains(player)) {
+                        plugin.respawn(player);
+                    }
 
-                if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
-                    new PvpKit().wearCheckLevel(player);
-                }
-                if (player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50) {
+                    if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
+                        new PvpKit().wearCheckLevel(player);
+                    }
+                    if (player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50) {
+                        player.getInventory().clear();
+                        player.getInventory().addItem(new I(Material.DIAMOND_AXE).name(org.bukkit.ChatColor.WHITE + "Duel Axe " + org.bukkit.ChatColor.AQUA + "(Punch a player!)"));
+                    }
+                });
+            } else {
+                plugin.getServer().getScheduler().runTask(plugin, () -> {
+                    player.setGameMode(GameMode.CREATIVE);
+                    player.setHealth(20);
+                    for (Player players : Bukkit.getServer().getOnlinePlayers()) {
+                        players.hidePlayer(player);
+                    }
+                    for (PotionEffect effect : player.getActivePotionEffects()) {
+                        player.removePotionEffect(effect.getType());
+                    }
+                    player.setAllowFlight(true);
+                    player.setFlying(true);
+                    player.setVelocity(player.getVelocity().setY(1.2));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 21, 0));
                     player.getInventory().clear();
-                    player.getInventory().addItem(new I(Material.DIAMOND_AXE).name(org.bukkit.ChatColor.WHITE + "Duel Axe " + org.bukkit.ChatColor.AQUA + "(Punch a player!)"));
-                }
-            });
-        } else {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
-                player.setGameMode(GameMode.CREATIVE);
-                player.setHealth(20);
-                for(Player players : Bukkit.getServer().getOnlinePlayers()){
-                    players.hidePlayer(player);
-                }
-                for (PotionEffect effect : player.getActivePotionEffects()) {
-                    player.removePotionEffect(effect.getType());
-                }
-                player.setAllowFlight(true);
-                player.setFlying(true);
-                player.setVelocity(player.getVelocity().setY(1.2));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 21, 0));
-                player.getInventory().clear();
-                player.getInventory().setArmorContents(null);
+                    player.getInventory().setArmorContents(null);
 
-                ClimaxPvp.deadPeoples.add(player);
+                    ClimaxPvp.deadPeoples.add(player);
 
-                player.getInventory().setItem(4, new I(Material.BOOK).name("§6§lRespawn"));
-            });
+                    player.getInventory().setItem(4, new I(Material.BOOK).name("\u00A76\u00A7lRespawn"));
+                });
+            }
         }
 
         if (ClimaxPvp.inDuel.contains(player)) {
@@ -226,7 +231,7 @@ public class PlayerDeathListener implements Listener {
             return;
         }
 
-        killer.sendMessage("§f» §7You killed " + ChatColor.RED + player.getName());
+        killer.sendMessage("\u00A7f» \u00A77You killed " + ChatColor.RED + player.getName());
 
         String rankTag = "";
         if (playerData.hasRank(Rank.NINJA)) {
@@ -303,22 +308,22 @@ public class PlayerDeathListener implements Listener {
                 plugin.getServer().broadcastMessage("" + ChatColor.GREEN + killer.getName() + ChatColor.GRAY + " has reached a killstreak of " + ChatColor.RED + killerAmount + ChatColor.GRAY + "!");
                 killerAmount = killerAmount * 2 + 20;
                 killerData.depositBalance(killerAmount);
-                killer.sendMessage("   §7You have gained §b$" + killerAmount + "!");
+                killer.sendMessage("   \u00A77You have gained \u00A7b$" + killerAmount + "!");
             } else {
                 killerData.depositBalance(10);
-                killer.sendMessage("   §7You have gained §b$10!");
-                killer.sendMessage("   §7You have reached a killstreak of §b" + KitPvp.killStreak.get(killer.getUniqueId()));
+                killer.sendMessage("   \u00A77You have gained \u00A7b$10!");
+                killer.sendMessage("   \u00A77You have reached a killstreak of \u00A7b" + KitPvp.killStreak.get(killer.getUniqueId()));
             }
         } else {
             KitPvp.killStreak.put(killer.getUniqueId(), 1);
             killerData.depositBalance(10);
-            killer.sendMessage("   §7You have gained §b$10!");
-            killer.sendMessage("   §7You have reached a killstreak of §b" + KitPvp.killStreak.get(killer.getUniqueId()));
+            killer.sendMessage("   \u00A77You have gained \u00A7b$10!");
+            killer.sendMessage("   \u00A77You have reached a killstreak of \u00A7b" + KitPvp.killStreak.get(killer.getUniqueId()));
         }
 
         if (KitPvp.killStreak.containsKey(player.getUniqueId())) {
             if (KitPvp.killStreak.get(player.getUniqueId()) >= 10) {
-                plugin.getServer().broadcastMessage("§f» §b" + killer.getName() + " §7destroyed " + ChatColor.RED + player.getName() + "'s " + "§7killstreak of §a" + KitPvp.killStreak.get(player.getUniqueId()) + "!");
+                plugin.getServer().broadcastMessage("\u00A7f» \u00A7b" + killer.getName() + " \u00A77destroyed " + ChatColor.RED + player.getName() + "'s " + "\u00A77killstreak of \u00A7a" + KitPvp.killStreak.get(player.getUniqueId()) + "!");
             }
             KitPvp.killStreak.remove(player.getUniqueId());
         }

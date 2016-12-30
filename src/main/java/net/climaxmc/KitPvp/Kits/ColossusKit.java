@@ -64,7 +64,7 @@ public class ColossusKit extends Kit {
         player.getInventory().addItem(sword);
 
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Slam §f» §8[§6" + cooldown + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Slam \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
 
@@ -106,7 +106,7 @@ public class ColossusKit extends Kit {
         }
 
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Slam §f» §8[§6" + cooldown + "§8]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Slam \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
     }

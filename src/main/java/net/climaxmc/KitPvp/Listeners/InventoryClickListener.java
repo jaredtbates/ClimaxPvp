@@ -10,6 +10,7 @@ import net.climaxmc.KitPvp.Kits.BomberKit;
 import net.climaxmc.KitPvp.Kits.FighterKit;
 import net.climaxmc.KitPvp.Menus.ReportGUI;
 import net.climaxmc.KitPvp.Menus.SettingsMenu;
+import net.climaxmc.KitPvp.Menus.SpecialKitsMenu;
 import net.climaxmc.KitPvp.Menus.TitlesMenu;
 import net.climaxmc.KitPvp.Utils.Challenges.Challenge;
 import net.climaxmc.KitPvp.Utils.Duels.DuelUtils;
@@ -82,6 +83,10 @@ public class InventoryClickListener implements Listener {
                         kit.wearCheckLevel(player);
                         plugin.getServer().getScheduler().runTask(plugin, player::closeInventory);
                     });
+                    if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Special Kits")) {
+                        SpecialKitsMenu specialKitsMenu = new SpecialKitsMenu(plugin);
+                        specialKitsMenu.openInventory(player);
+                    }
                     event.setCancelled(true);
                 }
             }
@@ -285,36 +290,6 @@ public class InventoryClickListener implements Listener {
                 settingsFiles.toggleGlobalChat(player);
             }
             event.setCancelled(true);
-        }
-        if (event.getClickedInventory().getName().contains("Duel Selector")) {
-            DuelUtils duelUtils = new DuelUtils(plugin);
-            if (event.getCurrentItem().getType().equals(Material.POTION) && event.getCurrentItem().getItemMeta().getDisplayName().contains("NoDebuff")) {
-                Player target = ClimaxPvp.initialRequest.get(player);
-                duelUtils.sendRequest(player, target, "NoDebuff");
-                event.setCancelled(true);
-                player.closeInventory();
-
-                ClimaxPvp.duelsKit.put(player, "NoDebuff");
-                ClimaxPvp.duelsKit.put(target, "NoDebuff");
-            }
-            if (event.getCurrentItem().getType().equals(Material.GOLDEN_APPLE) && event.getCurrentItem().getItemMeta().getDisplayName().contains("Gapple")) {
-                Player target = ClimaxPvp.initialRequest.get(player);
-                duelUtils.sendRequest(player, target, "Gapple");
-                event.setCancelled(true);
-                player.closeInventory();
-
-                ClimaxPvp.duelsKit.put(player, "Gapple");
-                ClimaxPvp.duelsKit.put(target, "Gapple");
-            }
-            if (event.getCurrentItem().getType().equals(Material.MUSHROOM_SOUP) && event.getCurrentItem().getItemMeta().getDisplayName().contains("Soup")) {
-                Player target = ClimaxPvp.initialRequest.get(player);
-                duelUtils.sendRequest(player, target, "Soup");
-                event.setCancelled(true);
-                player.closeInventory();
-
-                ClimaxPvp.duelsKit.put(player, "Soup");
-                ClimaxPvp.duelsKit.put(target, "Soup");
-            }
         }
         if (event.getClickedInventory().getName().contains("Cosmetics")) {
             if (event.getCurrentItem().getType().equals(Material.GHAST_TEAR)) {

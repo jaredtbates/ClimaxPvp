@@ -36,6 +36,7 @@ public class StrafeKit extends Kit {
         leggings.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
@@ -60,6 +61,7 @@ public class StrafeKit extends Kit {
         leggings.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().setLeggings(leggings);
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         boots.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
@@ -67,7 +69,6 @@ public class StrafeKit extends Kit {
         player.getInventory().addItem(sword);
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         player.getInventory().addItem(rod);
-
     }
 
     @EventHandler

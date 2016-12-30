@@ -37,7 +37,7 @@ public class SpectateCommand implements CommandExecutor {
         PlayerData playerData = plugin.getPlayerData(player);
 
         if (!playerData.hasRank(Rank.NINJA)) {
-            player.sendMessage(ChatColor.RED + "Please donate for Titan at https://donate.climaxmc.net for access to spectator mode!");
+            player.sendMessage(ChatColor.RED + "Please donate at https://donate.climaxmc.net for access to spectator mode!");
             return true;
         }
 

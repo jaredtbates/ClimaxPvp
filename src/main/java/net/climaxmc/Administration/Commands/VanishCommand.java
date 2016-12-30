@@ -142,14 +142,12 @@ public class VanishCommand implements CommandExecutor, Listener {
             plugin.getServer().broadcastMessage(ChatColor.DARK_AQUA + "Join" + ChatColor.DARK_GRAY + "\u00bb " + player.getName());
             String rankTag = "";
             if (playerData.hasRank(Rank.NINJA)) {
-                rankTag = org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "[" + playerData.getRank().getColor()
-                        + org.bukkit.ChatColor.BOLD + playerData.getRank().getPrefix() + org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "] ";
-                player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + ChatColor.BOLD + player.getName());
+                player.setPlayerListName(playerData.getLevelColor() + playerData.getRank().getColor() + ChatColor.BOLD + player.getName());
             }
             if (playerData.getRank().getColor() != null) {
-                player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + player.getName());
+                player.setPlayerListName(playerData.getLevelColor() + playerData.getRank().getColor() + player.getName());
             } else {
-                player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + player.getName());
+                player.setPlayerListName(playerData.getLevelColor() + player.getName());
             }
 
             KitPvp.getVanished().remove(player.getUniqueId());

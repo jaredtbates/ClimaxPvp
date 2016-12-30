@@ -20,7 +20,7 @@ public class SettingsMenu implements Listener {
     }
 
     public void openInventory(Player player) {
-        Inventory inv = plugin.getServer().createInventory(null, 27, "§8§lSettings");
+        Inventory inv = plugin.getServer().createInventory(null, 27, "\u00A78\u00A7lSettings");
 
         SettingsFiles settingsFiles = new SettingsFiles();
 
@@ -33,21 +33,21 @@ public class SettingsMenu implements Listener {
         }
 
         if (settingsFiles.getRespawnValue(player)) {
-            inv.setItem(11, new I(Material.REDSTONE).name(ChatColor.AQUA + "Toggle Insta-Respawn").lore("§7Currently: §a§lTrue"));
+            inv.setItem(11, new I(Material.REDSTONE).name(ChatColor.AQUA + "Toggle Insta-Respawn").lore("\u00A77Currently: \u00A7a\u00A7lTrue"));
         } else {
-            inv.setItem(11, new I(Material.REDSTONE).name(ChatColor.AQUA + "Toggle Insta-Respawn").lore("§7Currently: §c§lFalse"));
+            inv.setItem(11, new I(Material.REDSTONE).name(ChatColor.AQUA + "Toggle Insta-Respawn").lore("\u00A77Currently: \u00A7c\u00A7lFalse"));
         }
 
         if (settingsFiles.getReceiveMsgValue(player)) {
-            inv.setItem(13, new I(Material.BOOK).name(ChatColor.AQUA + "Toggle Receiving Msgs").lore("§7Currently: §a§lTrue"));
+            inv.setItem(13, new I(Material.BOOK).name(ChatColor.AQUA + "Toggle Receiving Msgs").lore("\u00A77Currently: \u00A7a\u00A7lTrue"));
         } else {
-            inv.setItem(13, new I(Material.BOOK).name(ChatColor.AQUA + "Toggle Receiving Msgs").lore("§7Currently: §c§lFalse"));
+            inv.setItem(13, new I(Material.BOOK).name(ChatColor.AQUA + "Toggle Receiving Msgs").lore("\u00A77Currently: \u00A7c\u00A7lFalse"));
         }
 
         if (settingsFiles.getGlobalChatValue(player)) {
-            inv.setItem(15, new I(Material.PAPER).name(ChatColor.AQUA + "Toggle Global Chat").lore("§7Currently: §a§lTrue"));
+            inv.setItem(15, new I(Material.PAPER).name(ChatColor.AQUA + "Toggle Global Chat").lore("\u00A77Currently: \u00A7a\u00A7lTrue"));
         } else {
-            inv.setItem(15, new I(Material.PAPER).name(ChatColor.AQUA + "Toggle Global Chat").lore("§7Currently: §c§lFalse"));
+            inv.setItem(15, new I(Material.PAPER).name(ChatColor.AQUA + "Toggle Global Chat").lore("\u00A77Currently: \u00A7c\u00A7lFalse"));
         }
 
         player.openInventory(inv);

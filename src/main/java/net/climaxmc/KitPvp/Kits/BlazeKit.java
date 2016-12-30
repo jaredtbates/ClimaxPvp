@@ -45,7 +45,7 @@ public class BlazeKit extends Kit {
         addSoup(player.getInventory(), 2, 35);
 
         ItemMeta blazeMeta = ability.getItemMeta();
-        blazeMeta.setDisplayName(ChatColor.AQUA + "Blaze §f» §8[§6" + cooldown + "§8]");
+        blazeMeta.setDisplayName(ChatColor.AQUA + "Blaze \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(blazeMeta);
         player.getInventory().addItem(ability);
 
@@ -84,7 +84,7 @@ public class BlazeKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
 
         ItemMeta blazeMeta = ability.getItemMeta();
-        blazeMeta.setDisplayName(ChatColor.AQUA + "Blaze §f» §8[§6" + cooldown + "§8]");
+        blazeMeta.setDisplayName(ChatColor.AQUA + "Blaze \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(blazeMeta);
         player.getInventory().addItem(ability);
 

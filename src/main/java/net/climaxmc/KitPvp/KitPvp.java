@@ -18,6 +18,8 @@ import net.climaxmc.KitPvp.Menus.ReportGUI;
 import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffectEvents;
 import net.climaxmc.KitPvp.Utils.Duels.DuelEvents;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
+import net.climaxmc.KitPvp.Utils.Tag.TagCommands;
+import net.climaxmc.KitPvp.Utils.Tag.TagEvents;
 import net.climaxmc.KitPvp.Utils.Tournaments.TournamentCommands;
 import net.climaxmc.KitPvp.Utils.Tournaments.TournamentEvents;
 import net.climaxmc.common.donations.trails.Trail;
@@ -74,6 +76,7 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new DuelEvents(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new TournamentEvents(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new DeathEffectEvents(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new TagEvents(plugin), plugin);
         //plugin.getServer().getPluginManager().registerEvents(new HackListeners(plugin), plugin);
 
         // Register commands
@@ -106,6 +109,7 @@ public class KitPvp {
         plugin.getCommand("cosmetics").setExecutor(new CosmeticsCommand(plugin));
         plugin.getCommand("tournament").setExecutor(new TournamentCommands(plugin));
         plugin.getCommand("unlockdeatheffect").setExecutor(new UnlockDeathEffectCommand(plugin));
+        //plugin.getCommand("tag").setExecutor(new TagCommands(plugin));
         /*plugin.getCommand("team").setExecutor(new TeamCommand(plugin));*/
         //plugin.getCommand("staffreq").setExecutor(new StaffReqCommand(plugin));
         //plugin.getCommand("afk").setExecutor(new AFKCommand(plugin));

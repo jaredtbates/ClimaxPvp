@@ -24,6 +24,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
+import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -51,6 +52,12 @@ public class PlayerInteractListener implements Listener {
         PlayerData playerData = plugin.getPlayerData(player);
         ItemStack item = event.getItem();
 
+        if (event.getClickedBlock() != null && event.getClickedBlock().getType().equals(Material.TRAP_DOOR)) {
+            if (!player.getGameMode().equals(GameMode.CREATIVE)) {
+                event.setCancelled(true);
+            }
+        }
+
         if (!player.getGameMode().equals(GameMode.CREATIVE) && !(event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_AIR))) {
             event.setCancelled(true);
         }
@@ -71,16 +78,23 @@ public class PlayerInteractListener implements Listener {
                 Inventory kitSelectorInventory = Bukkit.createInventory(null, 54, ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "Kit Selector");
 
                 ItemStack grayGlass = new I(Material.STAINED_GLASS_PANE).durability(15).name(" ");
+                ItemStack specialKits = new I(Material.STAINED_GLASS_PANE).durability(9).name(ChatColor.AQUA + "Special Kits");
                 kitSelectorInventory.setItem(0, grayGlass);
                 kitSelectorInventory.setItem(9, grayGlass);
+                /*kitSelectorInventory.setItem(18, specialKits);
+                kitSelectorInventory.setItem(27, specialKits);*/
                 kitSelectorInventory.setItem(18, grayGlass);
                 kitSelectorInventory.setItem(27, grayGlass);
+
                 kitSelectorInventory.setItem(36, grayGlass);
                 kitSelectorInventory.setItem(45, grayGlass);
                 kitSelectorInventory.setItem(8, grayGlass);
                 kitSelectorInventory.setItem(17, grayGlass);
+                /*kitSelectorInventory.setItem(26, specialKits);
+                kitSelectorInventory.setItem(35, specialKits);*/
                 kitSelectorInventory.setItem(26, grayGlass);
                 kitSelectorInventory.setItem(35, grayGlass);
+
                 kitSelectorInventory.setItem(44, grayGlass);
                 kitSelectorInventory.setItem(53, grayGlass);
 
@@ -144,8 +158,8 @@ public class PlayerInteractListener implements Listener {
                     if ((playerData.hasData("Admin Mode")
                             || playerData.getLevelColor().contains(kit.getColor() + "")
                             || (((playerData.hasRank(Rank.NINJA) && (kit.getColor().equals(ChatColor.BLUE) || kit.getColor().equals(ChatColor.GREEN)))
-                            || (playerData.hasRank(Rank.TITAN) && kit.getColor().equals(ChatColor.RED))
-                            || (playerData.hasRank(Rank.MASTER) && kit.getColor().equals(ChatColor.GOLD)))
+                            || (playerData.hasRank(Rank.MASTER) && kit.getColor().equals(ChatColor.RED))
+                            || (playerData.hasRank(Rank.TITAN) && kit.getColor().equals(ChatColor.GOLD)))
                                 && !playerData.hasRank(Rank.TRUSTED)))
                             || KitManager.isAllKitsEnabled()) {
                         if (kit.getColor().equals(ChatColor.DARK_PURPLE)) {
@@ -198,14 +212,14 @@ public class PlayerInteractListener implements Listener {
                     upgradeInventory.setItem(47, new I(Material.STAINED_GLASS_PANE).durability(7).name(" "));
                     upgradeInventory.setItem(51, new I(Material.STAINED_GLASS_PANE).durability(7).name(" "));
 
-                    ItemStack fighter = new I(Material.DIAMOND_SWORD).name("§c§lFighter").lore("§7Fighters use hand-to-hand combat and ")
-                            .lore("§7light but durable armor to ")
-                            .lore("§7defeat their opponents.")
+                    ItemStack fighter = new I(Material.DIAMOND_SWORD).name("\u00A7c\u00A7lFighter").lore("\u00A77Fighters use hand-to-hand combat and ")
+                            .lore("\u00A77light but durable armor to ")
+                            .lore("\u00A77defeat their opponents.")
                             .lore(" ")
-                            .lore("§eUpgrades §6(Tier 1 §e- §6Tier 4):")
-                            .lore("§cArmor: §7Full Chain §f- §7Full Iron")
-                            .lore("§cSword: §7Iron §f- §7Diamond")
-                            .lore("§cAbilities: §7None §f- §73");
+                            .lore("\u00A7eUpgrades \u00A76(Tier 1 \u00A7e- \u00A76Tier 4):")
+                            .lore("\u00A7cArmor: \u00A77Full Chain \u00A7f- \u00A77Full Iron")
+                            .lore("\u00A7cSword: \u00A77Iron \u00A7f- \u00A77Diamond")
+                            .lore("\u00A7cAbilities: \u00A77None \u00A7f- \u00A773");
                     upgradeInventory.setItem(11, fighter);
 
                     player.openInventory(upgradeInventory);
@@ -265,10 +279,10 @@ public class PlayerInteractListener implements Listener {
         }
     }
     @EventHandler
-    public void interactEvent(PlayerInteractEvent event) {
+    public void PlayerFishEvent(PlayerFishEvent event) {
         Player player = event.getPlayer();
         if (player.getItemInHand().getType().equals(Material.FISHING_ROD)) {
-            if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+            //if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
                 if (player.getItemInHand().getDurability() < player.getItemInHand().getType().getMaxDurability() - 8) {
                     int rodSlot = player.getInventory().getHeldItemSlot();
                     short currentDurability = player.getItemInHand().getDurability();
@@ -285,7 +299,7 @@ public class PlayerInteractListener implements Listener {
                     event.setCancelled(true);
                     player.sendMessage(ChatColor.RED + "Your rod is too damaged to use! Wait a few seconds!");
                 }
-            }
+            //}
         }
     }
 }

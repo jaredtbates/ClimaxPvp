@@ -21,7 +21,7 @@ public class CosmeticsMenu implements Listener {
     }
 
     public void openInventory(Player player) {
-        Inventory inv = plugin.getServer().createInventory(null, 27, "§8§lCosmetics");
+        Inventory inv = plugin.getServer().createInventory(null, 27, "\u00A78\u00A7lCosmetics");
 
         for (int slot = 0; slot <= 9; slot++) {
             inv.setItem(slot, new I(Material.STAINED_GLASS_PANE).durability(15).name(" "));
@@ -31,11 +31,11 @@ public class CosmeticsMenu implements Listener {
             inv.setItem(slot, new I(Material.STAINED_GLASS_PANE).durability(15).name(" "));
         }
 
-        inv.setItem(11, new I(Material.GHAST_TEAR).name("§aTrails"));
+        inv.setItem(11, new I(Material.GHAST_TEAR).name("\u00A7aTrails"));
 
-        inv.setItem(13, new I(Material.NAME_TAG).name("§5Titles"));
+        inv.setItem(13, new I(Material.NAME_TAG).name("\u00A75Titles"));
 
-        inv.setItem(15, new I(Material.BLAZE_POWDER).name("§cDeath Effects"));
+        inv.setItem(15, new I(Material.BLAZE_POWDER).name("\u00A7cDeath Effects"));
 
         player.openInventory(inv);
     }

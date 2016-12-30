@@ -40,9 +40,11 @@ public class DonateBroadcastCommand implements CommandExecutor {
             return true;
         }
 
+        String message = StringUtils.join(args, ' ', 1, args.length);
+
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
-                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GOLD + args[0] + ChatColor.WHITE + " has donated for " + ChatColor.GOLD + args[1]);
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GOLD + args[0] + ChatColor.WHITE + " has donated for " + ChatColor.GOLD + message);
                 player.playSound(player.getLocation(), Sound.ENDERDRAGON_GROWL, 2, 1);
             }
         });

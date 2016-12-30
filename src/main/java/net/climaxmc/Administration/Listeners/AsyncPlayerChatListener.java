@@ -120,7 +120,7 @@ public class AsyncPlayerChatListener implements Listener {
 
         if (KitPvp.globalChatDisabled.contains(player.getUniqueId())) {
             event.setCancelled(true);
-            player.sendMessage("§f» §7Your Global Chat is currently off, you can toggle it in §6Settings!");
+            player.sendMessage("\u00A7f» \u00A77Your Global Chat is currently off, you can toggle it in \u00A76Settings!");
         }
 
         if (playerData.hasRank(Rank.NINJA)) {

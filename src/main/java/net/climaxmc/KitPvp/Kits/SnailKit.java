@@ -29,7 +29,8 @@ public class SnailKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
-        helmet.addEnchantment(Enchantment.DURABILITY, 2);
+        helmet.addEnchantment(Enchantment.DURABILITY, 5);
+        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
         meta.setColor(Color.SILVER);
         helmet.setItemMeta(meta);
@@ -52,7 +53,8 @@ public class SnailKit extends Kit {
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         player.getInventory().addItem(rod);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
-        helmet.addEnchantment(Enchantment.DURABILITY, 2);
+        helmet.addEnchantment(Enchantment.DURABILITY, 5);
+        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
         meta.setColor(Color.SILVER);
         helmet.setItemMeta(meta);
