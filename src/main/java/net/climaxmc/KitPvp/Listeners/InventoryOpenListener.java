@@ -37,7 +37,7 @@ public class InventoryOpenListener implements Listener {
             if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 350) {
                 event.setCancelled(true);
                 if (settingsFiles.getSpawnSoupValue(player)) {
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
+                    //player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
                     if (!getSoup.tryUse(player)) {
                         player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Cooldown time remaining: " + ChatColor.YELLOW + getSoup.getStatus(player).getRemainingTime(TimeUnit.SECONDS));
                         return;

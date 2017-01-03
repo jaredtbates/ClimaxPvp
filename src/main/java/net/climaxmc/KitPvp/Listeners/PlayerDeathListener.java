@@ -73,7 +73,7 @@ public class PlayerDeathListener implements Listener {
             if (ClimaxPvp.inTag.contains(player)) {
                 return;
             }
-            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
+            //player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
             for (ItemStack item : player.getInventory().getContents()) {
                 if (item != null) {
                     if (item.getType() == Material.MUSHROOM_SOUP || item.getType() == Material.BOWL || item.getType() == Material.FISHING_ROD) {
