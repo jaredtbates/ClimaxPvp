@@ -29,7 +29,7 @@ public class SnailKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
-        helmet.addEnchantment(Enchantment.DURABILITY, 5);
+        helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
         meta.setColor(Color.SILVER);
@@ -45,7 +45,7 @@ public class SnailKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
+
         regenResistance(player);
         ItemStack sword = new ItemStack(Material.DIAMOND_AXE);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
@@ -53,7 +53,7 @@ public class SnailKit extends Kit {
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         player.getInventory().addItem(rod);
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
-        helmet.addEnchantment(Enchantment.DURABILITY, 5);
+        helmet.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
         meta.setColor(Color.SILVER);

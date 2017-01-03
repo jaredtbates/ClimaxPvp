@@ -73,7 +73,6 @@ public class ZephyrKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         regenResistance(player);
 
         ItemStack helm = new ItemStack(LEATHER_HELMET);

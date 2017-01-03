@@ -60,10 +60,10 @@ public class ScoreboardListener implements Listener {
         objective.getScore("\u00A7f» \u00A7eWebsite:").setScore(3);
         objective.getScore("climaxmc.net").setScore(2);
         objective.getScore("\u00A7f-]\u00A7f\u00A77\u00A7m---------\u00A7f[-").setScore(1);
-        /*Objective healthObjective = board.registerNewObjective("showhealth", "health");
+        Objective healthObjective = board.registerNewObjective("showhealth", "health");
         healthObjective.setDisplaySlot(DisplaySlot.BELOW_NAME);
         healthObjective.setDisplayName(ChatColor.RED + "\u2764");
-        player.setHealth(player.getHealth());*/
+        player.setHealth(player.getHealth());
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

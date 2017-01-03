@@ -7,6 +7,7 @@ import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.FighterKit;
 import net.climaxmc.KitPvp.Kits.PvpKit;
+import net.climaxmc.KitPvp.Utils.EntityHider;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.KitPvp.Utils.TextComponentMessages;
 import net.climaxmc.KitPvp.Utils.I;
@@ -80,7 +81,7 @@ public class PlayerDeathListener implements Listener {
                     }
                 }
             }
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < 4; i++) {
                 player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
             }
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 2));
@@ -328,6 +329,8 @@ public class PlayerDeathListener implements Listener {
             KitPvp.killStreak.remove(player.getUniqueId());
         }
 
+        EntityHider entityHider = new EntityHider(ClimaxPvp.getInstance(), EntityHider.Policy.BLACKLIST);
+
         if (ClimaxPvp.inDuel.contains(player)) {
             if (ClimaxPvp.isDueling.containsKey(player)) {
                 Player opponent = ClimaxPvp.isDueling.get(player);
@@ -340,7 +343,7 @@ public class PlayerDeathListener implements Listener {
                         if (!(player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
                             plugin.respawn(player, ClimaxPvp.getInstance().getWarpLocation("Duel"));
                             for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-                                allPlayers.showPlayer(player);
+                                entityHider.showEntity(allPlayers, player);
                             }
                         }
                     }
@@ -351,7 +354,7 @@ public class PlayerDeathListener implements Listener {
                         if (!(opponent.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
                             plugin.respawn(opponent, ClimaxPvp.getInstance().getWarpLocation("Duel"));
                             for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-                                allPlayers.showPlayer(opponent);
+                                entityHider.showEntity(allPlayers, opponent);
                             }
                         }
                     }
@@ -370,7 +373,7 @@ public class PlayerDeathListener implements Listener {
                         if (!(player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
                             plugin.respawn(player, ClimaxPvp.getInstance().getWarpLocation("Duel"));
                             for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-                                allPlayers.showPlayer(player);
+                                entityHider.showEntity(allPlayers, player);
                             }
                         }
                     }
@@ -381,7 +384,7 @@ public class PlayerDeathListener implements Listener {
                         if (!(opponent.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
                             plugin.respawn(opponent, ClimaxPvp.getInstance().getWarpLocation("Duel"));
                             for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-                                allPlayers.showPlayer(opponent);
+                                entityHider.showEntity(allPlayers, opponent);
                             }
                         }
                     }

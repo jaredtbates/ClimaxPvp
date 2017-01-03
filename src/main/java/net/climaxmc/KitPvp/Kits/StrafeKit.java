@@ -49,7 +49,6 @@ public class StrafeKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         regenResistance(player);
         player.getInventory().clear();
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET);

@@ -78,7 +78,6 @@ public class BomberKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         regenResistance(player);
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);

@@ -49,7 +49,7 @@ public class InventoryOpenListener implements Listener {
                                 }
                             }
                         }
-                        for (int i = 0; i < 6; i++) {
+                        for (int i = 0; i < 4; i++) {
                             player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
                         }
                         player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 2));

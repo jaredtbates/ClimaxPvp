@@ -147,7 +147,6 @@ public abstract class Kit implements Listener, CommandExecutor {
                     SettingsFiles settingsFiles = new SettingsFiles();
                     //if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 16) {
                         if (settingsFiles.getSpawnSoupValue(player)) {
-                            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0));
                             for (ItemStack item : player.getInventory().getContents()) {
                                 if (item != null) {
                                     if (item.getType() == Material.MUSHROOM_SOUP || item.getType() == Material.BOWL || item.getType() == Material.FISHING_ROD) {
@@ -155,7 +154,7 @@ public abstract class Kit implements Listener, CommandExecutor {
                                     }
                                 }
                             }
-                            for (int i = 0; i < 6; i++) {
+                            for (int i = 0; i < 4; i++) {
                                 player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
                             }
                             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 1));
@@ -186,6 +185,6 @@ public abstract class Kit implements Listener, CommandExecutor {
 
     public void regenResistance(Player player) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0));
+        //player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0));
     }
 }

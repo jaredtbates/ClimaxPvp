@@ -79,7 +79,6 @@ public class RangerKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
         regenResistance(player);
 
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
