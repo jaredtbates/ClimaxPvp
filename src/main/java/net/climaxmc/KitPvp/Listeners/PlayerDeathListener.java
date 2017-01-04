@@ -69,7 +69,7 @@ public class PlayerDeathListener implements Listener {
 
         SettingsFiles settingsFiles = new SettingsFiles();
 
-        if (settingsFiles.getSpawnSoupValue(player)) {
+        /*if (settingsFiles.getSpawnSoupValue(player)) {
             if (ClimaxPvp.inTag.contains(player)) {
                 return;
             }
@@ -86,7 +86,7 @@ public class PlayerDeathListener implements Listener {
             }
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 2));
             player.removePotionEffect(PotionEffectType.REGENERATION);
-        }
+        }*/
 
         if (!ClimaxPvp.inTag.contains(player)) {
             if (settingsFiles.getRespawnValue(player) || (ClimaxPvp.isTourneyHosted && ClimaxPvp.inTourney.contains(player))) {

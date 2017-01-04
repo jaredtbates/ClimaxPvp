@@ -52,6 +52,7 @@ public class InventoryOpenListener implements Listener {
                         for (int i = 0; i < 4; i++) {
                             player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
                         }
+                        player.setHealth(20);
                         player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 2));
                         player.removePotionEffect(PotionEffectType.REGENERATION);
 

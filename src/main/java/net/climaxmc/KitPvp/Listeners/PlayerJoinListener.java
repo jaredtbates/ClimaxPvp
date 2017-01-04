@@ -205,6 +205,7 @@ public class PlayerJoinListener implements Listener {
         attachment.setPermission("pp.use", true);
         attachment.setPermission("poll.command.vote", true);
         attachment.setPermission("portals.use", true);
+        attachment.setPermission("AAC.bypass", false);
         if (!player.isOp()) {
             attachment.setPermission("bukkit.command.plugins", false);
             attachment.setPermission("bukkit.command.version", false);
@@ -231,8 +232,7 @@ public class PlayerJoinListener implements Listener {
                 attachment.setPermission("litebans.warn", true);
                 attachment.setPermission("litebans.warnings", true);
                 attachment.setPermission("litebans.notify.dupeip_join", false);
-                attachment.setPermission("reflex.notify", true);
-                attachment.setPermission("phoenix.notification", true);
+                attachment.setPermission("clicks.notification", true);
                 if (!player.isOp()) {
                     attachment.setPermission("AAC.bypass", false);
                 }
