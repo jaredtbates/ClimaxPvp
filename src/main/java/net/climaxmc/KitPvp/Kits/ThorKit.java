@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
 import me.xericker.disguiseabilities.DisguiseAbilities;
+import me.xericker.disguiseabilities.other.WorldGuard;
 import net.climaxmc.Administration.Commands.CheckCommand;
 import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
@@ -89,20 +90,31 @@ public class ThorKit extends Kit {
     }
 
     @EventHandler
-    public void onInteract(PlayerInteractEvent event) {
-        final Player player = event.getPlayer();
+    public void onDamage(EntityDamageByEntityEvent event) {
+        if (!event.getDamager().getType().equals(EntityType.PLAYER) || !event.getEntity().getType().equals(EntityType.PLAYER)) {
+            return;
+        }
+        Player player = (Player) event.getDamager();
+        Player target = (Player) event.getEntity();
         if (KitManager.isPlayerInKit(player, this)) {
             if (player.getInventory().getItemInHand().getType() == Material.GOLD_AXE) {
-                if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR) {
-                    if (!lightning.tryUse(player)) {
-                        return;
-                    }
-                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Lightning Strike" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.WRATH);
-
-                    lightning.startCooldown(player, this, cooldown, ability);
+                if (!lightning.tryUse(player)) {
+                    return;
                 }
+                player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Lightning Strike" + ChatColor.GOLD + " Ability!");
+
+                if (WorldGuard.isWithinProtectedRegion(target.getLocation())) {
+                    return;
+                }
+
+                target.getWorld().strikeLightning(player.getLocation());
+                target.damage(4);
+
+                lightning.startCooldown(player, this, cooldown, ability);
             }
+        }
+        if (event.getDamager().getType().equals(EntityType.LIGHTNING)) {
+            event.setCancelled(true);
         }
     }
 }

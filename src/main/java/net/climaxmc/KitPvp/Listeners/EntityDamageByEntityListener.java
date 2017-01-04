@@ -48,6 +48,10 @@ public class EntityDamageByEntityListener implements Listener {
                 }
             }
 
+            if (WorldGuard.isWithinProtectedRegion(target.getLocation())) {
+                event.setCancelled(true);
+            }
+
             if (target.getGameMode().equals(GameMode.CREATIVE) && ClimaxPvp.deadPeoples.contains(target)) {
                 event.setCancelled(true);
             }
