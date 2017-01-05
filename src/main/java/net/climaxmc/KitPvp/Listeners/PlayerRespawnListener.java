@@ -5,6 +5,7 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.EntityHider;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import org.bukkit.Bukkit;
@@ -42,8 +43,12 @@ public class PlayerRespawnListener implements Listener {
             players.showPlayer(player);
         }
 
-        ClimaxPvp.deadPeoples.remove(player);
+        EntityHider entityHider = new EntityHider(ClimaxPvp.getInstance(), EntityHider.Policy.BLACKLIST);
+        for (Player allPlayers : Bukkit.getOnlinePlayers()) {
+            entityHider.showEntity(allPlayers, player);
+        }
 
+        ClimaxPvp.deadPeoples.remove(player);
 
         player.setGameMode(GameMode.SURVIVAL);
         player.getInventory().clear();

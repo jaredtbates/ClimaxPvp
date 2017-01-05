@@ -47,7 +47,7 @@ public class PirateKit extends Kit {
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
         chestmeta.setColor(Color.BLACK);
         chest.setItemMeta(chestmeta);
@@ -76,7 +76,7 @@ public class PirateKit extends Kit {
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
         chestmeta.setColor(Color.BLACK);
         chest.setItemMeta(chestmeta);

@@ -8,8 +8,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
@@ -72,6 +74,16 @@ public class StrafeKit extends Kit {
 
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {
+        if (event.getDamager().getType().equals(EntityType.FISHING_HOOK)) {
+            Projectile projectile = (Projectile) event.getDamager();
+            if (projectile.getShooter() instanceof Player) {
+                Player player = (Player) projectile.getShooter();
+                if (KitManager.isPlayerInKit(player, this)) {
+                    player.removePotionEffect(PotionEffectType.SPEED);
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50, 1));
+                }
+            }
+        }
         if (event.getDamager().getType().equals(EntityType.PLAYER)) {
             Player player = (Player) event.getDamager();
             if (KitManager.isPlayerInKit(player, this)) {

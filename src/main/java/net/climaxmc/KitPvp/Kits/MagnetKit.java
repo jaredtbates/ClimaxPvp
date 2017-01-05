@@ -56,7 +56,7 @@ public class MagnetKit extends Kit {
         player.getInventory().setLeggings(legs);
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 2);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLUE);
         boots.setItemMeta(bootsmeta);
@@ -92,7 +92,7 @@ public class MagnetKit extends Kit {
         player.getInventory().setLeggings(legs);
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         boots.addEnchantment(Enchantment.DURABILITY, 2);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         LeatherArmorMeta bootsmeta = (LeatherArmorMeta) boots.getItemMeta();
         bootsmeta.setColor(Color.BLUE);
         boots.setItemMeta(bootsmeta);
