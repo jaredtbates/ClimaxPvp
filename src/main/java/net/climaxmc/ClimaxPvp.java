@@ -77,6 +77,7 @@ public class ClimaxPvp extends JavaPlugin {
 
     //public static ArrayList<Integer> activeDuelArenas = new ArrayList<>();
     public static ArrayList<Player> inDuel = new ArrayList<>();
+    public static ArrayList<Player> duelSpectators = new ArrayList<>();
     public static HashMap<Player, Player> isDueling = new HashMap<>();
     public static HashMap<Player, Player> isDuelingReverse = new HashMap<>();
     public static HashMap<Player, String> duelsKit = new HashMap<>();

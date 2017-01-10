@@ -53,7 +53,7 @@ public class PlayerInteractListener implements Listener {
         ItemStack item = event.getItem();
 
         if (event.getClickedBlock() != null && event.getClickedBlock().getType().equals(Material.TRAP_DOOR)) {
-            if (!player.getGameMode().equals(GameMode.CREATIVE)) {
+            if (!player.getGameMode().equals(GameMode.CREATIVE) || !player.isOp()) {
                 event.setCancelled(true);
             }
         }

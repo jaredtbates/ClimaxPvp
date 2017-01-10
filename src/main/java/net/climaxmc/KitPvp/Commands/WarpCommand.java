@@ -1,8 +1,10 @@
 package net.climaxmc.KitPvp.Commands;
 
+import net.climaxmc.Administration.Listeners.CombatLogListeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -86,10 +88,32 @@ public class WarpCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.GREEN + " Warp " + warpDeleteSection.getName() + " deleted!");
                 break;
             default:
-                player.sendMessage("\u00A77You have been warped to \u00A76" + args[0]);
-                plugin.warp(args[0], player);
-                if (args[0].equalsIgnoreCase("nosoup")) {
-                    player.setFoodLevel(17);
+                if (CombatLogListeners.getTagged().containsKey(player.getUniqueId())) {
+                    player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Teleporting in 5 seconds, don't move...");
+
+                    double x = player.getLocation().getBlockX();
+                    double y = player.getLocation().getBlockY();
+                    double z = player.getLocation().getBlockZ();
+
+                    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(ClimaxPvp.getInstance(), new Runnable() {
+                        public void run() {
+                            if (player.getLocation().getBlockX() == x && player.getLocation().getBlockY() == y && player.getLocation().getBlockZ() == z) {
+                                player.sendMessage("\u00A77You have been warped to \u00A76" + args[0]);
+                                plugin.warp(args[0], player);
+                                if (args[0].equalsIgnoreCase("nosoup")) {
+                                    player.setFoodLevel(17);
+                                }
+                            } else {
+                                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You moved! Teleport cancelled.");
+                            }
+                        }
+                    }, 20L * 5);
+                } else {
+                    player.sendMessage("\u00A77You have been warped to \u00A76" + args[0]);
+                    plugin.warp(args[0], player);
+                    if (args[0].equalsIgnoreCase("nosoup")) {
+                        player.setFoodLevel(17);
+                    }
                 }
                 break;
         }

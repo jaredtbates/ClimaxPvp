@@ -343,7 +343,7 @@ public class PlayerDeathListener implements Listener {
                         if (!(player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
                             plugin.respawn(player, ClimaxPvp.getInstance().getWarpLocation("Duel"));
                             for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-                                entityHider.showEntity(allPlayers, player);
+                                allPlayers.showPlayer(player);
                             }
                         }
                     }
@@ -354,7 +354,7 @@ public class PlayerDeathListener implements Listener {
                         if (!(opponent.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
                             plugin.respawn(opponent, ClimaxPvp.getInstance().getWarpLocation("Duel"));
                             for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-                                entityHider.showEntity(allPlayers, opponent);
+                                allPlayers.showPlayer(opponent);
                             }
                         }
                     }
@@ -373,7 +373,7 @@ public class PlayerDeathListener implements Listener {
                         if (!(player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
                             plugin.respawn(player, ClimaxPvp.getInstance().getWarpLocation("Duel"));
                             for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-                                entityHider.showEntity(allPlayers, player);
+                                allPlayers.showPlayer(player);
                             }
                         }
                     }
@@ -384,7 +384,7 @@ public class PlayerDeathListener implements Listener {
                         if (!(opponent.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
                             plugin.respawn(opponent, ClimaxPvp.getInstance().getWarpLocation("Duel"));
                             for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-                                entityHider.showEntity(allPlayers, opponent);
+                                allPlayers.showPlayer(opponent);
                             }
                         }
                     }

@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -29,7 +30,7 @@ public class PingCommand implements CommandExecutor {
         if (args.length == 1) {
             target = plugin.getServer().getPlayer(args[0]);
 
-            if (target == null) {
+            if (target == null || KitPvp.getVanished().contains(target.getUniqueId())) {
                 player.sendMessage(ChatColor.RED + "That player is not online!");
                 return true;
             }

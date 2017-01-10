@@ -1,20 +1,20 @@
 package net.climaxmc.KitPvp.Commands;
 
+import net.climaxmc.Administration.Listeners.CombatLogListeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Utils.Duels.DuelUtils;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.KitPvp.Utils.Duels.DuelFiles;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class DuelCommand implements CommandExecutor {
     private ClimaxPvp plugin;
@@ -62,30 +62,86 @@ public class DuelCommand implements CommandExecutor {
                     }
                 }
             }*/
+        if (args.length == 0 || args.length > 3 && !args[0].contains("admin")) {
+            player.sendMessage(ChatColor.RED + "/duel spec (Username)");
+            player.sendMessage(ChatColor.RED + "/duel spec leave");
+            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+        } else {
+            if (args[0].contains("spec")) {
+                if (ClimaxPvp.inDuel.contains(player)) {
+                    player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You can't spectate a duel if you're in one!");
+                    return true;
+                }
+                if (args.length == 2) {
+                    if (args[1].contains("leave")) {
+                        if (!ClimaxPvp.duelSpectators.contains(player)) {
+                            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You are not spectating a duel!");
+                            return true;
+                        }
+                        plugin.respawn(player);
+                        for (Player dueling : ClimaxPvp.inDuel) {
+                            player.hidePlayer(dueling);
+                        }
+                        ClimaxPvp.isSpectating.remove(player.getUniqueId());
+                        return true;
+                    }
+                    Player target = ClimaxPvp.getInstance().getServer().getPlayer(args[1]);
+                    if (ClimaxPvp.inDuel.contains(target) && target != null) {
+                        if (CombatLogListeners.getTagged().containsKey(player.getUniqueId())) {
+                            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Teleporting in 5 seconds, don't move...");
+
+                            double x = player.getLocation().getBlockX();
+                            double y = player.getLocation().getBlockY();
+                            double z = player.getLocation().getBlockZ();
+
+                            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(ClimaxPvp.getInstance(), new Runnable() {
+                                public void run() {
+                                    if (player.getLocation().getBlockX() == x && player.getLocation().getBlockY() == y && player.getLocation().getBlockZ() == z) {
+                                        spectateDuel(player, target);
+                                    } else {
+                                        player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You moved! Teleport cancelled.");
+                                    }
+                                }
+                            }, 20L * 5);
+                        } else {
+                            spectateDuel(player, target);
+                        }
+                    } else {
+                        player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "That player is not in a duel!");
+                        player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                    }
+                } else {
+                    player.sendMessage(ChatColor.RED + "/duel spec (Username)");
+                    player.sendMessage(ChatColor.RED + "/duel spec leave");
+                    player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
+                }
+            }
+        }
+
         PlayerData playerData = plugin.getPlayerData(player);
         if (playerData.hasRank(Rank.ADMINISTRATOR)) {
-            if (args.length == 0 || args.length > 3) {
-                player.sendMessage(ChatColor.RED + "/duel set <arena number> <1 or 2> (Must both be numbers)");
+            if (args.length == 0 || args.length == 1 || args.length > 4) {
+                player.sendMessage(ChatColor.RED + "/duel admin set <arena number> <1 or 2> (Must both be numbers)");
                 player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                 return true;
             }
-            if (args[0].contains("set")) {
-                if (args.length == 1) {
-                    player.sendMessage(ChatColor.RED + "/duel set <arena number> <1 or 2> (Must both be numbers)");
+            if (args[1].contains("set")) {
+                if (args.length == 2) {
+                    player.sendMessage(ChatColor.RED + "/duel admin set <arena number> <1 or 2> (Must both be numbers)");
                     player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                     return true;
-                } else if (args.length == 2) {
-                    player.sendMessage(ChatColor.RED + "/duel set <arena number> <1 or 2> (Must both be numbers)");
+                } else if (args.length == 3) {
+                    player.sendMessage(ChatColor.RED + "/duel admin set <arena number> <1 or 2> (Must both be numbers)");
                     player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                     return true;
                 }
-                if (args.length == 3) {
-                    String arenaNumber = args[1];
+                if (args.length == 4) {
+                    String arenaNumber = args[2];
                     DuelFiles duelFiles = new DuelFiles();
-                    if (args[2].equals("1")) {
+                    if (args[3].equals("1")) {
                         duelFiles.setArenaPoint1(player, arenaNumber);
                         player.sendMessage(ChatColor.GRAY + "Set point 1 for arena " + arenaNumber);
-                    } else if (args[2].equals("2")) {
+                    } else if (args[4].equals("2")) {
                         duelFiles.setArenaPoint2(player, arenaNumber);
                         player.sendMessage(ChatColor.GRAY + "Set point 2 for arena " + arenaNumber);
                     } else {
@@ -94,12 +150,7 @@ public class DuelCommand implements CommandExecutor {
                 }
                 return true;
             }
-        } else {
-            player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
-            player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
-            return true;
         }
-
             /*player.sendMessage(org.bukkit.ChatColor.RED + "That player is not online!");
             player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
             return true;*/
@@ -133,5 +184,30 @@ public class DuelCommand implements CommandExecutor {
             }
         }*/
         return false;
+    }
+    private void spectateDuel(Player player, Player target) {
+        player.teleport(target.getLocation());
+        player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Now spectating: " + ChatColor.GOLD + target.getName()
+                + ChatColor.GRAY + " vs. " + ChatColor.GOLD
+                + (ClimaxPvp.isDueling.get(target) != null ? ClimaxPvp.isDueling.get(target).getName() : ClimaxPvp.isDuelingReverse.get(target).getName()));
+        player.showPlayer(target);
+        player.showPlayer(ClimaxPvp.isDueling.get(target) != null ? ClimaxPvp.isDueling.get(target) : ClimaxPvp.isDuelingReverse.get(target));
+        ClimaxPvp.duelSpectators.add(player);
+        for (Player players : Bukkit.getOnlinePlayers()) {
+            players.hidePlayer(player);
+        }
+        for (PotionEffect effect : player.getActivePotionEffects()) {
+            player.removePotionEffect(effect.getType());
+        }
+        player.setAllowFlight(true);
+        player.setFlying(true);
+        player.setVelocity(player.getVelocity().setY(0.7));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0));
+        player.getInventory().clear();
+        player.getInventory().setArmorContents(null);
+        player.setGameMode(GameMode.CREATIVE);
+        player.setHealth(20);
+
+        ClimaxPvp.isSpectating.add(player.getUniqueId());
     }
 }

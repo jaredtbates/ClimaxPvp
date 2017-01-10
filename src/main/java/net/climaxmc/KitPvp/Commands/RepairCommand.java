@@ -40,10 +40,10 @@ public class RepairCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Why would you need to repair? You're not in a kit!");
                 return true;
             }*/
-            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You repaired your inventory for" + ChatColor.GREEN + "$20!");
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You repaired your inventory for" + ChatColor.GREEN + " $20!");
             playerData.withdrawBalance(20);
         } else {
-            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You do not have enough money to repair your inventory!");
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "Insufficient Funds");
         }
 
         return true;

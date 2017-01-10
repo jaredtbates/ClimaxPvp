@@ -43,10 +43,10 @@ public class PlayerRespawnListener implements Listener {
             players.showPlayer(player);
         }
 
-        EntityHider entityHider = new EntityHider(ClimaxPvp.getInstance(), EntityHider.Policy.BLACKLIST);
+        /*EntityHider entityHider = new EntityHider(ClimaxPvp.getInstance(), EntityHider.Policy.BLACKLIST);
         for (Player allPlayers : Bukkit.getOnlinePlayers()) {
             entityHider.showEntity(allPlayers, player);
-        }
+        }*/
 
         ClimaxPvp.deadPeoples.remove(player);
 

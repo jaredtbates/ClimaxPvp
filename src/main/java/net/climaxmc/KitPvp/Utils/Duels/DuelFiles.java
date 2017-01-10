@@ -101,8 +101,10 @@ public class DuelFiles {
 
         for (Player allPlayers : Bukkit.getOnlinePlayers()) {
             if (allPlayers != target && allPlayers != player) {
-                entityHider.hideEntity(allPlayers, player);
-                entityHider.hideEntity(allPlayers, target);
+                allPlayers.hidePlayer(player);
+                allPlayers.hidePlayer(target);
+                player.setPlayerListName(player.getPlayerListName());
+                target.setPlayerListName(target.getPlayerListName());
             }
         }
 

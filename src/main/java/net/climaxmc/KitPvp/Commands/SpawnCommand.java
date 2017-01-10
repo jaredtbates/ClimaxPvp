@@ -1,6 +1,8 @@
 package net.climaxmc.KitPvp.Commands;
 
+import net.climaxmc.Administration.Listeners.CombatLogListeners;
 import net.climaxmc.ClimaxPvp;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -22,11 +24,29 @@ public class SpawnCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
+        if (CombatLogListeners.getTagged().containsKey(player.getUniqueId())) {
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Teleporting in 5 seconds, don't move...");
 
+            double x = player.getLocation().getBlockX();
+            double y = player.getLocation().getBlockY();
+            double z = player.getLocation().getBlockZ();
 
-        plugin.respawn(player);
-        plugin.getCurrentWarps().remove(player.getUniqueId());
-        player.sendMessage("\u00A7f» \u00A77You have been teleported to spawn!");
+            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(ClimaxPvp.getInstance(), new Runnable() {
+                public void run() {
+                    if (player.getLocation().getBlockX() == x && player.getLocation().getBlockY() == y && player.getLocation().getBlockZ() == z) {
+                        plugin.respawn(player);
+                        plugin.getCurrentWarps().remove(player.getUniqueId());
+                        player.sendMessage("\u00A7f» \u00A77You have been teleported to spawn!");
+                    } else {
+                        player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You moved! Teleport cancelled.");
+                    }
+                }
+            }, 20L * 5);
+        } else {
+            plugin.respawn(player);
+            plugin.getCurrentWarps().remove(player.getUniqueId());
+            player.sendMessage("\u00A7f» \u00A77You have been teleported to spawn!");
+        }
 
         return true;
     }

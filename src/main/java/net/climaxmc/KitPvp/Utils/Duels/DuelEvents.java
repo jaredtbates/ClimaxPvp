@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 public class DuelEvents implements Listener {
     private ClimaxPvp plugin;
@@ -96,6 +97,13 @@ public class DuelEvents implements Listener {
                 ClimaxPvp.duelsKit.put(player, "Soup");
                 ClimaxPvp.duelsKit.put(target, "Soup");
             }
+        }
+    }
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        for (Player dueling : ClimaxPvp.inDuel) {
+            player.hidePlayer(dueling);
         }
     }
 }

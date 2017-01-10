@@ -134,14 +134,10 @@ public class CombatLogListeners implements Listener {
     public void onPlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
 
-        if (tagged.containsKey(player.getUniqueId()) && (event.getMessage().toLowerCase().startsWith("/spawn")
-                || event.getMessage().toLowerCase().startsWith("/warp")
-                || event.getMessage().toLowerCase().startsWith("/spec")
+        if (tagged.containsKey(player.getUniqueId()) && event.getMessage().toLowerCase().startsWith("/spec")
                 || event.getMessage().toLowerCase().startsWith("/climaxpvp:")
                 || event.getMessage().toLowerCase().startsWith("/tourney")
-                || event.getMessage().toLowerCase().startsWith("/tournament")
-                || event.getMessage().toLowerCase().startsWith("/repair")
-                || event.getMessage().toLowerCase().startsWith("/soup"))) {
+                || event.getMessage().toLowerCase().startsWith("/tournament")) {
             player.sendMessage(ChatColor.RED + "You cannot run that command during combat!");
             event.setCancelled(true);
         }
@@ -150,6 +146,15 @@ public class CombatLogListeners implements Listener {
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
+
+        if (tagged.containsKey(player.getUniqueId())) {
+            plugin.getServer().getScheduler().cancelTask(tagged.get(player.getUniqueId()));
+            tagged.remove(player.getUniqueId());
+        }
+    }
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
 
         if (tagged.containsKey(player.getUniqueId())) {
             plugin.getServer().getScheduler().cancelTask(tagged.get(player.getUniqueId()));

@@ -46,6 +46,15 @@ public class PlayerCommandPreprocessListener implements Listener {
             }
         }
 
+        if (ClimaxPvp.duelSpectators.contains(player)) {
+            if (!StringUtils.startsWithIgnoreCase(event.getMessage(), "/duel")) {
+                return;
+            } else {
+                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "Do \"/duel spec leave\" to leave!");
+                event.setCancelled(true);
+            }
+        }
+
         if (KitPvp.getVanished().contains(player.getUniqueId())) {
             if (StringUtils.startsWithIgnoreCase(event.getMessage(), "/spawn")
                     || StringUtils.startsWithIgnoreCase(event.getMessage(), "/warp")) {
@@ -61,7 +70,7 @@ public class PlayerCommandPreprocessListener implements Listener {
                     StringUtils.startsWithIgnoreCase(event.getMessage(), "/msg") ||
                     StringUtils.startsWithIgnoreCase(event.getMessage(), "/r")) {
                 event.setCancelled(true);
-                player.sendMessage(ChatColor.RED + "You may only to /spec while spectating!");
+                player.sendMessage(ChatColor.RED + "You may only do /spec while spectating!");
                 return;
             }
         }

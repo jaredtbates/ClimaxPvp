@@ -65,11 +65,11 @@ public class SpectateCommand implements CommandExecutor {
 
             ClimaxPvp.isSpectating.add(player.getUniqueId());
 
-            player.sendMessage(ChatColor.GREEN + "You are now spectating");
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You are now spectating");
         } else {
             plugin.respawn(player);
             ClimaxPvp.isSpectating.remove(player.getUniqueId());
-            player.sendMessage(ChatColor.GREEN + "You are no longer spectating");
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You are no longer spectating");
         }
 
         return true;
