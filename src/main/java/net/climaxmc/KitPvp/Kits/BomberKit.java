@@ -65,7 +65,7 @@ public class BomberKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
 
-        ItemStack ability = new ItemStack(Material.TNT);
+        ItemStack ability = new ItemStack(Material.TNT, 2);
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Throwing TNT");
         ability.setItemMeta(abilitymeta);
@@ -103,7 +103,7 @@ public class BomberKit extends Kit {
             ItemStack rod = new ItemStack(Material.FISHING_ROD);
             player.getInventory().addItem(rod);
         }
-        ItemStack ability = new ItemStack(Material.TNT);
+        ItemStack ability = new ItemStack(Material.TNT, 2);
         ItemMeta abilitymeta = ability.getItemMeta();
         abilitymeta.setDisplayName(ChatColor.AQUA + "Throwing TNT");
         ability.setItemMeta(abilitymeta);

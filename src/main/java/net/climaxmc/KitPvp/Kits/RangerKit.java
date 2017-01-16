@@ -68,11 +68,11 @@ public class RangerKit extends Kit {
         bow.addEnchantment(Enchantment.ARROW_DAMAGE, 3);
         player.getInventory().addItem(bow);
 
+        addSoup(player.getInventory(), 2, 34);
+
         ItemStack ability = new ItemStack(Material.ARROW);
         player.getInventory().addItem(ability);
         player.updateInventory();
-
-        addSoup(player.getInventory(), 2, 34);
     }
 
     protected void wearNoSoup(Player player) {

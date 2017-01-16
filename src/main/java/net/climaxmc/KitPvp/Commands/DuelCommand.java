@@ -83,6 +83,7 @@ public class DuelCommand implements CommandExecutor {
                             player.hidePlayer(dueling);
                         }
                         ClimaxPvp.isSpectating.remove(player.getUniqueId());
+                        ClimaxPvp.duelSpectators.remove(player);
                         return true;
                     }
                     Player target = ClimaxPvp.getInstance().getServer().getPlayer(args[1]);

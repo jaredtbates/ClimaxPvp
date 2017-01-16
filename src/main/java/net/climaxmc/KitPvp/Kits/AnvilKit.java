@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AnvilKit extends Kit {
 
-    private final int cooldown = 10;
+    private final int cooldown = 9;
     private ItemStack ability = new ItemStack(Material.ANVIL);
 
     private Ability ironpunch = new Ability("Iron Punch", 1, cooldown, TimeUnit.SECONDS);

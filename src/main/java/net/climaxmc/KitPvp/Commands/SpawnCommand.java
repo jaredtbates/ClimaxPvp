@@ -36,6 +36,7 @@ public class SpawnCommand implements CommandExecutor {
                     if (player.getLocation().getBlockX() == x && player.getLocation().getBlockY() == y && player.getLocation().getBlockZ() == z) {
                         plugin.respawn(player);
                         plugin.getCurrentWarps().remove(player.getUniqueId());
+                        plugin.getPlayersInWarp().remove(player.getUniqueId());
                         player.sendMessage("\u00A7f» \u00A77You have been teleported to spawn!");
                     } else {
                         player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You moved! Teleport cancelled.");
@@ -45,6 +46,7 @@ public class SpawnCommand implements CommandExecutor {
         } else {
             plugin.respawn(player);
             plugin.getCurrentWarps().remove(player.getUniqueId());
+            plugin.getPlayersInWarp().remove(player.getUniqueId());
             player.sendMessage("\u00A7f» \u00A77You have been teleported to spawn!");
         }
 

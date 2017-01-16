@@ -43,10 +43,10 @@ public class PlayerRespawnListener implements Listener {
             players.showPlayer(player);
         }
 
-        /*EntityHider entityHider = new EntityHider(ClimaxPvp.getInstance(), EntityHider.Policy.BLACKLIST);
         for (Player allPlayers : Bukkit.getOnlinePlayers()) {
+            EntityHider entityHider = new EntityHider(ClimaxPvp.getInstance(), EntityHider.Policy.BLACKLIST);
             entityHider.showEntity(allPlayers, player);
-        }*/
+        }
 
         ClimaxPvp.deadPeoples.remove(player);
 
@@ -82,6 +82,10 @@ public class PlayerRespawnListener implements Listener {
                     .name(ChatColor.GREEN + "Previous Kit: " + kit.getColor() + kit.getName())
                     .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Equip your previous kit."));
         }
+
+        player.getInventory().setItem(4, new I(Material.COMPASS)
+                .name(ChatColor.DARK_PURPLE + "Warps")
+                .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "View and teleport to various warps on the server!"));
 
         SettingsFiles settingsFiles = new SettingsFiles();
         if (settingsFiles.getSpawnSoupValue(player)) {

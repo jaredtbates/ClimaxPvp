@@ -47,7 +47,7 @@ public class PlayerCommandPreprocessListener implements Listener {
         }
 
         if (ClimaxPvp.duelSpectators.contains(player)) {
-            if (!StringUtils.startsWithIgnoreCase(event.getMessage(), "/duel")) {
+            if (StringUtils.startsWithIgnoreCase(event.getMessage(), "/duel")) {
                 return;
             } else {
                 player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "Do \"/duel spec leave\" to leave!");
@@ -65,10 +65,12 @@ public class PlayerCommandPreprocessListener implements Listener {
         }
         if (ClimaxPvp.isSpectating.contains(player.getUniqueId())) {
             if (!(StringUtils.startsWithIgnoreCase(event.getMessage(), "/spec") ||
-                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/spectate")) ||
+                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/spectate") ||
+                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/v") ||
+                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/vanish") ||
                     StringUtils.startsWithIgnoreCase(event.getMessage(), "/ping") ||
                     StringUtils.startsWithIgnoreCase(event.getMessage(), "/msg") ||
-                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/r")) {
+                    StringUtils.startsWithIgnoreCase(event.getMessage(), "/r"))) {
                 event.setCancelled(true);
                 player.sendMessage(ChatColor.RED + "You may only do /spec while spectating!");
                 return;

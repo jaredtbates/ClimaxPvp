@@ -57,7 +57,7 @@ public class DragonKit extends Kit {
         player.getInventory().addItem(ability);
 
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 3);
+        helm.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta helmMeta = (LeatherArmorMeta) helm.getItemMeta();
         helmMeta.setColor(Color.YELLOW);
@@ -95,7 +95,7 @@ public class DragonKit extends Kit {
         player.getInventory().addItem(ability);
 
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 3);
+        helm.addUnsafeEnchantment(Enchantment.DURABILITY, 5);
         helm.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         LeatherArmorMeta helmMeta = (LeatherArmorMeta) helm.getItemMeta();
         helmMeta.setColor(Color.YELLOW);

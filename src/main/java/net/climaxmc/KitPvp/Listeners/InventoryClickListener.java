@@ -291,6 +291,14 @@ public class InventoryClickListener implements Listener {
             }
             event.setCancelled(true);
         }
+        if (event.getClickedInventory().getName().contains("Warps")) {
+            for (String warpName : plugin.getWarpsConfig().getKeys(false)) {
+                if (event.getCurrentItem().getItemMeta().getDisplayName().contains(warpName)) {
+                    plugin.warp(warpName, player);
+                    player.sendMessage("\u00A77You have been warped to \u00A76" + warpName);
+                }
+            }
+        }
         if (event.getClickedInventory().getName().contains("Cosmetics")) {
             if (event.getCurrentItem().getType().equals(Material.GHAST_TEAR)) {
                 new TrailsInventory(player);

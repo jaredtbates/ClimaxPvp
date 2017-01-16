@@ -8,6 +8,7 @@ import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Menus.CosmeticsMenu;
 import net.climaxmc.KitPvp.Menus.SettingsMenu;
 import net.climaxmc.KitPvp.Menus.TitlesMenu;
+import net.climaxmc.KitPvp.Menus.WarpsMenu;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.database.PlayerData;
@@ -276,6 +277,12 @@ public class PlayerInteractListener implements Listener {
                     return;
                 }
             }
+            if (player.getItemInHand().getType().equals(Material.COMPASS)) {
+                if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.DARK_PURPLE + "Warps")) {
+                    WarpsMenu warpsMenu = new WarpsMenu(plugin);
+                    warpsMenu.openInventory(player);
+                }
+            }
         }
     }
     @EventHandler
@@ -286,12 +293,12 @@ public class PlayerInteractListener implements Listener {
                 if (player.getItemInHand().getDurability() < player.getItemInHand().getType().getMaxDurability() - 8) {
                     int rodSlot = player.getInventory().getHeldItemSlot();
                     short currentDurability = player.getItemInHand().getDurability();
-                    int newDurability = currentDurability + 5;
+                    int newDurability = currentDurability + 6;
                     player.getItemInHand().setDurability((short) newDurability);
                     Bukkit.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
                         public void run() {
                             short currentDurability = player.getInventory().getItem(rodSlot).getDurability();
-                            int newDurability = currentDurability - 6;
+                            int newDurability = currentDurability - 7;
                             player.getInventory().getItem(rodSlot).setDurability((short) newDurability);
                         }
                     }, 20L * 9);

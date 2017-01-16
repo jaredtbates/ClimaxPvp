@@ -133,6 +133,7 @@ public class VanishCommand implements CommandExecutor, Listener {
             player.getInventory().setItem(4, new I(Material.INK_SACK).durability(8).name(ChatColor.AQUA + "Check Mode"));
             KitPvp.getVanished().add(player.getUniqueId());
             ClimaxPvp.isVanished.add(player);
+            ClimaxPvp.isSpectating.add(player.getUniqueId());
         } else {
             player.setGameMode(GameMode.SURVIVAL);
             player.setAllowFlight(false);
@@ -153,6 +154,7 @@ public class VanishCommand implements CommandExecutor, Listener {
             KitPvp.getVanished().remove(player.getUniqueId());
             KitPvp.getChecking().remove(player.getUniqueId());
             ClimaxPvp.isVanished.remove(player);
+            ClimaxPvp.isSpectating.remove(player.getUniqueId());
             plugin.respawn(player);
         }
     }

@@ -130,6 +130,7 @@ public class WitherKit extends Kit {
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Wither Blast" + ChatColor.GOLD + " Ability!");
                     WitherSkull ws = (WitherSkull) player.launchProjectile(WitherSkull.class);
                     ws.setVelocity(player.getLocation().getDirection());
+                    ws.setVelocity(ws.getVelocity().multiply(2));
                     ws.setIsIncendiary(true);
                     ws.setYield(5.0F);
 

@@ -10,6 +10,7 @@ import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Utils.Challenges.ChallengesFiles;
+import net.climaxmc.KitPvp.Utils.ChatColor.DChatColor;
 import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffect;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
@@ -42,6 +43,8 @@ public class ClimaxPvp extends JavaPlugin {
     private static ClimaxPvp instance = null;
     @Getter
     public HashMap<UUID, Location> currentWarps = new HashMap<>();
+    @Getter
+    public HashMap<UUID, String> playersInWarp = new HashMap<>();
     @Getter
     private MySQL mySQL = null;
     @Getter
@@ -108,6 +111,9 @@ public class ClimaxPvp extends JavaPlugin {
     public static Player isIt;
 
     public static HashMap<Player, String> inTitle = new HashMap<>();
+
+    public static HashMap<UUID, DChatColor> currentChatColor = new HashMap<>();
+    public static boolean chatColorItalics = false;
 
     public static HashMap<Player, String> inEffect = new HashMap<>();
 
@@ -330,6 +336,7 @@ public class ClimaxPvp extends JavaPlugin {
 
         respawn(player, location);
         currentWarps.put(player.getUniqueId(), getWarpLocation(warp));
+        playersInWarp.put(player.getUniqueId(), warp);
 
         if (warp.equalsIgnoreCase("Fair")) {
             new PvpKit().wearCheckLevel(player);

@@ -140,6 +140,8 @@ public class PlayerJoinListener implements Listener {
             }
         }
 
+
+
         event.setJoinMessage((player.hasPlayedBefore() ? ChatColor.DARK_AQUA : ChatColor.GOLD) + "Join" + ChatColor.DARK_GRAY + "\u00BB " + player.getName());
 
         plugin.respawn(player);

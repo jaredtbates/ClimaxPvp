@@ -103,7 +103,7 @@ public class DuelEvents implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         for (Player dueling : ClimaxPvp.inDuel) {
-            player.hidePlayer(dueling);
+            entityHider.hideEntity(dueling, player);
         }
     }
 }

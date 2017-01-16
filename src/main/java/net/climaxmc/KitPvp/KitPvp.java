@@ -15,6 +15,7 @@ import net.climaxmc.KitPvp.Kits.FighterKit;
 import net.climaxmc.KitPvp.Listeners.*;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
 import net.climaxmc.KitPvp.Menus.ReportGUI;
+import net.climaxmc.KitPvp.Utils.ChatColor.ChatColorEvents;
 import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffectEvents;
 import net.climaxmc.KitPvp.Utils.Duels.DuelEvents;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
@@ -77,6 +78,7 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new TournamentEvents(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new DeathEffectEvents(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new TagEvents(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new ChatColorEvents(plugin), plugin);
         //plugin.getServer().getPluginManager().registerEvents(new HackListeners(plugin), plugin);
 
         // Register commands

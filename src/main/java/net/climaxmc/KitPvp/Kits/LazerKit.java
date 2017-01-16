@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
 
 public class LazerKit extends Kit {
 
-    private final int cooldown = 9;
+    private final int cooldown = 8;
     private ItemStack ability = new ItemStack(Material.INK_SACK, 1, (byte) 6);
 
     private Ability beam = new Ability("Beam", 1, cooldown, TimeUnit.SECONDS);

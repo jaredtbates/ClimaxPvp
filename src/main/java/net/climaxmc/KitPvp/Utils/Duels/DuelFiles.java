@@ -97,14 +97,11 @@ public class DuelFiles {
         player.teleport(point1);
         target.teleport(point2);
 
-        EntityHider entityHider = new EntityHider(ClimaxPvp.getInstance(), EntityHider.Policy.BLACKLIST);
-
         for (Player allPlayers : Bukkit.getOnlinePlayers()) {
             if (allPlayers != target && allPlayers != player) {
-                allPlayers.hidePlayer(player);
-                allPlayers.hidePlayer(target);
-                player.setPlayerListName(player.getPlayerListName());
-                target.setPlayerListName(target.getPlayerListName());
+                EntityHider entityHider = new EntityHider(ClimaxPvp.getInstance(), EntityHider.Policy.BLACKLIST);
+                entityHider.hideEntity(allPlayers, player);
+                entityHider.hideEntity(allPlayers, target);
             }
         }
 

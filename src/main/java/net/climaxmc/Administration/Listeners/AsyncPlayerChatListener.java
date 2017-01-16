@@ -8,6 +8,8 @@ import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.ChatColor.ChatColorFiles;
+import net.climaxmc.KitPvp.Utils.ChatColor.DChatColor;
 import net.climaxmc.KitPvp.Utils.Titles.TitleFiles;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
@@ -175,6 +177,18 @@ public class AsyncPlayerChatListener implements Listener {
             event.setCancelled(true);
             player.sendMessage(ChatColor.RED + "We are not currently accepting staff applications.");
         }*/
+
+        if (ClimaxPvp.currentChatColor.containsKey(player.getUniqueId())) {
+            for (DChatColor color : DChatColor.values()) {
+                if (color.getName().equals(ClimaxPvp.currentChatColor.get(player.getUniqueId()).getName())) {
+                    //if (ClimaxPvp.chatColorItalics) {
+                    //    event.setMessage(color.getColor() + "" + ChatColor.ITALIC + event.getMessage());
+                    //} else {
+                        event.setMessage(color.getColor() + event.getMessage());
+                    //}
+                }
+            }
+        }
 
         if (ChatCommands.chatSilenced && !playerData.hasRank(Rank.TRIAL_MODERATOR)) {
             event.setCancelled(true);

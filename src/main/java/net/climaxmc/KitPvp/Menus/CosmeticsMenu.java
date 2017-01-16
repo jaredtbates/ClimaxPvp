@@ -31,11 +31,13 @@ public class CosmeticsMenu implements Listener {
             inv.setItem(slot, new I(Material.STAINED_GLASS_PANE).durability(15).name(" "));
         }
 
-        inv.setItem(11, new I(Material.GHAST_TEAR).name("\u00A7aTrails"));
+        inv.setItem(10, new I(Material.GHAST_TEAR).name("\u00A7aTrails"));
 
-        inv.setItem(13, new I(Material.NAME_TAG).name("\u00A75Titles"));
+        inv.setItem(12, new I(Material.NAME_TAG).name("\u00A75Titles"));
 
-        inv.setItem(15, new I(Material.BLAZE_POWDER).name("\u00A7cDeath Effects"));
+        inv.setItem(14, new I(Material.BLAZE_POWDER).name("\u00A7cDeath Effects"));
+
+        inv.setItem(16, new I(Material.REDSTONE).name("\u00A7cChat Color"));
 
         player.openInventory(inv);
     }

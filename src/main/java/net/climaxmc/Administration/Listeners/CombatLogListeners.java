@@ -134,10 +134,10 @@ public class CombatLogListeners implements Listener {
     public void onPlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
 
-        if (tagged.containsKey(player.getUniqueId()) && event.getMessage().toLowerCase().startsWith("/spec")
+        if (tagged.containsKey(player.getUniqueId()) && (event.getMessage().toLowerCase().startsWith("/spec")
                 || event.getMessage().toLowerCase().startsWith("/climaxpvp:")
                 || event.getMessage().toLowerCase().startsWith("/tourney")
-                || event.getMessage().toLowerCase().startsWith("/tournament")) {
+                || event.getMessage().toLowerCase().startsWith("/tournament"))) {
             player.sendMessage(ChatColor.RED + "You cannot run that command during combat!");
             event.setCancelled(true);
         }
