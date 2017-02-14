@@ -80,7 +80,7 @@ public class DuelCommand implements CommandExecutor {
                         }
                         plugin.respawn(player);
                         for (Player dueling : ClimaxPvp.inDuel) {
-                            player.hidePlayer(dueling);
+                            plugin.hideEntity(player, dueling);
                         }
                         ClimaxPvp.isSpectating.remove(player.getUniqueId());
                         ClimaxPvp.duelSpectators.remove(player);
@@ -195,7 +195,7 @@ public class DuelCommand implements CommandExecutor {
         player.showPlayer(ClimaxPvp.isDueling.get(target) != null ? ClimaxPvp.isDueling.get(target) : ClimaxPvp.isDuelingReverse.get(target));
         ClimaxPvp.duelSpectators.add(player);
         for (Player players : Bukkit.getOnlinePlayers()) {
-            players.hidePlayer(player);
+            plugin.hideEntity(players, player);
         }
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());

@@ -27,7 +27,7 @@ public class InventoryOpenListener implements Listener {
         this.plugin = plugin;
     }
 
-    Ability getSoup = new Ability("get le soup", 1, 22, TimeUnit.SECONDS);
+    Ability getSoup = new Ability("get le soup", 1, 18, TimeUnit.SECONDS);
 
     @EventHandler
     public void onInventoryOpenEvent(InventoryOpenEvent event) {

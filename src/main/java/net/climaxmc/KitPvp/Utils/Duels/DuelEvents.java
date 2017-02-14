@@ -21,7 +21,6 @@ public class DuelEvents implements Listener {
         this.plugin = plugin;
     }
 
-    EntityHider entityHider = new EntityHider(ClimaxPvp.getInstance(), EntityHider.Policy.BLACKLIST);
     @EventHandler
     public void onEntitySpawn(ProjectileLaunchEvent event) {
         if (event.getEntity().getShooter() instanceof Player) {
@@ -30,9 +29,9 @@ public class DuelEvents implements Listener {
                 if(!allPlayers.getName().equals(player.getName())) {
                     if (ClimaxPvp.inDuel.contains(player)) {
                         if (allPlayers.equals(ClimaxPvp.isDueling.get(player)) || allPlayers.equals(ClimaxPvp.isDuelingReverse.get(player))) {
-                            entityHider.showEntity(allPlayers, event.getEntity());
+                            plugin.showEntity(allPlayers, event.getEntity());
                         } else {
-                            entityHider.hideEntity(allPlayers, event.getEntity());
+                            plugin.hideEntity(allPlayers, event.getEntity());
                         }
                     }
                 }
@@ -68,7 +67,7 @@ public class DuelEvents implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        if (event.getClickedInventory().getName().contains("Duel Selector")) {
+        if (event.getClickedInventory() != player.getInventory() && event.getClickedInventory().getName().contains("Duel Selector")) {
             DuelUtils duelUtils = new DuelUtils(plugin);
             if (event.getCurrentItem().getType().equals(Material.POTION) && event.getCurrentItem().getItemMeta().getDisplayName().contains("NoDebuff")) {
                 Player target = ClimaxPvp.initialRequest.get(player);
@@ -102,8 +101,10 @@ public class DuelEvents implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        for (Player dueling : ClimaxPvp.inDuel) {
-            entityHider.hideEntity(dueling, player);
+        for (Player players : Bukkit.getOnlinePlayers()) {
+            for (Player duelers : ClimaxPvp.getInstance().inDuel) {
+                plugin.hideEntity(player, duelers);
+            }
         }
     }
 }

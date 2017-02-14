@@ -45,8 +45,8 @@ public class TagEvents implements Listener {
             plugin.getServer().getScheduler().runTask(plugin, () -> {
                 player.setGameMode(GameMode.CREATIVE);
                 player.setHealth(20);
-                for (Player players : Bukkit.getServer().getOnlinePlayers()){
-                    players.hidePlayer(player);
+                for (Player players : Bukkit.getServer().getOnlinePlayers()) {
+                    plugin.hideEntity(players, player);
                 }
                 for (PotionEffect effect : player.getActivePotionEffects()) {
                     player.removePotionEffect(effect.getType());

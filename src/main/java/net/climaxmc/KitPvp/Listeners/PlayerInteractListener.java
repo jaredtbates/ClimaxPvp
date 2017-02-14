@@ -53,6 +53,31 @@ public class PlayerInteractListener implements Listener {
         PlayerData playerData = plugin.getPlayerData(player);
         ItemStack item = event.getItem();
 
+        /**
+         * The ever cursed "Do not spam click items!" check hast been smitten...
+         */
+        /*if (!KitManager.isPlayerInKit(player) && !ClimaxPvp.inDuel.contains(player)) {
+            if (!player.getGameMode().equals(GameMode.CREATIVE)) {
+                if (item != null || (!item.getType().equals(Material.NETHER_STAR) && (!event.getAction().equals(Action.LEFT_CLICK_AIR) || !event.getAction().equals(Action.LEFT_CLICK_BLOCK)))) {
+                    if (plugin.itemClickDelay.containsKey(player)) {
+                        plugin.itemClickDelay.put(player, plugin.itemClickDelay.get(player) + 1);
+                        Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                            public void run() {
+                                plugin.itemClickDelay.put(player, plugin.itemClickDelay.get(player) - 1);
+                            }
+                        }, 20L * 5);
+                        if (plugin.itemClickDelay.get(player) > 5) {
+                            event.setCancelled(true);
+                            player.sendMessage(ChatColor.RED + "Do not spam click items!");
+                            return;
+                        }
+                    } else {
+                        plugin.itemClickDelay.put(player, 0);
+                    }
+                }
+            }
+        }*/
+
         if (event.getClickedBlock() != null && event.getClickedBlock().getType().equals(Material.TRAP_DOOR)) {
             if (!player.getGameMode().equals(GameMode.CREATIVE) || !player.isOp()) {
                 event.setCancelled(true);
@@ -70,12 +95,13 @@ public class PlayerInteractListener implements Listener {
         if (player.getItemInHand().getType() == Material.MUSHROOM_SOUP && player.getHealth() < 20.0D) {
             if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
                 player.getInventory().getItemInHand().setType(Material.BOWL);
+                player.updateInventory();
                 player.setHealth(player.getHealth() >= 13.0D ? 20.0D : player.getHealth() + 7.0D);
             }
         }
 
         if (item != null) {
-            if (item.getType().equals(Material.NETHER_STAR)) {
+            if (item.getType().equals(Material.NETHER_STAR) && (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK))) {
                 Inventory kitSelectorInventory = Bukkit.createInventory(null, 54, ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "Kit Selector");
 
                 ItemStack grayGlass = new I(Material.STAINED_GLASS_PANE).durability(15).name(" ");
@@ -267,7 +293,7 @@ public class PlayerInteractListener implements Listener {
                 }
             }
             if (player.getItemInHand().getType().equals(Material.MUSHROOM_SOUP)) {
-                if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup")) {
+                if (player.getItemInHand().getItemMeta().getDisplayName() != null && player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup")) {
                     player.getInventory().setItemInHand(new I(Material.FISHING_ROD)
                             .name(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Regen")
                             .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Set your preferred healing type!"));
@@ -297,9 +323,11 @@ public class PlayerInteractListener implements Listener {
                     player.getItemInHand().setDurability((short) newDurability);
                     Bukkit.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
                         public void run() {
-                            short currentDurability = player.getInventory().getItem(rodSlot).getDurability();
-                            int newDurability = currentDurability - 7;
-                            player.getInventory().getItem(rodSlot).setDurability((short) newDurability);
+                            if (player.getInventory().getItem(rodSlot) != null) {
+                                short currentDurability = player.getInventory().getItem(rodSlot).getDurability();
+                                int newDurability = currentDurability - 7;
+                                player.getInventory().getItem(rodSlot).setDurability((short) newDurability);
+                            }
                         }
                     }, 20L * 9);
                 } else {

@@ -5,7 +5,6 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
-import net.climaxmc.KitPvp.Utils.EntityHider;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import org.bukkit.Bukkit;
@@ -44,8 +43,7 @@ public class PlayerRespawnListener implements Listener {
         }
 
         for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-            EntityHider entityHider = new EntityHider(ClimaxPvp.getInstance(), EntityHider.Policy.BLACKLIST);
-            entityHider.showEntity(allPlayers, player);
+            plugin.showEntity(player, allPlayers);
         }
 
         ClimaxPvp.deadPeoples.remove(player);
@@ -83,7 +81,7 @@ public class PlayerRespawnListener implements Listener {
                     .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Equip your previous kit."));
         }
 
-        player.getInventory().setItem(4, new I(Material.COMPASS)
+        player.getInventory().setItem(5, new I(Material.COMPASS)
                 .name(ChatColor.DARK_PURPLE + "Warps")
                 .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "View and teleport to various warps on the server!"));
 

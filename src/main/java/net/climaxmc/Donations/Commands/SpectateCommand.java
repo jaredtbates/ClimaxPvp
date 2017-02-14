@@ -49,7 +49,7 @@ public class SpectateCommand implements CommandExecutor {
             player.setGameMode(GameMode.CREATIVE);
             player.setHealth(20);
             for(Player players : Bukkit.getServer().getOnlinePlayers()){
-                players.hidePlayer(player);
+                plugin.hideEntity(players, player);
             }
             for (PotionEffect effect : player.getActivePotionEffects()) {
                 player.removePotionEffect(effect.getType());

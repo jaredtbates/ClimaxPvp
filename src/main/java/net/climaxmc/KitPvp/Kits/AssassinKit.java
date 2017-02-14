@@ -117,8 +117,23 @@ public class AssassinKit extends Kit {
                     if (!shadowstep.tryUse(player)) {
                         return;
                     }
-                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Shadow-Step" + ChatColor.GOLD + " Ability!");
-                    DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.SHADOW_STEP);
+                    player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Disappear" + ChatColor.GOLD + " Ability!");
+
+                    for (Player players : Bukkit.getOnlinePlayers()) {
+                        ClimaxPvp.getInstance().hideEntity(players, player);
+                    }
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0, false, false));
+                    player.getWorld().playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 0, 0);
+
+                    Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                        @Override
+                        public void run() {
+                            for (Player players : Bukkit.getOnlinePlayers()) {
+                                ClimaxPvp.getInstance().showEntity(players, player);
+                                player.removePotionEffect(PotionEffectType.INVISIBILITY);
+                            }
+                        }
+                    }, 20L * 3);
 
                     shadowstep.startCooldown(player, this, cooldown, ability);
 

@@ -1,30 +1,16 @@
 package net.climaxmc.KitPvp.Utils.Duels;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.Donations.Donations;
-import net.climaxmc.Donations.Listeners.InventoryClickListener;
-import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.GappleKit;
 import net.climaxmc.KitPvp.Kits.NoDebuffKit;
 import net.climaxmc.KitPvp.Kits.SoupKit;
-import net.climaxmc.KitPvp.Utils.EntityHider;
-import net.climaxmc.KitPvp.Utils.I;
-import net.climaxmc.common.database.PlayerData;
-import net.climaxmc.common.database.Rank;
-import net.climaxmc.common.donations.trails.Trail;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 public class DuelFiles {
 
@@ -44,9 +30,7 @@ public class DuelFiles {
     }
 
     private void set(String path, Object object) {
-        //Bukkit.getScheduler().runTaskAsynchronously(ClimaxPvp.getInstance(), () -> {
         config.set(path, object);
-        //});
     }
 
     public void saveConfig() {
@@ -80,7 +64,6 @@ public class DuelFiles {
         for (String arenas : config.getConfigurationSection("arenas").getKeys(false)) {
             numberOfArenas++;
         }
-        int failsafe = 0;
         int randomArena = (int)(Math.random() * numberOfArenas + 1);
         Location point1 = new Location(Bukkit.getServer().getWorld((String) config.get("arenas." + randomArena + ".point1.world")),
                 config.getDouble("arenas." + randomArena + ".point1.x"),
@@ -99,9 +82,8 @@ public class DuelFiles {
 
         for (Player allPlayers : Bukkit.getOnlinePlayers()) {
             if (allPlayers != target && allPlayers != player) {
-                EntityHider entityHider = new EntityHider(ClimaxPvp.getInstance(), EntityHider.Policy.BLACKLIST);
-                entityHider.hideEntity(allPlayers, player);
-                entityHider.hideEntity(allPlayers, target);
+                ClimaxPvp.getInstance().hideEntity(player, allPlayers);
+                ClimaxPvp.getInstance().hideEntity(target, allPlayers);
             }
         }
 

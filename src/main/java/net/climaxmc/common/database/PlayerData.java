@@ -153,6 +153,9 @@ public class PlayerData {
         if (kills >= 1500) {
             color += ChatColor.GOLD + "" + ChatColor.BOLD;
         }
+        if (kills >= 2000) {
+            color += ChatColor.DARK_PURPLE;
+        }
 
         return color;
     }

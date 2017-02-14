@@ -12,6 +12,7 @@ import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Utils.Challenges.ChallengesFiles;
 import net.climaxmc.KitPvp.Utils.ChatColor.DChatColor;
 import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffect;
+import net.climaxmc.KitPvp.Utils.EntityHider;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.database.MySQL;
@@ -23,6 +24,7 @@ import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -110,6 +112,11 @@ public class ClimaxPvp extends JavaPlugin {
     public static int tagPrize;
     public static Player isIt;
 
+    public HashMap<Player, String> lastHitType = new HashMap<>();
+    public HashMap<Player, Boolean> canHit = new HashMap<>();
+
+    public HashMap<Player, Integer> itemClickDelay = new HashMap<>();
+
     public static HashMap<Player, String> inTitle = new HashMap<>();
 
     public static HashMap<UUID, DChatColor> currentChatColor = new HashMap<>();
@@ -122,6 +129,8 @@ public class ClimaxPvp extends JavaPlugin {
     public static ArrayList<Player> deadPeoples = new ArrayList<>();
 
     public static ArrayList<Player> inFighterKit = new ArrayList<>();
+
+    private EntityHider entityHider;
 
     @Override
     public void onEnable() {
@@ -195,6 +204,15 @@ public class ClimaxPvp extends JavaPlugin {
         slackStaffHelp = new SlackApi("https://hooks.slack.com/services/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");
         slackDonations = new SlackApi("https://hooks.slack.com/services/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");
 
+        entityHider = new EntityHider(this, EntityHider.Policy.BLACKLIST);
+    }
+
+    public void hideEntity(Player observer, Entity entity) {
+        entityHider.hideEntity(observer, entity);
+    }
+
+    public void showEntity(Player observer, Entity entity) {
+        entityHider.showEntity(observer, entity);
     }
 
     @Override

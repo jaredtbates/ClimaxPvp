@@ -208,6 +208,7 @@ public class PlayerJoinListener implements Listener {
         attachment.setPermission("poll.command.vote", true);
         attachment.setPermission("portals.use", true);
         attachment.setPermission("AAC.bypass", false);
+        attachment.setPermission("worldedit.calc", false);
         if (!player.isOp()) {
             attachment.setPermission("bukkit.command.plugins", false);
             attachment.setPermission("bukkit.command.version", false);
@@ -215,6 +216,9 @@ public class PlayerJoinListener implements Listener {
 
         if (playerData != null) {
             if (playerData.hasRank(Rank.TRIAL_MODERATOR)) {
+
+                attachment.setPermission("antinub.staff", true);
+
                 attachment.setPermission("AAC.admin", true);
                 attachment.setPermission("AAC.notify", true);
                 attachment.setPermission("AAC.verbose", true);

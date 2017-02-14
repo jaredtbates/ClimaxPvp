@@ -19,7 +19,11 @@ public class PlayerDropItemListener implements Listener {
     public void onPlayerDropItem(PlayerDropItemEvent event) {
         Material item = event.getItemDrop().getItemStack().getType();
 
+        Player player = event.getPlayer();
+
         String itemName = event.getItemDrop().getItemStack().getItemMeta().getDisplayName();
+
+        player.updateInventory();
 
         if (itemName != null) {
             if (itemName.equals(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup") || itemName.equals(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Rod/Regen")) {

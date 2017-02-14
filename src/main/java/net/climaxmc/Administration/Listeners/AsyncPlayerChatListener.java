@@ -72,8 +72,8 @@ public class AsyncPlayerChatListener implements Listener {
                 event.getRecipients().remove(recipients);
                 if (playerData.hasRank(Rank.NINJA)) {
                     event.setMessage(ChatColor.translateAlternateColorCodes('&', event.getMessage()));
-                    String rankColor = rank.getColor();
 
+                    String rankColor = rank.getColor();
                     if (ClimaxPvp.inTitle.containsKey(player)) {
                         String title = ClimaxPvp.inTitle.get(player);
                         if (playerData.getRank().equals(Rank.BETA)) {

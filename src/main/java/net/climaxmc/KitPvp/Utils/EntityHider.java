@@ -87,7 +87,7 @@ public class EntityHider implements Listener {
     /**
      * Set the visibility status of a given entity for a particular observer.
      * @param observer - the observer player.
-     * @param entity - ID of the entity that will be hidden or made visible.
+     * @param entityID - ID of the entity that will be hidden or made visible.
      * @param visible - TRUE if the entity should be made visible, FALSE if not.
      * @return TRUE if the entity was visible before this method call, FALSE otherwise.
      */

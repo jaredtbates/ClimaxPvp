@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 public class GhastKit extends Kit {
 
-    private final int cooldown = 2;
+    private final int cooldown = 4;
     private ItemStack ability = new ItemStack(Material.GOLD_HOE);
 
     private Ability fireball = new Ability("Fireball Launcher", 1, cooldown, TimeUnit.SECONDS);
@@ -59,7 +59,7 @@ public class GhastKit extends Kit {
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 3);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setBoots(boots);
         addSoup(player.getInventory(), 2, 35);
     }
@@ -90,7 +90,7 @@ public class GhastKit extends Kit {
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         ItemStack boots = new ItemStack(Material.GOLD_BOOTS);
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FIRE, 3);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
         player.getInventory().setBoots(boots);
     }
 
