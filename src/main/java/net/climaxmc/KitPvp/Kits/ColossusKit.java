@@ -3,6 +3,7 @@ package net.climaxmc.KitPvp.Kits;
 import me.xericker.disguiseabilities.DisguiseAbilities;
 import net.climaxmc.Administration.Commands.CheckCommand;
 import net.climaxmc.Administration.Commands.VanishCommand;
+import net.climaxmc.AntiNub.AntiNub;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
@@ -121,6 +122,18 @@ public class ColossusKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Slam" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.ASSAULT_AND_BATTERY);
+
+                    for (Entity entities : player.getNearbyEntities(7, 7, 7)) {
+                        if (entities.getType().equals(EntityType.PLAYER)) {
+                            ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(entities.getUniqueId(), false);
+                            ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                                @Override
+                                public void run() {
+                                    ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(entities.getUniqueId(), true);
+                                }
+                            }, 20L * 4);
+                        }
+                    }
 
                     slam.startCooldown(player, this, cooldown, ability);
                 }

@@ -189,6 +189,10 @@ public class PlayerJoinListener implements Listener {
             ChatCommands.cmdspies.remove(player.getUniqueId());
         }
 
+        if (playerData.hasRank(Rank.TRIAL_MODERATOR)) {
+            ChatCommands.cmdspies.add(player.getUniqueId());
+        }
+
         if (FreezeCommand.frozen || FreezeCommand.frozenPlayers.contains(player)) {
             player.setWalkSpeed(0F);
         } else {

@@ -33,6 +33,19 @@ public class ChatFilter implements Listener {
             finalMessage += word + " ";
         }
 
+        double count = 0;
+        for (char character : finalMessage.toCharArray()) {
+            if (Character.isUpperCase(character)) {
+                count++;
+            }
+        }
+
+        if (finalMessage.length() >= 13) {
+            if (count / finalMessage.length() > 0.60) {
+                finalMessage = finalMessage.toLowerCase();
+            }
+        }
+
         event.setMessage(finalMessage.trim());
     }
 }

@@ -74,7 +74,7 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new ReportGUI(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new InventoryCloseListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ProjectileLaunchListener(plugin), plugin);
-        plugin.getServer().getPluginManager().registerEvents(new DuelEvents(plugin), plugin);
+        //plugin.getServer().getPluginManager().registerEvents(new DuelEvents(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new TournamentEvents(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new DeathEffectEvents(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new TagEvents(plugin), plugin);
@@ -103,7 +103,7 @@ public class KitPvp {
         plugin.getCommand("youtube").setExecutor(new YoutubeCommand(plugin));
         plugin.getCommand("pei").setExecutor(new PeiCommand());
         plugin.getCommand("staffalert").setExecutor(new StaffAlertCommand(plugin));
-        plugin.getCommand("duel").setExecutor(new DuelCommand(plugin));
+        //plugin.getCommand("duel").setExecutor(new DuelCommand(plugin));
         plugin.getCommand("unlocktrail").setExecutor(new UnlockTrailCommand(plugin));
         plugin.getCommand("usetoken").setExecutor(new UseTokenCommand(plugin));
         plugin.getCommand("settokens").setExecutor(new SetTokensCommand(plugin));

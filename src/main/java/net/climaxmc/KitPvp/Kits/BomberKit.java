@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Kits;
 
 import me.xericker.disguiseabilities.DisguiseAbilities;
+import net.climaxmc.AntiNub.AntiNub;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
@@ -177,16 +178,40 @@ public class BomberKit extends Kit {
         player.getInventory().setItem(player.getInventory().getHeldItemSlot(), tntInInv);
         player.updateInventory();
         TNTPrimed tnt = player.getWorld().spawn(player.getEyeLocation().add(player.getLocation().getDirection()), TNTPrimed.class);
-        tnt.setFuseTicks(17);
+        tnt.setFuseTicks(14);
         velocity(tnt, player.getLocation().getDirection().multiply(2), 0.5, false, 0.0, 0.1, 10.0, false);
         velocity(player, player.getLocation().getDirection().multiply(-1), tnt.getVelocity().length() + 0.02, false, 0.0, 0.2, 0.8, true);
         new TNTParticle(tnt);
+
+        ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(player.getUniqueId(), false);
+        ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(player.getUniqueId(), true);
+            }
+        }, 20L * 5);
     }
 
     @EventHandler
     public void onExplosion(EntityExplodeEvent event) {
         event.setCancelled(true); // This should fix the bomber issue! It should also enable damage from tnt!
 
+    }
+
+    @EventHandler
+    public void onDamage(EntityDamageByEntityEvent event) {
+        if (event.getDamager().getType().equals(EntityType.PRIMED_TNT)) {
+            if (event.getEntity().getType().equals(EntityType.PLAYER)) {
+
+                ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(event.getEntity().getUniqueId(), false);
+                ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                    @Override
+                    public void run() {
+                        ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(event.getEntity().getUniqueId(), true);
+                    }
+                }, 20L * 5);
+            }
+        }
     }
 
     @EventHandler

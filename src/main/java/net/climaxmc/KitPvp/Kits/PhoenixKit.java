@@ -3,6 +3,7 @@ package net.climaxmc.KitPvp.Kits;
 import me.xericker.disguiseabilities.DisguiseAbilities;
 import net.climaxmc.Administration.Commands.CheckCommand;
 import net.climaxmc.Administration.Commands.VanishCommand;
+import net.climaxmc.AntiNub.AntiNub;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
@@ -132,6 +133,15 @@ public class PhoenixKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Flame Rush" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.FLAME_DASH);
+
+
+                    ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(player.getUniqueId(), false);
+                    ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                        @Override
+                        public void run() {
+                            ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(player.getUniqueId(), true);
+                        }
+                    }, 20L * 5);
 
                     flamebreath.startCooldown(player, this, cooldown, ability);
                 }

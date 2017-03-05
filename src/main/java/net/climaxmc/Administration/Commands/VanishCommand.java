@@ -130,7 +130,7 @@ public class VanishCommand implements CommandExecutor, Listener {
             player.setFlying(true);
             plugin.getServer().getOnlinePlayers().stream().forEach(target -> target.hidePlayer(player));
             player.getInventory().clear();
-            player.getInventory().setItem(4, new I(Material.INK_SACK).durability(8).name(ChatColor.AQUA + "Check Mode"));
+            player.getInventory().setItem(0, new I(Material.INK_SACK).durability(8).name(ChatColor.AQUA + "Leave Vanish"));
             KitPvp.getVanished().add(player.getUniqueId());
             ClimaxPvp.isVanished.add(player);
         } else {
@@ -161,25 +161,8 @@ public class VanishCommand implements CommandExecutor, Listener {
     public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         if (KitPvp.getVanished().contains(player.getUniqueId())) {
-            if (event.getItem().getItemMeta().getDisplayName().contains("Check Mode")) {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false, false));
-                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You are now checking a player.");
-                player.setGameMode(GameMode.SURVIVAL);
-                player.setAllowFlight(true);
-                player.setFlying(true);
-                player.getInventory().setArmorContents(null);
-                KitPvp.getChecking().add(player.getUniqueId());
-                player.getInventory().setItem(4, new I(Material.INK_SACK).durability(10).name(ChatColor.AQUA + "Normal Mode"));
-                return;
-            }
-            if (event.getItem().getItemMeta().getDisplayName().contains("Normal Mode")) {
-                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You are no longer checking a player.");
-                player.getInventory().setItem(4, new I(Material.INK_SACK).durability(8).name(ChatColor.AQUA + "Check Mode"));
-                player.removePotionEffect(PotionEffectType.INVISIBILITY);
-                player.setGameMode(GameMode.CREATIVE);
-                plugin.getServer().getOnlinePlayers().stream().forEach(target -> target.hidePlayer(player));
-                KitPvp.getChecking().remove(player.getUniqueId());
-                return;
+            if (event.getItem().getItemMeta().getDisplayName().contains("Leave Vanish")) {
+                toggleVanish(player, ClimaxPvp.getInstance().getPlayerData(player));
             }
         }
     }

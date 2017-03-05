@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.Administration.Commands.CheckCommand;
 import net.climaxmc.Administration.Commands.VanishCommand;
+import net.climaxmc.AntiNub.AntiNub;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
@@ -111,6 +112,14 @@ public class IronGolemKit extends Kit {
                                 && (KitPvp.currentTeams.get(player.getName()) != target.getName()
                                 && KitPvp.currentTeams.get(target.getName()) != player.getName())) {
                             target.setVelocity(new Vector(0, 1.3, 0));
+
+                            ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(target.getUniqueId(), false);
+                            ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                                @Override
+                                public void run() {
+                                    ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(target.getUniqueId(), true);
+                                }
+                            }, 20L * 5);
 
                             Throw.startCooldown(player, this, cooldown, ability);
                         }

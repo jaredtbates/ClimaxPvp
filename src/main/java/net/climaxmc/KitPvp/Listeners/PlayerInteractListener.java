@@ -1,5 +1,7 @@
 package net.climaxmc.KitPvp.Listeners;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Inventories.TrailsInventory;
 import net.climaxmc.KitPvp.Kit;
@@ -293,7 +295,7 @@ public class PlayerInteractListener implements Listener {
                 }
             }
             if (player.getItemInHand().getType().equals(Material.MUSHROOM_SOUP)) {
-                if (player.getItemInHand().getItemMeta().getDisplayName() != null && player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup")) {
+                if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup")) {
                     player.getInventory().setItemInHand(new I(Material.FISHING_ROD)
                             .name(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Regen")
                             .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Set your preferred healing type!"));
@@ -307,6 +309,15 @@ public class PlayerInteractListener implements Listener {
                 if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.DARK_PURPLE + "Warps")) {
                     WarpsMenu warpsMenu = new WarpsMenu(plugin);
                     warpsMenu.openInventory(player);
+                }
+            }
+            if (player.getItemInHand().getType().equals(Material.POTION)) {
+                if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.translateAlternateColorCodes('&', "&8[&cAlpha&8] &fPractice"))) {
+                    event.setCancelled(true);
+                    ByteArrayDataOutput out = ByteStreams.newDataOutput();
+                    out.writeUTF("Connect");
+                    out.writeUTF("dev2");
+                    player.sendPluginMessage(ClimaxPvp.getInstance(), "BungeeCord", out.toByteArray());
                 }
             }
         }

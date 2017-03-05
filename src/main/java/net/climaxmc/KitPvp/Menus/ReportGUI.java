@@ -176,8 +176,6 @@ public class ReportGUI implements Listener {
 
                 if (ReportCommand.getCooldown().get(player.getUniqueId()) == 0) {
                     ReportCommand.getCooldown().remove(player.getUniqueId());
-                    player.playSound(player.getLocation(), Sound.NOTE_PIANO, 1, 1.5F);
-                    player.sendMessage(ChatColor.GREEN + "You are now able to report another player!");
                     this.cancel();
                 }
             }

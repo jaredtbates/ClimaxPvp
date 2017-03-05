@@ -1,5 +1,6 @@
 package net.climaxmc.KitPvp.Kits;
 
+import net.climaxmc.AntiNub.AntiNub;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
@@ -173,6 +174,14 @@ public class RangerKit extends Kit {
         double vel = event.getProjectile().getVelocity().length() * (0.1D + 0.1D * 2.25);
         // Knock player back
         velocity(player, player.getLocation().getDirection().multiply(-1), vel, false, 0.0D, 0.2D, 0.5D, true);
+
+        ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(player.getUniqueId(), false);
+        ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(player.getUniqueId(), true);
+            }
+        }, 20L * 4);
 
         Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
             @Override

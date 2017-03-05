@@ -3,6 +3,7 @@ package net.climaxmc.KitPvp.Kits;
 import me.xericker.disguiseabilities.DisguiseAbilities;
 import net.climaxmc.Administration.Commands.CheckCommand;
 import net.climaxmc.Administration.Commands.VanishCommand;
+import net.climaxmc.AntiNub.AntiNub;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
@@ -147,6 +148,14 @@ public class WitherKit extends Kit {
                 if (event.getDamager().getType() == EntityType.WITHER_SKULL) {
                     event.setCancelled(true);
                     player.setVelocity(player.getVelocity().setY(0.7));
+
+                    ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(player.getUniqueId(), false);
+                    ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                        @Override
+                        public void run() {
+                            ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(player.getUniqueId(), true);
+                        }
+                    }, 20L * 5);
                 }
             }
         }

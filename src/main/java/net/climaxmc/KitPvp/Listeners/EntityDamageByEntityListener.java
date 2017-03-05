@@ -125,9 +125,9 @@ public class EntityDamageByEntityListener implements Listener {
             if (WorldGuard.isWithinProtectedRegion(event.getEntity().getLocation())) {
                 //event.setCancelled(true);
             }
-            if (player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50) {
+            /*if (player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50) {
                 event.setCancelled(true);
-            }
+            }*/
         }
     }
 

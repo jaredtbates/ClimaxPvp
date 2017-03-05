@@ -1,6 +1,8 @@
 package net.climaxmc.KitPvp.Kits;
 
 import me.xericker.disguiseabilities.DisguiseAbilities;
+import net.climaxmc.AntiNub.AntiNub;
+import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.Ability;
@@ -9,6 +11,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
@@ -25,7 +29,7 @@ import static org.bukkit.Material.*;
 
 public class ZephyrKit extends Kit {
 
-    private final int cooldown = 12;
+    private final int cooldown = 5;
     private ItemStack ability = new ItemStack(FEATHER);
 
     private Ability absolutezero = new Ability("Gust", 1, cooldown, TimeUnit.SECONDS);
@@ -121,6 +125,18 @@ public class ZephyrKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.DARK_PURPLE + "Gust" + ChatColor.GOLD + " Ability!");
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.LAST_BREATH);
+
+                    for (Entity entities : player.getNearbyEntities(13, 5, 13)) {
+                        if (entities.getType().equals(EntityType.PLAYER)) {
+                            ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(entities.getUniqueId(), false);
+                            ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                                @Override
+                                public void run() {
+                                    ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(entities.getUniqueId(), true);
+                                }
+                            }, 20L * 4);
+                        }
+                    }
 
                     absolutezero.startCooldown(player, this, cooldown, ability);
                 }

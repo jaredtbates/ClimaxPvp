@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Listeners;
 
 import com.comphenix.protocol.PacketType;
 import net.climaxmc.Administration.Commands.ChatCommands;
+import net.climaxmc.AntiNub.AntiNub;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
@@ -95,10 +96,10 @@ public class PlayerDeathListener implements Listener {
                     if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
                         new PvpKit().wearCheckLevel(player);
                     }
-                    if (player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50) {
+                    /*if (player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50) {
                         player.getInventory().clear();
                         player.getInventory().addItem(new I(Material.DIAMOND_AXE).name(org.bukkit.ChatColor.WHITE + "Duel Axe " + org.bukkit.ChatColor.AQUA + "(Punch a player!)"));
-                    }
+                    }*/
                 });
             } else {
                 plugin.getServer().getScheduler().runTask(plugin, () -> {
@@ -141,12 +142,9 @@ public class PlayerDeathListener implements Listener {
         scoreboardListener.updateScoreboards();
 
         if (killer == null) {
-            if (plugin.getServer().getOnlinePlayers().size() >= 15) {
-                return;
-            } else {
+            if (plugin.getServer().getOnlinePlayers().size() < 15) {
                 Bukkit.broadcastMessage("" + ChatColor.RED + player.getName() + ChatColor.GRAY + " died");
             }
-            return;
         }
 
         TextComponentMessages tcm = new TextComponentMessages(plugin);
@@ -171,20 +169,6 @@ public class PlayerDeathListener implements Listener {
         baseComponent.addExtra(wkb);
         baseComponent.addExtra(killerTCM);
 
-        if (ChatCommands.chatSilenced) {
-            return;
-        } else {
-            if (plugin.getServer().getOnlinePlayers().size() >= 15) {
-                killerData.addKills(1);
-                playerData.addDeaths(1);
-                return;
-            } else {
-                killerData.addKills(1);
-                playerData.addDeaths(1);
-                //event.setDeathMessage("" + ChatColor.RED + player.getName() + ChatColor.GRAY + " was killed by " + ChatColor.AQUA + killer.getName());
-                plugin.getServer().spigot().broadcast(baseComponent);
-            }
-        }
 
         if (killer.getHealth() % 2 == 0) {
             player.sendMessage("" + ChatColor.RED + killer.getName() + ChatColor.GRAY + " had " + ChatColor.RED + (((int) killer.getHealth()) / 2) + " hearts" + ChatColor.GRAY + " left");
@@ -386,6 +370,20 @@ public class PlayerDeathListener implements Listener {
 
                 ClimaxPvp.inDuel.remove(player);
                 ClimaxPvp.inDuel.remove(opponent);
+            }
+        }
+        if (ChatCommands.chatSilenced) {
+            return;
+        } else {
+            if (plugin.getServer().getOnlinePlayers().size() >= 15) {
+                killerData.addKills(1);
+                playerData.addDeaths(1);
+                return;
+            } else {
+                killerData.addKills(1);
+                playerData.addDeaths(1);
+                //event.setDeathMessage("" + ChatColor.RED + player.getName() + ChatColor.GRAY + " was killed by " + ChatColor.AQUA + killer.getName());
+                plugin.getServer().spigot().broadcast(baseComponent);
             }
         }
     }

@@ -1,6 +1,6 @@
-name: ${project.artifactId}
-main: ${project.groupId}.${project.artifactId}
-version: ${project.version}
+name: ClimaxPvp
+main: net.climaxmc.ClimaxPvp
+version: 2.0
 authors: [computerwizjared, Jonhan, GamerBah]
 commands:
   repair:
@@ -95,6 +95,7 @@ commands:
     aliases: a
   freeze:
     description: Freezes all players
+    aliases: ss
   staffreq:
     description: Sends a message to offline Staff Members
     aliases: [staffhelp, shelp, sreq]

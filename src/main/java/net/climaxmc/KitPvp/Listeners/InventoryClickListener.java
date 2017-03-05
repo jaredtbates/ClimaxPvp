@@ -51,6 +51,11 @@ public class InventoryClickListener implements Listener {
         Inventory inventory = event.getInventory();
         final Player player = (Player) event.getWhoClicked();
 
+        /*if (event.getAction().equals(InventoryAction.HOTBAR_SWAP) || event.getAction().equals(InventoryAction.PLACE_SOME)) {
+            player.getInventory().setItem(event.getSlot(), event.getCurrentItem());
+            player.updateInventory();
+        }*/
+
         if (!player.getGameMode().equals(GameMode.CREATIVE)) {
             if (event.getSlotType() == null || event.getCurrentItem() == null || event.getCurrentItem().getType() == null) {
                 return;

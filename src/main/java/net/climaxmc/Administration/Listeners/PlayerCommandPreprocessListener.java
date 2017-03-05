@@ -30,8 +30,10 @@ public class PlayerCommandPreprocessListener implements Listener {
                 || StringUtils.startsWithIgnoreCase(event.getMessage(), "/minecraft:")
                 || StringUtils.startsWithIgnoreCase(event.getMessage(), "/bukkit:")
                 || StringUtils.startsWithIgnoreCase(event.getMessage(), "/spigot:")) {
-            event.setCancelled(true);
-            return;
+            if (!playerData.hasRank(Rank.TRIAL_MODERATOR)) {
+                event.setCancelled(true);
+                return;
+            }
         }
 
         if (ClimaxPvp.inDuel.contains(player)) {

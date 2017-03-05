@@ -52,9 +52,9 @@ public class CombatLogListeners implements Listener {
         if (ClimaxPvp.deadPeoples.contains(damager) || ClimaxPvp.isSpectating.contains(damager.getUniqueId())) {
             return;
         }
-        if (damager.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50 || (damaged.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
+        /*if (damager.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50 || (damaged.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
             return;
-        }
+        }*/
 
         /*if (KitPvp.currentTeams.containsKey(damaged.getName()) || KitPvp.currentTeams.containsKey(damager.getName())) {
             if (KitPvp.currentTeams.get(damaged.getName()) == damager.getName()

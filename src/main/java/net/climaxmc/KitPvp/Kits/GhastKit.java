@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp.Kits;
 
 import net.climaxmc.Administration.Commands.CheckCommand;
 import net.climaxmc.Administration.Commands.VanishCommand;
+import net.climaxmc.AntiNub.AntiNub;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
@@ -132,10 +133,18 @@ public class GhastKit extends Kit {
                             return;
                         } else {
                             event.setCancelled(true);
-                            target.damage(7);
+                            //target.damage(7);
                         }
                     }
                     target.setVelocity(target.getVelocity().setY(1));
+
+                    ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(target.getUniqueId(), false);
+                    ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
+                        @Override
+                        public void run() {
+                            ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(target.getUniqueId(), true);
+                        }
+                    }, 20L * 5);
                 }
             }
         }

@@ -29,13 +29,13 @@ import java.util.concurrent.TimeUnit;
 
 public class AssassinKit extends Kit {
 
-    private final int cooldown = 15;
+    private final int cooldown = 12;
     private ItemStack ability = new ItemStack(Material.GHAST_TEAR);
 
-    private Ability shadowstep = new Ability("Shadow-Step", 1, cooldown, TimeUnit.SECONDS);
+    private Ability shadowstep = new Ability("Disappear", 1, cooldown, TimeUnit.SECONDS);
 
     public AssassinKit() {
-        super("Assassin", new ItemStack(Material.GHAST_TEAR), "Use your Shadow-Step to rek foes, easily.", ChatColor.GOLD);
+        super("Assassin", new ItemStack(Material.GHAST_TEAR), "Use your Disappear ability to rek foes, easily.", ChatColor.GOLD);
     }
 
     private int i;
@@ -52,7 +52,7 @@ public class AssassinKit extends Kit {
         addSoup(player.getInventory(), 3, 35);
 
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Shadow-Step \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Disappear \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
 
@@ -88,7 +88,7 @@ public class AssassinKit extends Kit {
         }
 
         ItemMeta abilitymeta = ability.getItemMeta();
-        abilitymeta.setDisplayName(ChatColor.AQUA + "Shadow-Step \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
+        abilitymeta.setDisplayName(ChatColor.AQUA + "Disappear \u00A7f» \u00A78[\u00A76" + cooldown + "\u00A78]");
         ability.setItemMeta(abilitymeta);
         player.getInventory().addItem(ability);
 
@@ -119,10 +119,16 @@ public class AssassinKit extends Kit {
                     }
                     player.sendMessage(ChatColor.GOLD + "You used the " + ChatColor.AQUA + "Disappear" + ChatColor.GOLD + " Ability!");
 
+                    for (PotionEffect potionEffect : player.getActivePotionEffects()) {
+                        player.removePotionEffect(potionEffect.getType());
+                    }
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, Integer.MAX_VALUE, 0));
+
                     for (Player players : Bukkit.getOnlinePlayers()) {
                         ClimaxPvp.getInstance().hideEntity(players, player);
                     }
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0, false, false));
                     player.getWorld().playSound(player.getLocation(), Sound.ENDERDRAGON_WINGS, 0, 0);
 
                     Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
@@ -130,8 +136,12 @@ public class AssassinKit extends Kit {
                         public void run() {
                             for (Player players : Bukkit.getOnlinePlayers()) {
                                 ClimaxPvp.getInstance().showEntity(players, player);
-                                player.removePotionEffect(PotionEffectType.INVISIBILITY);
                             }
+                            for (PotionEffect potionEffect : player.getActivePotionEffects()) {
+                                player.removePotionEffect(potionEffect.getType());
+                            }
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
                         }
                     }, 20L * 3);
 

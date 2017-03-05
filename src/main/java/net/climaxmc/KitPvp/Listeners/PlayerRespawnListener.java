@@ -18,6 +18,7 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent.RegainReason;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class PlayerRespawnListener implements Listener {
     private ClimaxPvp plugin;
@@ -45,6 +46,8 @@ public class PlayerRespawnListener implements Listener {
         for (Player allPlayers : Bukkit.getOnlinePlayers()) {
             plugin.showEntity(player, allPlayers);
         }
+
+        KitPvp.getChecking().remove(player.getUniqueId());
 
         ClimaxPvp.deadPeoples.remove(player);
 
@@ -81,6 +84,18 @@ public class PlayerRespawnListener implements Listener {
                     .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Equip your previous kit."));
         }
 
+        Bukkit.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
+            @Override
+            public void run() {
+                if (KitManager.isPlayerInKit(player)) {
+                    return;
+                }
+                player.getInventory().setItem(3, new I(Material.POTION).durability(16421)
+                        .name(ChatColor.translateAlternateColorCodes('&', "&8[&cAlpha&8] &fPractice"))
+                        .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Indeed"));
+            }
+        }, 20L);
+
         player.getInventory().setItem(5, new I(Material.COMPASS)
                 .name(ChatColor.DARK_PURPLE + "Warps")
                 .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "View and teleport to various warps on the server!"));
@@ -105,10 +120,10 @@ public class PlayerRespawnListener implements Listener {
                 .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Select from a variety of awesome cosmetics!"));
 
 
-        if (player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50) {
+        /*if (player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50) {
             player.getInventory().clear();
             player.getInventory().addItem(new I(Material.DIAMOND_AXE).name(org.bukkit.ChatColor.WHITE + "Duel Axe " + org.bukkit.ChatColor.AQUA + "(Punch a player!)"));
-        }
+        }*/
 
         /*ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);
         SkullMeta meta = (SkullMeta) head.getItemMeta();

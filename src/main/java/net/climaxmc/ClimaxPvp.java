@@ -5,6 +5,7 @@ import com.comphenix.protocol.ProtocolManager;
 import lombok.Getter;
 import net.climaxmc.Administration.Administration;
 import net.climaxmc.Administration.Runnables.UpdateRunnable;
+import net.climaxmc.AntiNub.AntiNub;
 import net.climaxmc.Donations.Donations;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
@@ -27,6 +28,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -132,6 +134,8 @@ public class ClimaxPvp extends JavaPlugin {
 
     private EntityHider entityHider;
 
+    public AntiNub antiNub;
+
     @Override
     public void onEnable() {
         // Initialize Instance
@@ -205,6 +209,8 @@ public class ClimaxPvp extends JavaPlugin {
         slackDonations = new SlackApi("https://hooks.slack.com/services/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");
 
         entityHider = new EntityHider(this, EntityHider.Policy.BLACKLIST);
+
+        antiNub = (AntiNub) Bukkit.getPluginManager().getPlugin("AntiNub");
     }
 
     public void hideEntity(Player observer, Entity entity) {
