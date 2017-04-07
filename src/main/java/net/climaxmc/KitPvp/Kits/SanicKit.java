@@ -18,7 +18,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class SanicKit extends Kit {
     public SanicKit() {
-        super("Sanic", new ItemStack(Material.QUARTZ), "Gotta Go Fast!", ChatColor.BLUE);
+        super("Sanic", new ItemStack(Material.QUARTZ), "Gotta Go Fast!", ChatColor.GREEN);
     }
 
     protected void wear(Player player) {
@@ -29,9 +29,9 @@ public class SanicKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
-        boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
         player.getInventory().setBoots(boots);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
         addSoup(player.getInventory(), 1, 35);
     }
 
@@ -46,8 +46,8 @@ public class SanicKit extends Kit {
         ItemStack rod = new ItemStack(Material.FISHING_ROD);
         player.getInventory().addItem(rod);
         ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS);
-        boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+        boots.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
         player.getInventory().setBoots(boots);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
     }
 }

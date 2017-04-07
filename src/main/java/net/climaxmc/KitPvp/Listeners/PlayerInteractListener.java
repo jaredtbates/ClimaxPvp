@@ -11,6 +11,7 @@ import net.climaxmc.KitPvp.Menus.CosmeticsMenu;
 import net.climaxmc.KitPvp.Menus.SettingsMenu;
 import net.climaxmc.KitPvp.Menus.TitlesMenu;
 import net.climaxmc.KitPvp.Menus.WarpsMenu;
+import net.climaxmc.KitPvp.Utils.ChatUtils;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.database.PlayerData;
@@ -80,6 +81,10 @@ public class PlayerInteractListener implements Listener {
             }
         }*/
 
+        if (ClimaxPvp.isSpectating.contains(player.getUniqueId())) {
+            event.setCancelled(true);
+        }
+
         if (event.getClickedBlock() != null && event.getClickedBlock().getType().equals(Material.TRAP_DOOR)) {
             if (!player.getGameMode().equals(GameMode.CREATIVE) || !player.isOp()) {
                 event.setCancelled(true);
@@ -127,23 +132,23 @@ public class PlayerInteractListener implements Listener {
                 kitSelectorInventory.setItem(44, grayGlass);
                 kitSelectorInventory.setItem(53, grayGlass);
 
-                ItemStack purpleKits = new I(Material.STAINED_CLAY).durability(11).name(ChatColor.DARK_PURPLE + "Purple Kits").lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Level 2000");
+                ItemStack purpleKits = new I(Material.STAINED_CLAY).durability(11).name(ChatColor.DARK_PURPLE + "Purple Kits").lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Level 1000");
                 kitSelectorInventory.setItem(1, purpleKits);
                 kitSelectorInventory.setItem(7, purpleKits);
 
-                ItemStack goldKits = new I(Material.STAINED_CLAY).durability(1).name(ChatColor.GOLD + "Gold Kits").lore(ChatColor.GOLD + "" + ChatColor.ITALIC + "Level 1500");
+                ItemStack goldKits = new I(Material.STAINED_CLAY).durability(1).name(ChatColor.GOLD + "Gold Kits").lore(ChatColor.GOLD + "" + ChatColor.ITALIC + "Level 700");
                 kitSelectorInventory.setItem(10, goldKits);
                 kitSelectorInventory.setItem(16, goldKits);
 
-                ItemStack redKits = new I(Material.STAINED_CLAY).durability(14).name(ChatColor.RED + "Red Kits").lore(ChatColor.RED + "" + ChatColor.ITALIC + "Level 1000");
+                ItemStack redKits = new I(Material.STAINED_CLAY).durability(14).name(ChatColor.RED + "Red Kits").lore(ChatColor.RED + "" + ChatColor.ITALIC + "Level 500");
                 kitSelectorInventory.setItem(19, redKits);
                 kitSelectorInventory.setItem(25, redKits);
 
-                ItemStack greenKits = new I(Material.STAINED_CLAY).durability(5).name(ChatColor.GREEN + "Green Kits").lore(ChatColor.GREEN + "" + ChatColor.ITALIC + "Level 500");
+                ItemStack greenKits = new I(Material.STAINED_CLAY).durability(5).name(ChatColor.GREEN + "Green Kits").lore(ChatColor.GREEN + "" + ChatColor.ITALIC + "Level 300");
                 kitSelectorInventory.setItem(28, greenKits);
                 kitSelectorInventory.setItem(34, greenKits);
 
-                ItemStack blueKits = new I(Material.STAINED_CLAY).durability(3).name(ChatColor.BLUE + "Blue Kits").lore(ChatColor.BLUE + "" + ChatColor.ITALIC + "Level 150");
+                ItemStack blueKits = new I(Material.STAINED_CLAY).durability(3).name(ChatColor.BLUE + "Blue Kits").lore(ChatColor.BLUE + "" + ChatColor.ITALIC + "Level 100");
                 kitSelectorInventory.setItem(37, blueKits);
                 kitSelectorInventory.setItem(43, blueKits);
 
@@ -151,27 +156,27 @@ public class PlayerInteractListener implements Listener {
                 kitSelectorInventory.setItem(46, grayKits);
                 kitSelectorInventory.setItem(52, grayKits);
 
-                ItemStack purpleKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(10).name(ChatColor.DARK_PURPLE + "Purple Kit").lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Unlocked at Level 2000");
+                ItemStack purpleKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(10).name(ChatColor.DARK_PURPLE + "Purple Kit").lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Unlocked at Level 1000");
                 for (int i = 2; i < 7; i++) {
                     kitSelectorInventory.setItem(i, purpleKitsGlass);
                 }
 
-                ItemStack goldKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(1).name(ChatColor.GOLD + "Gold Kit").lore(ChatColor.GOLD + "" + ChatColor.ITALIC + "Unlocked at Level 1500");
+                ItemStack goldKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(1).name(ChatColor.GOLD + "Gold Kit").lore(ChatColor.GOLD + "" + ChatColor.ITALIC + "Unlocked at Level 700");
                 for (int i = 11; i < 16; i++) {
                     kitSelectorInventory.setItem(i, goldKitsGlass);
                 }
 
-                ItemStack redKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(14).name(ChatColor.RED + "Red Kit").lore(ChatColor.RED + "" + ChatColor.ITALIC + "Unlocked at Level 1000");
+                ItemStack redKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(14).name(ChatColor.RED + "Red Kit").lore(ChatColor.RED + "" + ChatColor.ITALIC + "Unlocked at Level 500");
                 for (int i = 20; i < 25; i++) {
                     kitSelectorInventory.setItem(i, redKitsGlass);
                 }
 
-                ItemStack greenKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(5).name(ChatColor.GREEN + "Green Kit").lore(ChatColor.GREEN + "" + ChatColor.ITALIC + "Unlocked at Level 500");
+                ItemStack greenKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(5).name(ChatColor.GREEN + "Green Kit").lore(ChatColor.GREEN + "" + ChatColor.ITALIC + "Unlocked at Level 300");
                 for (int i = 29; i < 34; i++) {
                     kitSelectorInventory.setItem(i, greenKitsGlass);
                 }
 
-                ItemStack blueKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(3).name(ChatColor.BLUE + "Blue Kit").lore(ChatColor.BLUE + "" + ChatColor.ITALIC + "Unlocked at Level 150");
+                ItemStack blueKitsGlass = new I(Material.STAINED_GLASS_PANE).durability(3).name(ChatColor.BLUE + "Blue Kit").lore(ChatColor.BLUE + "" + ChatColor.ITALIC + "Unlocked at Level 100");
                 for (int i = 38; i < 43; i++) {
                     kitSelectorInventory.setItem(i, blueKitsGlass);
                 }
@@ -261,8 +266,10 @@ public class PlayerInteractListener implements Listener {
 
                     plugin.respawn(player);
 
-                    if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
-                        new PvpKit().wearCheckLevel(player);
+                    if (plugin.getWarpLocation("Fair") != null) {
+                        if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
+                            new PvpKit().wearCheckLevel(player);
+                        }
                     }
 
                     Bukkit.getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
@@ -289,22 +296,20 @@ public class PlayerInteractListener implements Listener {
                             .name(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup")
                             .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Set your preferred healing type!"));
                     event.setCancelled(true);
-                    SettingsFiles settingsFiles = new SettingsFiles();
-                    settingsFiles.toggleSpawnSoup(player);
+                    plugin.spawnSoupTrue.put(player, true);
                     return;
                 }
             }
-            if (player.getItemInHand().getType().equals(Material.MUSHROOM_SOUP)) {
+            /*if (player.getItemInHand().getType().equals(Material.MUSHROOM_SOUP)) {
                 if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup")) {
                     player.getInventory().setItemInHand(new I(Material.FISHING_ROD)
                             .name(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Regen")
                             .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Set your preferred healing type!"));
                     event.setCancelled(true);
-                    SettingsFiles settingsFiles = new SettingsFiles();
-                    settingsFiles.toggleSpawnSoup(player);
+                    plugin.spawnSoupTrue.put(player, false);
                     return;
                 }
-            }
+            }*/
             if (player.getItemInHand().getType().equals(Material.COMPASS)) {
                 if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatColor.DARK_PURPLE + "Warps")) {
                     WarpsMenu warpsMenu = new WarpsMenu(plugin);
@@ -316,8 +321,13 @@ public class PlayerInteractListener implements Listener {
                     event.setCancelled(true);
                     ByteArrayDataOutput out = ByteStreams.newDataOutput();
                     out.writeUTF("Connect");
-                    out.writeUTF("dev2");
+                    out.writeUTF("practice");
                     player.sendPluginMessage(ClimaxPvp.getInstance(), "BungeeCord", out.toByteArray());
+                }
+            }
+            if (player.getItemInHand().getType().equals(Material.PAPER)) {
+                if (player.getItemInHand().getItemMeta().getDisplayName().equals(ChatUtils.color("&bSeason II Info"))) {
+                    player.sendMessage(plugin.getInfo().toArray(new String[plugin.getInfo().size()]));
                 }
             }
         }
@@ -340,7 +350,7 @@ public class PlayerInteractListener implements Listener {
                                 player.getInventory().getItem(rodSlot).setDurability((short) newDurability);
                             }
                         }
-                    }, 20L * 9);
+                    }, 20L * 8);
                 } else {
                     event.setCancelled(true);
                     player.sendMessage(ChatColor.RED + "Your rod is too damaged to use! Wait a few seconds!");

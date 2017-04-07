@@ -23,7 +23,7 @@ public class CombatLogListeners implements Listener {
     private ClimaxPvp plugin;
     @Getter
     private static HashMap<UUID, Integer> tagged = new HashMap<>();
-    private HashMap<UUID, Long> logged = new HashMap<>();
+    public static HashMap<UUID, Long> logged = new HashMap<>();
 
     public CombatLogListeners(ClimaxPvp plugin) {
         this.plugin = plugin;
@@ -44,14 +44,17 @@ public class CombatLogListeners implements Listener {
             Player damaged = (Player) event.getEntity();
             combatLog(damager, damaged);
         }
+
     }
     public void combatLog(Player damager, Player damaged) {
-        if (WorldGuard.isWithinProtectedRegion(damaged.getLocation()) || WorldGuard.isWithinProtectedRegion(damager.getLocation())) {
-            return;
-        }
         if (ClimaxPvp.deadPeoples.contains(damager) || ClimaxPvp.isSpectating.contains(damager.getUniqueId())) {
             return;
         }
+
+        if (plugin.isWithinProtectedRegion(damaged.getLocation())) {
+            return;
+        }
+
         /*if (damager.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50 || (damaged.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
             return;
         }*/

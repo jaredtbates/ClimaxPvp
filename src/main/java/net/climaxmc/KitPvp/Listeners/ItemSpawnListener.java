@@ -20,6 +20,6 @@ public class ItemSpawnListener implements Listener {
             public void run() {
                 event.getEntity().remove();
             }
-        }.runTaskLater(plugin, 40);
+        }.runTaskLater(plugin, 20 * 10);
     }
 }

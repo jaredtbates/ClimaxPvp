@@ -60,25 +60,46 @@ public class SettingsFiles {
         }
     }
 
-    public void toggleRespawnValue(Player player) {
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
         if (config.get(player.getUniqueId() + ".instaRespawn") == null) {
             set(player.getUniqueId() + ".instaRespawn", false);
             saveConfig();
         } else {
             if (!(boolean) config.get(player.getUniqueId() + ".instaRespawn")) {
-                set(player.getUniqueId() + ".instaRespawn", true);
-                saveConfig();
-                player.closeInventory();
-                player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
-                player.sendMessage("\u00A7f» \u00A77You have set \u00A7eInsta-Respawn \u00A77to: \u00A7aTrue");
+                ClimaxPvp.getInstance().respawnValue.put(player, true);
             } else {
-                set(player.getUniqueId() + ".instaRespawn", false);
-                saveConfig();
-                player.closeInventory();
-                player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
-                player.sendMessage("\u00A7f» \u00A77You have set \u00A7eInsta-Respawn \u00A77to: \u00A7cFalse");
+                ClimaxPvp.getInstance().respawnValue.put(player, false);
             }
         }
+    }
+
+    public void toggleRespawnValue(Player player) {
+        Bukkit.getScheduler().runTaskAsynchronously(ClimaxPvp.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                if (config.get(player.getUniqueId() + ".instaRespawn") == null) {
+                    set(player.getUniqueId() + ".instaRespawn", false);
+                    saveConfig();
+                } else {
+                    if (!(boolean) config.get(player.getUniqueId() + ".instaRespawn")) {
+                        set(player.getUniqueId() + ".instaRespawn", true);
+                        ClimaxPvp.getInstance().respawnValue.put(player, true);
+                        saveConfig();
+                        player.closeInventory();
+                        player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
+                        player.sendMessage("\u00A7f» \u00A77You have set \u00A7eInsta-Respawn \u00A77to: \u00A7aTrue");
+                    } else {
+                        set(player.getUniqueId() + ".instaRespawn", false);
+                        ClimaxPvp.getInstance().respawnValue.put(player, false);
+                        saveConfig();
+                        player.closeInventory();
+                        player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
+                        player.sendMessage("\u00A7f» \u00A77You have set \u00A7eInsta-Respawn \u00A77to: \u00A7cFalse");
+                    }
+                }
+            }
+        });
     }
     public boolean getRespawnValue(Player player) {
         if (config.get(player.getUniqueId() + ".instaRespawn") == null) {
@@ -91,24 +112,29 @@ public class SettingsFiles {
     }
 
     public void toggleReceiveMsg(Player player) {
-        if (config.get(player.getUniqueId() + ".receiveMsging") == null) {
-            set(player.getUniqueId() + ".receiveMsging", true);
-            saveConfig();
-        } else {
-            if (!(boolean) config.get(player.getUniqueId() + ".receiveMsging")) {
-                set(player.getUniqueId() + ".receiveMsging", true);
-                saveConfig();
-                player.closeInventory();
-                player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
-                player.sendMessage("\u00A7f» \u00A77You have set \u00A7eReceiving Msgs \u00A77to: \u00A7aTrue");
-            } else {
-                set(player.getUniqueId() + ".receiveMsging", false);
-                saveConfig();
-                player.closeInventory();
-                player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
-                player.sendMessage("\u00A7f» \u00A77You have set \u00A7eReceiving Msgs \u00A77to: \u00A7cFalse");
+        Bukkit.getScheduler().runTaskAsynchronously(ClimaxPvp.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                if (config.get(player.getUniqueId() + ".receiveMsging") == null) {
+                    set(player.getUniqueId() + ".receiveMsging", true);
+                    saveConfig();
+                } else {
+                    if (!(boolean) config.get(player.getUniqueId() + ".receiveMsging")) {
+                        set(player.getUniqueId() + ".receiveMsging", true);
+                        saveConfig();
+                        player.closeInventory();
+                        player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
+                        player.sendMessage("\u00A7f» \u00A77You have set \u00A7eReceiving Msgs \u00A77to: \u00A7aTrue");
+                    } else {
+                        set(player.getUniqueId() + ".receiveMsging", false);
+                        saveConfig();
+                        player.closeInventory();
+                        player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
+                        player.sendMessage("\u00A7f» \u00A77You have set \u00A7eReceiving Msgs \u00A77to: \u00A7cFalse");
+                    }
+                }
             }
-        }
+        });
     }
     public boolean getReceiveMsgValue(Player player) {
         if (config.get(player.getUniqueId() + ".receiveMsging") == null) {
@@ -121,27 +147,32 @@ public class SettingsFiles {
     }
 
     public void toggleGlobalChat(Player player) {
-        if (config.get(player.getUniqueId() + ".globalChat") == null) {
-            set(player.getUniqueId() + ".globalChat", true);
-            saveConfig();
-            KitPvp.globalChatDisabled.remove(player.getUniqueId());
-        } else {
-            if (!(boolean) config.get(player.getUniqueId() + ".globalChat")) {
-                set(player.getUniqueId() + ".globalChat", true);
-                saveConfig();
-                player.closeInventory();
-                player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
-                player.sendMessage("\u00A7f» \u00A77You have set \u00A7eGlobal Chat \u00A77to: \u00A7aTrue");
-                KitPvp.globalChatDisabled.remove(player.getUniqueId());
-            } else {
-                set(player.getUniqueId() + ".globalChat", false);
-                saveConfig();
-                player.closeInventory();
-                player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
-                player.sendMessage("\u00A7f» \u00A77You have set \u00A7eGlobal Chat \u00A77to: \u00A7cFalse");
-                KitPvp.globalChatDisabled.add(player.getUniqueId());
+        Bukkit.getScheduler().runTaskAsynchronously(ClimaxPvp.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                if (config.get(player.getUniqueId() + ".globalChat") == null) {
+                    set(player.getUniqueId() + ".globalChat", true);
+                    saveConfig();
+                    KitPvp.globalChatDisabled.remove(player.getUniqueId());
+                } else {
+                    if (!(boolean) config.get(player.getUniqueId() + ".globalChat")) {
+                        set(player.getUniqueId() + ".globalChat", true);
+                        saveConfig();
+                        player.closeInventory();
+                        player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 2);
+                        player.sendMessage("\u00A7f» \u00A77You have set \u00A7eGlobal Chat \u00A77to: \u00A7aTrue");
+                        KitPvp.globalChatDisabled.remove(player.getUniqueId());
+                    } else {
+                        set(player.getUniqueId() + ".globalChat", false);
+                        saveConfig();
+                        player.closeInventory();
+                        player.playSound(player.getLocation(), Sound.NOTE_BASS_GUITAR, 1, 1);
+                        player.sendMessage("\u00A7f» \u00A77You have set \u00A7eGlobal Chat \u00A77to: \u00A7cFalse");
+                        KitPvp.globalChatDisabled.add(player.getUniqueId());
+                    }
+                }
             }
-        }
+        });
     }
     public boolean getGlobalChatValue(Player player) {
         if (config.get(player.getUniqueId() + ".globalChat") == null) {
@@ -195,16 +226,21 @@ public class SettingsFiles {
         }
     }
     public void setTrail(Player player, String name, Trail trail) {
-        if (config.get(player.getUniqueId() + ".unlockedTrails." + name) == null) {
-            if (name.equals("Snow")) {
-                player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "Beta Member Exclusive! Purchase @ donate.climaxmc.net");
-                return;
+        Bukkit.getScheduler().runTaskAsynchronously(ClimaxPvp.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                if (config.get(player.getUniqueId() + ".unlockedTrails." + name) == null) {
+                    if (name.equals("Snow")) {
+                        player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "Beta Member Exclusive! Purchase @ donate.climaxmc.net");
+                        return;
+                    }
+                    player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You must unlock this trail to use it!");
+                } else {
+                    KitPvp.inTrail.put(player.getUniqueId(), trail);
+                    player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You have selected the " + ChatColor.YELLOW + name + ChatColor.GRAY + " trail!");
+                }
             }
-            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You must unlock this trail to use it!");
-        } else {
-            KitPvp.inTrail.put(player.getUniqueId(), trail);
-            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You have selected the " + ChatColor.YELLOW + name + ChatColor.GRAY + " trail!");
-        }
+        });
     }
     public void tryUnlockTrail(Player player, String name, Trail trail, int cost) {
         PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);

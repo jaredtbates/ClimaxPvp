@@ -40,38 +40,38 @@ public class KitManager implements Listener {
         kits.add(new ArcherKit());
         kits.add(new AxeKit());
         kits.add(new HealerKit());
-        kits.add(new SnailKit());
+        kits.add(new EndermanKit());
 
         // Blue Kits
-        kits.add(new EndermanKit());
-        kits.add(new SanicKit());
+        kits.add(new SnailKit());
         kits.add(new BoulderKit());
         kits.add(new NinjaKit());
         kits.add(new PirateKit());
+        kits.add(new StrafeKit());
 
         // Green Kits
         kits.add(new ThorKit());
         kits.add(new MagnetKit());
         kits.add(new GhastKit());
-        kits.add(new VortexKit());
-        kits.add(new StrafeKit());
+        kits.add(new SnowmanKit());
+        kits.add(new SanicKit());
 
         // Red Kits
         kits.add(new AnvilKit());
         kits.add(new WitherKit(plugin));
         kits.add(new DragonKit());
         kits.add(new ViperKit());
-        kits.add(new LazerKit());
+        kits.add(new IronGolemKit());
 
         // Gold Kits
-        kits.add(new EmberKit());
+        kits.add(new JediKit());
         kits.add(new AssassinKit());
-        kits.add(new IronGolemKit());
+        kits.add(new LazerKit());
         kits.add(new PhoenixKit());
         kits.add(new BomberKit());
 
         // Purple Kits
-        kits.add(new ArctisKit());
+        kits.add(new KangarooKit());
         kits.add(new ColossusKit());
         kits.add(new VoidKit());
         kits.add(new ZephyrKit());

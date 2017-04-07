@@ -1,6 +1,7 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.KitPvp;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,6 +28,9 @@ public class BlockPlaceListener implements Listener {
             event.setCancelled(true);
         }
         if (ClimaxPvp.isSpectating.contains(player.getUniqueId())) {
+            event.setCancelled(true);
+        }
+        if (KitPvp.getVanished().contains(player.getUniqueId())) {
             event.setCancelled(true);
         }
     }

@@ -87,8 +87,8 @@ public class PhoenixKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        SettingsFiles settingsFiles = new SettingsFiles();
-        if (!settingsFiles.getSpawnSoupValue(player)) {
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.containsKey(player)) {             ClimaxPvp.getInstance().spawnSoupTrue.put(player, false);         }
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.get(player)) {
             ItemStack rod = new ItemStack(Material.FISHING_ROD);
             player.getInventory().addItem(rod);
         }
@@ -135,11 +135,11 @@ public class PhoenixKit extends Kit {
                     DisguiseAbilities.activateAbility(player, DisguiseAbilities.Ability.FLAME_DASH);
 
 
-                    ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(player.getUniqueId(), false);
+                    AntiNub.alertsEnabled.put(player.getUniqueId(), false);
                     ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
                         @Override
                         public void run() {
-                            ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(player.getUniqueId(), true);
+                            AntiNub.alertsEnabled.put(player.getUniqueId(), true);
                         }
                     }, 20L * 5);
 

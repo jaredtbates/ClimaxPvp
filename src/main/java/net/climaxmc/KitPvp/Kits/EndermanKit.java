@@ -33,7 +33,7 @@ public class EndermanKit extends Kit {
 	private Ability teleport = new Ability("Teleport", 1, cooldown, TimeUnit.SECONDS);
 	
     public EndermanKit() {
-        super("Enderman", new ItemStack(Material.EYE_OF_ENDER), "Teleport to people, like an enderman!", ChatColor.BLUE);
+        super("Enderman", new ItemStack(Material.EYE_OF_ENDER), "Teleport to people, like an enderman!", ChatColor.GRAY);
     }
 
     protected void wear(Player player) {
@@ -45,7 +45,7 @@ public class EndermanKit extends Kit {
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
 
         ItemMeta abilitymeta = ability.getItemMeta();
@@ -69,10 +69,12 @@ public class EndermanKit extends Kit {
         boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, 3);
         player.getInventory().setBoots(boots);
         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-        sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
         player.getInventory().addItem(sword);
-        SettingsFiles settingsFiles = new SettingsFiles();
-        if (!settingsFiles.getSpawnSoupValue(player)) {
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.containsKey(player)) {
+            ClimaxPvp.getInstance().spawnSoupTrue.put(player, false);
+        }
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.get(player)) {
             ItemStack rod = new ItemStack(Material.FISHING_ROD);
             player.getInventory().addItem(rod);
         }

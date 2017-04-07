@@ -35,7 +35,7 @@ public class IronGolemKit extends Kit {
     private Ability Throw = new Ability("Throw", 1, cooldown, TimeUnit.SECONDS);
 
     public IronGolemKit() {
-        super("Iron Golem", new ItemStack(Material.RED_ROSE), "Punch people with your Rose to launch them in the air!", ChatColor.GOLD);
+        super("Iron Golem", new ItemStack(Material.RED_ROSE), "Punch people with your Rose to launch them in the air!", ChatColor.RED);
     }
 
     protected void wear(Player player) {
@@ -70,8 +70,8 @@ public class IronGolemKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
         sword.addEnchantment(Enchantment.DURABILITY, 2);
         player.getInventory().addItem(sword);
-        SettingsFiles settingsFiles = new SettingsFiles();
-        if (!settingsFiles.getSpawnSoupValue(player)) {
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.containsKey(player)) {             ClimaxPvp.getInstance().spawnSoupTrue.put(player, false);         }
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.get(player)) {
             ItemStack rod = new ItemStack(Material.FISHING_ROD);
             player.getInventory().addItem(rod);
         }
@@ -113,11 +113,11 @@ public class IronGolemKit extends Kit {
                                 && KitPvp.currentTeams.get(target.getName()) != player.getName())) {
                             target.setVelocity(new Vector(0, 1.3, 0));
 
-                            ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(target.getUniqueId(), false);
+                            AntiNub.alertsEnabled.put(target.getUniqueId(), false);
                             ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
                                 @Override
                                 public void run() {
-                                    ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(target.getUniqueId(), true);
+                                    AntiNub.alertsEnabled.put(target.getUniqueId(), true);
                                 }
                             }, 20L * 5);
 

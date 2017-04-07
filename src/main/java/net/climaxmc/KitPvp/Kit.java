@@ -5,6 +5,7 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -141,26 +142,26 @@ public abstract class Kit implements Listener, CommandExecutor {
                 player.getInventory().setArmorContents(null);
 
 
-                if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 350) {
+                if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 23948723) {
                     wearNoSoup(player);
 
-                    SettingsFiles settingsFiles = new SettingsFiles();
-                    //if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 16) {
-                        if (settingsFiles.getSpawnSoupValue(player)) {
-                            for (ItemStack item : player.getInventory().getContents()) {
-                                if (item != null) {
-                                    if (item.getType() == Material.MUSHROOM_SOUP || item.getType() == Material.BOWL || item.getType() == Material.FISHING_ROD) {
-                                        player.getInventory().removeItem(item);
-                                    }
+                    if (!ClimaxPvp.getInstance().spawnSoupTrue.containsKey(player)) {
+                        ClimaxPvp.getInstance().spawnSoupTrue.put(player, false);
+                    }
+                    /*if (ClimaxPvp.getInstance().spawnSoupTrue.get(player)) {
+                        for (ItemStack item : player.getInventory().getContents()) {
+                            if (item != null) {
+                                if (item.getType() == Material.MUSHROOM_SOUP || item.getType() == Material.BOWL || item.getType() == Material.FISHING_ROD) {
+                                    player.getInventory().removeItem(item);
                                 }
                             }
-                            for (int i = 0; i < 4; i++) {
-                                player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
-                            }
-                            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 1));
-                            player.removePotionEffect(PotionEffectType.REGENERATION);
                         }
-                    //}
+                        for (int i = 0; i < 4; i++) {
+                            player.getInventory().addItem(new ItemStack(Material.MUSHROOM_SOUP));
+                        }
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 1));
+                        player.removePotionEffect(PotionEffectType.REGENERATION);
+                    }*/
                     return;
                 }
 
@@ -185,6 +186,6 @@ public abstract class Kit implements Listener, CommandExecutor {
 
     public void regenResistance(Player player) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 2));
-        //player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0));
     }
 }

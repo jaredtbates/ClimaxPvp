@@ -5,6 +5,7 @@ import net.climaxmc.Administration.Punishments.Punishment;
 import org.bukkit.plugin.Plugin;
 
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -20,11 +21,12 @@ public class MySQL {
     public static final String GET_PLAYERDATA_FROM_IP = "SELECT * FROM `climax_playerdata` WHERE `ip` = ?;";
     public static final String CREATE_PLAYERDATA_TABLE = "CREATE TABLE IF NOT EXISTS `climax_playerdata` (`uuid` VARCHAR(36) NOT NULL PRIMARY KEY, " +
             "`ip` VARCHAR(15) DEFAULT '' NOT NULL, `rank` VARCHAR(20) DEFAULT 'DEFAULT' NOT NULL, `balance` INT DEFAULT 0 NOT NULL, " +
-            "`kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, " /*`achievements` "VARCHAR(5000) DEFAULT NULL,*/ + "`nickname` VARCHAR(32) DEFAULT NULL);";
+            "`kills` INT DEFAULT 0 NOT NULL, `deaths` INT DEFAULT 0 NOT NULL, " /*`achievements` "VARCHAR(5000) DEFAULT NULL,*/ + "`nickname` VARCHAR(32) DEFAULT NULL, " +
+            "`kdr` INT DEFAULT 0 NOT NULL, `topks` INT DEFAULT 0 NOT NULL);";
     public static final String CREATE_PLAYERDATA = "INSERT IGNORE INTO `climax_playerdata` (`uuid`, `ip`, `rank`, `balance`, `kills`, " +
-            "`deaths`, " /*`achievements`,*/ + "`nickname`) VALUES (?, ?, ?, ?, ?, ?, ?);";
+            "`deaths`, " /*`achievements`,*/ + "`nickname`, `kdr`, `topks`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
     public static final String UPDATE_PLAYERDATA = "UPDATE `climax_playerdata` SET `ip` = ?, `rank` = ?, `balance` = ?, `kills` = ?, " +
-            "`deaths` = ?, " /*`achievements` = ?,*/ + "`nickname` = ? WHERE `uuid` = ?;";
+            "`deaths` = ?, " /*`achievements` = ?,*/ + "`nickname` = ?, `kdr` = ?, `topks` = ? WHERE `uuid` = ?;";
 
     // PUNISHMENTS ---------------------------------------------------------------------
     public static final String CREATE_PUNISHMENTS_TABLE = "CREATE TABLE IF NOT EXISTS `climax_punishments` (`uuid` VARCHAR(36) NOT NULL," +
@@ -205,6 +207,9 @@ public class MySQL {
                 int deaths = data.getInt("deaths");
                 //String achievements = data.getString("achievements");
                 String nickname = data.getString("nickname");
+                DecimalFormat decimalFormat = new DecimalFormat("0.00");
+                double kdr = Double.parseDouble(decimalFormat.format(data.getDouble("kdr")));
+                int topks = data.getInt("topks");
                 /*
                 boolean teamRequests = playerSettings.getBoolean("teamRequests");
                 String killEffect = playerSettings.getString("killEffect");
@@ -214,8 +219,7 @@ public class MySQL {
                 */
 
                 PlayerData playerData = new PlayerData(this, uuid, ip, rank, balance, kills, deaths,
-                        /*achievements,*/ nickname, /*killEffect, killSound, trail, teamRequests, privateMessaging,*/
-                        new ArrayList<>());
+                        nickname, kdr, topks, new ArrayList<>());
 
                 ResultSet punishments = executeQuery(GET_PUNISHMENTS_FROM_UUID, uuid.toString());
                 while (punishments != null && punishments.next()) {
@@ -243,7 +247,7 @@ public class MySQL {
      * @param ip IP address of the player to create data of
      */
     public synchronized void createPlayerData(UUID uuid, String ip) {
-        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), ip, Rank.DEFAULT.toString(), 0, 0, 0, /*null,*/ null);
+        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), ip, Rank.DEFAULT.toString(), 0, 0, 0, null, 0, 0);
         //executeUpdate(CREATE_SETTINGS, uuid.toString(), true, true, "DEFAULT", "NONE", "NONE", true);
     }
 
@@ -254,14 +258,16 @@ public class MySQL {
      */
     public void savePlayerData(PlayerData playerData) {
         executeUpdate(UPDATE_PLAYERDATA,
-                playerData.getUuid().toString(),
                 playerData.getIp(),
                 playerData.getRank().toString(),
                 playerData.getBalance(),
                 playerData.getKills(),
                 playerData.getDeaths(),
                 //playerData.getAchievements(),
-                playerData.getNickname()
+                playerData.getNickname(),
+                playerData.getKdr(),
+                playerData.getTopks(),
+                playerData.getUuid().toString()
         );
 
         /*

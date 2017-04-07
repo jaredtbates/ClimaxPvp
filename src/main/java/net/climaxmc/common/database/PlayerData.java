@@ -7,6 +7,7 @@ import net.climaxmc.common.events.PlayerBalanceChangeEvent;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -21,6 +22,8 @@ public class PlayerData {
     private int balance, kills, deaths;
     private String /*achievements,*/ nickname /*killEffect, killSound, trail*/;
     //private boolean dueling, duelRequests, teamRequests, privateMessaging;
+    private double kdr;
+    private int topks;
     private List<Punishment> punishments;
 
     /**
@@ -135,25 +138,43 @@ public class PlayerData {
     }
 
     /**
+     * Checks previous top KS and sets a new top ks if greater
+     *
+     * @param amount Amount to check and set
+     */
+    public void trySetTopKS(int amount) {
+        if (amount > topks) {
+            mySQL.updatePlayerData("topks", Integer.toString(topks = amount), uuid);
+        }
+    }
+
+    public void setKDR() {
+        double kdr = (double) kills / (deaths != 0 ? (double) deaths : 1);
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        double kdr2 = Double.parseDouble(decimalFormat.format(kdr));
+        mySQL.updatePlayerData("kdr", decimalFormat.format(this.kdr = kdr2), uuid);
+    }
+
+    /**
      * Gets player's level color
      *
      * @return Player's level color
      */
     public String getLevelColor() {
         String color = ChatColor.GRAY + "";
-        if (kills >= 150) {
+        if (kills >= 100) {
             color += ChatColor.BLUE;
         }
-        if (kills >= 500) {
+        if (kills >= 300) {
             color += ChatColor.GREEN;
         }
-        if (kills >= 1000) {
+        if (kills >= 500) {
             color += ChatColor.RED;
         }
-        if (kills >= 1500) {
+        if (kills >= 700) {
             color += ChatColor.GOLD + "" + ChatColor.BOLD;
         }
-        if (kills >= 2000) {
+        if (kills >= 1000) {
             color += ChatColor.DARK_PURPLE;
         }
 

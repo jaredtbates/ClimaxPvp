@@ -8,6 +8,7 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffect;
 import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffectFiles;
+import net.climaxmc.KitPvp.Utils.ServerScoreboard;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.KitPvp.Utils.TextComponentMessages;
 import net.climaxmc.KitPvp.Utils.Titles.TitleFiles;
@@ -15,7 +16,7 @@ import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import net.climaxmc.common.donations.trails.Trail;
 import net.climaxmc.common.titles.Title;
-import net.md_5.bungee.api.ChatColor;
+import org.bukkit.ChatColor;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -66,7 +67,9 @@ public class PlayerJoinListener implements Listener {
 
     @EventHandler
     public void onAsyncPlayerJoin(AsyncPlayerPreLoginEvent event) {
+
         plugin.getMySQL().createPlayerData(event.getUniqueId(), event.getAddress().getHostAddress());
+
         List<Punishment> punishments = new ArrayList<>();
         PlayerData playerData = plugin.getPlayerData(plugin.getServer().getOfflinePlayer(event.getUniqueId()));
 
@@ -99,7 +102,10 @@ public class PlayerJoinListener implements Listener {
             }
         }
 
-        if (plugin.getConfig().getLong("IPQueriesTime") < System.currentTimeMillis() || plugin.getConfig().getLong("IPQueriesTime") == 0) {
+        /**
+         * disabled cus hub
+         */
+        /*if (plugin.getConfig().getLong("IPQueriesTime") < System.currentTimeMillis() || plugin.getConfig().getLong("IPQueriesTime") == 0) {
             plugin.getConfig().set("IPQueries", 0);
             plugin.getConfig().set("IPQueriesTime", System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1));
             plugin.saveConfig();
@@ -122,7 +128,7 @@ public class PlayerJoinListener implements Listener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
     }
 
     @EventHandler
@@ -140,8 +146,6 @@ public class PlayerJoinListener implements Listener {
             }
         }
 
-
-
         event.setJoinMessage((player.hasPlayedBefore() ? ChatColor.DARK_AQUA : ChatColor.GOLD) + "Join" + ChatColor.DARK_GRAY + "\u00BB " + player.getName());
 
         plugin.respawn(player);
@@ -157,8 +161,8 @@ public class PlayerJoinListener implements Listener {
             String rankTag = "";
 
             if (playerData.hasRank(Rank.NINJA)) {
-                rankTag = org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "[" + playerData.getRank().getColor()
-                        + org.bukkit.ChatColor.BOLD + playerData.getRank().getPrefix() + org.bukkit.ChatColor.DARK_GRAY + "" + org.bukkit.ChatColor.BOLD + "] ";
+                rankTag = ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "[" + playerData.getRank().getColor()
+                        + ChatColor.BOLD + playerData.getRank().getPrefix() + ChatColor.DARK_GRAY + "" + ChatColor.BOLD + "] ";
                 player.setPlayerListName(/*rankTag + */playerData.getLevelColor() + playerData.getRank().getColor() + ChatColor.BOLD + player.getName());
             }
             if (playerData.getRank().getColor() != null) {
@@ -193,16 +197,11 @@ public class PlayerJoinListener implements Listener {
             ChatCommands.cmdspies.add(player.getUniqueId());
         }
 
-        if (FreezeCommand.frozen || FreezeCommand.frozenPlayers.contains(player)) {
-            player.setWalkSpeed(0F);
-        } else {
-            player.setWalkSpeed(0.2F);
-        }
+        player.setWalkSpeed(0.2F);
 
-        ScoreboardManager manager = Bukkit.getScoreboardManager();
-        Scoreboard board = manager.getNewScoreboard();
-
-        player.setScoreboard(board);
+        ServerScoreboard serverScoreboard = new ServerScoreboard(player);
+        serverScoreboard.updateScoreboard();
+        plugin.scoreboards.put(player.getUniqueId(), serverScoreboard);
 
         PermissionAttachment attachment = player.addAttachment(plugin);
 
@@ -223,9 +222,8 @@ public class PlayerJoinListener implements Listener {
 
                 attachment.setPermission("antinub.staff", true);
 
-                attachment.setPermission("AAC.admin", true);
-                attachment.setPermission("AAC.notify", true);
-                attachment.setPermission("AAC.verbose", true);
+                attachment.setPermission("litebans.ban", true);
+                attachment.setPermission("litebans.unlimited", true);
                 attachment.setPermission("litebans.banlist", true);
                 attachment.setPermission("litebans.checkban", true);
                 attachment.setPermission("litebans.clearchat", true);
@@ -242,10 +240,6 @@ public class PlayerJoinListener implements Listener {
                 attachment.setPermission("litebans.warn", true);
                 attachment.setPermission("litebans.warnings", true);
                 attachment.setPermission("litebans.notify.dupeip_join", false);
-                attachment.setPermission("clicks.notification", true);
-                if (!player.isOp()) {
-                    attachment.setPermission("AAC.bypass", false);
-                }
             }
 
             if (playerData.hasRank(Rank.MODERATOR)) {
@@ -254,9 +248,12 @@ public class PlayerJoinListener implements Listener {
                 attachment.setPermission("litebans.ban", true);
                 attachment.setPermission("litebans.dupeip", true);
                 attachment.setPermission("litebans.ipban", true);
-                attachment.setPermission("litebans.unban", true);
                 attachment.setPermission("litebans.unlimited", true);
                 attachment.setPermission("litebans.notify.dupeip_join", true);
+            }
+
+            if (playerData.hasRank(Rank.SENIOR_MODERATOR)) {
+                attachment.setPermission("libsdisguises.disguise.*", true);
             }
 
             if (playerData.hasRank(Rank.ADMINISTRATOR)) {

@@ -1,6 +1,11 @@
 package net.climaxmc.KitPvp.Listeners;
 
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.flags.DefaultFlag;
+import com.sk89q.worldguard.protection.flags.StateFlag;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import me.xericker.disguiseabilities.other.WorldGuard;
+import net.climaxmc.Administration.Listeners.CombatLogListeners;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
@@ -45,22 +50,28 @@ public class EntityDamageByEntityListener implements Listener {
                 }
             }
 
-            if (WorldGuard.isWithinProtectedRegion(target.getLocation())) {
+            if (plugin.isWithinProtectedRegion(target.getLocation())) {
                 event.setCancelled(true);
+                return;
             }
 
             if (target.getGameMode().equals(GameMode.CREATIVE) && ClimaxPvp.deadPeoples.contains(target)) {
                 event.setCancelled(true);
+                return;
             }
             if (ClimaxPvp.isSpectating != null) {
-                if (ClimaxPvp.isSpectating.contains(player.getUniqueId())) {
-                    event.setCancelled(true);
+                if (player != null) {
+                    if (ClimaxPvp.isSpectating.contains(player.getUniqueId())) {
+                        event.setCancelled(true);
+                        return;
+                    }
                 }
             }
 
             if (ClimaxPvp.deadPeoples != null) {
                 if (ClimaxPvp.deadPeoples.contains(player)) {
                     event.setCancelled(true);
+                    return;
                 }
             }
 
@@ -69,12 +80,37 @@ public class EntityDamageByEntityListener implements Listener {
                     || (KitPvp.currentTeams.containsKey(target.getName())
                     && KitPvp.currentTeams.get(target.getName()).equals(player.getName())))) {
                 event.setCancelled(true);
+                return;
+            }
+
+            if (target.getNoDamageTicks() == 0) {
+
+                float knockbackStrength;
+
+                if (!plugin.lastHitType.containsKey(player)) {
+                    plugin.lastHitType.put(player, "Walk");
+                }
+
+                if (player != null) {
+                    if (player.isSprinting() && plugin.lastHitType.get(player).equals("Walk")) {
+                        knockbackStrength = -0.7F;
+                        plugin.lastHitType.put(player, "Sprint");
+                    } else {
+                        knockbackStrength = -0.7F;
+                    }
+
+                    if (event.getDamager().getType().equals(EntityType.ARROW) || event.getDamager().getType().equals(EntityType.FISHING_HOOK)) {
+                        return;
+                    }
+                    target.setVelocity(new Vector().setY(0).setX(0).setZ(0).zero());
+                    target.setVelocity(target.getLocation().toVector().subtract(player.getLocation().toVector()).setY(0).normalize().multiply(knockbackStrength).setY(-0.2));
+                }
             }
         }
     }
 
     @EventHandler
-    public void EntityDamageByEntity(EntityDamageByEntityEvent event) {
+    public void entityDamageByEntity(EntityDamageByEntityEvent event) {
         if (!event.getDamager().getType().equals(EntityType.PLAYER) || !event.getEntity().getType().equals(EntityType.PLAYER)) {
             return;
         }
@@ -120,9 +156,17 @@ public class EntityDamageByEntityListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDamage(EntityDamageEvent event) {
+        if (event.getCause().equals(EntityDamageEvent.DamageCause.VOID)) {
+            if (event.getEntity().getType().equals(EntityType.PLAYER)) {
+                event.setCancelled(true);
+                Player player = (Player) event.getEntity();
+                Player damager = (Player) player.getLastDamageCause().getEntity();
+                player.damage(1000, damager);
+            }
+        }
         if (event.getEntityType().equals(EntityType.PLAYER)) {
             Player player = (Player) event.getEntity();
-            if (WorldGuard.isWithinProtectedRegion(event.getEntity().getLocation())) {
+            if (plugin.isWithinProtectedRegion(player.getLocation())) {
                 //event.setCancelled(true);
             }
             /*if (player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50) {

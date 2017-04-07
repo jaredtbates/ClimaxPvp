@@ -4,6 +4,7 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Listeners.ScoreboardListener;
 import net.climaxmc.KitPvp.Utils.I;
+import net.climaxmc.KitPvp.Utils.ServerScoreboard;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.database.PlayerData;
 import net.md_5.bungee.api.ChatColor;
@@ -37,11 +38,10 @@ public class SuicideCommand implements CommandExecutor {
 
         PlayerData playerData = plugin.getPlayerData(player);
         playerData.addDeaths(1);
+        playerData.setKDR();
 
-        ScoreboardListener scoreboardListener = new ScoreboardListener(plugin);
-        scoreboardListener.updateScoreboards();
-
-        Bukkit.broadcastMessage("" + ChatColor.RED + player.getName() + ChatColor.GRAY + " died");
+        ServerScoreboard serverScoreboard = plugin.getScoreboard(player);
+        serverScoreboard.updateScoreboard();
 
         return true;
     }

@@ -21,7 +21,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class SnailKit extends Kit {
     public SnailKit() {
-        super("Snail", new ItemStack(Material.INK_SACK, 1, (byte) 7), "With each hit you slow your enemy!", ChatColor.GRAY);
+        super("Snail", new ItemStack(Material.INK_SACK, 1, (byte) 7), "With each hit you slow your enemy!", ChatColor.BLUE);
     }
 
     protected void wear(Player player) {

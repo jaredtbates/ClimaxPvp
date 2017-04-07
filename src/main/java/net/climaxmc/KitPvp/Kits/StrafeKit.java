@@ -21,7 +21,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class StrafeKit extends Kit {
     public StrafeKit() {
-        super("Strafe", new ItemStack(Material.IRON_SWORD), "It's in the name! Speed Ftw!", ChatColor.GREEN);
+        super("Strafe", new ItemStack(Material.IRON_SWORD), "It's in the name! Speed Ftw!", ChatColor.BLUE);
     }
 
     protected void wear(Player player) {
@@ -51,6 +51,7 @@ public class StrafeKit extends Kit {
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
         regenResistance(player);
         player.getInventory().clear();
         ItemStack helmet = new ItemStack(Material.GOLD_HELMET);
@@ -72,7 +73,7 @@ public class StrafeKit extends Kit {
         player.getInventory().addItem(rod);
     }
 
-    @EventHandler
+    /*@EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {
         if (event.getDamager().getType().equals(EntityType.FISHING_HOOK)) {
             Projectile projectile = (Projectile) event.getDamager();
@@ -91,5 +92,5 @@ public class StrafeKit extends Kit {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50, 1));
             }
         }
-    }
+    }*/
 }

@@ -99,8 +99,8 @@ public class BomberKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        SettingsFiles settingsFiles = new SettingsFiles();
-        if (!settingsFiles.getSpawnSoupValue(player)) {
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.containsKey(player)) {             ClimaxPvp.getInstance().spawnSoupTrue.put(player, false);         }
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.get(player)) {
             ItemStack rod = new ItemStack(Material.FISHING_ROD);
             player.getInventory().addItem(rod);
         }
@@ -160,17 +160,6 @@ public class BomberKit extends Kit {
         }
     }
 
-    public int taskID = 0;
-
-    public void giveTNT(Player player) {
-        taskID = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(ClimaxPvp.getInstance(), new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        }, 0L, 20L * 7L );
-    }
-
     private void spawnTNT(Player player) {
         player.playSound(player.getLocation(), Sound.FUSE, 1, 1);
         ItemStack tntInInv = player.getItemInHand();
@@ -183,11 +172,11 @@ public class BomberKit extends Kit {
         velocity(player, player.getLocation().getDirection().multiply(-1), tnt.getVelocity().length() + 0.02, false, 0.0, 0.2, 0.8, true);
         new TNTParticle(tnt);
 
-        ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(player.getUniqueId(), false);
+        AntiNub.alertsEnabled.put(player.getUniqueId(), false);
         ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
             @Override
             public void run() {
-                ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(player.getUniqueId(), true);
+                AntiNub.alertsEnabled.put(player.getUniqueId(), true);
             }
         }, 20L * 5);
     }
@@ -203,11 +192,11 @@ public class BomberKit extends Kit {
         if (event.getDamager().getType().equals(EntityType.PRIMED_TNT)) {
             if (event.getEntity().getType().equals(EntityType.PLAYER)) {
 
-                ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(event.getEntity().getUniqueId(), false);
+                AntiNub.alertsEnabled.put(event.getEntity().getUniqueId(), false);
                 ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
                     @Override
                     public void run() {
-                        ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(event.getEntity().getUniqueId(), true);
+                        AntiNub.alertsEnabled.put(event.getEntity().getUniqueId(), true);
                     }
                 }, 20L * 5);
             }

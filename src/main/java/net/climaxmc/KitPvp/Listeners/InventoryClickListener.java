@@ -56,6 +56,10 @@ public class InventoryClickListener implements Listener {
             player.updateInventory();
         }*/
 
+        if (ClimaxPvp.isSpectating.contains(player.getUniqueId())) {
+            event.setCancelled(true);
+        }
+
         if (!player.getGameMode().equals(GameMode.CREATIVE)) {
             if (event.getSlotType() == null || event.getCurrentItem() == null || event.getCurrentItem().getType() == null) {
                 return;

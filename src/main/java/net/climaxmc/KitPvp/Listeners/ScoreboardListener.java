@@ -9,9 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -60,6 +58,7 @@ public class ScoreboardListener implements Listener {
         objective.getScore("\u00A7f» \u00A7eWebsite:").setScore(3);
         objective.getScore("climaxmc.net").setScore(2);
         objective.getScore("\u00A7f-]\u00A7f\u00A77\u00A7m---------\u00A7f[-").setScore(1);
+
         Objective healthObjective = board.registerNewObjective("showhealth", "health");
         healthObjective.setDisplaySlot(DisplaySlot.BELOW_NAME);
         healthObjective.setDisplayName(ChatColor.RED + "\u2764");

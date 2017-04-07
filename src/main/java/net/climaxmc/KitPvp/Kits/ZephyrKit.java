@@ -102,8 +102,10 @@ public class ZephyrKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
 
-        SettingsFiles settingsFiles = new SettingsFiles();
-        if (!settingsFiles.getSpawnSoupValue(player)) {
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.containsKey(player)) {
+            ClimaxPvp.getInstance().spawnSoupTrue.put(player, false);
+        }
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.get(player)) {
             ItemStack rod = new ItemStack(Material.FISHING_ROD);
             player.getInventory().addItem(rod);
         }
@@ -128,11 +130,11 @@ public class ZephyrKit extends Kit {
 
                     for (Entity entities : player.getNearbyEntities(13, 5, 13)) {
                         if (entities.getType().equals(EntityType.PLAYER)) {
-                            ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(entities.getUniqueId(), false);
+                            AntiNub.alertsEnabled.put(entities.getUniqueId(), false);
                             ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
                                 @Override
                                 public void run() {
-                                    ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(entities.getUniqueId(), true);
+                                    AntiNub.alertsEnabled.put(entities.getUniqueId(), true);
                                 }
                             }, 20L * 4);
                         }

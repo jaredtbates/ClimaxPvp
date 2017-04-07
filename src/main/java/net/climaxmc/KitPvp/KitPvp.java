@@ -11,22 +11,17 @@ import net.climaxmc.KitPvp.Commands.Economy.PayCommand;
 import net.climaxmc.KitPvp.Commands.*;
 import net.climaxmc.KitPvp.Commands.Messaging.MessageCommand;
 import net.climaxmc.KitPvp.Commands.Messaging.ReplyCommand;
-import net.climaxmc.KitPvp.Kits.FighterKit;
 import net.climaxmc.KitPvp.Listeners.*;
 import net.climaxmc.KitPvp.Menus.ChallengesMenu;
 import net.climaxmc.KitPvp.Menus.ReportGUI;
 import net.climaxmc.KitPvp.Utils.ChatColor.ChatColorEvents;
 import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffectEvents;
-import net.climaxmc.KitPvp.Utils.Duels.DuelEvents;
-import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
-import net.climaxmc.KitPvp.Utils.Tag.TagCommands;
 import net.climaxmc.KitPvp.Utils.Tag.TagEvents;
 import net.climaxmc.KitPvp.Utils.Tournaments.TournamentCommands;
 import net.climaxmc.KitPvp.Utils.Tournaments.TournamentEvents;
 import net.climaxmc.common.donations.trails.Trail;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import java.util.*;
@@ -64,7 +59,7 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new InventoryOpenListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerQuitListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerPickupItemListener(plugin), plugin);
-        plugin.getServer().getPluginManager().registerEvents(new ScoreboardListener(plugin), plugin);
+        //plugin.getServer().getPluginManager().registerEvents(new ScoreboardListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new BlockBreakListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new BlockPlaceListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PortalListeners(plugin), plugin);
@@ -79,6 +74,7 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new DeathEffectEvents(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new TagEvents(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ChatColorEvents(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PlayerMoveListener(plugin), plugin);
         //plugin.getServer().getPluginManager().registerEvents(new HackListeners(plugin), plugin);
 
         // Register commands
@@ -111,6 +107,9 @@ public class KitPvp {
         plugin.getCommand("cosmetics").setExecutor(new CosmeticsCommand(plugin));
         plugin.getCommand("tournament").setExecutor(new TournamentCommands(plugin));
         plugin.getCommand("unlockdeatheffect").setExecutor(new UnlockDeathEffectCommand(plugin));
+        plugin.getCommand("unbancombat").setExecutor(new UnbanCombatCommand(plugin));
+        plugin.getCommand("top").setExecutor(new TopCommand(plugin));
+        plugin.getCommand("rotatemaps").setExecutor(new RotateMapsCommand(plugin));
         //plugin.getCommand("tag").setExecutor(new TagCommands(plugin));
         /*plugin.getCommand("team").setExecutor(new TeamCommand(plugin));*/
         //plugin.getCommand("staffreq").setExecutor(new StaffReqCommand(plugin));

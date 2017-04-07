@@ -2,11 +2,16 @@ package net.climaxmc;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
+import com.sk89q.worldguard.protection.flags.DefaultFlag;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import lombok.Getter;
 import net.climaxmc.Administration.Administration;
 import net.climaxmc.Administration.Runnables.UpdateRunnable;
 import net.climaxmc.AntiNub.AntiNub;
 import net.climaxmc.Donations.Donations;
+import net.climaxmc.KitPvp.Commands.StatsHologramCommand;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
@@ -14,7 +19,9 @@ import net.climaxmc.KitPvp.Utils.Challenges.ChallengesFiles;
 import net.climaxmc.KitPvp.Utils.ChatColor.DChatColor;
 import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffect;
 import net.climaxmc.KitPvp.Utils.EntityHider;
+import net.climaxmc.KitPvp.Utils.HologramFile;
 import net.climaxmc.KitPvp.Utils.I;
+import net.climaxmc.KitPvp.Utils.ServerScoreboard;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.common.database.MySQL;
 import net.climaxmc.common.database.PlayerData;
@@ -77,6 +84,8 @@ public class ClimaxPvp extends JavaPlugin {
     private SlackApi slackStaffHelp = null;
     @Getter
     private SlackApi slackDonations = null;
+    @Getter
+    private List<String> info = new ArrayList<>();
 
     public static ArrayList<UUID> isSpectating = new ArrayList<>();
 
@@ -134,6 +143,14 @@ public class ClimaxPvp extends JavaPlugin {
 
     private EntityHider entityHider;
 
+    public HashMap<Player, Location> freezeLocation = new HashMap<>();
+    public Map<Player, Location> lastValidLocation = new HashMap<>();
+
+    public Map<Player, Boolean> spawnSoupTrue = new HashMap<>();
+    public Map<Player, Boolean> respawnValue = new HashMap<>();
+
+    public Map<UUID, Integer> currentKS = new HashMap<>();
+
     public AntiNub antiNub;
 
     @Override
@@ -190,9 +207,20 @@ public class ClimaxPvp extends JavaPlugin {
                 getConfig().getString("Database.Password")
         );
 
+        // Save Info File
+        File infoFile = new File(getDataFolder(), "info.txt");
+        if (!infoFile.exists()) {
+            saveResource("info.txt", false);
+        }
+        try {
+            Files.lines(FileSystems.getDefault().getPath(infoFile.getPath())).forEach(infoLine -> info.add(ChatColor.translateAlternateColorCodes('&', infoLine)));
+        } catch (IOException e) {
+            getLogger().severe("Could not get info!");
+        }
+
         // Create temporary player data
         getServer().getOnlinePlayers().forEach(player -> mySQL.getTemporaryPlayerData().put(player.getUniqueId(), new HashMap<>()));
-        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        //getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
         // Load Modules
         new KitPvp(this);
@@ -210,8 +238,25 @@ public class ClimaxPvp extends JavaPlugin {
 
         entityHider = new EntityHider(this, EntityHider.Policy.BLACKLIST);
 
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+
         antiNub = (AntiNub) Bukkit.getPluginManager().getPlugin("AntiNub");
+
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+            @Override
+            public void run() {
+                rotateMaps();
+            }
+        }, 0L, ((20L * 60) * 60) * 1);
+
+        for (Player players : Bukkit.getOnlinePlayers()) {
+            ServerScoreboard serverScoreboard = new ServerScoreboard(players);
+            serverScoreboard.updateScoreboard();
+            scoreboards.put(players.getUniqueId(), serverScoreboard);
+        }
     }
+
+    private int currentMap = 0;
 
     public void hideEntity(Player observer, Entity entity) {
         entityHider.hideEntity(observer, entity);
@@ -241,6 +286,52 @@ public class ClimaxPvp extends JavaPlugin {
         }
     }
 
+    public Map<UUID, ServerScoreboard> scoreboards = new HashMap<>();
+
+    public ServerScoreboard getScoreboard(Player player) {
+        return scoreboards.get(player.getUniqueId());
+    }
+
+    public void rotateMaps() {
+
+        Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&f\u00BB &bMap rotation commencing, do /spawn!"));
+        for (Player players : Bukkit.getOnlinePlayers()) {
+            players.playSound(players.getLocation(), Sound.LEVEL_UP, 1F, 0.7F);
+        }
+
+        if (currentMap == 0) {
+            Bukkit.getServer().getWorld("KitPvp3.0").setSpawnLocation(-53, 63, -907);
+            currentMap = 1;
+        /*} else if (currentMap == 1) {
+            Bukkit.getServer().getWorld("KitPvp3.0").setSpawnLocation(4, 10, 8);
+            currentMap = 2;*/
+        } else if (currentMap == 1) {
+            Bukkit.getServer().getWorld("KitPvp3.0").setSpawnLocation(-41, 58, 672);
+            currentMap = 0;
+        }
+    }
+
+    public WorldGuardPlugin getWorldGuard() {
+        Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
+
+        // WorldGuard may not be loaded
+        if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
+            return null; // Maybe you want throw an exception instead
+        }
+
+        return (WorldGuardPlugin) plugin;
+    }
+
+    public boolean isWithinProtectedRegion(Location location) {
+        ApplicableRegionSet set = getWorldGuard().getRegionManager(location.getWorld()).getApplicableRegions(location.getBlock().getLocation());
+        for (ProtectedRegion region : set.getRegions()) {
+            if (region.getFlags().containsKey(DefaultFlag.INVINCIBILITY)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Get player data from MySQL
      *
@@ -248,7 +339,7 @@ public class ClimaxPvp extends JavaPlugin {
      * @return Data of player
      */
     public PlayerData getPlayerData(OfflinePlayer player) {
-        if (!playerDataList.containsKey(player.getUniqueId()) || playerDataList.get(player.getUniqueId()) == null) {
+        if (!playerDataList.containsKey(player.getUniqueId())) {
             playerDataList.put(player.getUniqueId(), mySQL.getPlayerData(player.getUniqueId()));
         }
         return playerDataList.get(player.getUniqueId());

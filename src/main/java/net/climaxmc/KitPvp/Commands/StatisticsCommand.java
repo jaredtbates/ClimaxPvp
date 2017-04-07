@@ -1,6 +1,8 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.Kit;
+import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.common.database.PlayerData;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
@@ -44,12 +46,18 @@ public class StatisticsCommand implements CommandExecutor {
             return true;
         }
 
+        if (!KitPvp.killStreak.containsKey(player.getUniqueId())) {
+            KitPvp.killStreak.put(player.getUniqueId(), 0);
+        }
+
         player.sendMessage(ChatColor.WHITE + "\u00BB " + "\u00A76" + target.getName() + "'s \u00A77statistics " + ChatColor.WHITE + "\u00AB");
         player.sendMessage("\u00A77Rank: \u00A7c" + WordUtils.capitalizeFully(data.getRank().toString()));
         player.sendMessage("\u00A77Balance: \u00A7c" + "$" + data.getBalance());
         player.sendMessage("\u00A77Kills: \u00A7c" + data.getKills());
         player.sendMessage("\u00A77Deaths: \u00A7c" + data.getDeaths());
-        player.sendMessage("\u00A77KDR: \u00A7c" + getRatio(data));
+        player.sendMessage("\u00A77KDR: \u00A7c" + data.getKdr());
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Current KS: &c" + KitPvp.killStreak.get(player.getUniqueId())));
+        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Top KS: &c") + data.getTopks());
 
         return true;
     }

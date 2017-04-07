@@ -175,11 +175,11 @@ public class RangerKit extends Kit {
         // Knock player back
         velocity(player, player.getLocation().getDirection().multiply(-1), vel, false, 0.0D, 0.2D, 0.5D, true);
 
-        ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(player.getUniqueId(), false);
+        AntiNub.alertsEnabled.put(player.getUniqueId(), false);
         ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
             @Override
             public void run() {
-                ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(player.getUniqueId(), true);
+                AntiNub.alertsEnabled.put(player.getUniqueId(), true);
             }
         }, 20L * 4);
 

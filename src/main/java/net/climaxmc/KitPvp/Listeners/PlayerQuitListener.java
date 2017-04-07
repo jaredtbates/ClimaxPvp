@@ -108,6 +108,8 @@ public class PlayerQuitListener implements Listener {
         event.setQuitMessage(null/*ChatColor.RED + "Quit" + ChatColor.DARK_GRAY + "\u00bb " + player.getName()*/);
 
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> plugin.savePlayerData(plugin.getPlayerData(player)));
+
+        plugin.scoreboards.remove(player.getUniqueId());
     }
 
 }

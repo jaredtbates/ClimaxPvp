@@ -101,7 +101,7 @@ public class WarpCommand implements CommandExecutor {
                                 player.sendMessage("\u00A77You have been warped to \u00A76" + args[0]);
                                 plugin.warp(args[0], player);
                                 if (args[0].equalsIgnoreCase("nosoup")) {
-                                    player.setFoodLevel(17);
+                                    player.setFoodLevel(20);
                                 }
                             } else {
                                 player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "You moved! Teleport cancelled.");
@@ -112,7 +112,7 @@ public class WarpCommand implements CommandExecutor {
                     player.sendMessage("\u00A77You have been warped to \u00A76" + args[0]);
                     plugin.warp(args[0], player);
                     if (args[0].equalsIgnoreCase("nosoup")) {
-                        player.setFoodLevel(17);
+                        player.setFoodLevel(20);
                     }
                 }
                 break;

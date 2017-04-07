@@ -44,13 +44,13 @@ public class HealerKit extends Kit {
     protected void wear(Player player) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 3);
+        helm.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.MAROON);
         helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
-        chest.addEnchantment(Enchantment.DURABILITY, 3);
+        chest.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
         chestmeta.setColor(Color.MAROON);
@@ -77,13 +77,13 @@ public class HealerKit extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0));
         regenResistance(player);
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 3);
+        helm.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
         LeatherArmorMeta helmmeta = (LeatherArmorMeta) helm.getItemMeta();
         helmmeta.setColor(Color.MAROON);
         helm.setItemMeta(helmmeta);
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
-        chest.addEnchantment(Enchantment.DURABILITY, 3);
+        chest.addUnsafeEnchantment(Enchantment.DURABILITY, 4);
         chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
         chestmeta.setColor(Color.MAROON);
@@ -95,8 +95,10 @@ public class HealerKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
 
-        SettingsFiles settingsFiles = new SettingsFiles();
-        if (!settingsFiles.getSpawnSoupValue(player)) {
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.containsKey(player)) {
+            ClimaxPvp.getInstance().spawnSoupTrue.put(player, false);
+        }
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.get(player)) {
             ItemStack rod = new ItemStack(Material.FISHING_ROD);
             player.getInventory().addItem(rod);
         }

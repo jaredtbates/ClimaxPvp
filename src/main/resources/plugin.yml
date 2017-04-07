@@ -1,6 +1,6 @@
 name: ClimaxPvp
 main: net.climaxmc.ClimaxPvp
-version: 2.0
+version: 2.0-SNAPSHOT
 authors: [computerwizjared, Jonhan, GamerBah]
 commands:
   repair:
@@ -103,3 +103,33 @@ commands:
     description: Makes a player AFK (away from keyboard)
   options:
     description: Opens the options menu for a player
+  staffalert:
+    description: Alerts all staff online with a msg
+    aliases: sa
+  duel:
+    description: Duel a player
+  unlocktrail:
+    description: Unlock any trail for any player
+  usetoken:
+    description: Whitelist a player of your choice
+  settokens:
+    description: Set the tokens of a player
+  donatebroadcast:
+    description: Broadcast a donation
+  cosmetics:
+    description: Open cosmetics menu
+    aliases: c
+  tournament:
+    description: Tournament control command
+    aliases: tourney
+  unlockdeatheffect:
+    description: Unlock any death effect for any player
+  unbancombat:
+    description: Unbans a player that was banned because of combat log protection
+    aliases: unbanc
+  top:
+    description: View leaderboards
+  rotatemaps:
+    description: Manually rotates the maps
+  #tag:
+  #  description: Main control command for tag games

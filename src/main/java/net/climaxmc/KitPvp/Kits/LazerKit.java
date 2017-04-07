@@ -38,7 +38,7 @@ public class LazerKit extends Kit {
     private Ability beam = new Ability("Beam", 1, cooldown, TimeUnit.SECONDS);
 
     public LazerKit() {
-        super("Lazer", new ItemStack(Material.INK_SACK, 1, (byte) 6), "Pew pew!", ChatColor.RED);
+        super("Lazer", new ItemStack(Material.INK_SACK, 1, (byte) 6), "Pew pew!", ChatColor.GOLD);
     }
 
     protected void wear(Player player) {
@@ -86,8 +86,10 @@ public class LazerKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        SettingsFiles settingsFiles = new SettingsFiles();
-        if (!settingsFiles.getSpawnSoupValue(player)) {
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.containsKey(player)) {
+            ClimaxPvp.getInstance().spawnSoupTrue.put(player, false);
+        }
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.get(player)) {
             ItemStack rod = new ItemStack(Material.FISHING_ROD);
             player.getInventory().addItem(rod);
         }

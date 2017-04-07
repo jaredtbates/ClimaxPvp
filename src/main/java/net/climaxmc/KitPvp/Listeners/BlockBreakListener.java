@@ -31,5 +31,8 @@ public class BlockBreakListener implements Listener {
         if (ClimaxPvp.isSpectating.contains(player.getUniqueId())) {
             event.setCancelled(true);
         }
+        if (KitPvp.getVanished().contains(player.getUniqueId())) {
+            event.setCancelled(true);
+        }
     }
 }

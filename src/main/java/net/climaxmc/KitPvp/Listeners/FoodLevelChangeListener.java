@@ -21,7 +21,7 @@ public class FoodLevelChangeListener implements Listener {
             return;
         } else {
             if (player.getLocation().distance(player.getWorld().getSpawnLocation()) <= 250) {
-                player.setFoodLevel(17);
+                player.setFoodLevel(20);
             } else {
                 player.setFoodLevel(20);
             }

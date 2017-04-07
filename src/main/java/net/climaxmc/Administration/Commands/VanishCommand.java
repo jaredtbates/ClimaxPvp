@@ -69,7 +69,7 @@ public class VanishCommand implements CommandExecutor, Listener {
         Player player = (Player) sender;
         PlayerData playerData = plugin.getPlayerData(player);
 
-        if (!(playerData.hasRank(Rank.MODERATOR))) {
+        if (!(playerData.hasRank(Rank.TRIAL_MODERATOR))) {
             player.sendMessage(ChatColor.RED + "You do not have permission to execute that command!");
             return true;
         }
@@ -107,7 +107,7 @@ public class VanishCommand implements CommandExecutor, Listener {
                 .forEach(vanishedPlayer -> player.hidePlayer(plugin.getServer().getPlayer(vanishedPlayer)));
 
         PlayerData playerData = plugin.getPlayerData(player);
-        if (playerData.hasRank(Rank.MODERATOR)) {
+        if (playerData.hasRank(Rank.TRIAL_MODERATOR)) {
             toggleVanish(player, playerData);
             event.setJoinMessage(null);
         }
@@ -132,7 +132,6 @@ public class VanishCommand implements CommandExecutor, Listener {
             player.getInventory().clear();
             player.getInventory().setItem(0, new I(Material.INK_SACK).durability(8).name(ChatColor.AQUA + "Leave Vanish"));
             KitPvp.getVanished().add(player.getUniqueId());
-            ClimaxPvp.isVanished.add(player);
         } else {
             player.setGameMode(GameMode.SURVIVAL);
             player.setAllowFlight(false);
@@ -152,7 +151,6 @@ public class VanishCommand implements CommandExecutor, Listener {
 
             KitPvp.getVanished().remove(player.getUniqueId());
             KitPvp.getChecking().remove(player.getUniqueId());
-            ClimaxPvp.isVanished.remove(player);
             plugin.respawn(player);
         }
     }

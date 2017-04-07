@@ -5,7 +5,9 @@ import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.BlockUtils;
 import net.climaxmc.KitPvp.Utils.I;
+import net.climaxmc.KitPvp.Utils.ServerScoreboard;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -37,6 +39,12 @@ public class PlayerRespawnListener implements Listener {
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
+
+        player.teleport(BlockUtils.getCenter(event.getRespawnLocation()));
+
+        ServerScoreboard serverScoreboard = plugin.getScoreboard(player);
+        serverScoreboard.updateScoreboard();
+
         event.setRespawnLocation(event.getPlayer().getWorld().getSpawnLocation());
 
         for(Player players : Bukkit.getServer().getOnlinePlayers()){
@@ -84,7 +92,7 @@ public class PlayerRespawnListener implements Listener {
                     .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Equip your previous kit."));
         }
 
-        Bukkit.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
+        /*Bukkit.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
             @Override
             public void run() {
                 if (KitManager.isPlayerInKit(player)) {
@@ -94,14 +102,20 @@ public class PlayerRespawnListener implements Listener {
                         .name(ChatColor.translateAlternateColorCodes('&', "&8[&cAlpha&8] &fPractice"))
                         .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Indeed"));
             }
-        }, 20L);
+        }, 20L);*/
 
-        player.getInventory().setItem(5, new I(Material.COMPASS)
+        player.getInventory().setItem(3, new I(Material.COMPASS)
                 .name(ChatColor.DARK_PURPLE + "Warps")
                 .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "View and teleport to various warps on the server!"));
 
-        SettingsFiles settingsFiles = new SettingsFiles();
-        if (settingsFiles.getSpawnSoupValue(player)) {
+        player.getInventory().setItem(5, new I(Material.PAPER)
+                .name(ChatColor.AQUA + "Season II Info")
+                .lore("View info about the current season!"));
+
+        /*if (!plugin.spawnSoupTrue.containsKey(player)) {
+            plugin.spawnSoupTrue.put(player, false);
+        }
+        if (ClimaxPvp.getInstance().spawnSoupTrue.get(player)) {
             player.getInventory().setItem(6, new I(Material.MUSHROOM_SOUP)
                     .name(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Soup")
                     .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Set your preferred healing type!"));
@@ -109,7 +123,7 @@ public class PlayerRespawnListener implements Listener {
             player.getInventory().setItem(6, new I(Material.FISHING_ROD)
                     .name(ChatColor.GRAY + "Mode: " + ChatColor.YELLOW + "Regen")
                     .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Set your preferred healing type!"));
-        }
+        }*/
 
         player.getInventory().setItem(7, new I(Material.WATCH)
                 .name(ChatColor.GOLD + "Settings")

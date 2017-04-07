@@ -75,8 +75,8 @@ public class GhastKit extends Kit {
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
         player.getInventory().addItem(sword);
-        SettingsFiles settingsFiles = new SettingsFiles();
-        if (!settingsFiles.getSpawnSoupValue(player)) {
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.containsKey(player)) {             ClimaxPvp.getInstance().spawnSoupTrue.put(player, false);         }
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.get(player)) {
             ItemStack rod = new ItemStack(Material.FISHING_ROD);
             player.getInventory().addItem(rod);
         }
@@ -138,11 +138,11 @@ public class GhastKit extends Kit {
                     }
                     target.setVelocity(target.getVelocity().setY(1));
 
-                    ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(target.getUniqueId(), false);
+                    AntiNub.alertsEnabled.put(target.getUniqueId(), false);
                     ClimaxPvp.getInstance().getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
                         @Override
                         public void run() {
-                            ClimaxPvp.getInstance().antiNub.getInstance().alertsEnabled.put(target.getUniqueId(), true);
+                            AntiNub.alertsEnabled.put(target.getUniqueId(), true);
                         }
                     }, 20L * 5);
                 }
