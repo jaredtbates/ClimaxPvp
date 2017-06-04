@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Utils.Tournaments;
+package net.climaxmc.KitPvp.events.tournament;
 
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.common.database.PlayerData;
@@ -19,7 +19,6 @@ public class TournamentCommands implements CommandExecutor {
     public Player target;
 
     TournamentFiles tournamentFiles = new TournamentFiles();
-    TournamentUtils tournamentUtils = new TournamentUtils(plugin);
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -28,7 +27,10 @@ public class TournamentCommands implements CommandExecutor {
         }
         player = (Player) sender;
 
-        if (args.length == 0) {
+        PlayerData playerData = plugin.getPlayerData(player);
+        TournamentManager tournamentManager = plugin.tournamentManager;
+
+        /*if (args.length == 0) {
             player.sendMessage(ChatColor.WHITE + "" + ChatColor.BOLD + "Tourney Commands:");
             player.sendMessage(ChatColor.GRAY + "/tourney host <prize amt ($)> // Hosts a tournament with your money");
             player.sendMessage(ChatColor.GRAY + "/tourney join // Joins the current tournament");
@@ -38,8 +40,6 @@ public class TournamentCommands implements CommandExecutor {
         }
 
         target = plugin.getServer().getPlayerExact(args[0]);
-
-        PlayerData playerData = plugin.getPlayerData(player);
 
         if (args[0].contains("host")) {
             if (!playerData.hasRank(Rank.BETA)) {
@@ -110,13 +110,13 @@ public class TournamentCommands implements CommandExecutor {
                 player.sendMessage(ChatColor.GRAY + "/tourney leave // Leaves the current tournament");
                 player.sendMessage(ChatColor.GRAY + "/tourney spec // Spectates a running tournament");
             }
-        }
+        }*/
 
         if (playerData.hasRank(Rank.MODERATOR)) {
             if (args[0].contains("admin")) {
                 if (args.length == 2) {
                     if (args[1].contains("cancel")) {
-                        tournamentUtils.cancelTourney(player);
+                        tournamentManager.end();
                     }
                     if (args[1].contains("setwinpoint")) {
                         tournamentFiles.setWinPoint(player);

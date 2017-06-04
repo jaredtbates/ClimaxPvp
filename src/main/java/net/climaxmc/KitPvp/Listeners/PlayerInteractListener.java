@@ -268,7 +268,9 @@ public class PlayerInteractListener implements Listener {
 
                     if (plugin.getWarpLocation("Fair") != null) {
                         if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
-                            new PvpKit().wearCheckLevel(player);
+                            player.getInventory().clear();
+                            player.getInventory().setArmorContents(null);
+                            player.getInventory().setItem(0, new I(Material.DIAMOND_SWORD).name(ChatUtils.color("&bPunch to duel")));
                         }
                     }
 

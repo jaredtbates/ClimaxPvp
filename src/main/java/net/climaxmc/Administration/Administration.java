@@ -2,8 +2,6 @@ package net.climaxmc.Administration;
 
 import net.climaxmc.Administration.Commands.*;
 import net.climaxmc.Administration.Listeners.*;
-import net.climaxmc.Administration.Punishments.Commands.*;
-import net.climaxmc.Administration.Runnables.ChatAutoBroadcastRunnable;
 import net.climaxmc.ClimaxPvp;
 
 public class Administration {
@@ -13,7 +11,7 @@ public class Administration {
         plugin.getServer().getPluginManager().registerEvents(new AsyncPlayerChatListener(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new CombatLogListeners(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new SpawnProtectListeners(plugin), plugin);
-        plugin.getServer().getPluginManager().registerEvents(new VanishCommand(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new StaffMode(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new CheckCommand(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ChatFilter(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new FreezeCommand(plugin), plugin);
@@ -21,7 +19,7 @@ public class Administration {
         // Register commands
         plugin.getCommand("admin").setExecutor(new AdminCommand(plugin));
         plugin.getCommand("inventory").setExecutor(new InventoryCommand(plugin));
-        plugin.getCommand("vanish").setExecutor(new VanishCommand(plugin));
+        plugin.getCommand("vanish").setExecutor(new StaffMode(plugin));
         plugin.getCommand("check").setExecutor(new CheckCommand(plugin));
         plugin.getCommand("clearchat").setExecutor(new ChatCommands(plugin));
         plugin.getCommand("rank").setExecutor(new RankCommand(plugin));

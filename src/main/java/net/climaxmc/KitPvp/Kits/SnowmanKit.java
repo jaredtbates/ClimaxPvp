@@ -1,13 +1,14 @@
 package net.climaxmc.KitPvp.Kits;
 
 import me.xericker.disguiseabilities.DisguiseAbilities;
-import net.climaxmc.AntiNub.AntiNub;
+
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.Ability;
 import net.climaxmc.KitPvp.Utils.Particles.TNTParticle;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
+import net.climaxmc.antinub.AntiNub;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
@@ -53,7 +54,7 @@ public class SnowmanKit extends Kit {
         chestplate.setItemMeta(chestmeta);
         player.getInventory().setChestplate(chestplate);
         ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS);
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
         leggings.addEnchantment(Enchantment.DURABILITY, 3);
         LeatherArmorMeta legmeta = (LeatherArmorMeta) leggings.getItemMeta();
         legmeta.setColor(Color.WHITE);
@@ -138,7 +139,7 @@ public class SnowmanKit extends Kit {
     {
         Location l = target.getLocation().subtract(player.getLocation());
         double distance = target.getLocation().distance(player.getLocation());
-        Vector v = l.toVector().multiply(1.5/distance).setY(0.4);
+        Vector v = l.toVector().multiply(1.1/distance).setY(0.5);
         target.setVelocity(v);
     }
 }

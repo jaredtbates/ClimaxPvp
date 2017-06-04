@@ -1,7 +1,5 @@
 package net.climaxmc;
 
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
@@ -9,24 +7,23 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import lombok.Getter;
 import net.climaxmc.Administration.Administration;
 import net.climaxmc.Administration.Runnables.UpdateRunnable;
-import net.climaxmc.AntiNub.AntiNub;
 import net.climaxmc.Donations.Donations;
-import net.climaxmc.KitPvp.Commands.StatsHologramCommand;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Utils.Challenges.ChallengesFiles;
 import net.climaxmc.KitPvp.Utils.ChatColor.DChatColor;
+import net.climaxmc.KitPvp.Utils.ChatUtils;
 import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffect;
 import net.climaxmc.KitPvp.Utils.EntityHider;
-import net.climaxmc.KitPvp.Utils.HologramFile;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.KitPvp.Utils.ServerScoreboard;
-import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
+import net.climaxmc.KitPvp.events.EventManager;
+import net.climaxmc.KitPvp.events.tournament.TPManager;
+import net.climaxmc.KitPvp.events.tournament.TournamentManager;
+import net.climaxmc.KitPvp.packets.PacketCore;
 import net.climaxmc.common.database.MySQL;
 import net.climaxmc.common.database.PlayerData;
-import net.climaxmc.common.donations.trails.Trail;
-import net.climaxmc.common.titles.Title;
 import net.gpedro.integrations.slack.SlackApi;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
@@ -37,7 +34,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,9 +41,6 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.logging.Filter;
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
 
 public class ClimaxPvp extends JavaPlugin {
     @Getter
@@ -103,14 +96,14 @@ public class ClimaxPvp extends JavaPlugin {
     public static HashMap<Player, Integer> currentPlayerArena = new HashMap<>();
     public static ArrayList<Integer> currentArenas = new ArrayList<>();
 
-    public static ArrayList<Player> inTourney = new ArrayList<>();
+    /*public static ArrayList<Player> inTourney = new ArrayList<>();
     public static ArrayList<Player> inTourneyLobby = new ArrayList<>();
     public static ArrayList<Player> tourneySpectators = new ArrayList<>();
     public static ArrayList<Player> tourneyWinners = new ArrayList<>();
     public static HashMap<Integer, Player> playerPoint = new HashMap<>();
     public static boolean isTourneyRunning = false;
     public static boolean isTourneyHosted = false;
-    public static int tourneyPrize;
+    public static int tourneyPrize;*/
 
     public static ArrayList<Player> inTag = new ArrayList<>();
     public static ArrayList<Player> inTagLobby = new ArrayList<>();
@@ -124,7 +117,6 @@ public class ClimaxPvp extends JavaPlugin {
     public static Player isIt;
 
     public HashMap<Player, String> lastHitType = new HashMap<>();
-    public HashMap<Player, Boolean> canHit = new HashMap<>();
 
     public HashMap<Player, Integer> itemClickDelay = new HashMap<>();
 
@@ -151,7 +143,9 @@ public class ClimaxPvp extends JavaPlugin {
 
     public Map<UUID, Integer> currentKS = new HashMap<>();
 
-    public AntiNub antiNub;
+    public EventManager eventManager;
+    public TournamentManager tournamentManager;
+    public TPManager tpManager;
 
     @Override
     public void onEnable() {
@@ -240,20 +234,27 @@ public class ClimaxPvp extends JavaPlugin {
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
-        antiNub = (AntiNub) Bukkit.getPluginManager().getPlugin("AntiNub");
-
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+        /*getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public void run() {
                 rotateMaps();
             }
-        }, 0L, ((20L * 60) * 60) * 1);
+        }, 0L, ((20L * 60) * 60) * 1);*/
+
+        Bukkit.getServer().getWorld("KitPvp3.0").setSpawnLocation(-41, 58, 672);
+        currentMap = 0;
 
         for (Player players : Bukkit.getOnlinePlayers()) {
             ServerScoreboard serverScoreboard = new ServerScoreboard(players);
             serverScoreboard.updateScoreboard();
             scoreboards.put(players.getUniqueId(), serverScoreboard);
         }
+
+        new PacketCore(this);
+
+        eventManager = new EventManager(this);
+        tournamentManager = new TournamentManager(this);
+        tpManager = new TPManager(this);
     }
 
     private int currentMap = 0;
@@ -454,7 +455,9 @@ public class ClimaxPvp extends JavaPlugin {
         playersInWarp.put(player.getUniqueId(), warp);
 
         if (warp.equalsIgnoreCase("Fair")) {
-            new PvpKit().wearCheckLevel(player);
+            player.getInventory().clear();
+            player.getInventory().setArmorContents(null);
+            player.getInventory().setItem(0, new I(Material.DIAMOND_SWORD).name(ChatUtils.color("&bPunch to duel")));
         }
         if (warp.equalsIgnoreCase("Duel")) {
             player.getInventory().clear();

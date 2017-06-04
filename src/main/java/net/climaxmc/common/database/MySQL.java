@@ -168,6 +168,26 @@ public class MySQL {
         });
     }
 
+    public synchronized void executeUpdateSync(String query, Object... values) {
+        try {
+            if (connection == null || connection.isClosed()) {
+                connection = DriverManager.getConnection("jdbc:mysql://" + address + ":" + port + "/" + name, username, password);
+            }
+
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            int i = 0;
+            for (Object value : values) {
+                statement.setObject(++i, value);
+            }
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            logger.severe("Could not execute MySQL query!");
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Update Player Data
      *
@@ -246,8 +266,8 @@ public class MySQL {
      * @param uuid UUID of the player to create data of
      * @param ip IP address of the player to create data of
      */
-    public synchronized void createPlayerData(UUID uuid, String ip) {
-        executeUpdate(CREATE_PLAYERDATA, uuid.toString(), ip, Rank.DEFAULT.toString(), 0, 0, 0, null, 0, 0);
+    public void createPlayerData(UUID uuid, String ip) {
+        executeUpdateSync(CREATE_PLAYERDATA, uuid.toString(), ip, Rank.DEFAULT.toString(), 0, 0, 0, null, 0, 0);
         //executeUpdate(CREATE_SETTINGS, uuid.toString(), true, true, "DEFAULT", "NONE", "NONE", true);
     }
 

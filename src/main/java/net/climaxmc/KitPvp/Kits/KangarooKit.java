@@ -1,9 +1,10 @@
 package net.climaxmc.KitPvp.Kits;
 
-import net.climaxmc.AntiNub.AntiNub;
+
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
+import net.climaxmc.antinub.AntiNub;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -13,6 +14,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
@@ -28,14 +30,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class KangarooKit extends Kit {
+public class KangarooKit extends Kit implements Listener {
 
     public KangarooKit() {
         super("Kangaroo", new ItemStack(Material.FIREWORK), "Use your Firework to Jump High! (Shift for higher)", ChatColor.DARK_PURPLE);
     }
 
     protected void wear(Player player) {
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
@@ -71,7 +73,7 @@ public class KangarooKit extends Kit {
             player.removePotionEffect(effect.getType());
         }
         regenResistance(player);
-        ItemStack sword = new ItemStack(Material.STONE_SWORD);
+        ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
         player.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET));
@@ -129,7 +131,7 @@ public class KangarooKit extends Kit {
         if (jumpState.get(player) == 1) {
             player.setFallDistance(-5);
             Vector vector = player.getEyeLocation().getDirection();
-            vector.multiply(0.6F);
+            vector.multiply(0.62F);
             vector.setY(1);
             player.setVelocity(vector);
 
@@ -159,13 +161,9 @@ public class KangarooKit extends Kit {
             if (!jumpState.containsKey(player)) {
                 jumpState.put(player, 0);
             }
-            /*if (jumpState.get(player) == 0) {
+            if (jumpState.get(player) == 0) {
                 jumpState.put(player, 1);
-            }*/
-            /**
-             * The huge yellow highlight was annoying me so I let it use this weird putIfAbsent method.
-             */
-            jumpState.putIfAbsent(player, 1);
+            }
         }
     }
 }

@@ -118,10 +118,12 @@ public abstract class Kit implements Listener, CommandExecutor {
     public void wearCheckLevel(Player player) {
 
         PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
-        /*if (player.getLocation().distance(ClimaxPvp.getInstance().getWarpLocation("Duel")) <= 50) {
-            player.sendMessage(ChatColor.RED + "You cannot select a kit here!");
-            return;
-        }*/
+        if (ClimaxPvp.getInstance().getWarpLocation("Fair") != null) {
+            if (player.getLocation().distance(ClimaxPvp.getInstance().getWarpLocation("Fair")) <= 50) {
+                player.sendMessage(ChatColor.RED + "You cannot select a kit here!");
+                return;
+            }
+        }
         if (!KitManager.isPlayerInKit(player)) {
             if ((playerData.getLevelColor().contains(String.valueOf(color.getChar()))
                     || playerData.getTemporaryPlayerData().containsKey("Admin Mode")

@@ -2,15 +2,11 @@ package net.climaxmc.Administration.Listeners;
 
 import net.climaxmc.Administration.Commands.ChatCommands;
 import net.climaxmc.Administration.Commands.StaffChatCommand;
-import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
-import net.climaxmc.KitPvp.Utils.ChatColor.ChatColorFiles;
 import net.climaxmc.KitPvp.Utils.ChatColor.DChatColor;
-import net.climaxmc.KitPvp.Utils.Titles.TitleFiles;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import net.md_5.bungee.api.ChatColor;

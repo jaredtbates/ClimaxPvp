@@ -2,6 +2,7 @@ package net.climaxmc.KitPvp;
 
 import lombok.Getter;
 import net.climaxmc.Administration.Commands.*;
+import net.climaxmc.Administration.Listeners.StaffSilentJoin;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.Donations.Commands.CosmeticsCommand;
 import net.climaxmc.KitPvp.Commands.Economy.BalanceCommand;
@@ -16,10 +17,16 @@ import net.climaxmc.KitPvp.Menus.ChallengesMenu;
 import net.climaxmc.KitPvp.Menus.ReportGUI;
 import net.climaxmc.KitPvp.Utils.ChatColor.ChatColorEvents;
 import net.climaxmc.KitPvp.Utils.DeathEffects.DeathEffectEvents;
+import net.climaxmc.KitPvp.Utils.Fair.FairUtils;
+import net.climaxmc.KitPvp.Utils.PingUtils;
+import net.climaxmc.KitPvp.Utils.StatsHologram;
 import net.climaxmc.KitPvp.Utils.Tag.TagEvents;
-import net.climaxmc.KitPvp.Utils.Tournaments.TournamentCommands;
-import net.climaxmc.KitPvp.Utils.Tournaments.TournamentEvents;
+import net.climaxmc.KitPvp.events.EventCommand;
+import net.climaxmc.KitPvp.events.EventKitSelectorInv;
+import net.climaxmc.KitPvp.events.EventSelectorInv;
+import net.climaxmc.KitPvp.events.tournament.TournamentCommands;
 import net.climaxmc.common.donations.trails.Trail;
+import net.climaxmc.KitPvp.events.tournament.TournamentEvents;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
@@ -75,7 +82,14 @@ public class KitPvp {
         plugin.getServer().getPluginManager().registerEvents(new TagEvents(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new ChatColorEvents(plugin), plugin);
         plugin.getServer().getPluginManager().registerEvents(new PlayerMoveListener(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new StatsHologram(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new FairUtils(plugin), plugin);
+        //plugin.getServer().getPluginManager().registerEvents(new AFKTimer(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new StaffSilentJoin(plugin), plugin);
         //plugin.getServer().getPluginManager().registerEvents(new HackListeners(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new PingUtils(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new EventSelectorInv(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new EventKitSelectorInv(plugin), plugin);
 
         // Register commands
         plugin.getCommand("repair").setExecutor(new RepairCommand(plugin));
@@ -110,6 +124,10 @@ public class KitPvp {
         plugin.getCommand("unbancombat").setExecutor(new UnbanCombatCommand(plugin));
         plugin.getCommand("top").setExecutor(new TopCommand(plugin));
         plugin.getCommand("rotatemaps").setExecutor(new RotateMapsCommand(plugin));
+        plugin.getCommand("statshologram").setExecutor(new StatsHologram(plugin));
+        plugin.getCommand("hub").setExecutor(new HubCommand());
+        plugin.getCommand("resetstats").setExecutor(new ResetStatsCommand(plugin));
+        plugin.getCommand("event").setExecutor(new EventCommand(plugin));
         //plugin.getCommand("tag").setExecutor(new TagCommands(plugin));
         /*plugin.getCommand("team").setExecutor(new TeamCommand(plugin));*/
         //plugin.getCommand("staffreq").setExecutor(new StaffReqCommand(plugin));

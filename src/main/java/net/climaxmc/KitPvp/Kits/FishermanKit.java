@@ -1,24 +1,12 @@
  package net.climaxmc.KitPvp.Kits;
 
-import net.climaxmc.Administration.Commands.CheckCommand;
-import net.climaxmc.Administration.Commands.VanishCommand;
-import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
-import net.climaxmc.KitPvp.KitManager;
-import net.climaxmc.KitPvp.KitPvp;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerFishEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
-public class FishermanKit extends Kit {
+ public class FishermanKit extends Kit {
     public FishermanKit() {
         super("Fisherman", new ItemStack(Material.FISHING_ROD), "Hook a player and retract your line to Fish them to you!", ChatColor.GRAY);
     }

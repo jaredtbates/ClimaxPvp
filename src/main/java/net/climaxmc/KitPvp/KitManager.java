@@ -99,6 +99,15 @@ public class KitManager implements Listener {
         return playersInKits.containsKey(player.getUniqueId()) && playersInKits.get(player.getUniqueId()).getClass().equals(kit);
     }
 
+    public static Kit getKit(String name) {
+        for (Kit kit : getKits()) {
+            if (kit.getName().equals(name)) {
+                return kit;
+            }
+        }
+        return null;
+    }
+
     @EventHandler
     public final void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();

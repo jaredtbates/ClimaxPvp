@@ -22,6 +22,7 @@ public class PortalListeners implements Listener {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void rotationFix(BlockPlaceEvent event) {
         if (event.getBlockPlaced().getType().equals(Material.PORTAL)) {

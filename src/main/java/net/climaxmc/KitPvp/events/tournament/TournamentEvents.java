@@ -1,6 +1,7 @@
-package net.climaxmc.KitPvp.Utils.Tournaments;
+package net.climaxmc.KitPvp.events.tournament;
 
 import net.climaxmc.ClimaxPvp;
+import net.climaxmc.KitPvp.events.EventManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -19,16 +20,18 @@ public class TournamentEvents implements Listener {
         this.plugin = plugin;
     }
 
-    TournamentFiles tournamentFiles = new TournamentFiles();
-    TournamentUtils tournamentUtils = new TournamentUtils(plugin);
-
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
         Player killer = player.getKiller();
-        if (ClimaxPvp.inTourney.contains(player)) {
 
-            ClimaxPvp.inTourney.remove(player);
+        EventManager eventManager = plugin.eventManager;
+        TPManager tpManager = plugin.tpManager;
+        TournamentFiles tournamentFiles = new TournamentFiles();
+        TournamentManager tournamentManager = plugin.tournamentManager;
+
+        if (eventManager.isInEvent(player.getUniqueId())) {
+
             Bukkit.getServer().getScheduler().runTaskLater(ClimaxPvp.getInstance(), new Runnable() {
                 public void run() {
                     ClimaxPvp.getInstance().respawn(player, tournamentFiles.getDeathPoint());
@@ -36,12 +39,12 @@ public class TournamentEvents implements Listener {
                 }
             }, 5L);
 
-            if (ClimaxPvp.tourneyWinners.size() < 1 && tournamentUtils.areSlotsEmpty()) {
-                tournamentUtils.endTourney(killer);
+            if (tournamentManager.tourneyWinners.size() < 1 && tournamentManager.areSlotsEmpty()) {
+                tournamentManager.end(killer);
                 return;
             }
 
-            ClimaxPvp.tourneyWinners.add(killer);
+            tournamentManager.tourneyWinners.add(killer);
             killer.teleport(tournamentFiles.getWinPoint());
             killer.setHealth(20);
             killer.setFireTicks(0);
@@ -51,17 +54,20 @@ public class TournamentEvents implements Listener {
             killer.getInventory().clear();
             killer.getInventory().setArmorContents(null);
 
-            tournamentUtils.startNextMatchTimer();
+            tournamentManager.nextMatchTimer();
         }
     }
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
+        TournamentManager tournamentManager = plugin.tournamentManager;
+        EventManager eventManager = plugin.eventManager;
+
         for (int i = 1; i <= 10; i++) {
-            if (ClimaxPvp.playerPoint.get(i) != null && ClimaxPvp.playerPoint.get(i).equals(player)) {
-                Player player1 = ClimaxPvp.playerPoint.get(i);
-                ClimaxPvp.playerPoint.remove(i);
-                ClimaxPvp.inTourney.remove(player1);
+            if (tournamentManager.playerPoint.get(i) != null && tournamentManager.playerPoint.get(i).equals(player)) {
+                Player quitter = tournamentManager.playerPoint.get(i);
+                tournamentManager.playerPoint.remove(i);
+                eventManager.removePlayer(quitter.getUniqueId());
             }
         }
     }
@@ -69,12 +75,13 @@ public class TournamentEvents implements Listener {
     public void onCommandPreprocess(PlayerCommandPreprocessEvent event) {
         Player player = event.getPlayer();
         /*if (event.getMessage().toLowerCase().startsWith("/tourney")) {
-            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "Tournaments are currently disabled!");
+            player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.RED + "tournament are currently disabled!");
             event.setCancelled(true);
         }*/
-        if (ClimaxPvp.inTourney.contains(player)) {
-            if (!event.getMessage().toLowerCase().startsWith("/tourney")) {
-                player.sendMessage(ChatColor.RED + "You can only do /tourney while in a tournament! Do /tourney leave to leave!");
+        EventManager eventManager = plugin.eventManager;
+        if (eventManager.isInEvent(player.getUniqueId())) {
+            if (!event.getMessage().toLowerCase().startsWith("/event")) {
+                player.sendMessage(ChatColor.RED + "You can only do event commands while in a tournament! Do /event leave to leave!");
                 player.playSound(player.getLocation(), Sound.FIRE_IGNITE, 1, 1);
                 event.setCancelled(true);
             }

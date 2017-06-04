@@ -2,28 +2,26 @@ package net.climaxmc.KitPvp.Listeners;
 
 import com.comphenix.protocol.PacketType;
 import net.climaxmc.Administration.Commands.ChatCommands;
-import net.climaxmc.AntiNub.AntiNub;
+
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Kits.FighterKit;
 import net.climaxmc.KitPvp.Kits.PvpKit;
+import net.climaxmc.KitPvp.Utils.ChatUtils;
 import net.climaxmc.KitPvp.Utils.ServerScoreboard;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import net.climaxmc.KitPvp.Utils.TextComponentMessages;
 import net.climaxmc.KitPvp.Utils.I;
+import net.climaxmc.KitPvp.events.EventManager;
 import net.climaxmc.common.database.PlayerData;
 import net.climaxmc.common.database.Rank;
 import net.climaxmc.common.donations.trails.ParticleEffect;
-import org.bukkit.ChatColor;
+import org.bukkit.*;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -42,6 +40,7 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -209,6 +208,9 @@ public class PlayerDeathListener implements Listener {
             KitPvp.killStreak.remove(player.getUniqueId());
         }
 
+        killer.setLevel(KitPvp.killStreak.get(killer.getUniqueId()));
+        player.setLevel(0);
+
         /**
          * Trying setting top killstreak for the player.
          */
@@ -217,12 +219,10 @@ public class PlayerDeathListener implements Listener {
         }
 
         if (ChatCommands.chatSilenced) {
-            return;
         } else {
             if (plugin.getServer().getOnlinePlayers().size() >= 15) {
                 killerData.addKills(1);
                 playerData.addDeaths(1);
-                return;
             } else {
                 killerData.addKills(1);
                 playerData.addDeaths(1);
@@ -230,6 +230,7 @@ public class PlayerDeathListener implements Listener {
                 plugin.getServer().spigot().broadcast(baseComponent);
             }
         }
+
         killerData.setKDR();
 
         /**
@@ -295,55 +296,83 @@ public class PlayerDeathListener implements Listener {
     }
 
     @EventHandler
+    public void rankupDeath(PlayerDeathEvent event) {
+
+        Player player = event.getEntity();
+        Player target = player.getKiller();
+        if (target != null) {
+            PlayerData targetData = plugin.getPlayerData(target);
+
+            if (targetData.getKills() == 100) {
+                Bukkit.broadcastMessage(ChatUtils.color("&f\u00BB &b" + target.getName() + " &7has reached &9Blue &7tier!"));
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    players.playSound(players.getLocation(), Sound.NOTE_PIANO, 1, 1);
+                }
+            } else if (targetData.getKills() == 300) {
+                Bukkit.broadcastMessage(ChatUtils.color("&f\u00BB &b" + target.getName() + " &7has reached &aGreen &7tier!"));
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    players.playSound(players.getLocation(), Sound.NOTE_PIANO, 1, 1);
+                }
+            } else if (targetData.getKills() == 500) {
+                Bukkit.broadcastMessage(ChatUtils.color("&f\u00BB &b" + target.getName() + " &7has reached &cRed &7tier!"));
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    players.playSound(players.getLocation(), Sound.NOTE_PIANO, 1, 1);
+                }
+            } else if (targetData.getKills() == 700) {
+                Bukkit.broadcastMessage(ChatUtils.color("&f\u00BB &b" + target.getName() + " &7has reached &6Gold &7tier!"));
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    players.playSound(players.getLocation(), Sound.NOTE_PIANO, 1, 1);
+                }
+            } else if (targetData.getKills() == 1000) {
+                Bukkit.broadcastMessage(ChatUtils.color("&f\u00BB &b" + target.getName() + " &7has reached &5Purple &7tier!"));
+                for (Player players : Bukkit.getOnlinePlayers()) {
+                    players.playSound(players.getLocation(), Sound.NOTE_PIANO, 1, 1);
+                }
+            }
+        }
+    }
+
+    @EventHandler
     public void deathThing(PlayerDeathEvent event) {
 
         Player player = event.getEntity();
-        SettingsFiles settingsFiles = new SettingsFiles();
 
-        if (!plugin.respawnValue.containsKey(player)) {
-            plugin.respawnValue.put(player, settingsFiles.getRespawnValue(player));
+        EventManager eventManager = plugin.eventManager;
+
+        if (eventManager.isInEvent(player.getUniqueId())) {
+            return;
         }
-        if (plugin.respawnValue.get(player) || (ClimaxPvp.isTourneyHosted && ClimaxPvp.inTourney.contains(player))) {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
 
+        player.setGameMode(GameMode.CREATIVE);
+        player.setHealth(20);
+
+        player.setAllowFlight(true);
+        player.setFlying(true);
+        for (PotionEffect effect : player.getActivePotionEffects()) {
+            player.removePotionEffect(effect.getType());
+        }
+        player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 21, 0));
+        player.getInventory().clear();
+        player.getInventory().setArmorContents(null);
+
+        plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
+            @Override
+            public void run() {
+                player.setVelocity(new Vector(player.getVelocity().getX(), 2.1, player.getVelocity().getZ()));
+            }
+        }, 1L);
+
+        for (Player players : Bukkit.getServer().getOnlinePlayers()) {
+            plugin.hideEntity(players, player);
+        }
+
+        ClimaxPvp.deadPeoples.add(player);
+
+        plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
+            public void run() {
                 plugin.respawn(player);
-
-                if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
-                    new PvpKit().wearCheckLevel(player);
-                }
-                    /*if (player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50) {
-                        player.getInventory().clear();
-                        player.getInventory().addItem(new I(Material.DIAMOND_AXE).name(org.bukkit.ChatColor.WHITE + "Duel Axe " + org.bukkit.ChatColor.AQUA + "(Punch a player!)"));
-                    }*/
-            });
-        } else {
-            plugin.getServer().getScheduler().runTask(plugin, () -> {
-                player.setGameMode(GameMode.CREATIVE);
-                player.setHealth(20);
-                for (Player players : Bukkit.getServer().getOnlinePlayers()) {
-                    plugin.hideEntity(player, player);
-                }
-                for (PotionEffect effect : player.getActivePotionEffects()) {
-                    player.removePotionEffect(effect.getType());
-                }
-                player.setAllowFlight(true);
-                player.setFlying(true);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 0));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 21, 0));
-                player.getInventory().clear();
-                player.getInventory().setArmorContents(null);
-
-                player.setVelocity(player.getVelocity().setY(1.2));
-
-                ClimaxPvp.deadPeoples.add(player);
-
-                plugin.getServer().getScheduler().runTaskLater(plugin, new Runnable() {
-                    public void run() {
-                        plugin.respawn(player);
-                    }
-                }, 20L * 2);
-            });
-        }
-
+            }
+        }, 20L * 2);
     }
 }

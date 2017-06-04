@@ -1,16 +1,10 @@
 package net.climaxmc.KitPvp.Kits;
 
-import me.xericker.disguiseabilities.DisguiseAbilities;
-import me.xericker.disguiseabilities.other.WorldGuard;
-import net.climaxmc.Administration.Commands.CheckCommand;
-import net.climaxmc.Administration.Commands.VanishCommand;
+import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.Ability;
-import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -18,15 +12,10 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.concurrent.TimeUnit;
 
@@ -52,9 +41,9 @@ public class ThorKit extends Kit {
         player.getInventory().addItem(ability);
 
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 2);
+        helm.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().setHelmet(helm);
-        ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
+        ItemStack chestplate = new I(Material.DIAMOND_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chestplate);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
@@ -69,7 +58,9 @@ public class ThorKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        if (!ClimaxPvp.getInstance().spawnSoupTrue.containsKey(player)) {             ClimaxPvp.getInstance().spawnSoupTrue.put(player, false);         }
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.containsKey(player)) {
+            ClimaxPvp.getInstance().spawnSoupTrue.put(player, false);
+        }
         if (!ClimaxPvp.getInstance().spawnSoupTrue.get(player)) {
             ItemStack rod = new ItemStack(Material.FISHING_ROD);
             player.getInventory().addItem(rod);
@@ -81,9 +72,9 @@ public class ThorKit extends Kit {
         player.getInventory().addItem(ability);
 
         ItemStack helm = new ItemStack(Material.LEATHER_HELMET);
-        helm.addEnchantment(Enchantment.DURABILITY, 2);
+        helm.addEnchantment(Enchantment.DURABILITY, 3);
         player.getInventory().setHelmet(helm);
-        ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
+        ItemStack chestplate = new I(Material.DIAMOND_CHESTPLATE).enchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         player.getInventory().setChestplate(chestplate);
         player.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
         player.getInventory().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS));
@@ -107,14 +98,23 @@ public class ThorKit extends Kit {
                     return;
                 }
 
-                target.getWorld().strikeLightning(player.getLocation());
-                target.damage(4);
+                target.getWorld().strikeLightning(target.getLocation());
 
                 lightning.startCooldown(player, this, cooldown, ability);
             }
         }
         if (event.getDamager().getType().equals(EntityType.LIGHTNING)) {
             event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onLightningDamage(EntityDamageByEntityEvent event) {
+        if (event.getEntity() instanceof Player) {
+            if (event.getDamager() instanceof LightningStrike){
+                Player player = (Player) event.getEntity();
+                player.damage(4);
+            }
         }
     }
 }

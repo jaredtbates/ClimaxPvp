@@ -38,51 +38,22 @@ public class TopCommand implements CommandExecutor {
 
             MySQL mySQL = plugin.getMySQL();
 
-            ResultSet killsSet = mySQL.executeQuery("SELECT * FROM climax_playerdata ORDER BY `kills`+0 DESC LIMIT 5");
-            Map<UUID, Integer> topKills = new LinkedHashMap<>();
-
-            try {
-                while (killsSet.next()) {
-                    topKills.put(UUID.fromString(killsSet.getString("uuid")), killsSet.getInt("kills"));
-                }
-            } catch (SQLException e) {
-                //
-            }
-
-            ResultSet deathsSet = mySQL.executeQuery("SELECT * FROM climax_playerdata ORDER BY `deaths`+0 DESC LIMIT 5");
-            Map<UUID, Integer> topDeaths = new LinkedHashMap<>();
-
-            try {
-                while (deathsSet.next()) {
-                    topDeaths.put(UUID.fromString(deathsSet.getString("uuid")), deathsSet.getInt("deaths"));
-                }
-            } catch (SQLException e) {
-                //
-            }
-
-            ResultSet kdrSet = mySQL.executeQuery("SELECT * FROM climax_playerdata ORDER BY `kdr`+0 DESC LIMIT 5");
-            Map<UUID, Double> topKDR = new LinkedHashMap<>();
-
-            try {
-                while (kdrSet.next()) {
-                    topKDR.put(UUID.fromString(kdrSet.getString("uuid")), kdrSet.getDouble("kdr"));
-                }
-            } catch (SQLException e) {
-                //
-            }
-
-            ResultSet topksSet = mySQL.executeQuery("SELECT * FROM climax_playerdata ORDER BY `topks`+0 DESC LIMIT 5");
-            Map<UUID, Integer> topKS = new LinkedHashMap<>();
-
-            try {
-                while (topksSet.next()) {
-                    topKS.put(UUID.fromString(topksSet.getString("uuid")), topksSet.getInt("topks"));
-                }
-            } catch (SQLException e) {
-                //
-            }
-
             if (args[0].equals("kills")) {
+
+                /**
+                 * Top 5 kills
+                 */
+                ResultSet killsSet = mySQL.executeQuery("SELECT * FROM climax_playerdata ORDER BY `kills`+0 DESC LIMIT 5");
+                Map<UUID, Integer> topKills = new LinkedHashMap<>();
+
+                try {
+                    while (killsSet.next()) {
+                        topKills.put(UUID.fromString(killsSet.getString("uuid")), killsSet.getInt("kills"));
+                    }
+                } catch (SQLException e) {
+                    //
+                }
+
                 player.sendMessage(ChatUtils.color("&f\u00BB &6Top 5 Kills:"));
                 int counter = 1;
                 for (UUID uuids : topKills.keySet()) {
@@ -90,6 +61,21 @@ public class TopCommand implements CommandExecutor {
                     counter++;
                 }
             } else if (args[0].equals("deaths")) {
+
+                /**
+                 * Top 5 deaths
+                 */
+                ResultSet deathsSet = mySQL.executeQuery("SELECT * FROM climax_playerdata ORDER BY `deaths`+0 DESC LIMIT 5");
+                Map<UUID, Integer> topDeaths = new LinkedHashMap<>();
+
+                try {
+                    while (deathsSet.next()) {
+                        topDeaths.put(UUID.fromString(deathsSet.getString("uuid")), deathsSet.getInt("deaths"));
+                    }
+                } catch (SQLException e) {
+                    //
+                }
+
                 player.sendMessage(ChatUtils.color("&f\u00BB &6Top 5 Deaths:"));
                 int counter = 1;
                 for (UUID uuids : topDeaths.keySet()) {
@@ -97,6 +83,22 @@ public class TopCommand implements CommandExecutor {
                     counter++;
                 }
             } else if (args[0].equals("kdr")) {
+
+                /**
+                 * Top 5 kdr
+                 */
+                ResultSet kdrSet = mySQL.executeQuery("SELECT * FROM climax_playerdata WHERE `deaths` > 9 ORDER BY `kdr`+0 DESC LIMIT 5;");
+                Map<UUID, Double> topKDR = new LinkedHashMap<>();
+
+                try {
+                    while (kdrSet.next()) {
+                        UUID uuid = UUID.fromString(kdrSet.getString("uuid"));
+                        topKDR.put(uuid, kdrSet.getDouble("kdr"));
+                    }
+                } catch (SQLException e) {
+                    //
+                }
+
                 player.sendMessage(ChatUtils.color("&f\u00BB &6Top 5 KDR's:"));
                 int counter = 1;
                 for (UUID uuids : topKDR.keySet()) {
@@ -104,6 +106,21 @@ public class TopCommand implements CommandExecutor {
                     counter++;
                 }
             } else if (args[0].equals("ks")) {
+
+                /**
+                 * Top 5 ks
+                 */
+                ResultSet topksSet = mySQL.executeQuery("SELECT * FROM climax_playerdata ORDER BY `topks`+0 DESC LIMIT 5");
+                Map<UUID, Integer> topKS = new LinkedHashMap<>();
+
+                try {
+                    while (topksSet.next()) {
+                        topKS.put(UUID.fromString(topksSet.getString("uuid")), topksSet.getInt("topks"));
+                    }
+                } catch (SQLException e) {
+                    //
+                }
+
                 player.sendMessage(ChatUtils.color("&f\u00BB &6Top 5 Killstreaks:"));
                 int counter = 1;
                 for (UUID uuids : topKS.keySet()) {

@@ -1,14 +1,13 @@
 package net.climaxmc.KitPvp.Listeners;
 
-import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.BlockUtils;
+import net.climaxmc.KitPvp.Utils.ChatUtils;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.KitPvp.Utils.ServerScoreboard;
-import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -40,19 +39,26 @@ public class PlayerRespawnListener implements Listener {
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
 
+        if (player.getGameMode().equals(GameMode.CREATIVE)) {
+            if (plugin.getWarpLocation("Fair") != null) {
+                if (player.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
+                    event.setRespawnLocation(plugin.getWarpLocation("Fair"));
+                }
+            }
+        }
+
         player.teleport(BlockUtils.getCenter(event.getRespawnLocation()));
 
+        if (plugin.getScoreboard(player) == null) {
+            ServerScoreboard serverScoreboard = new ServerScoreboard(player);
+            serverScoreboard.updateScoreboard();
+            plugin.scoreboards.put(player.getUniqueId(), serverScoreboard);
+        }
         ServerScoreboard serverScoreboard = plugin.getScoreboard(player);
         serverScoreboard.updateScoreboard();
 
-        event.setRespawnLocation(event.getPlayer().getWorld().getSpawnLocation());
-
-        for(Player players : Bukkit.getServer().getOnlinePlayers()){
+        for (Player players : Bukkit.getServer().getOnlinePlayers()){
             players.showPlayer(player);
-        }
-
-        for (Player allPlayers : Bukkit.getOnlinePlayers()) {
-            plugin.showEntity(player, allPlayers);
         }
 
         KitPvp.getChecking().remove(player.getUniqueId());
@@ -71,9 +77,18 @@ public class PlayerRespawnListener implements Listener {
         player.setExp(0F);
         player.setLevel(0);
 
+        player.setLevel(KitPvp.killStreak.get(player.getUniqueId()));
+
+        for (Player allPlayers : Bukkit.getOnlinePlayers()) {
+            plugin.showEntity(allPlayers, player);
+        }
+
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
+        player.updateInventory();
+        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, Integer.MAX_VALUE, 0, false, false));
+        player.removePotionEffect(PotionEffectType.FAST_DIGGING);
 
         if (KitPvp.getVanished().contains(player.getUniqueId())) {
             player.setAllowFlight(true);
@@ -133,7 +148,19 @@ public class PlayerRespawnListener implements Listener {
                 .name(ChatColor.AQUA + "Cosmetics")
                 .lore(ChatColor.DARK_PURPLE + "" + ChatColor.ITALIC + "Select from a variety of awesome cosmetics!"));
 
-
+        /**
+         * If they're at fair and the distance of the fair warp from the respawn location is less than 50 give them the duel stuff
+         */
+        if (plugin.getPlayersInWarp().containsKey(player.getUniqueId())) {
+            String warp = plugin.getPlayersInWarp().get(player.getUniqueId()).toLowerCase();
+            if (warp.equals("fair")) {
+                if (event.getRespawnLocation().distance(plugin.getWarpLocation("fair")) <= 50) {
+                    player.getInventory().clear();
+                    player.getInventory().setArmorContents(null);
+                    player.getInventory().setItem(0, new I(Material.DIAMOND_SWORD).name(ChatUtils.color("&bPunch to duel")));
+                }
+            }
+        }
         /*if (player.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50) {
             player.getInventory().clear();
             player.getInventory().addItem(new I(Material.DIAMOND_AXE).name(org.bukkit.ChatColor.WHITE + "Duel Axe " + org.bukkit.ChatColor.AQUA + "(Punch a player!)"));

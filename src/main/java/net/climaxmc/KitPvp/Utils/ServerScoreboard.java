@@ -3,6 +3,7 @@ package net.climaxmc.KitPvp.Utils;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.common.database.PlayerData;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -69,6 +70,10 @@ public class ServerScoreboard {
         Team bottom = board.registerNewTeam("bottom");
         bottom.setPrefix(ChatUtils.color("&7&m-----"));
         bottom.addPlayer(Bukkit.getOfflinePlayer(ChatUtils.color("&7&m----------")));
+
+        Team website = board.registerNewTeam("website");
+        website.setPrefix(ChatUtils.color("&7www.cli"));
+        website.addPlayer(Bukkit.getOfflinePlayer(ChatUtils.color("maxmc.net")));
     }
 
     private Team killstreak, kills, deaths, nextTier, progress;
@@ -85,28 +90,36 @@ public class ServerScoreboard {
 
         String nextTierString = ChatUtils.color("&9Blue");
 
-        if (playerData.getLevelColor().equals(ChatColor.BLUE.toString())) {
+        if (playerData.getKills() >= 100) {
             nextTierString = ChatUtils.color("&aGreen");
-        } else if (playerData.getLevelColor().equals(ChatColor.GREEN.toString())) {
+        }
+        if (playerData.getKills() >= 300) {
             nextTierString = ChatUtils.color("&cRed");
-        } else if (playerData.getLevelColor().equals(ChatColor.RED.toString())) {
+        }
+        if (playerData.getKills() >= 500) {
             nextTierString = ChatUtils.color("&6Gold");
-        } else if (playerData.getLevelColor().equals(ChatColor.GOLD.toString())) {
+        }
+        if (playerData.getKills() >= 700) {
             nextTierString = ChatUtils.color("&5Purple");
-        } else if (playerData.getLevelColor().equals(ChatColor.DARK_PURPLE.toString())) {
+        }
+        if (playerData.getKills() >= 1000) {
             nextTierString = ChatUtils.color("&4Max");
         }
 
         String killsRequired = Integer.toString(100);
-        if (playerData.getLevelColor().equals(ChatColor.BLUE.toString())) {
+        if (playerData.getKills() >= 100) {
             killsRequired = Integer.toString(300);
-        } else if (playerData.getLevelColor().equals(ChatColor.GREEN.toString())) {
+        }
+        if (playerData.getKills() >= 300) {
             killsRequired = Integer.toString(500);
-        } else if (playerData.getLevelColor().equals(ChatColor.RED.toString())) {
+        }
+        if (playerData.getKills() >= 500) {
             killsRequired = Integer.toString(700);
-        } else if (playerData.getLevelColor().equals(ChatColor.GOLD.toString())) {
+        }
+        if (playerData.getKills() >= 700) {
             killsRequired = Integer.toString(1000);
-        } else if (playerData.getLevelColor().equals(ChatColor.DARK_PURPLE.toString())) {
+        }
+        if (playerData.getKills() >= 1000) {
             killsRequired = "Max";
         }
 
@@ -127,6 +140,7 @@ public class ServerScoreboard {
         /**
          * Sets scores for buffer, then swaps out for the buffer objective, then updates the new buffer scores.
          */
+        updateTeams();
         setScores();
     }
 
@@ -136,19 +150,21 @@ public class ServerScoreboard {
 
         String tier = ChatUtils.color("&7Gray");
 
-        if (playerData.getLevelColor().equals(ChatColor.BLUE.toString())) {
+        if (playerData.getKills() >= 100) {
             tier = ChatUtils.color("&9Blue");
-        } else if (playerData.getLevelColor().equals(ChatColor.GREEN.toString())) {
+        }
+        if (playerData.getKills() >= 300) {
             tier = ChatUtils.color("&aGreen");
-        } else if (playerData.getLevelColor().equals(ChatColor.RED.toString())) {
+        }
+        if (playerData.getKills() >= 500) {
             tier = ChatUtils.color("&cRed");
-        } else if (playerData.getLevelColor().equals(ChatColor.GOLD.toString())) {
+        }
+        if (playerData.getKills() >= 700) {
             tier = ChatUtils.color("&6Gold");
-        } else if (playerData.getLevelColor().equals(ChatColor.DARK_PURPLE.toString())) {
+        }
+        if (playerData.getKills() >= 1000) {
             tier = ChatUtils.color("&5Purple");
         }
-
-        updateTeams();
 
         List<String> scoreboardLines = new ArrayList<>();
 
@@ -161,7 +177,7 @@ public class ServerScoreboard {
         scoreboardLines.add(ChatUtils.color("&eNex"));
         scoreboardLines.add(ChatUtils.color("&eProgre"));
         scoreboardLines.add("  ");
-        scoreboardLines.add(ChatUtils.color("&7www.climaxmc.net"));
+        scoreboardLines.add(ChatUtils.color("maxmc.net"));
         scoreboardLines.add(ChatUtils.color("&7&m----------"));
 
         int line = scoreboardLines.size();

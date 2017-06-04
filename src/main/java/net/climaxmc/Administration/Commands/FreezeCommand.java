@@ -19,6 +19,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 
@@ -27,7 +28,7 @@ import java.util.*;
 public class FreezeCommand implements CommandExecutor, Listener {
     private static boolean frozen = false;
     public static List<UUID> frozenPlayers = new ArrayList<>();
-    private Map<Player, Location> portalLocation = new HashMap<>();
+    private Map<UUID, Location> portalLocation = new HashMap<>();
     private ClimaxPvp plugin;
 
     @SuppressWarnings("deprecation")
@@ -46,10 +47,10 @@ public class FreezeCommand implements CommandExecutor, Listener {
                         for (int i = 0; i <= 9; i++) {
                             if (i % 2 == 0) {
                                 player.getInventory().setItem(i, new I(Material.COAL)
-                                        .name(ChatColor.translateAlternateColorCodes('&', "&cYou have been frozen! Join &ediscord.climaxmc.net! &c(Hit ALT+TAB to escape)")));
+                                        .name(ChatColor.translateAlternateColorCodes('&', "&cYou have been frozen! Join &ets.climaxmc.net! &c(Hit ALT+TAB to escape)")));
                             } else {
                                 player.getInventory().setItem(i, new I(Material.COAL)
-                                        .name(ChatColor.translateAlternateColorCodes('&', "&cYou have been frozen! Join &cdiscord.climaxmc.net! &c(Hit ALT+TAB to escape)")));
+                                        .name(ChatColor.translateAlternateColorCodes('&', "&cYou have been frozen! Join &cts.climaxmc.net! &c(Hit ALT+TAB to escape)")));
                             }
                         }
 
@@ -97,16 +98,27 @@ public class FreezeCommand implements CommandExecutor, Listener {
             return true;
         }
 
+        tryFreezePlayer(player, target);
+        return false;
+    }
+
+    public void tryFreezePlayer(Player player, Player target) {
         if (frozenPlayers.contains(target.getUniqueId())) {
             frozenPlayers.remove(target.getUniqueId());
 
             if (player != null) {
                 for (Player players : Bukkit.getOnlinePlayers()) {
-                    players.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f\u00BB &c" + target.getName() + " &fwas un-frozen by &c" + player.getName()));
+                    PlayerData playerData = plugin.getPlayerData(players);
+                    if (playerData.hasRank(Rank.TRIAL_MODERATOR)) {
+                        players.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f\u00BB &c" + target.getName() + " &fwas un-frozen by &c" + player.getName()));
+                    }
                 }
             } else {
                 for (Player players : Bukkit.getOnlinePlayers()) {
-                    players.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f\u00BB &c" + target.getName() + " &fwas un-frozen by &cConsole"));
+                    PlayerData playerData = plugin.getPlayerData(players);
+                    if (playerData.hasRank(Rank.TRIAL_MODERATOR)) {
+                        players.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f\u00BB &c" + target.getName() + " &fwas un-frozen by &cConsole"));
+                    }
                 }
             }
 
@@ -116,8 +128,8 @@ public class FreezeCommand implements CommandExecutor, Listener {
             target.playSound(target.getLocation(), Sound.SUCCESSFUL_HIT, 1, 2);
             target.closeInventory();
 
-            if (portalLocation.containsKey(target)) {
-                portalLocation.get(target).getBlock().setType(Material.AIR);
+            if (portalLocation.containsKey(target.getUniqueId())) {
+                portalLocation.get(target.getUniqueId()).getBlock().setType(Material.AIR);
             }
 
             if (player != null) {
@@ -129,11 +141,17 @@ public class FreezeCommand implements CommandExecutor, Listener {
 
             if (player != null) {
                 for (Player players : Bukkit.getOnlinePlayers()) {
-                    players.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f\u00BB &c" + target.getName() + " &fwas frozen by &c" + player.getName()));
+                    PlayerData playerData = plugin.getPlayerData(players);
+                    if (playerData.hasRank(Rank.TRIAL_MODERATOR)) {
+                        players.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f\u00BB &c" + target.getName() + " &fwas frozen by &c" + player.getName()));
+                    }
                 }
             } else {
                 for (Player players : Bukkit.getOnlinePlayers()) {
-                    players.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f\u00BB &c" + target.getName() + " &fwas frozen by &cConsole"));
+                    PlayerData playerData = plugin.getPlayerData(players);
+                    if (playerData.hasRank(Rank.TRIAL_MODERATOR)) {
+                        players.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f\u00BB &c" + target.getName() + " &fwas frozen by &cConsole"));
+                    }
                 }
             }
 
@@ -146,7 +164,7 @@ public class FreezeCommand implements CommandExecutor, Listener {
             }
 
             Location headLocation = target.getLocation().add(0L, 1L, 0L);
-            portalLocation.put(target, headLocation);
+            portalLocation.put(target.getUniqueId(), headLocation);
             headLocation.getBlock().setType(Material.PORTAL);
 
             Location location = target.getLocation();
@@ -176,7 +194,6 @@ public class FreezeCommand implements CommandExecutor, Listener {
                 }
             }, (20L * 60) * 30);
         }
-        return false;
     }
 
     /*private void openFreezeInventory(Player player) {
@@ -243,13 +260,24 @@ public class FreezeCommand implements CommandExecutor, Listener {
     }
 
     @EventHandler
+    public void onTeleport(PlayerTeleportEvent event) {
+        Player player = event.getPlayer();
+
+        if (!frozenPlayers.contains(player.getUniqueId())) {
+            if (portalLocation.containsKey(player.getUniqueId())) {
+                portalLocation.get(player.getUniqueId()).getBlock().setType(Material.AIR);
+            }
+        }
+    }
+
+    @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
         if (frozenPlayers.contains(player.getUniqueId())) {
             frozenPlayers.remove(player.getUniqueId());
-            if (portalLocation.containsKey(player)) {
-                portalLocation.get(player).getBlock().setType(Material.AIR);
+            if (portalLocation.containsKey(player.getUniqueId())) {
+                portalLocation.get(player.getUniqueId()).getBlock().setType(Material.AIR);
             }
             player.getLocation().add(0, 1, 0).getBlock().setType(Material.AIR);
             for (Player players : Bukkit.getOnlinePlayers()) {

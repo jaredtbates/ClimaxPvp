@@ -1,9 +1,10 @@
 package net.climaxmc.Administration.Listeners;
 
 import lombok.Getter;
-import me.xericker.disguiseabilities.other.WorldGuard;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
+import net.climaxmc.KitPvp.Utils.Fair.FairUtils;
+import net.climaxmc.KitPvp.Utils.Fair.MatchManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -32,6 +33,10 @@ public class CombatLogListeners implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamage(EntityDamageByEntityEvent event) {
 
+        if (event.isCancelled()) {
+            return;
+        }
+
         if (event.getDamager().getType().equals(EntityType.ARROW) || event.getDamager().getType().equals(EntityType.FISHING_HOOK)) {
             Projectile projectile = (Projectile) event.getDamager();
             if (projectile.getShooter() instanceof Player) {
@@ -53,6 +58,14 @@ public class CombatLogListeners implements Listener {
 
         if (plugin.isWithinProtectedRegion(damaged.getLocation())) {
             return;
+        }
+
+        if (plugin.getWarpLocation("Fair") != null) {
+            if (damaged.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
+                if (!MatchManager.isInMatch(damaged.getUniqueId())) {
+                    return;
+                }
+            }
         }
 
         /*if (damager.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50 || (damaged.getLocation().distance(plugin.getWarpLocation("Duel")) <= 50)) {
@@ -128,8 +141,8 @@ public class CombatLogListeners implements Listener {
 
         if (tagged.containsKey(player.getUniqueId())) {
             tagged.remove(player.getUniqueId());
-            plugin.getServer().broadcastMessage(ChatColor.RED + "" + ChatColor.BOLD + player.getName() + ChatColor.RED + " has logged out while in combat!");
-            logged.put(player.getUniqueId(), System.currentTimeMillis() + 120000);
+            player.damage(1000);
+            //logged.put(player.getUniqueId(), System.currentTimeMillis() + 120000);
         }
     }
 

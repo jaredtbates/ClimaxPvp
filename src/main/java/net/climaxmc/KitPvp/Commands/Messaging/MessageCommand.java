@@ -1,6 +1,5 @@
 package net.climaxmc.KitPvp.Commands.Messaging;
 
-import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.Administration.Punishments.Punishment;
 import net.climaxmc.Administration.Punishments.Time;
 import net.climaxmc.ClimaxPvp;

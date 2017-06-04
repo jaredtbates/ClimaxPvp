@@ -1,10 +1,7 @@
-package net.climaxmc.KitPvp.Utils.Tournaments;
+package net.climaxmc.KitPvp.events.tournament;
 
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Kit;
-import net.climaxmc.KitPvp.KitManager;
-import net.climaxmc.KitPvp.Kits.PvpKit;
 import net.climaxmc.KitPvp.Kits.PvpKit2;
 import net.climaxmc.common.database.PlayerData;
 import org.bukkit.Bukkit;
@@ -12,8 +9,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
-
-import java.util.Iterator;
 
 public class TournamentUtils {
 
@@ -35,7 +30,7 @@ public class TournamentUtils {
 
     TournamentFiles tournamentFiles = new TournamentFiles();
 
-    public void createTourney(Player player, int prize) {
+    /*public void createTourney(Player player, int prize) {
         if (ClimaxPvp.isTourneyRunning || ClimaxPvp.isTourneyHosted) {
             player.sendMessage(ChatColor.RED + "A tournament is already hosted!");
             return;
@@ -336,5 +331,5 @@ public class TournamentUtils {
             }
         }
         return true;
-    }
+    }*/
 }

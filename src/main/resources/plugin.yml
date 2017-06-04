@@ -1,7 +1,8 @@
 name: ClimaxPvp
 main: net.climaxmc.ClimaxPvp
-version: 2.0-SNAPSHOT
+version: 3.0-SNAPSHOT
 authors: [computerwizjared, Jonhan, GamerBah]
+softdepend: [ProtocolLib, AntiNub]
 commands:
   repair:
     description: Repairs your inventory for $2
@@ -131,5 +132,13 @@ commands:
     description: View leaderboards
   rotatemaps:
     description: Manually rotates the maps
+  statshologram:
+    description: Hologram creation command
+  hub:
+    description: Sends player to hub
+  resetstats:
+    description: Resets stats for a player
+  event:
+    description: Event management command
   #tag:
   #  description: Main control command for tag games

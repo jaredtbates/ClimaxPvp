@@ -3,7 +3,9 @@ package net.climaxmc.KitPvp.Utils;
 import static com.comphenix.protocol.PacketType.Play.Server.*;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.ConcurrentModificationException;
 import java.util.Map;
 
 import org.bukkit.entity.Entity;
@@ -150,8 +152,17 @@ public class EntityHider implements Listener {
     protected void removeEntity(Entity entity, boolean destroyed) {
         int entityID = entity.getEntityId();
 
-        for (Map<Integer, Boolean> maps : observerEntityMap.rowMap().values()) {
-            maps.remove(entityID);
+        ArrayList<Map<Integer, Boolean>> maps2 = new ArrayList<>();
+        try {
+            for (Map<Integer, Boolean> maps : observerEntityMap.rowMap().values()) {
+                maps.remove(entityID);
+                maps2.add(maps);
+            }
+        } catch (ConcurrentModificationException e) {
+            e.printStackTrace();
+        }
+        for (Map<Integer, Boolean> maps : maps2) {
+            observerEntityMap.rowMap().values().remove(maps);
         }
     }
 
@@ -170,10 +181,10 @@ public class EntityHider implements Listener {
      */
     private Listener constructBukkit() {
         return new Listener() {
-            @EventHandler
+            /*@EventHandler
             public void onEntityDeath(EntityDeathEvent e) {
                 removeEntity(e.getEntity(), true);
-            }
+            }*/
 
             @EventHandler
             public void onChunkUnload(ChunkUnloadEvent e) {

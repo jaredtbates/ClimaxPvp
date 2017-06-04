@@ -1,12 +1,13 @@
 package net.climaxmc.KitPvp.Kits;
 
 import me.xericker.disguiseabilities.DisguiseAbilities;
-import net.climaxmc.AntiNub.AntiNub;
+
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
 import net.climaxmc.KitPvp.Utils.Ability;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
+import net.climaxmc.antinub.AntiNub;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;

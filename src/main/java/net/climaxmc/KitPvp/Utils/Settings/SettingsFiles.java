@@ -6,6 +6,7 @@ import net.climaxmc.Donations.Listeners.InventoryClickListener;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.common.database.PlayerData;
+import net.climaxmc.common.database.Rank;
 import net.climaxmc.common.donations.trails.Trail;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -266,6 +267,10 @@ public class SettingsFiles {
         saveConfig();
     }
     public boolean isTrailUnlocked(Player player, String name) {
+        PlayerData playerData = ClimaxPvp.getInstance().getPlayerData(player);
+        if (playerData.hasRank(Rank.TITAN)) {
+            return true;
+        }
         if (config.get(player.getUniqueId() + ".unlockedTrails." + name) == null) {
             return false;
         } else {

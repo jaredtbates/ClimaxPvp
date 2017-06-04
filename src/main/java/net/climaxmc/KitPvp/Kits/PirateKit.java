@@ -1,27 +1,18 @@
 package net.climaxmc.KitPvp.Kits;
 
 import me.xericker.disguiseabilities.DisguiseAbilities;
-import net.climaxmc.Administration.Commands.CheckCommand;
-import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
-import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.Ability;
-import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -47,7 +38,7 @@ public class PirateKit extends Kit {
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        chest.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
         chestmeta.setColor(Color.BLACK);
         chest.setItemMeta(chestmeta);
@@ -76,7 +67,7 @@ public class PirateKit extends Kit {
         player.getInventory().setHelmet(helm);
         ItemStack chest = new ItemStack(Material.LEATHER_CHESTPLATE);
         chest.addEnchantment(Enchantment.DURABILITY, 3);
-        chest.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+        chest.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
         LeatherArmorMeta chestmeta = (LeatherArmorMeta) chest.getItemMeta();
         chestmeta.setColor(Color.BLACK);
         chest.setItemMeta(chestmeta);
@@ -86,7 +77,9 @@ public class PirateKit extends Kit {
         ItemStack sword = new ItemStack(Material.DIAMOND_SWORD);
         sword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
         player.getInventory().addItem(sword);
-        if (!ClimaxPvp.getInstance().spawnSoupTrue.containsKey(player)) {             ClimaxPvp.getInstance().spawnSoupTrue.put(player, false);         }
+        if (!ClimaxPvp.getInstance().spawnSoupTrue.containsKey(player)) {
+            ClimaxPvp.getInstance().spawnSoupTrue.put(player, false);
+        }
         if (!ClimaxPvp.getInstance().spawnSoupTrue.get(player)) {
             ItemStack rod = new ItemStack(Material.FISHING_ROD);
             player.getInventory().addItem(rod);

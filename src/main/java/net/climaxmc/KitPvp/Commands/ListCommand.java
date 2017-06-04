@@ -1,6 +1,5 @@
 package net.climaxmc.KitPvp.Commands;
 
-import net.climaxmc.Administration.Commands.VanishCommand;
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.common.database.PlayerData;

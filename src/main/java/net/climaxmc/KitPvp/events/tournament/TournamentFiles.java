@@ -1,4 +1,4 @@
-package net.climaxmc.KitPvp.Utils.Tournaments;
+package net.climaxmc.KitPvp.events.tournament;
 
 import net.climaxmc.ClimaxPvp;
 import org.bukkit.*;
@@ -14,7 +14,7 @@ public class TournamentFiles {
     private FileConfiguration config;
 
     public TournamentFiles() {
-        this.file = new File(ClimaxPvp.getInstance().getDataFolder() + File.separator + "tournaments.yml");
+        this.file = new File(ClimaxPvp.getInstance().getDataFolder() + File.separator + "tournament.yml");
         if (!file.exists()) {
             try {
                 file.createNewFile();

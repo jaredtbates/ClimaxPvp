@@ -181,13 +181,14 @@ public class PlayerJoinListener implements Listener {
             player.setPlayerListName(ChatColor.GRAY + player.getName());
         }
 
-        int playersOnline = plugin.getServer().getOnlinePlayers().size();
+        //Commenting this out in attempts to make joining less laggy
+        /*int playersOnline = plugin.getServer().getOnlinePlayers().size();
 
         if (playersOnline > plugin.getConfig().getInt("HighestPlayerCount")) {
             plugin.getServer().broadcastMessage(ChatColor.AQUA + "" + ChatColor.BOLD + "We have reached a new high player count of " + playersOnline + "!");
             plugin.getConfig().set("HighestPlayerCount", playersOnline);
             plugin.saveConfig();
-        }
+        }*/
 
         if (ChatCommands.cmdspies.contains(player.getUniqueId()) && !playerData.hasRank(Rank.TRIAL_MODERATOR)) {
             ChatCommands.cmdspies.remove(player.getUniqueId());
@@ -198,10 +199,6 @@ public class PlayerJoinListener implements Listener {
         }
 
         player.setWalkSpeed(0.2F);
-
-        ServerScoreboard serverScoreboard = new ServerScoreboard(player);
-        serverScoreboard.updateScoreboard();
-        plugin.scoreboards.put(player.getUniqueId(), serverScoreboard);
 
         PermissionAttachment attachment = player.addAttachment(plugin);
 
@@ -250,6 +247,7 @@ public class PlayerJoinListener implements Listener {
                 attachment.setPermission("litebans.ipban", true);
                 attachment.setPermission("litebans.unlimited", true);
                 attachment.setPermission("litebans.notify.dupeip_join", true);
+                attachment.setPermission("litebans.unban", true);
             }
 
             if (playerData.hasRank(Rank.SENIOR_MODERATOR)) {
@@ -265,6 +263,20 @@ public class PlayerJoinListener implements Listener {
         if (joinMOTD != null) {
             player.sendMessage("" + ChatColor.translateAlternateColorCodes('&', joinMOTD));
         }
+    }
+
+    @EventHandler
+    public void scoreboardJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+
+        ServerScoreboard serverScoreboard = new ServerScoreboard(player);
+        serverScoreboard.updateScoreboard();
+        plugin.scoreboards.put(player.getUniqueId(), serverScoreboard);
+    }
+
+    @EventHandler
+    public void settingsJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
 
         // Settings global chat hashmap update
         SettingsFiles settingsFiles = new SettingsFiles();

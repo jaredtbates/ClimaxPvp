@@ -69,6 +69,9 @@ public class SpectateCommand implements CommandExecutor {
         } else {
             plugin.respawn(player);
             ClimaxPvp.isSpectating.remove(player.getUniqueId());
+            for(Player players : Bukkit.getServer().getOnlinePlayers()){
+                plugin.showEntity(players, player);
+            }
             player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "You are no longer spectating");
         }
 

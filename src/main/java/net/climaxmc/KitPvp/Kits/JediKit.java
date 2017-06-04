@@ -3,7 +3,7 @@ package net.climaxmc.KitPvp.Kits;
 import java.util.concurrent.TimeUnit;
 
 import me.xericker.disguiseabilities.DisguiseAbilities;
-import net.climaxmc.AntiNub.AntiNub;
+
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitManager;
@@ -12,6 +12,7 @@ import net.climaxmc.KitPvp.Utils.Ability;
 import net.climaxmc.KitPvp.Utils.ChatUtils;
 import net.climaxmc.KitPvp.Utils.I;
 import net.climaxmc.KitPvp.Utils.Settings.SettingsFiles;
+import net.climaxmc.antinub.AntiNub;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
@@ -113,7 +114,7 @@ public class JediKit extends Kit {
     {
         Location l = target.getLocation().subtract(player.getLocation());
         double distance = target.getLocation().distance(player.getLocation());
-        Vector v = l.toVector().multiply(3/distance).setY(0.15);
+        Vector v = l.toVector().multiply(2/distance).setY(1);
         target.setVelocity(v);
     }
 }

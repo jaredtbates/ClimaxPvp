@@ -1,10 +1,11 @@
 package net.climaxmc.KitPvp.Listeners;
 
 import net.climaxmc.Administration.Listeners.CombatLogListeners;
-import net.climaxmc.AntiNub.AntiNub;
+
 import net.climaxmc.ClimaxPvp;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.ChatUtils;
+import net.climaxmc.antinub.AntiNub;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;

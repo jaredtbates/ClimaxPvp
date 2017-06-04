@@ -118,7 +118,7 @@ public class TagUtils {
                 players.setFoodLevel(20);
                 players.setFireTicks(0);
                 players.setHealth(20);
-                ClimaxPvp.playerPoint.put(point, players);
+                //ClimaxPvp.playerPoint.put(point, players);
                 ClimaxPvp.inTagLobby.remove(players);
                 players.getInventory().clear();
                 players.getInventory().setBoots(new I(Material.DIAMOND_BOOTS).enchantment(Enchantment.PROTECTION_FALL, 1));

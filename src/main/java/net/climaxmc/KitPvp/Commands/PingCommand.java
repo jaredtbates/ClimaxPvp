@@ -1,8 +1,7 @@
 package net.climaxmc.KitPvp.Commands;
 
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.KitPvp;
-import org.bukkit.Bukkit;
+import net.climaxmc.KitPvp.Utils.PingUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,14 +22,13 @@ public class PingCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        String nmsVersion = plugin.getServer().getClass().getPackage().getName().substring(Bukkit.getServer().getClass().getPackage().getName().lastIndexOf(".") + 1);
 
         Player target = player;
 
         if (args.length == 1) {
             target = plugin.getServer().getPlayer(args[0]);
 
-            if (target == null || KitPvp.getVanished().contains(target.getUniqueId())) {
+            if (target == null /*|| KitPvp.getVanished().contains(target.getUniqueId())*/) {
                 player.sendMessage(ChatColor.RED + "That player is not online!");
                 return true;
             }
@@ -38,15 +36,7 @@ public class PingCommand implements CommandExecutor {
             player.sendMessage(ChatColor.RED + " /ping [player]");
         }
 
-        int ping = -1;
-
-        try {
-            Object nmsPlayer = Class.forName("org.bukkit.craftbukkit." + nmsVersion + ".entity.CraftPlayer").cast(player).getClass().getMethod("getHandle").invoke(target);
-            ping = nmsPlayer.getClass().getField("ping").getInt(nmsPlayer);
-        } catch (Exception e) {
-            plugin.getLogger().severe("Could not get ping of player!");
-            e.printStackTrace();
-        }
+        int ping = PingUtils.getPing(target);
 
         if (player == target) {
             player.sendMessage(ChatColor.WHITE + "\u00BB " + ChatColor.GRAY + "Your ping is " + ChatColor.GOLD + ping + "ms");

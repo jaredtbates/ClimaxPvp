@@ -32,14 +32,14 @@ public class SettingsMenu implements Listener {
             inv.setItem(slot, new I(Material.STAINED_GLASS_PANE).durability(15).name(" "));
         }
 
-        if (!plugin.respawnValue.containsKey(player)) {
+        /*if (!plugin.respawnValue.containsKey(player)) {
             plugin.respawnValue.put(player, settingsFiles.getRespawnValue(player));
         }
         if (plugin.respawnValue.get(player)) {
             inv.setItem(11, new I(Material.REDSTONE).name(ChatColor.AQUA + "Toggle Insta-Respawn").lore("\u00A77Currently: \u00A7a\u00A7lTrue"));
         } else {
             inv.setItem(11, new I(Material.REDSTONE).name(ChatColor.AQUA + "Toggle Insta-Respawn").lore("\u00A77Currently: \u00A7c\u00A7lFalse"));
-        }
+        }*/
 
         if (settingsFiles.getReceiveMsgValue(player)) {
             inv.setItem(13, new I(Material.BOOK).name(ChatColor.AQUA + "Toggle Receiving Msgs").lore("\u00A77Currently: \u00A7a\u00A7lTrue"));

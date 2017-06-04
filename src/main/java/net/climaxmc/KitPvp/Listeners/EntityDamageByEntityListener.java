@@ -1,32 +1,18 @@
 package net.climaxmc.KitPvp.Listeners;
 
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.flags.DefaultFlag;
-import com.sk89q.worldguard.protection.flags.StateFlag;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import me.xericker.disguiseabilities.other.WorldGuard;
-import net.climaxmc.Administration.Listeners.CombatLogListeners;
 import net.climaxmc.ClimaxPvp;
-import net.climaxmc.KitPvp.Kit;
 import net.climaxmc.KitPvp.KitPvp;
 import net.climaxmc.KitPvp.Utils.Duels.DuelUtils;
+import net.climaxmc.KitPvp.Utils.Fair.FairUtils;
+import net.climaxmc.KitPvp.Utils.Fair.MatchManager;
 import org.bukkit.*;
-import org.bukkit.block.Chest;
-import org.bukkit.block.Dispenser;
-import org.bukkit.block.DoubleChest;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.util.Vector;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.json.XMLTokener.entity;
 
 public class EntityDamageByEntityListener implements Listener {
     private ClimaxPvp plugin;
@@ -36,6 +22,7 @@ public class EntityDamageByEntityListener implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOW)
+    @SuppressWarnings("deprecation")
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (event.getEntityType().equals(EntityType.PLAYER)) {
             Player target = (Player) event.getEntity();
@@ -53,6 +40,13 @@ public class EntityDamageByEntityListener implements Listener {
             if (plugin.isWithinProtectedRegion(target.getLocation())) {
                 event.setCancelled(true);
                 return;
+            }
+
+            if (player != null) {
+                if (plugin.isWithinProtectedRegion(player.getLocation())) {
+                    event.setCancelled(true);
+                    return;
+                }
             }
 
             if (target.getGameMode().equals(GameMode.CREATIVE) && ClimaxPvp.deadPeoples.contains(target)) {
@@ -83,7 +77,28 @@ public class EntityDamageByEntityListener implements Listener {
                 return;
             }
 
-            if (target.getNoDamageTicks() == 0) {
+            if (plugin.getWarpLocation("Fair") != null) {
+                if (target.getLocation().distance(plugin.getWarpLocation("Fair")) <= 50) {
+                    if (!MatchManager.isInMatch(player.getUniqueId())) {
+                        return;
+                    }
+                }
+            }
+            if (event.isCancelled()) {
+                return;
+            }
+            if (player != null) {
+                if (!MatchManager.isInMatch(player.getUniqueId()) && MatchManager.isInMatch(target.getUniqueId())) {
+                    event.setCancelled(true);
+                    return;
+                }
+
+                if (MatchManager.isInMatch(player.getUniqueId()) && !MatchManager.isInMatch(target.getUniqueId())) {
+                    event.setCancelled(true);
+                    return;
+                }
+            }
+            if (target.getNoDamageTicks() <= 0) {
 
                 float knockbackStrength;
 
@@ -93,17 +108,29 @@ public class EntityDamageByEntityListener implements Listener {
 
                 if (player != null) {
                     if (player.isSprinting() && plugin.lastHitType.get(player).equals("Walk")) {
-                        knockbackStrength = -0.7F;
+                        knockbackStrength = -0.28F;
                         plugin.lastHitType.put(player, "Sprint");
                     } else {
-                        knockbackStrength = -0.7F;
+                        knockbackStrength = -0.1F;
                     }
 
-                    if (event.getDamager().getType().equals(EntityType.ARROW) || event.getDamager().getType().equals(EntityType.FISHING_HOOK)) {
-                        return;
+                    if (player.isOnGround()) {
+                        knockbackStrength -= -0.2F;
                     }
+
+                    if (player.getVelocity().length() >= 0.08) {
+                        knockbackStrength -= (float)((knockbackStrength * target.getVelocity().length()) / 18);
+                    }
+
+                    double y = -0.19;
+                    if (player.isOnGround()) {
+                        y = -0.19;
+                    }
+
+                    //Bukkit.broadcastMessage("str: " + knockbackStrength + " y: " + y + " vel length: " + target.getVelocity().length());
+
                     target.setVelocity(new Vector().setY(0).setX(0).setZ(0).zero());
-                    target.setVelocity(target.getLocation().toVector().subtract(player.getLocation().toVector()).setY(0).normalize().multiply(knockbackStrength).setY(-0.2));
+                    target.setVelocity(target.getLocation().toVector().subtract(player.getLocation().toVector()).setY(0).normalize().multiply(knockbackStrength).setY(y));
                 }
             }
         }
@@ -174,51 +201,4 @@ public class EntityDamageByEntityListener implements Listener {
             }*/
         }
     }
-
-    /*@EventHandler (priority = EventPriority.LOW)
-    public void onDamage(EntityDamageByEntityEvent event) {
-        if (event.getEntityType().equals(EntityType.PLAYER)) {
-            if (event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
-                Player target = (Player) event.getEntity();
-                if (WorldGuard.isWithinProtectedRegion(target.getLocation()) || WorldGuard.isWithinProtectedRegion(target.getLocation())) {
-                    return;
-                }
-                event.setCancelled(true);
-                target.damage(event.getDamage());
-                double unitVector = target.getLocation().toVector().subtract(event.getDamager().getLocation().toVector()).length() * (0.3);
-
-                velocity(target, target.getLocation().toVector().subtract(event.getDamager().getLocation().toVector()), unitVector, true, 0.5D, 0.0D, 1.0D, 0.4D, true);
-            }
-        }
-    }
-
-    private void velocity(Entity ent, Vector vec, double str, boolean ySet, double yBase, double yAdd, double yMax, double xMax, boolean groundBoost) {
-        if ((Double.isNaN(vec.getX())) || (Double.isNaN(vec.getY())) || (Double.isNaN(vec.getZ())) || (vec.length() == 0.0D)) {
-            return;
-        }
-
-        if (ySet) {
-            vec.setY(yBase);
-        }
-
-        vec.normalize();
-        vec.multiply(str);
-
-        vec.setY(vec.getY() + yAdd);
-
-        if (vec.getY() > yMax) {
-            vec.setY(yMax);
-        }
-
-        if (vec.getX() > xMax) {
-            vec.setX(xMax);
-        }
-
-        if (groundBoost) {
-            vec.setY(vec.getY() + 0.2D);
-        }
-
-        ent.setFallDistance(0.0F);
-        ent.setVelocity(vec);
-    }*/
 }
